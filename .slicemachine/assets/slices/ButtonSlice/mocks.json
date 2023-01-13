@@ -1,0 +1,17 @@
+[
+  {
+    "variation": "default",
+    "version": "sktwi1xtmkfgx8626",
+    "items": [
+      {}
+    ],
+    "primary": {
+      "label": "sugar",
+      "link": {
+        "link_type": "Web",
+        "url": "http://twitter.com"
+      }
+    },
+    "slice_type": "button_slice"
+  }
+]

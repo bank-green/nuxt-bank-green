@@ -1,0 +1,28 @@
+{
+  "id": "mock-doc-id",
+  "url": null,
+  "type": "takeactionpage",
+  "href": null,
+  "tags": [],
+  "first_publication_date": "1970-01-01T00:00:01+0000",
+  "last_publication_date": "1970-01-01T00:00:01+0000",
+  "slugs": [],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "introduction": [
+      {
+        "type": "paragraph",
+        "text": "Ad pariatur pariatur ut officia incididunt ex id culpa culpa cupidatat reprehenderit aliquip. Ad nisi nostrud non anim sint amet ex sint cupidatat esse Lorem aliqua ut aliquip.",
+        "spans": []
+      }
+    ],
+    "seo_title": "rich",
+    "seo_description": "vowel",
+    "slices1": [],
+    "slices2": [],
+    "slices3": [],
+    "slices4": []
+  }
+}

@@ -1,0 +1,41 @@
+<template>
+    <div class="lg:flex">
+        <div class="lg:mr-6 pt-4 pl-5 ">
+            <span class="text-xl font-bold text-gray-900">Step {{ step }}</span>
+        </div>
+        <div class="flex-1 mt-0 lg:col-span-2">
+            <AccordionItem
+                :description="description"
+                :title="title"
+                :caratClass="caratClass"
+            >
+                <AccordionItem
+                    v-for="(sub, i) in subcontent"
+                    :key="i"
+                    :title="sub.title"
+                    :description="sub.content"
+                    :caratClass="caratClass"
+                />
+            </AccordionItem>
+        </div>
+    </div>
+</template>
+
+<script>
+import AccordionItem from '../AccordionItem.vue'
+export default {
+    components: { AccordionItem },
+    props: {
+        step: Number,
+        title: String,
+        description: String,
+        subcontent: { type: Array, default: () => [] },
+        caratClass: String,
+    },
+    data() {
+        return {
+            isOpen: false,
+        }
+    },
+}
+</script>

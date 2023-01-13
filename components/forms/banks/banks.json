@@ -1,0 +1,438 @@
+[
+  {
+    "companyName": "Aspiration Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Bank Muamalat (Malaysia)",
+    "countryCode": "MY"
+  },
+  {
+    "companyName": "Bank of Palestine (Palestine)",
+    "countryCode": "PS"
+  },
+  {
+    "companyName": "BRAC Bank (Bangladesh)",
+    "countryCode": "BD"
+  },
+  {
+    "companyName": "Center-Invest Bank (Russia)",
+    "countryCode": "RU"
+  },
+  {
+    "companyName": "Amalgamated Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "ASN",
+    "countryCode": "NL"
+  },
+  {
+    "companyName": "Ekobanken",
+    "countryCode": "SE"
+  },
+  {
+    "companyName": "Tomorrow GmbH",
+    "countryCode": "DE"
+  },
+  {
+    "companyName": "Banco Ademi (Dominican Republic)",
+    "countryCode": "DO"
+  },
+  {
+    "companyName": "Banco de Antigua (Guatemala)",
+    "countryCode": "GT"
+  },
+  {
+    "companyName": "Nationwide",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "Banca Etica",
+    "countryCode": "IT"
+  },
+  {
+    "companyName": "Banco Codesarrollo (Ecuador)",
+    "countryCode": "EC"
+  },
+  {
+    "companyName": "Beneficial State Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Charity Bank",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "City First Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Clearwater Credit Union",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Co-op Bank",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "Crédit Coopératif",
+    "countryCode": "FR"
+  },
+  {
+    "companyName": "Cultura Bank",
+    "countryCode": "NO"
+  },
+  {
+    "companyName": "GLS",
+    "countryCode": "DE"
+  },
+  {
+    "companyName": "La Nef",
+    "countryCode": "FR"
+  },
+  {
+    "companyName": "Lead Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "National Cooperative Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Southern Bancorp, Inc.",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Sunrise Banks",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Teachers Mutual Bank",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "Triodos",
+    "countryCode": "DE"
+  },
+  {
+    "companyName": "Triodos",
+    "countryCode": "ES"
+  },
+  {
+    "companyName": "Triodos Bank N.V.",
+    "countryCode": "NL"
+  },
+  {
+    "companyName": "Triodos",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "Umweltbank",
+    "countryCode": "DE"
+  },
+  {
+    "companyName": "Bank Australia",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "Alternative Bank Switzerland",
+    "countryCode": "CH"
+  },
+  {
+    "companyName": "Cooperative Bank of Karditsa",
+    "countryCode": "GR"
+  },
+  {
+    "companyName": "Folke Sparekassen",
+    "countryCode": "DK"
+  },
+  {
+    "companyName": "Freie Gemeinschaftsbank Genossenschaft",
+    "countryCode": "CH"
+  },
+  {
+    "companyName": "MagNet Bank",
+    "countryCode": "HU"
+  },
+  {
+    "companyName": "Merkur Resource Bank",
+    "countryCode": "DK"
+  },
+  {
+    "companyName": "Triodos",
+    "countryCode": "FR"
+  },
+  {
+    "companyName": "Triodos",
+    "countryCode": "BE"
+  },
+  {
+    "companyName": "Banco Mundo Mujer (Colombia)",
+    "countryCode": "CO"
+  },
+  {
+    "companyName": "Banco Popular (Honduras)",
+    "countryCode": "HN"
+  },
+  {
+    "companyName": "Banco Solidario (Ecuador)",
+    "countryCode": "EC"
+  },
+  {
+    "companyName": "Bancompartir (Colombia)",
+    "countryCode": "CO"
+  },
+  {
+    "companyName": "BancoSol (Bolivia)",
+    "countryCode": "BO"
+  },
+  {
+    "companyName": "BANFONDESA (Dominican Republic)",
+    "countryCode": "DO"
+  },
+  {
+    "companyName": "Caissed’ économiesolidaire Desjardins (Canada)",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "Caja Arequipa (Peru)",
+    "countryCode": "PE"
+  },
+  {
+    "companyName": "CARD Bank, Inc. (Philippines)   ",
+    "countryCode": "PH"
+  },
+  {
+    "companyName": "Centenary Bank (Uganda)",
+    "countryCode": "UG"
+  },
+  {
+    "companyName": "Cooperativa Abaco (Peru)",
+    "countryCode": "PE"
+  },
+  {
+    "companyName": "DAI-ICHI KANGYO Credit Cooperative (Japan)",
+    "countryCode": "JP"
+  },
+  {
+    "companyName": "Decorah Bank and Trust Co.",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Ecology Building Society (United Kingdom)",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "ESAF Small Finance Bank (India)",
+    "countryCode": "IN"
+  },
+  {
+    "companyName": "Grooming Microfinance Bank (Nigeria) 1",
+    "countryCode": "NG"
+  },
+  {
+    "companyName": "Kindred Credit Union (Canada)",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "LAPO Microfinance Bank (Nigeria)",
+    "countryCode": "NG"
+  },
+  {
+    "companyName": "MegaBank (Ukrania) 1",
+    "countryCode": "UA"
+  },
+  {
+    "companyName": "Muktinath Bikas Bank Ltd. (Nepal)",
+    "countryCode": "NP"
+  },
+  {
+    "companyName": "NMB Bank Limited (Nepal)",
+    "countryCode": "NP"
+  },
+  {
+    "companyName": "North East Small Finance Bank (India)",
+    "countryCode": "IN"
+  },
+  {
+    "companyName": "Opportunity Bank (Serbia)",
+    "countryCode": "RS"
+  },
+  {
+    "companyName": "Opportunity Savings and Loans (Ghana) 1",
+    "countryCode": "GH"
+  },
+  {
+    "companyName": "SAC Apoyo Integral, S.A. (El Salvador)",
+    "countryCode": "SV"
+  },
+  {
+    "companyName": "The First Microfinance Bank Afghanistan (Afghanistan)",
+    "countryCode": "AF"
+  },
+  {
+    "companyName": "The First Microfinance Bank Tajikistan (Tajikistan)",
+    "countryCode": "TJ"
+  },
+  {
+    "companyName": "Vancity (Canada)",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "Verity CU (USA)",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Vision Banco (Paraguay)",
+    "countryCode": "PY"
+  },
+  {
+    "companyName": "VSECU (Vermont State Employees Credit Union) (USA)",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "XacBank (Mongolia)",
+    "countryCode": "MN"
+  },
+  {
+    "companyName": "Greenline Community Ventures LLC",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Partnership Capital Growth",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Business Development Bank of Canada",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "Envest Microfinance",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Globalance Bank",
+    "countryCode": "CH"
+  },
+  {
+    "companyName": "Keene Advisors, Inc.",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Lombard Odier",
+    "countryCode": "CH"
+  },
+  {
+    "companyName": "Maanch",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "MicroVest Capital Management, LLC",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Assiniboine Credit Union",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "Vaya Finserv Private Limited",
+    "countryCode": "IN"
+  },
+  {
+    "companyName": "Assimoco S.p.A.",
+    "countryCode": "IT"
+  },
+  {
+    "companyName": "ARA Consultants Limited",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "WE Family Offices LLC",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "BancoEstado Microempresas",
+    "countryCode": "CL"
+  },
+  {
+    "companyName": "BankVic",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "Big Path Capital",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Brattleboro Savings & Loan",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "CIRCLE Alliance Bank",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "Coast Capital Savings",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "DUCA Financial Services Credit Union",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "caisse d'épargne Normandie",
+    "countryCode": "FR"
+  },
+  {
+    "companyName": "Habito",
+    "countryCode": "GB"
+  },
+  {
+    "companyName": "Libro Credit Union",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "Mascoma Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "OMISTA Credit Union",
+    "countryCode": "CA"
+  },
+  {
+    "companyName": "Shine",
+    "countryCode": "FR"
+  },
+  {
+    "companyName": "Spring Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "AWA Alliance Bank",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "Banque Raiffeisen Région Genève Rhône",
+    "countryCode": "CH"
+  },
+  {
+    "companyName": "BDCU Alliance Bank",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "Beyond Bank Australia",
+    "countryCode": "AU"
+  },
+  {
+    "companyName": "O-Bank",
+    "countryCode": "TW"
+  },
+  {
+    "companyName": "Piscataqua Savings Bank",
+    "countryCode": "US"
+  },
+  {
+    "companyName": "Raiffeisen Servizi Assicurativi Srl",
+    "countryCode": "IT"
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "id": "accordion_slice",
+  "type": "SharedSlice",
+  "name": "AccordionSlice",
+  "description": "AccordionSlice",
+  "variations": [
+    {
+      "id": "richText",
+      "name": "Rich Text",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "AccordionSlice",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Content",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    },
+    {
+      "id": "richTextWithStep",
+      "name": "Rich Text With Step",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "AccordionSlice",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Content",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "step": {
+          "type": "Text",
+          "config": {
+            "label": "Step",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    },
+    {
+      "id": "default",
+      "name": "Content Link",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "AccordionSlice",
+      "primary": {
+        "contentlink": {
+          "type": "Link",
+          "config": {
+            "label": "ContentLink",
+            "select": "document"
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "takeactionpage",
+  "label": "TakeActionPage",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "introduction": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Introduction",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "seo_title": {
+        "type": "Text",
+        "config": {
+          "label": "SEO Title",
+          "placeholder": ""
+        }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": {
+          "label": "SEO Description",
+          "placeholder": ""
+        }
+      }
+    },
+    "Pressure": {
+      "slices1": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "embed_slice": {
+              "type": "SharedSlice"
+            },
+            "image_slice": {
+              "type": "SharedSlice"
+            },
+            "text_slice": {
+              "type": "SharedSlice"
+            },
+            "button_slice": {
+              "type": "SharedSlice"
+            },
+            "accordion_slice": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Switch": {
+      "slices2": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "embed_slice": {
+              "type": "SharedSlice"
+            },
+            "image_slice": {
+              "type": "SharedSlice"
+            },
+            "text_slice": {
+              "type": "SharedSlice"
+            },
+            "button_slice": {
+              "type": "SharedSlice"
+            },
+            "accordion_slice": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Share": {
+      "slices3": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "embed_slice": {
+              "type": "SharedSlice"
+            },
+            "image_slice": {
+              "type": "SharedSlice"
+            },
+            "text_slice": {
+              "type": "SharedSlice"
+            },
+            "button_slice": {
+              "type": "SharedSlice"
+            },
+            "accordion_slice": {
+              "type": "SharedSlice"
+            },
+            "social_sharer_slice": {
+              "type": "SharedSlice"
+            },
+            "share_pic_gallery_slice": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "Learn": {
+      "slices4": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "embed_slice": {
+              "type": "SharedSlice"
+            },
+            "image_slice": {
+              "type": "SharedSlice"
+            },
+            "text_slice": {
+              "type": "SharedSlice"
+            },
+            "button_slice": {
+              "type": "SharedSlice"
+            },
+            "accordion_slice": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

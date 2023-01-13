@@ -1,0 +1,45 @@
+{
+  "id": "mock-doc-id",
+  "url": null,
+  "type": "bankpage",
+  "href": null,
+  "tags": [],
+  "first_publication_date": "1970-01-01T00:00:01+0000",
+  "last_publication_date": "1970-01-01T00:00:01+0000",
+  "slugs": [],
+  "linked_documents": [],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "data": {
+    "headline": [
+      {
+        "type": "paragraph",
+        "text": "Laboris mollit est dolor labore proident nulla fugiat. Eiusmod ea pariatur aliquip anim velit et qui amet amet nulla aute consectetur elit.",
+        "spans": []
+      }
+    ],
+    "description1": [
+      {
+        "type": "paragraph",
+        "text": "Dolore elit aliquip qui amet commodo minim quis dolor id labore ut mollit aliqua elit. Consectetur nostrud do quis reprehenderit minim do tempor in.",
+        "spans": []
+      }
+    ],
+    "description2": [
+      {
+        "type": "paragraph",
+        "text": "Lorem qui reprehenderit incididunt commodo id labore cupidatat dolore nisi proident enim laborum dolore aliqua qui. Exercitation deserunt sit eu laboris proident reprehenderit aute anim duis non veniam nulla.",
+        "spans": []
+      }
+    ],
+    "description3": [
+      {
+        "type": "paragraph",
+        "text": "Laborum quis anim laboris velit fugiat fugiat officia in nostrud ut nostrud elit ex incididunt. Nulla velit ea in. Ullamco nisi incididunt pariatur ea incididunt ea pariatur.",
+        "spans": []
+      }
+    ],
+    "seo_title": "dog",
+    "seo_description": "none"
+  }
+}
