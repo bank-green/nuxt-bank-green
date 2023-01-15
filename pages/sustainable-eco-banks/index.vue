@@ -3,8 +3,8 @@
         <!-- <pre>
             {{ JSON.stringify(ecobanks, null, 2) }}
         </pre> -->
-        <div class="page-fade-in contain pt-10 pb-16">
-            <div class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10">
+        <div class="page-fade-in contain pt-28 pb-16">
+            <div class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold">
                 <SliceZone :slices="ecobanks?.data.slices ?? []" :components="sliceComps" />
             </div>
 
