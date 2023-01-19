@@ -81,8 +81,8 @@ const {
 ) // tag used specifically for GTM
 
 async function onSend() {
-    if (await this.send()) {
-        this.$router.push('/thanks-contact')
+    if (await send()) {
+        navigateTo('/thanks-contact')
     }
 }
 </script>
