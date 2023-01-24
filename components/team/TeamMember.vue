@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+import LazyImage from '@/components/LazyImage.vue'
 
 const props = defineProps({
     name: String,
