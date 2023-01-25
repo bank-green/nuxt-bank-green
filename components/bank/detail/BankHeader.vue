@@ -83,7 +83,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 const { client } = usePrismic()
 const { data: greatbank } = await useAsyncData('greatbank', () => client.getByUID('bankpage', 'greatbank'))
 const { data: okbank } = await useAsyncData('okbank', () => client.getByUID('bankpage', 'okbank'))
-const { data: unkonwnbank } = await useAsyncData('unkonwnbank', () => client.getByUID('bankpage', 'unkonwnbank'))
+const { data: unknownbank } = await useAsyncData('unknownbank', () => client.getByUID('bankpage', 'unknownbank'))
 
 
 
