@@ -25,7 +25,7 @@
 
 <script setup>
 import SignupBox from '@/components/forms/SignupBox.vue'
-// import { components } from '~~/slices'
+import { components } from '~~/slices'
 import { defineSliceZoneComponents } from '@prismicio/vue';
 
 const sliceComps = ref(defineSliceZoneComponents(components))
@@ -33,6 +33,6 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { client } = usePrismic()
 const { data: faq } = await useAsyncData('faq', () => client.getSingle('faqpage', { fetchLinks: ['accordionitem.title', 'accordionitem.slices'], }))
-usePrismicSEO(certification.value.data)
+usePrismicSEO(faq.value.data)
 
 </script>
