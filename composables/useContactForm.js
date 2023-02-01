@@ -1,4 +1,4 @@
-// import { useGtm } from 'vue-gtm'
+import { useGtm } from '@gtm-support/vue-gtm'
 
 export default function useContactForm(
     tag = 'unknown',
@@ -6,7 +6,7 @@ export default function useContactForm(
     extra,
     prefill = ref({})
 ) {
-    // const gtm = useGtm()
+    const gtm = useGtm()
 
     const firstName = ref(prefill.value.firstName || '')
     const lastName = ref(prefill.value.lastName || '')
@@ -68,11 +68,11 @@ export default function useContactForm(
         })
         isSent.value = true
 
-        // let gtmEvent = 'emailform'
-        // if (tag === 'contact page form') {
-        //     gtmEvent = 'contactpage'
-        // }
-        // gtm.trackEvent({ event: gtmEvent })
+        let gtmEvent = 'emailform'
+        if (tag === 'contact page form') {
+            gtmEvent = 'contactpage'
+        }
+        gtm.trackEvent({ event: gtmEvent })
 
         isSent.value = true
 

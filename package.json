@@ -21,6 +21,7 @@
     "slice-machine-ui": "^0.5.2"
   },
   "dependencies": {
+    "@gtm-support/vue-gtm": "^2.0.0",
     "date-fns": "^2.29.3",
     "fuse.js": "^6.6.2",
     "geonames.js": "^3.0.6",

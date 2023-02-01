@@ -112,7 +112,7 @@
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-// import { useGtm } from 'vue-gtm'
+import { useGtm } from '@gtm-support/vue-gtm'
 import { components } from '~~/slices'
 import { defineSliceZoneComponents } from '@prismicio/vue';
 import { usePrismicSEO } from '~~/composables/useHeadHelpers';
@@ -124,11 +124,10 @@ const { client } = usePrismic()
 const { data: home } = await useAsyncData('home', () => client.getSingle('homepage'))
 
 usePrismicSEO(home.value.data)
-// const gtm = useGtm()
-// const onCheckBankClick = () => {
-//     gtm.trackEvent({ event: 'onBankCheckClick' })
-// }
-// FIXME enable gtm
+const gtm = useGtm()
+const onCheckBankClick = () => {
+    gtm.trackEvent({ event: 'onBankCheckClick' })
+}
 
 const { country } = useCountry()
 
