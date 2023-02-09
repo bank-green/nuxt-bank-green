@@ -24,9 +24,7 @@
                         <span v-else-if="details.rating === 'bad'"
                             v-text="'Your money is funding the climate crisis'"></span>
                         <span v-else-if="details.rating === 'ok'">
-                            <template>{
-                                Your bank is doing OK.
-                            </template>
+                            Your bank is doing OK.
                         </span>
                         <span v-else-if="details.rating === 'great'">
                             Your bank is great.
