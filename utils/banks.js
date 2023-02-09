@@ -14,6 +14,7 @@ async function callBackend(query, variables) {
 
 const commentaryFields = `{
     rating,
+    ratingInherited,
     uniqueStatement,
     headline,
     recommendedIn {
@@ -76,7 +77,7 @@ export async function getBanksList({
             return {
                 ...b,
                 ...b.commentary,
-                rating: b.commentary?.rating?.toLowerCase() ?? 0,
+                rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
             }
         })
     }
@@ -128,7 +129,7 @@ export async function getBanksListWithFilter({
         return {
             ...b,
             ...b.commentary,
-            rating: b.commentary?.rating?.toLowerCase() ?? 0,
+            rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
         }
     })
     return banks
@@ -169,6 +170,6 @@ export async function getBankDetail(bankTag) {
         ...json.data.brand.commentary,
         bankFatures: json.data.brand.bankFeatures,
     }
-    bank.rating = bank.rating?.toLowerCase()
+    bank.rating = bank.ratingInherited?.toLowerCase()
     return bank
 }
