@@ -43,7 +43,7 @@
             <p class="text-blue-900 leading-loose text-lg">
                 The Paris Agreement set the goal to stay under 1.5°C of warming for very good reasons. According to the
                 Intergovernmental Panel on Climate Change, an increase of just a couple of degrees more could lead to
-                \"substantial species extinction, large risks to global and regional food security\", and an inability
+                "substantial species extinction, large risks to global and regional food security", and an inability
                 to work outside — or even live — in some areas of the world. Our world will become unrecognizable as
                 ocean dead zones, floods, and extreme weather fuel social and economic disruption.
             </p>

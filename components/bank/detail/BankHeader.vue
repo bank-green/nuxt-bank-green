@@ -37,7 +37,7 @@
                     <div v-else>
                         <template v-if="details.rating === 'worst'">
                             <span
-                                v-text="'Your bank is one of the 60 biggest funders of fossil fuels in the world\\*. In the 6 years since the Paris Agreement, the banks in this category have funneled $4.6 trillion into coal, oil, and gas, rapidly accelerating the climate crisis.'"></span>
+                                v-text="'Your bank is one of the 60 biggest funders of fossil fuels in the world\*. In the 6 years since the Paris Agreement, the banks in this category have funneled $4.6 trillion into coal, oil, and gas, rapidly accelerating the climate crisis.'"></span>
                         </template>
                         <template v-else-if="details.rating === 'bad'">
                             <span
