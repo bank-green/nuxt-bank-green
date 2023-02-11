@@ -10,7 +10,6 @@ const props = defineProps({ opts: Object })
 
 const formContainer = ref(null)
 onMounted(() => {
-    console.log("container", formContainer.value)
     createWidget("rwxTfN15", { ...props.opts, container: formContainer.value })
 })
 </script>
