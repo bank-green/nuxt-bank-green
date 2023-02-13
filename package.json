@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@gtm-support/vue-gtm": "^2.0.0",
+    "@typeform/embed": "^2.8.0",
     "date-fns": "^2.29.3",
     "fuse.js": "^6.6.2",
     "geonames.js": "^3.0.6",
