@@ -7,15 +7,12 @@
                         Opened an account with a bank that doesn't finance fossil fuels?
                     </h1>
                     <h2 class="mt-0">
-                        Now's your chance to maximise your impact by letting us know.
+                        Maximise your impact by letting us know.
                     </h2>
                     <p>
-                        By taking this survey, you are helping advocate for change. Bank.Green uses your response to
+                        Taking this survey helps advocate for change. Bank.Green uses your response to
                         push fossil banks to divest, push sustainable eco banks to improve their customer experience,
                         and encourage other people to join you in greening their finances.
-                    </p>
-                    <p>
-                        Please take a moment to share your thoughts.
                     </p>
                     <SwitchForm :opts="{ height: 600 }" />
                 </div>
