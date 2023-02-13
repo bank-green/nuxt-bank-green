@@ -20,7 +20,6 @@ export default function getLinks({ isHeader = false }) {
             short_title: 'FAQ',
         },
         { href: '/contact', title: 'Contact us' },
-        { href: '/impact', title: 'Impact' }
     ]
 
     if (!isHeader) {
