@@ -1,7 +1,7 @@
 <template>
     <div class="bg-primary-dark">
         <div class="contain py-4 md:py-8 w-full flex flex-wrap md:flex-nowrap  items-center text-gray-100 ">
-            <div v-if="isBankBadOrWorst" class="w-full flex flex-col items-center p-6 md:p-8">
+            <div class="w-full flex flex-col items-center p-6 md:p-8">
                 <h2 class="w-full text-center font-semibold text-2xl tracking-wider mb-4 text-gray-100">
                     Did we get something wrong?
                 </h2>
