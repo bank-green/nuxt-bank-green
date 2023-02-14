@@ -93,7 +93,8 @@
         }
       }
     },
-    "ecobankspage": {}
+    "ecobankspage": {},
+    "volunteerspage": {}
   },
   "slices": {
     "BlogImage": {},

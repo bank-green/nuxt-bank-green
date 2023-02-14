@@ -39,6 +39,12 @@ export default function getLinks({ isHeader = false }) {
         })
 
         links.push({
+            href: '/volunteers',
+            title: "Volunteering",
+            short_title: "Volunteering",
+        })
+ 
+        links.push({
             href: '/team',
             title: "Who we are",
             short_title: "Team",
