@@ -22,7 +22,7 @@
                         signing up for ${details.name}.`
                         }}
                     </div>
-                    <NuxtLink to="details.website" target="_blank" class="button-green inline-block mx-auto">{{
+                    <NuxtLink :to="details.website" target="_blank" class="button-green inline-block mx-auto">{{
                     `Visit ${details.name}`
                     }}</NuxtLink>
                     <NuxtLink to="/pledge"
