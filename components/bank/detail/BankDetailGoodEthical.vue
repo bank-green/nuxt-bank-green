@@ -31,8 +31,7 @@
                     </NuxtLink>
                     <div class="text-sm lg:text-md font-medium mt-8 sm:px-16 lg:px-0">
                         Have you opened an account with {{ details.name }} since visiting Bank.Green? <NuxtLink
-                            class="text-sushi-300 hover:text-sushi-200"
-                            to="https://s3c0er2g1pf.typeform.com/to/rwxTfN15">Please let us know!</NuxtLink>
+                            class="text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
                     </div>
                 </div>
             </div>
