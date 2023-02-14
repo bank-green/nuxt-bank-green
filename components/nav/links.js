@@ -20,6 +20,7 @@ export default function getLinks({ isHeader = false }) {
             short_title: 'FAQ',
         },
         { href: '/contact', title: 'Contact us' },
+        { href: '/take-action', title: 'Take Action' },
     ]
 
     if (!isHeader) {
@@ -43,7 +44,7 @@ export default function getLinks({ isHeader = false }) {
             title: "Volunteering",
             short_title: "Volunteering",
         })
- 
+
         links.push({
             href: '/team',
             title: "Who we are",
