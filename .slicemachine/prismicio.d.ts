@@ -1024,7 +1024,58 @@ type TeampageDocumentDataSlicesSlice = TextSliceSlice;
  * @typeParam Lang - Language API ID of the document.
  */
 export type TeampageDocument<Lang extends string = string> = prismicT.PrismicDocumentWithoutUID<Simplify<TeampageDocumentData>, "teampage", Lang>;
-export type AllDocumentTypes = AccordionitemDocument | BankpageDocument | BlogpostDocument | CalltoactionDocument | CertificationpageDocument | ContactpageDocument | DisclaimerpageDocument | EcobankspageDocument | FaqpageDocument | HomepageDocument | PledgepageDocument | PresspostDocument | PrivacypageDocument | TakeactionpageDocument | TeampageDocument;
+/** Content for VolunteersPage documents */
+interface VolunteerspageDocumentData {
+    /**
+     * SEO Title field in *VolunteersPage*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: volunteerspage.seo_title
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    seo_title: prismicT.KeyTextField;
+    /**
+     * SEO Description field in *VolunteersPage*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: volunteerspage.seo_description
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    seo_description: prismicT.KeyTextField;
+    /**
+     * Slice Zone field in *VolunteersPage*
+     *
+     * - **Field Type**: Slice Zone
+     * - **Placeholder**: *None*
+     * - **API ID Path**: volunteerspage.slices[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+     *
+     */
+    slices: prismicT.SliceZone<VolunteerspageDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *VolunteersPage → Slice Zone*
+ *
+ */
+type VolunteerspageDocumentDataSlicesSlice = TextSliceSlice;
+/**
+ * VolunteersPage document from Prismic
+ *
+ * - **API ID**: `volunteerspage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type VolunteerspageDocument<Lang extends string = string> = prismicT.PrismicDocumentWithoutUID<Simplify<VolunteerspageDocumentData>, "volunteerspage", Lang>;
+export type AllDocumentTypes = AccordionitemDocument | BankpageDocument | BlogpostDocument | CalltoactionDocument | CertificationpageDocument | ContactpageDocument | DisclaimerpageDocument | EcobankspageDocument | FaqpageDocument | HomepageDocument | PledgepageDocument | PresspostDocument | PrivacypageDocument | TakeactionpageDocument | TeampageDocument | VolunteerspageDocument;
 /**
  * Primary content in AccordionSlice → Primary
  *
@@ -1420,6 +1471,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { AccordionitemDocumentData, AccordionitemDocumentDataSlicesSlice, AccordionitemDocument, BankpageDocumentData, BankpageDocument, BlogpostDocumentData, BlogpostDocumentDataSlicesSlice, BlogpostDocument, CalltoactionDocumentData, CalltoactionDocument, CertificationpageDocumentData, CertificationpageDocumentDataSlicesSlice, CertificationpageDocument, ContactpageDocumentData, ContactpageDocument, DisclaimerpageDocumentData, DisclaimerpageDocumentDataSlicesSlice, DisclaimerpageDocument, EcobankspageDocumentData, EcobankspageDocumentDataSlicesSlice, EcobankspageDocumentDataSlices1Slice, EcobankspageDocument, FaqpageDocumentData, FaqpageDocumentDataSlicesSlice, FaqpageDocument, HomepageDocumentData, HomepageDocumentDataSlices1Slice, HomepageDocument, PledgepageDocumentData, PledgepageDocument, PresspostDocumentData, PresspostDocumentDataSlicesSlice, PresspostDocument, PrivacypageDocumentData, PrivacypageDocumentDataSlicesSlice, PrivacypageDocument, TakeactionpageDocumentData, TakeactionpageDocumentDataSlices1Slice, TakeactionpageDocumentDataSlices2Slice, TakeactionpageDocumentDataSlices3Slice, TakeactionpageDocumentDataSlices4Slice, TakeactionpageDocument, TeampageDocumentData, TeampageDocumentDataSlicesSlice, TeampageDocument, AllDocumentTypes, AccordionSliceSliceRichTextPrimary, AccordionSliceSliceRichText, AccordionSliceSliceRichTextWithStepPrimary, AccordionSliceSliceRichTextWithStep, AccordionSliceSliceDefaultPrimary, AccordionSliceSliceDefault, AccordionSliceSliceVariation, AccordionSliceSlice, ButtonSliceSliceDefaultPrimary, ButtonSliceSliceDefault, ButtonSliceSliceVariation, ButtonSliceSlice, EmbedSliceSliceDefaultPrimary, EmbedSliceSliceDefault, EmbedSliceSliceVariation, EmbedSliceSlice, FeaturedInSliceSliceDefaultPrimary, FeaturedInSliceSliceDefault, FeaturedInSliceSliceVariation, FeaturedInSliceSlice, ImageSliceSliceDefaultPrimary, ImageSliceSliceDefault, ImageSliceSliceVariation, ImageSliceSlice, SharePicGallerySliceSliceDefault, SharePicGallerySliceSliceVariation, SharePicGallerySliceSlice, SocialSharerSliceSliceDefault, SocialSharerSliceSliceVariation, SocialSharerSliceSlice, TextSliceSliceDefaultPrimary, TextSliceSliceDefault, TextSliceSliceVariation, TextSliceSlice };
+        export type { AccordionitemDocumentData, AccordionitemDocumentDataSlicesSlice, AccordionitemDocument, BankpageDocumentData, BankpageDocument, BlogpostDocumentData, BlogpostDocumentDataSlicesSlice, BlogpostDocument, CalltoactionDocumentData, CalltoactionDocument, CertificationpageDocumentData, CertificationpageDocumentDataSlicesSlice, CertificationpageDocument, ContactpageDocumentData, ContactpageDocument, DisclaimerpageDocumentData, DisclaimerpageDocumentDataSlicesSlice, DisclaimerpageDocument, EcobankspageDocumentData, EcobankspageDocumentDataSlicesSlice, EcobankspageDocumentDataSlices1Slice, EcobankspageDocument, FaqpageDocumentData, FaqpageDocumentDataSlicesSlice, FaqpageDocument, HomepageDocumentData, HomepageDocumentDataSlices1Slice, HomepageDocument, PledgepageDocumentData, PledgepageDocument, PresspostDocumentData, PresspostDocumentDataSlicesSlice, PresspostDocument, PrivacypageDocumentData, PrivacypageDocumentDataSlicesSlice, PrivacypageDocument, TakeactionpageDocumentData, TakeactionpageDocumentDataSlices1Slice, TakeactionpageDocumentDataSlices2Slice, TakeactionpageDocumentDataSlices3Slice, TakeactionpageDocumentDataSlices4Slice, TakeactionpageDocument, TeampageDocumentData, TeampageDocumentDataSlicesSlice, TeampageDocument, VolunteerspageDocumentData, VolunteerspageDocumentDataSlicesSlice, VolunteerspageDocument, AllDocumentTypes, AccordionSliceSliceRichTextPrimary, AccordionSliceSliceRichText, AccordionSliceSliceRichTextWithStepPrimary, AccordionSliceSliceRichTextWithStep, AccordionSliceSliceDefaultPrimary, AccordionSliceSliceDefault, AccordionSliceSliceVariation, AccordionSliceSlice, ButtonSliceSliceDefaultPrimary, ButtonSliceSliceDefault, ButtonSliceSliceVariation, ButtonSliceSlice, EmbedSliceSliceDefaultPrimary, EmbedSliceSliceDefault, EmbedSliceSliceVariation, EmbedSliceSlice, FeaturedInSliceSliceDefaultPrimary, FeaturedInSliceSliceDefault, FeaturedInSliceSliceVariation, FeaturedInSliceSlice, ImageSliceSliceDefaultPrimary, ImageSliceSliceDefault, ImageSliceSliceVariation, ImageSliceSlice, SharePicGallerySliceSliceDefault, SharePicGallerySliceSliceVariation, SharePicGallerySliceSlice, SocialSharerSliceSliceDefault, SocialSharerSliceSliceVariation, SocialSharerSliceSlice, TextSliceSliceDefaultPrimary, TextSliceSliceDefault, TextSliceSliceVariation, TextSliceSlice };
     }
 }
