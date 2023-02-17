@@ -15,6 +15,10 @@ async function callBackend(query, variables) {
 const commentaryFields = `{
     rating,
     ratingInherited,
+    inheritBrandRating {
+        tag
+        name
+    }
     uniqueStatement,
     headline,
     recommendedIn {

@@ -12,6 +12,10 @@
                     {{ bank.name }}
                 </h1>
                 <div v-if="bank.subtitle" class="text-lg md:text-xl text-gray-500" v-html="bank.subtitle"></div>
+                <div v-if="bank.inheritBrandRating" class="text-xs text-gray-500">Deposits or policies controlled by 
+                    <NuxtLink class="underline" :to="`/banks/${bank.inheritBrandRating.tag}`" >{{ bank.inheritBrandRating.name }}</NuxtLink>
+                </div>
+                
             </div>
         </div>
     </div>
