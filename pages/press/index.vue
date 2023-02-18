@@ -26,6 +26,5 @@ const { data: posts } = await useAsyncData('pressposts', () => client.getAllByTy
 const { data: press } = await useAsyncData('press', () => client.getSingle('presspage'))
 const sliceComps = ref(defineSliceZoneComponents(components))
 
-useHeadHelper('Press')
 usePrismicSEO(press.value.data)
 </script>
