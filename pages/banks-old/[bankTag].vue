@@ -1,14 +1,17 @@
 <template>
-    <BankWorst v-if="details.rating === 'worst'" :details="details" />
-    <BankBad v-else-if="details.rating === 'bad'" :details="details" />
-    <BankOk v-else-if="details.rating === 'ok'" :details="details" />
-    <BankGreat v-else-if="details.rating === 'great'" :details="details" />
-    <BankUnknown v-else />
-    <BankFooter :details="details"></BankFooter>
+    <div class="page">
+        <BankHeader :details="details" />
+        <BankDetailBad v-if="isBadBank" :details="details" />
+        <BankDetailOkay v-else :details="details" />
+        <BankFooter :details="details"></BankFooter>
+    </div>
 </template>
 
 <script setup>
-import { computed, defineAsyncComponent, ref } from "vue";
+import {
+    computed,
+    defineAsyncComponent, ref
+} from "vue";
 
 // const route = useRoute()
 // FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,
