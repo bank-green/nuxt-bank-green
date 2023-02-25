@@ -1,5 +1,5 @@
 <template>
-    <BankLayoutGreatOk>
+    <BankLayoutGreatOkUnknown>
         <template #section1>
             <BankHeadline :name="details?.name" :website="details?.website" :subtitle="details?.subtitle"
                 :inheritBrandRating="details?.inheritBrandRating" />
@@ -66,7 +66,7 @@
             </div>
         </template>
 
-    </BankLayoutGreatOk>
+    </BankLayoutGreatOkUnknown>
 </template>
 
 <script setup lang="ts">

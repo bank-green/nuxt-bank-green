@@ -3,11 +3,11 @@
     <BankBad v-else-if="details.rating === 'bad'" :details="details" />
     <BankOk v-else-if="details.rating === 'ok'" :details="details" />
     <BankGreat v-else-if="details.rating === 'great'" :details="details" />
-    <BankUnknown v-else />
+    <BankUnknown v-else :details="details" />
 </template>
 
 <script setup>
-import { computed, defineAsyncComponent, ref } from "vue";
+import { ref } from "vue";
 
 // const route = useRoute()
 // FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,
@@ -27,13 +27,4 @@ useHeadHelper(
 
 const { rating } = details.value;
 if (rating) useHeadRating(rating);
-
-const isBadBank = computed(() => {
-    switch (details.value.rating) {
-        case "bad":
-        case "worst":
-            return true;
-    }
-    return false;
-});
 </script>
