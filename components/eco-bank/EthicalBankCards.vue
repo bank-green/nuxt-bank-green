@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import EthicalBankCard from "~~/components/bank/EthicalBankCard.vue"
+import EthicalBankCard from '@/components/eco-bank/EthicalBankCard.vue'
 const props = defineProps({
     list: Array,
     isNoCredit: Boolean,

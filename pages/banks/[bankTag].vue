@@ -4,7 +4,6 @@
     <BankOk v-else-if="details.rating === 'ok'" :details="details" />
     <BankGreat v-else-if="details.rating === 'great'" :details="details" />
     <BankUnknown v-else />
-    <BankFooter :details="details"></BankFooter>
 </template>
 
 <script setup>

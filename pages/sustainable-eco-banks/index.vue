@@ -71,7 +71,8 @@
 
 <script setup>
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import EthicalBankCards from '@/components/bank/EthicalBankCards'
+import EthicalBankCards from '@/components/eco-bank/EthicalBankCards.vue'
+import EthicalBankFilters from '~~/components/EthicalBankFilters.client.vue';
 
 
 import { components } from '~~/slices'
