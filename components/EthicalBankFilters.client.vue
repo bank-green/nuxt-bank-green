@@ -20,8 +20,6 @@
                 Local branches</CheckboxSection>
             <RegionSearch v-if="searchByLocation" class="pb-4 md:max-w-sm md:mx-auto z-30" ref="regionPicker"
                 @select="onSelectLocation" />
-            <CheckboxSection class="col-span-full" v-model="filterPayload.location.online_only" name="online_only">
-                Online only</CheckboxSection>
         </div>
 
         <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
@@ -32,20 +30,17 @@
 
         <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Convenience</h5>
         <div class="flex flex-col space-y-1">
-            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience.online_account_opening"
-                name="online_account_opening">
-                Online account opening</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience.online_banking"
-                name="online_banking">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience['Mobile banking']"
+                name="Mobile banking">
                 Mobile banking</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience.free_atm_withdrawal"
-                name="free_atm_withdrawal">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience['Free ATM network']"
+                name="Free ATM network">
                 Free ATM network</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience.no_overdraft_fee"
-                name="no_overdraft_fee">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience['No overdraft fee']"
+                name="No overdraft fee">
                 No overdraft fee</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience.no_account_maintenance_fee"
-                name="no_account_maintenance_fee">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.convenience['No account maintenance fee']"
+                name="No account maintenance fee">
                 No account maintenance fees</CheckboxSection>
         </div>
 
@@ -109,15 +104,13 @@ const getDefaultFilter = () => ({
     region: null,
     subregion: null,
     location: {
-        online_only: false,
+        "Mobile banking": false,
     },
     fossilFreeAlliance: false,
     convenience: {
-        online_account_opening: false,
-        online_banking: false,
-        free_atm_withdrawal: false,
-        no_overdraft_fee: false,
-        no_account_maintenance_fee: false,
+        "Free ATM network": false,
+        "No overdraft fee": false,
+        "No account maintenance fee": false,
     },
     bankAccounts: {
         checking: false,
