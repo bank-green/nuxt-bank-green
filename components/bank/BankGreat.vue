@@ -17,7 +17,7 @@
                 </div>
                 <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="details?.header" v-html="details.header"></div>
-                    <div v-else><span>Your bank is great.</span></div>
+                    <PrismicRichText v-else :field="greatbank?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
                     <div v-if="details?.summary" v-html="details.summary"></div>
@@ -80,10 +80,4 @@ const { client } = usePrismic();
 const { data: greatbank } = await useAsyncData("greatbank", () =>
     client.getByUID("bankpage", "greatbank")
 );
-
-const checkList = [
-    "Learn about the issues via our blog updates",
-    "Join our campaigns to take action against fossil finance",
-    "Discover other ways to divest from fossil fuels",
-];
 </script>

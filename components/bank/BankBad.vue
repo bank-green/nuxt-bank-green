@@ -15,8 +15,7 @@
                 </div>
                 <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="details?.header" v-html="details.header"></div>
-                    <div v-else><span>Your money is funding the climate crisis.</span>
-                    </div>
+                    <PrismicRichText v-else :field="badbank?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
                     <div v-if="details?.summary" v-html="details.summary"></div>
@@ -42,6 +41,11 @@
 const props = defineProps({
     details: Object
 })
+
+const { client } = usePrismic();
+
+const { data: badbank } = await useAsyncData("badbank", () =>
+    client.getByUID("bankpage", "badbank"))
 
 const formattedTotal = computed(() => props?.details?.amountFinancedSince2016 ?? 'large amounts')
 

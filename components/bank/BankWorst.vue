@@ -15,15 +15,11 @@
                 </div>
                 <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="details?.header" v-html="details.header"></div>
-                    <div v-else><span>Your money is being used to fund the climate crisis at an alarming rate.</span>
-                    </div>
+                    <PrismicRichText v-else :field="worstbank?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
                     <div v-if="details?.summary" v-html="details.summary"></div>
-                    <div v-else>Your bank is one of the 60 biggest funders of fossil fuels in the world\*. In the 6
-                        years since the Paris Agreement, the banks in this category have funneled $4.6 trillion into
-                        coal, oil, and gas, rapidly accelerating the climate crisis.
-                    </div>
+                    <PrismicRichText v-else :field="worstbank?.data.description1" />
                     <a v-if="details?.data_sources?.includes('bimpact')" href="http://data.world/blab/b-corp-impact-data"
                         class="block"><span class="text-xs" v-text="'CC BY-SA data partially from B-Lab'"></span></a>
                 </div>
@@ -44,6 +40,12 @@
 const props = defineProps({
     details: Object
 })
+
+const { client } = usePrismic();
+
+const { data: worstbank } = await useAsyncData("worstbank", () =>
+    client.getByUID("bankpage", "worstbank")
+);
 
 const formattedTotal = computed(() => props?.details?.amountFinancedSince2016 ?? 'large amounts')
 
