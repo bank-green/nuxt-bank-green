@@ -46,7 +46,7 @@
                                     Sorry, we don't have any banks that met the required filters
                                 </h2>
                                 <p class="text-gray-600 mb-8 md:text-center max-w-lg mx-auto">
-                                    {We’re working hard to increase the number of banks we provide data on. If you tell
+                                    We’re working hard to increase the number of banks we provide data on. If you tell
                                     us your bank’s name, we’ll email you as soon as we have a score for it.
                                 </p>
                             </div>
