@@ -52,27 +52,27 @@
                 }}</CheckboxSection>
             <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts.saving" name="saving">
                 Savings accounts</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts.interest_rates"
-                name="interest_rates">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts['Interest rates']"
+                name="Interest rates">
                 Interest rates</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts.business_accounts"
-                name="business_accounts">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts['Business accounts']"
+                name="Business accounts">
                 Business accounts</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts.small_business_lending"
-                name="small_business_lending">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts['Small business lending']"
+                name="Small business lending">
                 Small business lending</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts.credit_cards"
-                name="credit_cards">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts['Credit cards']"
+                name="Credit cards">
                 Credit cards</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts.mortgage_or_loans"
-                name="mortgage_or_loans">
+            <CheckboxSection class="col-span-full" v-model="filterPayload.bankAccounts['Mortgage or loans']"
+                name="Mortgage or loans">
                 Mortgage or loan options
             </CheckboxSection>
         </div>
 
         <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Security</h5>
-        <CheckboxSection class="col-span-full" v-model="filterPayload.security.deposit_protection"
-            name="deposit_protection">
+        <CheckboxSection class="col-span-full" v-model="filterPayload.security['Deposit protection']"
+            name="Deposit protection">
             Deposit protection</CheckboxSection>
     </div>
 </template>
