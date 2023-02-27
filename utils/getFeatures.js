@@ -5,6 +5,9 @@ export default function getFeatures(item) {
         return {}
     }
 
+    // my intention is to deploy the frontend with teh existing feature dict
+    // to migrate the old feature.name s new ones
+    // and then to get rid of this dict
     const featureDict = {
         online_only: 'Online Only',
         online_account_opening: 'Online Account Opening',
@@ -36,6 +39,9 @@ export default function getFeatures(item) {
             // it's a feature we're interested in
             const displayFeature = getDisplayFeature(bankFeature)
             result[featureDict[bankFeature.feature.name]] = displayFeature
+        } else {
+            const displayFeature = getDisplayFeature(bankFeature)
+            result[bankFeature.feature.name] = displayFeature
         }
     }
 
