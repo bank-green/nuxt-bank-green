@@ -1,8 +1,7 @@
 <template>
     <BankLayoutGreatOkUnknown>
         <template #section1>
-            <BankHeadline :name="details?.name" :website="details?.website" :subtitle="details?.subtitle"
-                :inheritBrandRating="details?.inheritBrandRating" />
+            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start">
@@ -13,14 +12,12 @@
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full"></div>
                 <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
-                    <div v-if="details?.header" v-html="details.header"></div>
+                    <div v-if="header" v-html="header"></div>
                     <PrismicRichText v-else :field="bankok?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
-                    <div v-if="details?.summary" v-html="details.summary"></div>
+                    <div v-if="summary" v-html="summary"></div>
                     <PrismicRichText v-else :field="bankok?.data.description1" />
-                    <a v-if="details?.data_sources?.includes('bimpact')" href="http://data.world/blab/b-corp-impact-data"
-                        class="block"><span class="text-xs" v-text="'CC BY-SA data partially from B-Lab'"></span></a>
                 </div>
             </div>
             <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
@@ -64,22 +61,22 @@
 
 
 <script setup lang="ts">
-import Swoosh from "@/components/Swoosh.vue";
 import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
-import SignupBox from "../forms/SignupBox.vue";
-const props = defineProps({
-    details: Object,
-});
+const props = defineProps<{
+    name: string,
+    website: string,
+    subtitle: string,
+    inheritBrandRating: {
+        tag: string,
+        name: string
+    },
+    header: string,
+    summary: string
+}>()
 
 const { client } = usePrismic();
 
 const { data: bankok } = await useAsyncData("okbank", () =>
     client.getByUID("bankpage", "okbank")
 );
-
-const checkList = [
-    "Learn about the issues via our blog updates",
-    "Join our campaigns to take action against fossil finance",
-    "Discover other ways to divest from fossil fuels",
-];
 </script>

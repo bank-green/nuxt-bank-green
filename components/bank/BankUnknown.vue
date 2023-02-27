@@ -1,8 +1,8 @@
 <template>
     <BankLayoutGreatOkUnknown>
         <template #section1>
-            <BankHeadline :name="details?.name ?? 'Unknown Bank'" :website="details?.website" :subtitle="details?.subtitle"
-                :inheritBrandRating="details?.inheritBrandRating" />
+            <BankHeadline :name="name ?? 'Unknown Bank'" :website="website" :subtitle="subtitle"
+                :inheritBrandRating="inheritBrandRating" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start">
@@ -61,12 +61,16 @@
 
 
 <script setup lang="ts">
-import Swoosh from "@/components/Swoosh.vue";
 import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
-import SignupBox from "../forms/SignupBox.vue";
-const props = defineProps({
-    details: Object,
-});
+const props = defineProps<{
+    name: string,
+    website: string,
+    subtitle: string,
+    inheritBrandRating: {
+        tag: string,
+        name: string
+    },
+}>()
 
 const { client } = usePrismic();
 

@@ -1,12 +1,27 @@
 <template>
-    <BankWorst v-if="details.rating === 'worst'" :details="details" />
-    <BankBad v-else-if="details.rating === 'bad'" :details="details" />
-    <BankOk v-else-if="details.rating === 'ok'" :details="details" />
-    <BankGreat v-else-if="details.rating === 'great'" :details="details" />
-    <BankUnknown v-else :details="details" />
+    <!-- :summary, :header, :details, :amountFinancedSince2016 to be removed 
+        https://linear.app/bankgreen/issue/PE-476/render-custom-bank-texts-from-prismic
+    -->
+    <BankWorst v-if="details.rating === 'worst'" :name="details.name" :subtitle="details.subtitle"
+        :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
+        :summary="details.summary" :details="details.details" :amountFinancedSince2016="details.amountFinancedSince2016" />
+
+    <BankBad v-else-if="details.rating === 'bad'" :name="details.name" :subtitle="details.subtitle"
+        :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
+        :summary="details.summary" :details="details.details" :amountFinancedSince2016="details.amountFinancedSince2016" />
+
+    <BankOk v-else-if="details.rating === 'ok'" :name="details.name" :subtitle="details.subtitle" :website="details.website"
+        :inheritBrandRating="details.inheritBrandRating" :header="details.header" :summary="details.summary" />
+
+    <BankGreat v-else-if="details.rating === 'great'" :name="details.name" :subtitle="details.subtitle"
+        :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
+        :summary="details.summary" :fossilFreeAlliance="details.fossilFreeAlliance" />
+
+    <BankUnknown v-else :name="details.name" :subtitle="details.subtitle" :website="details.website"
+        :inheritBrandRating="details.inheritBrandRating" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 // const route = useRoute()
