@@ -5,27 +5,20 @@ export default function getFeatures(item) {
         return {}
     }
 
-    // my intention is to deploy the frontend with teh existing feature dict
-    // to migrate the old feature.name s new ones
-    // and then to get rid of this dict
+    // features in this dict will show an x if they are not available for a bank
     const featureDict = {
-        online_only: 'Online Only',
-        online_account_opening: 'Online Account Opening',
-        online_banking: 'Mobile Banking',
-        free_atm_withdrawal: 'Free ATM Network',
-        no_overdraft_fee: 'No Overdraft Fee',
-        no_account_maintenance_fee: 'No Account Maintenance Fees',
-
-        checking: isBE() ? 'Current Accounts' : 'Checking Accounts',
-        saving: 'Savings Accounts',
-        interest_rates: 'Interest Rates',
-        business_accounts: 'Business Accounts',
-        small_business_lending: 'Small Business Lending',
-        credit_cards: 'Credit Cards',
-        mortgage_or_loans: 'Mortgage or Loan Options',
-
-        free_checking: isBE() ? 'Free Checking Account Available' : 'Free Current Account Available',
-        deposit_protection: 'Deposit Protection',
+        "Mobile banking": 'Mobile Banking',
+        "Free ATM network": 'Free ATM Network',
+        "No overdraft fee": 'No Overdraft Fee',
+        "No account maintenance fee": 'No Account Maintenance Fees',
+        "checking": isBE() ? 'Current Accounts' : 'Checking Accounts',
+        "saving": 'Savings Accounts',
+        "Interest rates": 'Interest Rates',
+        "Business accounts": 'Business Accounts',
+        "Small business lending": 'Small Business Lending',
+        "Credit cards": 'Credit Cards',
+        "Mortgage or loans": 'Mortgage or Loan Options',
+        "Deposit protection": 'Deposit Protection',
     }
 
     // initialize result object with all false
