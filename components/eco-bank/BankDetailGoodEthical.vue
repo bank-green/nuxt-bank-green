@@ -19,11 +19,11 @@
                 <div class="max-w-xl mx-auto bg-primary-dark text-gray-100 rounded-xl shadow-xl p-8">
                     <div class="text-lg lg:text-xl font-medium mb-8 sm:px-16 lg:px-0">
                         {{ `Counting bank switches is vitally important to us as a movement. Please use this link when
-                        signing up for ${details.name}.`
+                                                signing up for ${details.name}.`
                         }}
                     </div>
                     <NuxtLink :to="details.website" target="_blank" class="button-green inline-block mx-auto">{{
-                    `Visit ${details.name}`
+                        `Visit ${details.name}`
                     }}</NuxtLink>
                     <NuxtLink to="/pledge"
                         class="block text-gray-200 hover:underline cursor-pointer font-bold mt-4 text-center">
@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import EthicalFeatures from '@/components/bank/detail/features/EthicalFeatures'
+import EthicalFeatures from './features/EthicalFeatures.vue';
 import Swoosh from '@/components/Swoosh.vue'
 
 defineProps({
