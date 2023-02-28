@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import TopEthicalBanksWidget from '@/components/bank/TopEthicalBanksWidget'
+import TopEthicalBanksWidget from '../eco-bank/TopEthicalBanksWidget.vue';
 
 const props = defineProps({
     title: String,
