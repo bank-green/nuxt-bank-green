@@ -10,7 +10,7 @@
 
 <script setup>
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import EthicalBankList from '@/components/bank/EthicalBankList'
+import EthicalBankList from './EthicalBankList.vue';
 
 const { country } = useCountry()
 
