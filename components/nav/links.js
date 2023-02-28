@@ -50,14 +50,7 @@ export default function getLinks({ isHeader = false }) {
             title: "Who we are",
             short_title: "Team",
         })
-        return [
-            {
-                href: '/take-action',
-                title: "Take action",
-                short_title: 'Act',
-            },
-            ...links,
-        ]
+        return links
     }
 
     return links

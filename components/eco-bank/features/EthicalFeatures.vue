@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import FeaturesList from '@/components/bank/detail/features/FeaturesList.vue'
+import FeaturesList from './FeaturesList.vue';
 
 const props = defineProps({
     details: Object,

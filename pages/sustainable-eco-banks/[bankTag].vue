@@ -7,6 +7,8 @@
 
 <script setup>
 
+import BankHeaderEthical from '~~/components/eco-bank/BankHeaderEthical.vue';
+import BankDetailGoodEthical from '~~/components/eco-bank/BankDetailGoodEthical.vue';
 
 // const route = useRoute()
 // FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,

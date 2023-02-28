@@ -51,7 +51,7 @@
 <script>
 import ClearbitLogo from '@/components/icons/ClearbitLogo'
 import BankIcon from '@/components/forms/banks/BankIcon'
-import FeaturesList from './detail/features/FeaturesList.vue'
+import FeaturesList from './features/FeaturesList.vue'
 
 export default {
     props: {
