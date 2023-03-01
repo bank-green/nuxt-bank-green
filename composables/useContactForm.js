@@ -6,7 +6,6 @@ export default function useContactForm(
     extra,
     prefill = ref({})
 ) {
-    const gtm = useGtm()
 
     const firstName = ref(prefill.value.firstName || '')
     const lastName = ref(prefill.value.lastName || '')
@@ -72,6 +71,8 @@ export default function useContactForm(
         if (tag === 'contact page form') {
             gtmEvent = 'contactpage'
         }
+        const gtm = useGtm()
+        gtm.enable(true)
         gtm.trackEvent({ event: gtmEvent })
 
         isSent.value = true

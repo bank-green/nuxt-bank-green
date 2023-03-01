@@ -100,8 +100,7 @@
             </div>
             <div class="flex flex-row items-center justify-center">
 
-                <LottiePlayer path="/anim/money_smoke.json"
-                    class="w-full md:max-w-2xl h-42 object-cover object-bottom" />
+                <LottiePlayer path="/anim/money_smoke.json" class="w-full md:max-w-2xl h-42 object-cover object-bottom" />
 
             </div>
         </div>
@@ -124,8 +123,10 @@ const { client } = usePrismic()
 const { data: home } = await useAsyncData('home', () => client.getSingle('homepage'))
 
 usePrismicSEO(home.value.data)
-const gtm = useGtm()
+
 const onCheckBankClick = () => {
+    const gtm = useGtm()
+    gtm.enable(true)
     gtm.trackEvent({ event: 'onBankCheckClick' })
 }
 
