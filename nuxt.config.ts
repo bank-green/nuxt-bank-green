@@ -142,6 +142,5 @@ export default defineNuxtConfig({
   },
   image: {
     prismic: {},
-    domains: ["images.prismic.io"],
   },
 });
