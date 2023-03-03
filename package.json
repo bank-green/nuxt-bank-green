@@ -8,7 +8,8 @@
     "postinstall": "nuxt prepare",
     "clean": "nuxt clean",
     "slicemachine": "start-slicemachine",
-    "publish": "npx wrangler publish"
+    "publish": "npx wrangler publish",
+    "stage": "npx wrangler publish --env staging"
   },
   "devDependencies": {
     "@nuxt/image-edge": "^1.0.0-27954023.4cee565",
