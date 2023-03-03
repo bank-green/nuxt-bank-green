@@ -1,5 +1,6 @@
 <template>
-  <img :src="slice.primary.logo.url" :alt="slice.primary.logo.alt" :class="slice.primary.class ?? 'h-10 w-auto'" />
+  <nuxt-img :src="slice.primary.logo.url" :alt="slice.primary.logo.alt" :class="slice.primary.class ?? 'h-10 w-auto'"
+    sizes="md:400px" />
 </template>
 
 <script>
@@ -12,6 +13,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
