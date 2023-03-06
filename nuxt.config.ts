@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/prismic", "@nuxt/image-edge"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/prismic"],
   prismic: {
     endpoint: "https://bankgreen.prismic.io/api/v2",
   },
@@ -139,8 +139,5 @@ export default defineNuxtConfig({
     prerender: {
       routes: ["/", "/blog", "/faq"],
     },
-  },
-  image: {
-    prismic: {},
   },
 });

@@ -1,9 +1,8 @@
 <template>
   <figure>
-    <nuxt-img class="mx-auto" :alt="slice.primary.image.alt" :src="slice.primary.image.url" sizes="md:100vw lg:800px"
-      :style="{
-        'max-width': `100%`,
-      }" />
+    <img class="mx-auto" :alt="slice.primary.image.alt" :src="slice.primary.image.url" :style="{
+      'max-width': `100%`,
+    }" />
     <figcaption>
       <PrismicRichText class="text-center" :field="slice.primary.caption" />
     </figcaption>
