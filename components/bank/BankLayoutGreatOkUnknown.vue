@@ -53,7 +53,8 @@
                     <h2 class="w-full text-center font-semibold text-2xl tracking-wider mb-4 text-gray-100">
                         Did we get something wrong?
                     </h2>
-                    <NuxtLink to="/contact" class="button-green inline-block w-max">Contact Us
+                    <NuxtLink :to="`https://data.bank.green/update/${bankTag}` " target="_blank" class="button-green inline-block w-max">
+                        Help us fix it
                     </NuxtLink>
                 </div>
 
@@ -74,11 +75,13 @@
 </template>
 <script setup lang="ts">
 import Swoosh from "@/components/Swoosh.vue";
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
 import SignupBox from "../forms/SignupBox.vue";
 const checkList = [
     "Learn about the issues via our blog updates",
     "Join our campaigns to take action against fossil finance",
     "Discover other ways to divest from fossil fuels",
 ];
+
+const router = useRouter();
+const bankTag = router.currentRoute.value.params.bankTag;
 </script>
