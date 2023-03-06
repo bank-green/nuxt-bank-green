@@ -8,7 +8,8 @@
     "postinstall": "nuxt prepare",
     "clean": "nuxt clean",
     "slicemachine": "start-slicemachine",
-    "publish": "npx wrangler publish"
+    "publish": "npx wrangler publish",
+    "stage": "npx wrangler publish --env staging"
   },
   "devDependencies": {
     "@nuxtjs/prismic": "^3.0.0-rc.2",
