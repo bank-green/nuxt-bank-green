@@ -19,7 +19,9 @@
             <div class="text-xs text-gray-500 mx-4 uppercase">
                 Or
             </div>
-            <NuxtLink to="/pledge" class="underline text-white">Pledge to Move It
+            <NuxtLink to="/pledge" 
+                :class="['underline', light ? 'text-gray-800' : 'text-white' ]">
+                Pledge to Move It
             </NuxtLink>
         </div>
     </div>
