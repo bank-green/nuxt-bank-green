@@ -18,6 +18,8 @@ export default defineNuxtConfig({
   css: ["@/styles/style.css", "@typeform/embed/build/css/widget.css"],
   routeRules: {
     "/sustainable-ethical-banks": { redirect: "/sustainable-eco-banks" },
+    "/": { prerender: true },
+    "/faq": { prerender: true },
   },
   app: {
     head: {
