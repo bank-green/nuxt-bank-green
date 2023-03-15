@@ -19,8 +19,7 @@
             <div class="text-xs text-gray-500 mx-4 uppercase">
                 Or
             </div>
-            <NuxtLink to="/pledge" 
-                :class="['underline', light ? 'text-gray-800' : 'text-white' ]">
+            <NuxtLink to="/pledge" :class="['underline', light ? 'text-gray-800' : 'text-white']">
                 Pledge to Move It
             </NuxtLink>
         </div>
@@ -29,9 +28,9 @@
 
 <script setup>
 import CheckList from '@/components/CheckList.vue'
+import { asText } from '@prismicio/helpers'
 
-
-const { client, asText } = usePrismic()
+const { client } = usePrismic()
 const { data: call } = await useAsyncData('calltoaction', () => client.getSingle('calltoaction'))
 const props = defineProps({
     title: String,
