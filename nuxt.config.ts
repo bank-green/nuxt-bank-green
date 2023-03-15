@@ -135,9 +135,4 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["slices"],
   },
-  nitro: {
-    prerender: {
-      routes: ["/", "/blog", "/faq"],
-    },
-  },
 });
