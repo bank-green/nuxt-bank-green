@@ -15,8 +15,9 @@
 
 <script setup>
 import BlogCard from '@/components/blog/BlogCard.vue'
+import { asText } from '@prismicio/helpers'
 
-const { client, asText } = usePrismic()
+const { client } = usePrismic()
 
 const { data: posts } = await useAsyncData('blogposts', () => client.getAllByType('blogpost', { orderings: { field: 'my.blogpost.publicationdate', direction: 'desc' } }))
 

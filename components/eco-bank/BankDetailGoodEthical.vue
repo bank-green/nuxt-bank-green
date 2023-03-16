@@ -10,7 +10,10 @@
                 </p>
             </template>
 
-            <EthicalFeatures :details="details" class="mt-16 max-w-xl mx-auto text-left" />
+            <EthicalFeatures :details="details" class="mt-16 max-w-xl mx-auto text-left mb-5" />
+            <NuxtLink :to="`https://data.bank.green/update/${details.tag}`" target="_blank" class="relative z-10 cursor-pointer text-center text-slate-600 hover:underline">
+                Tell us if we got something wrong
+            </NuxtLink>
         </div>
 
         <Swoosh color="text-blue-100" direction="up" />

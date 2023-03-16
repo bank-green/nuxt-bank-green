@@ -24,6 +24,9 @@ Build the server with wrangler
 Preview the server with local wrangler
 `npm run preview`
 
+Publish to `test.bank.green` (run after building)
+`npm run stage`
+
 Publish to `nuxt.bank.green`
 `npm run publish`
 

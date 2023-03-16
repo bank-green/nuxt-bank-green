@@ -6,8 +6,8 @@
                 {{ title || "I pledge not to fund fossil fuels" }}
             </p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-                <TextField class="col-span-2" v-model="firstName" name="firstName" type="text"
-                    :title="'Your first name'" :placeholder="'First name, so we can say hi'" :dark="true" />
+                <TextField class="col-span-2" v-model="firstName" name="firstName" type="text" :title="'Your first name'"
+                    :placeholder="'First name, so we can say hi'" :dark="true" />
                 <TextField class="col-span-2" v-model="lastName" name="lastName" type="text" :title="'Your last name'"
                     :placeholder="'Your last name'" :dark="true" />
                 <TextField class="col-span-2" v-model="email" type="email" name="email" :title="'Your email address'"
@@ -109,15 +109,17 @@ const {
     extras
 )
 
+const emit = defineEmits(['success'])
+
 async function checkAndSend() {
-    if (!this.extras.reminder) {
-        this.reminderWarning = "Please enter a date."
+    if (!extras.value.reminder) {
+        reminderWarning.value = "Please enter a date."
         return
     }
-    this.reminderWarning = ''
-    if (await this.send()) {
-        this.$emit('success')
-        this.$router.push(this.successRedirectURL)
+    reminderWarning.value = ''
+    if (await send()) {
+        emit('success')
+        navigateTo(props.successRedirectURL)
     }
 }
 </script>
