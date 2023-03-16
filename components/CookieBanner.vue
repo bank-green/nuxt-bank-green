@@ -26,7 +26,6 @@ import { useGtm } from '@gtm-support/vue-gtm'
 const showBanner = useCookie('bg.showbanner', { default: () => true })
 const allowCookies = useCookie('bg.allowcookies', { default: () => false })
 function yesCookies() {
-    console.log('yes cookies!')
     showBanner.value = false
     allowCookies.value = true
     const gtm = useGtm()
