@@ -67,15 +67,16 @@ export default function useContactForm(
         })
         isSent.value = true
 
-        let gtmEvent = 'emailform'
-        if (tag === 'contact page form') {
-            gtmEvent = 'contactpage'
+        const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+        if (allowCookies.value) {
+            let gtmEvent = 'emailform'
+            if (tag === 'contact page form') {
+                gtmEvent = 'contactpage'
+            }
+            const gtm = useGtm()
+            gtm.enable(true)
+            gtm.trackEvent({ event: gtmEvent })
         }
-        const gtm = useGtm()
-        gtm.enable(true)
-        gtm.trackEvent({ event: gtmEvent })
-
-        isSent.value = true
 
         setTimeout(() => {
             // clear after some ms so that the view has been updated / we have paginated away
