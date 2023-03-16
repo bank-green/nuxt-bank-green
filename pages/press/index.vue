@@ -20,8 +20,9 @@
 import BlogCard from '@/components/blog/BlogCard.vue'
 import { components } from '~~/slices'
 import { defineSliceZoneComponents } from '@prismicio/vue';
+import { asText } from '@prismicio/helpers'
 
-const { client, asText } = usePrismic()
+const { client } = usePrismic()
 const { data: posts } = await useAsyncData('pressposts', () => client.getAllByType('presspost'))
 const { data: press } = await useAsyncData('press', () => client.getSingle('presspage'))
 const sliceComps = ref(defineSliceZoneComponents(components))
