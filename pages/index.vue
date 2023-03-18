@@ -15,6 +15,16 @@
                             <LocationSearch class="md:w-1/2 flex-initial" v-model="country" />
                             <BankSearch class="md:w-1/2 flex-initial" ref="bankSearch" :disabled="!country"
                                 :country="country" v-model="bank" />
+                            <template #fallback>
+                                <div class="relative md:w-1/2 flex-initial">
+                                    <input disabled class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate" />
+                                    <LoadingJumper class="h-5 w-5 absolute inset-0 m-4 text-sushi-500" />
+                                </div>
+                                <div class="relative md:w-1/2 flex-initial">
+                                    <input disabled class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate" />    
+                                    <LoadingJumper class="h-5 w-5 absolute inset-0 m-4 text-sushi-500" />
+                                </div>
+                            </template>
                         </ClientOnly>
                         <NuxtLink :to="`/banks/${bank?.tag}`" class="flex-initial md:w-48 button-green"
                             :class="{ disabled: !bank }" @click="onCheckBankClick">Check My Bank</NuxtLink>
@@ -111,6 +121,7 @@
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import LoadingJumper from '@/components/LoadingJumper.vue'
 import { useGtm } from '@gtm-support/vue-gtm'
 import { components } from '~~/slices'
 import { defineSliceZoneComponents } from '@prismicio/vue';
