@@ -29,7 +29,7 @@ function yesCookies() {
     showBanner.value = false
     allowCookies.value = true
     const gtm = useGtm()
-    gtm.enable()
+    gtm.enable(true)
 }
 
 function noCookies() {
