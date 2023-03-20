@@ -34,6 +34,6 @@ function yesCookies() {
 
 function noCookies() {
     showBanner.value = false
-    allowCookies.value = true
+    allowCookies.value = false
 }
 </script>
