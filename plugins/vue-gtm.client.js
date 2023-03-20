@@ -20,7 +20,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         setTimeout(async () => {
             const allowCookies = useCookie('bg.allowcookies', { default: () => false })
             if (!allowCookies.value) return
-            console.log('cookies allowed')
             const gtm = useGtm()
             gtm.enable()
         }, LOADING_DELAY_MS)
