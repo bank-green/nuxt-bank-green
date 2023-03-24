@@ -1,4 +1,4 @@
-Running at https://nuxt.bank.green
+Running at https://bank.green
 
 # Setup
 
