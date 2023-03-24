@@ -3,8 +3,8 @@
     font-style: normal;
     font-weight: 100;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Thin.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Thin.woff") format("woff");
+    src: url("/fonts/inter/Inter-Thin.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Thin.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -12,8 +12,8 @@
     font-style: italic;
     font-weight: 100;
     font-display: swap;
-    src: url("/fonts/inter/Inter-ThinItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-ThinItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-ThinItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-ThinItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -21,8 +21,8 @@
     font-style: normal;
     font-weight: 200;
     font-display: swap;
-    src: url("/fonts/inter/Inter-ExtraLight.woff2") format("woff2"),
-        url("/fonts/inter/Inter-ExtraLight.woff") format("woff");
+    src: url("/fonts/inter/Inter-ExtraLight.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-ExtraLight.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -30,8 +30,8 @@
     font-style: italic;
     font-weight: 200;
     font-display: swap;
-    src: url("/fonts/inter/Inter-ExtraLightItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-ExtraLightItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-ExtraLightItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-ExtraLightItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -39,8 +39,8 @@
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Light.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Light.woff") format("woff");
+    src: url("/fonts/inter/Inter-Light.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Light.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -48,8 +48,8 @@
     font-style: italic;
     font-weight: 300;
     font-display: swap;
-    src: url("/fonts/inter/Inter-LightItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-LightItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-LightItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-LightItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -57,8 +57,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Regular.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Regular.woff") format("woff");
+    src: url("/fonts/inter/Inter-Regular.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Regular.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -66,8 +66,8 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Italic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Italic.woff") format("woff");
+    src: url("/fonts/inter/Inter-Italic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Italic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -75,8 +75,8 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Medium.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Medium.woff") format("woff");
+    src: url("/fonts/inter/Inter-Medium.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Medium.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -84,8 +84,8 @@
     font-style: italic;
     font-weight: 500;
     font-display: swap;
-    src: url("/fonts/inter/Inter-MediumItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-MediumItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-MediumItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-MediumItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -93,8 +93,8 @@
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url("/fonts/inter/Inter-SemiBold.woff2") format("woff2"),
-        url("/fonts/inter/Inter-SemiBold.woff") format("woff");
+    src: url("/fonts/inter/Inter-SemiBold.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-SemiBold.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -102,8 +102,8 @@
     font-style: italic;
     font-weight: 600;
     font-display: swap;
-    src: url("/fonts/inter/Inter-SemiBoldItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-SemiBoldItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-SemiBoldItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-SemiBoldItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -111,8 +111,8 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Bold.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Bold.woff") format("woff");
+    src: url("/fonts/inter/Inter-Bold.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Bold.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -120,8 +120,8 @@
     font-style: italic;
     font-weight: 700;
     font-display: swap;
-    src: url("/fonts/inter/Inter-BoldItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-BoldItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-BoldItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-BoldItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -129,8 +129,8 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: url("/fonts/inter/Inter-ExtraBold.woff2") format("woff2"),
-        url("/fonts/inter/Inter-ExtraBold.woff") format("woff");
+    src: url("/fonts/inter/Inter-ExtraBold.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-ExtraBold.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -138,8 +138,8 @@
     font-style: italic;
     font-weight: 800;
     font-display: swap;
-    src: url("/fonts/inter/Inter-ExtraBoldItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-ExtraBoldItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-ExtraBoldItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-ExtraBoldItalic.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -147,8 +147,8 @@
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: url("/fonts/inter/Inter-Black.woff2") format("woff2"),
-        url("/fonts/inter/Inter-Black.woff") format("woff");
+    src: url("/fonts/inter/Inter-Black.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-Black.Latin.woff") format("woff");
 }
 
 @font-face {
@@ -156,8 +156,8 @@
     font-style: italic;
     font-weight: 900;
     font-display: swap;
-    src: url("/fonts/inter/Inter-BlackItalic.woff2") format("woff2"),
-        url("/fonts/inter/Inter-BlackItalic.woff") format("woff");
+    src: url("/fonts/inter/Inter-BlackItalic.Latin.woff2") format("woff2"),
+        url("/fonts/inter/Inter-BlackItalic.Latin.woff") format("woff");
 }
 
 /* -------------------------------------------------------
@@ -175,7 +175,7 @@ Usage:
     font-display: swap;
     font-style: normal;
     font-named-instance: 'Regular';
-    src: url("/fonts/inter/Inter-roman.var.woff2") format("woff2");
+    src: url("/fonts/inter/Inter.var.Latin.woff2") format("woff2");
 }
 
 @font-face {
@@ -184,7 +184,7 @@ Usage:
     font-display: swap;
     font-style: italic;
     font-named-instance: 'Italic';
-    src: url("/fonts/inter/Inter-italic.var.woff2") format("woff2");
+    src: url("/fonts/inter/Inter-italic.var.Latin.woff2") format("woff2");
 }
 
 
@@ -206,5 +206,5 @@ explicitly, e.g.
     font-weight: 100 900;
     font-display: swap;
     font-style: oblique 0deg 10deg;
-    src: url("/fonts/inter/Inter.var.woff2") format("woff2");
+    src: url("/fonts/inter/Inter.var.Latin.woff2") format("woff2");
 }
