@@ -1,14 +1,11 @@
 <template>
     <div class="page">
-        <BankHeaderEthical :details="details" />
-        <BankDetailGoodEthical :details="details" />
+        <EcoBankHeader :details="details" />
+        <EcoBankDetail :details="details" />
     </div>
 </template>
 
 <script setup>
-
-import BankHeaderEthical from '~~/components/eco-bank/BankHeaderEthical.vue';
-import BankDetailGoodEthical from '~~/components/eco-bank/BankDetailGoodEthical.vue';
 
 // const route = useRoute()
 // FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,
