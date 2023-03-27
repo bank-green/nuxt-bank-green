@@ -10,7 +10,5 @@
 </template>
 
 <script setup>
-import ThanksSection from '@/components/contact/ThanksSection.vue'
-
 useHeadHelper('Thank you')
 </script>
