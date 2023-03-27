@@ -10,8 +10,8 @@
                 </p>
             </template>
 
-            <EthicalFeatures :bankFeatures="bankFeatures" class="mt-16 max-w-xl mx-auto text-left mb-5" />
-            <NuxtLink :to="`https://data.bank.green/update/${details.tag}`" target="_blank"
+            <EcoBankFeaturesSection :bankFeatures="bankFeatures" class="mt-16 max-w-xl mx-auto text-left mb-5" />
+            <NuxtLink :to="`https://data.bank.green/update/${tag}`" target="_blank"
                 class="relative z-10 cursor-pointer text-center text-slate-600 hover:underline">
                 Tell us if we got something wrong
             </NuxtLink>
@@ -49,14 +49,12 @@
 </template>
 
 <script setup lang="ts">
-import EthicalFeatures from './features/EthicalFeatures.vue';
-import Swoosh from '@/components/Swoosh.vue'
-
 defineProps<{
     fromTheWebsite: string,
     name: string,
     website: string,
     rating: string,
     bankFeatures: any,
+    tag: string
 }>()
 </script>

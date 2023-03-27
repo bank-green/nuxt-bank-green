@@ -3,7 +3,7 @@
         <EcoBankHeader :name="details.name" :rating="details.rating" :subtitle="details.subtitle" :ourTake="details.ourTake"
             :website="details.website" :inheritBrandRating="details.inheritBrandRating" />
         <EcoBankDetail :details="details" :fromTheWebsite="details.fromTheWebsite" :name="details.name"
-            :website="details.website" :rating="details.rating" :bankFeatures="details.bankFeatures" />
+            :website="details.website" :rating="details.rating" :bankFeatures="details.bankFeatures" :tag="details.tag" />
     </div>
 </template>
 

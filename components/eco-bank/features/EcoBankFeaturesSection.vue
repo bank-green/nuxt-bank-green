@@ -12,8 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import FeaturesList from './FeaturesList.vue';
-
 const props = defineProps<{
     bankFeatures: any
 }>()

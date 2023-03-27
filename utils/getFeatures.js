@@ -1,7 +1,7 @@
 // these functions transform the data from the backend into the format used by our frontend templates
 export default function getFeatures(bankFeatures) {
     const { isBE } = useCountry()
-    if (!item) {
+    if (!bankFeatures) {
         return {}
     }
 

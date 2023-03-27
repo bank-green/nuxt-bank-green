@@ -15,8 +15,8 @@
                 <div class="flex flex-col md:flex-row">
                     <div class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
                         style="height: fit-content">
-                        <EthicalBankFilters v-if="country" :location="country" @filter="applyFilter">
-                        </EthicalBankFilters>
+                        <EcoBankFilters v-if="country" :location="country" @filter="applyFilter">
+                        </EcoBankFilters>
                     </div>
 
                     <div class="relative w-full md:ml-6">
@@ -38,7 +38,7 @@
                                     ? 'opacity-50 pointer-events-none'
                                     : '',
                             ]" class="transition">
-                                <EthicalBankCards :list="banks" :isNoCredit="isNoCredit" />
+                                <EcoBankCards :list="banks" :isNoCredit="isNoCredit" />
                             </div>
 
                             <div v-else-if="!loading" class="mt-20">
@@ -71,7 +71,6 @@
 
 <script setup>
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import EthicalBankCards from '@/components/eco-bank/EthicalBankCards.vue'
 
 
 import { components } from '~~/slices'
