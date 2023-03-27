@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="p-4 space-y-2">
-            <FeaturesList :features="features" />
+            <EcoBankFeaturesList :features="features" />
         </div>
     </div>
 </template>
