@@ -26,7 +26,7 @@ import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 import BankIcon from '@/components/forms/banks/BankIcon.vue'
 
 defineProps<{
-    website?: string,
+    website: string,
     name: string,
     inheritBrandRating?: {
         tag: string,

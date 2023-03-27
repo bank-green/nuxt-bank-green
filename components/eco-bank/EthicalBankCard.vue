@@ -67,7 +67,7 @@ export default {
     computed: {
         features() {
             // filter our credit card
-            const features = getFeatures(this.item)
+            const features = getFeatures(this.item?.bankFeatures)
             const allFeatures = {}
             for (const [featKey, featValue] of Object.entries(features)) {
                 if (

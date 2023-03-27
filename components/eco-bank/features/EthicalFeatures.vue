@@ -11,13 +11,13 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import FeaturesList from './FeaturesList.vue';
 
-const props = defineProps({
-    details: Object,
-})
+const props = defineProps<{
+    bankFeatures: any
+}>()
 
-const features = computed(() => getFeatures(props.details))
+const features = computed(() => getFeatures(props.bankFeatures))
 
 </script>

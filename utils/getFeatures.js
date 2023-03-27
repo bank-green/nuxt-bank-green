@@ -1,5 +1,5 @@
 // these functions transform the data from the backend into the format used by our frontend templates
-export default function getFeatures(item) {
+export default function getFeatures(bankFeatures) {
     const { isBE } = useCountry()
     if (!item) {
         return {}
@@ -27,7 +27,7 @@ export default function getFeatures(item) {
         result[v] = { isChecked: false }
     })
 
-    for (let bankFeature of item.bankFeatures) {
+    for (let bankFeature of bankFeatures) {
         if (featureDict[bankFeature.feature.name]) {
             // it's a feature we're interested in
             const displayFeature = getDisplayFeature(bankFeature)

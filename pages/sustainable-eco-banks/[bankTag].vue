@@ -1,11 +1,13 @@
 <template>
     <div class="page">
-        <EcoBankHeader :details="details" />
-        <EcoBankDetail :details="details" />
+        <EcoBankHeader :name="details.name" :rating="details.rating" :subtitle="details.subtitle" :ourTake="details.ourTake"
+            :website="details.website" :inheritBrandRating="details.inheritBrandRating" />
+        <EcoBankDetail :details="details" :fromTheWebsite="details.fromTheWebsite" :name="details.name"
+            :website="details.website" :rating="details.rating" :bankFeatures="details.bankFeatures" />
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 // const route = useRoute()
 // FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,
