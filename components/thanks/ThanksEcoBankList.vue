@@ -3,27 +3,20 @@
         enter-from-class="-translate-y-2 opacity-0" enter-to-class="translate-y-0 opacity-100"
         leave-active-class="transform-gpu transition ease-in duration-190" leave-from-class="opacity-100"
         leave-to-class="opacity-0">
-        <ThanksEcoBankListItem v-for="i in cardsCount" :key="i" :item="list[i - 1]" :loaded="loaded" />
+        <ThanksEcoBankListItem v-for="i in cardsCount" :key="i" v-bind="list[i - 1]" :loaded="loaded" />
     </transition-group>
 </template>
 
-<script>
-import { ThanksEcoBankListItem } from '~~/.nuxt/components';
+<script setup lang="ts">
 
-export default {
-    props: {
-        list: Array,
-        loaded: Boolean,
-    },
-    components: {
-        EthicalBankListItem,
-        ThanksEcoBankListItem
-    },
-    computed: {
-        cardsCount() {
-            if (this.loaded) return this.list.length
-            return 3
-        },
-    },
-}
+const props = defineProps<{
+    list: {
+        name: string,
+        website: string,
+        tag: string
+    }[],
+    loaded: Boolean
+}>()
+
+const cardsCount = computed(() => props.loaded ? props.list.length : 3)
 </script>

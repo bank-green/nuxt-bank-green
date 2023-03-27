@@ -26,14 +26,12 @@
             <h4 class="font-semibold text-xl text-gray-800 mb-6 sm:text-2xl tracking-wide">
                 Bank on a better future" </h4>
             <p class="text-gray-500 mb-6">Not happy with your bank’s score? Explore sustainable banks in your area.</p>
-            <TopEthicalBanksWidget />
+            <ThanksTopEcoBanksWidget />
         </div>
     </div>
 </template>
 
 <script setup>
-import TopEthicalBanksWidget from '../eco-bank/TopEthicalBanksWidget.vue';
-
 const props = defineProps({
     title: String,
     description: String,
