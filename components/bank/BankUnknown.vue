@@ -19,9 +19,11 @@
                     <PrismicRichText :field="bankunknown?.data.description1" />
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
+            <div class="col-span-2 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
                 <div class="relative flex-grow md:flex-none md:-right-10 text-center">
-                    <ArrowDownBounce class="inline-block mt-8 w-10" />
+                    <a href="#section-two">
+                        <ArrowDownBounce class="w-10" />
+                    </a>
                 </div>
             </div>
         </template>
@@ -39,7 +41,9 @@
                         us.
                     </p>
                     <div class="flex justify-center mt-12">
-                        <ArrowDownBounce class="inline-block w-10" />
+                        <a href="#call-to-action">
+                            <ArrowDownBounce class="w-10" />
+                        </a>
                     </div>
                 </div>
                 <img class="md:order-first md:w-1/2 -mx-24 sm:mx-0 lg:-ml-32 md:mr-16" src="/img/illustrations/dig.svg"
