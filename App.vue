@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-import PledgeSignup from '@/components/forms/PledgeSignup.vue'
 
 const openModal = ref(false)
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', { default: () => false })
