@@ -4,7 +4,7 @@
         <div id="section-one" class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16">
             <div class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10">
                 <slot name="section1"></slot>
-                <div class="col-span-2 flex flex-col space-y-4 md:space-y-0 md:flex-row gap-12 md:gap-0 justify-between items-center">
+                <div class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 gap-12 justify-between items-center">
                     <div class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8">
                         <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">Move Your Money
                         </NuxtLink>
@@ -14,7 +14,7 @@
                         <NuxtLink to="/pledge" class="underline">Pledge to Move it
                         </NuxtLink>
                     </div>
-                    <div class="relative flex-grow md:flex-none md:-right-10 ">
+                    <div class="relative flex-grow md:flex-none">
                         <a href="#section-two">
                             <ArrowDownBounce class="inline-block w-10" />
                         </a>

@@ -23,8 +23,8 @@
                     <PrismicRichText v-else :field="greatbank?.data.description1" />
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
-                <div class="relative flex-grow md:flex-none md:-right-10 text-center">
+            <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+                <div class="relative flex-grow md:flex-none  text-center">
                     <ArrowDownBounce class="inline-block mt-8 w-10" />
                 </div>
             </div>

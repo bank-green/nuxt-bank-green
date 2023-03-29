@@ -19,8 +19,8 @@
                     <PrismicRichText :field="bankunknown?.data.description1" />
                 </div>
             </div>
-            <div class="col-span-2 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
-                <div class="relative flex-grow md:flex-none md:-right-10 text-center">
+            <div class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+                <div class="relative flex-grow md:flex-none  text-center">
                     <a href="#section-two">
                         <ArrowDownBounce class="w-10" />
                     </a>
