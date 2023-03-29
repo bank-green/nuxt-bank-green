@@ -28,7 +28,7 @@
         <div id="section-two"
             class="contain flex flex-col-reverse md:flex-row justify-center items-center py-8 space-y-12 md:space-y-0 md:space-x-24">
             <RenderWhenVisibleInViewPort :options="{ rootMargin: '0px 0px 100% 0px' }" class="max-w-sm w-full md:w-1/2">
-                <PiggybankAnimation />
+                <LazyPiggybankAnimation />
             </RenderWhenVisibleInViewPort>
             <div class="md:w-1/2">
                 <slot name="section2">
@@ -95,7 +95,8 @@
                     <h2 class="w-full text-center font-semibold text-2xl tracking-wider mb-4 text-gray-100">
                         Did we get something wrong?
                     </h2>
-                    <NuxtLink :to="`https://data.bank.green/update/${bankTag}` " target="_blank" class="button-green inline-block w-max">
+                    <NuxtLink :to="`https://data.bank.green/update/${bankTag}`" target="_blank"
+                        class="button-green inline-block w-max">
                         Help us fix it
                     </NuxtLink>
                 </div>
@@ -120,7 +121,6 @@ import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInVi
 import Swoosh from '@/components/Swoosh.vue'
 import CallToAction from '@/components/CallToAction.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import PiggybankAnimation from '@/components/bank/PiggybankAnimation.vue'
 
 const router = useRouter();
 const bankTag = router.currentRoute.value.params.bankTag;

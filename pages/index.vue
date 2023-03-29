@@ -86,7 +86,7 @@
                     :field="home.data.description2" />
             </div>
 
-            <LottiePlayer :placeholderHeight="480" :placeholderWidth="426" class="md:w-2/5 max-w-full md:ml-24"
+            <LazyLottiePlayer :placeholderHeight="480" :placeholderWidth="426" class="md:w-2/5 max-w-full md:ml-24"
                 path="/anim/atm_without_bg.json" alt="" />
 
         </div>
@@ -112,7 +112,8 @@
             </div>
             <div class="flex flex-row items-center justify-center">
 
-                <LottiePlayer path="/anim/money_smoke.json" class="w-full md:max-w-2xl h-42 object-cover object-bottom" />
+                <LazyLottiePlayer path="/anim/money_smoke.json"
+                    class="w-full md:max-w-2xl h-42 object-cover object-bottom" />
 
             </div>
         </div>

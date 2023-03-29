@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+console.log('rendering')
 const { container } = useLottieScroller({
     path: '/anim/piggy.json?v=2',
     actions: [
