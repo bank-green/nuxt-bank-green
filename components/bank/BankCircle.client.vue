@@ -1,10 +1,10 @@
 <template>
-    <div ref="container" class="w-full">
-        <div class="shadow-circle bg-white rounded-full relative" :style="outerCircleStyles">
-            <svg class="absolute" :style="{
-                top: `${circleSize * 0.1}px`,
-                left: `${circleSize * 0.1}px`,
-            }" :width="circleSize * 0.8" :height="circleSize * 0.8 * 0.7568" viewBox="0 0 101 77" fill="none"
+    <div class="w-full flex px-12 md:px-0">
+        <div class="shadow-circle bg-white rounded-full relative squarebox">
+            <svg
+                class="absolute"
+                style="width:80%; height: 60.54%; top: 10%; left: 10%"
+                viewBox="0 0 101 77" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M50.5 12.1424C71.6015 12.1424 88.7075 29.2485 88.7075 50.35C88.7075 57.5328 86.7311 64.2361 83.2957 69.9655L93.4094 76.0297C97.9126 68.5194 100.5 59.7278 100.5 50.35C100.5 22.7357 78.1142 0.349976 50.5 0.349976C22.8858 0.349976 0.499999 22.7357 0.499999 50.35C0.499999 59.7278 3.08738 68.5194 7.59058 76.0297L17.7043 69.9655C14.2689 64.2361 12.2924 57.5328 12.2924 50.35C12.2924 29.2485 29.3985 12.1424 50.5 12.1424Z"
@@ -22,10 +22,10 @@
                 </defs>
             </svg>
 
-            <svg class="absolute" :style="{
-                top: `${circleSize * 0.14}px`,
-                left: `${circleSize * 0.14}px`,
-            }" :width="circleSize * 0.8 * 0.91" :height="circleSize * 0.8 * 0.69" viewBox="0 0 91 69" fill="none"
+            <svg 
+                class="absolute" 
+                style="top:14%;left:14%;width:72.8%;height:55.2%;" 
+                viewBox="0 0 91 69" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path opacity="0.5"
                     d="M83.3523 67.9976C87.3216 61.3777 89.6035 53.6303 89.6035 45.35C89.6035 20.9921 69.8576 1.2462 45.4998 1.2462C21.1419 1.2462 1.396 20.9921 1.396 45.35C1.396 53.6303 3.67792 61.3777 7.64722 67.9976"
@@ -33,46 +33,46 @@
                     stroke-dasharray="0.4 3" />
             </svg>
 
-            <svg class="absolute opacity-25" :style="{
-                top: `${circleSize * 0.2}px`,
-                left: `${circleSize * 0.2}px`,
-            }" :width="circleSize * 0.6" :height="circleSize * 0.6 * 0.7568" viewBox="0 0 101 77" fill="none"
+            <svg class="absolute opacity-25" 
+                style="top:20%;left:20%;width:60%;height:45.408%" 
+                viewBox="0 0 101 77" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M50.5 12.1424C71.6015 12.1424 88.7075 29.2485 88.7075 50.35C88.7075 57.5328 86.7311 64.2361 83.2957 69.9655L93.4094 76.0297C97.9126 68.5194 100.5 59.7278 100.5 50.35C100.5 22.7357 78.1142 0.349976 50.5 0.349976C22.8858 0.349976 0.499999 22.7357 0.499999 50.35C0.499999 59.7278 3.08738 68.5194 7.59058 76.0297L17.7043 69.9655C14.2689 64.2361 12.2924 57.5328 12.2924 50.35C12.2924 29.2485 29.3985 12.1424 50.5 12.1424Z"
                     fill="url(#paint0_linear)" />
             </svg>
 
-            <svg class="absolute" :style="{
-                top: `${circleSize * 0.4}px`,
-                left: `${circleSize * 0.4}px`,
-            }" :width="circleSize * 0.2" :height="circleSize * 0.2" viewBox="0 0 53 53" fill="none"
+            <svg class="absolute" 
+                style="top:40%;left:40%;width:20%;height:20%"
+                viewBox="0 0 53 53" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M0.999996 26.75C0.999996 40.8333 12.4167 52.25 26.5 52.25C40.5833 52.25 52 40.8333 52 26.75C52 12.6667 40.5833 1.25 26.5 1.25C12.4167 1.25 0.999996 12.6667 0.999996 26.75Z"
                     stroke="#87B448" stroke-width="1.5" />
             </svg>
 
-            <svg class="absolute" :style="{
-                top: `${circleSize * 0.23}px`,
-                left: `${circleSize * 0.46}px`,
-            
-                transformOrigin: `${circleSize *
-                    0.4 *
-                    0.11}px ${circleSize * 0.4 * 0.68}px`,
-                transform: `rotate(${initialRotation || rotation}deg)`,
-                transition: 'transform 1.5s 0.3s',
-            }" :width="circleSize * 0.4 * 0.21" :height="circleSize * 0.4 * 0.79" viewBox="0 0 21 79" fill="none"
+            <svg class="absolute"
+                :style="{
+                    top: '20.2%',
+                    left: '46%',
+                    width: '8.4%',
+                    height: '36%',
+                    transformOrigin: '50% 83%',
+                    transform: `rotate(${initialRotation || rotation}deg)`,
+                    transition: 'transform 1.5s 0.3s',
+                }"
+                viewBox="0 0 21 79" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M13.6271 3.42899C13.5065 2.05146 12.353 0.994614 10.9702 0.994614V0.994614C9.60004 0.994615 8.45279 2.03274 8.3163 3.39605L1.75908 68.8903C1.23773 74.0976 5.32678 78.6165 10.5601 78.6165V78.6165C15.7497 78.6165 19.8243 74.1694 19.3714 68.9995L13.6271 3.42899Z"
                     fill="#293145" />
                 <circle cx="10.4996" cy="67.6369" r="3.4" fill="white" />
             </svg>
-            <div class="absolute inset-x-0 mx-auto text-center font-extrabold text-gray-900 text-3xl" :style="{
-                bottom: `${circleSize * 0.07}px`,
-            }">
-                <LottieFile class="mx-auto w-28 h-28" :path="emojiForRating" />
+            <div class="absolute inset-x-0 mx-auto text-center font-extrabold text-gray-900 text-3xl" 
+                :style="{
+                    bottom: `7%`,
+                }">
+                <LottieFile class="mx-auto w-16 h-16 md:w-28 md:h-28" :path="emojiForRating" />
             </div>
         </div>
     </div>
@@ -83,24 +83,7 @@ const props = defineProps({
     rating: String,
 })
 
-const initialRotation = ref(-120)
-const { container, diameter } = useResize()
-
-const circleSize = computed(() => {
-    return Math.min(diameter.value, 420)
-})
-const outerCircleStyles = computed(() => {
-    return {
-        width: `${circleSize.value}px`,
-        height: `${circleSize.value}px`,
-    }
-})
-const firstColoredCircleStyles = computed(() => {
-    return {
-        width: `${circleSize.value * 0.8}px`,
-        height: `${circleSize.value * 0.8}px`,
-    }
-})
+const initialRotation = ref(-120);
 
 const rotation = computed(() => {
     switch (props.rating) {
@@ -140,3 +123,13 @@ onMounted(() => {
     initialRotation.value = null
 })
 </script>
+<style scoped>
+.squarebox {
+    flex: 1 0 auto;
+}
+.squarebox::before {
+    display: block;
+	content: '';
+	margin-top: 100%;
+}
+</style>
