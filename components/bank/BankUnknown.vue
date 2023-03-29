@@ -12,7 +12,7 @@
             </div>
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full"></div>
-                <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
+                <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <PrismicRichText :field="bankunknown?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">

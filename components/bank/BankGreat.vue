@@ -14,7 +14,7 @@
                     <img v-if="fossilFreeAlliance" class="w-32" src="/img/certification/certified.png"
                         alt="Fossil Free Certification" />
                 </div>
-                <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
+                <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="header" v-html="header"></div>
                     <PrismicRichText v-else :field="greatbank?.data.headline" />
                 </div>
