@@ -1,4 +1,4 @@
-Running at https://nuxt.bank.green
+Running at https://bank.green
 
 # Setup
 
@@ -27,7 +27,7 @@ Preview the server with local wrangler
 Publish to `test.bank.green` (run after building)
 `npm run stage`
 
-Publish to `nuxt.bank.green`
+Publish to `bank.green`
 `npm run publish`
 
 # CMS with Prismic
