@@ -19,11 +19,6 @@ const commentaryFields = `{
         tag
         name
     }
-    uniqueStatement,
-    headline,
-    recommendedIn {
-        code
-    }
     fromTheWebsite,
     ourTake,
     amountFinancedSince2016,

@@ -6,18 +6,16 @@
             </div>
         </div>
         <div class="p-4 space-y-2">
-            <FeaturesList :features="features" />
+            <EcoBankFeaturesList :features="features" />
         </div>
     </div>
 </template>
 
-<script setup>
-import FeaturesList from './FeaturesList.vue';
+<script setup lang="ts">
+const props = defineProps<{
+    bankFeatures: any
+}>()
 
-const props = defineProps({
-    details: Object,
-})
-
-const features = computed(() => getFeatures(props.details))
+const features = computed(() => getFeatures(props.bankFeatures))
 
 </script>

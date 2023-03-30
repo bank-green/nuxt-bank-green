@@ -42,44 +42,34 @@
             leave-active-class="duration-100 transform-gpu origin-top ease-in" leave-from-class="opacity-100 scale-100"
             leave-to-class="opacity-0 scale-95">
             <div v-if="Object.keys(features).length" class="py-4 px-7 flex flex-wrap">
-                <FeaturesList :features="features" />
+                <EcoBankFeaturesList :features="features" />
             </div>
         </transition>
     </NuxtLink>
 </template>
 
-<script>
-import ClearbitLogo from '@/components/icons/ClearbitLogo'
-import BankIcon from '@/components/forms/banks/BankIcon'
-import FeaturesList from './features/FeaturesList.vue'
+<script setup lang="ts">
+import BankIcon from '@/components/forms/banks/BankIcon.vue'
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue';
 
-export default {
-    props: {
-        item: Object,
-        isNoCredit: Boolean,
-    },
-    components: {
-        ClearbitLogo,
-        BankIcon,
-        FeaturesList,
-    },
+const props = defineProps<{
+    item: any,
+    isNoCredit: Boolean
+}>()
 
-    computed: {
-        features() {
-            // filter our credit card
-            const features = getFeatures(this.item)
-            const allFeatures = {}
-            for (const [featKey, featValue] of Object.entries(features)) {
-                if (
-                    (this.isNoCredit && featKey === 'Credit Card') ||
-                    !featValue.isChecked
-                ) {
-                    continue
-                }
-                allFeatures[featKey] = features[featKey]
-            }
-            return allFeatures
-        },
-    },
-}
+const features = computed(() => {
+    // filter our credit card
+    const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
+    const allFeatures: Record<string, any> = {}
+    for (const [featKey, featValue] of Object.entries(features)) {
+        if (
+            (props.isNoCredit && featKey === 'Credit Card') ||
+            !(featValue.isChecked)
+        ) {
+            continue
+        }
+        allFeatures[featKey] = features[featKey]
+    }
+    return allFeatures
+})
 </script>

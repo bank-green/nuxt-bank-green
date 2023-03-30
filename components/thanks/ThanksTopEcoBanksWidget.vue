@@ -1,7 +1,7 @@
 <template>
     <LocationSearch class="mb-8 md:max-w-sm md:mx-auto z-50" v-model="country" />
     <div v-if="banks.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-min">
-        <EthicalBankList :loaded="loaded" :list="banks" />
+        <ThanksEcoBankList :loaded="loaded" :list="banks" />
     </div>
     <div v-if="banks.length" class="sm:text-center">
         <NuxtLink to="/sustainable-eco-banks" class="mt-6 button-green sm:inline-block sm:w-64">Show more</NuxtLink>
@@ -10,7 +10,6 @@
 
 <script setup>
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import EthicalBankList from './EthicalBankList.vue';
 
 const { country } = useCountry()
 
