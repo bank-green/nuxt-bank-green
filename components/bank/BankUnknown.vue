@@ -5,23 +5,25 @@
                 :inheritBrandRating="inheritBrandRating" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
-                <div class="flex flex-col items-center justify-start">
+                <div class="flex flex-col items-center justify-start w-full">
                     <BankCircle class="max-w-sm" :rating="'ok'" />
                     <SocialSharer class="text-sushi-500" :hashtags="['climatecrisis', 'fossilbanks']" />
                 </div>
             </div>
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full"></div>
-                <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
+                <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <PrismicRichText :field="bankunknown?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
                     <PrismicRichText :field="bankunknown?.data.description1" />
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
-                <div class="relative flex-grow md:flex-none md:-right-10 text-center">
-                    <ArrowDownBounce class="inline-block mt-8 w-10" />
+            <div class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+                <div class="relative flex-grow md:flex-none  text-center">
+                    <a href="#section-two">
+                        <ArrowDownBounce class="w-10" />
+                    </a>
                 </div>
             </div>
         </template>
@@ -39,7 +41,9 @@
                         us.
                     </p>
                     <div class="flex justify-center mt-12">
-                        <ArrowDownBounce class="inline-block w-10" />
+                        <a href="#call-to-action">
+                            <ArrowDownBounce class="w-10" />
+                        </a>
                     </div>
                 </div>
                 <img class="md:order-first md:w-1/2 -mx-24 sm:mx-0 lg:-ml-32 md:mr-16" src="/img/illustrations/dig.svg"

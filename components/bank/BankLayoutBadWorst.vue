@@ -1,10 +1,10 @@
 <template>
     <div class="page">
         <!-- SECTION ONE -->
-        <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16">
+        <div id="section-one" class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16">
             <div class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10">
                 <slot name="section1"></slot>
-                <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
+                <div class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 gap-12 justify-between items-center">
                     <div class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8">
                         <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">Move Your Money
                         </NuxtLink>
@@ -14,8 +14,10 @@
                         <NuxtLink to="/pledge" class="underline">Pledge to Move it
                         </NuxtLink>
                     </div>
-                    <div class="relative flex-grow md:flex-none md:-right-10 text-center">
-                        <ArrowDownBounce class="inline-block mt-8 w-10" />
+                    <div class="relative flex-grow md:flex-none">
+                        <a href="#section-two">
+                            <ArrowDownBounce class="inline-block w-10" />
+                        </a>
                     </div>
                 </div>
             </div>
@@ -23,7 +25,7 @@
         </div>
 
         <!-- SECTION TWO -->
-        <div
+        <div id="section-two"
             class="contain flex flex-col-reverse md:flex-row justify-center items-center py-8 space-y-12 md:space-y-0 md:space-x-24">
             <RenderWhenVisibleInViewPort :options="{ rootMargin: '0px 0px 100% 0px' }" class="max-w-sm w-full md:w-1/2">
                 <LazyPiggybankAnimation />
@@ -32,7 +34,7 @@
                 <slot name="section2">
 
                 </slot>
-                <div class="mt-8 flex items-center">
+                <div class="mt-8 flex flex-col md:flex-row gap-12 md:gap-0 items-center">
                     <div class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center w-auto">
                         <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">Move Your Money
                         </NuxtLink>
@@ -43,14 +45,16 @@
                         </NuxtLink>
                     </div>
                     <div class="flex md:hidden flex-grow justify-center">
-                        <ArrowDownBounce class="inline-block w-10" />
+                        <a href="#section-three">
+                            <ArrowDownBounce class="w-10" />
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- SECTION THREE -->
-        <div class="relative bg-blue-100">
+        <div id="section-three" class="relative bg-blue-100">
             <Swoosh direction="down" />
             <img class="relative inline-block mb-4" src="/img/illustrations/fishes.svg" alt="" />
             <div class="relative z-10 contain max-w-2xl">
@@ -71,7 +75,7 @@
         </div>
 
         <!-- CALL TO ACTION -->
-        <div class="bg-blue-100 pb-8 pt-8">
+        <div id="call-to-action" class="bg-blue-100 pb-8 pt-8">
             <div class="contain flex flex-col justify-center items-center">
                 <CallToAction :light="true" :spaced="true" />
             </div>

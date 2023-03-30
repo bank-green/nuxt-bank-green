@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <!-- SECTION ONE -->
-        <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16">
+        <div id="section-one" class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16">
             <div class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10">
                 <slot name="section1"></slot>
             </div>
@@ -9,7 +9,7 @@
         </div>
 
         <!-- SECTION TWO -->
-        <div class="text-gray-800 overflow-hidden py-16">
+        <div id="section-two" class="text-gray-800 overflow-hidden py-16">
             <div class="contain">
                 <slot name="section2"></slot>
             </div>
@@ -17,12 +17,14 @@
 
 
         <!-- SECTION THREE -->
-        <slot name="section3"></slot>
+        <div id="section-three">
+            <slot name="section3"></slot>
+        </div>
 
         <!-- CALL TO ACTION -->
-        <div class="bg-blue-100 text-gray-800">
+        <div id="call-to-action" class="bg-blue-100 text-gray-800">
             <Swoosh direction="down" />
-            <div class="contain">
+            <div class="contain pt-8">
                 <slot name="call-to-action">
                     <h2 class="text-center text-gray-800 font-semibold text-lg md:text-2xl tracking-wider mb-4">
                         Join the Money Movement
