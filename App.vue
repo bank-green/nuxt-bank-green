@@ -1,7 +1,9 @@
 <template>
     <div v-if="$route" @mouseleave="onExitIntent" class="min-h-screen flex flex-col">
         <NuxtLoadingIndicator :color="'#7BB123'" :height="6" />
-        <CookieBanner />
+        <ClientOnly>
+            <CookieBanner />
+        </ClientOnly>
         <NavBar />
         <NuxtPage />
         <NavFooter />
