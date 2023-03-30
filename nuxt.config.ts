@@ -140,4 +140,7 @@ export default defineNuxtConfig({
   image: {
     prismic: {},
   },
+  nitro: {
+    preset: 'cloudflare',
+  },
 });

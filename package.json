@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "NITRO_PRESET=cloudflare nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "npx wrangler dev .output/server/index.mjs --site .output/public --local",
