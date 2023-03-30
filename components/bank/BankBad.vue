@@ -4,7 +4,7 @@
             <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
-                <div class="flex flex-col items-center justify-start">
+                <div class="flex flex-col items-center justify-start w-full">
                     <BankCircle class="max-w-sm" :rating="'bad'" />
                     <SocialSharer class="text-sushi-500" :hashtags="['climatecrisis', 'fossilbanks']" />
                 </div>
@@ -12,7 +12,7 @@
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full">
                 </div>
-                <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
+                <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="header" v-html="header"></div>
                     <PrismicRichText v-else :field="badbank?.data.headline" />
                 </div>

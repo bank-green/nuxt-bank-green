@@ -4,14 +4,14 @@
             <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
-                <div class="flex flex-col items-center justify-start">
+                <div class="flex flex-col items-center justify-start w-full">
                     <BankCircle class="max-w-sm" :rating="'ok'" />
                     <SocialSharer class="text-sushi-500" :hashtags="['climatecrisis', 'fossilbanks']" />
                 </div>
             </div>
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full"></div>
-                <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
+                <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="header" v-html="header"></div>
                     <PrismicRichText v-else :field="bankok?.data.headline" />
                 </div>
@@ -20,8 +20,8 @@
                     <PrismicRichText v-else :field="bankok?.data.description1" />
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-between items-center">
-                <div class="relative flex-grow md:flex-none md:-right-10 text-center">
+            <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+                <div class="relative flex-grow md:flex-none text-center">
                     <ArrowDownBounce class="inline-block mt-8 w-10" />
                 </div>
             </div>

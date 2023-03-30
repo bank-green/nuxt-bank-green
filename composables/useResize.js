@@ -2,9 +2,12 @@
 /**
  * Responsible for knowing the maximum container size
  */
+
+const DEFAULT_DIAMETER = 320;
+
 export default function useResize() {
   const container = ref(null)
-  const diameter = ref(window.innerWidth || 320)
+  const diameter = ref(window.innerWidth || DEFAULT_DIAMETER)
 
   const onResize = () => {
     if (container.value)

@@ -1,5 +1,3 @@
-import lottie from 'lottie-web/build/player/lottie_light'
-
 export default function useLottieScroller({ path, actions }) {
     const container = ref(null)
     const animData = ref(null)
@@ -46,7 +44,9 @@ export default function useLottieScroller({ path, actions }) {
         window.addEventListener('scroll', onScroll, false)
     }
 
-    onMounted(() => {
+    onMounted(async () => {
+        const lottie = await import('lottie-web/build/player/lottie_light')
+
         animData.value = lottie.loadAnimation({
             container: container.value, // the dom element that will contain the animation
             renderer: 'svg',
