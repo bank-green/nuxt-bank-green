@@ -45,6 +45,8 @@ import Fuse from 'fuse.js'
 const props = defineProps({
     modelValue: String,
 })
+
+const emit = defineEmits(['update:modelValue', 'select'])
 const listPicker = ref()
 const onKeyDown = (event) => {
     listPicker.value.incrementFocus(event)
