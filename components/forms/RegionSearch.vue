@@ -42,7 +42,7 @@ import ListPicker from '@/components/forms/ListPicker'
 import Geonames from 'geonames.js'
 import Fuse from 'fuse.js'
 
-const props = definePrpos({
+const props = defineProps({
     modelValue: String,
 })
 const listPicker = ref()
