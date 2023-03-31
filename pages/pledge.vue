@@ -38,7 +38,6 @@
 <script setup>
 import LazyImage from '../components/LazyImage.vue'
 import Swoosh from '@/components/Swoosh.vue'
-import PledgeSignup from '@/components/forms/PledgeSignup.vue'
 import CheckList from '@/components/CheckList.vue'
 import { ref } from 'vue'
 
