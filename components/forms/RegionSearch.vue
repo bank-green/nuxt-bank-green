@@ -1,8 +1,8 @@
 <template>
     <div class="relative" v-clickaway="hideList">
-        <SearchInput :aria-expanded="isShowing" v-model="search" placeholder="Search region/state"
-            @keydown.down="onKeyDown" @keydown.up="onKeyUp" @keydown.enter="onKeyEnter" @onFocus="showList"
-            @onClick="showList" @onCloseClick="onCloseClick">
+        <SearchInput :aria-expanded="isShowing" v-model="search" placeholder="Search region/state" @keydown.down="onKeyDown"
+            @keydown.up="onKeyUp" @keydown.enter="onKeyEnter" @onFocus="showList" @onClick="showList"
+            @onCloseClick="onCloseClick">
             <template v-slot:icon>
                 <PinIcon class="h-6 w-6 absolute inset-0 m-4" />
             </template>
@@ -25,7 +25,7 @@
                     <div>
                         {{ item.toponymName
                         }}{{
-        item.fcode === 'ADM2' ? `, ${item.adminName1}` : ''
+    item.fcode === 'ADM2' ? `, ${item.adminName1}` : ''
 }}
                     </div>
                 </ListPicker>
