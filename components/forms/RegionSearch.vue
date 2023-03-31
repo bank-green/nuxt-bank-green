@@ -34,13 +34,20 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import SearchInput from '@/components/forms/input/SearchInput'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
 import PinIcon from './location/PinIcon.vue'
-import ListPicker from '@/components/forms/ListPicker'
+import ListPicker from '@/components/forms/ListPicker.vue'
 import Geonames from 'geonames.js'
 import Fuse from 'fuse.js'
+
+// custom type for responses from geonames API
+type Place = {
+    toponymName: string,
+    fcode: string,
+    adminName1: string
+}
 
 const props = defineProps({
     modelValue: String,
@@ -48,10 +55,10 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'select'])
 const listPicker = ref()
-const onKeyDown = (event) => {
+const onKeyDown = (event: Event) => {
     listPicker.value.incrementFocus(event)
 }
-const onKeyUp = (event) => {
+const onKeyUp = (event: Event) => {
     listPicker.value.decrementFocus(event)
 }
 const onKeyEnter = () => listPicker.value.selectCurrentItem()
@@ -62,7 +69,7 @@ const isLoading = ref(false)
 
 const { country } = useCountry()
 
-const options = ref([])
+const options = ref<Place[]>([])
 const geonames = Geonames({
     username: 'myusername',
     encoding: 'JSON',
@@ -75,7 +82,7 @@ const searchRegion = async () => {
         featureClass: 'A',
         featureCode: ['ADM1', 'ADM2'],
         maxRows: 1000,
-    })
+    }) as { geonames: Place[] }
     options.value = data.geonames.sort((a, b) =>
         a.toponymName.localeCompare(b.toponymName)
     )
@@ -92,7 +99,7 @@ const filteredOptions = computed(() => {
         return options.value
     }
     const result = fuse.search(search.value)
-    return result.filter((x) => x.score < 0.3).map((x) => x.item)
+    return result.filter((x) => x.score && (x.score < 0.3)).map((x) => x.item)
 })
 
 watch(
@@ -110,7 +117,7 @@ function showList() {
 function hideList() {
     isShowing.value = false
 }
-async function onSelectLocation(item) {
+async function onSelectLocation(item: Place) {
     emit('update:modelValue', '')
     await nextTick()
     search.value = item.toponymName
