@@ -30,13 +30,8 @@ import { ref } from "vue";
 // I think this issue is relevant: https://github.com/nuxt/framework/issues/8731
 // and this upstream PR in Vue: https://github.com/vuejs/core/pull/6736
 const router = useRouter();
-
-const bankTag = router.currentRoute.value.params.bankTag as string
-
-const { data: details } = (await useAsyncData(
-    bankTag,
-    () => getBankDetail(bankTag)
-)) as { data: any }
+const bankTag = router.currentRoute.value.params.bankTag;
+const details = ref(await getBankDetail(bankTag));
 
 useHeadHelper(
     details.value?.name
