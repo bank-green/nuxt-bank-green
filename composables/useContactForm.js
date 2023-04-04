@@ -54,7 +54,7 @@ export default function useContactForm(
             return // already busy, prevent double requests
         }
         busy.value = true
-        await submitContact({
+        const body = {
             firstName: capitalizeString(firstName.value),
             lastName: capitalizeString(lastName.value),
             email: email.value,
@@ -64,7 +64,13 @@ export default function useContactForm(
             bank: bank.value,
             isAgreeMarketing: isAgreeMarketing.value,
             ...(extra ? extra.value : {}),
+        }
+
+        await useFetch(`/api/contact`, {
+            method: 'POST',
+            body: JSON.stringify(body)
         })
+
         isSent.value = true
 
         const allowCookies = useCookie('bg.allowcookies', { default: () => false })
