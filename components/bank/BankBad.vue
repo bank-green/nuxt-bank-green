@@ -21,6 +21,11 @@
                     <div v-else>Your bank doesn't top the charts, but it’s still using your money to lend to fossil fuel
                         companies and projects that are rapidly accelerating the climate crisis.
                     </div>
+                </div>  
+
+                <div v-if="badbank?.data.subtitle"
+                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
+                    <PrismicRichText :field="badbank.data.subtitle" />
                 </div>
             </div>
         </template>

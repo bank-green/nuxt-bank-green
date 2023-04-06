@@ -19,7 +19,11 @@
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
                     <div v-if="summary" v-html="summary"></div>
                     <PrismicRichText v-else :field="worstbank?.data.description1" />
+                </div>
 
+                <div v-if="worstbank?.data.subtitle"
+                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
+                    <PrismicRichText :field="worstbank.data.subtitle" />
                 </div>
             </div>
         </template>

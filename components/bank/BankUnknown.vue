@@ -18,6 +18,11 @@
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
                     <PrismicRichText :field="bankunknown?.data.description1" />
                 </div>
+
+                <div v-if="bankunknown?.data.subtitle"
+                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
+                    <PrismicRichText :field="bankunknown.data.subtitle" />
+                </div>
             </div>
             <div class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
                 <div class="relative flex-grow md:flex-none  text-center">

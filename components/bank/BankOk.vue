@@ -19,6 +19,11 @@
                     <div v-if="summary" v-html="summary"></div>
                     <PrismicRichText v-else :field="bankok?.data.description1" />
                 </div>
+
+                <div v-if="bankok?.data.subtitle"
+                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
+                    <PrismicRichText :field="bankok.data.subtitle" />
+                </div>
             </div>
             <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
                 <div class="relative flex-grow md:flex-none text-center">
