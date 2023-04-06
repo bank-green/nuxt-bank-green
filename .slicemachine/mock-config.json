@@ -91,6 +91,12 @@
           "patternType": "PARAGRAPH",
           "blocks": 1
         }
+      },
+      "subtitle": {
+        "config": {
+          "patternType": "PARAGRAPH",
+          "blocks": 1
+        }
       }
     },
     "ecobankspage": {},
