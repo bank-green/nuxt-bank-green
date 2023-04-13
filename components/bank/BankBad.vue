@@ -56,5 +56,5 @@ const { data: badbank } = await useAsyncData("badbank", () =>
 const formattedTotal = computed(() => props.amountFinancedSince2016 ?? 'large amounts')
 
 const piggyText =
-    `While you’ve been stashing away money for a car or a weekend get-away, ${props.name} has been using your savings to lend to some very questionable fossil fuel friends.\n\nAnd it's not just a little here and there, we’re talking about ${formattedTotal.value || "a lot of money"} in the 6 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`
+    `While you’ve been stashing away money for a house or a weekend get-away, ${props.name} has been using your savings to lend to some very questionable fossil fuel friends.\n\nAnd it's not just a little here and there, we’re talking about ${formattedTotal.value || "up to billions of dollars"} in the 7 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`
 </script>
