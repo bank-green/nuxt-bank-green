@@ -1,0 +1,82 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "richText",
+    "primary": {
+      "title": {
+        "__TYPE__": "FieldContent",
+        "value": "pocket",
+        "type": "Text"
+      },
+      "content": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Commodo enim eiusmod aute mollit in voluptate occaecat eu ea magna. Ut ipsum in ea nulla do qui labore ea laborum sint."
+            }
+          }
+        ]
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "richTextWithStep",
+    "primary": {
+      "title": {
+        "__TYPE__": "FieldContent",
+        "value": "process",
+        "type": "Text"
+      },
+      "content": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Cupidatat tempor sunt sint aliquip sunt cillum dolore cillum eu occaecat ad. Elit ut dolore pariatur deserunt excepteur in Lorem eiusmod incididunt adipisicing aliqua ad amet. Eu sint velit aute magna ad enim cupidatat nisi dolor duis est commodo."
+            }
+          }
+        ]
+      },
+      "step": {
+        "__TYPE__": "FieldContent",
+        "value": "speak",
+        "type": "Text"
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "contentlink": {
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "DocumentLink",
+          "id": "mock_document_id"
+        }
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
+]

@@ -1,35 +1,206 @@
 {
-  "id": "mock-doc-id",
-  "url": null,
-  "type": "blogpost",
-  "href": null,
-  "tags": [],
-  "first_publication_date": "1970-01-01T00:00:01+0000",
-  "last_publication_date": "1970-01-01T00:00:01+0000",
-  "slugs": [],
-  "linked_documents": [],
-  "lang": "en-us",
-  "alternate_languages": [],
-  "data": {
-    "title": "from",
-    "author": "smaller",
-    "publicationdate": "2020-01-02",
-    "description": [
+  "title": {
+    "__TYPE__": "FieldContent",
+    "value": "language",
+    "type": "Text"
+  },
+  "author": {
+    "__TYPE__": "FieldContent",
+    "value": "hundred",
+    "type": "Text"
+  },
+  "publicationdate": {
+    "__TYPE__": "FieldContent",
+    "type": "Date",
+    "value": "2021-10-25"
+  },
+  "description": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
       {
         "type": "paragraph",
-        "text": "Labore laborum laboris quis in do cupidatat veniam proident ex. Nulla sunt officia pariatur deserunt incididunt nulla culpa nostrud cillum occaecat labore consectetur. Commodo aliqua veniam cupidatat.",
-        "spans": []
+        "content": {
+          "text": "Ullamco commodo reprehenderit elit est deserunt labore qui. Magna sint excepteur occaecat nostrud ex nostrud irure nostrud nostrud eiusmod fugiat irure."
+        }
       }
-    ],
-    "cardimage": {
-      "dimensions": {
-        "width": 900,
-        "height": 500
-      },
-      "alt": null,
-      "copyright": null,
-      "url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb"
+    ]
+  },
+  "uid": {
+    "__TYPE__": "UIDContent",
+    "value": "month"
+  },
+  "cardimage": {
+    "__TYPE__": "ImageContent",
+    "origin": {
+      "id": "main",
+      "url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f",
+      "width": 6000,
+      "height": 4000
     },
-    "slices": []
+    "url": "https://images.unsplash.com/photo-1544731612-de7f96afe55f",
+    "width": 6000,
+    "height": 4000,
+    "edit": {
+      "zoom": 1,
+      "crop": {
+        "x": 0,
+        "y": 0
+      },
+      "background": "transparent"
+    },
+    "thumbnails": {}
+  },
+  "slices": {
+    "__TYPE__": "SliceContentType",
+    "value": [
+      {
+        "key": "text_slice$5ab20a17-6a31-4b38-8d7e-696e8fbf768d",
+        "name": "text_slice",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {
+            "text": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Ad sunt nostrud ullamco aute anim dolor incididunt. Reprehenderit qui proident laboris consequat est."
+                  }
+                }
+              ]
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": []
+            }
+          ]
+        }
+      },
+      {
+        "key": "embed_slice$17b6156e-f76b-4c97-81f8-b16944e23a12",
+        "name": "embed_slice",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {
+            "target": {
+              "embed_url": "https://twitter.com/timbenniks/status/1304146886832594944",
+              "author_name": "Tim Benniks",
+              "author_url": "https://twitter.com/timbenniks",
+              "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">I’ve been diving deep on <a href=\"https://twitter.com/prismicio?ref_src=twsrc%5Etfw\">@prismicio</a> <a href=\"https://twitter.com/hashtag/slicemachine?src=hash&amp;ref_src=twsrc%5Etfw\">#slicemachine</a> today. I made all my own components and I used custom slices. It works like a charm with <a href=\"https://twitter.com/nuxt_js?ref_src=twsrc%5Etfw\">@nuxt_js</a>. Also\": I’m coding with this view. <a href=\"https://t.co/F0I8X9gz39\">pic.twitter.com/F0I8X9gz39</a></p>&mdash; Tim Benniks (@timbenniks) <a href=\"https://twitter.com/timbenniks/status/1304146886832594944?ref_src=twsrc%5Etfw\">September 10, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+              "width": 550,
+              "height": null,
+              "type": "rich",
+              "cache_age": "3153600000",
+              "provider_name": "Twitter",
+              "provider_url": "http://www.twitter.com/",
+              "version": "1.0",
+              "__TYPE__": "EmbedContent",
+              "all": {
+                "embed_url": "https://twitter.com/timbenniks/status/1304146886832594944",
+                "type": "rich",
+                "author_name": "Tim Benniks",
+                "author_url": "https://twitter.com/timbenniks",
+                "cache_age": "3153600000",
+                "html": "<blockquote class=\"twitter-tweet\"><p lang=\"en\" dir=\"ltr\">I’ve been diving deep on <a href=\"https://twitter.com/prismicio?ref_src=twsrc%5Etfw\">@prismicio</a> <a href=\"https://twitter.com/hashtag/slicemachine?src=hash&amp;ref_src=twsrc%5Etfw\">#slicemachine</a> today. I made all my own components and I used custom slices. It works like a charm with <a href=\"https://twitter.com/nuxt_js?ref_src=twsrc%5Etfw\">@nuxt_js</a>. Also\": I’m coding with this view. <a href=\"https://t.co/F0I8X9gz39\">pic.twitter.com/F0I8X9gz39</a></p>&mdash; Tim Benniks (@timbenniks) <a href=\"https://twitter.com/timbenniks/status/1304146886832594944?ref_src=twsrc%5Etfw\">September 10, 2020</a></blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+                "provider_name": "Twitter",
+                "provider_url": "http://www.twitter.com/",
+                "version": "1.0"
+              }
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": []
+            }
+          ]
+        }
+      },
+      {
+        "key": "image_slice$2a53231b-1603-42fa-9cfc-d6310870f8c7",
+        "name": "image_slice",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "default",
+          "primary": {
+            "image": {
+              "__TYPE__": "ImageContent",
+              "origin": {
+                "id": "main",
+                "url": "https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa",
+                "width": 2747,
+                "height": 4120
+              },
+              "url": "https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa",
+              "width": 2747,
+              "height": 4120,
+              "edit": {
+                "zoom": 1,
+                "crop": {
+                  "x": 0,
+                  "y": 0
+                },
+                "background": "transparent"
+              },
+              "thumbnails": {}
+            },
+            "caption": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Duis enim aute eu veniam quis aute exercitation ipsum sint fugiat. Ut fugiat nisi fugiat laboris minim cillum excepteur qui."
+                  }
+                }
+              ]
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": []
+            }
+          ]
+        }
+      },
+      {
+        "key": "accordion_slice$76c76f22-67d9-4efb-b3a2-4bca1bbef964",
+        "name": "accordion_slice",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "richText",
+          "primary": {
+            "title": {
+              "__TYPE__": "FieldContent",
+              "value": "regular",
+              "type": "Text"
+            },
+            "content": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Magna eu sunt amet incididunt amet quis Lorem eu elit labore ipsum do."
+                  }
+                }
+              ]
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": []
+            }
+          ]
+        }
+      }
+    ]
   }
 }

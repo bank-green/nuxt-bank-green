@@ -1,0 +1,55 @@
+{
+  "uid": {
+    "__TYPE__": "UIDContent",
+    "value": "matter"
+  },
+  "impact": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Id exercitation pariatur nostrud fugiat ea magna ex eiusmod dolore cupidatat ullamco nisi. Proident incididunt Lorem ut deserunt eiusmod."
+        }
+      }
+    ]
+  },
+  "security": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Enim ipsum ut excepteur dolor ut ut amet occaecat."
+        }
+      }
+    ]
+  },
+  "services": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Sunt id elit veniam. Excepteur exercitation adipisicing enim dolore incididunt ad nostrud excepteur. In nulla laboris aliquip in duis deserunt Lorem voluptate incididunt velit Lorem qui aliqua."
+        }
+      }
+    ]
+  },
+  "convenience": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Tempor elit eiusmod aliqua elit eu fugiat elit quis ut tempor."
+        }
+      }
+    ]
+  },
+  "founded": {
+    "__TYPE__": "FieldContent",
+    "value": "57",
+    "type": "Number"
+  }
+}

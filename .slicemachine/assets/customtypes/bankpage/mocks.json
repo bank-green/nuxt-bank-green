@@ -1,45 +1,60 @@
 {
-  "id": "mock-doc-id",
-  "url": null,
-  "type": "bankpage",
-  "href": null,
-  "tags": [],
-  "first_publication_date": "1970-01-01T00:00:01+0000",
-  "last_publication_date": "1970-01-01T00:00:01+0000",
-  "slugs": [],
-  "linked_documents": [],
-  "lang": "en-us",
-  "alternate_languages": [],
-  "data": {
-    "headline": [
+  "headline": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
       {
         "type": "paragraph",
-        "text": "Laboris mollit est dolor labore proident nulla fugiat. Eiusmod ea pariatur aliquip anim velit et qui amet amet nulla aute consectetur elit.",
-        "spans": []
+        "content": {
+          "text": "Ad esse minim ex proident proident est incididunt dolor ullamco. Amet dolor ullamco consectetur commodo nulla et. Do laborum reprehenderit magna laborum ullamco ipsum culpa veniam mollit do sunt pariatur."
+        }
       }
-    ],
-    "description1": [
+    ]
+  },
+  "uid": {
+    "__TYPE__": "UIDContent",
+    "value": "kids"
+  },
+  "description1": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
       {
         "type": "paragraph",
-        "text": "Dolore elit aliquip qui amet commodo minim quis dolor id labore ut mollit aliqua elit. Consectetur nostrud do quis reprehenderit minim do tempor in.",
-        "spans": []
+        "content": {
+          "text": "Adipisicing eu elit quis consectetur eiusmod nisi officia enim ullamco fugiat adipisicing qui velit."
+        }
       }
-    ],
-    "description2": [
+    ]
+  },
+  "description2": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
       {
         "type": "paragraph",
-        "text": "Lorem qui reprehenderit incididunt commodo id labore cupidatat dolore nisi proident enim laborum dolore aliqua qui. Exercitation deserunt sit eu laboris proident reprehenderit aute anim duis non veniam nulla.",
-        "spans": []
+        "content": {
+          "text": "Id enim eu Lorem aliqua sit adipisicing veniam id aute do. Anim elit nisi dolore elit nisi ex."
+        }
       }
-    ],
-    "description3": [
+    ]
+  },
+  "description3": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
       {
         "type": "paragraph",
-        "text": "Laborum quis anim laboris velit fugiat fugiat officia in nostrud ut nostrud elit ex incididunt. Nulla velit ea in. Ullamco nisi incididunt pariatur ea incididunt ea pariatur.",
-        "spans": []
+        "content": {
+          "text": "Ad in consequat eiusmod cillum labore voluptate est. Amet et labore non exercitation reprehenderit."
+        }
       }
-    ],
-    "seo_title": "dog",
-    "seo_description": "none"
+    ]
+  },
+  "seo_title": {
+    "__TYPE__": "FieldContent",
+    "value": "step",
+    "type": "Text"
+  },
+  "seo_description": {
+    "__TYPE__": "FieldContent",
+    "value": "slipped",
+    "type": "Text"
   }
 }

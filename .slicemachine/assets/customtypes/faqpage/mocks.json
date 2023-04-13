@@ -1,25 +1,60 @@
 {
-  "id": "mock-doc-id",
-  "url": null,
-  "type": "faqpage",
-  "href": null,
-  "tags": [],
-  "first_publication_date": "1970-01-01T00:00:01+0000",
-  "last_publication_date": "1970-01-01T00:00:01+0000",
-  "slugs": [],
-  "linked_documents": [],
-  "lang": "en-us",
-  "alternate_languages": [],
-  "data": {
-    "introduction": [
+  "introduction": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
       {
         "type": "paragraph",
-        "text": "Excepteur nostrud nulla enim veniam laborum id esse proident. Ex et do reprehenderit.",
-        "spans": []
+        "content": {
+          "text": "Et est aliqua amet reprehenderit do ex nostrud voluptate sunt ad commodo dolor commodo sint nulla."
+        }
       }
-    ],
-    "seo_title": "pictured",
-    "seo_description": "hurry",
-    "slices": []
+    ]
+  },
+  "seo_title": {
+    "__TYPE__": "FieldContent",
+    "value": "mud",
+    "type": "Text"
+  },
+  "seo_description": {
+    "__TYPE__": "FieldContent",
+    "value": "leave",
+    "type": "Text"
+  },
+  "slices": {
+    "__TYPE__": "SliceContentType",
+    "value": [
+      {
+        "key": "accordion_slice$43391511-373a-4e17-9420-18fd95cf29f1",
+        "name": "accordion_slice",
+        "widget": {
+          "__TYPE__": "SharedSliceContent",
+          "variation": "richText",
+          "primary": {
+            "title": {
+              "__TYPE__": "FieldContent",
+              "value": "spirit",
+              "type": "Text"
+            },
+            "content": {
+              "__TYPE__": "StructuredTextContent",
+              "value": [
+                {
+                  "type": "paragraph",
+                  "content": {
+                    "text": "Proident ut velit occaecat do nostrud. Proident incididunt adipisicing fugiat ex proident mollit culpa tempor velit sunt. Et ullamco cupidatat magna laborum cillum veniam aliqua qui."
+                  }
+                }
+              ]
+            }
+          },
+          "items": [
+            {
+              "__TYPE__": "GroupItemContent",
+              "value": []
+            }
+          ]
+        }
+      }
+    ]
   }
 }
