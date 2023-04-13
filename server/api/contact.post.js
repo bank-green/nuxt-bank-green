@@ -5,8 +5,6 @@ export default defineEventHandler(async (event) => {
   }
   const headers = event.node.req.headers;
 
-  console.log(body, headers);
-
   const formatDate = (date) => {
     if (!date) return undefined;
     let newDate = new Date(date);
@@ -18,6 +16,7 @@ export default defineEventHandler(async (event) => {
   };
 
   const message = {
+    app_env: process.env.NODE_ENV || "production",
     first_name: body.firstName || "",
     last_name: body.lastName || "",
     email: body.email,
