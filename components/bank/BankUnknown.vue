@@ -15,11 +15,12 @@
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <PrismicRichText :field="bankunknown?.data.headline" />
                 </div>
-                <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
+                <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <PrismicRichText :field="bankunknown?.data.description1" />
                 </div>
             </div>
-            <div class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+            <div
+                class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
                 <div class="relative flex-grow md:flex-none  text-center">
                     <a href="#section-two">
                         <ArrowDownBounce class="w-10" />
