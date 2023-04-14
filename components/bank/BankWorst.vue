@@ -16,7 +16,7 @@
                     <div v-if="header" v-html="header"></div>
                     <PrismicRichText v-else :field="worstbank?.data.headline" />
                 </div>
-                <div class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap">
+                <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <div v-if="summary" v-html="summary"></div>
                     <PrismicRichText v-else :field="worstbank?.data.description1" />
 
