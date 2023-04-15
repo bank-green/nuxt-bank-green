@@ -14,7 +14,7 @@
                 </div>
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="header" v-html="header"></div>
-                    <PrismicRichText :field="bankPageData?.headline" />
+                    <PrismicRichText v-else :field="bankPage?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <div v-if="summary" v-html="summary"></div>
@@ -23,9 +23,9 @@
                     </div>
                 </div>  
 
-                <div v-if="bankPageData?.subtitle"
+                <div v-if="bankPage?.data.subtitle"
                 class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
-                    <PrismicRichText :field="bankPageData?.subtitle" />
+                    <PrismicRichText :field="bankPage.data.subtitle" />
                 </div>
             </div>
         </template>
@@ -38,7 +38,8 @@
 </template>
 
 
-<script setup lang="ts">
+<script setup lang="ts">import { PrismicDocument } from '@prismicio/types';
+
 const props = defineProps<{
     name: string,
     website: string,
@@ -51,7 +52,7 @@ const props = defineProps<{
         tag: string
     },
     amountFinancedSince2016: string,
-    bankPageData: Record<string, any> | null,
+    bankPage: PrismicDocument<Record<string, any>, string, string> | null,
 }>()
 
 const formattedTotal = computed(() => props.amountFinancedSince2016 ?? 'large amounts')

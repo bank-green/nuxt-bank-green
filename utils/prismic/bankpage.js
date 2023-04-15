@@ -19,6 +19,7 @@ function getBankPageId(bankDetails) {
     }
 }
 
+
 export async function useBankPage(bankDetails) {
     const { client } = usePrismic();
 
@@ -31,7 +32,7 @@ export async function useBankPage(bankDetails) {
             const { data } = await useAsyncData(id, () =>
                 client.getByUID(type, id)
             );
-            bankPage.value = data;
+            bankPage.value = data.value;
         }
     }
     catch (e) {
