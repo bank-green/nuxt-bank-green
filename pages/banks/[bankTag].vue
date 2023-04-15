@@ -2,7 +2,11 @@
     <!-- :summary, :header, :details, :amountFinancedSince2016 to be removed 
         https://linear.app/bankgreen/issue/PE-476/render-custom-bank-texts-from-prismic
     -->
-    <BankWorst v-if="details.rating === 'worst'" :name="details.name" :subtitle="details.subtitle"
+    <component v-if="componentName" :is="componentName"
+        :details="details"
+        :bankPage="bankPage"
+    />
+    <!-- <BankWorst v-if="details.rating === 'worst'" :name="details.name" :subtitle="details.subtitle"
         :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
         :summary="details.summary" :details="details.details" :amountFinancedSince2016="details.amountFinancedSince2016" />
 
@@ -18,11 +22,12 @@
         :summary="details.summary" :fossilFreeAlliance="details.fossilFreeAlliance" />
 
     <BankUnknown v-else :name="details.name" :subtitle="details.subtitle" :website="details.website"
-        :inheritBrandRating="details.inheritBrandRating" />
+        :inheritBrandRating="details.inheritBrandRating" /> -->
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useBankPage } from "../../utils/prismic/bankpage";
 
 // const route = useRoute()
 // FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,
@@ -33,6 +38,8 @@ const router = useRouter();
 const bankTag = router.currentRoute.value.params.bankTag;
 const details = ref(await getBankDetail(bankTag));
 
+const { bankPage } = await useBankPage(details);
+
 useHeadHelper(
     details.value?.name
         ? `${details.value.name}'s Climate Score - Bank.Green`
@@ -42,4 +49,30 @@ useHeadHelper(
 
 const { rating } = details.value;
 if (rating) useHeadRating(rating);
+
+// TODO: move to composable
+const BankUnknown = resolveComponent('BankUnknown');
+const BankWorst = resolveComponent('BankWorst');
+const BankBad = resolveComponent('BankBad');
+const BankOk = resolveComponent('BankOk');
+const BankGreat = resolveComponent('BankGreat');
+
+const componentName = computed(() => {
+    const hasDetails = details.value && details.value.rating;
+    if (!hasDetails)
+        return undefined;
+    switch (details.value.rating) {
+        case "worst":
+            return BankWorst;
+        case "bad":
+            return BankBad;
+        case "ok":
+            return BankOk;
+        case "great":
+            return BankGreat;
+        case "unknown":
+        default:
+            return BankUnknown;
+    }
+})
 </script>

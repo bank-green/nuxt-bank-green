@@ -14,7 +14,7 @@
                 </div>
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="header" v-html="header"></div>
-                    <PrismicRichText v-else :field="badbank?.data.headline" />
+                    <PrismicRichText :field="bankPageData?.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <div v-if="summary" v-html="summary"></div>
@@ -23,9 +23,9 @@
                     </div>
                 </div>  
 
-                <div v-if="badbank?.data.subtitle"
+                <div v-if="bankPageData?.subtitle"
                 class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
-                    <PrismicRichText :field="badbank.data.subtitle" />
+                    <PrismicRichText :field="bankPageData?.subtitle" />
                 </div>
             </div>
         </template>
@@ -50,13 +50,9 @@ const props = defineProps<{
         name: string,
         tag: string
     },
-    amountFinancedSince2016: string
+    amountFinancedSince2016: string,
+    bankPageData: Record<string, any> | null,
 }>()
-
-const { client } = usePrismic();
-
-const { data: badbank } = await useAsyncData("badbank", () =>
-    client.getByUID("bankpage", "badbank"))
 
 const formattedTotal = computed(() => props.amountFinancedSince2016 ?? 'large amounts')
 
