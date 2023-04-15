@@ -47,10 +47,20 @@ const BankBad = resolveComponent('BankBad');
 const BankOk = resolveComponent('BankOk');
 const BankGreat = resolveComponent('BankGreat');
 
+const CUSTOM_BANKTAGS = [
+    'jpmorgan_chase',
+]
+
 const componentName = computed(() => {
+    const isCustomBankTag = CUSTOM_BANKTAGS.includes(router.currentRoute.value.params.bankTag as string);
+    
+    if (isCustomBankTag) {
+        // TODO: add custom component here
+    }
     const hasDetails = details.value && details.value.rating;
     if (!hasDetails)
         return undefined;
+
     switch (details.value.rating) {
         case "worst":
             return BankWorst;
