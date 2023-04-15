@@ -14,23 +14,6 @@
         :fossilFreeAlliance="details.fossilFreeAlliance"
         :bankPage="bankPage"
     />
-    <!-- <BankWorst v-if="details.rating === 'worst'" :name="details.name" :subtitle="details.subtitle"
-        :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
-        :summary="details.summary" :details="details.details" :amountFinancedSince2016="details.amountFinancedSince2016" />
-
-    <BankBad v-else-if="details.rating === 'bad'" :name="details.name" :subtitle="details.subtitle"
-        :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
-        :summary="details.summary" :details="details.details" :amountFinancedSince2016="details.amountFinancedSince2016" />
-
-    <BankOk v-else-if="details.rating === 'ok'" :name="details.name" :subtitle="details.subtitle" :website="details.website"
-        :inheritBrandRating="details.inheritBrandRating" :header="details.header" :summary="details.summary" />
-
-    <BankGreat v-else-if="details.rating === 'great'" :name="details.name" :subtitle="details.subtitle"
-        :website="details.website" :inheritBrandRating="details.inheritBrandRating" :header="details.header"
-        :summary="details.summary" :fossilFreeAlliance="details.fossilFreeAlliance" />
-
-    <BankUnknown v-else :name="details.name" :subtitle="details.subtitle" :website="details.website"
-        :inheritBrandRating="details.inheritBrandRating" /> -->
 </template>
 
 <script setup lang="ts">
@@ -58,7 +41,6 @@ useHeadHelper(
 const { rating } = details.value;
 if (rating) useHeadRating(rating);
 
-// TODO: move to composable
 const BankUnknown = resolveComponent('BankUnknown');
 const BankWorst = resolveComponent('BankWorst');
 const BankBad = resolveComponent('BankBad');
