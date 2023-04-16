@@ -9,12 +9,14 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
         <div class="flex-1">
-            <span v-if="item.text" class="text-gray-900">{{ item.text }}</span>
+            <span v-if="item.isChecked && item.text" class="text-gray-900">{{
+                `${key}: ${item.text}`
+            }}</span>
             <span v-else-if="item.isChecked" class="text-gray-700">{{
-                    key
+                key
             }}</span>
             <span v-else class="text-gray-400">{{
-                    key
+                key
             }}</span>
         </div>
     </div>
