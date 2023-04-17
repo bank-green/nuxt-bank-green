@@ -1,4 +1,9 @@
-function getBankPageId(bankDetails) {
+import CUSTOM_BANK_TAGS from '../../constants/customBankTags';
+
+function getBankPageId(bankTag, bankDetails) {
+    if (CUSTOM_BANK_TAGS.includes(bankTag))
+        return bankTag;
+
     const hasDetails = bankDetails && bankDetails.rating;
     if (!hasDetails)
         return undefined;
@@ -20,14 +25,14 @@ function getBankPageId(bankDetails) {
 }
 
 
-export async function useBankPage(bankDetails) {
+export async function useBankPage(bankTag, bankDetails) {
     const { client } = usePrismic();
 
     const bankPage = ref(null);
 
     try {
         const type = "bankpage";
-        const id = getBankPageId(unref(bankDetails));
+        const id = getBankPageId(bankTag, unref(bankDetails));
         if (typeof (id) === "string") {
             const { data } = await useAsyncData(id, () =>
                 client.getByUID(type, id)

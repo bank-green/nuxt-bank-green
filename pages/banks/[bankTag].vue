@@ -29,7 +29,7 @@ const router = useRouter();
 const bankTag = router.currentRoute.value.params.bankTag;
 const details = ref(await getBankDetail(bankTag));
 
-const { bankPage } = await useBankPage(details);
+const { bankPage } = await useBankPage(bankTag, details);
 
 useHeadHelper(
     details.value?.name
@@ -47,16 +47,8 @@ const BankBad = resolveComponent('BankBad');
 const BankOk = resolveComponent('BankOk');
 const BankGreat = resolveComponent('BankGreat');
 
-const CUSTOM_BANKTAGS = [
-    'jpmorgan_chase',
-]
 
 const componentName = computed(() => {
-    const isCustomBankTag = CUSTOM_BANKTAGS.includes(router.currentRoute.value.params.bankTag as string);
-    
-    if (isCustomBankTag) {
-        // TODO: add custom component here
-    }
     const hasDetails = details.value && details.value.rating;
     if (!hasDetails)
         return undefined;
