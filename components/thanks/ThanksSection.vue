@@ -24,7 +24,7 @@
     <div class="relative py-8 sm:py-16 bg-sushi-100">
         <div class="contain sm:text-center">
             <h4 class="font-semibold text-xl text-gray-800 mb-6 sm:text-2xl tracking-wide">
-                Bank on a better future" </h4>
+                Bank on a better future</h4>
             <p class="text-gray-500 mb-6">Not happy with your bank’s score? Explore sustainable banks in your area.</p>
             <ThanksTopEcoBanksWidget />
         </div>
