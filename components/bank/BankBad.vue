@@ -1,7 +1,7 @@
 <template>
     <BankLayoutBadWorst>
         <template #section1>
-            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" />
+            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" :prismicFieldSubtitle="bankPage?.data?.subtitle" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
@@ -22,11 +22,6 @@
                         companies and projects that are rapidly accelerating the climate crisis.
                     </div>
                 </div>  
-
-                <div v-if="bankPage?.data.subtitle"
-                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
-                    <PrismicRichText :field="bankPage.data.subtitle" />
-                </div>
             </div>
         </template>
 

@@ -1,7 +1,7 @@
 <template>
     <BankLayoutGreatOkUnknown>
         <template #section1>
-            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" />
+            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" :prismicFieldSubtitle="bankPage?.data?.subtitle" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
@@ -21,11 +21,6 @@
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <div v-if="summary" v-html="summary"></div>
                     <PrismicRichText v-else :field="bankPage?.data.description1" />
-                </div>
-
-                <div v-if="bankPage?.data.subtitle"
-                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
-                    <PrismicRichText :field="bankPage.data.subtitle" />
                 </div>
             </div>
             <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">

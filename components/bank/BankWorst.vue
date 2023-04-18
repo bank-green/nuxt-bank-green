@@ -5,7 +5,8 @@
                 :name="name" 
                 :website="website" 
                 :subtitle="subtitle" 
-                :inheritBrandRating="inheritBrandRating" />
+                :inheritBrandRating="inheritBrandRating"
+                :prismicFieldSubtitle="bankPage?.data?.subtitle" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
@@ -23,11 +24,6 @@
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <div v-if="summary" v-html="summary"></div>
                     <PrismicRichText v-else-if="bankPage?.data" :field="bankPage?.data.description1" />
-                </div>
-
-                <div v-if="bankPage?.data && bankPage?.data.subtitle"
-                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
-                    <PrismicRichText :field="bankPage.data.subtitle" />
                 </div>
             </div>
         </template>
