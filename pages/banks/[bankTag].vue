@@ -2,18 +2,20 @@
     <!-- :summary, :header, :details, :amountFinancedSince2016 to be removed 
         https://linear.app/bankgreen/issue/PE-476/render-custom-bank-texts-from-prismic
     -->
-    <component v-if="details" :is="componentName"
-        :name="details.name" 
-        :subtitle="details.subtitle"
-        :website="details.website" 
-        :inheritBrandRating="details.inheritBrandRating" 
-        :header="details.header"
-        :summary="details.summary" 
-        :details="details.details" 
-        :amountFinancedSince2016="details.amountFinancedSince2016"
-        :fossilFreeAlliance="details.fossilFreeAlliance"
-        :bankPage="bankPage"
-    />
+    <ClientOnly>
+        <component v-if="details" :is="componentName"
+            :name="details.name" 
+            :subtitle="details.subtitle"
+            :website="details.website" 
+            :inheritBrandRating="details.inheritBrandRating" 
+            :header="details.header"
+            :summary="details.summary" 
+            :details="details.details" 
+            :amountFinancedSince2016="details.amountFinancedSince2016"
+            :fossilFreeAlliance="details.fossilFreeAlliance"
+            :bankPage="bankPage"
+        />
+    </ClientOnly>
 </template>
 
 <script setup lang="ts">
