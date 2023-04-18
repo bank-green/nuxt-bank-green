@@ -1,6 +1,5 @@
 
-import { post } from "./backend";
-
-export function submitContact(form) {
-  return post("/submitContact", form);
+export async function submitContact(form) {
+  const response = await $fetch("/api/contact", { method: "POST", body: form });
+  return response;
 }
