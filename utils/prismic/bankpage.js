@@ -19,27 +19,26 @@ function getBankRating(bankDetails) {
     }
 }
 
+function isValidResponse(response) {
+    return !response?.error?.value && response?.data?.value;
+}
 
 export async function useBankPage(bankTag, bankDetails) {
     const { client } = usePrismic();
     const type = "bankpage";
+    const rating = getBankRating(unref(bankDetails));
     const bankPage = ref(null);
 
     try {
-        const bankTagResponse = await useAsyncData(bankTag, () =>
-            client.getByUID(type, bankTag)
-        )
-        if (bankTagResponse.data.value) {
-            bankPage.value = bankTagResponse.data.value;
-        }
-        else {
-            const rating = getBankRating(unref(bankDetails));
-            if (typeof (rating) === "string") {
-                const { data } = await useAsyncData(rating, () =>
-                    client.getByUID(type, rating)
-                );
-                bankPage.value = data.value;
-            }
+        const [ customBankResponse, bankRatingResponse ] = await Promise.all([
+            useAsyncData(bankTag, () => client.getByUID(type, bankTag)),
+            useAsyncData(rating, () => client.getByUID(type, rating)),
+        ]);
+
+        if (isValidResponse(customBankResponse)) {
+            bankPage.value = customBankResponse.data.value;
+        } else if (isValidResponse(bankRatingResponse)) {
+            bankPage.value = bankRatingResponse.data.value;
         }
     }
     catch (e) {
