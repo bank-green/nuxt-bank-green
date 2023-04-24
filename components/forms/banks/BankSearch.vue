@@ -68,6 +68,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange']);
 
+const pageStart = new Date();
 const banks = ref([]);
 const loaded = ref(false);
 const search = ref('');
@@ -87,7 +88,7 @@ onMounted(() => {
 watch(props.country, async function() {
     await loadBanks();
     await nextTick();
-    if (input.value && typeof(input.value.focus) == 'function' && new Date - pageStart > 15000) {
+    if ((input.value && typeof(input.value.focus) == 'function') && (new Date() - pageStart > 15000)) {
         input.value.focus();
     }
 });
