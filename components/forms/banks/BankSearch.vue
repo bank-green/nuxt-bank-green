@@ -52,99 +52,87 @@
         <BankIcon v-else class="h-6 w-6 absolute inset-0 m-4" />
     </div>
 </template>
-
-<script>
-import BankSearchItem from './BankSearchItem.vue'
-import BankIcon from './BankIcon.vue'
+<script setup lang="ts">
 import { findBanks } from './banks'
+import BankIcon from './BankIcon.vue'
+import BankSearchItem from './BankSearchItem.vue'
 import LoadingJumper from '../../LoadingJumper.vue'
-import SearchInput from '@/components/forms/input/SearchInput'
-import ListPicker from '@/components/forms/ListPicker'
+import SearchInput from '../input/SearchInput.vue'
+import ListPicker from '../ListPicker.vue'
 
-let pageStart = new Date()
-export default {
-    props: {
-        disabled: Boolean,
-        country: String,
-        modelValue: Object,
-    },
-    components: {
-        BankIcon,
-        BankSearchItem,
-        LoadingJumper,
-        SearchInput,
-        ListPicker,
-    },
-    data() {
-        return {
-            banks: [],
-            loaded: false,
-            search: '',
-            isShowing: false,
-            highlightBank: '',
-            selectedItem: null
-        }
-    },
-    computed: {
-        hasBanks() {
-            return this.banks.length > 0
-        },
-        filteredBanks() {
-            return findBanks(this.banks, this.search)
-        },
-    },
+const props = defineProps<{
+    disabled: Boolean,
+    country: String,
+    modelValue: Object,
+}>();
 
-    watch: {
-        async country() {
-            await this.loadBanks()
-            await this.$nextTick()
-            if (this.$refs.input && new Date() - pageStart > 15000) {
-                this.$refs.input.focus()
-            }
-        },
-        search() {
-            if (this.modelValue && this.search !== this.selectedItem) {
-                this.$emit('update:modelValue', null)
-            }
-            this.$emit('searchInputChange', this.search)
-        },
-    },
-    created() {
-        this.loadBanks()
-    },
-    methods: {
-        async loadBanks() {
-            if (this.disabled) {
-                return
-            }
-            this.loaded = false
-            this.search = ''
-            this.banks = await getBanksList({ country: this.country })
-            this.loaded = true
-        },
-        onKeyDown() {
-            if (this.search.length > 0 && this.loaded) {
-                this.showList()
-            }
-        },
-        showList() {
-            this.isShowing = true
-        },
-        hideList() {
-            this.isShowing = false
-        },
-        async onSelectBank(item) {
-            this.$emit('update:modelValue', null)
-            await this.$nextTick()
-            this.search = item.name
-            this.selectedItem = item.name
-            this.$emit('update:modelValue', item)
-            this.isShowing = false
-        },
-        onCloseClick() {
-            this.search = ''
-            this.$emit('update:modelValue', null)
-        },
-    },
+const emit = defineEmits(['update:modelValue', 'searchInputChange']);
+
+const banks = ref([]);
+const loaded = ref(false);
+const search = ref('');
+const isShowing = ref(false);
+const selectedItem = ref(null);
+const input = ref(null);
+
+const hasBanks = computed(() => banks.value.length > 0);
+const filteredBanks = computed(() => 
+    findBanks(banks.value, search.value)
+);
+
+onMounted(() => {
+    loadBanks();
+});
+
+watch(props.country, async function() {
+    await loadBanks();
+    await nextTick();
+    if (input.value && typeof(input.value.focus) == 'function' && new Date - pageStart > 15000) {
+        input.value.focus();
+    }
+});
+
+watch(search, function(newValue) {
+    if (props.modelValue && newValue != selectedItem.value) {
+        emit('update:modelValue', null);
+    }
+    emit('searchInputChange', newValue);
+})
+
+async function loadBanks() {
+    if (props.disabled)
+        return;
+    loaded.value = false;
+    search.value = '';
+    banks.value = await getBanksList({ country: props.country })
+    loaded.value = true;
 }
+
+function onKeyDown() {
+    if (search.value.length > 0 && loaded.value) 
+        showList();
+}
+
+function showList() {
+    isShowing.value = true;
+}
+
+function hideList() {
+    isShowing.value = false;
+}
+
+async function onSelectBank(item) {
+    emit('update:modelValue', null);
+    await nextTick();
+    search.value = item.name;
+    selectedItem.value = item.name;
+    emit('update:modelValue', item);
+    isShowing.value = false;
+}
+
+function onCloseClick() {
+    search.value = '';
+    emit('update:modelValue', null);
+}
+
 </script>
