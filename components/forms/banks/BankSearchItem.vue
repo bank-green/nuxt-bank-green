@@ -45,7 +45,7 @@
 import BankIcon from './BankIcon.vue'
 import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
-defineProps<{
+const props = defineProps<{
     id: String,
     name: String,
     website: String,
