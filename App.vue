@@ -16,7 +16,9 @@
     <Modal v-if="openSwitchSurveyModal" v-on:closeModal="openSwitchSurveyModal = false"
         class="z-50 text-white bg-primary-dark">
         <SwitchSurveyExit @success="openSwitchSurveyModal = false"
-            :title="'Did you open a green account as as a result of visiting our website?'" tag="popup" />
+            :title="'Did you open a green account as as a result of visiting our website?'"
+            :subtitle="'By letting us know, you will be help further the green banking movement and amplify your impact.'"
+            tag="popup" />
     </Modal>
     <NotificationPanel />
 </template>
