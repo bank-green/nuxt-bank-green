@@ -1,60 +1,84 @@
 <template>
-    <div class="page">
-        <div class="contain py-16 lg:pt-6 lg:pb-6 sm:text-center">
-            <template v-if="fromTheWebsite">
-                <h2 class="font-semibold text-2xl text-gray-800 mb-8 sm:text-4xl sm:mb-4">
-                    {{ `From the website of ${name}` }}
-                </h2>
-                <p class="whitespace-pre-line text-gray-500 sm:text-xl max-w-xl mx-auto">
-                    {{ fromTheWebsite }}
-                </p>
-            </template>
+    <div class="contain">
+        <ul class="flex width-full justify-center gap-24 text-xl font-semibold">
+            <li :class="isActive('key-facts') ? 'text-sushi-500' : 'text-gray-400 hover:text-gray-500'" >
+                <a class="tab-nav-link" @click.prevent="setActive('key-facts')" href="#key-facts">Key Facts</a>
+            </li>
+            <li :class="isActive('products') ? 'text-sushi-500' : 'text-gray-400 hover:text-gray-500'" >
+                <a class="tab-nav-link" @click.prevent="setActive('products')" :class="{ active: isActive('products') }" href="#products">Products</a>
+            </li>
+            <li :class="isActive('fees') ? 'text-sushi-500' : 'text-gray-400 hover:text-gray-500'" >
+                <a class="tab-nav-link" @click.prevent="setActive('fees')" :class="{ active: isActive('fees') }" href="#fees">Fees</a>
+            </li>
+        </ul>
+        <br/>
 
-            <EcoBankFeaturesSection :bankFeatures="bankFeatures" class="mt-16 max-w-xl mx-auto text-left mb-5" />
-            <NuxtLink :to="`https://data.bank.green/update/${tag}`" target="_blank"
-                class="relative z-10 cursor-pointer text-center text-slate-600 hover:underline">
-                Tell us if we got something wrong
-            </NuxtLink>
-        </div>
-
-        <Swoosh color="text-blue-100" direction="up" />
-        <div class="bg-blue-100 pt-16">
-            <div class="contain">
-                <div class="max-w-xl mx-auto bg-primary-dark text-gray-100 rounded-xl shadow-xl p-8">
-                    <div class="text-lg lg:text-xl font-medium mb-8 sm:px-16 lg:px-0">
-                        {{ `Counting bank switches is vitally important to us as a movement. Please use this link when
-                                                signing up for ${name}.`
-                        }}
-                    </div>
-                    <NuxtLink :to="website" target="_blank" class="button-green inline-block mx-auto">{{
-                        `Visit ${name}`
-                    }}</NuxtLink>
-                    <NuxtLink to="/pledge"
-                        class="block text-gray-200 hover:underline cursor-pointer font-bold mt-4 text-center">
-                        Pledge to Switch Later
-                    </NuxtLink>
-                    <div class="text-sm lg:text-md font-medium mt-8 sm:px-16 lg:px-0">
-                        Have you opened an account with {{ name }} since visiting Bank.Green? <NuxtLink
-                            class="text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
-                    </div>
+        <div class="relative bg-white rounded-xl shadow-soft border py-8 px-16">
+            <div :class="{ 'hidden': !isActive('key-facts') }" id="key-facts">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <p><strong>Type:</strong> Bank</p>
+                    <p><strong>Mobile Banking:</strong> {{ getBankFeature('Mobile banking') }}</p>
+                    <p><strong>Environmental Policy:</strong> {{ getBankFeature('Environmental Policy') }}</p>
+                    <p><strong>Founded:</strong> {{ getBankFeature('Founded', 'NIL') }}</p>
+                    <p><strong>Serving:</strong> {{ getBankFeature('Serving', 'NIL') }}</p>
+                    <p><strong>Local Branches:</strong> {{ getBankFeature('Local Branches') }}</p>
                 </div>
             </div>
-            <div v-if="rating === 'great'" class="flex items-end justify-end pointer-events-none">
-                <div class="w-11/12">
-                    <LottiePlayer path="/anim/wind_2_without_bg.json" />
+            <div :class="{ 'hidden': !isActive('products') }" id="products">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <p><strong>Current Accounts:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>Savings Accounts:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>Credit Cards:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>Mortgages of Loans:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>Business Lending:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>ISAs:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                </div>
+            </div>
+            <div :class="{ 'hidden': !isActive('fees') }" id="fees">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <p><strong>Overdraft Fee:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>Account Maintenaince Fees:</strong> {{ getBankFeature('Current Accounts') }}</p>
+                    <p><strong>Free ATM Network:</strong> {{ getBankFeature('Current Accounts') }}</p>
                 </div>
             </div>
         </div>
+        <!-- <br />
+        <div>{{ bankFeatures }}</div> -->
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface BankFeature {
+    offered: string;
+    feature: {
+        name: string;
+    },
+    details: string | null;
+}
+
+const props = defineProps<{
     fromTheWebsite: string,
     name: string,
     website: string,
     rating: string,
-    bankFeatures: any,
+    bankFeatures: BankFeature[],
     tag: string
-}>()
+}>();
+
+const activeTab = ref('key-facts');
+function setActive(tabName: string) {
+    if (!isActive(tabName))
+        activeTab.value = tabName;
+}
+function isActive(tabName: string) {
+    return activeTab.value === tabName;
+}
+
+function getBankFeature(featureName : string, defaultValue : string = "No") {
+    props.bankFeatures.forEach(function(feature) {
+        if (feature.feature.name === featureName)
+            return feature.offered;
+    });
+    return defaultValue;
+}
 </script>
