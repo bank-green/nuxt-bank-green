@@ -1,9 +1,13 @@
 <template>
-    <div class="page">
-        <EcoBankHeader :name="details.name" :rating="details.rating" :subtitle="details.subtitle" :ourTake="details.ourTake"
-            :website="details.website" :inheritBrandRating="details.inheritBrandRating" />
-        <EcoBankDetail :details="details" :fromTheWebsite="details.fromTheWebsite" :name="details.name"
-            :website="details.website" :rating="details.rating" :bankFeatures="details.bankFeatures" :tag="details.tag" />
+    <div class="page bg-sushi-50">
+        <div class="pt-32 pb-16">
+            <EcoBankHeader
+                :name="details.name" :rating="details.rating" :subtitle="details.subtitle" :ourTake="details.ourTake"
+                :website="details.website" :inheritBrandRating="details.inheritBrandRating" />
+        </div>
+        <!-- TODO: create component -->
+        <!-- <EcoBankDetail :details="details" :fromTheWebsite="details.fromTheWebsite" :name="details.name"
+            :website="details.website" :rating="details.rating" :bankFeatures="details.bankFeatures" :tag="details.tag" /> -->
     </div>
 </template>
 
