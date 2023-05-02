@@ -1,11 +1,12 @@
 <template>
-<div>
-    <ul class="flex width-full gap-24 text-xl font-semibold" :style="{ justifyContent: justifyTabNavigation}">
+<div >
+    <ul class="Tab__Nav flex width-full gap-24 text-xl font-semibold" :style="{ justifyContent: justifyTabNavigation}">
         <li 
             v-for="tabId in tabIds"
             :key="tabId"
             :class="[
-                isActive(tabId) ? 'text-sushi-500' : 'text-gray-400 hover:text-gray-500'
+                'Tab_NavItem flex flex-col items-center',
+                isActive(tabId) ? 'Tab_NavItem--active text-sushi-500' : 'text-gray-400 hover:text-gray-500'
             ]" 
         >
             <a 
@@ -15,7 +16,7 @@
                 <slot :name="`${tabId}-nav`"></slot>
             </a>
             <div :class="[
-                'mx-2 mt-2 border rounded h-2 border-transparent', 
+                'Tab_NavItemUnderline mx-2 mt-2 border rounded h-2 border-transparent', 
                 isActive(tabId) ? 'bg-sushi-500' : 'bg-transparent']"
             >
             </div>
@@ -59,3 +60,13 @@ watch(props.tabIds, (newValue, oldValue) => {
         setActive(newValue[0]);
 });
 </script>
+<style scoped>
+.Tab_NavItem .Tab_NavItemUnderline {
+    width: 0;
+    transition: 0.3s all ease;
+}
+
+.Tab_NavItem.Tab_NavItem--active .Tab_NavItemUnderline {
+    width: calc(100% - 1rem);
+}
+</style>
