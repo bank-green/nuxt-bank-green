@@ -9,7 +9,10 @@
                     <p><strong>Type:</strong> Bank</p>
                     <p><strong>Mobile Banking:</strong> {{ getBankFeature('Mobile banking') }}</p>
                     <p><strong>Environmental Policy:</strong> {{ getBankFeature('Environmental Policy') }}</p>
-                    <p><strong>Founded:</strong> {{ getBankFeature('Founded', 'NIL') }}</p>
+                    <p>
+                        <strong>Founded:</strong>
+                        {{ prismicPageData?.founded || 'NIL' }}
+                    </p>
                     <p><strong>Serving:</strong> {{ getBankFeature('Serving', 'NIL') }}</p>
                     <p><strong>Local Branches:</strong> {{ getBankFeature('Local Branches') }}</p>
                 </div>
@@ -33,15 +36,38 @@
             </template>
         </Tab>
 
-        <Tab :tab-ids="['impact', 'security', 'service', 'convenience']" justify-tab-navigation="space-around">
+        <Tab 
+            v-if="prismicPageData"
+            :tab-ids="['impact', 'security', 'service', 'convenience']" 
+            justify-tab-navigation="space-around">
             <template v-slot:impact-nav>Impact</template>
             <template v-slot:security-nav>Security</template>
             <template v-slot:service-nav>Service</template>
             <template v-slot:convenience-nav>Convenience</template>
-            <template v-slot:impact></template>
-            <template v-slot:security></template>
-            <template v-slot:service></template>
-            <template v-slot:convenience></template>
+            <template v-slot:impact>
+                <PrismicRichText 
+                    class="text-md md:text-lg tracking-wide" 
+                    :field="prismicPageData?.impact" 
+                />
+            </template>
+            <template v-slot:security>
+                <PrismicRichText 
+                    class="text-md md:text-lg tracking-wide" 
+                    :field="prismicPageData?.security" 
+                />
+            </template>
+            <template v-slot:service>
+                <PrismicRichText 
+                    class="text-md md:text-lg tracking-wide" 
+                    :field="prismicPageData?.services" 
+                />
+            </template>
+            <template v-slot:convenience>
+                <PrismicRichText 
+                    class="text-md md:text-lg tracking-wide" 
+                    :field="prismicPageData?.convenience" 
+                />
+            </template>
         </Tab>
         <!-- <br />
         <div>{{ bankFeatures }}</div> -->
@@ -63,7 +89,8 @@ const props = defineProps<{
     website: string,
     rating: string,
     bankFeatures: BankFeature[],
-    tag: string
+    tag: string,
+    prismicPageData: Record<string, any> | null
 }>();
 
 function getBankFeature(featureName : string, defaultValue : string = "No") {
