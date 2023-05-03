@@ -1,5 +1,5 @@
 <template>
-    <div class="contain space-y-24">
+    <div class="contain space-y-16 md:space-y-24">
         <Tab :tab-ids="[ 'key-facts', 'products', 'fees' ]">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
@@ -69,8 +69,6 @@
                 />
             </template>
         </Tab>
-        <!-- <br />
-        <div>{{ bankFeatures }}</div> -->
     </div>
 </template>
 

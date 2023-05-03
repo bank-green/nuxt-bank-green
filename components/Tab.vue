@@ -1,6 +1,6 @@
 <template>
-<div >
-    <ul class="Tab__Nav flex width-full gap-24 text-xl font-semibold" :style="{ justifyContent: justifyTabNavigation}">
+<div>
+    <ul class="Tab__Nav hidden md:flex width-full gap-24 text-xl font-semibold" :style="{ justifyContent: justifyTabNavigation}">
         <li 
             v-for="tabId in tabIds"
             :key="tabId"
@@ -13,6 +13,7 @@
                 class="tab-nav-link" 
                 @click.prevent="setActive(tabId)" 
                 :href="`#${tabId}`">
+                <!-- Tab Title (desktop) -->
                 <slot :name="`${tabId}-nav`"></slot>
             </a>
             <div :class="[
@@ -23,13 +24,29 @@
         </li>
     </ul>
     <br/>
-    <div class="relative bg-white rounded-xl shadow-soft border py-8 px-16">
+    <div class="space-y-16 md:space-y-0">
         <div 
             v-for="tabId in tabIds"
             :key="tabId"
-            :class="{ 'hidden': !isActive(tabId) }" 
-            :id="tabId">
-            <slot :name="tabId"></slot>
+            class="flex flex-col items-center gap-4 md:gap-0"
+        >
+            <div class="flex flex-col items-center md:hidden">
+                <h3 class="text-2xl font-semibold text-sushi-500">
+                    <!-- Tab Title (mobile) -->
+                    <slot :name="`${tabId}-nav`">
+                    </slot>
+                </h3>
+                <div class="mx-2 mt-2 border rounded h-2 border-transparent bg-sushi-500" style="width: calc(100% - 1rem)"></div>
+            </div>
+            <div 
+                :class="[
+                    'w-full block relative bg-white rounded-xl shadow-soft border py-8 px-8 md:px-16',
+                    !isActive(tabId) && 'md:hidden'
+                ]"
+                :id="tabId">
+                <!-- Tab Content -->
+                <slot :name="tabId"></slot>
+            </div>
         </div>
     </div>
 </div>

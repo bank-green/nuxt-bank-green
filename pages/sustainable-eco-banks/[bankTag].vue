@@ -6,12 +6,14 @@
 
         <!-- TODO: create component -->
         <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
-            <NuxtLink 
-                to="/#" 
-                class="col-span-2 button-green w-auto">
-                <span class="font-semibold">{{ `Visit ${details.name}` }}</span>
-            </NuxtLink>
-            <div class="col-span-3 pt-1">
+            <div class="col-span-1 md:col-span-2">
+                <NuxtLink 
+                    to="/#" 
+                    class="button-green w-full">
+                    <span class="font-semibold">{{ `Visit ${details.name}` }}</span>
+                </NuxtLink>
+            </div>
+            <div class="col-span-1 md:col-span-3 pt-1">
                 Have you opened an account with {{ details.name }} since visiting Bank.Green? 
                 <NuxtLink class="font-semibold text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
             </div>
@@ -27,14 +29,16 @@
             :prismic-page-data="prismicPageData"
         />
         
-            <!-- TODO: create component -->
+        <!-- TODO: create component -->
         <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
-            <NuxtLink 
-                to="/#" 
-                class="col-span-2 button-green w-auto">
-                <span class="font-semibold">{{ `Visit ${details.name}` }}</span>
-            </NuxtLink>
-            <div class="col-span-3 pt-1">
+            <div class="col-span-1 md:col-span-2">
+                <NuxtLink 
+                    to="/#" 
+                    class="button-green w-full">
+                    <span class="font-semibold">{{ `Visit ${details.name}` }}</span>
+                </NuxtLink>
+            </div>
+            <div class="col-span-1 md:col-span-3 pt-1">
                 Have you opened an account with {{ details.name }} since visiting Bank.Green? 
                 <NuxtLink class="font-semibold text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
             </div>
