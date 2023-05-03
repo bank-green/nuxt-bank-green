@@ -37,7 +37,7 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
     tabIds: string[];
-    justifyTabNavigation: 'space-between' | 'center' | 'space-around'
+    justifyTabNavigation?: 'space-between' | 'center' | 'space-around'
 }>(), {
     tabIds: () => [],
     justifyTabNavigation: 'center'
@@ -55,10 +55,13 @@ function isActive(tabName: string) {
     return activeTab.value === tabName;
 }
 
-watch(props.tabIds, (newValue, oldValue) => {
-    if (newValue != oldValue && newValue.length && !newValue.includes(activeTab.value))
-        setActive(newValue[0]);
-});
+watch(
+    () => props.tabIds, 
+    (newValue, oldValue) => {
+        if (newValue != oldValue && newValue.length && !newValue.includes(activeTab.value))
+            setActive(newValue[0]);
+    }
+);
 </script>
 <style scoped>
 .Tab_NavItem .Tab_NavItemUnderline {

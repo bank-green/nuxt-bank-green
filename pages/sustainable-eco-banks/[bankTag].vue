@@ -59,12 +59,12 @@ if (!bankTag)
 else {
     const { client } = usePrismic();
 
-    const [ bankDetailsResponse, prismicResponse ] = await Promise.all([
-        getBankDetail(bankTag),
-        client.getByUID("sfipage", bankTag),
-    ]);
-    details.value = bankDetailsResponse;
-    prismicPageData.value = prismicResponse.data;
+    details.value = await getBankDetail(bankTag);
+
+    const prismicResponse = await useAsyncData(`sfipage`, () => 
+        client.getByUID("sfipage", bankTag)
+    );
+    prismicPageData.value = prismicResponse.data.value?.data || null;
 
     useHeadHelper(`${details.value.name} Review and Service Offering - Bank.Green`)
 }
