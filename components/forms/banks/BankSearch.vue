@@ -62,7 +62,7 @@ import ListPicker from '../ListPicker.vue'
 const props = defineProps<{
     disabled: Boolean,
     country: String,
-    modelValue: Object,
+    modelValue: Object | null,
 }>();
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange']);
@@ -84,7 +84,7 @@ onMounted(() => {
     loadBanks();
 });
 
-watch(props.country, async function () {
+watch(() => props.country, async function () {
     await loadBanks();
     await nextTick();
     if ((input.value) && (+new Date() - +pageStart > 15000)) {
@@ -92,7 +92,7 @@ watch(props.country, async function () {
     }
 });
 
-watch(search, function (newValue) {
+watch(() => search, function (newValue) {
     if (props.modelValue && newValue != selectedItem.value) {
         emit('update:modelValue', null);
     }
