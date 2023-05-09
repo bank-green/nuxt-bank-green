@@ -1,8 +1,13 @@
 <template>
     <div class="page bg-sushi-50 space-y-24 pt-32 pb-16">
         <EcoBankHeader
-            :name="details.name" :rating="details.rating" :subtitle="details.subtitle" :ourTake="details.ourTake"
-            :website="details.website" :inheritBrandRating="details.inheritBrandRating" />
+            :name="details.name" 
+            :rating="details.rating" 
+            :subtitle="details.subtitle" 
+            :ourTake="details.ourTake"
+            :website="details.website" 
+            :inheritBrandRating="details.inheritBrandRating" 
+            :institution-credentials="institutionCredentials"/>
 
         <!-- TODO: create component -->
         <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
@@ -20,6 +25,7 @@
         </div>
 
         <EcoBankDetail 
+            :institutionType="institutionType"
             :fromTheWebsite="details.fromTheWebsite" 
             :name="details.name"
             :website="details.website" 
@@ -69,7 +75,20 @@ else {
         client.getByUID("sfipage", bankTag)
     );
     prismicPageData.value = prismicResponse.data.value?.data || null;
-
+    
     useHeadHelper(`${details.value.name} Review and Service Offering - Bank.Green`)
 }
+
+const institutionType : ComputedRef<string | undefined> = computed(() => {
+    const result = 
+        details.value.commentary.institutionType.length &&  
+        details.value.commentary.institutionType[0].name;
+    if (typeof result === 'string')
+        return result.charAt(0).toUpperCase() + result.slice(1);
+    return result;
+});
+
+const institutionCredentials = computed(() =>
+    details.value.commentary.institutionCredentials.map((cred: { name: string; }) => cred.name)
+);
 </script>

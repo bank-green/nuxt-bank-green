@@ -29,16 +29,16 @@
                     <span v-else-if="rating === 'ok'">This bank is ok</span>
                     <span v-else-if="rating === 'great'">This bank is great</span>
                 </div>
-                <div class="flex justify-start items-center gap-6 mt-4">
-                    <img class="h-16 w-auto" 
+                <div class="flex justify-start items-center gap-6 mt-4" v-if="hasInstitutionCredentials">
+                    <img v-if="hasFossilFreeCertification" class="h-16 w-auto" 
                         src="/img/certification/fossil-free-certified.png"
                         alt="Fossil Free Certification" 
                     />
-                    <img class="w-auto" 
+                    <img v-if="hasCertifiedBCorporation" class="w-auto" 
                         src="/img/certification/certified-b-corporation.png"
                         alt="Certified B Corporation" 
                     />
-                    <img class="h-12 w-auto" 
+                    <img v-if="hasBankerforNetZeroCertification" class="h-12 w-auto" 
                         src="/img/certification/alliance/bankers-for-netzero.png"
                         alt="Banker for NetZero" 
                     />
@@ -49,7 +49,7 @@
 </div>
 </template>
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     website: string,
     name: string,
     inheritBrandRating?: {
@@ -58,6 +58,19 @@ defineProps<{
     },
     subtitle: string,
     rating: string,
-    ourTake: string
+    ourTake: string,
+    institutionCredentials: string[],
 }>()
+
+const hasInstitutionCredentials = computed(() => 
+    props.institutionCredentials && props.institutionCredentials.length)
+
+const hasFossilFreeCertification = computed(() => 
+    hasInstitutionCredentials.value && props.institutionCredentials.includes('Fossil Free Certification'));
+
+const hasCertifiedBCorporation = computed(() => 
+    hasInstitutionCredentials.value && props.institutionCredentials.includes('Certified B Corporation'));
+
+const hasBankerforNetZeroCertification = computed(() => 
+    hasInstitutionCredentials.value && props.institutionCredentials.includes('Banker for NetZero'));
 </script>
