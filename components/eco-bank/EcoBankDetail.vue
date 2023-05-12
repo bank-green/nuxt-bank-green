@@ -1,5 +1,5 @@
 <template>
-    <div class="contain space-y-16 md:space-y-24">
+    <div class="contain space-y-8 md:space-y-24">
         <Tab :tab-ids="[ 'key-facts', 'products', 'fees' ]">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
@@ -20,7 +20,7 @@
                         {{ prismicPageData?.founded || 'NIL' }}
                     </p>
                     <p><strong>Serving:</strong>
-                        {{ prismicPageData?.serving || 'NIL' }}
+                        {{ prismicPageData?.serving || '[]' }}
                     </p>
                     <p><strong>Local Branches:</strong>
                         {{ getBankFeature('Local Branches') }}
@@ -38,8 +38,8 @@
                     <p><strong>Credit Cards:</strong>
                         {{ getBankFeature('Credit cards') }}
                     </p>
-                    <p><strong>Mortgages of Loans:</strong>
-                        {{ getBankFeature('Mortgages of Loans') }}
+                    <p><strong>Mortgages or Loans:</strong>
+                        {{ getBankFeature('Mortgages or Loans') }}
                     </p>
                     <p><strong>Business Lending:</strong>
                         {{ getBankFeature('Small business lending') }}

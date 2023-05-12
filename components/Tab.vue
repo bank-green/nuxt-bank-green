@@ -24,7 +24,7 @@
         </li>
     </ul>
     <br/>
-    <div class="space-y-16 md:space-y-0">
+    <div class="space-y-8 md:space-y-0">
         <div 
             v-for="tabId in tabIds"
             :key="tabId"
