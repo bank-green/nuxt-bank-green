@@ -38,25 +38,25 @@
                         v-if="
                             hasCertifiedBCorporation &&
                             prismicDefaultPageData &&
-                            prismicDefaultPageData['institution_credentials-b_impact']"
+                            prismicDefaultPageData[ACCREDIT_MAPPING.B_COPR.Prismic]"
                         class="h-20 width-auto"
-                        :field="prismicDefaultPageData['institution_credentials-b_impact']"
+                        :field="prismicDefaultPageData[ACCREDIT_MAPPING.B_COPR.Prismic]"
                     />
                     <PrismicImage 
                         v-if=" 
                             hasGABV &&
                             prismicDefaultPageData &&
-                            prismicDefaultPageData['institution_credentials-gabv']"
+                            prismicDefaultPageData[ACCREDIT_MAPPING.GABV.Prismic]"
                         class="h-10 width-auto"
-                        :field="prismicDefaultPageData['institution_credentials-gabv']"
+                        :field="prismicDefaultPageData[ACCREDIT_MAPPING.GABV.Prismic]"
                     />
                     <PrismicImage 
                         v-if=" 
                             hasBankerforNetZeroCertification &&
                             prismicDefaultPageData &&
-                            prismicDefaultPageData['institution_credentials-bankers_for_net_zero']"
+                            prismicDefaultPageData[ACCREDIT_MAPPING.NETZERO.Prismic]"
                         class="h-12 width-auto"
-                        :field="prismicDefaultPageData['institution_credentials-bankers_for_net_zero']"
+                        :field="prismicDefaultPageData[ACCREDIT_MAPPING.NETZERO.Prismic]"
                     />
                 </div>
             </div>
@@ -65,11 +65,23 @@
 </div>
 </template>
 <script setup lang="ts">
-const CREDENTIALS = {
-    GABV: "GABV",
-    NETZERO: "Bankers for Net Zero",
-    FOSSIL_FREE: "Fossil Free Certification",
-    B_COPR: "Certified B Corporation"
+const ACCREDIT_MAPPING = {
+    GABV: {
+        Django: "GABV",
+        Prismic: "institution_credentials-gabv"
+    },
+    NETZERO:  {
+        Django: "Bankers for Net Zero",
+        Prismic: "institution_credentials-bankers_for_net_zero"
+    },
+    FOSSIL_FREE:  {
+        Django: "Fossil Free Certification",
+        Prismic: ""
+    },
+    B_COPR:  {
+        Django: "Certified B Corporation",
+        Prismic: 'institution_credentials-b_impact'
+    },
 }
 
 const props = defineProps<{
@@ -90,15 +102,17 @@ const hasInstitutionCredentials : ComputedRef<boolean> = computed(() =>
     props.institutionCredentials && props.institutionCredentials.length > 0)
 
 const hasGABV : ComputedRef<boolean> = computed(() =>
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(CREDENTIALS.GABV)
+    hasInstitutionCredentials.value && 
+    props.institutionCredentials.includes(ACCREDIT_MAPPING.GABV.Django)
     );
 
 const hasFossilFreeCertification : ComputedRef<boolean> = computed(() => 
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(CREDENTIALS.FOSSIL_FREE));
+    hasInstitutionCredentials.value && props.institutionCredentials.includes(ACCREDIT_MAPPING.FOSSIL_FREE.Django));
+
 
 const hasCertifiedBCorporation : ComputedRef<boolean> = computed(() => 
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(CREDENTIALS.B_COPR));
+    hasInstitutionCredentials.value && props.institutionCredentials.includes(ACCREDIT_MAPPING.B_COPR.Django));
 
 const hasBankerforNetZeroCertification : ComputedRef<boolean> = computed(() => 
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(CREDENTIALS.NETZERO));
+    hasInstitutionCredentials.value && props.institutionCredentials.includes(ACCREDIT_MAPPING.NETZERO.Django));
 </script>
