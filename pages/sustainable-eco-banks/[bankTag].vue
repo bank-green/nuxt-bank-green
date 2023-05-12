@@ -70,8 +70,9 @@ else {
 
 const institutionType : ComputedRef<string | undefined> = computed(() => {
     const result = 
-        details.value.commentary.institutionType.length &&  
-        details.value.commentary.institutionType[0].name;
+        (Array.isArray(details.value.commentary.institutionType) && details.value.commentary.institutionType.length)
+            ? details.value.commentary.institutionType[0].name 
+            : undefined;
     return result;
 });
 
