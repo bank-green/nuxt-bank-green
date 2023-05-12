@@ -83,8 +83,6 @@ const institutionType : ComputedRef<string | undefined> = computed(() => {
     const result = 
         details.value.commentary.institutionType.length &&  
         details.value.commentary.institutionType[0].name;
-    if (typeof result === 'string')
-        return result.charAt(0).toUpperCase() + result.slice(1);
     return result;
 });
 
