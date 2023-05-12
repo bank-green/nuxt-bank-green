@@ -38,11 +38,11 @@
                     </p>
                     <p>
                         <strong>Founded: </strong>
-                        {{ prismicPageData?.founded || '' }}
+                        <PrismicText v-if="prismicPageData?.founded" :field="prismicPageData.founded" wrapper="span" fallback="" />
                     </p>
                     <p>
                         <strong>Serving: </strong>
-                        {{ prismicPageData?.serving ? prismicPageData.serving[0].text : '' }}
+                        <PrismicText v-if="prismicPageData?.serving" :field="prismicPageData.serving" wrapper="span" fallback="" />
                     </p>
                     <p><strong>Local Branches: </strong>
                         {{ getBankFeature('Local Branches') }}
