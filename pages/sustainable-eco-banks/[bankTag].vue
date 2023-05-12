@@ -7,7 +7,8 @@
             :ourTake="details.ourTake"
             :website="details.website" 
             :inheritBrandRating="details.inheritBrandRating" 
-            :institutionCredentials="institutionCredentials"/>
+            :institutionCredentials="institutionCredentials"
+            :prismicDefaultPageData="prismicDefaultPageData"/>
 
 
         <EcoBankSwitchSurvey
