@@ -42,7 +42,7 @@
                     </p>
                     <p>
                         <strong>Serving: </strong>
-                        {{ prismicPageData?.serving ? prismicPageData.serving : '' }}
+                        {{ prismicPageData?.serving ? prismicPageData.serving[0].text : '' }}
                     </p>
                     <p><strong>Local Branches: </strong>
                         {{ getBankFeature('Local Branches') }}
