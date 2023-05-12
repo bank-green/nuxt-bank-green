@@ -1,5 +1,26 @@
 <template>
     <div class="contain space-y-8 md:space-y-24">
+        <div v-if="!prismicPageData && fromTheWebsite"
+
+            :class="[
+                'w-full block relative bg-white rounded-xl shadow-soft border py-12 px-8 md:px-16',
+                'contain sm:text-center'
+            ]">
+            <div class="mb-8">
+                <h2 class="font-semibold text-2xl text-gray-800 mb-8 sm:text-4xl sm:mb-4">
+                    {{ `From the website of ${name}` }}
+                </h2>
+                <p class="whitespace-pre-line text-gray-500 sm:text-xl">
+                    {{ fromTheWebsite }}
+                </p>
+            </div>
+            
+            
+            <NuxtLink :to="`https://data.bank.green/update/${tag}`" target="_blank"
+                class="relative z-10 cursor-pointer text-center text-slate-600 hover:underline">
+                Tell us if we got something wrong
+            </NuxtLink>
+        </div>
         <Tab :tabIds="[ 'key-facts', 'products', 'fees' ]">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
@@ -63,7 +84,6 @@
                 </div>
             </template>
         </Tab>
-
         <Tab 
             v-if="prismicPageData"
             :tabIds="['impact', 'security', 'service', 'convenience']" 
@@ -160,6 +180,8 @@ const props = defineProps<{
     prismicPageData: Record<string, any> | null,
     prismicDefaultPageData: Record<string, any> | null,
 }>();
+
+const noPrismicContent : ComputedRef<boolean> = computed(() => !props.prismicPageData);
 
 function getBankFeature(featureName : string, defaultValue : string = "No") {
     const feature = props.bankFeatures.find((feature) =>
