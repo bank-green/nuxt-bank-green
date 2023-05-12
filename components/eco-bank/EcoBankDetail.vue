@@ -37,13 +37,14 @@
                         {{ getBankFeature('Environmental Policy') }}
                     </p>
                     <p>
-                        <strong>Founded:</strong>
-                        {{ prismicPageData?.founded || 'NIL' }}
+                        <strong>Founded: </strong>
+                        {{ prismicPageData?.founded || '' }}
                     </p>
-                    <p><strong>Serving:</strong>
-                        {{ prismicPageData?.serving || '[]' }}
+                    <p>
+                        <strong>Serving: </strong>
+                        {{ prismicPageData?.serving ? prismicPageData.serving : '' }}
                     </p>
-                    <p><strong>Local Branches:</strong>
+                    <p><strong>Local Branches: </strong>
                         {{ getBankFeature('Local Branches') }}
                     </p>
                 </div>
