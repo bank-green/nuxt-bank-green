@@ -1,6 +1,6 @@
 <template>
     <div class="contain space-y-8 md:space-y-24">
-        <Tab :tab-ids="[ 'key-facts', 'products', 'fees' ]">
+        <Tab :tabIds="[ 'key-facts', 'products', 'fees' ]">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
             <template v-slot:fees-nav>Fees</template>
@@ -66,8 +66,8 @@
 
         <Tab 
             v-if="prismicPageData"
-            :tab-ids="['impact', 'security', 'service', 'convenience']" 
-            justify-tab-navigation="space-around">
+            :tabIds="['impact', 'security', 'service', 'convenience']" 
+            justifyTabNavigation="space-around">
             <template v-slot:impact-nav>Impact</template>
             <template v-slot:security-nav>Security</template>
             <template v-slot:service-nav>Service</template>

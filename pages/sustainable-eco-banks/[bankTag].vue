@@ -32,7 +32,7 @@
             :rating="details.rating" 
             :bankFeatures="details.bankFeatures" 
             :tag="details.tag" 
-            :prismic-page-data="prismicPageData"
+            :prismicPageData="prismicPageData"
         />
         
         <!-- TODO: create component -->
