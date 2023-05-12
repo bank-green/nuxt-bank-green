@@ -7,22 +7,13 @@
             :ourTake="details.ourTake"
             :website="details.website" 
             :inheritBrandRating="details.inheritBrandRating" 
-            :institution-credentials="institutionCredentials"/>
+            :institutionCredentials="institutionCredentials"/>
 
-        <!-- TODO: create component -->
-        <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
-            <div class="col-span-1 md:col-span-2">
-                <NuxtLink 
-                    to="/#" 
-                    class="button-green w-full">
-                    <span class="font-semibold">{{ `Visit ${details.name}` }}</span>
-                </NuxtLink>
-            </div>
-            <div class="col-span-1 md:col-span-3 pt-1">
-                Have you opened an account with {{ details.name }} since visiting Bank.Green? 
-                <NuxtLink class="font-semibold text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
-            </div>
-        </div>
+
+        <EcoBankSwitchSurvey
+            :bankName="details.name"
+            :prismicDefaultPageData="prismicDefaultPageData"
+        />
 
         <EcoBankDetail 
             :institutionType="institutionType"
@@ -33,22 +24,13 @@
             :bankFeatures="details.bankFeatures" 
             :tag="details.tag" 
             :prismicPageData="prismicPageData"
+            :prismicDefaultPageData="prismicDefaultPageData"
         />
         
-        <!-- TODO: create component -->
-        <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
-            <div class="col-span-1 md:col-span-2">
-                <NuxtLink 
-                    to="/#" 
-                    class="button-green w-full">
-                    <span class="font-semibold">{{ `Visit ${details.name}` }}</span>
-                </NuxtLink>
-            </div>
-            <div class="col-span-1 md:col-span-3 pt-1">
-                Have you opened an account with {{ details.name }} since visiting Bank.Green? 
-                <NuxtLink class="font-semibold text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
-            </div>
-        </div>
+        <EcoBankSwitchSurvey
+            :bankName="details.name"
+            :prismicDefaultPageData="prismicDefaultPageData"
+        />
     </div>
 </template>
 
@@ -56,6 +38,9 @@
 const details : Ref<any | null> = ref(null);
 const prismicPageData : 
     Ref<Record<string, any> | null> 
+    = ref(null);
+const prismicDefaultPageData :
+    Ref<Record<string, any> | null>
     = ref(null);
 
 // const route = useRoute()
@@ -75,6 +60,10 @@ else {
         client.getByUID("sfipage", bankTag)
     );
     prismicPageData.value = prismicResponse.data.value?.data || null;
+    const prismicDefaultDataResponse = await useAsyncData(`sfidefaults`, () => 
+        client.getByID('ZFpGfhEAACEAuFIf')
+    );
+    prismicDefaultPageData.value = prismicDefaultDataResponse.data.value?.data || null;
     
     useHeadHelper(`${details.value.name} Review and Service Offering - Bank.Green`)
 }

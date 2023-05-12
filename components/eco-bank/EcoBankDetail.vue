@@ -73,28 +73,68 @@
             <template v-slot:service-nav>Service</template>
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
-                <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide space-y-6" 
-                    :field="prismicPageData?.impact" 
-                />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.impact" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']"
+                            alt="impact-image"
+                            :field="prismicDefaultPageData['impact-image']"
+                        />
+                    </div>
+                </div>
             </template>
             <template v-slot:security>
-                <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide space-y-6" 
-                    :field="prismicPageData?.security" 
-                />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.security" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['security-image']"
+                            alt="security-image"
+                            :field="prismicDefaultPageData['security-image']"
+                        />
+                    </div>
+                </div>
             </template>
             <template v-slot:service>
-                <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide space-y-6" 
-                    :field="prismicPageData?.services" 
-                />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.services" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['service-image']"
+                            alt="service-image"
+                            :field="prismicDefaultPageData['service-image']"
+                        />
+                    </div>
+                </div>
             </template>
             <template v-slot:convenience>
-                <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide space-y-6" 
-                    :field="prismicPageData?.convenience" 
-                />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.convenience" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['convenience-image']"
+                            alt="convenience-image"
+                            :field="prismicDefaultPageData['convenience-image']"
+                        />
+                    </div>
+                </div>
             </template>
         </Tab>
     </div>
@@ -117,7 +157,8 @@ const props = defineProps<{
     rating: string,
     bankFeatures: BankFeature[],
     tag: string,
-    prismicPageData: Record<string, any> | null
+    prismicPageData: Record<string, any> | null,
+    prismicDefaultPageData: Record<string, any> | null,
 }>();
 
 function getBankFeature(featureName : string, defaultValue : string = "No") {
