@@ -74,25 +74,25 @@
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
                 <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide" 
+                    class="text-md md:text-lg tracking-wide space-y-6" 
                     :field="prismicPageData?.impact" 
                 />
             </template>
             <template v-slot:security>
                 <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide" 
+                    class="text-md md:text-lg tracking-wide space-y-6" 
                     :field="prismicPageData?.security" 
                 />
             </template>
             <template v-slot:service>
                 <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide" 
+                    class="text-md md:text-lg tracking-wide space-y-6" 
                     :field="prismicPageData?.services" 
                 />
             </template>
             <template v-slot:convenience>
                 <PrismicRichText 
-                    class="text-md md:text-lg tracking-wide" 
+                    class="text-md md:text-lg tracking-wide space-y-6" 
                     :field="prismicPageData?.convenience" 
                 />
             </template>
