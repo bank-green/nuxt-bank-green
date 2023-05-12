@@ -78,6 +78,6 @@ const institutionType : ComputedRef<string | undefined> = computed(() => {
 });
 
 const institutionCredentials = computed(() =>
-    details.value.commentary.institutionCredentials.map((cred: { name: string; }) => cred.name)
+    details.value.commentary.institutionCredentials || []
 );
 </script>

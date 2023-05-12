@@ -34,6 +34,7 @@ const commentaryFields = `{
     }
     institutionCredentials {
         name
+        prismicApiId
     }
   }`
 

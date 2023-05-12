@@ -30,34 +30,23 @@
                     <span v-else-if="rating === 'great'">This bank is great</span>
                 </div>
                 <div class="flex flex-col md:flex-row justify-start items-center gap-6 mt-4" v-if="hasInstitutionCredentials">
-                    <img v-if="hasFossilFreeCertification" class="h-16 w-auto" 
-                        src="/img/certification/fossil-free-certified.png"
-                        alt="Fossil Free Certification" 
-                    />
-                    <PrismicImage 
-                        v-if="
-                            hasCertifiedBCorporation &&
-                            prismicDefaultPageData &&
-                            prismicDefaultPageData[ACCREDIT_MAPPING.B_COPR.Prismic]"
-                        class="h-20 width-auto"
-                        :field="prismicDefaultPageData[ACCREDIT_MAPPING.B_COPR.Prismic]"
-                    />
-                    <PrismicImage 
-                        v-if=" 
-                            hasGABV &&
-                            prismicDefaultPageData &&
-                            prismicDefaultPageData[ACCREDIT_MAPPING.GABV.Prismic]"
-                        class="h-10 width-auto"
-                        :field="prismicDefaultPageData[ACCREDIT_MAPPING.GABV.Prismic]"
-                    />
-                    <PrismicImage 
-                        v-if=" 
-                            hasBankerforNetZeroCertification &&
-                            prismicDefaultPageData &&
-                            prismicDefaultPageData[ACCREDIT_MAPPING.NETZERO.Prismic]"
-                        class="h-12 width-auto"
-                        :field="prismicDefaultPageData[ACCREDIT_MAPPING.NETZERO.Prismic]"
-                    />
+                    <template 
+                        v-for="cred in institutionCredentials"
+                    >
+                        <img v-if="isFossilFreeCertification(cred)"
+                            class="h-16 w-auto" 
+                            src="/img/certification/fossil-free-certified.png"
+                            :alt="cred?.name" 
+                        />
+                         
+                        <PrismicImage 
+                            v-else-if="cred?.prismicApiId &&
+                                prismicDefaultPageData &&
+                                prismicDefaultPageData[cred.prismicApiId]"
+                            class="h-16 md:h-12 w-auto"
+                            :field="prismicDefaultPageData[cred.prismicApiId]"
+                        />
+                    </template>
                 </div>
             </div>
         </div>
@@ -65,23 +54,9 @@
 </div>
 </template>
 <script setup lang="ts">
-const ACCREDIT_MAPPING = {
-    GABV: {
-        Django: "GABV",
-        Prismic: "institution_credentials-gabv"
-    },
-    NETZERO:  {
-        Django: "Bankers for Net Zero",
-        Prismic: "institution_credentials-bankers_for_net_zero"
-    },
-    FOSSIL_FREE:  {
-        Django: "Fossil Free Certification",
-        Prismic: ""
-    },
-    B_COPR:  {
-        Django: "Certified B Corporation",
-        Prismic: 'institution_credentials-b_impact'
-    },
+interface InstitutionCredential {
+    name: string;
+    prismicApiId: string;
 }
 
 const props = defineProps<{
@@ -94,25 +69,15 @@ const props = defineProps<{
     subtitle: string,
     rating: string,
     ourTake: string,
-    institutionCredentials: string[],
+    institutionCredentials: any[],
     prismicDefaultPageData: Record<string, any> | null,
 }>()
 
 const hasInstitutionCredentials : ComputedRef<boolean> = computed(() => 
     props.institutionCredentials && props.institutionCredentials.length > 0)
 
-const hasGABV : ComputedRef<boolean> = computed(() =>
-    hasInstitutionCredentials.value && 
-    props.institutionCredentials.includes(ACCREDIT_MAPPING.GABV.Django)
-    );
 
-const hasFossilFreeCertification : ComputedRef<boolean> = computed(() => 
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(ACCREDIT_MAPPING.FOSSIL_FREE.Django));
-
-
-const hasCertifiedBCorporation : ComputedRef<boolean> = computed(() => 
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(ACCREDIT_MAPPING.B_COPR.Django));
-
-const hasBankerforNetZeroCertification : ComputedRef<boolean> = computed(() => 
-    hasInstitutionCredentials.value && props.institutionCredentials.includes(ACCREDIT_MAPPING.NETZERO.Django));
+const isFossilFreeCertification = (institutionCredential : any) => {
+    return (institutionCredential as InstitutionCredential).name == 'Fossil Free Certification'
+}
 </script>
