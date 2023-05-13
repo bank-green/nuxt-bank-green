@@ -1,7 +1,12 @@
 <template>
     <BankLayoutBadWorst>
         <template #section1>
-            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating" />
+            <BankHeadline 
+                :name="name" 
+                :website="website" 
+                :subtitle="subtitle" 
+                :inheritBrandRating="inheritBrandRating"
+                :prismicFieldSubtitle="bankPage?.data?.subtitle" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
@@ -14,12 +19,11 @@
                 </div>
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
                     <div v-if="header" v-html="header"></div>
-                    <PrismicRichText v-else :field="worstbank?.data.headline" />
+                    <PrismicRichText v-else-if="bankPage?.data" :field="bankPage?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
                     <div v-if="summary" v-html="summary"></div>
-                    <PrismicRichText v-else :field="worstbank?.data.description1" />
-
+                    <PrismicRichText v-else-if="bankPage?.data" :field="bankPage?.data.description1" />
                 </div>
             </div>
         </template>
@@ -30,10 +34,9 @@
         </template>
     </BankLayoutBadWorst>
 </template>
-
-
-
 <script setup lang="ts">
+import { PrismicDocument } from '@prismicio/types'
+
 const props = defineProps<{
     name: string,
     website: string,
@@ -45,14 +48,9 @@ const props = defineProps<{
         name: string,
         tag: string
     },
-    amountFinancedSince2016: string
+    amountFinancedSince2016: string,
+    bankPage: PrismicDocument<Record<string, any>, string, string> | null
 }>()
-
-const { client } = usePrismic();
-
-const { data: worstbank } = await useAsyncData("worstbank", () =>
-    client.getByUID("bankpage", "worstbank")
-);
 
 const formattedTotal = computed(() => props.amountFinancedSince2016 ?? 'large amounts')
 
