@@ -19,10 +19,6 @@
                     <PrismicRichText :field="bankPage?.data.description1" />
                 </div>
 
-                <div v-if="bankPage?.data.subtitle"
-                class="prose sm:prose-lg xl:prose-xl prose-blurb whitespace-pre-wrap mt-1">
-                    <PrismicRichText :field="bankPage.data.subtitle" />
-                </div>
             </div>
             <div
                 class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
@@ -37,8 +33,7 @@
         <template #section2>
             <div class="flex flex-col md:flex-row items-center justify-center pt-8 pb-16">
                 <div class="md:w-1/2 max-w-sm">
-                    <PrismicRichText class="text-lg md:text-2xl tracking-wide mb-4"
-                        :field="bankPage?.data.description2" />
+                    <PrismicRichText class="text-lg md:text-2xl tracking-wide mb-4" :field="bankPage?.data.description2" />
                     <p class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0">
                         Our mission is to encourage as many people as possible to take a
                         stand - to refuse to let their money fuel environmental
