@@ -108,11 +108,6 @@ async function loadBanks() {
     loaded.value = true;
 }
 
-function onKeyDown() {
-    if (search.value.length > 0 && loaded.value)
-        showList();
-}
-
 function showList() {
     isShowing.value = true;
 }
