@@ -41,18 +41,15 @@
     </span>
 </template>
 
-<script>
+<script setup lang="ts">
 import BankIcon from './BankIcon.vue'
-import ClearbitLogo from '../../icons/ClearbitLogo'
+import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
-export default {
-    components: { BankIcon, ClearbitLogo },
-    props: {
-        id: String,
-        name: String,
-        website: String,
-        isSelected: Boolean,
-        isFocused: Boolean,
-    },
-}
+const props = defineProps<{
+    id: String,
+    name: String,
+    website: String,
+    isSelected: Boolean,
+    isFocused?: Boolean,
+}>();
 </script>
