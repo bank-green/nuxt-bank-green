@@ -26,7 +26,8 @@
         </template>
 
         <template #section2>
-            <div v-if="details" class="text-lg md:text-2xl whitespace-pre-line text-gray-900" v-html="details"></div>
+            <PrismicRichText v-if="bankPage?.data?.description2" :field="bankPage.data.description2" />
+            <div v-else-if="details" class="text-lg md:text-2xl whitespace-pre-line text-gray-900" v-html="details"></div>
             <p v-else class="text-lg md:text-2xl whitespace-pre-line text-gray-900" v-text="piggyText"></p>
         </template>
     </BankLayoutBadWorst>
