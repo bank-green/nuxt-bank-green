@@ -23,7 +23,7 @@
                     {{ `Our take on ${name}` }}
                 </div>
                 <div class="text-lg md:text-xl text-gray-500">
-                    <PrismicRichText v-if="prismicOurTake" :field="prismicOurTake" />
+                    <PrismicRichText v-if="prismicOurTake && prismicOurTake.length > 1" :field="prismicOurTake" />
                     <span v-else-if="ourTake" class="">{{
                         ourTake
                     }}</span>
