@@ -54,6 +54,8 @@
 </div>
 </template>
 <script setup lang="ts">
+import { RichTextField } from "@prismicio/types";
+
 interface InstitutionCredential {
     name: string;
     prismicApiId: string;
@@ -71,6 +73,7 @@ const props = defineProps<{
     ourTake: string,
     institutionCredentials: any[],
     prismicDefaultPageData: Record<string, any> | null,
+    prismicOurTake?: RichTextField
 }>()
 
 const hasInstitutionCredentials : ComputedRef<boolean> = computed(() => 

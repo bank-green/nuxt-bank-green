@@ -8,6 +8,7 @@
             :website="details.website" 
             :inheritBrandRating="details.inheritBrandRating" 
             :institutionCredentials="institutionCredentials"
+            :prismicOurTake="prismicPageData?.our_take"
             :prismicDefaultPageData="prismicDefaultPageData"/>
 
 
