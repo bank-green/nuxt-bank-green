@@ -1,27 +1,6 @@
 <template>
     <div class="contain space-y-8 md:space-y-24">
-        <div v-if="!prismicPageData && fromTheWebsite"
-
-            :class="[
-                'w-full block relative bg-white rounded-xl shadow-soft border py-12 px-8 md:px-16',
-                'contain sm:text-center'
-            ]">
-            <div class="mb-8">
-                <h2 class="font-semibold text-2xl text-gray-800 mb-8 sm:text-4xl sm:mb-4">
-                    {{ `From the website of ${name}` }}
-                </h2>
-                <p class="whitespace-pre-line text-gray-500 sm:text-xl">
-                    {{ fromTheWebsite }}
-                </p>
-            </div>
-            
-            
-            <NuxtLink :to="`https://data.bank.green/update/${tag}`" target="_blank"
-                class="relative z-10 cursor-pointer text-center text-slate-600 hover:underline">
-                Tell us if we got something wrong
-            </NuxtLink>
-        </div>
-        <Tab :tabIds="[ 'key-facts', 'products', 'fees' ]">
+        <Tab :tabIds="['key-facts', 'products', 'fees']">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
             <template v-slot:fees-nav>Fees</template>
@@ -38,7 +17,8 @@
                     </p>
                     <p>
                         <strong>Founded: </strong>
-                        <span v-if="prismicPageData?.founded" :field="prismicPageData.founded">{{ prismicPageData.founded }}</span>
+                        <span v-if="prismicPageData?.founded" :field="prismicPageData.founded">{{ prismicPageData.founded
+                        }}</span>
                     </p>
                     <p>
                         <strong>Serving: </strong>
@@ -85,13 +65,10 @@
                 </div>
             </template>
         </Tab>
-        <Tab 
-            v-if="prismicPageData"
-            :tabIds="['impact', 'security', 'service', 'convenience']" 
-            justifyTabNavigation="space-around">
+        <Tab v-if="tabIds.length > 0" :tabIds="tabIds" justifyTabNavigation="space-around">
             <template v-slot:impact-nav>Impact</template>
             <template v-slot:security-nav>Security</template>
-            <template v-slot:service-nav>Service</template>
+            <template v-slot:services-nav>Service</template>
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -125,7 +102,7 @@
                     </div>
                 </div>
             </template>
-            <template v-slot:service>
+            <template v-slot:services>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <PrismicRichText 
                         class="text-md md:text-lg tracking-wide space-y-6" 
@@ -158,6 +135,20 @@
                 </div>
             </template>
         </Tab>
+        <div v-else :class="[
+            'w-full block relative bg-white rounded-xl shadow-soft border py-12 px-8 md:px-16',
+            'contain sm:text-center'
+        ]">
+            <div class="mb-8">
+                <h2 class="font-semibold text-2xl text-gray-800 mb-8 sm:text-4xl sm:mb-4">
+                    {{ `From the website of ${name}` }}
+                </h2>
+                <p class="whitespace-pre-line text-gray-500 sm:text-xl">
+                    {{ fromTheWebsite }}
+                </p>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -182,7 +173,11 @@ const props = defineProps<{
     prismicDefaultPageData: Record<string, any> | null,
 }>();
 
-const noPrismicContent : ComputedRef<boolean> = computed(() => !props.prismicPageData);
+const tabIds = computed(() =>
+    ['impact', 'security', 'services', 'convenience'].filter(tabId =>
+        props?.prismicPageData && props.prismicPageData[tabId] && props.prismicPageData[tabId].length > 0
+    )
+)
 
 function getBankFeature(featureName : string, defaultValue : string = "No") {
     const feature = props.bankFeatures.find((feature) =>
