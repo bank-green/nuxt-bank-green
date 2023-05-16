@@ -17,7 +17,7 @@
                             {{ item.name }}
                         </span>
 
-                        <img v-if="item.fossilFreeAlliance" class="w-12 ml-6" src="/img/certification/certified.png"
+                        <img v-if="item.fossilFreeAlliance" class="w-12 ml-6" src="/img/certification/fossil-free-certified.png"
                             alt="Fossil Free Certification" />
                     </div>
                 </div>

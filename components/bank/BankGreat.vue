@@ -11,7 +11,7 @@
             </div>
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full">
-                    <img v-if="fossilFreeAlliance" class="w-32" src="/img/certification/certified.png"
+                    <img v-if="fossilFreeAlliance" class="w-32" src="/img/certification/fossil-free-certified.png"
                         alt="Fossil Free Certification" />
                 </div>
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">

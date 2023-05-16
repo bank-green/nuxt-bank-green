@@ -1,60 +1,199 @@
 <template>
-    <div class="page">
-        <div class="contain py-16 lg:pt-6 lg:pb-6 sm:text-center">
-            <template v-if="fromTheWebsite">
+    <div class="contain space-y-8 md:space-y-24">
+        <Tab :tabIds="['key-facts', 'products', 'fees']">
+            <template v-slot:key-facts-nav>Key Facts</template>
+            <template v-slot:products-nav>Products</template>
+            <template v-slot:fees-nav>Fees</template>
+            <template v-slot:key-facts>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <p><strong>Type:</strong> 
+                        {{ institutionType || 'Bank' }}
+                    </p>
+                    <p><strong>Mobile Banking:</strong> 
+                        {{ getBankFeature('Mobile banking') }}
+                    </p>
+                    <p><strong>Environmental Policy:</strong> 
+                        {{ getBankFeature('Environmental Policy') }}
+                    </p>
+                    <p>
+                        <strong>Founded: </strong>
+                        <span v-if="prismicPageData?.founded" :field="prismicPageData.founded">{{ prismicPageData.founded
+                        }}</span>
+                    </p>
+                    <p>
+                        <strong>Serving: </strong>
+                        <PrismicText v-if="prismicPageData?.serving" :field="prismicPageData.serving" wrapper="span" fallback="" />
+                    </p>
+                    <p><strong>Local Branches: </strong>
+                        {{ getBankFeature('Local Branches') }}
+                    </p>
+                </div>
+            </template>
+            <template v-slot:products>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <p><strong>Current Accounts:</strong>
+                        {{ getBankFeature('checking') }}
+                    </p>
+                    <p><strong>Savings Accounts:</strong>
+                        {{ getBankFeature('saving') }}
+                    </p>
+                    <p><strong>Credit Cards:</strong>
+                        {{ getBankFeature('Credit cards') }}
+                    </p>
+                    <p><strong>Mortgages or Loans:</strong>
+                        {{ getBankFeature('Mortgages or Loans') }}
+                    </p>
+                    <p><strong>Business Lending:</strong>
+                        {{ getBankFeature('Small business lending') }}
+                    </p>
+                    <p><strong>ISAs:</strong>
+                        {{ getBankFeature('ISAs') }}
+                    </p>
+                </div>
+            </template>
+            <template v-slot:fees>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <p><strong>Overdraft Fee:</strong>
+                        {{ getBankFeature('Overdraft Fee') }}
+                    </p>
+                    <p><strong>Account Maintenaince Fees:</strong>
+                        {{ getInvertedBankFeature('No account maintenance fee') }}
+                    </p>
+                    <p><strong>Free ATM Network:</strong>
+                        {{ getBankFeature('Free ATM network') }}
+                    </p>
+                </div>
+            </template>
+        </Tab>
+        <Tab v-if="tabIds.length > 0" :tabIds="tabIds" justifyTabNavigation="space-around">
+            <template v-slot:impact-nav>Impact</template>
+            <template v-slot:security-nav>Security</template>
+            <template v-slot:services-nav>Service</template>
+            <template v-slot:convenience-nav>Convenience</template>
+            <template v-slot:impact>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.impact" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']"
+                            alt="impact-image"
+                            :field="prismicDefaultPageData['impact-image']"
+                        />
+                    </div>
+                </div>
+            </template>
+            <template v-slot:security>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.security" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['security-image']"
+                            alt="security-image"
+                            :field="prismicDefaultPageData['security-image']"
+                        />
+                    </div>
+                </div>
+            </template>
+            <template v-slot:services>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.services" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['service-image']"
+                            alt="service-image"
+                            :field="prismicDefaultPageData['service-image']"
+                        />
+                    </div>
+                </div>
+            </template>
+            <template v-slot:convenience>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <PrismicRichText 
+                        class="text-md md:text-lg tracking-wide space-y-6" 
+                        :field="prismicPageData?.convenience" 
+                    />
+                    <div class="order-first md:order-last">
+                        <PrismicImage
+                            class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['convenience-image']"
+                            alt="convenience-image"
+                            :field="prismicDefaultPageData['convenience-image']"
+                        />
+                    </div>
+                </div>
+            </template>
+        </Tab>
+        <div v-else :class="[
+            'w-full block relative bg-white rounded-xl shadow-soft border py-12 px-8 md:px-16',
+            'contain sm:text-center'
+        ]">
+            <div class="mb-8">
                 <h2 class="font-semibold text-2xl text-gray-800 mb-8 sm:text-4xl sm:mb-4">
                     {{ `From the website of ${name}` }}
                 </h2>
-                <p class="whitespace-pre-line text-gray-500 sm:text-xl max-w-xl mx-auto">
+                <p class="whitespace-pre-line text-gray-500 sm:text-xl">
                     {{ fromTheWebsite }}
                 </p>
-            </template>
-
-            <EcoBankFeaturesSection :bankFeatures="bankFeatures" class="mt-16 max-w-xl mx-auto text-left mb-5" />
-            <NuxtLink :to="`https://data.bank.green/update/${tag}`" target="_blank"
-                class="relative z-10 cursor-pointer text-center text-slate-600 hover:underline">
-                Tell us if we got something wrong
-            </NuxtLink>
-        </div>
-
-        <Swoosh color="text-blue-100" direction="up" />
-        <div class="bg-blue-100 pt-16">
-            <div class="contain">
-                <div class="max-w-xl mx-auto bg-primary-dark text-gray-100 rounded-xl shadow-xl p-8">
-                    <div class="text-lg lg:text-xl font-medium mb-8 sm:px-16 lg:px-0">
-                        {{ `Counting bank switches is vitally important to us as a movement. Please use this link when
-                                                signing up for ${name}.`
-                        }}
-                    </div>
-                    <NuxtLink :to="website" target="_blank" class="button-green inline-block mx-auto">{{
-                        `Visit ${name}`
-                    }}</NuxtLink>
-                    <NuxtLink to="/pledge"
-                        class="block text-gray-200 hover:underline cursor-pointer font-bold mt-4 text-center">
-                        Pledge to Switch Later
-                    </NuxtLink>
-                    <div class="text-sm lg:text-md font-medium mt-8 sm:px-16 lg:px-0">
-                        Have you opened an account with {{ name }} since visiting Bank.Green? <NuxtLink
-                            class="text-sushi-300 hover:text-sushi-200" to="/impact">Please let us know!</NuxtLink>
-                    </div>
-                </div>
-            </div>
-            <div v-if="rating === 'great'" class="flex items-end justify-end pointer-events-none">
-                <div class="w-11/12">
-                    <LottiePlayer path="/anim/wind_2_without_bg.json" />
-                </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+interface BankFeature {
+    offered: string;
+    feature: {
+        name: string;
+    },
+    details: string | null;
+}
+
+const props = defineProps<{
+    institutionType: string | undefined,
     fromTheWebsite: string,
     name: string,
     website: string,
     rating: string,
-    bankFeatures: any,
-    tag: string
-}>()
+    bankFeatures: BankFeature[],
+    tag: string,
+    prismicPageData: Record<string, any> | null,
+    prismicDefaultPageData: Record<string, any> | null,
+}>();
+
+const tabIds = computed(() =>
+    ['impact', 'security', 'services', 'convenience'].filter(tabId =>
+        props?.prismicPageData && props.prismicPageData[tabId] && props.prismicPageData[tabId].length > 0
+    )
+)
+
+function getBankFeature(featureName : string, defaultValue : string = "No") {
+    const feature = props.bankFeatures.find((feature) =>
+        feature.feature.name === featureName
+    );
+    if (feature)
+        return feature.details || feature.offered;
+    return defaultValue;
+}
+
+function getInvertedBankFeature(featureName: string, defaultValue: string = "No") {
+        const feature = props.bankFeatures.find((feature) =>
+        feature.feature.name === featureName
+    );
+    if (feature)
+        return feature.details || (feature.offered === 'Yes' ? 'No' : 'Yes');
+    return defaultValue;
+}
 </script>

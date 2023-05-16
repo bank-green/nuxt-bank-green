@@ -29,6 +29,13 @@ const commentaryFields = `{
     details,
     fossilFreeAllianceRating,
     showOnSustainableBanksPage
+    institutionType {
+        name
+    }
+    institutionCredentials {
+        name
+        prismicApiId
+    }
   }`
 
 const bankFeaturesFields = `{

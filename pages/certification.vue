@@ -3,7 +3,7 @@
         <div class="bg-sushi-50">
             <div class="page-fade-in contain max-w-4xl xl:max-w-5xl pt-28 pb-16">
                 <article class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl">
-                    <img class="w-48 h-48" src="/img/certification/certified.png" alt="Fossil-free certified badge" />
+                    <img class="w-48 h-48" src="/img/certification/fossil-free-certified.png" alt="Fossil-free certified badge" />
                     <SliceZone :slices="certification?.data.slices ?? []" :components="sliceComps" />
                 </article>
             </div>
