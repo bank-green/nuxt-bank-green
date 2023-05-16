@@ -2,7 +2,8 @@
 <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
     <div class="col-span-1 md:col-span-2">
         <NuxtLink 
-            to="/#" 
+            :to="website" 
+            target="_blank"
             class="button-green w-full">
             <span class="font-semibold">{{ `Visit ${bankName}` }}</span>
         </NuxtLink>
@@ -21,6 +22,7 @@ const BANK_NAME_TEMPLATE = "{{Bank Name}}";
 const props = defineProps<{
     bankName: string | undefined,
     prismicDefaultPageData: Record<string, any> | null,
+    website?: string
 }>();
 
 const switchSurveyText : ComputedRef<RichTextField | null> = computed(() => {

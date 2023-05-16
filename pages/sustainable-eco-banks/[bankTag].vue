@@ -15,6 +15,7 @@
         <EcoBankSwitchSurvey
             :bankName="details.name"
             :prismicDefaultPageData="prismicDefaultPageData"
+            :website="details.website"
         />
 
         <EcoBankDetail 
@@ -32,6 +33,7 @@
         <EcoBankSwitchSurvey
             :bankName="details.name"
             :prismicDefaultPageData="prismicDefaultPageData"
+            :website="details.website"
         />
     </div>
 </template>
