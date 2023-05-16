@@ -38,7 +38,7 @@
                     </p>
                     <p>
                         <strong>Founded: </strong>
-                        <PrismicText v-if="prismicPageData?.founded" :field="prismicPageData.founded" wrapper="span" fallback="" />
+                        <span v-if="prismicPageData?.founded" :field="prismicPageData.founded">{{ prismicPageData.founded }}</span>
                     </p>
                     <p>
                         <strong>Serving: </strong>
