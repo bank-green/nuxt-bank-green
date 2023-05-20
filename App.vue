@@ -8,13 +8,12 @@
         <NuxtPage />
         <NavFooter />
     </div>
-    <Modal v-if="openPledgeModal" v-on:closeModal="openPledgeModal = false" class="z-50 text-white bg-primary-dark">
+    <Modal v-model="openPledgeModal">
         <PledgeSignup @success="openPledgeModal = false"
             :title="'Not ready to switch banks today?\nTake our pledge to move your money when you’re ready.'"
             tag="pledge popup" />
     </Modal>
-    <Modal v-if="openSwitchSurveyModal" v-on:closeModal="openSwitchSurveyModal = false"
-        class="z-50 text-white bg-primary-dark">
+    <Modal v-model="openSwitchSurveyModal">
         <SwitchSurveyExit @success="openSwitchSurveyModal = false"
             :title="'Did you open a green account as a result of visiting our website?'"
             :subtitle="'By letting us know, you will be helping to further the green banking movement and amplifying your impact.'"
