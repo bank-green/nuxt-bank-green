@@ -26,26 +26,16 @@
 
 const openPledgeModal = ref(false)
 const openSwitchSurveyModal = ref(false)
-const exitCount = useCookie('bg.exitCount', { default: () => 0 })
+const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', { default: () => false })
 
 const route = useRoute()
 
 function onExitIntent() {
-    if (exitCount.value > 1) return
-    if (openPledgeModal.value || openSwitchSurveyModal.value) return
-    if (route.path.includes('/sustainable-eco-banks')) return
-
-    if (exitCount.value == 0) {
-        openPledgeModal.value = true
-        exitCount.value++
-        return
-    }
-
-    if (exitCount.value == 1) {
-        if (route.path.includes('/impact')) return
-        openSwitchSurveyModal.value = true
-        exitCount.value++
-    }
+    if (hasUserSeenExitIntentModal.value) return
+    if (openSwitchSurveyModal.value) return
+    if (route.path.includes('/impact')) return
+    openSwitchSurveyModal.value = true
+    hasUserSeenExitIntentModal.value = true
 }
 </script>
 <style>
