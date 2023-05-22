@@ -1,11 +1,7 @@
 <template>
     <BankLayoutBadWorst>
         <template #section1>
-            <BankHeadline 
-                :name="name" 
-                :website="website" 
-                :subtitle="subtitle" 
-                :inheritBrandRating="inheritBrandRating"
+            <BankHeadline :name="name" :website="website" :inheritBrandRating="inheritBrandRating"
                 :prismicFieldSubtitle="bankPage?.data?.subtitle" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
@@ -18,12 +14,10 @@
                 <div class="flex justify-center md:block mb-8 w-full">
                 </div>
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
-                    <div v-if="header" v-html="header"></div>
-                    <PrismicRichText v-else-if="bankPage?.data" :field="bankPage?.data.headline" />
+                    <PrismicRichText v-if="bankPage?.data" :field="bankPage?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
-                    <div v-if="summary" v-html="summary"></div>
-                    <PrismicRichText v-else-if="bankPage?.data" :field="bankPage?.data.description1" />
+                    <PrismicRichText v-if="bankPage?.data" :field="bankPage?.data.description1" />
                 </div>
             </div>
         </template>
@@ -31,7 +25,6 @@
         <template #section2>
             <PrismicRichText v-if="bankPage?.data?.description2 && bankPage.data.description2.length > 0"
                 class="text-lg md:text-2xl whitespace-pre-line text-gray-900" :field="bankPage.data.description2" />
-            <div v-else-if="details" class="text-lg md:text-2xl whitespace-pre-line text-gray-900" v-html="details"></div>
             <p v-else class="text-lg md:text-2xl whitespace-pre-line text-gray-900" v-text="piggyText"></p>
         </template>
     </BankLayoutBadWorst>
@@ -42,20 +35,13 @@ import { PrismicDocument } from '@prismicio/types'
 const props = defineProps<{
     name: string,
     website: string,
-    subtitle: string,
-    header: string,
-    summary: string,
-    details: string
     inheritBrandRating: {
         name: string,
         tag: string
     },
-    amountFinancedSince2016: string,
     bankPage: PrismicDocument<Record<string, any>, string, string> | null
 }>()
 
-const formattedTotal = computed(() => props.amountFinancedSince2016 ?? 'large amounts')
-
 const piggyText =
-    `While you’ve been stashing away money for a house or a weekend get-away, ${props.name} has been using your savings to lend to some very questionable fossil fuel friends.\n\nAnd it's not just a little here and there, we’re talking about ${formattedTotal.value || "hundreds of millions to hundreds of billions of US dollars"} in the 7 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`
+    `While you’ve been stashing away money for a house or a weekend get-away, ${props.name} has been using your savings to lend to some very questionable fossil fuel friends.\n\nAnd it's not just a little here and there, we’re talking about hundreds of millions to hundreds of billions of US dollars in the 7 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`
 </script>

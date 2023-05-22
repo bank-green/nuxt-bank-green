@@ -1,7 +1,8 @@
 <template>
     <BankLayoutGreatOkUnknown>
         <template #section1>
-            <BankHeadline :name="name" :website="website" :subtitle="subtitle" :inheritBrandRating="inheritBrandRating"  :prismicFieldSubtitle="bankPage?.data?.subtitle" />
+            <BankHeadline :name="name" :website="website" :inheritBrandRating="inheritBrandRating"
+                :prismicFieldSubtitle="bankPage?.data?.subtitle" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
@@ -12,12 +13,10 @@
             <div class="col-span-2 md:col-span-1">
                 <div class="flex justify-center md:block mb-8 w-full"></div>
                 <div class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6">
-                    <div v-if="header" v-html="header"></div>
-                    <PrismicRichText v-else :field="bankPage?.data.headline" />
+                    <PrismicRichText :field="bankPage?.data.headline" />
                 </div>
                 <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
-                    <div v-if="summary" v-html="summary"></div>
-                    <PrismicRichText v-else :field="bankPage?.data.description1" />
+                    <PrismicRichText :field="bankPage?.data.description1" />
                 </div>
             </div>
             <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
@@ -66,13 +65,10 @@ import { PrismicDocument } from "@prismicio/types";
 const props = defineProps<{
     name: string,
     website: string,
-    subtitle: string,
     inheritBrandRating: {
         tag: string,
         name: string
     },
-    header: string,
-    summary: string,
     bankPage: PrismicDocument<Record<string, any>, string, string> | null,
 }>()
 </script>
