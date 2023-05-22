@@ -1,49 +1,28 @@
 <template>
     <div class="page bg-sushi-50 space-y-8 md:space-y-24 pt-32 pb-16">
-        <EcoBankHeader
-            :name="details.name" 
-            :rating="details.rating" 
-            :subtitle="details.subtitle" 
-            :ourTake="details.ourTake"
-            :website="details.website" 
-            :inheritBrandRating="details.inheritBrandRating" 
-            :institutionCredentials="institutionCredentials"
-            :prismicOurTake="prismicPageData?.our_take"
-            :prismicDefaultPageData="prismicDefaultPageData"/>
+        <EcoBankHeader :name="details.name" :rating="details.rating" :website="details.website"
+            :inheritBrandRating="details.inheritBrandRating" :institutionCredentials="institutionCredentials"
+            :prismicOurTake="prismicPageData?.our_take" :prismicDefaultPageData="prismicDefaultPageData" />
 
 
-        <EcoBankSwitchSurvey
-            :bankName="details.name"
-            :prismicDefaultPageData="prismicDefaultPageData"
-            :website="details.website"
-        />
+        <EcoBankSwitchSurvey :bankName="details.name" :prismicDefaultPageData="prismicDefaultPageData"
+            :website="details.website" />
 
-        <EcoBankDetail 
-            :institutionType="institutionType"
-            :fromTheWebsite="details.fromTheWebsite" 
-            :name="details.name"
-            :website="details.website" 
-            :rating="details.rating" 
-            :bankFeatures="details.bankFeatures" 
-            :tag="details.tag" 
-            :prismicPageData="prismicPageData"
-            :prismicDefaultPageData="prismicDefaultPageData"
-        />
-        
-        <EcoBankSwitchSurvey
-            :bankName="details.name"
-            :prismicDefaultPageData="prismicDefaultPageData"
-            :website="details.website"
-        />
+        <EcoBankDetail :institutionType="institutionType" :fromTheWebsite="details.fromTheWebsite" :name="details.name"
+            :website="details.website" :rating="details.rating" :bankFeatures="details.bankFeatures" :tag="details.tag"
+            :prismicPageData="prismicPageData" :prismicDefaultPageData="prismicDefaultPageData" />
+
+        <EcoBankSwitchSurvey :bankName="details.name" :prismicDefaultPageData="prismicDefaultPageData"
+            :website="details.website" />
     </div>
 </template>
 
 <script setup lang="ts">
-const details : Ref<any | null> = ref(null);
-const prismicPageData : 
-    Ref<Record<string, any> | null> 
+const details: Ref<any | null> = ref(null);
+const prismicPageData:
+    Ref<Record<string, any> | null>
     = ref(null);
-const prismicDefaultPageData :
+const prismicDefaultPageData:
     Ref<Record<string, any> | null>
     = ref(null);
 
@@ -60,22 +39,22 @@ else {
 
     details.value = await getBankDetail(bankTag);
 
-    const prismicResponse = await useAsyncData(`sfipage`, () => 
+    const prismicResponse = await useAsyncData(`sfipage`, () =>
         client.getByUID("sfipage", bankTag)
     );
     prismicPageData.value = prismicResponse.data.value?.data || null;
-    const prismicDefaultDataResponse = await useAsyncData(`sfidefaults`, () => 
+    const prismicDefaultDataResponse = await useAsyncData(`sfidefaults`, () =>
         client.getByID('ZFpGfhEAACEAuFIf')
     );
     prismicDefaultPageData.value = prismicDefaultDataResponse.data.value?.data || null;
-    
+
     useHeadHelper(`${details.value.name} Review and Service Offering - Bank.Green`)
 }
 
-const institutionType : ComputedRef<string | undefined> = computed(() => {
-    const result = 
+const institutionType: ComputedRef<string | undefined> = computed(() => {
+    const result =
         (Array.isArray(details.value.commentary.institutionType) && details.value.commentary.institutionType.length)
-            ? details.value.commentary.institutionType[0].name 
+            ? details.value.commentary.institutionType[0].name
             : undefined;
     return result;
 });
