@@ -34,14 +34,12 @@
     </span>
 </template>
 
-<script>
+<script setup lang="ts">
 import Flag from '../../Flag.vue'
-export default {
-    components: { Flag },
-    props: {
-        id: String,
-        title: String,
-        isSelected: Boolean,
-    },
-}
+
+defineProps<{
+    id: string;
+    title: string;
+    isSelected: boolean;
+}>();
 </script>
