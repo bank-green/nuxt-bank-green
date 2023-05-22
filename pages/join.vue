@@ -31,25 +31,15 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import CheckList from '@/components/CheckList.vue'
-import SignupBox from '@/components/forms/SignupBox'
+import SignupBox from '@/components/forms/SignupBox.vue'
 
+useHeadHelper('Join the Money Movement - Bank.Green', 'Join our consumer action community to attend our Zoom workshops to take on fossil funding banks and discover other ways to divest from fossil fuels.')
 
-
-export default {
-    components: { CheckList, SignupBox },
-    setup() {
-        useHeadHelper('Join the Money Movement - Bank.Green', 'Join our consumer action community to attend our Zoom workshops to take on fossil funding banks and discover other ways to divest from fossil fuels.')
-    },
-    computed: {
-        checkList() {
-            return [
-                "Learn about the issues via our blog updates",
-                "Join our campaigns to take action against fossil finance",
-                "Discover other ways to divest from fossil fuels",
-            ]
-        },
-    },
-}
+const checkList = computed(() => [
+    "Learn about the issues via our blog updates",
+    "Join our campaigns to take action against fossil finance",
+    "Discover other ways to divest from fossil fuels",
+]);
 </script>
