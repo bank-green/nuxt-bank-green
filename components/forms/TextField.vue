@@ -23,7 +23,7 @@
             :aria-invalid="!!warning"
             :required="required"
             :disabled="disabled"
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="onInput"
         />
         <input
             v-else
@@ -40,56 +40,56 @@
             :aria-invalid="!!warning"
             :required="required"
             :disabled="disabled"
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="onInput"
         />
     </BaseField>
 </template>
 
-<script>
+<script setup lang="ts">
 import BaseField from './BaseField.vue'
 
-export default {
-    components: {
-        BaseField,
-    },
-    props: {
-        modelValue: [Number, String],
-        title: String,
-        description: String,
-        name: { type: String, required: true },
-        placeholder: String,
-        rightLabel: [Object, String],
-        currencyLabel: String,
-        typeLabel: String,
-        type: { type: String, default: 'text' },
-        step: String,
-        autocomplete: String,
-        rows: [Number, String],
-        required: Boolean,
-        disabled: Boolean,
-        warning: [String, Boolean],
-        dark: Boolean,
-    },
-    computed: {
-        inputClasses() {
-            if (this.disabled) {
-                return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
-            }
-            if (this.warning) {
-                return 'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
-            }
-            if (this.currencyLabel && this.typeLabel) {
-                return 'pl-7 pr-12'
-            }
-            return 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'
-        },
-    },
-    methods: {
-        focus() {
-            if (this.$refs.input) {
-                this.$refs.input.focus()
-            }
-        },
-    },
+const props = withDefaults(defineProps<{
+    modelValue: string | number;
+    title: string;
+    description: string;
+    name?: string;
+    placeholder: string;
+    rightLabel: string | object;
+    currencyLabel: string;
+    typeLabel: string;
+    type: string;
+    step: string;
+    autocomplete: string;
+    rows: string | number;
+    required: boolean;
+    disabled: boolean;
+    warning: string | boolean;
+    dark: boolean;
+}>(), {
+    type: 'text'
+});
+
+const emit = defineEmits([ 'update:modelValue']);
+
+const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null);
+
+const inputClasses = computed(() => {
+    if (props.disabled) {
+        return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
+    }
+    if (props.warning) {
+        return 'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
+    }
+    if (props.currencyLabel && props.typeLabel) {
+        return 'pl-7 pr-12'
+    }
+    return 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'
+});
+
+const focus = () => {
+    inputRef.value?.focus();
+}
+const onInput = ($event : Event) => {
+    emit('update:modelValue', ($event.target as HTMLInputElement).value)
 }
 </script>
