@@ -22,26 +22,24 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        modelValue: Boolean,
-        name: String,
-        warning: String,
-        dark: Boolean,
-    },
-    computed: {
-        labelClasses() {
-            if (this.dark) {
-                return 'text-gray-200'
-            }
-            return 'text-gray-800'
-        },
-    },
-    methods: {
-        onUpdate(ev) {
-            this.$emit('update:modelValue', ev.target.checked)
-        },
-    },
+<script setup lang="ts">
+const props = defineProps<{
+    modelValue: boolean;
+    name: string;
+    warning: string;
+    dark: boolean;
+}>();
+
+const emit = defineEmits([ 'update:modelValue' ]);
+
+const labelClasses = computed(() => {
+    if (props.dark) {
+        return 'text-gray-200'
+    }
+    return 'text-gray-800'
+});
+
+function onUpdate(ev : Event) {
+    emit('update:modelValue', (ev.target as HTMLInputElement).checked)
 }
 </script>

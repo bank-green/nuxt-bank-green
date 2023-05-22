@@ -71,26 +71,22 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        title: String,
-        description: String,
-        name: { type: String, required: true },
-        showWarning: [String, Boolean],
-        typeLabel: String,
-        currencyLabel: String,
-        rightLabel: [Object, String],
-        dark: Boolean,
-    },
+<script setup lang="ts">
+const props = defineProps<{
+    title?: string;
+    description?: string;
+    name: string;
+    showWarning?: string | boolean;
+    typeLabel?: string;
+    currencyLabel?: string;
+    rightLabel?: string | object;
+    dark?: boolean;
+}>();
 
-    computed: {
-        labelClasses() {
-            if (this.dark) {
-                return 'text-blue-100 text-opacity-75 font-medium'
-            }
-            return 'text-gray-600 font-semibold'
-        },
-    },
-}
+const labelClasses = compute(() {
+    if (props.dark) {
+        return 'text-blue-100 text-opacity-75 font-medium'
+    }
+    return 'text-gray-600 font-semibold'
+});
 </script>
