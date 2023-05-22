@@ -27,22 +27,39 @@ export async function useBankPage(bankTag, bankDetails) {
     const { client } = usePrismic();
     const type = "bankpage";
     const rating = getBankRating(unref(bankDetails));
-    const bankPage = ref(null);
+    let bankPage = null
 
     try {
-        const [ customBankResponse, bankRatingResponse ] = await Promise.all([
+        const [customBankResponse, bankRatingResponse] = await Promise.all([
             useAsyncData(bankTag, () => client.getByUID(type, bankTag)),
             useAsyncData(rating, () => client.getByUID(type, rating)),
         ]);
 
-        if (isValidResponse(customBankResponse)) {
-            bankPage.value = customBankResponse.data.value;
-        } else if (isValidResponse(bankRatingResponse)) {
-            bankPage.value = bankRatingResponse.data.value;
+        // check if we get responses at all
+        if (!isValidResponse(customBankResponse)) {
+            if (!isValidResponse(bankRatingResponse)) {
+                throw new Error(`could not get bankPage for ${bankTag}`)
+            }
+            bankPage = bankRatingResponse
+            return { bankPage }
         }
+
+        // override default fields if available
+        bankPage = bankRatingResponse.data.value
+        let custom = customBankResponse.data.value
+
+        if (custom.data.headline.length > 0) bankPage.data.headline = custom.data.headline
+        if (custom.data.subtitle.length > 0) bankPage.data.subtitle = custom.data.subtitle
+        if (custom.data.description1.length > 0) bankPage.data.description1 = custom.data.description1
+        if (custom.data.description2.length > 0) bankPage.data.description2 = custom.data.description2
+        if (custom.data.description3.length > 0) bankPage.data.description3 = custom.data.description3
+        if (custom.data.seo_title) bankPage.data.seo_title = custom.data.seo_title
+        if (custom.data.seo_description) bankPage.data.seo_description = custom.data.seo_description
+
+        return { bankPage }
     }
     catch (e) {
         console.log(e);
+        return { bankPage: null }
     }
-    return { bankPage };
 }
