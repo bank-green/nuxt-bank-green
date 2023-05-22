@@ -40,71 +40,69 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 
-export default {
-    emits: ['success'],
-    props: {
-        tag: { type: String, default: 'signupbox' },
-        successRedirectURL: { type: String, default: '/thanks' },
-        details: Object,
-        title: String,
-        prefill: { type: Object, default: () => ({}) },
-    },
-    components: {
-        CheckboxSection,
-        TextField,
-    },
-    setup(props) {
-        const details = toRef(props, 'details')
-        const extra = computed(() => {
-            if (!details.value) {
-                return {}
-            }
-            return {
-                bank: details.value.tag,
-                bankDisplayName: details.value.name,
-                rating: details.value.rating,
-                country: details.value.country,
-                dirty_deal_1: details.value['dirty deal 1'],
-                dirty_deal_2: details.value['dirty deal 2'],
-            }
-        })
+// TODO: manage in separate file
+interface DetailsInterface {
+    tag: string;
+    name: string;
+    rating: string | number | null;
+    country: string;
+    'dirty deal 1': any;
+    'dirty deal 2': any;
+}
 
-        const {
-            firstName,
-            email,
-            isAgreeTerms,
-            isAgreeMarketing,
-            warningsMap,
-            send,
-            busy,
-        } = useContactForm(
-            props.tag,
-            ['email', 'isAgreeTerms', 'isAgreeMarketing'],
-            extra,
-            toRef(props, 'prefill')
-        )
+const props = withDefaults(defineProps<{
+    tag: string;
+    successRedirectURL: string;
+    details: DetailsInterface | null;
+    title: string;
+    prefill: Object;
+}>(), {
+    tag: 'signupbox',
+    successRedirectURL: '/thanks',
+    prefill: () => ({}),
+});
 
-        return {
-            firstName,
-            email,
-            isAgreeTerms,
-            isAgreeMarketing,
-            warningsMap,
-            send,
-            busy,
-        }
-    },
-    methods: {
-        async submit() {
-            if (await this.send()) {
-                this.$emit('success')
-                this.$router.push(this.successRedirectURL)
-            }
-        },
-    },
+const emit = defineEmits([ 'success']);
+
+const router = useRouter();
+
+const extra = computed(() => {
+    if (!props.details) {
+        return {}
+    }
+    return {
+        bank: props.details.tag,
+        bankDisplayName: props.details.name,
+        rating: props.details.rating,
+        country: props.details.country,
+        dirty_deal_1: props.details['dirty deal 1'],
+        dirty_deal_2: props.details['dirty deal 2'],
+    }
+})
+
+const {
+    firstName,
+    email,
+    isAgreeTerms,
+    isAgreeMarketing,
+    warningsMap,
+    send,
+    busy,
+} = useContactForm(
+    props.tag,
+    ['email', 'isAgreeTerms', 'isAgreeMarketing'],
+    extra,
+    toRef(props, 'prefill')
+)
+
+const submit = async () => {
+    if (await send()) {
+        emit('success')
+        router.push(props.successRedirectURL)
+    }
 }
 </script>

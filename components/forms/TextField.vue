@@ -50,23 +50,36 @@ import BaseField from './BaseField.vue'
 
 const props = withDefaults(defineProps<{
     modelValue: string | number;
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     name?: string;
-    placeholder: string;
-    rightLabel: string | object;
-    currencyLabel: string;
-    typeLabel: string;
-    type: string;
-    step: string;
-    autocomplete: string;
-    rows: string | number;
-    required: boolean;
-    disabled: boolean;
-    warning: string | boolean;
-    dark: boolean;
+    placeholder?: string;
+    rightLabel?: string | object;
+    currencyLabel?: string;
+    typeLabel?: string;
+    type?: string;
+    step?: string;
+    autocomplete?: string | undefined;
+    rows?: string | number;
+    required?: boolean;
+    disabled?: boolean;
+    warning?: string | boolean;
+    dark?: boolean;
 }>(), {
-    type: 'text'
+    title: '',
+    description: '',
+    name: '',
+    placeholder: '',
+    rightLabel: '',
+    currencyLabel: '',
+    typeLabel: '',
+    type: 'text',
+    step: '',
+    rows: '',
+    required: false,
+    disabled: false,
+    warning: false,
+    dark: false,
 });
 
 const emit = defineEmits([ 'update:modelValue']);
