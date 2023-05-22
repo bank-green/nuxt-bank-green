@@ -29,99 +29,89 @@
     </ClientOnly>
 </template>
 
-<script>
+<script setup lang="ts">
 
 /**
  * Note: This might have issues displaying when the src file contains spaces! eg "Some file.png" will not work
  */
-export default {
-    props: {
-        src: String,
-        imgClass: [String, Array],
-        useImageTag: { type: Boolean, default: false },
-        width: [String, Number],
-        height: [String, Number],
-        srcset: String,
-        skipObserver: { type: Boolean, default: false },
-        alt: { type: String, default: '' },
-    },
-    data() {
-        return {
-            useTransition: true,
-            observer: null,
-            hasBeenInViewport: false,
-        }
-    },
-    computed: {
-        srcsetOptions() {
-            return getSrcSet(this.srcset, this.src)
-        },
-        srcsetOptionsWebP() {
-            return getSrcSet(this.srcset, this.src, 'webp')
-        },
-        currentSrc() {
-            return imageCacheService.state.imageLoaded[this.src]
-        },
-        loaded() {
-            return !!this.currentSrc
-        },
-        bgStyle() {
-            return { backgroundImage: `url(${this.currentSrc})` }
-        },
-    },
-    created() {
-        if (this.loaded || this.useImageTag) {
-            this.useTransition = false
-        }
+const props = withDefaults(defineProps<{
+    src: string;
+    imgClass?: string | string[];
+    useImageTag?: boolean;
+    width?: string | number;
+    height?: string | number;
+    srcset?: string;
+    skipObserver?: boolean;
+    alt?: string;
+}>(), {
+    useImageTag: false,
+    skipObserver: false,
+    alt: ''
+});
 
-        if (this.loaded || this.skipObserver || this.useImageTag) {
-            this.hasBeenInViewport = true
-        }
-    },
-    mounted() {
-        if (!('IntersectionObserver' in window)) {
-            // no support for IntersectionObserver, just show right away, instead of loading polyfills
-            this.hasBeenInViewport = true
-            return
-        }
+const useTransition = ref(true);
+const img = ref<InstanceType<typeof HTMLImageElement>>();
+const observer = ref<InstanceType<typeof HTMLSpanElement>>();
+const intersectionObserver = ref<IntersectionObserver | null>(null);
+const hasBeenInViewport = ref(false);
 
-        if (this.hasBeenInViewport) {
-            return
-        }
+const srcsetOptions = computed(() => 
+    getSrcSet(props.srcset, props.src)
+);
 
-        if (this.$refs.observer) {
-            this.observer = new IntersectionObserver(
-                entries => {
-                    const image = entries[0]
-                    if (image.isIntersecting) {
-                        this.hasBeenInViewport = true
-                        if (this.observer) {
-                            this.observer.disconnect()
-                        }
+const srcsetOptionsWebP = computed(() =>
+    getSrcSet(props.srcset, props.src, 'webp')
+);
+const currentSrc = computed<string>(() => 
+    imageCacheService.state.imageLoaded[props.src]
+);
+const loaded = computed(() => !!currentSrc.value);
+
+const bgStyle = computed(() => ({ backgroundImage: `url(${currentSrc.value})` }));
+
+onMounted(() => {
+    if (!('IntersectionObserver' in window)) {
+        // no support for IntersectionObserver, just show right away, instead of loading polyfills
+        hasBeenInViewport.value = true
+        return
+    }
+
+    if (hasBeenInViewport.value) {
+        return
+    }
+
+    if (observer.value) {
+        intersectionObserver.value = new IntersectionObserver(
+            entries => {
+                const image = entries[0]
+                if (image.isIntersecting) {
+                    hasBeenInViewport.value = true
+                    if (intersectionObserver.value) {
+                        intersectionObserver.value.disconnect()
                     }
-                },
-                { rootMargin: '100px' }
-            )
-            this.observer.observe(this.$refs.observer)
-        } else {
-            this.hasBeenInViewport = true
-        }
-    },
-    unmounted() {
-        if (this.observer) {
-            this.observer.disconnect()
-        }
-    },
-    methods: {
-        onLoad() {
-            if (process.browser && this.srcsetOptions && this.$refs.img) {
-                // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentSrc
-                const currentSrc = this.$refs.img.currentSrc // the actual src from srcset
-                imageCacheService.setImageLoaded(this.src, currentSrc)
-                return
-            }
-            imageCacheService.setImageLoaded(this.src)
-        },
-    },
+                }
+            },
+            { rootMargin: '100px' }
+        )
+        intersectionObserver.value.observe(observer.value)
+    } else {
+        hasBeenInViewport.value = true
+    }
+});
+
+onUnmounted(() => {
+    if (intersectionObserver.value) {
+        intersectionObserver.value.disconnect()
+    }
+})
+
+function onLoad() {
+    if (process.browser && srcsetOptions.value && img.value) {
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentSrc
+        const currentSrc = img.value.currentSrc // the actual src from srcset
+        imageCacheService.setImageLoaded(props.src, currentSrc)
+        return
+    }
+    imageCacheService.setImageLoaded(props.src)
 }
 </script>
