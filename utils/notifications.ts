@@ -1,21 +1,19 @@
 import { reactive } from 'vue'
 
-/**
- * @typedef Notification
- * @prop { 'lock-closed'|'x-circle'|'check'|'wave' } icon hard coded icons for now
- * @prop { string } title
- * @prop { string } description
- */
+export interface NotificationInterface {
+    icon: 'lock-closed'|'x-circle'|'check'|'wave';
+    title: String;
+    description: String;
+}
 
 const store = {
-    state: reactive({
+    state: reactive<{
+        notifications: Array<NotificationInterface>
+    }>({
         notifications: [],
     }),
 
-    /**
-     * @param {Notification} notif 
-     */
-    addNotification(notif) {
+    addNotification(notif : NotificationInterface) {
         this.state.notifications.push(notif)
         if (this.state.notifications.length > 3) {
             this.state.notifications.shift()
@@ -25,10 +23,7 @@ const store = {
         }, 6000)
     },
 
-    /**
-     * @param {Notification} notif
-     */
-    closeNotification(notif) {
+    closeNotification(notif : NotificationInterface) {
         const index = this.state.notifications.indexOf(notif)
         if (index > -1) {
             this.state.notifications.splice(index, 1)

@@ -7,7 +7,7 @@
             enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
             leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100"
             leave-to-class="opacity-0" tag="div" class="max-w-sm w-full">
-            <div v-for="(notif, index) in notifications" :key="`notif_${index}`"
+            <div v-for="(notif, index) in computedNotifications" :key="`notif_${index}`"
                 class="mb-2 bg-white shadow-lg rounded-lg pointer-events-auto">
                 <div class="rounded-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div class="p-4">
@@ -57,13 +57,14 @@
     </div>
 </template>
 
-<script>
-export default {
-    computed: {
-        notifications: () => notifications.state.notifications,
-    },
-    methods: {
-        closeNotification: (notif) => notifications.closeNotification(notif),
-    },
+<script setup lang="ts">
+import { NotificationInterface } from '~~/utils/notifications';
+
+const computedNotifications = computed(() => 
+    notifications.state.notifications
+);
+
+const closeNotification = (notif : NotificationInterface) =>  {
+    notifications.closeNotification(notif)
 }
 </script>
