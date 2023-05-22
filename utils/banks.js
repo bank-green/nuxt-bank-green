@@ -20,13 +20,8 @@ const commentaryFields = `{
         name
     }
     fromTheWebsite,
-    ourTake,
     amountFinancedSince2016,
     fossilFreeAlliance,
-    subtitle,
-    header,
-    summary,
-    details,
     fossilFreeAllianceRating,
     showOnSustainableBanksPage
     institutionType {
