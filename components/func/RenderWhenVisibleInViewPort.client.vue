@@ -9,80 +9,72 @@
     </transition>
 </template>
 
-<script>
+<script setup lang="ts">
 /**
  * Mounts the slot when it is visible in viewport
  * Renders some whitespace with a placeholder width/height if not visibile
  */
-export default {
-    props: {
-        placeholderWidth: Number,
-        placeholderHeight: Number,
-        options: {
-            type: Object, // {root: HTMLElement, rootMargin: string, threshold: number | number[]}
-            default: function () {
-                return {}
-            },
-        },
-    },
-    data() {
-        return {
-            observer: null,
-            hasBeenInViewport: false,
-        }
-    },
-    computed: {
-        styles() {
-            if (this.hasBeenInViewport) {
-                return
-            }
+const props = withDefaults(defineProps<{
+    placeholderWidth?: number;
+    placeholderHeight?: number;
+    options?: any
+}>(), {
+    options: () => ({})
+});
 
-            return {
-                width: this.placeholderWidth,
-                height: this.placeholderHeight,
-                opacity: 0,
-            }
-        },
-    },
-    mounted() {
-        if (!('IntersectionObserver' in window)) {
-            // no support for IntersectionObserver, just show right away, instead of loading polyfills
-            this.hasBeenInViewport = true
-            return
-        }
+const intersectionObserver = ref<IntersectionObserver | null>(null);
+const root = ref<InstanceType<typeof HTMLElement>>();
+const observer = ref<InstanceType<typeof HTMLElement>>();
+const hasBeenInViewport = ref(false);
 
-        if (this.hasBeenInViewport) {
-            return
-        }
+const styles = computed(() => {
+    if (hasBeenInViewport.value) 
+        return;
+    return {
+        width: props.placeholderWidth,
+        height: props.placeholderHeight,
+        opacity: 0,
+    }
+});
 
-        if (this.$refs.observer) {
-            this.observer = new window.IntersectionObserver(
-                (entries) => {
-                    const image = entries[0]
-                    if (image.intersectionRatio > 0) {
-                        this.hasBeenInViewport = true
-                        if (this.observer) {
-                            this.observer.disconnect()
-                        }
+onMounted(() => {
+    if (!('IntersectionObserver' in window)) {
+        // no support for IntersectionObserver, just show right away, instead of loading polyfills
+        hasBeenInViewport.value = true
+        return
+    }
+
+    if (hasBeenInViewport.value)
+        return;
+
+    if (observer.value && root.value) {
+        intersectionObserver.value = new window.IntersectionObserver(
+            (entries) => {
+                const image = entries[0]
+                if (image.intersectionRatio > 0) {
+                    hasBeenInViewport.value = true
+                    if (intersectionObserver.value) {
+                        intersectionObserver.value.disconnect()
                     }
-                },
-                {
-                    root: null,
-                    rootMargin: '0px 0px 0px 0px',
-                    threshold: 0,
-                    ...this.options,
                 }
-            )
+            },
+            {
+                root: null,
+                rootMargin: '0px 0px 0px 0px',
+                threshold: 0,
+                ...props.options,
+            }
+        )
 
-            this.observer.observe(this.$el)
-        } else {
-            this.hasBeenInViewport = true
-        }
-    },
-    unmounted() {
-        if (this.observer) {
-            this.observer.disconnect()
-        }
-    },
-}
+        intersectionObserver.value.observe(observer.value)
+    } else {
+        hasBeenInViewport.value = true
+    }
+});
+
+onUnmounted(() => {
+    if (intersectionObserver.value) {
+        intersectionObserver.value.disconnect();
+    }
+})
 </script>
