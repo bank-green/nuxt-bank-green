@@ -14,10 +14,7 @@
             tag="pledge popup" />
     </Modal>
     <Modal v-model="openSwitchSurveyModal">
-        <SwitchSurveyExit @success="openSwitchSurveyModal = false"
-            :title="'Did you open a green account as a result of visiting our website?'"
-            :subtitle="'By letting us know, you will be helping to further the green banking movement and amplifying your impact.'"
-            tag="popup" />
+        <SwitchSurveyExit @success="openSwitchSurveyModal = false" tag="popup" />
     </Modal>
     <NotificationPanel />
 </template>
