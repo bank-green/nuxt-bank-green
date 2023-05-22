@@ -8,17 +8,13 @@
         <NuxtPage />
         <NavFooter />
     </div>
-    <Modal v-if="openPledgeModal" v-on:closeModal="openPledgeModal = false" class="z-50 text-white bg-primary-dark">
+    <Modal v-model="openPledgeModal">
         <PledgeSignup @success="openPledgeModal = false"
             :title="'Not ready to switch banks today?\nTake our pledge to move your money when you’re ready.'"
             tag="pledge popup" />
     </Modal>
-    <Modal v-if="openSwitchSurveyModal" v-on:closeModal="openSwitchSurveyModal = false"
-        class="z-50 text-white bg-primary-dark">
-        <SwitchSurveyExit @success="openSwitchSurveyModal = false"
-            :title="'Did you open a green account as a result of visiting our website?'"
-            :subtitle="'By letting us know, you will be helping to further the green banking movement and amplifying your impact.'"
-            tag="popup" />
+    <Modal v-model="openSwitchSurveyModal">
+        <SwitchSurveyExit @success="openSwitchSurveyModal = false" tag="popup" />
     </Modal>
     <NotificationPanel />
 </template>
@@ -27,26 +23,16 @@
 
 const openPledgeModal = ref(false)
 const openSwitchSurveyModal = ref(false)
-const exitCount = useCookie('bg.exitCount', { default: () => 0 })
+const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', { default: () => false })
 
 const route = useRoute()
 
 function onExitIntent() {
-    if (exitCount.value > 1) return
-    if (openPledgeModal.value || openSwitchSurveyModal.value) return
-    if (route.path.includes('/sustainable-eco-banks')) return
-
-    if (exitCount.value == 0) {
-        openPledgeModal.value = true
-        exitCount.value++
-        return
-    }
-
-    if (exitCount.value == 1) {
-        if (route.path.includes('/impact')) return
-        openSwitchSurveyModal.value = true
-        exitCount.value++
-    }
+    if (hasUserSeenExitIntentModal.value) return
+    if (openSwitchSurveyModal.value) return
+    if (route.path.includes('/impact')) return
+    openSwitchSurveyModal.value = true
+    hasUserSeenExitIntentModal.value = true
 }
 </script>
 <style>
