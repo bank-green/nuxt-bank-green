@@ -1,8 +1,7 @@
 <template>
     <BankLayoutGreatOkUnknown>
         <template #section1>
-            <BankHeadline :name="name ?? 'Unknown Bank'" :website="website" :subtitle="subtitle"
-                :inheritBrandRating="inheritBrandRating" />
+            <BankHeadline :name="name ?? 'Unknown Bank'" :website="website" :inheritBrandRating="inheritBrandRating" />
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
@@ -71,7 +70,6 @@ import { PrismicDocument } from "@prismicio/types";
 const props = defineProps<{
     name: string,
     website: string,
-    subtitle: string,
     inheritBrandRating: {
         tag: string,
         name: string

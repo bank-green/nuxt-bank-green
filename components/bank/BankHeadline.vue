@@ -10,11 +10,9 @@
                 <h1 class="text-xl md:text-2xl text-gray-800 font-medium md:font-semibold tracking-wider flex items-center">
                     {{ name }}
                 </h1>
-                <div v-if="prismicFieldSubtitle"
-                    class="text-lg md:text-xl text-gray-500">
+                <div v-if="prismicFieldSubtitle" class="text-lg md:text-xl text-gray-500">
                     <PrismicRichText :field="prismicFieldSubtitle" />
                 </div>
-                <div v-else-if="subtitle" class="text-lg md:text-xl text-gray-500" v-html="subtitle"></div>
                 <div v-if="inheritBrandRating" class="text-xs text-gray-500">Deposits or policies controlled by
                     <NuxtLink class="underline" :to="`/banks/${inheritBrandRating.tag}`">{{
                         inheritBrandRating.name }}</NuxtLink>
@@ -33,14 +31,11 @@ import BankIcon from '@/components/forms/banks/BankIcon.vue'
 const props = defineProps({
     name: String,
     website: String,
-    subtitle: String,
     inheritBrandRating: {
         name: String,
         tag: String
     },
     prismicFieldSubtitle: undefined,
 })
-const bank = computed(() => props.details)
-
 
 </script>
