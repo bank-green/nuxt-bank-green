@@ -1,7 +1,7 @@
 <template>
     <component v-if="details" :is="componentName" :name="details.name" :website="details.website"
         :inheritBrandRating="details.inheritBrandRating" :fossilFreeAlliance="details.fossilFreeAlliance"
-        :bankPage="bankPage" />
+        :bankPage="bankPage" :amountFinancedSince2016="details.amountFinancedSince2016" />
 </template>
 
 <script setup lang="ts">
