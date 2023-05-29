@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
+import { ContactFormPrefill } from '@/utils/interfaces/contactForm'
 
 // TODO: manage in separate file
 interface DetailsInterface {
@@ -55,15 +56,14 @@ interface DetailsInterface {
 }
 
 const props = withDefaults(defineProps<{
-    tag: string;
-    successRedirectURL: string;
-    details: DetailsInterface | null;
-    title: string;
-    prefill: Object;
+    tag?: string;
+    successRedirectURL?: string;
+    details?: DetailsInterface | null;
+    title?: string;
+    prefill?: ContactFormPrefill | undefined;
 }>(), {
     tag: 'signupbox',
     successRedirectURL: '/thanks',
-    prefill: () => ({}),
 });
 
 const emit = defineEmits([ 'success']);

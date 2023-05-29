@@ -1,29 +1,30 @@
 import { useGtm } from '@gtm-support/vue-gtm'
+import { ContactFormPrefill, ContactFormWarningsMap } from '~~/utils/interfaces/contactForm'
 
 export default function useContactForm(
     tag = 'unknown',
     required = ['email', 'isAgreeTerms'],
-    extra,
-    prefill = ref({})
+    extra = ref({}),
+    prefill = ref<ContactFormPrefill | undefined>()
 ) {
 
-    const firstName = ref(prefill.value.firstName || '')
-    const lastName = ref(prefill.value.lastName || '')
-    const email = ref(prefill.value.email || '')
-    const subject = ref(prefill.value.subject || '')
-    const message = ref(prefill.value.message || '')
-    const bank = ref(prefill.value.bank || '')
-    const isAgreeTerms = ref(prefill.value.isAgreeTerms || false)
-    const isAgreeMarketing = ref(prefill.value.isAgreeTerms || false)
+    const firstName = ref(prefill.value?.firstName || '')
+    const lastName = ref(prefill.value?.lastName || '')
+    const email = ref(prefill.value?.email || '')
+    const subject = ref(prefill.value?.subject || '')
+    const message = ref(prefill.value?.message || '')
+    const bank = ref(prefill.value?.bank || '')
+    const isAgreeTerms = ref(prefill.value?.isAgreeTerms || false)
+    const isAgreeMarketing = ref(prefill.value?.isAgreeTerms || false)
     const busy = ref(false)
     const isSent = useCookie(`contact.${tag}.sent`, { default: () => false })
     const showWarnings = ref(false)
 
-    const warningsMap = computed(() => {
+    const warningsMap : ComputedRef<ContactFormWarningsMap> = computed(() => {
         if (!showWarnings.value) {
             return {}
         }
-        const warningsMap = {}
+        const warningsMap : ContactFormWarningsMap = {};
         if (!email.value && required.includes('email')) {
             warningsMap['email'] = 'Your email is reauired.'
         }
@@ -73,9 +74,11 @@ export default function useContactForm(
             if (tag === 'contact page form') {
                 gtmEvent = 'contactpage'
             }
-            const gtm = useGtm()
-            gtm.enable(true)
-            gtm.trackEvent({ event: gtmEvent })
+            const gtm = useGtm();
+            if (gtm) {
+                gtm.enable(true)
+                gtm.trackEvent({ event: gtmEvent })
+            }
         }
 
         setTimeout(() => {

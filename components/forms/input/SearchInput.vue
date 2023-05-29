@@ -90,11 +90,13 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+withDefaults(defineProps<{
     modelValue: string;
     placeholder: string;
-    usePencil: boolean;
-}>();
+    usePencil?: boolean;
+}>(), {
+    usePencil: false,
+});
 
 const emit = defineEmits([ 'update:modelValue', 'onKeydown', 'onFocus', 'onBlur', 'onClick', 'onCloseClick']);
 

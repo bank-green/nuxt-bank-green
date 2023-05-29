@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import { withDefaults } from 'vue';
 import LazyImage from '@/components/LazyImage.vue'
 
 const props = withDefaults(defineProps<{
@@ -13,7 +14,7 @@ const props = withDefaults(defineProps<{
     size: 60
 });
 
-const urlDomain = computed(() {
+const urlDomain = computed(() => {
     let url = props.url
     if (url) {
         if (url.indexOf('http') === -1) url = `https://${url}`
@@ -45,8 +46,7 @@ const src = computed(() => {
                 return '/img/logos/green_got.png'
         }
 
-        return `https://logo.clearbit.com/${urlDomain.value}?size=${this
-            .size * 2}`
+        return `https://logo.clearbit.com/${urlDomain.value}?size=${props.size * 2}`
     }
     return ''
 });

@@ -35,7 +35,7 @@ const focus = () => {
     inputRef.value?.focus();
 }
 
-const inputClasses = computed(() {
+const inputClasses = computed(() => {
     if (props.disabled) {
         return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
     }
@@ -47,7 +47,7 @@ const inputClasses = computed(() {
     }
     return 'px-5 py-4 border-gray-50 text-gray-500'
 });
-const inputIsEmptyClass = computed(() {
+const inputIsEmptyClass = computed(() => {
     if (props.modelValue) {
         return ''
     } else {

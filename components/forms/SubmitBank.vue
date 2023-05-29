@@ -60,5 +60,5 @@ const {
     warningsMap,
     send,
     busy,
-} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms']);
+} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}));
 </script>

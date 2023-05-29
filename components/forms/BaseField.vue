@@ -83,7 +83,7 @@ const props = defineProps<{
     dark?: boolean;
 }>();
 
-const labelClasses = compute(() {
+const labelClasses = computed(() => {
     if (props.dark) {
         return 'text-blue-100 text-opacity-75 font-medium'
     }

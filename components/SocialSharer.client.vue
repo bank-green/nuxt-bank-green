@@ -42,10 +42,12 @@
 const props = withDefaults(defineProps<{
     url: string;
     hashtags?: string[];
-    text: string;
-    large: boolean;
+    text?: string;
+    large?: boolean;
 }>(), {
-    hashtags: () => []
+    hashtags: () => [],
+    text: () => '',
+    large: false,
 });
 
 const links = computed(() => ({

@@ -108,6 +108,7 @@ const getDefaultFilter = () => ({
     },
     fossilFreeAlliance: false,
     convenience: {
+        "Mobile banking": false,
         "Free ATM network": false,
         "No overdraft fee": false,
         "No account maintenance fee": false,
@@ -115,14 +116,14 @@ const getDefaultFilter = () => ({
     bankAccounts: {
         checking: false,
         saving: false,
-        interest_rates: false,
-        business_accounts: false,
-        small_business_lending: false,
-        credit_cards: false,
-        mortgage_or_loans: false,
+        "Interest rates": false,
+        "Business accounts": false,
+        "Small business lending": false,
+        "Credit cards": false,
+        "Mortgage or loans": false,
     },
     security: {
-        deposit_protection: false,
+        "Deposit protection": false,
     },
 })
 

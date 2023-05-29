@@ -26,8 +26,8 @@
 const props = defineProps<{
     modelValue: boolean;
     name: string;
-    warning: string;
-    dark: boolean;
+    warning?: string | object | undefined;
+    dark?: boolean;
 }>();
 
 const emit = defineEmits([ 'update:modelValue' ]);
