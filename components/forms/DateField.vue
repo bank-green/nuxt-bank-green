@@ -12,7 +12,7 @@
 import BaseField from './BaseField.vue'
 
 const props = withDefaults(defineProps<{
-    modelValue: string | number;
+    modelValue: string | number | null;
     title?: string;
     description?: string;
     name: string;

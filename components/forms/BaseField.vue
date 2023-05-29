@@ -63,7 +63,7 @@
             {{ description }}
         </div>
         <div
-            v-if="showWarning"
+            v-if="showWarning && typeof(showWarning) === 'string'"
             class="absolute top-full left-5 mt-0.5 text-xs text-red-600"
         >
             {{ showWarning }}
