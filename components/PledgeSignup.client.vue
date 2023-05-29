@@ -5,23 +5,23 @@
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
             <TextField class="col-span-2" v-model="firstName" name="firstName" type="text" :title="'Your first name'"
-                :placeholder="'First name, so we can say hi'" :dark="true" />
+                :placeholder="'First name, so we can say hi'" />
             <TextField class="col-span-2" v-model="lastName" name="lastName" type="text" :title="'Your last name'"
-                :placeholder="'Your last name'" :dark="true" />
+                :placeholder="'Your last name'" />
             <TextField class="col-span-2" v-model="email" type="email" name="email" :title="'Your email address'"
-                :placeholder="'Your email address'" :warning="warningsMap['email']" :dark="true" />
+                :placeholder="'Your email address'" :warning="warningsMap['email']" />
             <DateField class="col-span-2" v-model="reminderDate" name="reminder"
                 :title="'When would you like to be reminded?'"
                 :placeholder="'When would you like to be reminded to switch?'" :warning="reminderWarning"
-                :dark="true" />
+                />
             <div class="col-span-2">
-                <span class="block text-sm leading-5 text-blue-100 text-opacity-75 font-medium mb-2">
+                <span class="block text-sm leading-5 text-gray-600 font-semibold mb-2">
                     Choose your country
                 </span>
                 <LocationSearch class="w-full text-gray-700" v-model="country" />
             </div>
             <div class="col-span-2">
-                <span class="block text-sm leading-5 text-blue-100 text-opacity-75 font-medium mb-2">
+                <span class="block text-sm leading-5 text-gray-600 font-semibold mb-2">
                     Choose your current bank
                 </span>
                 <BankSearch class="w-full text-gray-700" ref="bankSearch" :disabled="!country" :country="country"
@@ -35,9 +35,9 @@
                 </BankSearch>
             </div>
             <CheckboxSection class="col-span-full" v-model="isAgreeMarketing" name="isAgreeMarketing"
-                :warning="warningsMap['isAgreeMarketing']" :dark="true">
+                :warning="warningsMap['isAgreeMarketing']">
                 I wish to receive more information via email from Bank.Green.</CheckboxSection>
-            <CheckboxSection class="col-span-full" v-model="isAgreeTerms" name="isAgreeTerms" :dark="true"
+            <CheckboxSection class="col-span-full" v-model="isAgreeTerms" name="isAgreeTerms"
                 :warning="warningsMap['isAgreeTerms']">
                 I have read and understood Bank.Green’s <NuxtLink to="/privacy" class="link">privacy policy
                 </NuxtLink>. </CheckboxSection>
