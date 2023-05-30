@@ -73,7 +73,7 @@ const props = defineProps({
 const bank = ref(null)
 const reminderDate = ref(null)
 const searchValue = ref(null)
-const reminderWarning = ref('')
+const reminderWarning = ref(null)
 
 const { country } = useCountry()
 
@@ -99,6 +99,7 @@ const {
     warningsMap,
     hasWarnings,
     send,
+    validate,
     busy,
 } = useContactForm(
     'pledge',
@@ -109,11 +110,12 @@ const {
 const emit = defineEmits(['success'])
 
 async function checkAndSend() {
+    validate();
     if (!extras.value.reminder) {
         reminderWarning.value = "Please enter a date."
         return
     }
-    reminderWarning.value = ''
+    reminderWarning.value = null;
     if (await send()) {
         emit('success')
         navigateTo(props.successRedirectURL)

@@ -26,7 +26,7 @@ export default function useContactForm(
         }
         const warningsMap : ContactFormWarningsMap = {};
         if (!email.value && required.includes('email')) {
-            warningsMap['email'] = 'Your email is reauired.'
+            warningsMap['email'] = 'Your email is required.'
         }
         if (!isAgreeTerms.value && required.includes('isAgreeTerms')) {
             warningsMap['isAgreeTerms'] = 'You need to agree to the terms.'
@@ -43,6 +43,15 @@ export default function useContactForm(
     const hasWarnings = computed(() => {
         return Object.keys(warningsMap.value).length > 0
     })
+
+    const validate = () => {
+        showWarnings.value = true;
+    }
+
+    const reset = () => {
+        showWarnings.value = false;
+        busy.value = false;
+    }
 
     const send = async () => {
         showWarnings.value = true
@@ -104,6 +113,8 @@ export default function useContactForm(
         warningsMap,
         hasWarnings,
         send,
+        validate,
+        reset,
         busy,
     }
 }

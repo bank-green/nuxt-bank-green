@@ -12,7 +12,7 @@
 import BaseField from './BaseField.vue'
 
 const props = withDefaults(defineProps<{
-    modelValue: string | number | null;
+    modelValue: string | null;
     title?: string;
     description?: string;
     name: string;
@@ -56,7 +56,7 @@ const inputIsEmptyClass = computed(() => {
 });
 
 function onUpdate(ev : Event) {
-    emit('update:modelValue', (ev.target as HTMLInputElement).checked)
+    emit('update:modelValue', (ev.target as HTMLInputElement).value)
 }
 </script>
 
