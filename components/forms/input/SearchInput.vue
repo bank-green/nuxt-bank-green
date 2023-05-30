@@ -3,7 +3,7 @@
         <!-- input form -->
         <input
             :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="onInput"
             ref="input"
             :placeholder="placeholder"
             type="text"
@@ -13,10 +13,10 @@
                 'border-sushi-100': modelValue,
             }"
             autocomplete="chrome-off"
-            @keydown="$emit('onKeyDown')"
-            @focus="$emit('onFocus')"
-            @blur="$emit('onBlur')"
-            @click="$emit('onClick')"
+            @keydown="onKeyDown"
+            @focus="onFocus"
+            @blur="onBlur"
+            @click="onClick"
         />
 
         <!-- icon on the left -->
@@ -25,7 +25,7 @@
         <div
             v-if="modelValue"
             class="absolute right-0 p-5 text-red-700 hover:text-red-500 cursor-pointer"
-            @click="$emit('onCloseClick')"
+            @click="onCloseClick"
         >
             <!-- close icon -->
             <svg
@@ -89,17 +89,28 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        modelValue: String,
-        placeholder: String,
-        usePencil: Boolean,
-    },
-    methods: {
-        focus() {
-            this.$refs?.input?.focus()
-        },
-    },
+<script setup lang="ts">
+withDefaults(defineProps<{
+    modelValue: string;
+    placeholder: string;
+    usePencil?: boolean;
+}>(), {
+    usePencil: false,
+});
+
+const emit = defineEmits([ 'update:modelValue', 'onKeydown', 'onFocus', 'onBlur', 'onClick', 'onCloseClick']);
+
+const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null);
+
+const focus = () => {
+    inputRef.value?.focus();
 }
+const onInput = ($event : Event) => {
+    emit('update:modelValue', ($event.target as HTMLInputElement).value)
+}
+const onKeyDown = () => emit('onKeydown');
+const onFocus = () => emit('onFocus');
+const onBlur = () => emit('onBlur');
+const onClick = () => emit('onClick');
+const onCloseClick = () => emit('onCloseClick');
 </script>

@@ -6,7 +6,7 @@
             </NuxtLink>
             <div
                 class="border-t lg:border-none border-gray-200 py-8 lg:py-0 lg:px-16 xl:px-32 text-gray-700 font-semibold flex lg:items-center lg:flex-wrap justify-center flex-col lg:flex-row -mx-4">
-                <NuxtLink v-for="link in links" :key="link.href" :to="link.href"
+                <NuxtLink v-for="link in computedLinks" :key="link.href" :to="link.href"
                     class="p-4 hover:text-sushi-500 text-xl lg:text-base lg:p-3 lg:py-1">
                     <span class="xl:hidden">{{
                             link.short_title || link.title
@@ -32,19 +32,11 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import links from './links'
 import SocialLinks from '@/components/nav/SocialLinks.vue'
 
-export default {
-    components: { SocialLinks },
-    data() {
-        return {}
-    },
-    computed: {
-        links() {
-            return links({ isHeader: false })
-        },
-    },
-}
+const computedLinks = computed(() => 
+    links({ isHeader: false })
+);
 </script>

@@ -38,31 +38,25 @@
         </a>
     </div>
 </template>
-<script>
-export default {
-    props: {
-        url: String,
-        hashtags: {
-            type: Array,
-            default: () => {
-                return []
-            },
-        },
-        text: String,
-        large: Boolean,
-    },
-    data() {
-        return {
-            links: {
-                facebook: `http://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                    this.url || window.location.href
-                )}`,
-                twitter: `http://twitter.com/share?url=${encodeURIComponent(
-                    this.url || window.location.href
-                )}&hashtags=${this.hashtags.toString()}&text=${this.text ||
-                    ''}`,
-            },
-        }
-    },
-}
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+    url: string;
+    hashtags?: string[];
+    text?: string;
+    large?: boolean;
+}>(), {
+    hashtags: () => [],
+    text: () => '',
+    large: false,
+});
+
+const links = computed(() => ({
+    facebook: `http://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        props.url || window.location.href
+    )}`,
+    twitter: `http://twitter.com/share?url=${encodeURIComponent(
+        props.url || window.location.href
+    )}&hashtags=${props.hashtags.toString()}&text=${props.text ||
+        ''}`,
+}));
 </script>

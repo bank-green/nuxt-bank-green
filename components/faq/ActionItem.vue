@@ -21,21 +21,16 @@
     </div>
 </template>
 
-<script>
-import AccordionItem from '../AccordionItem.vue'
-export default {
-    components: { AccordionItem },
-    props: {
-        step: Number,
-        title: String,
-        description: String,
-        subcontent: { type: Array, default: () => [] },
-        caratClass: String,
-    },
-    data() {
-        return {
-            isOpen: false,
-        }
-    },
-}
+<script setup lang="ts">
+import AccordionItem from '../AccordionItem.vue';
+
+withDefaults(defineProps<{
+    step: number;
+    title: string;
+    description: string;
+    subcontent?: any[],
+    caratClass: string;
+}>(), {
+    subcontent: () => []
+});
 </script>

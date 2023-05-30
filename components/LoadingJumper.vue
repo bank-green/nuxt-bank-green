@@ -15,9 +15,6 @@
         ></circle>
     </svg>
 </template>
-<script>
-export default {}
-</script>
 <style scoped>
 .spinner {
     animation: circle-rotator 1.4s linear infinite;

@@ -9,7 +9,7 @@
         <li
             v-for="(item, index) in items"
             :key="index"
-            :ref="`item_${index}`"
+            :ref="(el) => ( itemArrRef[index] = el)"
             role="option"
             tabindex="0"
             class="text-gray-900 cursor-default relative py-3 pl-4 pr-9 mx-2 rounded-md"
@@ -24,45 +24,41 @@
     </ul>
 </template>
 
-<script>
-export default {
-    props: {
-        items: Array,
-    },
-    data() {
-        return {
-            focusedItemIndex: -1,
-        }
-    },
-    emits: ['selectItem'],
-    methods: {
-        focusItem(indexToFocus, eventToPrevent) {
-            if (this.focusedItemIndex === indexToFocus) return
+<script setup lang="ts">
+const props = defineProps<{
+    items: any[]
+}>();
 
-            eventToPrevent?.preventDefault()
-            const itemToFocus = this.$refs[`item_${indexToFocus}`]
+const emit = defineEmits([ 'selectItem' ]);
 
-            if (!itemToFocus) return
+const itemArrRef = ref<InstanceType<typeof HTMLLIElement>[]>([]);
+const focusedItemIndex = ref(-1);
 
-            this.focusedItemIndex = indexToFocus
+function focusItem(indexToFocus: number, eventToPrevent : Event) {
+    if (focusedItemIndex.value === indexToFocus) return
 
-            itemToFocus.scrollIntoView(false)
-        },
-        incrementFocus(eventToPrevent) {
-            this.focusItem(this.focusedItemIndex + 1, eventToPrevent)
-        },
-        decrementFocus(eventToPrevent) {
-            this.focusItem(this.focusedItemIndex - 1, eventToPrevent)
-        },
-        selectCurrentItem() {
-            this.onSelectItem(this.focusedItemIndex)
-        },
-        async onSelectItem(index) {
-            const item = this.items[index]
-            if (item) {
-                this.$emit('selectItem', item)
-            }
-        },
-    },
+    eventToPrevent?.preventDefault()
+    const itemToFocus = itemArrRef.value[indexToFocus];
+
+    if (!itemToFocus) return
+
+    focusedItemIndex.value = indexToFocus
+
+    itemToFocus.scrollIntoView(false)
+}
+function incrementFocus(eventToPrevent : Event) {
+    focusItem(focusedItemIndex.value + 1, eventToPrevent)
+}
+function decrementFocus(eventToPrevent : Event) {
+    focusItem(focusedItemIndex.value - 1, eventToPrevent)
+}
+function selectCurrentItem() {
+    onSelectItem(focusedItemIndex.value)
+}
+async function onSelectItem(index : number) {
+    const item = props.items[index]
+    if (item) {
+        emit('selectItem', item)
+    }
 }
 </script>

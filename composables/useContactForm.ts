@@ -1,31 +1,32 @@
 import { useGtm } from '@gtm-support/vue-gtm'
+import { ContactFormPrefill, ContactFormWarningsMap } from '~~/utils/interfaces/contactForm'
 
 export default function useContactForm(
     tag = 'unknown',
     required = ['email', 'isAgreeTerms'],
-    extra,
-    prefill = ref({})
+    extra = ref({}),
+    prefill = ref<ContactFormPrefill | undefined>()
 ) {
 
-    const firstName = ref(prefill.value.firstName || '')
-    const lastName = ref(prefill.value.lastName || '')
-    const email = ref(prefill.value.email || '')
-    const subject = ref(prefill.value.subject || '')
-    const message = ref(prefill.value.message || '')
-    const bank = ref(prefill.value.bank || '')
-    const isAgreeTerms = ref(prefill.value.isAgreeTerms || false)
-    const isAgreeMarketing = ref(prefill.value.isAgreeTerms || false)
+    const firstName = ref(prefill.value?.firstName || '')
+    const lastName = ref(prefill.value?.lastName || '')
+    const email = ref(prefill.value?.email || '')
+    const subject = ref(prefill.value?.subject || '')
+    const message = ref(prefill.value?.message || '')
+    const bank = ref(prefill.value?.bank || '')
+    const isAgreeTerms = ref(prefill.value?.isAgreeTerms || false)
+    const isAgreeMarketing = ref(prefill.value?.isAgreeTerms || false)
     const busy = ref(false)
     const isSent = useCookie(`contact.${tag}.sent`, { default: () => false })
     const showWarnings = ref(false)
 
-    const warningsMap = computed(() => {
+    const warningsMap : ComputedRef<ContactFormWarningsMap> = computed(() => {
         if (!showWarnings.value) {
             return {}
         }
-        const warningsMap = {}
+        const warningsMap : ContactFormWarningsMap = {};
         if (!email.value && required.includes('email')) {
-            warningsMap['email'] = 'Your email is reauired.'
+            warningsMap['email'] = 'Your email is required.'
         }
         if (!isAgreeTerms.value && required.includes('isAgreeTerms')) {
             warningsMap['isAgreeTerms'] = 'You need to agree to the terms.'
@@ -42,6 +43,15 @@ export default function useContactForm(
     const hasWarnings = computed(() => {
         return Object.keys(warningsMap.value).length > 0
     })
+
+    const validate = () => {
+        showWarnings.value = true;
+    }
+
+    const reset = () => {
+        showWarnings.value = false;
+        busy.value = false;
+    }
 
     const send = async () => {
         showWarnings.value = true
@@ -73,9 +83,11 @@ export default function useContactForm(
             if (tag === 'contact page form') {
                 gtmEvent = 'contactpage'
             }
-            const gtm = useGtm()
-            gtm.enable(true)
-            gtm.trackEvent({ event: gtmEvent })
+            const gtm = useGtm();
+            if (gtm) {
+                gtm.enable(true)
+                gtm.trackEvent({ event: gtmEvent })
+            }
         }
 
         setTimeout(() => {
@@ -101,6 +113,8 @@ export default function useContactForm(
         warningsMap,
         hasWarnings,
         send,
+        validate,
+        reset,
         busy,
     }
 }

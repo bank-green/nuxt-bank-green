@@ -15,51 +15,49 @@
     <span v-else-if="eventIsPastMessage">{{ eventIsPastMessage }}</span>
 </template>
 
-<script>
+<script setup lang="ts">
 import {
     isValid,
     isFuture,
     formatDistanceToNowStrict,
     formatRelative,
 } from 'date-fns'
+import { clearInterval } from 'timers';
 
-export default {
-    props: {
-        eventStart: Date,
-        eventIsPastMessage: String,
-        showTooltip: Boolean,
-    },
-    data() {
-        return {
-            isUpcoming: true,
-            interval: null,
-            tooltipText: '',
-        }
-    },
-    methods: {
-        timerCount: function() {
-            if (isFuture(this.eventStart)) {
-                this.durationString = formatDistanceToNowStrict(
-                    this.eventStart,
-                    {
-                        addSuffix: false,
-                        unit: 'day',
-                    }
-                )
-            } else {
-                this.isUpcoming = false
-                clearInterval(this.interval)
+const props = defineProps<
+{
+    eventStart: Date;
+    eventIsPastMessage: String;
+    showTooltip: Boolean;
+}>();
+
+const isUpcoming = ref(false);
+const interval : Ref<NodeJS.Timer | null> = ref(null);
+const tooltipText = ref('');
+const durationString = ref('');
+
+function timerCount() {
+    if (isFuture(props.eventStart)) {
+        durationString.value = formatDistanceToNowStrict(
+            props.eventStart,
+            {
+                addSuffix: false,
+                unit: 'day',
             }
-        },
-    },
-    mounted() {
-        if (isValid(this.eventStart)) {
-            this.timerCount()
-            this.interval = setInterval(() => {
-                this.timerCount()
-            }, 1000)
-            this.tooltipText = formatRelative(this.eventStart, new Date())
-        }
-    },
+        )
+    } else {
+        isUpcoming.value = false;
+        interval.value && clearInterval(interval.value);
+    }
 }
+
+onMounted(() => {
+    if (isValid(props.eventStart)) {
+        timerCount()
+        interval.value = setInterval(() => {
+            timerCount()
+        }, 1000)
+        tooltipText.value = formatRelative(props.eventStart, new Date())
+    }
+});
 </script>

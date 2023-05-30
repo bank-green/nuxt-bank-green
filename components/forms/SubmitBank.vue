@@ -40,42 +40,25 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 
-export default {
-    props: {
-        tag: { type: String, default: 'submitbank' },
-    },
-    components: {
-        CheckboxSection,
-        TextField,
-    },
-    setup(props) {
-        const {
-            firstName,
-            email,
-            bank,
-            isAgreeTerms,
-            isAgreeMarketing,
-            isSent,
-            warningsMap,
-            send,
-            busy,
-        } = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'])
+const props = withDefaults(defineProps<{
+    tag: string;
+}>(), {
+    tag: 'submitbank'
+});
 
-        return {
-            firstName,
-            email,
-            bank,
-            isAgreeTerms,
-            isAgreeMarketing,
-            isSent,
-            warningsMap,
-            send,
-            busy,
-        }
-    },
-}
+const {
+    firstName,
+    email,
+    bank,
+    isAgreeTerms,
+    isAgreeMarketing,
+    isSent,
+    warningsMap,
+    send,
+    busy,
+} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}));
 </script>

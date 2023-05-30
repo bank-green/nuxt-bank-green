@@ -1,11 +1,13 @@
 import { reactive } from 'vue'
 
 const store = {
-  state: reactive({
+  state: reactive<{
+    imageLoaded: any
+  }>({
     imageLoaded: {},
   }),
 
-  setImageLoaded(src, currentSrc) {
+  setImageLoaded(src : string, currentSrc? : string) {
     if (!currentSrc) {
       this.state.imageLoaded[src] = src
       return
