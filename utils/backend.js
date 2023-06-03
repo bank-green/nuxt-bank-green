@@ -1,19 +1,8 @@
 import axios from 'axios'
 import httpErrorHandling from './errorHandling'
 
+let baseURL = process.env.DJANGO_BACKEND;
 
-// let baseURL = 'http://localhost:5001/bank-green-staging/europe-west1'
-// let baseURL = 'https://europe-west1-bank-green-staging.cloudfunctions.net'
-let baseURL = "https://europe-west1-bank-green.cloudfunctions.net"
-
-/*
-if (process.env.VUE_APP_ENV === 'staging') {
-    baseURL = 'https://europe-west1-bank-green-staging.cloudfunctions.net'
-}
-if (process.env.VUE_APP_ENV === 'production') {
-    baseURL = 'https://europe-west1-bank-green.cloudfunctions.net'
-}
-*/
 
 export const instance = axios.create({
     baseURL,
