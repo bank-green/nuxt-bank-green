@@ -94,6 +94,10 @@ a.button-green {
     @apply block font-medium bg-gray-100 hover:bg-gray-200 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-gray-100 text-primary-dark p-4 text-center w-full rounded-2xl  capitalize;
 }
 
+.button-green-2 {
+    @apply block font-medium bg-leaf-500 hover:bg-white focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 text-white hover:text-leaf-500 p-4 text-center w-full rounded-2xl shadow-green capitalize;    
+}
+
 * {
     scrollbar-width: thin;
     scrollbar-color: theme('colors.sushi.500') theme('colors.sushi.100');
