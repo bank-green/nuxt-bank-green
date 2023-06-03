@@ -1,10 +1,10 @@
 <template>
     <div class="page">
         <div class="page-fade-in overflow-hidden max-w-screen">
-            <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
-                <div class="contain grid grid-cols-2 justify-center items-center pb-4 lg:pb-0 mb-4">
+            <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 py-28">
+                <div class="contain grid grid-cols-1 md:grid-cols-2 justify-center items-center pb-4 lg:pb-0 mb-4 gap-16">
                     <template v-if="donation">
-                        <div>
+                        <div class="space-y-8">
                             <PrismicImage
                                 class="w-full h-full object-contain object-top"
                                 v-if="donation.data['photo']"
@@ -21,7 +21,7 @@
                                 class="prose sm:prose-lg xl:prose-xl prose-blurb" 
                             />
                         </div>
-                        <form class="bg-leaf-700 flex flex-col" @submit.prevent.stop="submit">
+                        <form class="bg-leaf-700 flex flex-col rounded-xl px-16 py-20" @submit.prevent.stop="submit">
                             <PrismicText 
                                 :field="donation.data['donation-title']" 
                                 wrapper="h1" 
@@ -29,36 +29,37 @@
                             />
                             <PrismicRichText 
                                 :field="donation.data['donation-description']" 
-                                class="prose sm:prose-lg xl:prose-xl prose-blurb text-white" 
+                                class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4" 
                             />
-                            <div class="grid grid-cols-2">
-                                <div v-for="(option) in donationOptions"
-                                    :key="option.value"
+                            <div class="grid grid-cols-2 px-4 gap-4 mt-8">
+                                <div v-for="(_option) in donationOptions"
+                                    :key="_option.value"
                                     class="inline-block"
                                 >
                                     <input v-model="selectedOption" 
                                         type="radio" 
-                                        :id="option.value.toString()" 
-                                        :value="option.value" 
+                                        :id="_option.value.toString()" 
+                                        :value="_option.value" 
                                         class="hidden" 
                                     />
                                     <label 
-                                        class="w-full md:w-auto mt-6 flex justify-center"
-                                        :class="selectedOption !== option.value ?
-                                            'button-green-2' :
-                                            'block font-medium bg-white focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 text-leaf-500 p-4 text-center w-full rounded-2xl shadow-green capitalize'
+                                        class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-4 text-center w-full rounded-lg shadow-green capitalize"
+                                        :class="selectedOption !== _option.value ?
+                                            'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500' :
+                                            'bg-whitetext-leaf-500'
                                         "
-                                        :for="option.value.toString()"
+                                        :for="_option.value.toString()"
                                     >
-                                        {{ option.label }}
+                                        {{ _option.label }}
                                     </label>
                                 </div>
                             </div>
                             <button type="submit" 
-                                class="button-green w-full md:w-auto mt-6 flex justify-center" 
+                                class="button-green w-full md:w-auto mt-12 flex justify-center" 
                             >
                                 <PrismicText 
                                     wrapper="span"
+                                    class="text-2xl font-semibold"
                                     :field="donation.data['donation-button']"
                                 />
                             </button>
