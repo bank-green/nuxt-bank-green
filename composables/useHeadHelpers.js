@@ -1,3 +1,5 @@
+const hostUrl = process.env.HOST;
+
 export const useHeadHelper = (
   title,
   description
@@ -38,8 +40,8 @@ export const useHeadHelper = (
 };
 
 export const useHeadRating = (rating) => {
-  const imageUrl = `https://bank.green/anim/gauge/${rating}.gif`
-  const videoUrl = `https://bank.green/anim/gauge/${rating}.mp4`
+  const imageUrl = `${hostUrl}/anim/gauge/${rating}.gif`
+  const videoUrl = `${hostUrl}/anim/gauge/${rating}.mp4`
   const width = "680"
   const height = "689"
   useHead({

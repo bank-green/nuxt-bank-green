@@ -55,7 +55,7 @@
                     <h2 class="w-full text-center font-semibold text-2xl tracking-wider mb-4 text-gray-100">
                         Did we get something wrong?
                     </h2>
-                    <NuxtLink :to="`https://data.bank.green/update/${bankTag}` " target="_blank" class="button-green inline-block w-max">
+                    <NuxtLink :to="`${dataHostUrl}/update/${bankTag}` " target="_blank" class="button-green inline-block w-max">
                         Help us fix it
                     </NuxtLink>
                 </div>
@@ -86,4 +86,5 @@ const checkList = [
 
 const router = useRouter();
 const bankTag = router.currentRoute.value.params.bankTag;
+const dataHostUrl = process.env.HOST_DATA as string;
 </script>

@@ -26,7 +26,7 @@
                             Why not encourage your friends to do the same...
                         </p>
                         <div class="flex justify-center">
-                            <SocialSharer class="text-sushi-500" url="https://bank.green"
+                            <SocialSharer class="text-sushi-500" :url="hostUrl"
                                 :hashtags="['climatecrisis', 'fossilbanks']"
                                 :text="'I just pledged to move my money away from fossil fuels! Check your bank and do the same'"
                                 :large="true" />
@@ -38,6 +38,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const hostUrl = process.env.HOST as string;
 useHeadHelper("Thank you")
 </script>

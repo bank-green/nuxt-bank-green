@@ -1,6 +1,8 @@
 import { get } from './backend'
 
-let gqlUrl = 'https://data.bank.green/graphql'
+const dataUrl = process.env.HOST_DATA;
+
+let gqlUrl = `${dataUrl}/graphql`
 let options = {}
 
 
