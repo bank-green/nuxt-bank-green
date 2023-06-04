@@ -30,7 +30,7 @@ export default function getLinks({ isHeader = false }) {
         });
         links.push({
             href: '/donate',
-            title: 'Donate Us',
+            title: 'Donation',
             isButton: true,
         });
     } else {
@@ -60,6 +60,12 @@ export default function getLinks({ isHeader = false }) {
             title: "Who we are",
             short_title: "Team",
         })
+
+        links.push({
+            href: '/donate',
+            title: 'Donation',
+            isButton: true,
+        });
     }
 
     return links
