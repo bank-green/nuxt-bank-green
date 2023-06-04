@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <div class="page-fade-in overflow-hidden max-w-screen">
-            <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 py-28">
+            <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pb-28 pt-36">
                 <div class="contain grid grid-cols-1 md:grid-cols-2 justify-center items-center pb-4 lg:pb-0 mb-4 gap-16">
                     <template v-if="donation">
                         <div class="space-y-8">
