@@ -42,6 +42,7 @@
                 </form>
             </div>
             <Swoosh direction="up" />
+            <Donation />
         </div>
     </div>
 </template>
@@ -57,7 +58,7 @@ import Swoosh from '@/components/Swoosh.vue'
 
 const p = usePrismic()
 const { data: contact } = await useAsyncData('contact', () => p.client.getSingle('contactpage'))
-usePrismicSEO(contact.value.data)
+usePrismicSEO(contact.value.data);
 
 let extras = ref({ isAgreeMarketing: false })
 

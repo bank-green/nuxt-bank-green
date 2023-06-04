@@ -32,6 +32,8 @@
             </div>
             <LazyImage src="/img/illustrations/pledge.png" imgClass="w-full" :useImageTag="true" />
         </div>
+
+        <Donation background="dark"/>
     </div>
 </template>
 

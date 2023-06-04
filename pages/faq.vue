@@ -16,9 +16,10 @@
             </div>
 
             <div id="contact" class="contain max-w-3xl flex flex-row justify-center items-center">
-                <SignupBox tag="FAQ bottom" class="w-full mt-8" />
+                <SignupBox tag="FAQ bottom" class="w-full mt-8 mb-12" />
             </div>
             <Swoosh />
+            <Donation />
         </div>
     </div>
 </template>
