@@ -22,7 +22,7 @@
                             />
                         </div>
                         <div class="relative w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center">
-                            <div class="absolute -top-4 md:-top-10 -right-4 md:-right-10">
+                            <div class="absolute -top-4 md:-top-8 -right-4 md:-right-8">
                                 <img class="h-12 md:h-20 w-auto" src="/img/logos/bankgreen-logo.png" alt="Bank Green" />
                             </div>
                             <form class="flex flex-col rounded-xl" @submit.prevent.stop="submit">
