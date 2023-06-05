@@ -30,7 +30,7 @@ export default function getLinks({ isHeader = false }) {
         });
         links.push({
             href: '/donate',
-            title: 'Donation',
+            title: 'Donate',
             isButton: true,
         });
     } else {
@@ -63,7 +63,7 @@ export default function getLinks({ isHeader = false }) {
 
         links.push({
             href: '/donate',
-            title: 'Donation',
+            title: 'Donate',
             isButton: true,
         });
     }

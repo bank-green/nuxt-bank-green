@@ -38,7 +38,7 @@
                         :inactiveClass="!link.isButton && 'hover:bg-primary-light'"
                         :class="!link.isButton 
                             ? 'inline-block px-4 py-2 text-base text-white font-medium rounded-xl'
-                            : 'inline-block w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center w-full rounded-xl shadow-green capitalize'
+                            : 'inline-block w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center w-full rounded-xl shadow-green capitalize cursor-pointer'
                         "
                         @click="isOpen = false"
                     >
