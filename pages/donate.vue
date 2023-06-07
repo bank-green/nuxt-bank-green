@@ -58,6 +58,7 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div id="stripe-payment-element"></div>
                                 <button type="submit" 
                                     class="button-green w-full md:w-auto mt-12 flex justify-center" 
                                 >
@@ -76,7 +77,8 @@
     </div>
 </template>
 <script setup lang="ts">
-//TODO: move to utils once Django backend is done
+import useStripe from '~~/utils/useStripe';
+
 interface DonationOption {
     label: string;
     value: number | string;
@@ -99,7 +101,13 @@ const selectedOption = ref<number | string | null>(null);
 const { client } = usePrismic()
 const { data: donation } = await useAsyncData('donation', () => client.getSingle('donationpage'));
 
+
+const { handleSubmit } = useStripe(
+    "stripe-payment-element"
+)
+
 const submit = () => {
     console.log(selectedOption.value);
+    handleSubmit();
 }
 </script>
