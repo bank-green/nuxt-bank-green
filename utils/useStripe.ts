@@ -1,9 +1,8 @@
 import { Stripe, StripeElements, loadStripe } from "@stripe/stripe-js";
 
-const publishableKey = ""; //TODO: move this to .env file
-const clientSecret = ""; //TODO: collect from backend endpoint
-
 export default function useStripe(
+    publishableKey: string,
+    clientSecret: string | undefined,
     elementId: string,
     authenticationElementId?: string,
 ) {

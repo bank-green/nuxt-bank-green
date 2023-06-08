@@ -98,11 +98,17 @@ const donationOptions : DonationOption[] = [
 
 const selectedOption = ref<number | string | null>(null);
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 const { data: donation } = await useAsyncData('donation', () => client.getSingle('donationpage'));
 
+const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY;
+const { data: stripePaymentIntent } = await useFetch('/api/create-payment-intent');
+
+console.info(stripePaymentIntent.value)
 
 const { handleSubmit } = useStripe(
+    stripePublishableKey,
+    stripePaymentIntent.value?.clientSecret,
     "stripe-payment-element"
 )
 
