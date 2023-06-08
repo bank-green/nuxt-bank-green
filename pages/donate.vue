@@ -58,7 +58,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div id="stripe-payment-element"></div>
+                                <div id="stripe-payment-element" class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"></div>
                                 <button type="submit" 
                                     class="button-green w-full md:w-auto mt-12 flex justify-center" 
                                 >
@@ -77,8 +77,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import useStripe from '~~/utils/useStripe';
-
 interface DonationOption {
     label: string;
     value: number | string;
@@ -102,13 +100,16 @@ const { client } = usePrismic();
 const { data: donation } = await useAsyncData('donation', () => client.getSingle('donationpage'));
 
 const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY;
-const { data: stripePaymentIntent } = await useFetch('/api/create-payment-intent');
+const { data: stripePaymentIntent } = await useFetch('/api/create-payment-intent', {
+    method: 'POST',
+    body: {},
+});
 
 console.info(stripePaymentIntent.value)
 
 const { handleSubmit } = useStripe(
     stripePublishableKey,
-    stripePaymentIntent.value?.clientSecret,
+    stripePaymentIntent.value?.clientSecret || undefined,
     "stripe-payment-element"
 )
 

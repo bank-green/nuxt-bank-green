@@ -1,4 +1,4 @@
-import { Stripe, StripeElements, loadStripe } from "@stripe/stripe-js";
+import { Appearance, Stripe, StripeElements, loadStripe } from "@stripe/stripe-js";
 
 export default function useStripe(
     publishableKey: string,
@@ -16,12 +16,18 @@ export default function useStripe(
         stripe = await loadStripe(publishableKey);
 
         if (stripe) {
-            elements = stripe.elements({clientSecret});
+            const appearance : Appearance = {
+                theme: 'flat'
+            };
+            elements = stripe.elements({
+                clientSecret,
+                appearance,
+            });
             const paymentElement = elements.create('payment');
-            paymentElement.mount(elementId);
+            paymentElement.mount(`#${elementId}`);
             if (authenticationElementId) {
                 const linkAuthenticationElement = elements.create("linkAuthentication");
-                linkAuthenticationElement.mount(authenticationElementId);
+                linkAuthenticationElement.mount(`#${authenticationElementId}`);
             }
             isStripeLoading.value = false;
         }
@@ -37,7 +43,7 @@ export default function useStripe(
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-            return_url: `${window.location.origin}/return`
+            return_url: `${window.location.origin}/donate-complete`
             }
         });
 
