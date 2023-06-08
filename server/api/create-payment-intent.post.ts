@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { CreatePaymentIntentResponse, DonationRequestBody } from '~~/utils/interfaces/donate';
 
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string;
 
@@ -6,17 +7,27 @@ const stripe = new Stripe(stripeSecretKey, {
     apiVersion: "2022-11-15",
 });
 
-const DEFAULT_CURRENCY = "usd";
+// https://stripe.com/docs/currencies#presentment-currencies
+const DEFAULT_CURRENCY = "USD";
+// https://stripe.com/docs/currencies#zero-decimal
+const DEFAULT_MULTIPLIER = 100;
 
-const calculateOrderAmount = (items: any) => 300;
+const isValidAmount = (amount : number) => [25, 50, 100, 200, 500, 1000].includes(amount);
 
-export default defineEventHandler(async (event) => {  
+export default defineEventHandler(async (event) : Promise<CreatePaymentIntentResponse> => {  
     try {
-        const { items } = await readBody(event);
+        const body : DonationRequestBody = await readBody(event);
+        if (!isValidAmount(body.amount)) {
+            return {
+                success: false,
+                clientSecret: null,
+                error: 'Invalid amount',
+            };
+        }
 
         // Create a PaymentIntent with the order amount and currency
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: calculateOrderAmount(items),
+            amount: body.amount * DEFAULT_MULTIPLIER,
             currency: DEFAULT_CURRENCY,
             automatic_payment_methods: {
                 enabled: true,

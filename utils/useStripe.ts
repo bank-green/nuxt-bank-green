@@ -1,18 +1,29 @@
 import { Appearance, Stripe, StripeElements, loadStripe } from "@stripe/stripe-js";
+import { CreatePaymentIntentResponse } from "./interfaces/donate";
 
 export default function useStripe(
     publishableKey: string,
-    clientSecret: string | undefined,
     elementId: string,
     authenticationElementId?: string,
 ) {
-    const isStripeLoading = ref(false);
+    const isStripeLoaded = ref(false);
     const stripeMessages = ref<string[]>([]);
 
     let stripe : Stripe | null = null;
     let elements : StripeElements | null = null;
 
-    onMounted(async () => {
+    const initOneTimePayment = async (amount : number) => {
+        isStripeLoaded.value = false;
+        const stripePaymentIntent : CreatePaymentIntentResponse = await $fetch('/api/create-payment-intent', {
+            method: 'POST',
+            body: {
+                amount
+            },
+        });
+        console.info(stripePaymentIntent)
+        if (stripePaymentIntent?.clientSecret == null)
+            return;
+
         stripe = await loadStripe(publishableKey);
 
         if (stripe) {
@@ -20,7 +31,7 @@ export default function useStripe(
                 theme: 'flat'
             };
             elements = stripe.elements({
-                clientSecret,
+                clientSecret: stripePaymentIntent.clientSecret,
                 appearance,
             });
             const paymentElement = elements.create('payment');
@@ -29,16 +40,14 @@ export default function useStripe(
                 const linkAuthenticationElement = elements.create("linkAuthentication");
                 linkAuthenticationElement.mount(`#${authenticationElementId}`);
             }
-            isStripeLoading.value = false;
         }
-    });
+        isStripeLoaded.value = true;
+    }
 
     const handleSubmit = async () => {
-        if (isStripeLoading.value || stripe == null || elements == null) {
+        if (!isStripeLoaded.value || stripe == null || elements == null) {
             return;
         }
-
-        isStripeLoading.value = true;
 
         const { error } = await stripe.confirmPayment({
             elements,
@@ -52,13 +61,12 @@ export default function useStripe(
         } else {
             stripeMessages.value.push("An unexpected error occured.");
         }
-
-        isStripeLoading.value = false;
     }
 
     return {
-        isStripeLoading,
+        isStripeLoaded,
         stripeMessages,
+        initOneTimePayment,
         handleSubmit,
     }
 }

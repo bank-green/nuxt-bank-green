@@ -36,6 +36,27 @@
                                     class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify" 
                                 />
                                 <div class="grid grid-cols-2 md:grid-cols-2 px-4 gap-4 mt-8">
+                                    <div v-for="(_option) in methodOptions"
+                                        :key="_option.value"
+                                        class="inline-block"
+                                    >
+                                        <input v-model="selectedMethod" 
+                                            type="radio" 
+                                            :id="_option.value.toString()" 
+                                            :value="_option.value" 
+                                            class="hidden" 
+                                        />
+                                        <label 
+                                            class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize"
+                                            :class="selectedMethod !== _option.value ?
+                                                'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500' :
+                                                'bg-white text-leaf-500'
+                                            "
+                                            :for="_option.value.toString()"
+                                        >
+                                            {{ _option.label }}
+                                        </label>
+                                    </div>
                                     <div v-for="(_option) in donationOptions"
                                         :key="_option.value"
                                         class="inline-block"
@@ -58,7 +79,11 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div id="stripe-payment-element" class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"></div>
+                                <div 
+                                    id="stripe-payment-element" 
+                                    class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"
+                                    :class="!isStripeLoaded && 'hidden'">
+                                </div>
                                 <button type="submit" 
                                     class="button-green w-full md:w-auto mt-12 flex justify-center" 
                                 >
@@ -77,14 +102,17 @@
     </div>
 </template>
 <script setup lang="ts">
-interface DonationOption {
+interface DonationOption<T> {
     label: string;
-    value: number | string;
+    value: T;
 }
 
-const donationOptions : DonationOption[] = [
+const methodOptions : DonationOption<string>[] = [
     { label: "One-time Donation", value: 'one-time' },
     { label: "Recurring Donation", value: 'recurring' },
+]
+
+const donationOptions : DonationOption<number>[] = [
     { label: "$25", value: 25 },
     { label: "$50", value: 50 },
     { label: "$100", value: 100 },
@@ -94,7 +122,9 @@ const donationOptions : DonationOption[] = [
 
 ]
 
-const selectedOption = ref<number | string | null>(null);
+const selectedMethod = ref<string>('one-time');
+const selectedOption = ref<number | null>(null);
+const isStripeUpdated = ref(false);
 
 const { client } = usePrismic();
 const { data: donation } = await useAsyncData('donation', () => client.getSingle('donationpage'));
@@ -105,16 +135,26 @@ const { data: stripePaymentIntent } = await useFetch('/api/create-payment-intent
     body: {},
 });
 
-console.info(stripePaymentIntent.value)
+watch(() => selectedOption.value, () => {
+    isStripeUpdated.value = false;
+});
 
-const { handleSubmit } = useStripe(
+const { 
+    isStripeLoaded,
+    initOneTimePayment, 
+    handleSubmit } = useStripe(
     stripePublishableKey,
-    stripePaymentIntent.value?.clientSecret || undefined,
     "stripe-payment-element"
 )
 
-const submit = () => {
-    console.log(selectedOption.value);
-    handleSubmit();
+const submit = async () => {
+    if (!selectedOption.value)
+        return;
+    else if (isStripeUpdated.value)
+        handleSubmit();
+    else {
+        await initOneTimePayment(selectedOption.value)
+        isStripeUpdated.value = true;
+    }
 }
 </script>
