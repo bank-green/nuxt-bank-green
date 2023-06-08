@@ -34,7 +34,6 @@ export default defineEventHandler(async (event) => {
             success: false,
             clientSecret: null,
             error: _e.message,
-            key: stripeSecretKey
         }
     }
     
