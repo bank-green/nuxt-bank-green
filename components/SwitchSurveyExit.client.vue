@@ -1,4 +1,5 @@
 <template>
+<Modal v-if="surveyContent != null" v-model="showModal">
     <div class="flex flex-col items-center">
         <PrismicRichText v-if="surveyContent?.data?.title" :field="surveyContent.data.title" class="text-3xl mb-6 font-semibold whitespace-pre-wrap" />
         <PrismicRichText v-if="surveyContent?.data?.subtitle" :field="surveyContent.data.subtitle" class="text-lg mb-6 font-semibold whitespace-pre-wrap" />
@@ -7,11 +8,20 @@
             <PrismicRichText v-if="surveyContent?.data?.buttontext" :field="surveyContent.data.buttontext" />
         </NuxtLink>
     </div>
+</Modal>
 </template>
 
 <script setup lang="ts">
+const props = defineProps<{
+    modelValue: boolean
+}>();
 
-const emit = defineEmits(['success']);
+const emit = defineEmits(['success', 'update:modelValue']);
+
+const showModal = computed({
+    get: () => props.modelValue,
+    set: (val) => emit('update:modelValue', val),
+})
 
 function clickSurvey() {
     emit('success');
