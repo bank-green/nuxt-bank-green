@@ -119,7 +119,7 @@ const loadBanks = async ({
         )
     loading.value = false;
     if (banks.value.length === 0) {
-        errorMessage.value = "Sorry, we don't have any banks that met the required filter."
+        errorMessage.value = "Sorry, we don't have any banks that meet the required filter."
     }
 }
 watch(country, () => {
