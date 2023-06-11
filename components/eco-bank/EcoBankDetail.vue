@@ -55,11 +55,11 @@
             <template v-slot:fees>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <pre>{{ JSON.stringify(bankFeatures, null, 2) }}</pre>
-                    <p><strong>No Overdraft Fee:</strong>
-                        {{ getBankFeature('No overdraft fee') }}
+                    <p><strong>Overdraft Fee:</strong>
+                        {{ getInvertedBankFeature('No overdraft fee', 'Yes') }}
                     </p>
-                    <p><strong>No Account Maintenaince Fee:</strong>
-                        {{ getBankFeature('No account maintenance fee') }}
+                    <p><strong>Account Maintenaince Fee:</strong>
+                        {{ getInvertedBankFeature('No account maintenance fee', 'Yes') }}
                     </p>
                     <p><strong>Free ATM Network:</strong>
                         {{ getBankFeature('Free ATM network') }}
