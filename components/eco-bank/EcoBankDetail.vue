@@ -54,7 +54,6 @@
             </template>
             <template v-slot:fees>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <pre>{{ JSON.stringify(bankFeatures, null, 2) }}</pre>
                     <p><strong>Overdraft Fee:</strong>
                         {{ getInvertedBankFeature('No overdraft fee', 'Yes') }}
                     </p>
