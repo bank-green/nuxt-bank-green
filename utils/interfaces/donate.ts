@@ -4,6 +4,7 @@ export interface DonationRequestBody {
 
 export interface CreateSubscriptionResponse {
     success: boolean;
+    redirectURL: string | null;
     error: string | null;
 }
 

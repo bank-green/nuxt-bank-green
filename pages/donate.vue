@@ -169,12 +169,14 @@ const handleOneTimePayment = async() => {
 }
 
 const handleRecurringPayment = async() => {
-    await $fetch('/api/create-checkout-session', {
+    const response = await $fetch('/api/create-checkout-session', {
         method: 'POST',
         body: {
             amount: selectedAmount.value,
         }
     });
+    if (response.redirectURL)
+        window.location.href = response.redirectURL;
 }
 
 const submit = () => {

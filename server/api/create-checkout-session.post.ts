@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { CreateSubscriptionResponse } from '~~/utils/interfaces/donate';
 
+const domainURL = useRuntimeConfig().public.DOMAIN_URL as string;
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string;
 const priceId1 = useRuntimeConfig().STRIPE_SUBSCRIPTION_PRICE_1 as string;
 const priceId2 = useRuntimeConfig().STRIPE_SUBSCRIPTION_PRICE_2 as string;
@@ -34,8 +35,6 @@ const getPriceId = (amount: number) : string | null =>  {
 
 export default defineEventHandler(async (event) : Promise<CreateSubscriptionResponse | void> => {  
     try {
-        const requestURL = getRequestURL(event);
-        const domainURL = requestURL.hostname;
         const body = await readBody(event);
         const priceId = getPriceId(body.amount);
         if (priceId == null)
@@ -54,12 +53,19 @@ export default defineEventHandler(async (event) : Promise<CreateSubscriptionResp
             // automatic_tax: { enabled: true }
         });
 
-        return sendRedirect(event, session.url || '', 303);
+        return {
+            success: true,
+            redirectURL: session.url,
+            error: null,
+        }
+
+        // return sendRedirect(event, session.url || '', 303);
     } catch (e) {
         let _e:Error = e;
         setResponseStatus(400);
         return {
             success: false,
+            redirectURL: null,
             error: _e.message,
         };
     }
