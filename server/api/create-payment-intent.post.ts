@@ -41,6 +41,7 @@ export default defineEventHandler(async (event) : Promise<CreatePaymentIntentRes
         };
     } catch (e) {
         let _e:Error = e;
+        setResponseStatus(400);
         return {
             success: false,
             clientSecret: null,

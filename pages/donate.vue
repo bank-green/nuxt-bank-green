@@ -61,7 +61,7 @@
                                         :key="_option.value"
                                         class="inline-block"
                                     >
-                                        <input v-model="selectedOption" 
+                                        <input v-model="selectedAmount" 
                                             type="radio" 
                                             :id="_option.value.toString()" 
                                             :value="_option.value" 
@@ -69,7 +69,7 @@
                                         />
                                         <label 
                                             class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize"
-                                            :class="selectedOption !== _option.value ?
+                                            :class="selectedAmount !== _option.value ?
                                                 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500' :
                                                 'bg-white text-leaf-500'
                                             "
@@ -123,38 +123,65 @@ const donationOptions : DonationOption<number>[] = [
 ]
 
 const selectedMethod = ref<string>('one-time');
-const selectedOption = ref<number | null>(null);
+const selectedAmount = ref<number | null>(null);
 const isStripeUpdated = ref(false);
+
+const isOneTimePayment = computed(() => 
+    selectedMethod.value == 'one-time' && selectedAmount.value != null
+);
+
+const isRecurring = computed(() => 
+    selectedMethod.value == 'recurring' && selectedAmount.value != null
+);
 
 const { client } = usePrismic();
 const { data: donation } = await useAsyncData('donation', () => client.getSingle('donationpage'));
 
 const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY;
-const { data: stripePaymentIntent } = await useFetch('/api/create-payment-intent', {
-    method: 'POST',
-    body: {},
+
+watch(() => selectedAmount.value, (newVal, oldVal) => {
+    isStripeUpdated.value = (newVal != oldVal);
 });
 
-watch(() => selectedOption.value, () => {
-    isStripeUpdated.value = false;
+watch(() => selectedMethod.value, (newVal, oldVal) => {
+    isStripeUpdated.value = (newVal != oldVal);
 });
+
 
 const { 
     isStripeLoaded,
     initOneTimePayment, 
-    handleSubmit } = useStripe(
+    handleSubmit 
+} = useStripe(
     stripePublishableKey,
     "stripe-payment-element"
 )
 
-const submit = async () => {
-    if (!selectedOption.value)
+const handleOneTimePayment = async() => {
+    if (selectedAmount.value == null)
         return;
     else if (isStripeUpdated.value)
         handleSubmit();
     else {
-        await initOneTimePayment(selectedOption.value)
+        await initOneTimePayment(selectedAmount.value)
         isStripeUpdated.value = true;
+    }
+}
+
+const handleRecurringPayment = async() => {
+    await $fetch('/api/create-checkout-session', {
+        method: 'POST',
+        body: {
+            amount: selectedAmount.value,
+        }
+    });
+}
+
+const submit = () => {
+    if (isOneTimePayment.value) {
+        handleOneTimePayment();
+    } else if (isRecurring.value) {
+        handleRecurringPayment();
     }
 }
 </script>
