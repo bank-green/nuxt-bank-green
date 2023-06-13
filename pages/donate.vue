@@ -5,93 +5,55 @@
                 <div class="contain grid grid-cols-1 md:grid-cols-2 justify-center items-center pb-4 lg:pb-0 mb-4 gap-16">
                     <template v-if="donation">
                         <div class="space-y-8">
-                            <PrismicImage
-                                class="w-full h-full object-contain object-top"
-                                v-if="donation.data['photo']"
-                                alt="donation-image"
-                                :field="donation.data['photo']"
-                            />
-                            <PrismicText 
-                                :field="donation.data['title']" 
-                                wrapper="h1" 
-                                class="font-semibold text-xl md:text-3xl tracking-wider" 
-                            />
-                            <PrismicRichText 
-                                :field="donation.data['description']" 
-                                class="prose sm:prose-lg xl:prose-xl prose-blurb" 
-                            />
+                            <PrismicImage class="w-full h-full object-contain object-top" v-if="donation.data['photo']"
+                                alt="donation-image" :field="donation.data['photo']" />
+                            <PrismicText :field="donation.data['title']" wrapper="h1"
+                                class="font-semibold text-xl md:text-3xl tracking-wider" />
+                            <PrismicRichText :field="donation.data['description']"
+                                class="prose sm:prose-lg xl:prose-xl prose-blurb" />
                         </div>
-                        <div class="relative w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center">
+                        <div
+                            class="relative w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center">
                             <div class="absolute -top-4 md:-top-8 -right-4 md:-right-8">
                                 <img class="h-12 md:h-20 w-auto" src="/img/logos/bankgreen-logo.png" alt="Bank Green" />
                             </div>
                             <form class="flex flex-col rounded-xl" @submit.prevent.stop="submit">
-                                <PrismicText 
-                                    :field="donation.data['donation-title']" 
-                                    wrapper="h1" 
-                                    class="font-semibold text-xl md:text-3xl tracking-wider text-white" 
-                                />
-                                <PrismicRichText 
-                                    :field="donation.data['donation-description']" 
-                                    class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify" 
-                                />
+                                <PrismicText :field="donation.data['donation-title']" wrapper="h1"
+                                    class="font-semibold text-xl md:text-3xl tracking-wider text-white" />
+                                <PrismicRichText :field="donation.data['donation-description']"
+                                    class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify" />
                                 <div class="grid grid-cols-2 md:grid-cols-2 px-4 gap-4 mt-8">
-                                    <div v-for="(_option) in methodOptions"
-                                        :key="_option.value"
-                                        class="inline-block"
-                                    >
-                                        <input v-model="selectedMethod" 
-                                            type="radio" 
-                                            :id="_option.value.toString()" 
-                                            :value="_option.value" 
-                                            class="hidden" 
-                                        />
-                                        <label 
-                                            class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize"
+                                    <div v-for="(_option) in methodOptions" :key="_option.value" class="inline-block">
+                                        <input v-model="selectedMethod" type="radio" :id="_option.value.toString()"
+                                            :value="_option.value" class="hidden" />
+                                        <label
+                                            class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
                                             :class="selectedMethod !== _option.value ?
                                                 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500' :
                                                 'bg-white text-leaf-500'
-                                            "
-                                            :for="_option.value.toString()"
-                                        >
+                                                " :for="_option.value.toString()">
                                             {{ _option.label }}
                                         </label>
                                     </div>
-                                    <div v-for="(_option) in donationOptions"
-                                        :key="_option.value"
-                                        class="inline-block"
-                                    >
-                                        <input v-model="selectedAmount" 
-                                            type="radio" 
-                                            :id="_option.value.toString()" 
-                                            :value="_option.value" 
-                                            class="hidden" 
-                                        />
-                                        <label 
-                                            class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize"
+                                    <div v-for="(_option) in donationOptions" :key="_option.value" class="inline-block">
+                                        <input v-model="selectedAmount" type="radio" :id="_option.value.toString()"
+                                            :value="_option.value" class="hidden" />
+                                        <label
+                                            class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
                                             :class="selectedAmount !== _option.value ?
                                                 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500' :
                                                 'bg-white text-leaf-500'
-                                            "
-                                            :for="_option.value.toString()"
-                                        >
+                                                " :for="_option.value.toString()">
                                             {{ _option.label }}
                                         </label>
                                     </div>
                                 </div>
-                                <div 
-                                    id="stripe-payment-element" 
-                                    class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"
+                                <div id="stripe-payment-element" class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"
                                     :class="!isStripeLoaded && 'hidden'">
                                 </div>
-                                <button type="submit" 
-                                    class="button-green w-full md:w-auto mt-12 flex justify-center" 
-                                >
-                                    <PrismicText 
-                                        wrapper="span"
-                                        class="text-2xl font-semibold"
-                                        :field="donation.data['donation-button']"
-                                    />
+                                <button type="submit" class="button-green w-full md:w-auto mt-12 flex justify-center">
+                                    <PrismicText wrapper="span" class="text-2xl font-semibold"
+                                        :field="donation.data['donation-button']" />
                                 </button>
                             </form>
                         </div>
@@ -107,12 +69,12 @@ interface DonationOption<T> {
     value: T;
 }
 
-const methodOptions : DonationOption<string>[] = [
+const methodOptions: DonationOption<string>[] = [
     { label: "One-time Donation", value: 'one-time' },
     { label: "Recurring Donation", value: 'recurring' },
 ]
 
-const donationOptions : DonationOption<number>[] = [
+const donationOptions: DonationOption<number>[] = [
     { label: "$25", value: 25 },
     { label: "$50", value: 50 },
     { label: "$100", value: 100 },
@@ -126,11 +88,11 @@ const selectedMethod = ref<string>('one-time');
 const selectedAmount = ref<number | null>(null);
 const isStripeUpdated = ref(false);
 
-const isOneTimePayment = computed(() => 
+const isOneTimePayment = computed(() =>
     selectedMethod.value == 'one-time' && selectedAmount.value != null
 );
 
-const isRecurring = computed(() => 
+const isRecurring = computed(() =>
     selectedMethod.value == 'recurring' && selectedAmount.value != null
 );
 
@@ -148,16 +110,16 @@ watch(() => selectedMethod.value, (newVal, oldVal) => {
 });
 
 
-const { 
+const {
     isStripeLoaded,
-    initOneTimePayment, 
-    handleSubmit 
+    initOneTimePayment,
+    handleSubmit
 } = useStripe(
     stripePublishableKey,
     "stripe-payment-element"
 )
 
-const handleOneTimePayment = async() => {
+const handleOneTimePayment = async () => {
     if (selectedAmount.value == null)
         return;
     else if (isStripeUpdated.value)
@@ -168,7 +130,7 @@ const handleOneTimePayment = async() => {
     }
 }
 
-const handleRecurringPayment = async() => {
+const handleRecurringPayment = async () => {
     const response = await $fetch('/api/create-checkout-session', {
         method: 'POST',
         body: {
