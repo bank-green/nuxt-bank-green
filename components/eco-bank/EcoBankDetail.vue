@@ -71,47 +71,48 @@
             <template v-slot:security-nav>Security</template>
             <template v-slot:services-nav>Service</template>
             <template v-slot:convenience-nav>Convenience</template>
-            <template v-slot:impact>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+            <template v-slot:impact>    
+                <div class="columns-2 gap-8">
+                    <div class="w-1/2 h-96 block ml-[50%] pl-12" style="column-span:all;">
+                        <PrismicImage
+                            class="h-full mx-auto object-contain"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']" alt="impact-image"
                             :field="prismicDefaultPageData['impact-image']" />
                     </div>
+                    <PrismicRichText class="-mt-96 pt-4 text-justify text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
                 </div>
             </template>
             <template v-slot:security>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
-                        :field="prismicPageData?.security" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+                <div class="columns-2 gap-8">
+                    <div class="w-1/2 h-96 block ml-[50%] pl-12" style="column-span:all;">
+                        <PrismicImage
+                            class="h-full mx-auto object-contain"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['security-image']" alt="security-image"
                             :field="prismicDefaultPageData['security-image']" />
                     </div>
+                    <PrismicRichText class="-mt-96 pt-4 text-justify text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.security" />
                 </div>
             </template>
             <template v-slot:services>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
-                        :field="prismicPageData?.services" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+                <div class="columns-2 gap-8">
+                    <div class="w-1/2 h-96 block ml-[50%] pl-12" style="column-span:all;">
+                        <PrismicImage
+                            class="h-full mx-auto object-contain"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['service-image']" alt="service-image"
                             :field="prismicDefaultPageData['service-image']" />
                     </div>
+                    <PrismicRichText class="-mt-96 pt-4 text-justify text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.services" />
                 </div>
             </template>
             <template v-slot:convenience>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
-                        :field="prismicPageData?.convenience" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
-                            v-if="prismicDefaultPageData && prismicDefaultPageData['convenience-image']"
-                            alt="convenience-image" :field="prismicDefaultPageData['convenience-image']" />
+                <div class="columns-2 gap-8">
+                    <div class="w-1/2 h-96 block ml-[50%] pl-12" style="column-span:all;">
+                        <PrismicImage
+                            class="h-full mx-auto object-contain"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['convenience-image']" alt="convenience-image"
+                            :field="prismicDefaultPageData['convenience-image']" />
                     </div>
+                    <PrismicRichText class="-mt-96 pt-4 text-justify text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.convenience" />
                 </div>
             </template>
         </Tab>
@@ -177,3 +178,8 @@ function getInvertedBankFeature(featureName: string, defaultValue: string = "No"
     return defaultValue;
 }
 </script>
+<style scoped>
+.TextColumn__Image {
+    column-span: all;
+}
+</style>
