@@ -6,13 +6,13 @@
             <template v-slot:fees-nav>Fees</template>
             <template v-slot:key-facts>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <p><strong>Type:</strong> 
+                    <p><strong>Type:</strong>
                         {{ institutionType || 'Bank' }}
                     </p>
-                    <p><strong>Mobile Banking:</strong> 
+                    <p><strong>Mobile Banking:</strong>
                         {{ getBankFeature('Mobile banking') }}
                     </p>
-                    <p><strong>Environmental Policy:</strong> 
+                    <p><strong>Environmental Policy:</strong>
                         {{ getBankFeature('Environmental Policy') }}
                     </p>
                     <p>
@@ -22,7 +22,8 @@
                     </p>
                     <p>
                         <strong>Serving: </strong>
-                        <PrismicText v-if="prismicPageData?.serving" :field="prismicPageData.serving" wrapper="span" fallback="" />
+                        <PrismicText v-if="prismicPageData?.serving" :field="prismicPageData.serving" wrapper="span"
+                            fallback="" />
                     </p>
                     <p><strong>Local Branches: </strong>
                         {{ getBankFeature('Local Branches') }}
@@ -54,10 +55,10 @@
             <template v-slot:fees>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <p><strong>Overdraft Fee:</strong>
-                        {{ getBankFeature('Overdraft Fee') }}
+                        {{ getInvertedBankFeature('No overdraft fee', 'Yes') }}
                     </p>
-                    <p><strong>Account Maintenaince Fees:</strong>
-                        {{ getInvertedBankFeature('No account maintenance fee') }}
+                    <p><strong>Account Maintenaince Fee:</strong>
+                        {{ getInvertedBankFeature('No account maintenance fee', 'Yes') }}
                     </p>
                     <p><strong>Free ATM Network:</strong>
                         {{ getBankFeature('Free ATM network') }}
@@ -72,65 +73,44 @@
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText 
-                        class="text-md md:text-lg tracking-wide space-y-6" 
-                        :field="prismicPageData?.impact" 
-                    />
+                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
                     <div class="order-first md:order-last">
-                        <PrismicImage
-                            class="w-full h-full object-contain object-top"
-                            v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']"
-                            alt="impact-image"
-                            :field="prismicDefaultPageData['impact-image']"
-                        />
+                        <PrismicImage class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']" alt="impact-image"
+                            :field="prismicDefaultPageData['impact-image']" />
                     </div>
                 </div>
             </template>
             <template v-slot:security>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText 
-                        class="text-md md:text-lg tracking-wide space-y-6" 
-                        :field="prismicPageData?.security" 
-                    />
+                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
+                        :field="prismicPageData?.security" />
                     <div class="order-first md:order-last">
-                        <PrismicImage
-                            class="w-full h-full object-contain object-top"
-                            v-if="prismicDefaultPageData && prismicDefaultPageData['security-image']"
-                            alt="security-image"
-                            :field="prismicDefaultPageData['security-image']"
-                        />
+                        <PrismicImage class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['security-image']" alt="security-image"
+                            :field="prismicDefaultPageData['security-image']" />
                     </div>
                 </div>
             </template>
             <template v-slot:services>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText 
-                        class="text-md md:text-lg tracking-wide space-y-6" 
-                        :field="prismicPageData?.services" 
-                    />
+                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
+                        :field="prismicPageData?.services" />
                     <div class="order-first md:order-last">
-                        <PrismicImage
-                            class="w-full h-full object-contain object-top"
-                            v-if="prismicDefaultPageData && prismicDefaultPageData['service-image']"
-                            alt="service-image"
-                            :field="prismicDefaultPageData['service-image']"
-                        />
+                        <PrismicImage class="w-full h-full object-contain object-top"
+                            v-if="prismicDefaultPageData && prismicDefaultPageData['service-image']" alt="service-image"
+                            :field="prismicDefaultPageData['service-image']" />
                     </div>
                 </div>
             </template>
             <template v-slot:convenience>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText 
-                        class="text-md md:text-lg tracking-wide space-y-6" 
-                        :field="prismicPageData?.convenience" 
-                    />
+                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
+                        :field="prismicPageData?.convenience" />
                     <div class="order-first md:order-last">
-                        <PrismicImage
-                            class="w-full h-full object-contain object-top"
+                        <PrismicImage class="w-full h-full object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['convenience-image']"
-                            alt="convenience-image"
-                            :field="prismicDefaultPageData['convenience-image']"
-                        />
+                            alt="convenience-image" :field="prismicDefaultPageData['convenience-image']" />
                     </div>
                 </div>
             </template>
@@ -179,7 +159,7 @@ const tabIds = computed(() =>
     )
 )
 
-function getBankFeature(featureName : string, defaultValue : string = "No") {
+function getBankFeature(featureName: string, defaultValue: string = "No") {
     const feature = props.bankFeatures.find((feature) =>
         feature.feature.name === featureName
     );
@@ -189,7 +169,7 @@ function getBankFeature(featureName : string, defaultValue : string = "No") {
 }
 
 function getInvertedBankFeature(featureName: string, defaultValue: string = "No") {
-        const feature = props.bankFeatures.find((feature) =>
+    const feature = props.bankFeatures.find((feature) =>
         feature.feature.name === featureName
     );
     if (feature)

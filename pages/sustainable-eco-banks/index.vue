@@ -42,8 +42,8 @@
                             </div>
 
                             <div v-else-if="!loading" class="mt-20">
-                                <h2 class="text-xl font-semibold mb-4 md:text-center">
-                                    Sorry, we don't have any banks that met the required filters
+                                <h2 v-if="errorMessage" class="text-xl font-semibold mb-4 md:text-center">
+                                    {{ errorMessage }}
                                 </h2>
                                 <p class="text-gray-600 mb-8 md:text-center max-w-lg mx-auto">
                                     We’re working hard to increase the number of banks we provide data on. If you tell
@@ -89,6 +89,7 @@ const { country } = useCountry()
 
 const banks = ref([])
 const loading = ref(false)
+const errorMessage = ref(null)
 const loadBanks = async ({
     regions,
     subregions,
@@ -116,7 +117,10 @@ const loadBanks = async ({
                 b.fossilFreeAllianceRating -
                 a.fossilFreeAllianceRating || a.name - b.name
         )
-    loading.value = false
+    loading.value = false;
+    if (banks.value.length === 0) {
+        errorMessage.value = "Sorry, we don't have any banks that meet the required filter."
+    }
 }
 watch(country, () => {
     banks.value = []
