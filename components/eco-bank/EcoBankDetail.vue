@@ -72,43 +72,43 @@
             <template v-slot:services-nav>Service</template>
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
+                    <div class=" order-first lg:order-last flex items-center justify-center">
+                        <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']" alt="impact-image"
                             :field="prismicDefaultPageData['impact-image']" />
                     </div>
                 </div>
             </template>
             <template v-slot:security>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.security" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+                    <div class=" order-first lg:order-last flex items-center justify-center">
+                        <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['security-image']" alt="security-image"
                             :field="prismicDefaultPageData['security-image']" />
                     </div>
                 </div>
             </template>
             <template v-slot:services>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.services" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+                    <div class=" order-first lg:order-last flex items-center justify-center">
+                        <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['service-image']" alt="service-image"
                             :field="prismicDefaultPageData['service-image']" />
                     </div>
                 </div>
             </template>
             <template v-slot:convenience>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <PrismicRichText class="text-md md:text-lg tracking-wide space-y-6"
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.convenience" />
-                    <div class="order-first md:order-last">
-                        <PrismicImage class="w-full h-full object-contain object-top"
+                    <div class=" order-first lg:order-last flex items-center justify-center">
+                        <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['convenience-image']"
                             alt="convenience-image" :field="prismicDefaultPageData['convenience-image']" />
                     </div>
