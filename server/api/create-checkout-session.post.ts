@@ -48,8 +48,8 @@ export default defineEventHandler(async (event) : Promise<CreateSubscriptionResp
                 },
             ],
             // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-            success_url: `${domainURL}/donate-success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${domainURL}/donate-canceled`,
+            success_url: `${domainURL}/donate-complete?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${domainURL}/donate-cancelled`,
             // automatic_tax: { enabled: true }
         });
 
