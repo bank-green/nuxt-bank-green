@@ -1,16 +1,15 @@
 <template>
     <div class="page">
-        <div class="bg-sushi-50">
-            <div class="page-fade-in contain pt-28 pb-16">
-                <div class="prose mx-auto max-w-4xl text-center prose-headings:font-semibold">
-                    <h1>
-                        Thank you for your donation
-                    </h1>
-                </div>
+        <div class="bg-white">
+            <div class="page-fade-in pt-28">
+                <ThanksSection title="Thank you for your donation!"
+                    description="We appreciate your support in defunding fossil banks." />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+
+useHeadHelper("Thank you")
 </script>

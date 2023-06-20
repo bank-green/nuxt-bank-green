@@ -4,7 +4,7 @@
             <div class="page-fade-in contain pt-28 pb-16">
                 <div class="prose mx-auto max-w-4xl text-center prose-headings:font-semibold">
                     <h1>
-                        Your donation is cancelled.
+                        Your donation was cancelled.
                     </h1>
                 </div>
             </div>
