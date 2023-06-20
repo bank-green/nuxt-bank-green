@@ -86,7 +86,6 @@ const donationOptions: DonationOption<number>[] = [
 
 const selectedMethod = ref<string>('one-time');
 const selectedAmount = ref<number | null>(null);
-const isStripeUpdated = ref(false);
 
 const isOneTimePayment = computed(() =>
     selectedMethod.value == 'one-time' && selectedAmount.value != null
@@ -101,15 +100,6 @@ const { data: donation } = await useAsyncData('donation', () => client.getSingle
 
 const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY;
 
-watch(() => selectedAmount.value, (newVal, oldVal) => {
-    isStripeUpdated.value = (newVal != oldVal);
-});
-
-watch(() => selectedMethod.value, (newVal, oldVal) => {
-    isStripeUpdated.value = (newVal != oldVal);
-});
-
-
 const {
     isStripeLoaded,
     initOneTimePayment,
@@ -119,14 +109,35 @@ const {
     "stripe-payment-element"
 )
 
+watch(() => selectedAmount.value, (newVal, oldVal) => {
+    const _isAmountChanged = newVal != oldVal && oldVal != null && newVal != null;
+
+    if (_isAmountChanged && isOneTimePayment.value && isStripeLoaded.value) {
+        isStripeLoaded.value = false;
+        initOneTimePayment(newVal);
+    }
+});
+
+watch(() => selectedMethod.value, (newVal, oldVal) => {
+    const _isOneTimePayment = newVal != oldVal && newVal === 'one-time';
+    const _isRecurringPayment = newVal != oldVal && newVal === 'recurring';
+
+    if (_isRecurringPayment && isStripeLoaded.value)
+        isStripeLoaded.value = false;
+    
+    if (_isOneTimePayment && selectedAmount.value != null && isStripeLoaded.value) {
+        isStripeLoaded.value = false;
+        initOneTimePayment(selectedAmount.value);
+    }
+})
+
 const handleOneTimePayment = async () => {
     if (selectedAmount.value == null)
         return;
-    else if (isStripeUpdated.value)
+    else if (isStripeLoaded.value)
         handleSubmit();
     else {
-        await initOneTimePayment(selectedAmount.value)
-        isStripeUpdated.value = true;
+        await initOneTimePayment(selectedAmount.value);
     }
 }
 
