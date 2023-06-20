@@ -16,7 +16,7 @@
                     <div class="font-medium md:font-semibold text-gray-800 text-xl md:text-4xl tracking-wider mb-2 md:mb-6">
                         {{ `Our take on ${name}` }}
                     </div>
-                    <div class="text-lg md:text-xl text-gray-500">
+                    <div class="text-lg md:text-xl text-gray-500 prose">
                         <PrismicRichText v-if="prismicOurTake && prismicOurTake.length > 0" :field="prismicOurTake" />
                         <span v-else-if="rating === 'ok'">This bank is ok</span>
                         <span v-else-if="rating === 'great'">This bank is great</span>
