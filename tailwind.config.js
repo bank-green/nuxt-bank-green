@@ -48,7 +48,7 @@ module.exports = {
                     '400': '#3A6028',
                     '500': '#0D5D43',
                     '700': '#123F30'
-                }
+                },
             },
             boxShadow: {
                 green: '0px 15px 30px rgba(122, 139, 85, 0.2)',

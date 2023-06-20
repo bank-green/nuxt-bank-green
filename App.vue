@@ -13,9 +13,10 @@
             :title="'Not ready to switch banks today?\nTake our pledge to move your money when you’re ready.'"
             tag="pledge popup" />
     </Modal>
-    <Modal v-model="openSwitchSurveyModal">
-        <SwitchSurveyExit @success="openSwitchSurveyModal = false" tag="popup" />
-    </Modal>
+    <SwitchSurveyExit
+        v-model="openSwitchSurveyModal"
+        @success="openSwitchSurveyModal = false"
+        tag="popup" />
     <NotificationPanel />
 </template>
 

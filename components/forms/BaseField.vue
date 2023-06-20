@@ -64,7 +64,8 @@
         </div>
         <div
             v-if="showWarning && typeof(showWarning) === 'string'"
-            class="absolute top-full left-5 mt-0.5 text-xs text-red-600"
+            class="absolute top-full left-5 mt-0.5 text-xs"
+            :class="dark ? 'text-white font-semibold' : 'text-red-600'"
         >
             {{ showWarning }}
         </div>
