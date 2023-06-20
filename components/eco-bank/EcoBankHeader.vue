@@ -22,12 +22,15 @@
                         <span v-else-if="rating === 'great'">This bank is great</span>
                     </div>
                     <div class="flex flex-col md:flex-row justify-start items-center gap-6 mt-4"
-                        v-if="hasInstitutionCredentials">
-                        <template v-for="cred in institutionCredentials">
-                            <img v-if="isFossilFreeCertification(cred)" class="h-16 w-auto"
-                                src="/img/certification/fossil-free-certified.png" :alt="cred?.name" />
+                        v-if="hasInstitutionCredentials || fossilFreeAlliance">
 
-                            <PrismicImage v-else-if="cred?.prismicApiId &&
+                        <img v-if="fossilFreeAlliance" class="h-16 w-auto"
+                                src="/img/certification/fossil-free-certified.png" alt="Fossil Free Certified" />
+                        <template v-for="cred in institutionCredentials">
+                            <!-- <img v-if="isFossilFreeCertification(cred)" class="h-16 w-auto"
+                                src="/img/certification/fossil-free-certified.png" :alt="cred?.name" /> -->
+
+                            <PrismicImage v-if="cred?.prismicApiId &&
                                 prismicDefaultPageData &&
                                 prismicDefaultPageData[cred.prismicApiId]" class="h-16 md:h-12 w-auto"
                                 :field="prismicDefaultPageData[cred.prismicApiId]" />
@@ -56,7 +59,8 @@ const props = defineProps<{
     rating: string,
     institutionCredentials: any[],
     prismicDefaultPageData: Record<string, any> | null,
-    prismicOurTake?: RichTextField
+    prismicOurTake?: RichTextField,
+    fossilFreeAlliance: boolean,
 }>()
 
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(() =>
