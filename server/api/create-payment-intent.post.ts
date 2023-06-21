@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { CreatePaymentIntentResponse, DonationRequestBody } from '~~/utils/interfaces/donate';
+import { CreatePaymentIntentResponse } from '~~/utils/interfaces/donate';
 
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string;
 
@@ -16,7 +16,11 @@ const isValidAmount = (amount : number) => [25, 50, 100, 200, 500, 1000].include
 
 export default defineEventHandler(async (event) : Promise<CreatePaymentIntentResponse> => {  
     try {
-        const body : DonationRequestBody = await readBody(event);
+        let body = await readBody(event);
+        if (body instanceof Uint8Array) {
+          body = JSON.parse(new TextDecoder().decode(body));
+        }
+
         if (!isValidAmount(body.amount)) {
             return {
                 success: false,

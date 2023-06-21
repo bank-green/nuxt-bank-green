@@ -35,7 +35,11 @@ const getPriceId = (amount: number) : string | null =>  {
 
 export default defineEventHandler(async (event) : Promise<CreateSubscriptionResponse | void> => {  
     try {
-        const body = await readBody(event);
+        let body = await readBody(event);
+        if (body instanceof Uint8Array) {
+          body = JSON.parse(new TextDecoder().decode(body));
+        }
+        
         const priceId = getPriceId(body.amount);
         if (priceId == null)
             throw new Error("Subscription not found");    
