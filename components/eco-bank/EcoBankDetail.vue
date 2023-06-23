@@ -73,7 +73,8 @@
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-12 text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
+                        :field="prismicPageData?.impact" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']" alt="impact-image"
@@ -83,7 +84,7 @@
             </template>
             <template v-slot:security>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-12 text-md md:text-lg tracking-wide space-y-6"
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.security" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
@@ -94,7 +95,7 @@
             </template>
             <template v-slot:services>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-12 text-md md:text-lg tracking-wide space-y-6"
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.services" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
@@ -105,7 +106,7 @@
             </template>
             <template v-slot:convenience>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-12 text-md md:text-lg tracking-wide space-y-6"
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.convenience" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
