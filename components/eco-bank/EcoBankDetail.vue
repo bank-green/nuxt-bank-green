@@ -1,11 +1,11 @@
 <template>
     <div class="contain space-y-8 md:space-y-16">
-        <Tab :tabIds="['key-facts', 'products', 'fees']">
+        <Tab :tabIds="['key-facts', 'products', 'fees']" class="w-full lg:w-3/4 xl:w-2/3 mx-auto">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
             <template v-slot:fees-nav>Fees</template>
             <template v-slot:key-facts>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
                     <p><strong>Type:</strong>
                         {{ institutionType || 'Bank' }}
                     </p>
@@ -31,7 +31,7 @@
                 </div>
             </template>
             <template v-slot:products>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-24">
                     <p><strong>Current Accounts:</strong>
                         {{ getBankFeature('checking') }}
                     </p>
@@ -53,7 +53,7 @@
                 </div>
             </template>
             <template v-slot:fees>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
                     <p><strong>Overdraft Fee:</strong>
                         {{ getInvertedBankFeature('No overdraft fee', 'Yes') }}
                     </p>
