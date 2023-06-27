@@ -31,9 +31,9 @@
                 </button>
 
                 <div class="hidden lg:block py-2 space-x-2">
-                    <NuxtLink v-for="link in headerLinks" :key="link.href" :to="link.href"
-                        activeClass="bg-primary-light" inactiveClass="hover:bg-primary-light"
-                        class="px-4 py-2 text-base text-white font-medium rounded-xl" @click="isOpen = false">{{
+                    <NuxtLink v-for="link in headerLinks" :key="link.href" :to="link.href" activeClass="bg-primary-light"
+                        inactiveClass="hover:bg-primary-light" class="px-4 py-2 text-base text-white font-medium rounded-xl"
+                        @click="isOpen = false">{{
                             link.short_title || link.title
                         }}</NuxtLink>
                     <NuxtLink to="/impact" activeClass="bg-sushi-600"
@@ -54,8 +54,9 @@
                     class="block py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-white text-sm font-medium bg-primary-dark rounded-xl"
                     @click="isOpen = false">{{ link.title }}</NuxtLink>
                 <NuxtLink to="/impact"
-                    class="block w-full text-left py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium bg-primary-dark text-white rounded-xl bg-sushi-500 hover:bg-sushi-600">
-                    Switch survey
+                    class="block w-full text-left py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium text-white rounded-xl bg-sushi-500 hover:bg-sushi-600"
+                    @click="isOpen = false">
+                    Switch Survey
                 </NuxtLink>
             </div>
         </transition>
