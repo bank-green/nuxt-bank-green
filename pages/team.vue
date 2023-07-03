@@ -16,6 +16,7 @@
                     description="When Alice finished school in 2019, she had the strongly felt but vaguely conceived plan to somehow do some good in the world. As she reckoned with her own eco-grief, she found her place in climate campaigning, working to create a livable world for all from New York City."
                     img="/img/team/alice.jpg" />
                 <TeamMember name="Ilias Ism"
+                    href="https://il.ly"
                     description="Being a tech founder in several successful startups, Ilias felt he could use his experience and passion in the fight against climate change and life on our planet. He enjoys hosting on couchsurfing, meeting people and travel."
                     img="/img/team/illy.jpg" />
                 <TeamMember name="Martha Murphy"
