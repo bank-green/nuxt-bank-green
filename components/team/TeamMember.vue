@@ -7,7 +7,8 @@
             </div>
             <div class="flex-1 mt-4 sm:mt-0 sm:ml-8">
                 <div class="text-lg leading-6 font-medium space-y-1 mb-4">
-                    <h3>{{ name }}</h3>
+                    <a v-if="href" :href="href" target="_blank" ref="noopener">{{ name }}</a>
+                    <h3 v-else>{{ name }}</h3>
                 </div>
                 <div class="text-lg">
                     <p class="text-gray-500">{{ description }}</p>
@@ -22,6 +23,7 @@ import LazyImage from '@/components/LazyImage.vue'
 
 const props = defineProps({
     name: String,
+    href: String,
     img: String,
     description: String,
 })
