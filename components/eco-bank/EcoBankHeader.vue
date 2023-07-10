@@ -25,7 +25,8 @@
                         v-if="hasInstitutionCredentials || fossilFreeAlliance">
 
                         <img v-if="fossilFreeAlliance" class="h-16 w-auto"
-                                src="/img/certification/fossil-free-certified.png" alt="Fossil Free Certified" />
+                            src="/img/certification/fossil-free-certified.png" alt="Fossil Free Certified"
+                            title="Fossil Free Certified" />
                         <template v-for="cred in institutionCredentials">
                             <!-- <img v-if="isFossilFreeCertification(cred)" class="h-16 w-auto"
                                 src="/img/certification/fossil-free-certified.png" :alt="cred?.name" /> -->
@@ -33,7 +34,7 @@
                             <PrismicImage v-if="cred?.prismicApiId &&
                                 prismicDefaultPageData &&
                                 prismicDefaultPageData[cred.prismicApiId]" class="h-16 md:h-12 w-auto"
-                                :field="prismicDefaultPageData[cred.prismicApiId]" />
+                                :alt="cred?.name" :title="cred?.name" :field="prismicDefaultPageData[cred.prismicApiId]" />
                         </template>
                     </div>
                 </div>

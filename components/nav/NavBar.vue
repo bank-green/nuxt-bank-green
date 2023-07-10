@@ -30,19 +30,15 @@
                     </template>
                 </button>
 
-                <div class="hidden lg:block py-2 space-x-2 mr-2 text-right">
-                    <NuxtLink v-for="link in headerLinks" 
-                        :key="link.href" 
-                        :to="link.href"
-                        :activeClass="!link.isButton ? 'bg-primary-light' : 'bg-sushi-600'"
-                        :inactiveClass="!link.isButton && 'hover:bg-primary-light'"
-                        :class="!link.isButton 
-                            ? 'inline-block px-4 py-2 text-base text-white font-medium rounded-xl'
-                            : 'inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center w-full rounded-xl shadow-green capitalize cursor-pointer'
-                        "
-                        @click="isOpen = false"
-                    >
-                        {{link.short_title || link.title}}
+                <div class="hidden lg:block py-2 space-x-2">
+                    <NuxtLink v-for="link in headerLinks" :key="link.href" :to="link.href" activeClass="bg-primary-light"
+                        inactiveClass="hover:bg-primary-light" class="px-4 py-2 text-base text-white font-medium rounded-xl"
+                        @click="isOpen = false">{{
+                            link.short_title || link.title
+                        }}</NuxtLink>
+                    <NuxtLink to="/donate" activeClass="bg-sushi-600"
+                        class="inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center w-full rounded-xl shadow-green capitalize">
+                        Donate
                     </NuxtLink>
                 </div>
             </div>
@@ -59,9 +55,11 @@
                     activeClass="'bg-primary-light'"
                     inactiveClass="'hover:bg-primary-light'"
                     class="block py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-white text-sm font-medium bg-primary-dark rounded-xl"
-                    @click="isOpen = false"
-                >
-                    {{ link.title }}
+                    @click="isOpen = false">{{ link.title }}</NuxtLink>
+                <NuxtLink to="/impact"
+                    class="block w-full text-left py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium text-white rounded-xl bg-sushi-500 hover:bg-sushi-600"
+                    @click="isOpen = false">
+                    Donate
                 </NuxtLink>
             </div>
         </transition>

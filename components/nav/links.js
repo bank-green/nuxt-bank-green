@@ -28,11 +28,6 @@ export default function getLinks({ isHeader = false }) {
             href: '/impact',
             title: 'Switch Survey',
         });
-        links.push({
-            href: '/donate',
-            title: 'Donate',
-            isButton: true,
-        });
     } else {
         links.push({
             href: '/certification',
