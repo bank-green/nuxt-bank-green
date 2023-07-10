@@ -1,8 +1,8 @@
 <template>
-    <div class="page bg-sushi-50 space-y-8 md:space-y-24 pt-32 pb-16">
+    <div class="page bg-sushi-50 space-y-8 md:space-y-16 pt-32 pb-16">
         <EcoBankHeader :name="details.name" :rating="details.rating" :website="details.website"
             :inheritBrandRating="details.inheritBrandRating" :institutionCredentials="institutionCredentials"
-            :prismicOurTake="prismicPageData?.our_take" :prismicDefaultPageData="prismicDefaultPageData" />
+            :prismicOurTake="prismicPageData?.our_take" :prismicDefaultPageData="prismicDefaultPageData" :fossilFreeAlliance="details.fossilFreeAlliance" />
 
 
         <EcoBankSwitchSurvey :bankName="details.name" :prismicDefaultPageData="prismicDefaultPageData"

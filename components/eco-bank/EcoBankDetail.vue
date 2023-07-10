@@ -1,11 +1,11 @@
 <template>
-    <div class="contain space-y-8 md:space-y-24">
-        <Tab :tabIds="['key-facts', 'products', 'fees']">
+    <div class="contain space-y-8 md:space-y-16">
+        <Tab :tabIds="['key-facts', 'products', 'fees']" class="w-full lg:w-3/4 xl:w-2/3 mx-auto">
             <template v-slot:key-facts-nav>Key Facts</template>
             <template v-slot:products-nav>Products</template>
             <template v-slot:fees-nav>Fees</template>
             <template v-slot:key-facts>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
                     <p><strong>Type:</strong>
                         {{ institutionType || 'Bank' }}
                     </p>
@@ -31,7 +31,7 @@
                 </div>
             </template>
             <template v-slot:products>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-24">
                     <p><strong>Current Accounts:</strong>
                         {{ getBankFeature('checking') }}
                     </p>
@@ -53,7 +53,7 @@
                 </div>
             </template>
             <template v-slot:fees>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
                     <p><strong>Overdraft Fee:</strong>
                         {{ getInvertedBankFeature('No overdraft fee', 'Yes') }}
                     </p>
@@ -73,7 +73,8 @@
             <template v-slot:convenience-nav>Convenience</template>
             <template v-slot:impact>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6" :field="prismicPageData?.impact" />
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
+                        :field="prismicPageData?.impact" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
                             v-if="prismicDefaultPageData && prismicDefaultPageData['impact-image']" alt="impact-image"
@@ -83,7 +84,7 @@
             </template>
             <template v-slot:security>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6"
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.security" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
@@ -94,7 +95,7 @@
             </template>
             <template v-slot:services>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6"
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.services" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"
@@ -105,7 +106,7 @@
             </template>
             <template v-slot:convenience>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <PrismicRichText class="pt-4 text-md md:text-lg tracking-wide space-y-6"
+                    <PrismicRichText class="pt-8 text-md md:text-lg tracking-wide space-y-6"
                         :field="prismicPageData?.convenience" />
                     <div class=" order-first lg:order-last flex items-center justify-center">
                         <PrismicImage class="w-full md:w-3/4 mx-auto object-contain object-top"

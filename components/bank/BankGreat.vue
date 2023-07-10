@@ -34,7 +34,7 @@
                 <div class="contain">
                     <div class="flex flex-col md:flex-row items-center justify-center pt-8 pb-16">
                         <div class="md:w-1/2 max-w-sm">
-                            <PrismicRichText class="text-lg md:text-2xl tracking-wide mb-4"
+                            <PrismicRichText class="text-lg md:text-2xl tracking-wide mb-4 prose"
                                 :field="bankPage?.data.description2" />
                             <p class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0">
                                 Our mission is to encourage as many people as possible to take a
