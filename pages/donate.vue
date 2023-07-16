@@ -110,9 +110,7 @@ const {
 )
 
 watch(() => selectedAmount.value, (newVal, oldVal) => {
-    const _isAmountChanged = newVal != oldVal && oldVal != null && newVal != null;
-
-    if (_isAmountChanged && isOneTimePayment.value && isStripeLoaded.value) {
+    if (isOneTimePayment.value && newVal !== null) {
         isStripeLoaded.value = false;
         initOneTimePayment(newVal);
     }
