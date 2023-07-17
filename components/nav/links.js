@@ -23,7 +23,12 @@ export default function getLinks({ isHeader = false }) {
         { href: '/take-action', title: 'Take Action' },
     ]
 
-    if (!isHeader) {
+    if (isHeader) {
+        links.push({
+            href: '/impact',
+            title: 'Switch Survey',
+        });
+    } else {
         links.push({
             href: '/certification',
             title: 'Fossil Free Certification',
@@ -50,7 +55,12 @@ export default function getLinks({ isHeader = false }) {
             title: "Who we are",
             short_title: "Team",
         })
-        return links
+
+        links.push({
+            href: '/donate',
+            title: 'Donate',
+            isButton: true,
+        });
     }
 
     return links

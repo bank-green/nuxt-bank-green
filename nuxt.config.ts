@@ -1,9 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/prismic"],
   prismic: {
     endpoint: "https://bankgreen.prismic.io/api/v2",
+  },
+  runtimeConfig: {
+    public: {
+      STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
+      DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
+    },
+    STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
+    STRIPE_SUBSCRIPTION_PRICE_1: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_1,
+    STRIPE_SUBSCRIPTION_PRICE_2: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_2,
+    STRIPE_SUBSCRIPTION_PRICE_3: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_3,
+    STRIPE_SUBSCRIPTION_PRICE_4: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_4,
+    STRIPE_SUBSCRIPTION_PRICE_5: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
+    STRIPE_SUBSCRIPTION_PRICE_6: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
   },
   vue: {
     compilerOptions: {
