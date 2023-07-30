@@ -6,14 +6,6 @@ import httpErrorHandling from './errorHandling'
 // let baseURL = 'https://europe-west1-bank-green-staging.cloudfunctions.net'
 let baseURL = "https://europe-west1-bank-green.cloudfunctions.net"
 
-/*
-if (process.env.VUE_APP_ENV === 'staging') {
-    baseURL = 'https://europe-west1-bank-green-staging.cloudfunctions.net'
-}
-if (process.env.VUE_APP_ENV === 'production') {
-    baseURL = 'https://europe-west1-bank-green.cloudfunctions.net'
-}
-*/
 
 export const instance = axios.create({
     baseURL,
