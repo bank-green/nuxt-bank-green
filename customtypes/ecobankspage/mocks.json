@@ -1,0 +1,142 @@
+[
+  {
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "deeply",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "anybody",
+      "type": "Text"
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "accordion_slice$fc75f3ce-08bf-4751-a31e-4ee1827c5a3b",
+          "name": "accordion_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "richText",
+            "primary": {
+              "title": {
+                "__TYPE__": "FieldContent",
+                "value": "winter",
+                "type": "Text"
+              },
+              "content": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Anim commodo commodo commodo."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        },
+        {
+          "key": "text_slice$c7baa225-f968-4d06-9ee2-a982efd54421",
+          "name": "text_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "text": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Officia occaecat incididunt nostrud ipsum proident in dolore ipsum aliquip qui esse enim Lorem fugiat."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "slices1": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "accordion_slice$bb8b9e6e-9955-490a-9c0f-eba3ccb05e62",
+          "name": "accordion_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "richText",
+            "primary": {
+              "title": {
+                "__TYPE__": "FieldContent",
+                "value": "something",
+                "type": "Text"
+              },
+              "content": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Adipisicing commodo magna tempor amet anim. Id mollit mollit aute sit ad ullamco aliqua commodo proident pariatur fugiat pariatur labore fugiat. Deserunt anim ex ad incididunt laborum ullamco consequat amet fugiat proident pariatur consectetur aute enim aliqua."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        },
+        {
+          "key": "text_slice$118481be-ddce-49a0-9711-981413fa07de",
+          "name": "text_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "text": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Occaecat cupidatat nisi laboris laborum tempor irure nisi labore culpa cillum. Consequat esse ipsum laborum id laborum exercitation. Non cupidatat tempor ut tempor ullamco ea Lorem ex Lorem culpa consequat."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

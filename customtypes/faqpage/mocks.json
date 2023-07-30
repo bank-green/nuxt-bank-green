@@ -1,0 +1,62 @@
+[
+  {
+    "introduction": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Ad commodo laboris cupidatat aliqua deserunt anim et anim magna ipsum dolor mollit ipsum. Dolor reprehenderit esse ut pariatur id magna et ad amet duis mollit cupidatat."
+          }
+        }
+      ]
+    },
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "row",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "replied",
+      "type": "Text"
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "accordion_slice$fc3e0480-96c4-48fa-9e9f-d26f14a8fa1a",
+          "name": "accordion_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "richText",
+            "primary": {
+              "title": {
+                "__TYPE__": "FieldContent",
+                "value": "police",
+                "type": "Text"
+              },
+              "content": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Sunt mollit sunt sit ut. Deserunt consequat nulla eiusmod aliqua nostrud pariatur."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

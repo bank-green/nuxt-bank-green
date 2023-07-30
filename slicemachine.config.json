@@ -1,0 +1,6 @@
+{
+  "apiEndpoint": "https://bankgreen.cdn.prismic.io/api/v2",
+  "repositoryName": "bankgreen",
+  "adapter": "@slicemachine/adapter-nuxt",
+  "libraries": ["./slices"]
+}

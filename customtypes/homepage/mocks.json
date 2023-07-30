@@ -1,0 +1,105 @@
+[
+  {
+    "description1": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Id qui dolore consequat ipsum irure ullamco minim tempor consectetur."
+          }
+        }
+      ]
+    },
+    "description2": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Enim voluptate ipsum irure et esse. Laborum anim quis incididunt quis minim esse reprehenderit tempor enim reprehenderit. Et sunt nulla non nisi proident voluptate pariatur qui tempor deserunt commodo dolore qui consequat."
+          }
+        }
+      ]
+    },
+    "description3": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Velit sunt labore ut amet culpa veniam eu dolore et exercitation ipsum ad nostrud deserunt."
+          }
+        }
+      ]
+    },
+    "description4": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Consequat aliqua excepteur tempor ex sit enim exercitation laboris incididunt officia. Ex consectetur ullamco ut."
+          }
+        }
+      ]
+    },
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "stronger",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "visit",
+      "type": "Text"
+    },
+    "slices1": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "featured_in_slice$23a6e716-7657-4434-9b08-aa2a54de2f5d",
+          "name": "featured_in_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "logo": {
+                "__TYPE__": "ImageContent",
+                "origin": {
+                  "id": "main",
+                  "url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+                  "width": 4172,
+                  "height": 4000
+                },
+                "url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+                "width": 4172,
+                "height": 4000,
+                "edit": {
+                  "zoom": 1,
+                  "crop": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "background": "transparent"
+                },
+                "thumbnails": {}
+              },
+              "class": {
+                "__TYPE__": "FieldContent",
+                "value": "frighten",
+                "type": "Text"
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

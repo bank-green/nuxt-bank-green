@@ -1,0 +1,82 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "richText",
+    "primary": {
+      "title": {
+        "__TYPE__": "FieldContent",
+        "value": "independent",
+        "type": "Text"
+      },
+      "content": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Aliquip non dolor ipsum ad proident pariatur eiusmod consequat duis cupidatat elit pariatur cillum quis. Aute minim ipsum commodo cupidatat minim deserunt aute id commodo dolore pariatur minim."
+            }
+          }
+        ]
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "richTextWithStep",
+    "primary": {
+      "title": {
+        "__TYPE__": "FieldContent",
+        "value": "frequently",
+        "type": "Text"
+      },
+      "content": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Ut exercitation dolore id sint adipisicing laborum. Excepteur nulla aute sit quis culpa qui elit sit in voluptate reprehenderit mollit. Cillum officia est qui laborum non irure esse pariatur enim nostrud quis reprehenderit ex consectetur."
+            }
+          }
+        ]
+      },
+      "step": {
+        "__TYPE__": "FieldContent",
+        "value": "evening",
+        "type": "Text"
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "contentlink": {
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "DocumentLink",
+          "id": "mock_document_id"
+        }
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
+]
