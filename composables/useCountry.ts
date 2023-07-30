@@ -5,9 +5,7 @@ const isValidCode = (code : string) : boolean => !!en && Object.keys(en).include
 const defaultCountry = () => {
   try { 
     if (process?.client) {
-      console.log('client side')
       // client-side we try to read country from browser settings
-
       const navLang = navigator.language;
       if (navLang) {
         const region = new Intl.Locale(navLang)?.region as string;
@@ -15,7 +13,6 @@ const defaultCountry = () => {
           return region
       }
     } else {
-      console.log('server side')
       // server-side we try to read country from CF headers and locale headers
 
       const headers = useRequestHeaders()
