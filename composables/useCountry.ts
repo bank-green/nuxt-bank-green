@@ -3,7 +3,7 @@ import en from "~~/lang/en.json"
 const isValidCode = (code : string) : boolean => !!en && Object.keys(en).includes(`COUNTRY_${code}`)
 
 const defaultCountry = () => {
-  if (process.server) {
+  if (process?.server) {
     // server-side we try to read country from CF headers and locale headers
 
     const headers = useRequestHeaders()
@@ -17,7 +17,7 @@ const defaultCountry = () => {
       if (isValidCode(region))
         return region
     }
-  } else if (process.client) {
+  } else if (process?.client) {
     // client-side we try to read country from browser settings
 
     const navLang = navigator.language;
