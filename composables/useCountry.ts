@@ -3,31 +3,36 @@ import en from "~~/lang/en.json"
 const isValidCode = (code : string) : boolean => !!en && Object.keys(en).includes(`COUNTRY_${code}`)
 
 const defaultCountry = () => {
-  if (process?.server) {
-    // server-side we try to read country from CF headers and locale headers
+  try { 
+    if (process?.client) {
+      console.log('client side')
+      // client-side we try to read country from browser settings
 
-    const headers = useRequestHeaders()
-    const reqCountry = headers["CF-IPCountry"] as string;
-    if (isValidCode(reqCountry))
-      return reqCountry
+      const navLang = navigator.language;
+      if (navLang) {
+        const region = new Intl.Locale(navLang)?.region as string;
+        if (isValidCode(region))
+          return region
+      }
+    } else {
+      console.log('server side')
+      // server-side we try to read country from CF headers and locale headers
 
-    const reqLocale = headers["accept-language"]?.split(",")[0];
-    if (reqLocale) {
-      const region = new Intl.Locale(reqLocale)?.region as string;
-      if (isValidCode(region))
-        return region
+      const headers = useRequestHeaders()
+      const reqCountry = headers["CF-IPCountry"] as string;
+      if (isValidCode(reqCountry))
+        return reqCountry
+
+      const reqLocale = headers["accept-language"]?.split(",")[0];
+      if (reqLocale) {
+        const region = new Intl.Locale(reqLocale)?.region as string;
+        if (isValidCode(region))
+          return region
+      }
     }
-  } else if (process?.client) {
-    // client-side we try to read country from browser settings
-
-    const navLang = navigator.language;
-    if (navLang) {
-      const region = new Intl.Locale(navLang)?.region as string;
-      if (isValidCode(region))
-        return region
-    }
+  } finally {
+    return 'US';
   }
-  return 'US';
 };
 
 export const useCountry = () => {
