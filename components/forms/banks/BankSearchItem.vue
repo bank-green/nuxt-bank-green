@@ -2,12 +2,10 @@
     <div class="flex items-center">
         <div class="relative w-6 h-6 mr-3">
             <ClearbitLogo
-                v-if="website"
                 :url="website"
                 :size="24"
-                imgClass="absolute inset-0 z-20 bg-contain bg-no-repeat bg-center bg-white"
+                imgClass="absolute inset-0 z-20"
             />
-            <BankIcon class="absolute inset-0 z-10" />
         </div>
         <span
             class="w-full flex-1 font-normal block truncate"
@@ -42,7 +40,6 @@
 </template>
 
 <script setup lang="ts">
-import BankIcon from './BankIcon.vue'
 import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
 const props = defineProps<{

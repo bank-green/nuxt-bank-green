@@ -1,15 +1,17 @@
 <template>
-    <ClientOnly>
-        <img :style="imgStyle" :src="src" :class="imgClass" @load="handleLoad" />
-    </ClientOnly>
+    <img :src="src" :width="size" :height="size" :class="imgClass" @error="handleError" :style="clearbitStyle" />
+    <img src="/img/icons/bank-icon.svg" :width="size" :height="size" :class="imgClass" :style="fallbackStyle" />
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 
-const imgStyle = ref("visibility: hidden")
-function handleLoad() {
-    console.log('found image')
-    imgStyle.value = "visibility: visible"
+const clearbitStyle = ref("visibility: visible")
+const fallbackStyle = ref("visibility: hidden")
+
+function handleError() {
+    clearbitStyle.value = "visibility: hidden"
+    fallbackStyle.value = "visibility: visibl"
 } 
 
 const props = withDefaults(defineProps<{
@@ -17,7 +19,8 @@ const props = withDefaults(defineProps<{
     imgClass: string;
     size?: number;
 }>(), {
-    size: 60
+    size: 60,
+    src: "doesnotexist" // added to trigger handleError, not ideal, but it works
 });
 
 const urlDomain = computed(() => {
