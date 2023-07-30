@@ -8,7 +8,7 @@
                 leave-from-class="opacity-100 scale-y-100" leave-to-class="opacity-0 scale-y-95" mode="out-in">
                 <div v-if="item" class="flex items-center truncate">
                     <div class="relative w-12 h-12">
-                        <ClearbitLogo :url="item.website" :size="24"
+                        <ClearbitLogo :url="item.website" :size="48"
                             imgClass="absolute inset-0 z-20" />
                     </div>
                     <div class="ml-3 flex-1 flex items-center font-semibold text-gray-800 truncate">
@@ -48,7 +48,6 @@
 </template>
 
 <script setup lang="ts">
-import BankIcon from '@/components/forms/banks/BankIcon.vue'
 import ClearbitLogo from '@/components/icons/ClearbitLogo.vue';
 
 const props = defineProps<{

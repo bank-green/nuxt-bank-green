@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import BankIcon from '../forms/banks/BankIcon.vue';
 import ClearbitLogo from '../icons/ClearbitLogo.vue';
 
 defineProps<{

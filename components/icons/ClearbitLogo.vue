@@ -1,17 +1,14 @@
 <template>
-    <img :src="src" :width="size" :height="size" :class="imgClass" @error="handleError" :style="clearbitStyle" />
-    <img src="/img/icons/bank-icon.svg" :width="size" :height="size" :class="imgClass" :style="fallbackStyle" />
+        <img v-if="showClearbit" :src="src" :class="`object-contain`" :style="`width: ${size}px; height: ${size}px`" @error="handleError" />
+        <img v-else src="/img/icons/bank-icon.svg" :style="`width: ${size}px; height: ${size}px`" :class="`object-contain`" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 
-const clearbitStyle = ref("visibility: visible")
-const fallbackStyle = ref("visibility: hidden")
+const showClearbit = ref(true)
 
 function handleError() {
-    clearbitStyle.value = "visibility: hidden"
-    fallbackStyle.value = "visibility: visibl"
+    showClearbit.value = false
 } 
 
 const props = withDefaults(defineProps<{

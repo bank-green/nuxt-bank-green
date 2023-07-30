@@ -9,10 +9,6 @@ import { ref, computed } from "vue";
 import { useBankPage } from "../../utils/prismic/bankpage";
 
 const route = useRoute()
-// FIXME this is a workaround for an upstream Vue router bug; when seeing this the next time,
-// check if it works with useRoute() by now
-// I think this issue is relevant: https://github.com/nuxt/framework/issues/8731
-// and this upstream PR in Vue: https://github.com/vuejs/core/pull/6736
 const bankTag = route.params.bankTag;
 const details = ref(await getBankDetail(bankTag));
 

@@ -2,8 +2,8 @@
     <div class="relative col-span-2 md:col-span-1 flex items-center md:-mt-8">
         <div class="flex-1 flex items-center">
             <div class="relative w-14 h-14 mr-4 rounded-lg">
-                <ClearbitLogo :url="website" :size="24"
-                    imgClass="absolute inset-0 z-20" />
+                <ClearbitLogo :url="website" :size="56"
+                     />
             </div>
             <div>
                 <h1 class="text-xl md:text-2xl text-gray-800 font-medium md:font-semibold tracking-wider flex items-center">
@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
-import BankIcon from '@/components/forms/banks/BankIcon.vue'
 
 defineProps<{
     website: string,
