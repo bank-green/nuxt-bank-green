@@ -30,7 +30,7 @@
                     </button>
                 </div>
             </div>
-            <LazyImage src="/img/illustrations/pledge.png" imgClass="w-full" :useImageTag="true" />
+            <NuxtImg src="/img/illustrations/pledge.png" class="w-full" loading="lazy" provider="none"/>
         </div>
 
         <Donation background="dark"/>
@@ -38,7 +38,6 @@
 </template>
 
 <script setup>
-import LazyImage from '../components/LazyImage.vue'
 import Swoosh from '@/components/Swoosh.vue'
 import CheckList from '@/components/CheckList.vue'
 import { ref } from 'vue'

@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/prismic"],
+  modules: ["@nuxt/image", "@nuxtjs/tailwindcss", "@nuxtjs/prismic"],
   prismic: {
-    endpoint: "https://bankgreen.prismic.io/api/v2",
+    endpoint: "bankgreen",
   },
   runtimeConfig: {
     public: {
@@ -150,6 +150,8 @@ export default defineNuxtConfig({
     dirs: ["slices"],
   },
   image: {
+    provider: 'prismic',
+    none: {},
     prismic: {},
   },
   nitro: {

@@ -1,10 +1,16 @@
 <template>
-    <LazyImage :width="size" :height="size" srcset="" :imgClass="imgClass" :src="src" />
+    <ClientOnly>
+        <img :style="imgStyle" :src="src" :class="imgClass" @load="handleLoad" />
+    </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import { withDefaults } from 'vue';
-import LazyImage from '@/components/LazyImage.vue'
+
+const imgStyle = ref("visibility: hidden")
+function handleLoad() {
+    console.log('found image')
+    imgStyle.value = "visibility: visible"
+} 
 
 const props = withDefaults(defineProps<{
     url: string;

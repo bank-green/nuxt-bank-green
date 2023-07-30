@@ -3,7 +3,7 @@
         <div class="flex-1 flex items-center md:mt-8">
             <div class="relative w-14 h-14 mr-4 rounded-lg">
                 <ClearbitLogo v-if="website" :url="website" :size="24"
-                    imgClass="absolute inset-0 z-20 bg-contain bg-no-repeat bg-center bg-white" />
+                    imgClass="absolute inset-0 z-20 w-full" />
                 <BankIcon class="absolute inset-0 z-10" />
             </div>
             <div>
