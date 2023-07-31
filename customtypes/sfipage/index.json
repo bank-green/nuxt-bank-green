@@ -1,0 +1,76 @@
+{
+  "id": "sfipage",
+  "label": "SFIPage",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "tag",
+          "placeholder": ""
+        }
+      },
+      "impact": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Impact",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "security": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Security",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "services": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Services",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "convenience": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Convenience",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "founded": {
+        "type": "Number",
+        "config": {
+          "label": "Founded",
+          "placeholder": ""
+        }
+      },
+      "our_take": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item",
+          "allowTargetBlank": true,
+          "label": "our take"
+        }
+      },
+      "serving": {
+        "type": "StructuredText",
+        "config": {
+          "single": "paragraph",
+          "label": "serving"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "donationpage",
+  "label": "DonationPage",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1,heading2,heading3,heading4,heading5,heading6",
+          "label": "Title"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "label": "Description"
+        }
+      },
+      "photo": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "Photo"
+        }
+      },
+      "donation-title": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1,heading2,heading3,heading4,heading5,heading6",
+          "label": "Donation-title"
+        }
+      },
+      "donation-description": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "label": "Donation-description"
+        }
+      },
+      "donation-button": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading6",
+          "label": "Donation-button"
+        }
+      }
+    }
+  }
+}
