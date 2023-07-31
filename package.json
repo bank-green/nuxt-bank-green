@@ -29,9 +29,8 @@
     "lottie-web": "^5.10.0",
     "nuxt": "^3.6.5",
     "slice-machine-ui": "^1.6.0",
-    "stripe": "^12.8.0"
-  },
-  "dependencies": {
+    "stripe": "^12.8.0",
     "@nuxt/image": "^1.0.0-rc.1"
-  }
+  },
+  "dependencies": {}
 }
