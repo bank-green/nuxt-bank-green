@@ -1,0 +1,77 @@
+[
+  {
+    "headline": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Nulla ullamco reprehenderit nostrud."
+          }
+        }
+      ]
+    },
+    "uid": {
+      "__TYPE__": "UIDContent",
+      "value": "end"
+    },
+    "description1": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Do velit aute quis. Reprehenderit sint veniam officia sunt et laboris voluptate culpa. Amet minim quis aliquip duis eiusmod Lorem officia tempor."
+          }
+        }
+      ]
+    },
+    "description2": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Aliquip adipisicing officia ea ad sint fugiat aliqua eiusmod elit ullamco enim culpa. Ex reprehenderit velit velit cillum ad nostrud nostrud minim dolor velit aute eu ut nisi excepteur."
+          }
+        }
+      ]
+    },
+    "description3": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Aliqua est aliquip excepteur exercitation culpa id consequat enim elit exercitation cupidatat. Id duis ex aliqua ad velit."
+          }
+        }
+      ]
+    },
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "living",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "cook",
+      "type": "Text"
+    },
+    "subtitle": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Ullamco consectetur commodo elit laborum laborum aliquip velit ullamco culpa voluptate."
+          }
+        }
+      ]
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": []
+    }
+  }
+]

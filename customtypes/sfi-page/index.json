@@ -1,0 +1,83 @@
+{
+  "id": "sfi-page",
+  "label": "SFIDefaults",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "switch-survey-text": {
+        "type": "StructuredText",
+        "config": {
+          "single": "paragraph",
+          "label": "switch-survey-text",
+          "placeholder": "Have you opened an account with {{bank name}} since visiting Bank Green?"
+        }
+      },
+      "switch-survey-link": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "hyperlink",
+          "label": "switch-survey-link",
+          "placeholder": "please let us know"
+        }
+      },
+      "impact-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "impact-image"
+        }
+      },
+      "security-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "security-image"
+        }
+      },
+      "service-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "service-image"
+        }
+      },
+      "convenience-image": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "convenience-image"
+        }
+      },
+      "institution_credentials-bankers_for_net_zero": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "institution_credentials-bankers for net zero"
+        }
+      },
+      "institution_credentials-gabv": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "institution_credentials-gabv"
+        }
+      },
+      "institution_credentials-b_impact": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "institution_credentials-b impact"
+        }
+      }
+    }
+  }
+}

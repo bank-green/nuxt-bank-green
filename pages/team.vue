@@ -30,7 +30,7 @@
                     img="/img/team/zak.jpg" />
                 <TeamMember name="Luke Gelmi"
                     description="Luke is an ex-oil-and-gas Chemical Engineer who - after hearing the bleak image that climate scientists are painting of our future - has made the switch to fighting for a planet we can all live on for the next hundred generations."
-                    img="/img/team/gelmi.jpg" />
+                    img="/img/team/gelmi.png" />
             </ul>
         </div>
     </div>

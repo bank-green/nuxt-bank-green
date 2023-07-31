@@ -1,0 +1,41 @@
+[
+  {
+    "introduction": {
+      "__TYPE__": "FieldContent",
+      "value": "bark",
+      "type": "Text"
+    },
+    "description1": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Eiusmod do veniam Lorem officia commodo mollit."
+          }
+        }
+      ]
+    },
+    "description2": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Cupidatat voluptate ad consectetur incididunt sunt irure et velit anim consequat aliqua do ad in."
+          }
+        }
+      ]
+    },
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "transportation",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "size",
+      "type": "Text"
+    }
+  }
+]

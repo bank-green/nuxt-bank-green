@@ -8,7 +8,7 @@
                 @keydown.enter="(_event: PointerEvent) => ($refs['listPicker'] as typeof ListPicker).selectCurrentItem()
                     " @onFocus="showList" @onClick="showList" @onCloseClick="onCloseClick">
                 <template v-slot:icon>
-                    <BankIcon class="h-6 w-6 absolute inset-0 m-4" />
+                    <img src="/img/icons/bank-icon.svg" class="h-6 w-6 absolute inset-0 m-4" />
                 </template>
             </SearchInput>
 
@@ -48,12 +48,12 @@
         </div>
 
         <LoadingJumper v-if="!loaded && !disabled" class="h-5 w-5 absolute inset-0 m-4 text-sushi-500" />
-        <BankIcon v-else class="h-6 w-6 absolute inset-0 m-4" />
+        <img v-else src="/img/icons/bank-icon.svg" class="h-6 w-6 absolute inset-0 m-4" />
+
     </div>
 </template>
 <script setup lang="ts">
 import { findBanks } from './banks'
-import BankIcon from './BankIcon.vue'
 import BankSearchItem from './BankSearchItem.vue'
 import LoadingJumper from '../../LoadingJumper.vue'
 import SearchInput from '../input/SearchInput.vue'

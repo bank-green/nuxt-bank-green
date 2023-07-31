@@ -1,0 +1,46 @@
+[
+  {
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "ride",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "worth",
+      "type": "Text"
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "text_slice$8361cfca-e395-42c7-9e44-2169887ea7e9",
+          "name": "text_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "text": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Voluptate laborum sunt veniam cupidatat ut duis reprehenderit tempor aute elit proident sint duis qui non. Dolor labore incididunt deserunt anim excepteur ut. Do eiusmod quis ad duis anim cupidatat."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

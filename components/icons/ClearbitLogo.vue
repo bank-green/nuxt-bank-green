@@ -1,17 +1,23 @@
 <template>
-    <LazyImage :width="size" :height="size" srcset="" :imgClass="imgClass" :src="src" />
+        <img v-if="showClearbit" :src="src" :class="`object-contain`" :style="`width: ${size}px; height: ${size}px`" @error="handleError" />
+        <img v-else src="/img/icons/bank-icon.svg" :style="`width: ${size}px; height: ${size}px`" :class="`object-contain`" />
 </template>
 
 <script setup lang="ts">
-import { withDefaults } from 'vue';
-import LazyImage from '@/components/LazyImage.vue'
+
+const showClearbit = ref(true)
+
+function handleError() {
+    showClearbit.value = false
+} 
 
 const props = withDefaults(defineProps<{
     url: string;
     imgClass: string;
     size?: number;
 }>(), {
-    size: 60
+    size: 60,
+    src: "doesnotexist" // added to trigger handleError, not ideal, but it works
 });
 
 const urlDomain = computed(() => {

@@ -1,0 +1,25 @@
+[
+  {
+    "description": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Adipisicing consequat sint duis. Dolor labore proident deserunt officia laboris eu aliquip id commodo amet. In occaecat Lorem nostrud quis proident eu et cillum qui."
+          }
+        }
+      ]
+    },
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "function",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "simply",
+      "type": "Text"
+    }
+  }
+]

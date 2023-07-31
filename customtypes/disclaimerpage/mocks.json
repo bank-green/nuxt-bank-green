@@ -1,0 +1,46 @@
+[
+  {
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "enjoy",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "because",
+      "type": "Text"
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": [
+        {
+          "key": "text_slice$0b6b239b-6e90-44cb-91ee-343a2da4bbe0",
+          "name": "text_slice",
+          "widget": {
+            "__TYPE__": "SharedSliceContent",
+            "variation": "default",
+            "primary": {
+              "text": {
+                "__TYPE__": "StructuredTextContent",
+                "value": [
+                  {
+                    "type": "paragraph",
+                    "content": {
+                      "text": "Mollit irure tempor culpa incididunt cillum laboris. Magna sit ut do sit commodo exercitation aliqua dolor cillum incididunt voluptate consequat esse quis. Laboris voluptate eiusmod officia ea ea id commodo incididunt ex."
+                    }
+                  }
+                ]
+              }
+            },
+            "items": [
+              {
+                "__TYPE__": "GroupItemContent",
+                "value": []
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]
