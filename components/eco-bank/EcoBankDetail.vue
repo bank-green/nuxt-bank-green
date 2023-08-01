@@ -57,7 +57,7 @@
                     <p><strong>Overdraft Fee:</strong>
                         {{ getInvertedBankFeature('No overdraft fee', 'Yes') }}
                     </p>
-                    <p><strong>Account Maintenaince Fee:</strong>
+                    <p><strong>Account Maintenance Fee:</strong>
                         {{ getInvertedBankFeature('No account maintenance fee', 'Yes') }}
                     </p>
                     <p><strong>Free ATM Network:</strong>
