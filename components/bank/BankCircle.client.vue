@@ -95,6 +95,8 @@ const rotation = computed(() => {
             return -45
         case 'worst':
             return -90
+        case 'unknown':
+            return 0
         default:
             return 0
     }
@@ -114,6 +116,9 @@ const emojiForRating = computed(() => {
             break
         case 'worst':
             emoji = 'Cussing'
+            break
+        case 'unknown':
+            emoji = 'Meh'
             break
     }
     return `/anim/emoji/${emoji}_Flat.json`
