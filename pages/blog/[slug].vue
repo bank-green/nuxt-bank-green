@@ -56,12 +56,11 @@ const error = ref(false)
 const { client } = usePrismic()
 const slug = route.path.split('/').at(-1)
 const { data: post } = await useAsyncData(slug, () => client.getByUID('blogpost', slug))
+console.log('post', post.value)
 
 const comps = ref(defineSliceZoneComponents(components))
 
-useHeadHelper(post?.data?.title ?? "Blog Post", post?.data?.description)
-
-// FIXME add image header and pull title properly
+useHeadHelper(post.value?.data?.title ?? "Blog Post", post?.value?.data?.description)
 
 </script>
 

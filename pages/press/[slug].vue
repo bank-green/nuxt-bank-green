@@ -54,9 +54,7 @@ const comps = ref(defineSliceZoneComponents({
     embed_slice: EmbedSlice
 }))
 
-useHeadHelper(post?.data?.title ?? "Press Post", post?.data?.description)
-
-// FIXME add image header and pull title properly
+useHeadHelper(post?.value?.data?.title ?? "Press Post", post?.value?.data?.description)
 
 </script>
 
