@@ -11,6 +11,8 @@ function getBankRating(bankDetails) {
             return "badbank";
         case "ok":
             return "okbank";
+        case "good":
+            return "goodbank";
         case "great":
             return "greatbank";
         case "unknown":

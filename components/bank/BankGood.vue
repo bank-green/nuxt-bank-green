@@ -6,7 +6,7 @@
             <div
                 class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8">
                 <div class="flex flex-col items-center justify-start w-full">
-                    <BankCircle class="max-w-sm" :rating="'great'" />
+                    <BankCircle class="max-w-sm" :rating="'good'" />
                     <SocialSharer class="text-sushi-500" :hashtags="['climatecrisis', 'fossilbanks']" />
                 </div>
             </div>
