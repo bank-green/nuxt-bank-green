@@ -1,6 +1,8 @@
 <template>
+    <ClientOnly>
         <img v-if="showClearbit" :src="src" :class="`object-contain`" :style="`width: ${size}px; height: ${size}px`" @error="handleError" />
         <img v-else src="/img/icons/bank-icon.svg" :style="`width: ${size}px; height: ${size}px`" :class="`object-contain`" />
+    </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -8,6 +10,7 @@
 const showClearbit = ref(true)
 
 function handleError() {
+    console.log('handling error')
     showClearbit.value = false
 } 
 
