@@ -1,5 +1,5 @@
 <template>
-    <BankLayoutGreatOkUnknown>
+    <BankLayoutGreatGoodOkUnknown>
         <template #section1>
             <BankHeadline :name="name ?? 'Unknown Bank'" :website="website" :inheritBrandRating="inheritBrandRating" />
             <div
@@ -56,7 +56,7 @@
                 <LottiePlayer path="/anim/money_smoke.json" class="w-full md:max-w-2xl h-42 object-cover object-bottom" />
             </div>
         </template>
-    </BankLayoutGreatOkUnknown>
+    </BankLayoutGreatGoodOkUnknown>
 </template>
 
 

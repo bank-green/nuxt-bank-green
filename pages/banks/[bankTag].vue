@@ -28,6 +28,7 @@ const BankUnknown = resolveComponent('BankUnknown');
 const BankWorst = resolveComponent('BankWorst');
 const BankBad = resolveComponent('BankBad');
 const BankOk = resolveComponent('BankOk');
+const BankGood = resolveComponent('BankGood');
 const BankGreat = resolveComponent('BankGreat');
 
 
@@ -43,6 +44,8 @@ const componentName = computed(() => {
             return BankBad;
         case "ok":
             return BankOk;
+        case "good":
+            return BankGood
         case "great":
             return BankGreat;
         case "unknown":

@@ -89,6 +89,8 @@ const rotation = computed(() => {
     switch (props.rating) {
         case 'great':
             return 90
+        case 'good':
+            return 75
         case 'ok':
             return 45
         case 'bad':
@@ -107,6 +109,9 @@ const emojiForRating = computed(() => {
     switch (props.rating) {
         case 'great':
             emoji = 'Heart_Eyes'
+            break
+        case 'good':
+            emoji = 'Happy'
             break
         case 'ok':
             emoji = 'Happy'
