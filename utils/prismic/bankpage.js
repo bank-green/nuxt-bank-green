@@ -31,8 +31,8 @@ export async function useBankPage(bankTag, bankDetails) {
 
     try {
         const [customBankResponse, bankRatingResponse] = await Promise.all([
-            useAsyncData(bankTag, () => client.getByUID(type, bankTag)),
-            useAsyncData(rating, () => client.getByUID(type, rating)),
+            useAsyncData(() => { return client.getByUID(type, bankTag) }),
+            useAsyncData(() => { return client.getByUID(type, rating) }),
         ]);
 
         // check if we get responses at all
@@ -41,7 +41,7 @@ export async function useBankPage(bankTag, bankDetails) {
                 throw new Error(`could not get bankPage for ${bankTag}`)
             }
             bankPage = bankRatingResponse
-            return { bankPage }
+            return { bankPage: bankPage.data }
         }
 
         // override default fields if available
