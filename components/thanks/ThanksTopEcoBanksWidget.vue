@@ -1,5 +1,5 @@
 <template>
-  <LocationSearch class="mb-8 md:max-w-sm md:mx-auto z-50" v-model="country" />
+  <LocationSearch v-model="country" class="mb-8 md:max-w-sm md:mx-auto z-50" />
   <div
     v-if="banks.length"
     class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-min"

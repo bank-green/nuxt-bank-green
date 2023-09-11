@@ -5,9 +5,9 @@
         :id="name"
         :name="name"
         :checked="modelValue"
-        @input="onUpdate"
         type="checkbox"
         class="mt-0.5 h-4 w-4 text-sushi-600 focus:ring-sushi-500 border-gray-300 rounded appearance-none"
+        @input="onUpdate"
       />
       <label :for="name" class="ml-4 block text-sm" :class="labelClasses">
         <slot />

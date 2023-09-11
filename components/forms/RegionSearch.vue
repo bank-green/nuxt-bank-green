@@ -1,8 +1,8 @@
 <template>
-  <div class="relative" v-clickaway="hideList">
+  <div v-clickaway="hideList" class="relative">
     <SearchInput
-      :aria-expanded="isShowing"
       v-model="search"
+      :aria-expanded="isShowing"
       placeholder="Search region/state"
       @keydown.down="onKeyDown"
       @keydown.up="onKeyUp"
@@ -11,7 +11,7 @@
       @onClick="showList"
       @onCloseClick="onCloseClick"
     >
-      <template v-slot:icon>
+      <template #icon>
         <PinIcon class="h-6 w-6 absolute inset-0 m-4" />
       </template>
     </SearchInput>
@@ -39,10 +39,10 @@
           No region/state found
         </div>
         <ListPicker
-          ref="listPicker"
           v-else
-          :items="filteredOptions"
+          ref="listPicker"
           v-slot="{ item }"
+          :items="filteredOptions"
           @selectItem="onSelectLocation"
         >
           <div>
@@ -57,11 +57,11 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import SearchInput from "@/components/forms/input/SearchInput.vue";
-import PinIcon from "./location/PinIcon.vue";
-import ListPicker from "@/components/forms/ListPicker.vue";
 import Geonames from "geonames.js";
 import Fuse from "fuse.js";
+import PinIcon from "./location/PinIcon.vue";
+import SearchInput from "@/components/forms/input/SearchInput.vue";
+import ListPicker from "@/components/forms/ListPicker.vue";
 
 // custom type for responses from geonames API
 type Place = {

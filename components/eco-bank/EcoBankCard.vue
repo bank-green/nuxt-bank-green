@@ -20,7 +20,7 @@
             <ClearbitLogo
               :url="item.website"
               :size="48"
-              imgClass="absolute inset-0 z-20"
+              img-class="absolute inset-0 z-20"
             />
           </div>
           <div

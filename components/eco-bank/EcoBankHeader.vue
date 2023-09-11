@@ -12,7 +12,7 @@
         <EcoBankHeadline
           :name="name"
           :website="website"
-          :inheritBrandRating="inheritBrandRating"
+          :inherit-brand-rating="inheritBrandRating"
         />
         <div
           class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center items-center"
@@ -40,8 +40,8 @@
             <span v-else-if="rating === 'great'">This bank is great</span>
           </div>
           <div
-            class="flex flex-col md:flex-row justify-start items-center gap-6 mt-4"
             v-if="hasInstitutionCredentials || fossilFreeAlliance"
+            class="flex flex-col md:flex-row justify-start items-center gap-6 mt-4"
           >
             <img
               v-if="fossilFreeAlliance"

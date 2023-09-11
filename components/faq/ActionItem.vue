@@ -7,14 +7,14 @@
       <AccordionItem
         :description="description"
         :title="title"
-        :caratClass="caratClass"
+        :carat-class="caratClass"
       >
         <AccordionItem
           v-for="(sub, i) in subcontent"
           :key="i"
           :title="sub.title"
           :description="sub.content"
-          :caratClass="caratClass"
+          :carat-class="caratClass"
         />
       </AccordionItem>
     </div>

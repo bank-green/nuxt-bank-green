@@ -11,8 +11,8 @@
       </p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
         <TextField
-          class="col-span-2"
           v-model="firstName"
+          class="col-span-2"
           name="firstName"
           type="text"
           :title="'Your first name'"
@@ -20,8 +20,8 @@
           dark
         />
         <TextField
-          class="col-span-2"
           v-model="lastName"
+          class="col-span-2"
           name="lastName"
           type="text"
           :title="'Your last name'"
@@ -29,8 +29,8 @@
           dark
         />
         <TextField
-          class="col-span-2"
           v-model="email"
+          class="col-span-2"
           type="email"
           name="email"
           :title="'Your email address'"
@@ -39,8 +39,8 @@
           dark
         />
         <DateField
-          class="col-span-2"
           v-model="reminderDate"
+          class="col-span-2"
           name="reminder"
           dark
           :title="'When would you like to be reminded?'"
@@ -53,7 +53,7 @@
           >
             Choose your country
           </span>
-          <LocationSearch class="w-full text-gray-700" v-model="country" />
+          <LocationSearch v-model="country" class="w-full text-gray-700" />
         </div>
         <div class="col-span-2">
           <span
@@ -62,14 +62,14 @@
             Choose your current bank
           </span>
           <BankSearch
-            class="w-full text-gray-700"
             ref="bankSearch"
+            v-model="bank"
+            class="w-full text-gray-700"
             :disabled="!country"
             :country="country"
-            v-model="bank"
             @searchInputChange="searchValue = $event"
           >
-            <template v-slot:not-listed>
+            <template #not-listed>
               <p class="text-gray-500 p-4 shadow-lg">
                 We couldn't find your bank. <br />
                 But that's ok! Just type in your bank's name and leave it at
@@ -79,8 +79,8 @@
           </BankSearch>
         </div>
         <CheckboxSection
-          class="col-span-full"
           v-model="isAgreeMarketing"
+          class="col-span-full"
           name="isAgreeMarketing"
           :warning="warningsMap['isAgreeMarketing']"
           dark
@@ -89,8 +89,8 @@
           Bank.Green.</CheckboxSection
         >
         <CheckboxSection
-          class="col-span-full"
           v-model="isAgreeTerms"
+          class="col-span-full"
           name="isAgreeTerms"
           :warning="warningsMap['isAgreeTerms']"
           dark

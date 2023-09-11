@@ -1,13 +1,13 @@
 <template>
   <div class="contain space-y-8 md:space-y-16">
     <Tab
-      :tabIds="['key-facts', 'products', 'fees']"
+      :tab-ids="['key-facts', 'products', 'fees']"
       class="w-full lg:w-3/4 xl:w-2/3 mx-auto"
     >
-      <template v-slot:key-facts-nav>Key Facts</template>
-      <template v-slot:products-nav>Products</template>
-      <template v-slot:fees-nav>Fees</template>
-      <template v-slot:key-facts>
+      <template #key-facts-nav>Key Facts</template>
+      <template #products-nav>Products</template>
+      <template #fees-nav>Fees</template>
+      <template #key-facts>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
           <p>
             <strong>Type:</strong>
@@ -44,7 +44,7 @@
           </p>
         </div>
       </template>
-      <template v-slot:products>
+      <template #products>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-24">
           <p>
             <strong>Current Accounts:</strong>
@@ -72,7 +72,7 @@
           </p>
         </div>
       </template>
-      <template v-slot:fees>
+      <template #fees>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
           <p>
             <strong>Overdraft Fee:</strong>
@@ -91,14 +91,14 @@
     </Tab>
     <Tab
       v-if="tabIds.length > 0"
-      :tabIds="tabIds"
-      justifyTabNavigation="space-around"
+      :tab-ids="tabIds"
+      justify-tab-navigation="space-around"
     >
-      <template v-slot:impact-nav>Impact</template>
-      <template v-slot:security-nav>Security</template>
-      <template v-slot:services-nav>Service</template>
-      <template v-slot:convenience-nav>Convenience</template>
-      <template v-slot:impact>
+      <template #impact-nav>Impact</template>
+      <template #security-nav>Security</template>
+      <template #services-nav>Service</template>
+      <template #convenience-nav>Convenience</template>
+      <template #impact>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <PrismicRichText
             class="pt-8 text-md md:text-lg tracking-wide space-y-6"
@@ -108,17 +108,17 @@
             class="order-first lg:order-last flex items-center justify-center"
           >
             <PrismicImage
-              class="w-full md:w-3/4 mx-auto object-contain object-top"
               v-if="
                 prismicDefaultPageData && prismicDefaultPageData['impact-image']
               "
+              class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="impact-image"
               :field="prismicDefaultPageData['impact-image']"
             />
           </div>
         </div>
       </template>
-      <template v-slot:security>
+      <template #security>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <PrismicRichText
             class="pt-8 text-md md:text-lg tracking-wide space-y-6"
@@ -128,18 +128,18 @@
             class="order-first lg:order-last flex items-center justify-center"
           >
             <PrismicImage
-              class="w-full md:w-3/4 mx-auto object-contain object-top"
               v-if="
                 prismicDefaultPageData &&
                 prismicDefaultPageData['security-image']
               "
+              class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="security-image"
               :field="prismicDefaultPageData['security-image']"
             />
           </div>
         </div>
       </template>
-      <template v-slot:services>
+      <template #services>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <PrismicRichText
             class="pt-8 text-md md:text-lg tracking-wide space-y-6"
@@ -149,18 +149,18 @@
             class="order-first lg:order-last flex items-center justify-center"
           >
             <PrismicImage
-              class="w-full md:w-3/4 mx-auto object-contain object-top"
               v-if="
                 prismicDefaultPageData &&
                 prismicDefaultPageData['service-image']
               "
+              class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="service-image"
               :field="prismicDefaultPageData['service-image']"
             />
           </div>
         </div>
       </template>
-      <template v-slot:convenience>
+      <template #convenience>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <PrismicRichText
             class="pt-8 text-md md:text-lg tracking-wide space-y-6"
@@ -170,11 +170,11 @@
             class="order-first lg:order-last flex items-center justify-center"
           >
             <PrismicImage
-              class="w-full md:w-3/4 mx-auto object-contain object-top"
               v-if="
                 prismicDefaultPageData &&
                 prismicDefaultPageData['convenience-image']
               "
+              class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="convenience-image"
               :field="prismicDefaultPageData['convenience-image']"
             />

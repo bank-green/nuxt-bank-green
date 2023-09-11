@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="$route"
-    @mouseleave="onExitIntent"
     class="min-h-screen flex flex-col"
+    @mouseleave="onExitIntent"
   >
     <NuxtLoadingIndicator :color="'#7BB123'" :height="6" />
     <ClientOnly>
@@ -14,15 +14,15 @@
   </div>
   <Modal v-model="openPledgeModal">
     <PledgeSignup
-      @success="openPledgeModal = false"
       :title="'Not ready to switch banks today?\nTake our pledge to move your money when you’re ready.'"
       tag="pledge popup"
+      @success="openPledgeModal = false"
     />
   </Modal>
   <SwitchSurveyExit
     v-model="openSwitchSurveyModal"
-    @success="openSwitchSurveyModal = false"
     tag="popup"
+    @success="openSwitchSurveyModal = false"
   />
   <NotificationPanel />
 </template>

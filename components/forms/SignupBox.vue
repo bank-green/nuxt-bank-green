@@ -7,21 +7,21 @@
       <p v-else class="text-xl md:text-3xl mb-6">Take action with Bank.Green</p>
 
       <form
-        @submit.prevent.stop="submit"
         class="flex flex-col justify-center items-center text-left"
+        @submit.prevent.stop="submit"
       >
         <div class="grid grid-cols-2 gap-6">
           <TextField
-            class="col-span-2 md:col-span-1"
             v-model="firstName"
+            class="col-span-2 md:col-span-1"
             name="firstName"
             type="text"
             placeholder="First name, so we can say hi"
             :dark="true"
           />
           <TextField
-            class="col-span-2 md:col-span-1"
             v-model="email"
+            class="col-span-2 md:col-span-1"
             name="email"
             type="email"
             placeholder="Your email address"
@@ -29,8 +29,8 @@
             :dark="true"
           />
           <CheckboxSection
-            class="col-span-2"
             v-model="isAgreeMarketing"
+            class="col-span-2"
             name="isAgreeMarketing"
             :warning="warningsMap['isAgreeMarketing']"
             :dark="true"
@@ -39,8 +39,8 @@
             Bank.Green.</CheckboxSection
           >
           <CheckboxSection
-            class="col-span-2"
             v-model="isAgreeTerms"
+            class="col-span-2"
             name="isAgreeTerms"
             :dark="true"
             :warning="warningsMap['isAgreeTerms']"

@@ -16,13 +16,13 @@
 </template>
 
 <script setup lang="ts">
+import { clearInterval } from "timers";
 import {
   isValid,
   isFuture,
   formatDistanceToNowStrict,
   formatRelative,
 } from "date-fns";
-import { clearInterval } from "timers";
 
 const props = defineProps<{
   eventStart: Date;

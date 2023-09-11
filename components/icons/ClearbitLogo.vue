@@ -39,8 +39,8 @@ const props = withDefaults(
 const urlDomain = computed(() => {
   let url = props.url;
   if (url) {
-    if (url.indexOf("http") === -1) url = `https://${url}`;
-    if (url.indexOf(".") > -1) {
+    if (!url.includes("http")) url = `https://${url}`;
+    if (url.includes(".")) {
       return new URL(url).hostname;
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div
-    class="youtube"
     v-if="slice?.primary.target.provider_name === 'YouTube'"
+    class="youtube"
     v-html="fixYoutube(slice.primary.target.html)"
   ></div>
   <div

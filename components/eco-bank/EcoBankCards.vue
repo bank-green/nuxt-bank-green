@@ -7,8 +7,8 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <li class="list-none" v-for="i in list.length" :key="i">
-      <EcoBankCard :item="list[i - 1]" :isNoCredit="isNoCredit" />
+    <li v-for="i in list.length" :key="i" class="list-none">
+      <EcoBankCard :item="list[i - 1]" :is-no-credit="isNoCredit" />
     </li>
   </transition-group>
 </template>

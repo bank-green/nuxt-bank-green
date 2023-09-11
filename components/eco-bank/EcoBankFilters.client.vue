@@ -1,40 +1,40 @@
 <template>
   <div
-    @click="toggleFilters"
     class="bg-white hover:bg-gray-50 px-5 py-4 md:py-0 md:px-0 md:bg-transparent md:hover:bg-transparent cursor-pointer md:cursor-auto flex items-center"
     :class="{
       'rounded-xl': !showFilters,
       'rounded-t-xl': showFilters,
     }"
+    @click="toggleFilters"
   >
     <h4 class="font-semibold text-left md:text-xl">Filter</h4>
 
     <button
       v-if="isFilterDirty"
-      @click="setDefaultFilter"
       class="ml-6 text-sm text-sushi-500 hover:text-sushi-600 font-semibold focus:outline-none"
+      @click="setDefaultFilter"
     >
       Reset
     </button>
   </div>
 
   <div
-    class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
     v-show="showFilters"
+    class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
   >
     <h5 class="text-xs uppercase font-semibold md:mt-6 mb-2">Location</h5>
     <div class="flex flex-col space-y-1">
       <CheckboxSection
-        class="col-span-full"
         v-model="searchByLocation"
+        class="col-span-full"
         name="local_branches"
       >
         Local branches</CheckboxSection
       >
       <RegionSearch
         v-if="searchByLocation"
-        class="pb-4 md:max-w-sm md:mx-auto z-30"
         ref="regionPicker"
+        class="pb-4 md:max-w-sm md:mx-auto z-30"
         @select="onSelectLocation"
       />
     </div>
@@ -43,8 +43,8 @@
       Fossil Free Alliance
     </h5>
     <CheckboxSection
-      class="col-span-full"
       v-model="filterPayload.fossilFreeAlliance"
+      class="col-span-full"
       name="fossilFreeAlliance"
     >
       Fossil Free Alliance</CheckboxSection
@@ -53,29 +53,29 @@
     <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Convenience</h5>
     <div class="flex flex-col space-y-1">
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.convenience['Mobile banking']"
+        class="col-span-full"
         name="Mobile banking"
       >
         Mobile banking</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.convenience['Free ATM network']"
+        class="col-span-full"
         name="Free ATM network"
       >
         Free ATM network</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.convenience['No overdraft fee']"
+        class="col-span-full"
         name="No overdraft fee"
       >
         No overdraft fee</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.convenience['No account maintenance fee']"
+        class="col-span-full"
         name="No account maintenance fee"
       >
         No account maintenance fees</CheckboxSection
@@ -85,50 +85,50 @@
     <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Bank Accounts</h5>
     <div class="flex flex-col space-y-1">
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts.checking"
+        class="col-span-full"
         name="checking"
       >
         {{ isBE() ? "Current accounts" : "Checking accounts" }}</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts.saving"
+        class="col-span-full"
         name="saving"
       >
         Savings accounts</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts['Interest rates']"
+        class="col-span-full"
         name="Interest rates"
       >
         Interest rates</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts['Business accounts']"
+        class="col-span-full"
         name="Business accounts"
       >
         Business accounts</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts['Small business lending']"
+        class="col-span-full"
         name="Small business lending"
       >
         Small business lending</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts['Credit cards']"
+        class="col-span-full"
         name="Credit cards"
       >
         Credit cards</CheckboxSection
       >
       <CheckboxSection
-        class="col-span-full"
         v-model="filterPayload.bankAccounts['Mortgage or loans']"
+        class="col-span-full"
         name="Mortgage or loans"
       >
         Mortgage or loan options
@@ -137,8 +137,8 @@
 
     <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Security</h5>
     <CheckboxSection
-      class="col-span-full"
       v-model="filterPayload.security['Deposit protection']"
+      class="col-span-full"
       name="Deposit protection"
     >
       Deposit protection</CheckboxSection

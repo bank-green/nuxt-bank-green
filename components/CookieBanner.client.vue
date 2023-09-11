@@ -15,15 +15,15 @@
             >Privacy policy</NuxtLink
           >
           <div
-            @click="noCookies"
             class="bg-red-500 hover:bg-red-400 rounded text-white cursor-pointer px-4 no-underline py-2 mr-2"
+            @click="noCookies"
           >
             Decline cookies
           </div>
 
           <div
-            @click="yesCookies"
             class="bg-sushi-500 hover:bg-sushi-400 rounded text-white cursor-pointer px-4 no-underline py-2"
+            @click="yesCookies"
           >
             Allow cookies
           </div>

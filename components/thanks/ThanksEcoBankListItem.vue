@@ -17,7 +17,7 @@
           <ClearbitLogo
             :url="website"
             :size="24"
-            imgClass="absolute inset-0 z-20"
+            img-class="absolute inset-0 z-20"
           />
         </div>
         <div class="ml-3 flex-1 font-semibold text-gray-800 block truncate">

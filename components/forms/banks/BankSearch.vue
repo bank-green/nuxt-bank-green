@@ -3,8 +3,8 @@
     <div class="relative">
       <SearchInput
         ref="input"
-        :aria-expanded="isShowing"
         v-model="search"
+        :aria-expanded="isShowing"
         :placeholder="'Search bank...'"
         @keydown.down="
           (event: PointerEvent) =>
@@ -22,7 +22,7 @@
         @onClick="showList"
         @onCloseClick="onCloseClick"
       >
-        <template v-slot:icon>
+        <template #icon>
           <img
             src="/img/icons/bank-icon.svg"
             class="h-6 w-6 absolute inset-0 m-4"
@@ -51,17 +51,17 @@
             </NuxtLink>
           </slot>
           <ListPicker
-            ref="listPicker"
             v-else
-            :items="filteredBanks"
+            ref="listPicker"
             v-slot="{ item }"
+            :items="filteredBanks"
             @selectItem="onSelectBank"
           >
             <BankSearchItem
               :id="item.tag"
               :name="item.name"
               :website="item.website"
-              :isSelected="item === modelValue"
+              :is-selected="item === modelValue"
             />
           </ListPicker>
         </div>
@@ -89,11 +89,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { findBanks } from "./banks";
-import BankSearchItem from "./BankSearchItem.vue";
 import LoadingJumper from "../../LoadingJumper.vue";
 import SearchInput from "../input/SearchInput.vue";
 import ListPicker from "../ListPicker.vue";
+import BankSearchItem from "./BankSearchItem.vue";
+import { findBanks } from "./banks";
 
 const props = defineProps<{
   disabled: Boolean;

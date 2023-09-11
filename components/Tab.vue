@@ -16,8 +16,8 @@
       >
         <a
           class="tab-nav-link"
-          @click.prevent="setActive(tabId)"
           :href="`#${tabId}`"
+          @click.prevent="setActive(tabId)"
         >
           <!-- Tab Title (desktop) -->
           <slot :name="`${tabId}-nav`"></slot>
@@ -48,11 +48,11 @@
           ></div>
         </div>
         <div
+          :id="tabId"
           :class="[
             'w-full block relative bg-white rounded-xl shadow-soft border py-8 px-8 md:px-16',
             !isActive(tabId) && 'md:hidden',
           ]"
-          :id="tabId"
         >
           <!-- Tab Content -->
           <slot :name="tabId"></slot>

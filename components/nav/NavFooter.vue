@@ -34,13 +34,13 @@
         <NuxtLink
           to="/disclaimer"
           class="hover:underline"
-          activeClass="text-gray-900"
+          active-class="text-gray-900"
           >Disclaimer
         </NuxtLink>
         <NuxtLink
           to="/privacy"
           class="hover:underline"
-          activeClass="text-gray-900"
+          active-class="text-gray-900"
         >
           Privacy policy
         </NuxtLink>

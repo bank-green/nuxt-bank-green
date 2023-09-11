@@ -11,13 +11,13 @@
   >
     <div class="max-w-xl">
       <form
-        @submit.prevent.stop="send"
         class="flex flex-col justify-center items-center"
+        @submit.prevent.stop="send"
       >
         <div class="grid grid-cols-2 gap-6 text-left">
           <TextField
-            class="col-span-2"
             v-model="bank"
+            class="col-span-2"
             name="bank"
             type="bank"
             :title="'Name of bank'"
@@ -26,8 +26,8 @@
             :dark="true"
           />
           <TextField
-            class="col-span-2"
             v-model="firstName"
+            class="col-span-2"
             name="firstName"
             type="text"
             :title="'Your first name (optional)'"
@@ -35,8 +35,8 @@
             :dark="true"
           />
           <TextField
-            class="col-span-2"
             v-model="email"
+            class="col-span-2"
             name="email"
             type="email"
             :title="'Your email address'"
@@ -45,8 +45,8 @@
             :dark="true"
           />
           <CheckboxSection
-            class="col-span-2"
             v-model="isAgreeMarketing"
+            class="col-span-2"
             name="isAgreeMarketing"
             :warning="warningsMap['isAgreeMarketing']"
             :dark="true"
@@ -55,8 +55,8 @@
             Bank.Green.</CheckboxSection
           >
           <CheckboxSection
-            class="col-span-2"
             v-model="isAgreeTerms"
+            class="col-span-2"
             name="isAgreeTerms"
             :dark="true"
             :warning="warningsMap['isAgreeTerms']"

@@ -11,8 +11,8 @@
         :field="switchSurveyText"
       ></PrismicRichText>
       <PrismicRichText
-        class="font-semibold"
         v-if="switchSurveyLink"
+        class="font-semibold"
         :field="switchSurveyLink"
       ></PrismicRichText>
     </div>
@@ -30,13 +30,13 @@ const props = defineProps<{
 }>();
 
 const switchSurveyText: ComputedRef<RichTextField | null> = computed(() => {
-  let result =
+  const result =
     props.prismicDefaultPageData != null &&
     props.prismicDefaultPageData["switch-survey-text"];
   if (
     result &&
     result[0] &&
-    typeof result[0].text == "string" &&
+    typeof result[0].text === "string" &&
     props.bankName
   )
     result[0].text = result[0].text.replace(BANK_NAME_TEMPLATE, props.bankName);

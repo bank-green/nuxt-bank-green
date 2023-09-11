@@ -47,8 +47,8 @@
 </template>
 
 <script setup>
-import CheckList from "@/components/CheckList.vue";
 import { asText } from "@prismicio/helpers";
+import CheckList from "@/components/CheckList.vue";
 
 const { client } = usePrismic();
 const { data: call } = await useAsyncData("calltoaction", () =>

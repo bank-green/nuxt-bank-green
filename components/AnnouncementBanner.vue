@@ -10,9 +10,9 @@
     >
       <span>
         <Countdown
-          :eventStart="new Date(Date.UTC(2021, 9, 31, 0))"
-          eventIsPastMessage="(event already finished, we'll see you at the next one!)"
-          :showTooltip="false"
+          :event-start="new Date(Date.UTC(2021, 9, 31, 0))"
+          event-is-past-message="(event already finished, we'll see you at the next one!)"
+          :show-tooltip="false"
         />
         to go until the most important climate summit in history. Learn more
         about COP26 in Glasgow

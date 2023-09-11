@@ -12,9 +12,9 @@
         class="text-lg mb-6 font-semibold whitespace-pre-wrap"
       />
       <NuxtLink
-        @click="clickSurvey"
         :to="surveyContent?.data?.link?.url"
         class="px-6 py-3 text-medium no-underline bg-sushi-500 rounded hover:bg-sushi-600"
+        @click="clickSurvey"
       >
         <PrismicRichText
           v-if="surveyContent?.data?.buttontext"

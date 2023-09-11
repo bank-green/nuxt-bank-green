@@ -2,9 +2,8 @@
   <div aria-haspopup="listbox" class="flex items-center">
     <!-- input form -->
     <input
-      :value="modelValue"
-      @input="onInput"
       ref="input"
+      :value="modelValue"
       :placeholder="placeholder"
       type="text"
       class="relative w-full appearance-none border bg-white rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-sushi-500 focus:border-sushi-500 sm:text-sm truncate"
@@ -13,6 +12,7 @@
         'border-sushi-100': modelValue,
       }"
       autocomplete="chrome-off"
+      @input="onInput"
       @keydown="onKeyDown"
       @focus="onFocus"
       @blur="onBlur"

@@ -78,9 +78,11 @@
 </template>
 
 <script setup>
-import { getSliceComponentProps } from "@prismicio/vue";
+import {
+  getSliceComponentProps,
+  defineSliceZoneComponents,
+} from "@prismicio/vue";
 import { components } from "~~/slices";
-import { defineSliceZoneComponents } from "@prismicio/vue";
 const sliceComps = ref(defineSliceZoneComponents(components));
 
 const props = defineProps({

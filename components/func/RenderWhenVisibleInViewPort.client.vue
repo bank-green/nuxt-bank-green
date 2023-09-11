@@ -8,7 +8,7 @@
     leave-to-class="opacity-0 scale-95"
     appear
   >
-    <div :style="styles" ref="observer">
+    <div ref="observer" :style="styles">
       <slot v-if="hasBeenInViewport" />
     </div>
   </transition>

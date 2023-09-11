@@ -1,7 +1,7 @@
 <template>
   <RenderWhenVisibleInViewPort
-    :placeholderWidth="placeholderWidth"
-    :placeholderHeight="placeholderHeight"
+    :placeholder-width="placeholderWidth"
+    :placeholder-height="placeholderHeight"
     :options="{ rootMargin: '200px' }"
   >
     <LazyLottieFile :path="path" />

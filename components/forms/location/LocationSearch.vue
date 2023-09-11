@@ -1,9 +1,9 @@
 <template>
-  <div class="relative" v-clickaway="hideList">
+  <div v-clickaway="hideList" class="relative">
     <SearchInput
-      :aria-expanded="isShowing"
       v-model="search"
-      :usePencil="true"
+      :aria-expanded="isShowing"
+      :use-pencil="true"
       :placeholder="'Search country...'"
       @keydown.down="(event) => $refs['listPicker'].incrementFocus(event)"
       @keydown.up="(event) => $refs['listPicker'].decrementFocus(event)"
@@ -12,7 +12,7 @@
       @onClick="showList"
       @onCloseClick="onCloseClick"
     >
-      <template v-slot:icon>
+      <template #icon>
         <PinIcon class="h-6 w-6 absolute inset-0 m-4" />
       </template>
     </SearchInput>
@@ -37,16 +37,16 @@
           No countries found
         </div>
         <ListPicker
-          ref="listPicker"
           v-else
-          :items="filteredCountries"
+          ref="listPicker"
           v-slot="{ item }"
+          :items="filteredCountries"
           @selectItem="onSelectCountry"
         >
           <LocationSearchItem
             :id="item"
             :title="en[`COUNTRY_${item}`]"
-            :isSelected="item === modelValue"
+            :is-selected="item === modelValue"
           />
         </ListPicker>
       </div>

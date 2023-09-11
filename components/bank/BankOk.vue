@@ -4,8 +4,8 @@
       <BankHeadline
         :name="name"
         :website="website"
-        :inheritBrandRating="inheritBrandRating"
-        :prismicFieldSubtitle="bankPage?.data?.subtitle"
+        :inherit-brand-rating="inheritBrandRating"
+        :prismic-field-subtitle="bankPage?.data?.subtitle"
       />
       <div
         class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8"
@@ -79,8 +79,8 @@
 </template>
 
 <script setup lang="ts">
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
 import { PrismicDocument } from "@prismicio/types";
+import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
 const props = defineProps<{
   name: string;
   website: string;

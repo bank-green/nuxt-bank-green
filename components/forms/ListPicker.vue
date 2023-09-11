@@ -19,7 +19,7 @@
       @keydown.up="(event) => decrementFocus(event)"
       @keydown.enter="() => onSelectItem(index)"
     >
-      <slot v-bind:item="item" />
+      <slot :item="item" />
     </li>
   </ul>
 </template>

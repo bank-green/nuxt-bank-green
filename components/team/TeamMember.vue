@@ -13,7 +13,7 @@
       </div>
       <div class="flex-1 mt-4 sm:mt-0 sm:ml-8">
         <div class="text-lg leading-6 font-medium space-y-1 mb-4">
-          <a v-if="href" :href="href" target="_blank" ref="noopener">{{
+          <a v-if="href" ref="noopener" :href="href" target="_blank">{{
             name
           }}</a>
           <h3 v-else>{{ name }}</h3>
