@@ -1,7 +1,7 @@
 import { get } from "./backend";
 
-let gqlUrl = "https://data.bank.green/graphql";
-let options = {};
+const gqlUrl = "https://data.bank.green/graphql";
+const options = {};
 
 async function callBackend(query, variables) {
   const queryParam = encodeURIComponent(query);

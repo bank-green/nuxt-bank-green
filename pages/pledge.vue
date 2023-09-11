@@ -35,7 +35,7 @@
       >
         <PrismicRichText :field="pledge.data.description2" />
         <div class="w-full flex justify-center mt-12">
-          <button @click="scrollToForm" class="button-green max-w-md md:w-max">
+          <button class="button-green max-w-md md:w-max" @click="scrollToForm">
             Take the Pledge
           </button>
         </div>
@@ -53,9 +53,9 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import Swoosh from "@/components/Swoosh.vue";
 import CheckList from "@/components/CheckList.vue";
-import { ref } from "vue";
 
 const checkList = [
   "Send a message to your bank that it must defund fossil fuels",

@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const formatDate = (date) => {
     if (!date) return undefined;
-    let newDate = new Date(date);
+    const newDate = new Date(date);
     if (newDate) {
       return newDate.toISOString().slice(0, 10);
     } else {

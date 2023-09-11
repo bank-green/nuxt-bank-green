@@ -1,5 +1,5 @@
 <template>
-  <SliceSimulator #default="{ slices }">
+  <SliceSimulator v-slot="{ slices }">
     <SliceZone :slices="slices" :components="components" />
   </SliceSimulator>
 </template>

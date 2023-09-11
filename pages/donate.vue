@@ -8,8 +8,8 @@
           <template v-if="donation">
             <div class="space-y-8">
               <PrismicImage
-                class="w-full h-full object-contain object-top"
                 v-if="donation.data['photo']"
+                class="w-full h-full object-contain object-top"
                 alt="donation-image"
                 :field="donation.data['photo']"
               />
@@ -53,9 +53,9 @@
                     class="inline-block"
                   >
                     <input
+                      :id="_option.value.toString()"
                       v-model="selectedMethod"
                       type="radio"
-                      :id="_option.value.toString()"
                       :value="_option.value"
                       class="hidden"
                     />
@@ -77,9 +77,9 @@
                     class="inline-block"
                   >
                     <input
+                      :id="_option.value.toString()"
                       v-model="selectedAmount"
                       type="radio"
-                      :id="_option.value.toString()"
                       :value="_option.value"
                       class="hidden"
                     />

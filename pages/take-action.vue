@@ -15,11 +15,11 @@
             >
               <div v-for="(tab, index) in tabs" :key="index" class="flex-grow">
                 <input
+                  :id="index"
+                  v-model="selectedTabIndex"
                   class="hidden"
                   type="radio"
-                  :id="index"
                   :value="index"
-                  v-model="selectedTabIndex"
                 />
                 <label
                   class="flex justify-center py-2 text-sm sm:text-base md:text-2xl font-semibold cursor-pointer"
@@ -34,8 +34,8 @@
             <div class="prose md:prose-lg px-4">
               <div class="px-5 py-4"></div>
               <div
-                class="pb-4 md:pb-8"
                 v-if="tabs[selectedTabIndex] === 'Pressure'"
+                class="pb-4 md:pb-8"
               >
                 <SliceZone
                   :slices="action?.data.slices1 ?? []"
@@ -44,8 +44,8 @@
                 />
               </div>
               <div
-                class="pb-4 md:pb-8"
                 v-else-if="tabs[selectedTabIndex] === 'Switch'"
+                class="pb-4 md:pb-8"
               >
                 <SliceZone
                   :slices="action?.data.slices2 ?? []"
@@ -54,8 +54,8 @@
                 />
               </div>
               <div
-                class="pb-4 md:pb-8"
                 v-else-if="tabs[selectedTabIndex] === 'Share'"
+                class="pb-4 md:pb-8"
               >
                 <SliceZone
                   :slices="action?.data.slices3 ?? []"
@@ -64,8 +64,8 @@
                 />
               </div>
               <div
-                class="pb-4 md:pb-8"
                 v-else-if="tabs[selectedTabIndex] === 'Learn'"
+                class="pb-4 md:pb-8"
               >
                 <SliceZone
                   :slices="action?.data.slices4 ?? []"
@@ -89,8 +89,8 @@
 </template>
 
 <script setup>
-import { components } from "~~/slices";
 import { defineSliceZoneComponents } from "@prismicio/vue";
+import { components } from "~~/slices";
 const sliceComps = ref(defineSliceZoneComponents(components));
 
 const { client } = usePrismic();

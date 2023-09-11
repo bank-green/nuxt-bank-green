@@ -29,10 +29,10 @@
 </template>
 
 <script setup>
-import BlogCard from "@/components/blog/BlogCard.vue";
-import { components } from "~~/slices";
 import { defineSliceZoneComponents } from "@prismicio/vue";
 import { asText } from "@prismicio/helpers";
+import BlogCard from "@/components/blog/BlogCard.vue";
+import { components } from "~~/slices";
 
 const { client } = usePrismic();
 const { data: posts } = await useAsyncData("pressposts", () =>

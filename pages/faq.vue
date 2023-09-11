@@ -36,9 +36,9 @@
 </template>
 
 <script setup>
+import { defineSliceZoneComponents } from "@prismicio/vue";
 import SignupBox from "@/components/forms/SignupBox.vue";
 import { components } from "~~/slices";
-import { defineSliceZoneComponents } from "@prismicio/vue";
 
 const sliceComps = ref(defineSliceZoneComponents(components));
 

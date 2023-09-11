@@ -1,7 +1,7 @@
 export const useHeadHelper = (title, description) => {
   if (title)
     useHead({
-      title: title,
+      title,
       meta: [
         {
           property: "og:title",

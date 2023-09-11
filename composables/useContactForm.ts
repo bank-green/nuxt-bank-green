@@ -28,17 +28,17 @@ export default function useContactForm(
     }
     const warningsMap: ContactFormWarningsMap = {};
     if (!email.value && required.includes("email")) {
-      warningsMap["email"] = "Your email is required.";
+      warningsMap.email = "Your email is required.";
     }
     if (!isAgreeTerms.value && required.includes("isAgreeTerms")) {
-      warningsMap["isAgreeTerms"] = "You need to agree to the terms.";
+      warningsMap.isAgreeTerms = "You need to agree to the terms.";
     }
     if (!isAgreeMarketing.value && required.includes("isAgreeMarketing")) {
-      warningsMap["isAgreeMarketing"] =
+      warningsMap.isAgreeMarketing =
         "You need to agree to receive marketing from Bank.Green";
     }
     if (!bank.value && required.includes("bank")) {
-      warningsMap["bank"] = "Please tell us the name of your bank";
+      warningsMap.bank = "Please tell us the name of your bank";
     }
     return warningsMap;
   });

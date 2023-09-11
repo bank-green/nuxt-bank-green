@@ -4,34 +4,34 @@
       :name="details.name"
       :rating="details.rating"
       :website="details.website"
-      :inheritBrandRating="details.inheritBrandRating"
-      :institutionCredentials="institutionCredentials"
-      :prismicOurTake="prismicPageData?.our_take"
-      :prismicDefaultPageData="prismicDefaultPageData"
-      :fossilFreeAlliance="details.fossilFreeAlliance"
+      :inherit-brand-rating="details.inheritBrandRating"
+      :institution-credentials="institutionCredentials"
+      :prismic-our-take="prismicPageData?.our_take"
+      :prismic-default-page-data="prismicDefaultPageData"
+      :fossil-free-alliance="details.fossilFreeAlliance"
     />
 
     <EcoBankSwitchSurvey
-      :bankName="details.name"
-      :prismicDefaultPageData="prismicDefaultPageData"
+      :bank-name="details.name"
+      :prismic-default-page-data="prismicDefaultPageData"
       :website="details.website"
     />
 
     <EcoBankDetail
-      :institutionType="institutionType"
-      :fromTheWebsite="details.fromTheWebsite"
+      :institution-type="institutionType"
+      :from-the-website="details.fromTheWebsite"
       :name="details.name"
       :website="details.website"
       :rating="details.rating"
-      :bankFeatures="details.bankFeatures"
+      :bank-features="details.bankFeatures"
       :tag="details.tag"
-      :prismicPageData="prismicPageData"
-      :prismicDefaultPageData="prismicDefaultPageData"
+      :prismic-page-data="prismicPageData"
+      :prismic-default-page-data="prismicDefaultPageData"
     />
 
     <EcoBankSwitchSurvey
-      :bankName="details.name"
-      :prismicDefaultPageData="prismicDefaultPageData"
+      :bank-name="details.name"
+      :prismic-default-page-data="prismicDefaultPageData"
       :website="details.website"
     />
   </div>

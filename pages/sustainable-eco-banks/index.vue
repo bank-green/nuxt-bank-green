@@ -36,7 +36,7 @@
           </div>
 
           <div class="relative w-full md:ml-6">
-            <LocationSearch class="z-30 mb-8" v-model="country" />
+            <LocationSearch v-model="country" class="z-30 mb-8" />
 
             <div v-if="!country">
               <h2
@@ -54,7 +54,7 @@
                 :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                 class="transition"
               >
-                <EcoBankCards :list="banks" :isNoCredit="isNoCredit" />
+                <EcoBankCards :list="banks" :is-no-credit="isNoCredit" />
               </div>
 
               <div v-else-if="!loading" class="mt-20">
@@ -92,10 +92,10 @@
 </template>
 
 <script setup>
+import { defineSliceZoneComponents } from "@prismicio/vue";
 import LocationSearch from "@/components/forms/location/LocationSearch.vue";
 
 import { components } from "~~/slices";
-import { defineSliceZoneComponents } from "@prismicio/vue";
 const sliceComps = ref(defineSliceZoneComponents(components));
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')

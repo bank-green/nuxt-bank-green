@@ -66,8 +66,8 @@
 </template>
 
 <script setup>
-import { components } from "~~/slices";
 import { defineSliceZoneComponents } from "@prismicio/vue";
+import { components } from "~~/slices";
 
 const route = useRoute();
 const error = ref(false);

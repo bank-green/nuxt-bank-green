@@ -27,7 +27,7 @@ export default function getFeatures(bankFeatures) {
     result[v] = { isChecked: false };
   });
 
-  for (let bankFeature of bankFeatures) {
+  for (const bankFeature of bankFeatures) {
     if (featureDict[bankFeature.feature.name]) {
       // it's a feature we're interested in
       const displayFeature = getDisplayFeature(bankFeature);

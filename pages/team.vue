@@ -56,8 +56,8 @@
 </template>
 
 <script setup>
-import { components } from "~~/slices";
 import { defineSliceZoneComponents } from "@prismicio/vue";
+import { components } from "~~/slices";
 useHead({ title: "Team" });
 
 const sliceComps = ref(defineSliceZoneComponents(components));

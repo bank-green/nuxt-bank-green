@@ -16,13 +16,13 @@
             class="flex flex-col md:flex-row items-stretch md:items-center space-y-2 md:space-y-0 md:space-x-4 mt-8 md:mt-10 md:mb-10"
           >
             <ClientOnly>
-              <LocationSearch class="md:w-1/2 flex-initial" v-model="country" />
+              <LocationSearch v-model="country" class="md:w-1/2 flex-initial" />
               <BankSearch
-                class="md:w-1/2 flex-initial"
                 ref="bankSearch"
+                v-model="bank"
+                class="md:w-1/2 flex-initial"
                 :disabled="!country"
                 :country="country"
-                v-model="bank"
               />
               <template #fallback>
                 <div class="relative md:w-1/2 flex-initial">
@@ -133,8 +133,8 @@
       </div>
 
       <LazyLottiePlayer
-        :placeholderHeight="480"
-        :placeholderWidth="426"
+        :placeholder-height="480"
+        :placeholder-width="426"
         class="md:w-2/5 max-w-full md:ml-24"
         path="/anim/atm_without_bg.json"
         alt=""
@@ -181,12 +181,12 @@
 </template>
 
 <script setup>
+import { useGtm } from "@gtm-support/vue-gtm";
+import { defineSliceZoneComponents } from "@prismicio/vue";
 import LocationSearch from "@/components/forms/location/LocationSearch.vue";
 import BankSearch from "@/components/forms/banks/BankSearch.vue";
 import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
-import { useGtm } from "@gtm-support/vue-gtm";
 import { components } from "~~/slices";
-import { defineSliceZoneComponents } from "@prismicio/vue";
 import { usePrismicSEO } from "~~/composables/useHeadHelpers";
 const sliceComps = ref(defineSliceZoneComponents(components));
 

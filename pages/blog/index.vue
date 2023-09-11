@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-import BlogCard from "@/components/blog/BlogCard.vue";
 import { asText } from "@prismicio/helpers";
+import BlogCard from "@/components/blog/BlogCard.vue";
 
 const { client } = usePrismic();
 

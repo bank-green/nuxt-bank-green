@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import { components } from "~~/slices";
 import { defineSliceZoneComponents } from "@prismicio/vue";
+import { components } from "~~/slices";
 
 const sliceComps = ref(defineSliceZoneComponents(components));
 

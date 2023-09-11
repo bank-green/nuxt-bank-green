@@ -69,7 +69,7 @@ export default defineEventHandler(
 
       // return sendRedirect(event, session.url || '', 303);
     } catch (e) {
-      let _e: Error = e;
+      const _e: Error = e;
       console.error(e);
       setResponseStatus(400);
       return {

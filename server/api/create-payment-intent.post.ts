@@ -51,7 +51,7 @@ export default defineEventHandler(
         error: null,
       };
     } catch (e) {
-      let _e: Error = e;
+      const _e: Error = e;
       setResponseStatus(400);
       return {
         success: false,

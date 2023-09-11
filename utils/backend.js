@@ -1,7 +1,7 @@
 import axios from "axios";
 import httpErrorHandling from "./errorHandling";
 
-let baseURL = "https://europe-west1-bank-green.cloudfunctions.net";
+const baseURL = "https://europe-west1-bank-green.cloudfunctions.net";
 
 export const instance = axios.create({
   baseURL,
@@ -26,7 +26,7 @@ function parseError(e) {
 
 export async function get(url, config) {
   try {
-    const params = window["__PRERENDER_INJECTED"]?.prerender
+    const params = window.__PRERENDER_INJECTED?.prerender
       ? {
           params: { ...config?.params, prerender: true },
         }

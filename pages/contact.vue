@@ -13,16 +13,16 @@
         >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             <TextField
-              class="col-span-1"
               v-model="firstName"
+              class="col-span-1"
               name="firstName"
               type="text"
               :title="'Your first name (optional)'"
               :placeholder="'First name, so we can say hi'"
             />
             <TextField
-              class="col-span-1"
               v-model="email"
+              class="col-span-1"
               type="email"
               name="email"
               :title="'Your email address'"
@@ -30,8 +30,8 @@
               :warning="warningsMap['email']"
             />
             <TextField
-              class="col-span-1 md:col-span-2"
               v-model="subject"
+              class="col-span-1 md:col-span-2"
               name="subject"
               :title="'Subject'"
               :placeholder="'Subject'"
@@ -39,8 +39,8 @@
               :required="true"
             />
             <TextField
-              class="md:col-span-2"
               v-model="message"
+              class="md:col-span-2"
               rows="3"
               name="message"
               :title="'Your message'"
@@ -49,16 +49,16 @@
               :required="true"
             />
             <CheckboxSection
-              class="md:col-span-2"
               v-model="isAgreeMarketing"
+              class="md:col-span-2"
               name="isAgreeMarketing"
             >
               I wish to receive more information via email from
               Bank.Green.</CheckboxSection
             >
             <CheckboxSection
-              class="md:col-span-2"
               v-model="isAgreeTerms"
+              class="md:col-span-2"
               name="isAgreeTerms"
               :warning="warningsMap['isAgreeTerms']"
             >
@@ -98,10 +98,10 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import CheckboxSection from "../components/forms/CheckboxSection.vue";
 import TextField from "../components/forms/TextField.vue";
 
-import { ref } from "vue";
 import Swoosh from "@/components/Swoosh.vue";
 
 const p = usePrismic();
@@ -110,7 +110,7 @@ const { data: contact } = await useAsyncData("contact", () =>
 );
 usePrismicSEO(contact.value.data);
 
-let extras = ref({ isAgreeMarketing: false });
+const extras = ref({ isAgreeMarketing: false });
 
 const {
   firstName,

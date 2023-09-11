@@ -1,9 +1,7 @@
 function getBankRating(bankDetails) {
   const hasDetails = bankDetails && bankDetails.rating;
   if (!hasDetails) return undefined;
-  const rating = !!(bankDetails && bankDetails.rating)
-    ? bankDetails.rating
-    : "";
+  const rating = bankDetails && bankDetails.rating ? bankDetails.rating : "";
 
   switch (rating) {
     case "worst":
@@ -53,7 +51,7 @@ export async function useBankPage(bankTag, bankDetails) {
 
     // override default fields if available
     bankPage = bankRatingResponse.data.value;
-    let custom = customBankResponse.data.value;
+    const custom = customBankResponse.data.value;
 
     if (custom.data.headline.length > 0)
       bankPage.data.headline = custom.data.headline;
