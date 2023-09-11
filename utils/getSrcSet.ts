@@ -1,4 +1,3 @@
-
 /**
  * returns /img/features/1-home.jpg 1x, /img/features/1-home@2x.jpg 2x, /img/features/1-home@3x.jpg 3x
  *
@@ -6,34 +5,38 @@
  * @param {string} src /img/features/1-home.jpg
  * @param {string} newExtension webp
  */
-export default function getSrcSet(srcset? : string, src? : string, newExtension? : string) {
+export default function getSrcSet(
+  srcset?: string,
+  src?: string,
+  newExtension?: string,
+) {
   if (!srcset || !src) {
-    return ''
+    return "";
   }
-  const resolutions = srcset.split(',')
-  const srcsetOptions = []
-  const filename = getFileName(src)
-  const extension = newExtension || getExtension(src)
+  const resolutions = srcset.split(",");
+  const srcsetOptions = [];
+  const filename = getFileName(src);
+  const extension = newExtension || getExtension(src);
   for (const resolution of resolutions) {
-    if (resolution === '1x') {
-      srcsetOptions.push(`${filename}.${extension} ${resolution}`)
-      continue
+    if (resolution === "1x") {
+      srcsetOptions.push(`${filename}.${extension} ${resolution}`);
+      continue;
     }
-    srcsetOptions.push(`${filename}@${resolution}.${extension} ${resolution}`)
+    srcsetOptions.push(`${filename}@${resolution}.${extension} ${resolution}`);
   }
-  return srcsetOptions.join(',')
+  return srcsetOptions.join(",");
 }
 
-function getExtension(filename? : string) {
-  if (!filename || typeof filename !== 'string') {
-    return '' // bad argument
+function getExtension(filename?: string) {
+  if (!filename || typeof filename !== "string") {
+    return ""; // bad argument
   }
-  if (!filename.includes('.')) {
-    return '' // no dot
+  if (!filename.includes(".")) {
+    return ""; // no dot
   }
-  return filename.split('.').pop()
+  return filename.split(".").pop();
 }
 
-function getFileName(filename : string) {
-  return filename.split('.').slice(0, -1).join('.')
+function getFileName(filename: string) {
+  return filename.split(".").slice(0, -1).join(".");
 }

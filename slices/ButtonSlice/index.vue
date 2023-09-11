@@ -1,7 +1,12 @@
 <template>
   <p class="text-center py-2">
-    <NuxtLink class="button-green inline-block w-auto no-underline" :to="slice?.primary.link.url"><span
-        class="text-white no-underline">{{ slice?.primary.label }}</span></NuxtLink>
+    <NuxtLink
+      class="button-green inline-block w-auto no-underline"
+      :to="slice?.primary.link.url"
+      ><span class="text-white no-underline">{{
+        slice?.primary.label
+      }}</span></NuxtLink
+    >
   </p>
 </template>
 

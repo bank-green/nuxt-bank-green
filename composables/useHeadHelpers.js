@@ -1,7 +1,4 @@
-export const useHeadHelper = (
-  title,
-  description
-) => {
+export const useHeadHelper = (title, description) => {
   if (title)
     useHead({
       title: title,
@@ -38,10 +35,10 @@ export const useHeadHelper = (
 };
 
 export const useHeadRating = (rating) => {
-  const imageUrl = `https://bank.green/anim/gauge/${rating}.gif`
-  const videoUrl = `https://bank.green/anim/gauge/${rating}.mp4`
-  const width = "680"
-  const height = "689"
+  const imageUrl = `https://bank.green/anim/gauge/${rating}.gif`;
+  const videoUrl = `https://bank.green/anim/gauge/${rating}.mp4`;
+  const width = "680";
+  const height = "689";
   useHead({
     meta: [
       {
@@ -50,23 +47,23 @@ export const useHeadRating = (rating) => {
       },
       {
         property: "og:image:width",
-        content: width
+        content: width,
       },
       {
         property: "og:image:height",
-        content: height
+        content: height,
       },
       {
         property: "twitter:image",
-        content: imageUrl
+        content: imageUrl,
       },
       {
         property: "og:video",
-        content: videoUrl
+        content: videoUrl,
       },
       {
         property: "og:video:url",
-        content: videoUrl
+        content: videoUrl,
       },
       {
         property: "og:video:secure_url",
@@ -82,27 +79,25 @@ export const useHeadRating = (rating) => {
       },
       {
         property: "og:video:width",
-        content: width
-      }, {
+        content: width,
+      },
+      {
         property: "og:video:height",
-        content: height
+        content: height,
       },
       {
         name: "twitter:player:width",
-        content: width
+        content: width,
       },
       {
         name: "twitter:player:height",
-        content: height
-      }
-
-    ]
-  })
-}
+        content: height,
+      },
+    ],
+  });
+};
 
 export const usePrismicSEO = (data) => {
-  if (!data) return
-  useHeadHelper(data.seo_title, data.seo_description)
-}
-
-
+  if (!data) return;
+  useHeadHelper(data.seo_title, data.seo_description);
+};

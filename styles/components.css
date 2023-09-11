@@ -1,159 +1,181 @@
 img {
-    max-width: none;
+  max-width: none;
 }
 
 .constrain-images img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 html {
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
-    scroll-behavior: smooth;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+  scroll-behavior: smooth;
 }
 
 @supports (font-variation-settings: normal) {
-    html {
-        font-family: Inter var, system-ui, -apple-system, BlinkMacSystemFont,
-            'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-            'Noto Color Emoji';
-    }
+  html {
+    font-family:
+      Inter var,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      "Noto Sans",
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      "Noto Color Emoji";
+  }
 }
 
 body {
-    -webkit-tap-highlight-color: transparent;
-    /* to avoid android selection flash */
-    touch-action: manipulation;
-    /* disable double-tap to zoom */
-    -webkit-touch-callout: none;
-    /* disable ios callout */
-    @apply bg-gray-50 text-gray-900 antialiased;
-    overflow-y: scroll;
+  -webkit-tap-highlight-color: transparent;
+  /* to avoid android selection flash */
+  touch-action: manipulation;
+  /* disable double-tap to zoom */
+  -webkit-touch-callout: none;
+  /* disable ios callout */
+  @apply bg-gray-50 text-gray-900 antialiased;
+  overflow-y: scroll;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 a.link {
-    @apply font-medium text-sushi-500  hover:underline hover:text-sushi-600 focus:underline;
+  @apply font-medium text-sushi-500  hover:underline hover:text-sushi-600 focus:underline;
 }
 
 b {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 strong {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 ::selection {
-    @apply bg-sushi-500 text-white;
+  @apply bg-sushi-500 text-white;
 }
 
 .bg-gradient-gray-light {
-    background: linear-gradient(180deg, #f4f8fd 44.37%, #e2f0fc 100%);
+  background: linear-gradient(180deg, #f4f8fd 44.37%, #e2f0fc 100%);
 }
 
 .contain {
-    @apply w-full max-w-7xl mx-auto px-6;
+  @apply w-full max-w-7xl mx-auto px-6;
 }
 
 @screen sm {
-    .contain {
-        @apply px-8;
-    }
+  .contain {
+    @apply px-8;
+  }
 }
 
 @screen md {
-    .contain {
-        @apply px-10;
-    }
+  .contain {
+    @apply px-10;
+  }
 }
 
 .overflow-y-scroll {
-    -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
 }
 
 .button-green {
-    @apply block font-medium bg-sushi-500 hover:bg-sushi-600 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-sushi-500 text-white p-4 text-center w-full rounded-2xl shadow-green capitalize;
+  @apply block font-medium bg-sushi-500 hover:bg-sushi-600 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-sushi-500 text-white p-4 text-center w-full rounded-2xl shadow-green capitalize;
 }
 
 a.button-green {
-    @apply no-underline;
+  @apply no-underline;
 }
 
 .button-green.disabled {
-    @apply opacity-50;
-    pointer-events: none;
+  @apply opacity-50;
+  pointer-events: none;
 }
 .button-white {
-    @apply block font-medium bg-gray-100 hover:bg-gray-200 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-gray-100 text-primary-dark p-4 text-center w-full rounded-2xl  capitalize;
+  @apply block font-medium bg-gray-100 hover:bg-gray-200 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-gray-100 text-primary-dark p-4 text-center w-full rounded-2xl  capitalize;
 }
 
 * {
-    scrollbar-width: thin;
-    scrollbar-color: theme('colors.sushi.500') theme('colors.sushi.100');
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.sushi.500") theme("colors.sushi.100");
 }
 
 *::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 *::-webkit-scrollbar-track {
-    background: theme('colors.sushi.100');
+  background: theme("colors.sushi.100");
 }
 
 *::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: theme('colors.sushi.500');
+  border-radius: 4px;
+  background-color: theme("colors.sushi.500");
 }
 
 /* App.vue has a .route-transition class with a transition component
  * you can simply add .page-fade-in to your route pages to fade those sections in on page change
  */
 .route-enter-active-class {
-    @apply duration-300 ease-out;
+  @apply duration-300 ease-out;
 }
 
 .route-enter-active-class .page-fade-in {
-    @apply duration-300 transform-gpu ease-out;
+  @apply duration-300 transform-gpu ease-out;
 }
 .route-enter-from-class .page-fade-in {
-    @apply opacity-0 -translate-y-1;
+  @apply opacity-0 -translate-y-1;
 }
 .route-enter-to-class .page-fade-in {
-    @apply opacity-100 translate-y-0;
+  @apply opacity-100 translate-y-0;
 }
 
 .alternate-rows:nth-child(2n) .table-cell {
-    @apply bg-sushi-50;
+  @apply bg-sushi-50;
 }
 
 .prose-blurb a {
-    @apply text-sm font-normal no-underline text-sushi-500 hover:text-sushi-600;
+  @apply text-sm font-normal no-underline text-sushi-500 hover:text-sushi-600;
 }
 
 .filter-grayscale {
-    filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 article img {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    max-height: 75vh;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  max-height: 75vh;
 }
 
 @layer utilities {
-    .filter-none {
-        filter: none;
-    }
+  .filter-none {
+    filter: none;
+  }
 }
 
 .backdrop-blur {
-    backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }

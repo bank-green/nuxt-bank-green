@@ -11,12 +11,18 @@ export default defineNuxtConfig({
       DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
     },
     STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
-    STRIPE_SUBSCRIPTION_PRICE_1: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_1,
-    STRIPE_SUBSCRIPTION_PRICE_2: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_2,
-    STRIPE_SUBSCRIPTION_PRICE_3: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_3,
-    STRIPE_SUBSCRIPTION_PRICE_4: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_4,
-    STRIPE_SUBSCRIPTION_PRICE_5: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
-    STRIPE_SUBSCRIPTION_PRICE_6: process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
+    STRIPE_SUBSCRIPTION_PRICE_1:
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_1,
+    STRIPE_SUBSCRIPTION_PRICE_2:
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_2,
+    STRIPE_SUBSCRIPTION_PRICE_3:
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_3,
+    STRIPE_SUBSCRIPTION_PRICE_4:
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_4,
+    STRIPE_SUBSCRIPTION_PRICE_5:
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
+    STRIPE_SUBSCRIPTION_PRICE_6:
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
   },
   vue: {
     compilerOptions: {
@@ -151,14 +157,14 @@ export default defineNuxtConfig({
     dirs: ["slices"],
   },
   image: {
-    provider: 'prismic',
+    provider: "prismic",
     none: {},
     prismic: {},
   },
   nitro: {
-    preset: 'cloudflare',
+    preset: "cloudflare",
   },
   vite: {
-    plugins: [eslintPlugin()]
-  }
+    plugins: [eslintPlugin()],
+  },
 });

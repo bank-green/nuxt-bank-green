@@ -3,7 +3,6 @@ import { CreatePaymentIntentResponse } from "~~/utils/interfaces/donate";
 
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string;
 
-
 // https://stripe.com/docs/currencies#presentment-currencies
 const DEFAULT_CURRENCY = "USD";
 // https://stripe.com/docs/currencies#zero-decimal
@@ -32,15 +31,16 @@ export default defineEventHandler(
       const reqBody = {
         amount: `${body.amount * DEFAULT_MULTIPLIER}`,
         currency: DEFAULT_CURRENCY,
-        'automatic_payment_methods[enabled]': 'true'
+        "automatic_payment_methods[enabled]": "true",
       };
 
       const res = await $fetch(`https://api.stripe.com/v1/payment_intents`, {
         method: "POST",
         headers: {
-            authorization:
-              `Basic ${Buffer.from(stripeSecretKey + ':').toString('base64') }`,
-          },
+          authorization: `Basic ${Buffer.from(stripeSecretKey + ":").toString(
+            "base64",
+          )}`,
+        },
         body: new URLSearchParams(reqBody),
         parseResponse: JSON.parse,
       });
@@ -59,5 +59,5 @@ export default defineEventHandler(
         error: _e.message,
       };
     }
-  }
+  },
 );

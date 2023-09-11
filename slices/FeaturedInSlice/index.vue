@@ -1,6 +1,9 @@
 <template>
-  <img :src='`${slice.primary.logo.url}&w=400`' :alt="slice.primary.logo.alt"
-    :class="slice.primary.class ?? 'h-10 w-auto'" />
+  <img
+    :src="`${slice.primary.logo.url}&w=400`"
+    :alt="slice.primary.logo.alt"
+    :class="slice.primary.class ?? 'h-10 w-auto'"
+  />
 </template>
 
 <script setup lang="ts">

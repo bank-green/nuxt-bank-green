@@ -45,18 +45,17 @@ export default defineEventHandler(
       const reqBody = {
         mode: "subscription",
         "line_items[0][price]": priceId,
-        "line_items[0][quantity]": '1',
+        "line_items[0][quantity]": "1",
         success_url: `${domainURL}/donate-complete?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${domainURL}/donate-cancelled`
+        cancel_url: `${domainURL}/donate-cancelled`,
       };
-
-
 
       const res = await $fetch(`https://api.stripe.com/v1/checkout/sessions`, {
         method: "POST",
         headers: {
-          authorization:
-            `Basic ${Buffer.from(stripeSecretKey + ':').toString('base64') }`,
+          authorization: `Basic ${Buffer.from(stripeSecretKey + ":").toString(
+            "base64",
+          )}`,
         },
         body: new URLSearchParams(reqBody),
         parseResponse: JSON.parse,
@@ -79,5 +78,5 @@ export default defineEventHandler(
         error: _e.message,
       };
     }
-  }
+  },
 );

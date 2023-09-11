@@ -545,7 +545,7 @@ interface EcobankspageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice>
+  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice>;
   /**
    * Slice Zone field in *EcoBanksPage*
    *
@@ -554,7 +554,7 @@ interface EcobankspageDocumentData {
    * - **API ID Path**: ecobankspage.slices1[]
    * - **Tab**: FAQ
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
+   */
   slices1: prismic.SliceZone<EcobankspageDocumentDataSlices1Slice>;
 }
 
@@ -711,7 +711,7 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField
+  seo_description: prismic.KeyTextField;
   /**
    * Slice Zone field in *HomePage*
    *
@@ -720,7 +720,7 @@ interface HomepageDocumentData {
    * - **API ID Path**: homepage.slices1[]
    * - **Tab**: As Featured In
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
+   */
   slices1: prismic.SliceZone<HomepageDocumentDataSlices1Slice>;
 }
 
@@ -1234,7 +1234,7 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField
+  seo_description: prismic.KeyTextField;
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1243,8 +1243,8 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices1[]
    * - **Tab**: Pressure
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
-  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice>
+   */
+  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice>;
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1253,8 +1253,8 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices2[]
    * - **Tab**: Switch
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
-  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice>
+   */
+  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice>;
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1263,8 +1263,8 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices3[]
    * - **Tab**: Share
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
-  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice>
+   */
+  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice>;
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1273,7 +1273,7 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices4[]
    * - **Tab**: Learn
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
+   */
   slices4: prismic.SliceZone<TakeactionpageDocumentDataSlices4Slice>;
 }
 
@@ -1879,7 +1879,7 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
+      options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
   }
 

@@ -56,12 +56,11 @@ export default defineEventHandler(async (event) => {
   // };
   return "OK";
 });
-  
+
 async function sendZapierContact(message) {
-  const hookUrl = 
-    (message && message.tag === 'contact page form')
-    ? 'https://hooks.zapier.com/hooks/catch/9709339/ojsks1l'
-    : 'https://hooks.zapier.com/hooks/catch/9709339/ojskliq';
+  const hookUrl =
+    message && message.tag === "contact page form"
+      ? "https://hooks.zapier.com/hooks/catch/9709339/ojsks1l"
+      : "https://hooks.zapier.com/hooks/catch/9709339/ojskliq";
   await $fetch(hookUrl, { method: "POST", body: message });
 }
-  
