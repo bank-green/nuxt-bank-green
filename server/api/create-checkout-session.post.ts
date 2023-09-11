@@ -1,5 +1,3 @@
-import Stripe from "stripe";
-import ofetch from "ofetch";
 import { CreateSubscriptionResponse } from "~~/utils/interfaces/donate";
 
 const domainURL = useRuntimeConfig().public.DOMAIN_URL as string;

@@ -19,7 +19,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     );
 
     // only enable after another delay
-    setTimeout(async () => {
+    setTimeout(() => {
       const allowCookies = useCookie("bg.allowcookies", {
         default: () => false,
       });

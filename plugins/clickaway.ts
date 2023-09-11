@@ -3,7 +3,7 @@ import { DirectiveBinding, VNode } from "vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive("clickaway", {
-    mounted(el: any, binding: DirectiveBinding<any>, vnode: VNode<any, any>) {
+    mounted(el: any, binding: DirectiveBinding<any>, _: VNode<any, any>) {
       el.clickOutsideEvent = (event: { target: any }) => {
         if (!(el === event.target || el.contains(event.target))) {
           binding.value(el, event);

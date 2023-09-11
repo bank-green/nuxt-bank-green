@@ -1,4 +1,3 @@
-import Stripe from "stripe";
 import { CreatePaymentIntentResponse } from "~~/utils/interfaces/donate";
 
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string;

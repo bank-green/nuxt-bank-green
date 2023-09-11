@@ -48,7 +48,7 @@ function getDisplayFeature(bankFeature) {
       text: bankFeature.details,
     };
 
-  if (bankFeature.offered.toUpperCase() == "YES")
+  if (bankFeature.offered.toUpperCase() === "YES")
     return {
       isChecked: true,
     };
