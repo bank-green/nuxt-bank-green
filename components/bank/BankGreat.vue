@@ -25,7 +25,7 @@
             class="w-32"
             src="/img/certification/fossil-free-certified.png"
             alt="Fossil Free Certification"
-          />
+          >
         </div>
         <div
           class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6"
@@ -73,7 +73,7 @@
               class="md:order-first md:w-1/2 -mx-24 sm:mx-0 lg:-ml-32 md:mr-16"
               src="/img/illustrations/dig.svg"
               alt=""
-            />
+            >
           </div>
         </div>
       </div>
@@ -90,8 +90,8 @@
 </template>
 
 <script setup lang="ts">
-import { PrismicDocument } from "@prismicio/types";
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
+import { PrismicDocument } from '@prismicio/types'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 const props = defineProps<{
   name: string;
   website: string;
@@ -101,5 +101,5 @@ const props = defineProps<{
   };
   fossilFreeAlliance: boolean;
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
-}>();
+}>()
 </script>

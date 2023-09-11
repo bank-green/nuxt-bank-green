@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import ClearbitLogo from "../../icons/ClearbitLogo.vue";
+import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
 const props = defineProps<{
   id: String;
@@ -48,5 +48,5 @@ const props = defineProps<{
   website: String;
   isSelected: Boolean;
   isFocused?: Boolean;
-}>();
+}>()
 </script>

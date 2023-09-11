@@ -26,7 +26,7 @@
           <img
             src="/img/icons/bank-icon.svg"
             class="h-6 w-6 absolute inset-0 m-4"
-          />
+          >
         </template>
       </SearchInput>
 
@@ -85,87 +85,87 @@
       v-else
       src="/img/icons/bank-icon.svg"
       class="h-6 w-6 absolute inset-0 m-4"
-    />
+    >
   </div>
 </template>
 <script setup lang="ts">
-import LoadingJumper from "../../LoadingJumper.vue";
-import SearchInput from "../input/SearchInput.vue";
-import ListPicker from "../ListPicker.vue";
-import BankSearchItem from "./BankSearchItem.vue";
-import { findBanks } from "./banks";
+import LoadingJumper from '../../LoadingJumper.vue'
+import SearchInput from '../input/SearchInput.vue'
+import ListPicker from '../ListPicker.vue'
+import BankSearchItem from './BankSearchItem.vue'
+import { findBanks } from './banks'
 
 const props = defineProps<{
   disabled: Boolean;
   country: String;
   modelValue: Object | null;
-}>();
+}>()
 
-const emit = defineEmits(["update:modelValue", "searchInputChange"]);
+const emit = defineEmits(['update:modelValue', 'searchInputChange'])
 
-const pageStart = new Date();
-const banks = ref([]);
-const loaded = ref(false);
-const search = ref("");
-const isShowing = ref(false);
-const selectedItem = ref(null);
-const input = ref<HTMLInputElement | null>(null);
+const pageStart = new Date()
+const banks = ref([])
+const loaded = ref(false)
+const search = ref('')
+const isShowing = ref(false)
+const selectedItem = ref(null)
+const input = ref<HTMLInputElement | null>(null)
 
-const hasBanks = computed(() => banks.value.length > 0);
-const filteredBanks = computed(() => findBanks(banks.value, search.value));
+const hasBanks = computed(() => banks.value.length > 0)
+const filteredBanks = computed(() => findBanks(banks.value, search.value))
 
 onMounted(() => {
-  loadBanks();
-});
+  loadBanks()
+})
 
 watch(
   () => props.country,
   async function () {
-    await loadBanks();
-    await nextTick();
+    await loadBanks()
+    await nextTick()
     if (input.value && +new Date() - +pageStart > 15000) {
-      input.value.focus();
+      input.value.focus()
     }
-  },
-);
+  }
+)
 
 watch(
   () => search,
   function (newValue) {
     if (props.modelValue && newValue != selectedItem.value) {
-      emit("update:modelValue", null);
+      emit('update:modelValue', null)
     }
-    emit("searchInputChange", newValue);
-  },
-);
+    emit('searchInputChange', newValue)
+  }
+)
 
-async function loadBanks() {
-  if (props.disabled) return;
-  loaded.value = false;
-  search.value = "";
-  banks.value = await getBanksList({ country: props.country });
-  loaded.value = true;
+async function loadBanks () {
+  if (props.disabled) { return }
+  loaded.value = false
+  search.value = ''
+  banks.value = await getBanksList({ country: props.country })
+  loaded.value = true
 }
 
-function showList() {
-  isShowing.value = true;
+function showList () {
+  isShowing.value = true
 }
 
-function hideList() {
-  isShowing.value = false;
+function hideList () {
+  isShowing.value = false
 }
 
-async function onSelectBank(item) {
-  emit("update:modelValue", null);
-  await nextTick();
-  search.value = item.name;
-  selectedItem.value = item.name;
-  emit("update:modelValue", item);
-  isShowing.value = false;
+async function onSelectBank (item) {
+  emit('update:modelValue', null)
+  await nextTick()
+  search.value = item.name
+  selectedItem.value = item.name
+  emit('update:modelValue', item)
+  isShowing.value = false
 }
 
-function onCloseClick() {
-  search.value = "";
-  emit("update:modelValue", null);
+function onCloseClick () {
+  search.value = ''
+  emit('update:modelValue', null)
 }
 </script>

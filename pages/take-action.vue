@@ -20,19 +20,18 @@
                   class="hidden"
                   type="radio"
                   :value="index"
-                />
+                >
                 <label
                   class="flex justify-center py-2 text-sm sm:text-base md:text-2xl font-semibold cursor-pointer"
                   :class="
                     selectedTabIndex === index ? 'bg-sushi-200' : 'text-white'
                   "
                   :for="index"
-                  >{{ tab }}</label
-                >
+                >{{ tab }}</label>
               </div>
             </div>
             <div class="prose md:prose-lg px-4">
-              <div class="px-5 py-4"></div>
+              <div class="px-5 py-4" />
               <div
                 v-if="tabs[selectedTabIndex] === 'Pressure'"
                 class="pb-4 md:pb-8"
@@ -85,22 +84,22 @@
   <!-- FIXME: had to add this so the tailwind classes get loaded for the SharePicGallerySlice -->
   <div
     class="w-full flex flex-row flex-wrap sm:w-1/2 md:w-1/3 w-full p-2 mt-0"
-  ></div>
+  />
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import { components } from "~~/slices";
-const sliceComps = ref(defineSliceZoneComponents(components));
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const { client } = usePrismic();
-const { data: action } = await useAsyncData("takeaction", () =>
-  client.getSingle("takeactionpage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
-usePrismicSEO(action.value.data);
+const { client } = usePrismic()
+const { data: action } = await useAsyncData('takeaction', () =>
+  client.getSingle('takeactionpage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
+usePrismicSEO(action.value.data)
 
-const tabs = ["Pressure", "Switch", "Share", "Learn"];
-const selectedTabIndex = ref(0);
+const tabs = ['Pressure', 'Switch', 'Share', 'Learn']
+const selectedTabIndex = ref(0)
 </script>

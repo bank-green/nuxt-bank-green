@@ -1,6 +1,8 @@
 <template>
-  <span v-if="isUpcoming" :title="tooltipText"
-    >{{ durationString }}
+  <span
+    v-if="isUpcoming"
+    :title="tooltipText"
+  >{{ durationString }}
     <svg
       v-if="showTooltip"
       viewBox="0 0 1000 1000"
@@ -16,44 +18,44 @@
 </template>
 
 <script setup lang="ts">
-import { clearInterval } from "timers";
+import { clearInterval } from 'timers'
 import {
   isValid,
   isFuture,
   formatDistanceToNowStrict,
-  formatRelative,
-} from "date-fns";
+  formatRelative
+} from 'date-fns'
 
 const props = defineProps<{
   eventStart: Date;
   eventIsPastMessage: String;
   showTooltip: Boolean;
-}>();
+}>()
 
-const isUpcoming = ref(false);
-const interval: Ref<NodeJS.Timer | null> = ref(null);
-const tooltipText = ref("");
-const durationString = ref("");
+const isUpcoming = ref(false)
+const interval: Ref<NodeJS.Timer | null> = ref(null)
+const tooltipText = ref('')
+const durationString = ref('')
 
-function timerCount() {
+function timerCount () {
   if (isFuture(props.eventStart)) {
     durationString.value = formatDistanceToNowStrict(props.eventStart, {
       addSuffix: false,
-      unit: "day",
-    });
+      unit: 'day'
+    })
   } else {
-    isUpcoming.value = false;
-    interval.value && clearInterval(interval.value);
+    isUpcoming.value = false
+    interval.value && clearInterval(interval.value)
   }
 }
 
 onMounted(() => {
   if (isValid(props.eventStart)) {
-    timerCount();
+    timerCount()
     interval.value = setInterval(() => {
-      timerCount();
-    }, 1000);
-    tooltipText.value = formatRelative(props.eventStart, new Date());
+      timerCount()
+    }, 1000)
+    tooltipText.value = formatRelative(props.eventStart, new Date())
   }
-});
+})
 </script>

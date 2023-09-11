@@ -41,12 +41,12 @@
       :required="required"
       :disabled="disabled"
       @input="onInput"
-    />
+    >
   </BaseField>
 </template>
 
 <script setup lang="ts">
-import BaseField from "./BaseField.vue";
+import BaseField from './BaseField.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -68,44 +68,44 @@ const props = withDefaults(
     dark?: boolean;
   }>(),
   {
-    title: "",
-    description: "",
-    name: "",
-    placeholder: "",
-    rightLabel: "",
-    currencyLabel: "",
-    typeLabel: "",
-    type: "text",
-    step: "",
-    rows: "",
+    title: '',
+    description: '',
+    name: '',
+    placeholder: '',
+    rightLabel: '',
+    currencyLabel: '',
+    typeLabel: '',
+    type: 'text',
+    step: '',
+    rows: '',
     required: false,
     disabled: false,
     warning: false,
-    dark: false,
-  },
-);
+    dark: false
+  }
+)
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
-const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null);
+const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null)
 
 const inputClasses = computed(() => {
   if (props.disabled) {
-    return "bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300";
+    return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
   }
   if (props.warning) {
-    return "pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red";
+    return 'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
   }
   if (props.currencyLabel && props.typeLabel) {
-    return "pl-7 pr-12";
+    return 'pl-7 pr-12'
   }
-  return "px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800";
-});
+  return 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'
+})
 
 const focus = () => {
-  inputRef.value?.focus();
-};
+  inputRef.value?.focus()
+}
 const onInput = ($event: Event) => {
-  emit("update:modelValue", ($event.target as HTMLInputElement).value);
-};
+  emit('update:modelValue', ($event.target as HTMLInputElement).value)
+}
 </script>

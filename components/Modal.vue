@@ -18,7 +18,7 @@
         <div
           class="relative flex items-center justify-center bg-primary-dark px-6 lg:px-10 py-8 text-gray-50 text-center"
         >
-          <slot></slot>
+          <slot />
 
           <button
             class="absolute -right-5 inset-y-0 top-2 text-white hover:text-red-400 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500 h-6 w-6 sm:h-8 sm:w-8 flex items-center justify-center m-auto mr-3.5 mt-2 sm:mt-1.5"
@@ -39,13 +39,13 @@
 </template>
 <script setup lang="ts">
 defineProps({
-  modelValue: Boolean,
-});
+  modelValue: Boolean
+})
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(['update:modelValue'])
 
-function closeModal() {
-  console.info("close");
-  emits("update:modelValue", false);
+function closeModal () {
+  console.info('close')
+  emits('update:modelValue', false)
 }
 </script>

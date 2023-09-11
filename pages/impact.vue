@@ -8,7 +8,9 @@
           <h1>
             Opened an account with a bank that doesn't finance fossil fuels?
           </h1>
-          <h2 class="mt-0">Maximise your impact by letting us know.</h2>
+          <h2 class="mt-0">
+            Maximise your impact by letting us know.
+          </h2>
           <p>
             Taking this survey helps advocate for change. Bank.Green uses your
             response to push fossil banks to divest, push sustainable eco banks

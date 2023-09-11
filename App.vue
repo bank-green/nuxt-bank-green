@@ -28,20 +28,20 @@
 </template>
 
 <script setup>
-const openPledgeModal = ref(false);
-const openSwitchSurveyModal = ref(false);
-const hasUserSeenExitIntentModal = useCookie("bg.seenExitIntent", {
-  default: () => false,
-});
+const openPledgeModal = ref(false)
+const openSwitchSurveyModal = ref(false)
+const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
+  default: () => false
+})
 
-const route = useRoute();
+const route = useRoute()
 
-function onExitIntent() {
-  if (hasUserSeenExitIntentModal.value) return;
-  if (openSwitchSurveyModal.value) return;
-  if (route.path.includes("/impact")) return;
-  openSwitchSurveyModal.value = true;
-  hasUserSeenExitIntentModal.value = true;
+function onExitIntent () {
+  if (hasUserSeenExitIntentModal.value) { return }
+  if (openSwitchSurveyModal.value) { return }
+  if (route.path.includes('/impact')) { return }
+  openSwitchSurveyModal.value = true
+  hasUserSeenExitIntentModal.value = true
 }
 </script>
 <style>

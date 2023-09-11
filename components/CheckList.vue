@@ -11,7 +11,7 @@
         } p-1 mt-0.5 mr-4 rounded-full`"
         src="/img/icons/check.svg"
         alt=""
-      />
+      >
       <p>{{ item }}</p>
     </div>
   </div>
@@ -20,6 +20,6 @@
 <script setup>
 const props = defineProps({
   list: { type: Array, default: () => [] },
-  dark: { type: Boolean, default: false },
-});
+  dark: { type: Boolean, default: false }
+})
 </script>

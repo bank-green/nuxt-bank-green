@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import AccordionItem from "../AccordionItem.vue";
+import AccordionItem from '../AccordionItem.vue'
 
 withDefaults(
   defineProps<{
@@ -33,7 +33,7 @@ withDefaults(
     caratClass: string;
   }>(),
   {
-    subcontent: () => [],
-  },
-);
+    subcontent: () => []
+  }
+)
 </script>

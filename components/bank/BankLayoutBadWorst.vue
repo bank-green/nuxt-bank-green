@@ -8,19 +8,27 @@
       <div
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
-        <slot name="section1"></slot>
+        <slot name="section1" />
         <div
           class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 gap-12 justify-between items-center"
         >
           <div
             class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8"
           >
-            <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto"
-              >Move Your Money
+            <NuxtLink
+              to="/sustainable-eco-banks"
+              class="button-green w-auto"
+            >
+              Move Your Money
             </NuxtLink>
-            <div class="text-xs text-gray-500 mx-4 uppercase">Or</div>
-            <NuxtLink to="/pledge" class="underline"
-              >Pledge to Move it
+            <div class="text-xs text-gray-500 mx-4 uppercase">
+              Or
+            </div>
+            <NuxtLink
+              to="/pledge"
+              class="underline"
+            >
+              Pledge to Move it
             </NuxtLink>
           </div>
           <div class="relative flex-grow md:flex-none">
@@ -45,19 +53,27 @@
         <LazyPiggybankAnimation />
       </RenderWhenVisibleInViewPort>
       <div class="md:w-1/2">
-        <slot name="section2"> </slot>
+        <slot name="section2" />
         <div
           class="mt-8 flex flex-col md:flex-row gap-12 md:gap-0 items-center"
         >
           <div
             class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center w-auto"
           >
-            <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto"
-              >Move Your Money
+            <NuxtLink
+              to="/sustainable-eco-banks"
+              class="button-green w-auto"
+            >
+              Move Your Money
             </NuxtLink>
-            <div class="text-xs text-gray-500 mx-4 uppercase">Or</div>
-            <NuxtLink to="/pledge" class="underline"
-              >Pledge to Move it
+            <div class="text-xs text-gray-500 mx-4 uppercase">
+              Or
+            </div>
+            <NuxtLink
+              to="/pledge"
+              class="underline"
+            >
+              Pledge to Move it
             </NuxtLink>
           </div>
           <div class="flex md:hidden flex-grow justify-center">
@@ -76,7 +92,7 @@
         class="relative inline-block mb-4"
         src="/img/illustrations/fishes.svg"
         alt=""
-      />
+      >
       <div class="relative z-10 contain max-w-2xl">
         <h3
           class="text-center text-blue-900 text-lg md:text-2xl tracking-wider font-semibold mb-4"
@@ -114,7 +130,7 @@
     <!-- FOOTER IMAGE -->
     <div class="bg-blue-100 overflow-hidden w-full pointer-events-none">
       <div class="-mx-1/4 sm:mx-0 sm:w-full">
-        <img class="w-full" src="/img/illustrations/landscape.svg" alt="" />
+        <img class="w-full" src="/img/illustrations/landscape.svg" alt="">
       </div>
     </div>
 
@@ -150,7 +166,8 @@
               hash: '#how-do-you-know-what-my-bank-funds',
             }"
             class="button-green inline-block w-max"
-            >Find out more
+          >
+            Find out more
           </NuxtLink>
         </div>
       </div>
@@ -159,11 +176,11 @@
 </template>
 
 <script setup lang="ts">
-import RenderWhenVisibleInViewPort from "@/components/func/RenderWhenVisibleInViewPort.client.vue";
-import Swoosh from "@/components/Swoosh.vue";
-import CallToAction from "@/components/CallToAction.vue";
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
+import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue'
+import Swoosh from '@/components/Swoosh.vue'
+import CallToAction from '@/components/CallToAction.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
-const router = useRouter();
-const bankTag = router.currentRoute.value.params.bankTag;
+const router = useRouter()
+const bankTag = router.currentRoute.value.params.bankTag
 </script>

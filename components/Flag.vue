@@ -6,11 +6,11 @@
     provider="none"
     loading="lazy"
   />
-  <span v-else></span>
+  <span v-else />
 </template>
 
 <script setup>
 const props = defineProps({
-  country: String,
-});
+  country: String
+})
 </script>

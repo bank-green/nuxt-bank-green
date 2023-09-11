@@ -3,8 +3,12 @@
     class="flex items-center justify-center bg-primary-dark rounded-2xl px-6 py-12 text-gray-50 text-center font-semibold"
   >
     <div class="max-w-xl">
-      <p v-if="title" class="text-xl md:text-3xl mb-6">{{ title }}</p>
-      <p v-else class="text-xl md:text-3xl mb-6">Take action with Bank.Green</p>
+      <p v-if="title" class="text-xl md:text-3xl mb-6">
+        {{ title }}
+      </p>
+      <p v-else class="text-xl md:text-3xl mb-6">
+        Take action with Bank.Green
+      </p>
 
       <form
         class="flex flex-col justify-center items-center text-left"
@@ -36,8 +40,8 @@
             :dark="true"
           >
             I wish to receive more information via email from
-            Bank.Green.</CheckboxSection
-          >
+            Bank.Green.
+          </CheckboxSection>
           <CheckboxSection
             v-model="isAgreeTerms"
             class="col-span-2"
@@ -46,7 +50,9 @@
             :warning="warningsMap['isAgreeTerms']"
           >
             I have read and understood Bank.Green’s
-            <NuxtLink to="/privacy" class="link">privacy policy </NuxtLink>.
+            <NuxtLink to="/privacy" class="link">
+              privacy policy
+            </NuxtLink>.
           </CheckboxSection>
         </div>
         <button
@@ -78,9 +84,9 @@
 </template>
 
 <script setup lang="ts">
-import CheckboxSection from "@/components/forms/CheckboxSection.vue";
-import TextField from "@/components/forms/TextField.vue";
-import { ContactFormPrefill } from "@/utils/interfaces/contactForm";
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import TextField from '@/components/forms/TextField.vue'
+import { ContactFormPrefill } from '@/utils/interfaces/contactForm'
 
 // TODO: manage in separate file
 interface DetailsInterface {
@@ -88,8 +94,8 @@ interface DetailsInterface {
   name: string;
   rating: string | number | null;
   country: string;
-  "dirty deal 1": any;
-  "dirty deal 2": any;
+  'dirty deal 1': any;
+  'dirty deal 2': any;
 }
 
 const props = withDefaults(
@@ -101,28 +107,28 @@ const props = withDefaults(
     prefill?: ContactFormPrefill | undefined;
   }>(),
   {
-    tag: "signupbox",
-    successRedirectURL: "/thanks",
-  },
-);
+    tag: 'signupbox',
+    successRedirectURL: '/thanks'
+  }
+)
 
-const emit = defineEmits(["success"]);
+const emit = defineEmits(['success'])
 
-const router = useRouter();
+const router = useRouter()
 
 const extra = computed(() => {
   if (!props.details) {
-    return {};
+    return {}
   }
   return {
     bank: props.details.tag,
     bankDisplayName: props.details.name,
     rating: props.details.rating,
     country: props.details.country,
-    dirty_deal_1: props.details["dirty deal 1"],
-    dirty_deal_2: props.details["dirty deal 2"],
-  };
-});
+    dirty_deal_1: props.details['dirty deal 1'],
+    dirty_deal_2: props.details['dirty deal 2']
+  }
+})
 
 const {
   firstName,
@@ -131,18 +137,18 @@ const {
   isAgreeMarketing,
   warningsMap,
   send,
-  busy,
+  busy
 } = useContactForm(
   props.tag,
-  ["email", "isAgreeTerms", "isAgreeMarketing"],
+  ['email', 'isAgreeTerms', 'isAgreeMarketing'],
   extra,
-  toRef(props, "prefill"),
-);
+  toRef(props, 'prefill')
+)
 
 const submit = async () => {
   if (await send()) {
-    emit("success");
-    router.push(props.successRedirectURL);
+    emit('success')
+    router.push(props.successRedirectURL)
   }
-};
+}
 </script>

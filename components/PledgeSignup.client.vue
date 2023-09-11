@@ -71,7 +71,7 @@
           >
             <template #not-listed>
               <p class="text-gray-500 p-4 shadow-lg">
-                We couldn't find your bank. <br />
+                We couldn't find your bank. <br>
                 But that's ok! Just type in your bank's name and leave it at
                 that.
               </p>
@@ -86,8 +86,8 @@
           dark
         >
           I wish to receive more information via email from
-          Bank.Green.</CheckboxSection
-        >
+          Bank.Green.
+        </CheckboxSection>
         <CheckboxSection
           v-model="isAgreeTerms"
           class="col-span-full"
@@ -96,7 +96,9 @@
           dark
         >
           I have read and understood Bank.Green’s
-          <NuxtLink to="/privacy" class="link">privacy policy </NuxtLink>.
+          <NuxtLink to="/privacy" class="link">
+            privacy policy
+          </NuxtLink>.
         </CheckboxSection>
       </div>
       <button
@@ -127,34 +129,34 @@
 </template>
 
 <script setup>
-import LocationSearch from "@/components/forms/location/LocationSearch.vue";
-import BankSearch from "@/components/forms/banks/BankSearch.vue";
-import CheckboxSection from "@/components/forms/CheckboxSection.vue";
-import TextField from "@/components/forms/TextField.vue";
-import DateField from "@/components/forms/DateField.vue";
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
+import BankSearch from '@/components/forms/banks/BankSearch.vue'
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import TextField from '@/components/forms/TextField.vue'
+import DateField from '@/components/forms/DateField.vue'
 
 const props = defineProps({
   title: String,
-  successRedirectURL: { type: String, default: "/thanks-pledge" },
-});
+  successRedirectURL: { type: String, default: '/thanks-pledge' }
+})
 
-const bank = ref(null);
-const reminderDate = ref(null);
-const searchValue = ref(null);
-const reminderWarning = ref(null);
+const bank = ref(null)
+const reminderDate = ref(null)
+const searchValue = ref(null)
+const reminderWarning = ref(null)
 
-const { country } = useCountry();
+const { country } = useCountry()
 
 const extras = computed(() => {
   return {
-    reminder: reminderDate.value || "",
-    country: country.value || "",
-    bank: bank.value?.tag || "",
-    bankDisplayName: bank.value?.name || "",
-    rating: bank.value?.rating || "",
-    bankNameWhenNotFound: (!bank.value && searchValue.value) || "",
-  };
-});
+    reminder: reminderDate.value || '',
+    country: country.value || '',
+    bank: bank.value?.tag || '',
+    bankDisplayName: bank.value?.name || '',
+    rating: bank.value?.rating || '',
+    bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
+  }
+})
 
 const {
   firstName,
@@ -168,25 +170,25 @@ const {
   hasWarnings,
   send,
   validate,
-  busy,
+  busy
 } = useContactForm(
-  "pledge",
-  ["firstName", "lastName", "email", "isAgreeTerms"],
-  extras,
-);
+  'pledge',
+  ['firstName', 'lastName', 'email', 'isAgreeTerms'],
+  extras
+)
 
-const emit = defineEmits(["success"]);
+const emit = defineEmits(['success'])
 
-async function checkAndSend() {
-  validate();
+async function checkAndSend () {
+  validate()
   if (!extras.value.reminder) {
-    reminderWarning.value = "Please enter a date.";
-    return;
+    reminderWarning.value = 'Please enter a date.'
+    return
   }
-  reminderWarning.value = null;
+  reminderWarning.value = null
   if (await send()) {
-    emit("success");
-    navigateTo(props.successRedirectURL);
+    emit('success')
+    navigateTo(props.successRedirectURL)
   }
 }
 </script>

@@ -31,7 +31,7 @@
                   class="h-12 md:h-20 w-auto"
                   src="/img/logos/bankgreen-logo.png"
                   alt="Bank Green"
-                />
+                >
               </div>
               <form
                 class="flex flex-col rounded-xl"
@@ -58,7 +58,7 @@
                       type="radio"
                       :value="_option.value"
                       class="hidden"
-                    />
+                    >
                     <label
                       class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
                       :class="
@@ -82,7 +82,7 @@
                       type="radio"
                       :value="_option.value"
                       class="hidden"
-                    />
+                    >
                     <label
                       class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
                       :class="
@@ -100,7 +100,7 @@
                   id="stripe-payment-element"
                   class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"
                   :class="!isStripeLoaded && 'hidden'"
-                ></div>
+                />
                 <button
                   type="submit"
                   class="button-green w-full md:w-auto mt-12 flex justify-center"
@@ -126,95 +126,92 @@ interface DonationOption<T> {
 }
 
 const methodOptions: DonationOption<string>[] = [
-  { label: "One-time Donation", value: "one-time" },
-  { label: "Recurring Donation", value: "recurring" },
-];
+  { label: 'One-time Donation', value: 'one-time' },
+  { label: 'Recurring Donation', value: 'recurring' }
+]
 
 const donationOptions: DonationOption<number>[] = [
-  { label: "$25", value: 25 },
-  { label: "$50", value: 50 },
-  { label: "$100", value: 100 },
-  { label: "$200", value: 200 },
-  { label: "$500", value: 500 },
-  { label: "$1000", value: 1000 },
-];
+  { label: '$25', value: 25 },
+  { label: '$50', value: 50 },
+  { label: '$100', value: 100 },
+  { label: '$200', value: 200 },
+  { label: '$500', value: 500 },
+  { label: '$1000', value: 1000 }
+]
 
-const selectedMethod = ref<string>("one-time");
-const selectedAmount = ref<number | null>(null);
+const selectedMethod = ref<string>('one-time')
+const selectedAmount = ref<number | null>(null)
 
 const isOneTimePayment = computed(
-  () => selectedMethod.value == "one-time" && selectedAmount.value != null,
-);
+  () => selectedMethod.value == 'one-time' && selectedAmount.value != null
+)
 
 const isRecurring = computed(
-  () => selectedMethod.value == "recurring" && selectedAmount.value != null,
-);
+  () => selectedMethod.value == 'recurring' && selectedAmount.value != null
+)
 
-const { client } = usePrismic();
-const { data: donation } = await useAsyncData("donation", () =>
-  client.getSingle("donationpage"),
-);
+const { client } = usePrismic()
+const { data: donation } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage')
+)
 
-const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY;
+const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY
 
 const { isStripeLoaded, initOneTimePayment, handleSubmit } = useStripe(
   stripePublishableKey,
-  "stripe-payment-element",
-);
+  'stripe-payment-element'
+)
 
 watch(
   () => selectedAmount.value,
   (newVal, oldVal) => {
     if (isOneTimePayment.value && newVal !== null) {
-      isStripeLoaded.value = false;
-      initOneTimePayment(newVal);
+      isStripeLoaded.value = false
+      initOneTimePayment(newVal)
     }
-  },
-);
+  }
+)
 
 watch(
   () => selectedMethod.value,
   (newVal, oldVal) => {
-    const _isOneTimePayment = newVal != oldVal && newVal === "one-time";
-    const _isRecurringPayment = newVal != oldVal && newVal === "recurring";
+    const _isOneTimePayment = newVal != oldVal && newVal === 'one-time'
+    const _isRecurringPayment = newVal != oldVal && newVal === 'recurring'
 
-    if (_isRecurringPayment && isStripeLoaded.value)
-      isStripeLoaded.value = false;
+    if (_isRecurringPayment && isStripeLoaded.value) { isStripeLoaded.value = false }
 
     if (
       _isOneTimePayment &&
       selectedAmount.value != null &&
       isStripeLoaded.value
     ) {
-      isStripeLoaded.value = false;
-      initOneTimePayment(selectedAmount.value);
+      isStripeLoaded.value = false
+      initOneTimePayment(selectedAmount.value)
     }
-  },
-);
+  }
+)
 
 const handleOneTimePayment = async () => {
-  if (selectedAmount.value == null) return;
-  else if (isStripeLoaded.value) handleSubmit();
-  else {
-    await initOneTimePayment(selectedAmount.value);
+  if (selectedAmount.value == null) {} else if (isStripeLoaded.value) { handleSubmit() } else {
+    await initOneTimePayment(selectedAmount.value)
   }
-};
+}
 
 const handleRecurringPayment = async () => {
-  const response = await $fetch("/api/create-checkout-session", {
-    method: "POST",
+  const response = await $fetch('/api/create-checkout-session', {
+    method: 'POST',
     body: {
-      amount: selectedAmount.value,
-    },
-  });
-  if (response.redirectURL) window.location.href = response.redirectURL;
-};
+      amount: selectedAmount.value
+    }
+  })
+  if (response.redirectURL) { window.location.href = response.redirectURL }
+}
 
 const submit = () => {
   if (isOneTimePayment.value) {
-    handleOneTimePayment();
+    handleOneTimePayment()
   } else if (isRecurring.value) {
-    handleRecurringPayment();
+    handleRecurringPayment()
   }
-};
+}
 </script>

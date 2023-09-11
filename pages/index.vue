@@ -4,7 +4,7 @@
       <div
         class="page-fade-in contain flex flex-col justify-center items-center"
       >
-        <a id="top"></a>
+        <a id="top" />
         <div class="max-w-4xl pt-28 lg:pt-12">
           <h2
             class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl"
@@ -29,7 +29,7 @@
                   <input
                     disabled
                     class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate"
-                  />
+                  >
                   <LoadingJumper
                     class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
                   />
@@ -38,7 +38,7 @@
                   <input
                     disabled
                     class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate"
-                  />
+                  >
                   <LoadingJumper
                     class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
                   />
@@ -50,8 +50,9 @@
               class="flex-initial md:w-48 button-green"
               :class="{ disabled: !bank }"
               @click="onCheckBankClick"
-              >Check My Bank</NuxtLink
             >
+              Check My Bank
+            </NuxtLink>
           </div>
 
           <div
@@ -91,13 +92,16 @@
                 target="_blank"
               >
                 <div class="bg-white rounded-xl p-5">
-                  <img class="w-36" src="/img/logos/banktrack.svg" />
+                  <img class="w-36" src="/img/logos/banktrack.svg">
                 </div>
               </a>
             </div>
-            <NuxtLink to="/partners" class="underline mt-2 text-sm"
-              >See our partners</NuxtLink
+            <NuxtLink
+              to="/partners"
+              class="underline mt-2 text-sm"
             >
+              See our partners
+            </NuxtLink>
           </div>
           <div class="mt-16">
             <div class="mt-12 text-lg text-gray-700 text-center leading-4">
@@ -106,7 +110,7 @@
                 class="inline-block h-5 px-0.5"
                 src="/img/trim-hor-light.svg"
                 alt="Bank.Green"
-              />
+              >
               ?
             </div>
             <ArrowDownBounce class="mx-auto mt-4 w-10" />
@@ -163,7 +167,7 @@
               alt=""
               width="450"
               height="450"
-            />
+            >
           </div>
         </div>
         <div id="join" class="contain max-w-5xl">
@@ -181,35 +185,35 @@
 </template>
 
 <script setup>
-import { useGtm } from "@gtm-support/vue-gtm";
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import LocationSearch from "@/components/forms/location/LocationSearch.vue";
-import BankSearch from "@/components/forms/banks/BankSearch.vue";
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
-import { components } from "~~/slices";
-import { usePrismicSEO } from "~~/composables/useHeadHelpers";
-const sliceComps = ref(defineSliceZoneComponents(components));
+import { useGtm } from '@gtm-support/vue-gtm'
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
+import BankSearch from '@/components/forms/banks/BankSearch.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import { components } from '~~/slices'
+import { usePrismicSEO } from '~~/composables/useHeadHelpers'
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const bank = ref(null);
+const bank = ref(null)
 
-const { client } = usePrismic();
-const { data: home } = await useAsyncData("home", () =>
-  client.getSingle("homepage"),
-);
+const { client } = usePrismic()
+const { data: home } = await useAsyncData('home', () =>
+  client.getSingle('homepage')
+)
 
-usePrismicSEO(home.value.data);
+usePrismicSEO(home.value.data)
 
 const onCheckBankClick = () => {
-  const allowCookies = useCookie("bg.allowcookies", { default: () => false });
-  if (!allowCookies.value) return;
-  const gtm = useGtm();
-  gtm.enable(true);
-  gtm.trackEvent({ event: "onBankCheckClick" });
-};
+  const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+  if (!allowCookies.value) { return }
+  const gtm = useGtm()
+  gtm.enable(true)
+  gtm.trackEvent({ event: 'onBankCheckClick' })
+}
 
-const { country } = useCountry();
+const { country } = useCountry()
 
 watch(country, (loc) => {
-  bank.value = null;
-});
+  bank.value = null
+})
 </script>

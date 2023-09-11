@@ -24,7 +24,7 @@ const props = defineProps<{
     tag: string;
   }[];
   loaded: Boolean;
-}>();
+}>()
 
-const cardsCount = computed(() => (props.loaded ? props.list.length : 3));
+const cardsCount = computed(() => (props.loaded ? props.list.length : 3))
 </script>

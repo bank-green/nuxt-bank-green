@@ -8,7 +8,7 @@
       <div
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
-        <slot name="section1"></slot>
+        <slot name="section1" />
       </div>
       <Swoosh />
     </div>
@@ -16,13 +16,13 @@
     <!-- SECTION TWO -->
     <div id="section-two" class="text-gray-800 overflow-hidden py-16">
       <div class="contain">
-        <slot name="section2"></slot>
+        <slot name="section2" />
       </div>
     </div>
 
     <!-- SECTION THREE -->
     <div id="section-three">
-      <slot name="section3"></slot>
+      <slot name="section3" />
     </div>
 
     <!-- CALL TO ACTION -->
@@ -56,7 +56,7 @@
           </div>
         </slot>
       </div>
-      <slot name="footer-image"></slot>
+      <slot name="footer-image" />
     </div>
 
     <!-- FOOTER -->
@@ -91,7 +91,8 @@
               hash: '#how-do-you-know-what-my-bank-funds',
             }"
             class="button-green inline-block w-max"
-            >Find out more
+          >
+            Find out more
           </NuxtLink>
         </div>
       </div>
@@ -99,14 +100,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import SignupBox from "../forms/SignupBox.vue";
-import Swoosh from "@/components/Swoosh.vue";
+import SignupBox from '../forms/SignupBox.vue'
+import Swoosh from '@/components/Swoosh.vue'
 const checkList = [
-  "Learn about the issues via our blog updates",
-  "Join our campaigns to take action against fossil finance",
-  "Discover other ways to divest from fossil fuels",
-];
+  'Learn about the issues via our blog updates',
+  'Join our campaigns to take action against fossil finance',
+  'Discover other ways to divest from fossil fuels'
+]
 
-const router = useRouter();
-const bankTag = router.currentRoute.value.params.bankTag;
+const router = useRouter()
+const bankTag = router.currentRoute.value.params.bankTag
 </script>

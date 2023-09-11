@@ -1,14 +1,14 @@
-import { get } from "./backend";
+import { get } from './backend'
 
-const gqlUrl = "https://data.bank.green/graphql";
-const options = {};
+const gqlUrl = 'https://data.bank.green/graphql'
+const options = {}
 
-async function callBackend(query, variables) {
-  const queryParam = encodeURIComponent(query);
-  const variablesParam = encodeURIComponent(JSON.stringify(variables));
-  const url = `${gqlUrl}?query=${queryParam}&variables=${variablesParam}`;
-  const res = await $fetch(url, options);
-  return res;
+async function callBackend (query, variables) {
+  const queryParam = encodeURIComponent(query)
+  const variablesParam = encodeURIComponent(JSON.stringify(variables))
+  const url = `${gqlUrl}?query=${queryParam}&variables=${variablesParam}`
+  const res = await $fetch(url, options)
+  return res
 }
 
 const commentaryFields = `{
@@ -30,7 +30,7 @@ const commentaryFields = `{
         name
         prismicApiId
     }
-  }`;
+  }`
 
 const bankFeaturesFields = `{
     offered
@@ -38,13 +38,13 @@ const bankFeaturesFields = `{
         name
     }
     details
-}`;
+}`
 
-export async function getBanksList({
+export async function getBanksList ({
   country,
   topOnly = false,
   recommendedOnly = true,
-  first = 3,
+  first = 3
 }) {
   const brandsQuery = `
         query BrandsQuery($country: String, $recommendedOnly: Boolean, $rating: [String], $first: Int, $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -60,36 +60,36 @@ export async function getBanksList({
                     }
                 }
             }
-        }`;
+        }`
 
-  const variables = { country };
+  const variables = { country }
   if (topOnly) {
-    variables.recommendedOnly = recommendedOnly;
-    variables.withCommentary = true; // pull a lot more details in
-    variables.withFeatures = true;
-    variables.first = first; // due to data entry errors in the backend, we cannot rely on there only being three
+    variables.recommendedOnly = recommendedOnly
+    variables.withCommentary = true // pull a lot more details in
+    variables.withFeatures = true
+    variables.first = first // due to data entry errors in the backend, we cannot rely on there only being three
   }
 
-  const json = await callBackend(brandsQuery, variables);
-  let banks = json.data.brands.edges.map((o) => o.node);
+  const json = await callBackend(brandsQuery, variables)
+  let banks = json.data.brands.edges.map(o => o.node)
   if (topOnly) {
     banks = banks.map((b) => {
       return {
         ...b,
         ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
-      };
-    });
+        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0
+      }
+    })
   }
-  return banks;
+  return banks
 }
 
-export async function getBanksListWithFilter({
+export async function getBanksListWithFilter ({
   country,
   regions,
   subregions,
   fossilFreeAlliance,
-  features,
+  features
 }) {
   const brandsQuery = `
       query BrandsQuery($country: String, $first: Int, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -110,7 +110,7 @@ export async function getBanksListWithFilter({
                   }
               }
           }
-      }`;
+      }`
 
   const variables = {
     country,
@@ -120,36 +120,36 @@ export async function getBanksListWithFilter({
     features,
     first: 300,
     withCommentary: true,
-    withFeatures: true,
-  };
+    withFeatures: true
+  }
 
-  const json = await callBackend(brandsQuery, variables);
-  let banks = json.data.brands.edges.map((o) => o.node);
+  const json = await callBackend(brandsQuery, variables)
+  let banks = json.data.brands.edges.map(o => o.node)
   banks = banks.map((b) => {
     return {
       ...b,
       ...b.commentary,
-      rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
-    };
-  });
-  return banks;
+      rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0
+    }
+  })
+  return banks
 }
 
-export async function getCountry() {
-  const cachedCountry = useCookie("bg.country.suggested", {
-    default: () => "",
-  });
+export async function getCountry () {
+  const cachedCountry = useCookie('bg.country.suggested', {
+    default: () => ''
+  })
 
   if (!cachedCountry.value) {
-    const res = await get("/getCountry");
+    const res = await get('/getCountry')
     if (res.country) {
-      cachedCountry.value = res.country;
+      cachedCountry.value = res.country
     }
   }
-  return cachedCountry;
+  return cachedCountry
 }
 
-export async function getBankDetail(bankTag) {
+export async function getBankDetail (bankTag) {
   const brandQuery = `
     query BrandByTagQuery($tag: String!) {
         brand(tag: $tag) {
@@ -160,18 +160,18 @@ export async function getBankDetail(bankTag) {
           bankFeatures ${bankFeaturesFields}
         }
       }
-    `;
+    `
   const variables = {
-    tag: bankTag,
-  };
+    tag: bankTag
+  }
 
-  const json = await callBackend(brandQuery, variables);
-  if (!json?.data?.brand) return {};
+  const json = await callBackend(brandQuery, variables)
+  if (!json?.data?.brand) { return {} }
   const bank = {
     ...json.data.brand,
     ...json.data.brand.commentary,
-    bankFatures: json.data.brand.bankFeatures,
-  };
-  bank.rating = bank.ratingInherited?.toLowerCase();
-  return bank;
+    bankFatures: json.data.brand.bankFeatures
+  }
+  bank.rating = bank.ratingInherited?.toLowerCase()
+  return bank
 }

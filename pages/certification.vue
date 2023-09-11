@@ -9,7 +9,7 @@
             class="w-48 h-48"
             src="/img/certification/fossil-free-certified.png"
             alt="Fossil-free certified badge"
-          />
+          >
           <SliceZone
             :slices="certification?.data.slices ?? []"
             :components="sliceComps"
@@ -21,16 +21,16 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import { components } from "~~/slices";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 
-const sliceComps = ref(defineSliceZoneComponents(components));
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const { client } = usePrismic();
-const { data: certification } = await useAsyncData("certification", () =>
-  client.getSingle("certificationpage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
-usePrismicSEO(certification.value.data);
+const { client } = usePrismic()
+const { data: certification } = await useAsyncData('certification', () =>
+  client.getSingle('certificationpage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
+usePrismicSEO(certification.value.data)
 </script>

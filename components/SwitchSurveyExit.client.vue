@@ -28,21 +28,21 @@
 <script setup lang="ts">
 const props = defineProps<{
   modelValue: boolean;
-}>();
+}>()
 
-const emit = defineEmits(["success", "update:modelValue"]);
+const emit = defineEmits(['success', 'update:modelValue'])
 
 const showModal = computed({
   get: () => props.modelValue,
-  set: (val) => emit("update:modelValue", val),
-});
+  set: val => emit('update:modelValue', val)
+})
 
-function clickSurvey() {
-  emit("success");
+function clickSurvey () {
+  emit('success')
 }
 
-const { client } = usePrismic();
-const { data: surveyContent } = await useAsyncData("switchsurveyexit", () =>
-  client.getSingle("switchsurveyexit"),
-);
+const { client } = usePrismic()
+const { data: surveyContent } = await useAsyncData('switchsurveyexit', () =>
+  client.getSingle('switchsurveyexit')
+)
 </script>

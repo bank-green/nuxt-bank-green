@@ -8,8 +8,7 @@
         :for="name"
         class="block text-sm leading-5"
         :class="labelClasses"
-        >{{ title }}</label
-      >
+      >{{ title }}</label>
       <div
         v-if="rightLabel"
         class="text-xs text-gray-500"
@@ -82,12 +81,12 @@ const props = defineProps<{
   currencyLabel?: string;
   rightLabel?: string | object;
   dark?: boolean;
-}>();
+}>()
 
 const labelClasses = computed(() => {
   if (props.dark) {
-    return "text-blue-100 text-opacity-75 font-medium";
+    return 'text-blue-100 text-opacity-75 font-medium'
   }
-  return "text-gray-600 font-semibold";
-});
+  return 'text-gray-600 font-semibold'
+})
 </script>

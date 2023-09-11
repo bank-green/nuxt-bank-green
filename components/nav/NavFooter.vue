@@ -6,7 +6,7 @@
           class="h-6 my-4 lg:my-2"
           src="/img/trim-hor-light.svg"
           alt="Bank.Green"
-        />
+        >
       </NuxtLink>
       <div
         class="border-t lg:border-none border-gray-200 py-8 lg:py-0 lg:px-16 xl:px-32 text-gray-700 font-semibold flex lg:items-center lg:flex-wrap justify-center flex-col lg:flex-row -mx-4"
@@ -35,7 +35,8 @@
           to="/disclaimer"
           class="hover:underline"
           active-class="text-gray-900"
-          >Disclaimer
+        >
+          Disclaimer
         </NuxtLink>
         <NuxtLink
           to="/privacy"
@@ -50,8 +51,8 @@
 </template>
 
 <script setup lang="ts">
-import links from "./links";
-import SocialLinks from "@/components/nav/SocialLinks.vue";
+import links from './links'
+import SocialLinks from '@/components/nav/SocialLinks.vue'
 
-const computedLinks = computed(() => links({ isHeader: false }));
+const computedLinks = computed(() => links({ isHeader: false }))
 </script>

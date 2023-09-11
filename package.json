@@ -36,7 +36,6 @@
     "geonames.js": "^3.0.6",
     "lottie-web": "^5.10.0",
     "nuxt": "^3.6.5",
-    "prettier": "^3.0.3",
     "slice-machine-ui": "^1.6.0",
     "stripe": "^12.8.0",
     "vite-plugin-eslint": "^1.8.1"

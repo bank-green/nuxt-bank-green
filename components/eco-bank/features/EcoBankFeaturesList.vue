@@ -17,7 +17,7 @@
         stroke-linejoin="round"
         stroke-width="2"
         d="M5 13l4 4L19 7"
-      ></path>
+      />
     </svg>
     <svg
       v-else
@@ -32,7 +32,7 @@
         stroke-linejoin="round"
         stroke-width="2"
         d="M6 18L18 6M6 6l12 12"
-      ></path>
+      />
     </svg>
     <div class="flex-1">
       <span v-if="item.isChecked && item.text" class="text-gray-900">{{
@@ -46,6 +46,6 @@
 
 <script setup>
 defineProps({
-  features: Object,
-});
+  features: Object
+})
 </script>

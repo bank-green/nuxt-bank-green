@@ -25,19 +25,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PrismicDocument } from "@prismicio/types";
+import { PrismicDocument } from '@prismicio/types'
 
 withDefaults(
   defineProps<{
-    background?: "light" | "dark";
+    background?: 'light' | 'dark';
   }>(),
   {
-    background: "light",
-  },
-);
+    background: 'light'
+  }
+)
 
-const { client } = usePrismic();
-const { data: donationData } = await useAsyncData("donation", () =>
-  client.getSingle("donationpage"),
-);
+const { client } = usePrismic()
+const { data: donationData } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage')
+)
 </script>

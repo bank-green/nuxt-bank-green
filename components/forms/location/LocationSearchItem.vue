@@ -35,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import Flag from "../../Flag.vue";
+import Flag from '../../Flag.vue'
 
 defineProps<{
   id: string;
   title: string;
   isSelected: boolean;
-}>();
+}>()
 </script>

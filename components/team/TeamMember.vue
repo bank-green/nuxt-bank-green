@@ -16,10 +16,14 @@
           <a v-if="href" ref="noopener" :href="href" target="_blank">{{
             name
           }}</a>
-          <h3 v-else>{{ name }}</h3>
+          <h3 v-else>
+            {{ name }}
+          </h3>
         </div>
         <div class="text-lg">
-          <p class="text-gray-500">{{ description }}</p>
+          <p class="text-gray-500">
+            {{ description }}
+          </p>
         </div>
       </div>
     </div>
@@ -31,6 +35,6 @@ const props = defineProps({
   name: String,
   href: String,
   img: String,
-  description: String,
-});
+  description: String
+})
 </script>

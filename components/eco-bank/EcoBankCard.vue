@@ -35,12 +35,12 @@
               class="w-12 ml-6"
               src="/img/certification/fossil-free-certified.png"
               alt="Fossil Free Certification"
-            />
+            >
           </div>
         </div>
 
         <div v-else class="w-full flex items-center truncate">
-          <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse"></div>
+          <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse" />
           <div class="ml-3 flex-1 font-semibold text-gray-200 block truncate">
             loading...
           </div>
@@ -81,26 +81,26 @@
 </template>
 
 <script setup lang="ts">
-import ClearbitLogo from "@/components/icons/ClearbitLogo.vue";
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 
 const props = defineProps<{
   item: any;
   isNoCredit: Boolean;
-}>();
+}>()
 
 const features = computed(() => {
   // filter our credit card
-  const features = getFeatures(props.item?.bankFeatures) as Record<string, any>;
-  const allFeatures: Record<string, any> = {};
+  const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
+  const allFeatures: Record<string, any> = {}
   for (const [featKey, featValue] of Object.entries(features)) {
     if (
-      (props.isNoCredit && featKey === "Credit Card") ||
+      (props.isNoCredit && featKey === 'Credit Card') ||
       !featValue.isChecked
     ) {
-      continue;
+      continue
     }
-    allFeatures[featKey] = features[featKey];
+    allFeatures[featKey] = features[featKey]
   }
-  return allFeatures;
-});
+  return allFeatures
+})
 </script>

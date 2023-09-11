@@ -25,19 +25,17 @@
             slice.primary?.contentlink?.data.title
           }}</span>
           <span v-else-if="slice.variation === 'richText'">
-            {{ slice.primary?.title }}</span
-          >
+            {{ slice.primary?.title }}</span>
           <span v-else-if="slice.variation === 'richTextWithStep'">
-            {{ slice.primary?.step }}: {{ slice.primary?.title }}</span
-          >
+            {{ slice.primary?.step }}: {{ slice.primary?.title }}</span>
         </h2>
       </transition>
 
       <svg
         :class="
           'flex-none transform-gpu transition-transform h-3 text-sushi-500 ' +
-          caratClass +
-          (isOpen ? ' rotate-180' : ' rotate-0')
+            caratClass +
+            (isOpen ? ' rotate-180' : ' rotate-0')
         "
         viewBox="0 0 12 8"
         fill="none"
@@ -80,20 +78,20 @@
 <script setup>
 import {
   getSliceComponentProps,
-  defineSliceZoneComponents,
-} from "@prismicio/vue";
-import { components } from "~~/slices";
-const sliceComps = ref(defineSliceZoneComponents(components));
+  defineSliceZoneComponents
+} from '@prismicio/vue'
+import { components } from '~~/slices'
+const sliceComps = ref(defineSliceZoneComponents(components))
 
 const props = defineProps({
   caratClass: {
     type: String,
-    default: "text-ocean-400",
+    default: 'text-ocean-400'
   },
-  ...getSliceComponentProps(["slice", "index", "slices", "context"]),
-});
+  ...getSliceComponentProps(['slice', 'index', 'slices', 'context'])
+})
 
-const isOpen = ref(false);
+const isOpen = ref(false)
 </script>
 
 <style scoped>

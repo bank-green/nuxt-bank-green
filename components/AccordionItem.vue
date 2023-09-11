@@ -25,7 +25,7 @@
           Loading...
         </div>
         <h2 v-else class="font-semibold md:!text-lg text-gray-700 mr-4">
-          <a :href="'#' + convertToSlug(title)" aria-hidden="true"></a>
+          <a :href="'#' + convertToSlug(title)" aria-hidden="true" />
           {{ title }}
         </h2>
       </transition>
@@ -33,8 +33,8 @@
       <svg
         :class="
           'flex-none transform-gpu transition-transform h-3 text-sushi-500 ' +
-          caratClass +
-          (isOpen ? ' rotate-180' : ' rotate-0')
+            caratClass +
+            (isOpen ? ' rotate-180' : ' rotate-0')
         "
         viewBox="0 0 12 8"
         fill="none"
@@ -73,9 +73,9 @@ const props = defineProps({
   title: String,
   description: String,
   loaded: { type: Boolean, default: true },
-  caratClass: String,
-});
-const isOpen = ref(false);
+  caratClass: String
+})
+const isOpen = ref(false)
 </script>
 
 <style scoped>

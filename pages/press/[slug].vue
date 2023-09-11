@@ -9,11 +9,14 @@
           class="flex sm:items-center justify-between sm:text-center sm:justify-around my-8"
         >
           <div>
-            <div class="uppercase text-xs text-gray-500">Contact</div>
+            <div class="uppercase text-xs text-gray-500">
+              Contact
+            </div>
             <div class="text-sm text-gray-700 font-semibold">
-              {{ post.data.author }}<br />
-              <NuxtLink :to="post.data.email">{{ post.data.email }}</NuxtLink
-              ><br />
+              {{ post.data.author }}<br>
+              <NuxtLink :to="post.data.email">
+                {{ post.data.email }}
+              </NuxtLink><br>
               {{ post.data.phone }}
             </div>
           </div>
@@ -40,30 +43,30 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
+import { defineSliceZoneComponents } from '@prismicio/vue'
 
-import { EmbedSlice, TextSlice, ImageSlice } from "~~/slices";
+import { EmbedSlice, TextSlice, ImageSlice } from '~~/slices'
 
-const route = useRoute();
+const route = useRoute()
 
-const { client } = usePrismic();
-const slug = route.path.split("/").at(-1);
+const { client } = usePrismic()
+const slug = route.path.split('/').at(-1)
 const { data: post } = await useAsyncData(slug, () =>
-  client.getByUID("presspost", slug),
-);
+  client.getByUID('presspost', slug)
+)
 
 const comps = ref(
   defineSliceZoneComponents({
     image_slice: ImageSlice,
     text_slice: TextSlice,
-    embed_slice: EmbedSlice,
-  }),
-);
+    embed_slice: EmbedSlice
+  })
+)
 
 useHeadHelper(
-  post?.value?.data?.title ?? "Press Post",
-  post?.value?.data?.description,
-);
+  post?.value?.data?.title ?? 'Press Post',
+  post?.value?.data?.description
+)
 </script>
 
 <style></style>

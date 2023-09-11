@@ -35,6 +35,6 @@ defineProps({
   title: String,
   description: String,
   image: String,
-  to: String,
-});
+  to: String
+})
 </script>

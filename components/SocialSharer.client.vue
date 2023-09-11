@@ -40,17 +40,17 @@ const props = withDefaults(
   }>(),
   {
     hashtags: () => [],
-    text: () => "",
-    large: false,
-  },
-);
+    text: () => '',
+    large: false
+  }
+)
 
 const links = computed(() => ({
   facebook: `http://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-    props.url || window.location.href,
+    props.url || window.location.href
   )}`,
   twitter: `http://twitter.com/share?url=${encodeURIComponent(
-    props.url || window.location.href,
-  )}&hashtags=${props.hashtags.toString()}&text=${props.text || ""}`,
-}));
+    props.url || window.location.href
+  )}&hashtags=${props.hashtags.toString()}&text=${props.text || ''}`
+}))
 </script>

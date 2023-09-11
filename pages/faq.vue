@@ -14,8 +14,7 @@
             leave-active-class="transform-gpu transition ease-in duration-190"
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
-          >
-          </transition-group>
+          />
           <SliceZone
             :slices="faq?.data.slices ?? []"
             :components="sliceComps"
@@ -36,17 +35,17 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import SignupBox from "@/components/forms/SignupBox.vue";
-import { components } from "~~/slices";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import SignupBox from '@/components/forms/SignupBox.vue'
+import { components } from '~~/slices'
 
-const sliceComps = ref(defineSliceZoneComponents(components));
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const { client } = usePrismic();
-const { data: faq } = await useAsyncData("faq", () =>
-  client.getSingle("faqpage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
-usePrismicSEO(faq.value.data);
+const { client } = usePrismic()
+const { data: faq } = await useAsyncData('faq', () =>
+  client.getSingle('faqpage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
+usePrismicSEO(faq.value.data)
 </script>

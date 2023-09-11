@@ -17,7 +17,7 @@
       @focus="onFocus"
       @blur="onBlur"
       @click="onClick"
-    />
+    >
 
     <!-- icon on the left -->
     <slot name="icon" />
@@ -97,30 +97,30 @@ withDefaults(
     usePencil?: boolean;
   }>(),
   {
-    usePencil: false,
-  },
-);
+    usePencil: false
+  }
+)
 
 const emit = defineEmits([
-  "update:modelValue",
-  "onKeydown",
-  "onFocus",
-  "onBlur",
-  "onClick",
-  "onCloseClick",
-]);
+  'update:modelValue',
+  'onKeydown',
+  'onFocus',
+  'onBlur',
+  'onClick',
+  'onCloseClick'
+])
 
-const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null);
+const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null)
 
 const focus = () => {
-  inputRef.value?.focus();
-};
+  inputRef.value?.focus()
+}
 const onInput = ($event: Event) => {
-  emit("update:modelValue", ($event.target as HTMLInputElement).value);
-};
-const onKeyDown = () => emit("onKeydown");
-const onFocus = () => emit("onFocus");
-const onBlur = () => emit("onBlur");
-const onClick = () => emit("onClick");
-const onCloseClick = () => emit("onCloseClick");
+  emit('update:modelValue', ($event.target as HTMLInputElement).value)
+}
+const onKeyDown = () => emit('onKeydown')
+const onFocus = () => emit('onFocus')
+const onBlur = () => emit('onBlur')
+const onClick = () => emit('onClick')
+const onCloseClick = () => emit('onCloseClick')
 </script>

@@ -118,58 +118,58 @@
 
 <script setup>
 const props = defineProps({
-  rating: String,
-});
+  rating: String
+})
 
-const initialRotation = ref(-120);
+const initialRotation = ref(-120)
 
 const rotation = computed(() => {
   switch (props.rating) {
-    case "great":
-      return 90;
-    case "good":
-      return 75;
-    case "ok":
-      return 45;
-    case "bad":
-      return -45;
-    case "worst":
-      return -90;
-    case "unknown":
-      return 0;
+    case 'great':
+      return 90
+    case 'good':
+      return 75
+    case 'ok':
+      return 45
+    case 'bad':
+      return -45
+    case 'worst':
+      return -90
+    case 'unknown':
+      return 0
     default:
-      return 0;
+      return 0
   }
-});
+})
 
 const emojiForRating = computed(() => {
-  let emoji = "Shrug";
+  let emoji = 'Shrug'
   switch (props.rating) {
-    case "great":
-      emoji = "Heart_Eyes";
-      break;
-    case "good":
-      emoji = "Happy";
-      break;
-    case "ok":
-      emoji = "Happy";
-      break;
-    case "bad":
-      emoji = "Sad_Tear";
-      break;
-    case "worst":
-      emoji = "Cussing";
-      break;
-    case "unknown":
-      emoji = "Meh";
-      break;
+    case 'great':
+      emoji = 'Heart_Eyes'
+      break
+    case 'good':
+      emoji = 'Happy'
+      break
+    case 'ok':
+      emoji = 'Happy'
+      break
+    case 'bad':
+      emoji = 'Sad_Tear'
+      break
+    case 'worst':
+      emoji = 'Cussing'
+      break
+    case 'unknown':
+      emoji = 'Meh'
+      break
   }
-  return `/anim/emoji/${emoji}_Flat.json`;
-});
+  return `/anim/emoji/${emoji}_Flat.json`
+})
 
 onMounted(() => {
-  initialRotation.value = null;
-});
+  initialRotation.value = null
+})
 </script>
 <style scoped>
 .squarebox {

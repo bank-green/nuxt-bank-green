@@ -13,10 +13,8 @@
           >
             <div class="md:w-1/2 max-w-sm">
               <p class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
-                <b
-                  >Bank.Green was founded on the belief that banks have had an
-                  easy time from their customers for too long</b
-                >. Mass movements will pull us out of the climate crisis – and
+                <b>Bank.Green was founded on the belief that banks have had an
+                  easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
                 they’ll pull your bank out, too.
               </p>
             </div>
@@ -42,17 +40,17 @@
 </template>
 
 <script setup lang="ts">
-import CheckList from "@/components/CheckList.vue";
-import SignupBox from "@/components/forms/SignupBox.vue";
+import CheckList from '@/components/CheckList.vue'
+import SignupBox from '@/components/forms/SignupBox.vue'
 
 useHeadHelper(
-  "Join the Money Movement - Bank.Green",
-  "Join our consumer action community to attend our Zoom workshops to take on fossil funding banks and discover other ways to divest from fossil fuels.",
-);
+  'Join the Money Movement - Bank.Green',
+  'Join our consumer action community to attend our Zoom workshops to take on fossil funding banks and discover other ways to divest from fossil fuels.'
+)
 
 const checkList = computed(() => [
-  "Learn about the issues via our blog updates",
-  "Join our campaigns to take action against fossil finance",
-  "Discover other ways to divest from fossil fuels",
-]);
+  'Learn about the issues via our blog updates',
+  'Join our campaigns to take action against fossil finance',
+  'Discover other ways to divest from fossil fuels'
+])
 </script>

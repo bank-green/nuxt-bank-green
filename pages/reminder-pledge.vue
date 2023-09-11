@@ -11,5 +11,5 @@
 </template>
 
 <script setup>
-useHeadHelper("Thank you");
+useHeadHelper('Thank you')
 </script>

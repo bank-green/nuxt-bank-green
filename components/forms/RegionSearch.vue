@@ -56,12 +56,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
-import Geonames from "geonames.js";
-import Fuse from "fuse.js";
-import PinIcon from "./location/PinIcon.vue";
-import SearchInput from "@/components/forms/input/SearchInput.vue";
-import ListPicker from "@/components/forms/ListPicker.vue";
+import { computed, ref, watch } from 'vue'
+import Geonames from 'geonames.js'
+import Fuse from 'fuse.js'
+import PinIcon from './location/PinIcon.vue'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
+import ListPicker from '@/components/forms/ListPicker.vue'
 
 // custom type for responses from geonames API
 type Place = {
@@ -71,87 +71,87 @@ type Place = {
 };
 
 const props = defineProps({
-  modelValue: String,
-});
+  modelValue: String
+})
 
-const emit = defineEmits(["update:modelValue", "select"]);
-const listPicker = ref();
+const emit = defineEmits(['update:modelValue', 'select'])
+const listPicker = ref()
 const onKeyDown = (event: Event) => {
-  listPicker.value.incrementFocus(event);
-};
+  listPicker.value.incrementFocus(event)
+}
 const onKeyUp = (event: Event) => {
-  listPicker.value.decrementFocus(event);
-};
-const onKeyEnter = () => listPicker.value.selectCurrentItem();
+  listPicker.value.decrementFocus(event)
+}
+const onKeyEnter = () => listPicker.value.selectCurrentItem()
 
-const search = ref("");
-const isShowing = ref(false);
-const isLoading = ref(false);
+const search = ref('')
+const isShowing = ref(false)
+const isLoading = ref(false)
 
-const { country } = useCountry();
+const { country } = useCountry()
 
-const options = ref<Place[]>([]);
+const options = ref<Place[]>([])
 const geonames = Geonames({
-  username: "myusername",
-  encoding: "JSON",
-});
+  username: 'myusername',
+  encoding: 'JSON'
+})
 
 const searchRegion = async () => {
-  isLoading.value = true;
+  isLoading.value = true
   const data = (await geonames.search({
     country: country.value,
-    featureClass: "A",
-    featureCode: ["ADM1", "ADM2"],
-    maxRows: 1000,
-  })) as { geonames: Place[] };
+    featureClass: 'A',
+    featureCode: ['ADM1', 'ADM2'],
+    maxRows: 1000
+  })) as { geonames: Place[] }
   options.value = data.geonames.sort((a, b) =>
-    a.toponymName.localeCompare(b.toponymName),
-  );
-  isLoading.value = false;
-};
+    a.toponymName.localeCompare(b.toponymName)
+  )
+  isLoading.value = false
+}
 
 const filteredOptions = computed(() => {
   const fuse = new Fuse(options.value, {
     includeScore: true,
-    keys: ["toponymName"],
-  });
+    keys: ['toponymName']
+  })
 
   if (!search.value.trim()) {
-    return options.value;
+    return options.value
   }
-  const result = fuse.search(search.value);
-  return result.filter((x) => x.score && x.score < 0.3).map((x) => x.item);
-});
+  const result = fuse.search(search.value)
+  return result.filter(x => x.score && x.score < 0.3).map(x => x.item)
+})
 
 watch(
   country,
   () => {
-    searchRegion();
+    searchRegion()
   },
-  { immediate: true },
-);
+  { immediate: true }
+)
 
-function showList() {
-  isShowing.value = true;
+function showList () {
+  isShowing.value = true
 }
-function hideList() {
-  isShowing.value = false;
+function hideList () {
+  isShowing.value = false
 }
-async function onSelectLocation(item: Place) {
-  emit("update:modelValue", "");
-  await nextTick();
-  search.value = item.toponymName;
-  emit("update:modelValue", item.toponymName);
-  emit("select", {
-    type: item.fcode === "ADM2" ? "subregion" : "region",
-    value: item.toponymName,
-  });
+async function onSelectLocation (item: Place) {
+  emit('update:modelValue', '')
+  await nextTick()
+  search.value = item.toponymName
+  emit('update:modelValue', item.toponymName)
+  emit('select', {
+    type: item.fcode === 'ADM2' ? 'subregion' : 'region',
+    value: item.toponymName
+  })
 
-  isShowing.value = false;
+  isShowing.value = false
 }
-function onCloseClick() {
-  search.value = "";
-  emit("update:modelValue", "");
-  emit("select", null);
+function onCloseClick () {
+  search.value = ''
+  emit('update:modelValue', '')
+  emit('select', null)
 }
 </script>

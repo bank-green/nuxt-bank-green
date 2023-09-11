@@ -9,11 +9,11 @@
 </template>
 
 <script setup>
-import RenderWhenVisibleInViewPort from "./func/RenderWhenVisibleInViewPort.client.vue";
+import RenderWhenVisibleInViewPort from './func/RenderWhenVisibleInViewPort.client.vue'
 
 const props = defineProps({
   placeholderWidth: Number,
   placeholderHeight: Number,
-  path: String,
-});
+  path: String
+})
 </script>

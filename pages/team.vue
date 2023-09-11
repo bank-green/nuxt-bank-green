@@ -56,15 +56,15 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import { components } from "~~/slices";
-useHead({ title: "Team" });
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
+useHead({ title: 'Team' })
 
-const sliceComps = ref(defineSliceZoneComponents(components));
-const { client } = usePrismic();
-const { data: team } = await useAsyncData("team", () =>
-  client.getSingle("teampage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
+const sliceComps = ref(defineSliceZoneComponents(components))
+const { client } = usePrismic()
+const { data: team } = await useAsyncData('team', () =>
+  client.getSingle('teampage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
 </script>

@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-const bannerName = "COP26-blog-july";
+const bannerName = 'COP26-blog-july'
 
 // if we use this component again, this will have to be adapted with useCookie
 

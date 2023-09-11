@@ -101,11 +101,11 @@
 </template>
 
 <script setup lang="ts">
-import { NotificationInterface } from "~~/utils/notifications";
+import { NotificationInterface } from '~~/utils/notifications'
 
-const computedNotifications = computed(() => notifications.state.notifications);
+const computedNotifications = computed(() => notifications.state.notifications)
 
 const closeNotification = (notif: NotificationInterface) => {
-  notifications.closeNotification(notif);
-};
+  notifications.closeNotification(notif)
+}
 </script>

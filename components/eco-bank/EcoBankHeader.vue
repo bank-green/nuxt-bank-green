@@ -6,7 +6,7 @@
           class="h-20 w-auto"
           src="/img/logos/bankgreen-logo.png"
           alt="Bank Green"
-        />
+        >
       </div>
       <div class="grid grid-cols-2 gap-8 md:gap-10 py-12 px-8">
         <EcoBankHeadline
@@ -49,7 +49,7 @@
               src="/img/certification/fossil-free-certified.png"
               alt="Fossil Free Certified"
               title="Fossil Free Certified"
-            />
+            >
             <template v-for="cred in institutionCredentials">
               <!-- <img v-if="isFossilFreeCertification(cred)" class="h-16 w-auto"
                                 src="/img/certification/fossil-free-certified.png" :alt="cred?.name" /> -->
@@ -57,8 +57,8 @@
               <PrismicImage
                 v-if="
                   cred?.prismicApiId &&
-                  prismicDefaultPageData &&
-                  prismicDefaultPageData[cred.prismicApiId]
+                    prismicDefaultPageData &&
+                    prismicDefaultPageData[cred.prismicApiId]
                 "
                 class="h-16 md:h-12 w-auto"
                 :alt="cred?.name"
@@ -73,7 +73,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { RichTextField } from "@prismicio/types";
+import { RichTextField } from '@prismicio/types'
 
 interface InstitutionCredential {
   name: string;
@@ -92,16 +92,16 @@ const props = defineProps<{
   prismicDefaultPageData: Record<string, any> | null;
   prismicOurTake?: RichTextField;
   fossilFreeAlliance: boolean;
-}>();
+}>()
 
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
-  () => props.institutionCredentials && props.institutionCredentials.length > 0,
-);
+  () => props.institutionCredentials && props.institutionCredentials.length > 0
+)
 
 const isFossilFreeCertification = (institutionCredential: any) => {
   return (
     (institutionCredential as InstitutionCredential).name ==
-    "Fossil Free Certification"
-  );
-};
+    'Fossil Free Certification'
+  )
+}
 </script>

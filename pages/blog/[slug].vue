@@ -42,10 +42,15 @@
     v-else-if="error"
     class="w-full h-screen flex items-center justify-center flex flex-col items-center"
   >
-    <p class="text-4xl font-bold">No blog found</p>
-    <NuxtLink class="mt-2 border-b border-primary-dark" to="/blog"
-      >Go back to Blogs</NuxtLink
+    <p class="text-4xl font-bold">
+      No blog found
+    </p>
+    <NuxtLink
+      class="mt-2 border-b border-primary-dark"
+      to="/blog"
     >
+      Go back to Blogs
+    </NuxtLink>
   </div>
   <div v-else class="w-full h-screen flex items-center justify-center">
     <span>
@@ -66,25 +71,25 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import { components } from "~~/slices";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 
-const route = useRoute();
-const error = ref(false);
+const route = useRoute()
+const error = ref(false)
 
-const { client } = usePrismic();
-const slug = route.path.split("/").at(-1);
+const { client } = usePrismic()
+const slug = route.path.split('/').at(-1)
 const { data: post } = await useAsyncData(slug, () =>
-  client.getByUID("blogpost", slug),
-);
-console.log("post", post.value);
+  client.getByUID('blogpost', slug)
+)
+console.log('post', post.value)
 
-const comps = ref(defineSliceZoneComponents(components));
+const comps = ref(defineSliceZoneComponents(components))
 
 useHeadHelper(
-  post.value?.data?.title ?? "Blog Post",
-  post?.value?.data?.description,
-);
+  post.value?.data?.title ?? 'Blog Post',
+  post?.value?.data?.description
+)
 </script>
 
 <style></style>

@@ -27,38 +27,38 @@
 <script setup lang="ts">
 const props = defineProps<{
   items: any[];
-}>();
+}>()
 
-const emit = defineEmits(["selectItem"]);
+const emit = defineEmits(['selectItem'])
 
-const itemArrRef = ref<InstanceType<typeof HTMLLIElement>[]>([]);
-const focusedItemIndex = ref(-1);
+const itemArrRef = ref<InstanceType<typeof HTMLLIElement>[]>([])
+const focusedItemIndex = ref(-1)
 
-function focusItem(indexToFocus: number, eventToPrevent: Event) {
-  if (focusedItemIndex.value === indexToFocus) return;
+function focusItem (indexToFocus: number, eventToPrevent: Event) {
+  if (focusedItemIndex.value === indexToFocus) { return }
 
-  eventToPrevent?.preventDefault();
-  const itemToFocus = itemArrRef.value[indexToFocus];
+  eventToPrevent?.preventDefault()
+  const itemToFocus = itemArrRef.value[indexToFocus]
 
-  if (!itemToFocus) return;
+  if (!itemToFocus) { return }
 
-  focusedItemIndex.value = indexToFocus;
+  focusedItemIndex.value = indexToFocus
 
-  itemToFocus.scrollIntoView(false);
+  itemToFocus.scrollIntoView(false)
 }
-function incrementFocus(eventToPrevent: Event) {
-  focusItem(focusedItemIndex.value + 1, eventToPrevent);
+function incrementFocus (eventToPrevent: Event) {
+  focusItem(focusedItemIndex.value + 1, eventToPrevent)
 }
-function decrementFocus(eventToPrevent: Event) {
-  focusItem(focusedItemIndex.value - 1, eventToPrevent);
+function decrementFocus (eventToPrevent: Event) {
+  focusItem(focusedItemIndex.value - 1, eventToPrevent)
 }
-function selectCurrentItem() {
-  onSelectItem(focusedItemIndex.value);
+function selectCurrentItem () {
+  onSelectItem(focusedItemIndex.value)
 }
-async function onSelectItem(index: number) {
-  const item = props.items[index];
+async function onSelectItem (index: number) {
+  const item = props.items[index]
   if (item) {
-    emit("selectItem", item);
+    emit('selectItem', item)
   }
 }
 </script>

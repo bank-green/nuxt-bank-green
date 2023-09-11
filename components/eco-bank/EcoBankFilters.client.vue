@@ -7,7 +7,9 @@
     }"
     @click="toggleFilters"
   >
-    <h4 class="font-semibold text-left md:text-xl">Filter</h4>
+    <h4 class="font-semibold text-left md:text-xl">
+      Filter
+    </h4>
 
     <button
       v-if="isFilterDirty"
@@ -22,15 +24,17 @@
     v-show="showFilters"
     class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
   >
-    <h5 class="text-xs uppercase font-semibold md:mt-6 mb-2">Location</h5>
+    <h5 class="text-xs uppercase font-semibold md:mt-6 mb-2">
+      Location
+    </h5>
     <div class="flex flex-col space-y-1">
       <CheckboxSection
         v-model="searchByLocation"
         class="col-span-full"
         name="local_branches"
       >
-        Local branches</CheckboxSection
-      >
+        Local branches
+      </CheckboxSection>
       <RegionSearch
         v-if="searchByLocation"
         ref="regionPicker"
@@ -47,85 +51,89 @@
       class="col-span-full"
       name="fossilFreeAlliance"
     >
-      Fossil Free Alliance</CheckboxSection
-    >
+      Fossil Free Alliance
+    </CheckboxSection>
 
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Convenience</h5>
+    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
+      Convenience
+    </h5>
     <div class="flex flex-col space-y-1">
       <CheckboxSection
         v-model="filterPayload.convenience['Mobile banking']"
         class="col-span-full"
         name="Mobile banking"
       >
-        Mobile banking</CheckboxSection
-      >
+        Mobile banking
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.convenience['Free ATM network']"
         class="col-span-full"
         name="Free ATM network"
       >
-        Free ATM network</CheckboxSection
-      >
+        Free ATM network
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.convenience['No overdraft fee']"
         class="col-span-full"
         name="No overdraft fee"
       >
-        No overdraft fee</CheckboxSection
-      >
+        No overdraft fee
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.convenience['No account maintenance fee']"
         class="col-span-full"
         name="No account maintenance fee"
       >
-        No account maintenance fees</CheckboxSection
-      >
+        No account maintenance fees
+      </CheckboxSection>
     </div>
 
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Bank Accounts</h5>
+    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
+      Bank Accounts
+    </h5>
     <div class="flex flex-col space-y-1">
       <CheckboxSection
         v-model="filterPayload.bankAccounts.checking"
         class="col-span-full"
         name="checking"
       >
-        {{ isBE() ? "Current accounts" : "Checking accounts" }}</CheckboxSection
-      >
+        {{ isBE() ? "Current accounts" : "Checking accounts" }}
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts.saving"
         class="col-span-full"
         name="saving"
       >
-        Savings accounts</CheckboxSection
-      >
+        Savings accounts
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Interest rates']"
         class="col-span-full"
         name="Interest rates"
       >
-        Interest rates</CheckboxSection
-      >
+        Interest rates
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Business accounts']"
         class="col-span-full"
         name="Business accounts"
       >
-        Business accounts</CheckboxSection
-      >
+        Business accounts
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Small business lending']"
         class="col-span-full"
         name="Small business lending"
       >
-        Small business lending</CheckboxSection
-      >
+        Small business lending
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Credit cards']"
         class="col-span-full"
         name="Credit cards"
       >
-        Credit cards</CheckboxSection
-      >
+        Credit cards
+      </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Mortgage or loans']"
         class="col-span-full"
@@ -135,73 +143,75 @@
       </CheckboxSection>
     </div>
 
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">Security</h5>
+    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
+      Security
+    </h5>
     <CheckboxSection
       v-model="filterPayload.security['Deposit protection']"
       class="col-span-full"
       name="Deposit protection"
     >
-      Deposit protection</CheckboxSection
-    >
+      Deposit protection
+    </CheckboxSection>
   </div>
 </template>
 
 <script setup>
-import CheckboxSection from "@/components/forms/CheckboxSection.vue";
-import RegionSearch from "@/components/forms/RegionSearch.vue";
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import RegionSearch from '@/components/forms/RegionSearch.vue'
 
-const { isBE } = useCountry();
-const emit = defineEmits(["filter"]);
+const { isBE } = useCountry()
+const emit = defineEmits(['filter'])
 const props = defineProps({
-  location: String,
-});
-const searchByLocation = ref(false);
+  location: String
+})
+const searchByLocation = ref(false)
 const onSelectLocation = (payload) => {
   if (!payload) {
-    filterPayload.value.region = null;
-    filterPayload.value.subregion = null;
-  } else if (payload.type === "subregion") {
-    filterPayload.value.region = null;
-    filterPayload.value.subregion = payload.value;
+    filterPayload.value.region = null
+    filterPayload.value.subregion = null
+  } else if (payload.type === 'subregion') {
+    filterPayload.value.region = null
+    filterPayload.value.subregion = payload.value
   } else {
-    filterPayload.value.region = payload.value;
-    filterPayload.value.subregion = null;
+    filterPayload.value.region = payload.value
+    filterPayload.value.subregion = null
   }
-};
+}
 
 const getDefaultFilter = () => ({
   region: null,
   subregion: null,
   location: {
-    "Mobile banking": false,
+    'Mobile banking': false
   },
   fossilFreeAlliance: false,
   convenience: {
-    "Mobile banking": false,
-    "Free ATM network": false,
-    "No overdraft fee": false,
-    "No account maintenance fee": false,
+    'Mobile banking': false,
+    'Free ATM network': false,
+    'No overdraft fee': false,
+    'No account maintenance fee': false
   },
   bankAccounts: {
     checking: false,
     saving: false,
-    "Interest rates": false,
-    "Business accounts": false,
-    "Small business lending": false,
-    "Credit cards": false,
-    "Mortgage or loans": false,
+    'Interest rates': false,
+    'Business accounts': false,
+    'Small business lending': false,
+    'Credit cards': false,
+    'Mortgage or loans': false
   },
   security: {
-    "Deposit protection": false,
-  },
-});
+    'Deposit protection': false
+  }
+})
 
-const filterPayload = ref(getDefaultFilter());
+const filterPayload = ref(getDefaultFilter())
 
 const isFilterDirty = computed(
   () =>
-    JSON.stringify(filterPayload.value) !== JSON.stringify(getDefaultFilter()),
-);
+    JSON.stringify(filterPayload.value) !== JSON.stringify(getDefaultFilter())
+)
 
 const parsedFilterPayload = computed(() => {
   return {
@@ -216,51 +226,51 @@ const parsedFilterPayload = computed(() => {
       : undefined,
     features: [
       ...Object.keys(filterPayload.value.location).filter(
-        (key) => filterPayload.value.location[key],
+        key => filterPayload.value.location[key]
       ),
       ...Object.keys(filterPayload.value.convenience).filter(
-        (key) => filterPayload.value.convenience[key],
+        key => filterPayload.value.convenience[key]
       ),
       ...Object.keys(filterPayload.value.bankAccounts).filter(
-        (key) => filterPayload.value.bankAccounts[key],
+        key => filterPayload.value.bankAccounts[key]
       ),
       ...Object.keys(filterPayload.value.security).filter(
-        (key) => filterPayload.value.security[key],
-      ),
-    ],
-  };
-});
+        key => filterPayload.value.security[key]
+      )
+    ]
+  }
+})
 
 watch(
   filterPayload,
   () => {
-    emit("filter", parsedFilterPayload.value);
+    emit('filter', parsedFilterPayload.value)
   },
-  { deep: true },
-);
+  { deep: true }
+)
 
 watch(searchByLocation, () => {
-  filterPayload.value.region = null;
-  filterPayload.value.subregion = null;
-});
+  filterPayload.value.region = null
+  filterPayload.value.subregion = null
+})
 
-onMounted(() => emit("filter", parsedFilterPayload.value));
+onMounted(() => emit('filter', parsedFilterPayload.value))
 
 const setDefaultFilter = () => {
-  filterPayload.value = getDefaultFilter();
-};
+  filterPayload.value = getDefaultFilter()
+}
 watch(
   () => props.location,
   () => {
-    setDefaultFilter();
-  },
-);
+    setDefaultFilter()
+  }
+)
 
-const forceShowMobile = ref(false);
+const forceShowMobile = ref(false)
 const showFilters = computed(() => {
-  return forceShowMobile.value || window.innerWidth >= 768;
-});
+  return forceShowMobile.value || window.innerWidth >= 768
+})
 const toggleFilters = () => {
-  forceShowMobile.value = !forceShowMobile.value;
-};
+  forceShowMobile.value = !forceShowMobile.value
+}
 </script>

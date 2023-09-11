@@ -38,34 +38,34 @@
 </template>
 
 <script setup lang="ts">
-const details: Ref<any | null> = ref(null);
-const prismicPageData: Ref<Record<string, any> | null> = ref(null);
-const prismicDefaultPageData: Ref<Record<string, any> | null> = ref(null);
+const details: Ref<any | null> = ref(null)
+const prismicPageData: Ref<Record<string, any> | null> = ref(null)
+const prismicDefaultPageData: Ref<Record<string, any> | null> = ref(null)
 
-const route = useRoute();
-const bankTag = route.params.bankTag as string;
-if (!bankTag)
+const route = useRoute()
+const bankTag = route.params.bankTag as string
+if (!bankTag) {
   throw new Error(
-    "no banktag supplied: " + JSON.stringify(router.currentRoute.value),
-  );
-else {
-  const { client } = usePrismic();
+    'no banktag supplied: ' + JSON.stringify(router.currentRoute.value)
+  )
+} else {
+  const { client } = usePrismic()
 
-  details.value = await getBankDetail(bankTag);
+  details.value = await getBankDetail(bankTag)
 
-  const prismicResponse = await useAsyncData(`sfipage`, () =>
-    client.getByUID("sfipage", bankTag),
-  );
-  prismicPageData.value = prismicResponse.data.value?.data || null;
-  const prismicDefaultDataResponse = await useAsyncData(`sfidefaults`, () =>
-    client.getByID("ZFpGfhEAACEAuFIf"),
-  );
+  const prismicResponse = await useAsyncData('sfipage', () =>
+    client.getByUID('sfipage', bankTag)
+  )
+  prismicPageData.value = prismicResponse.data.value?.data || null
+  const prismicDefaultDataResponse = await useAsyncData('sfidefaults', () =>
+    client.getByID('ZFpGfhEAACEAuFIf')
+  )
   prismicDefaultPageData.value =
-    prismicDefaultDataResponse.data.value?.data || null;
+    prismicDefaultDataResponse.data.value?.data || null
 
   useHeadHelper(
-    `${details.value.name} Review and Service Offering - Bank.Green`,
-  );
+    `${details.value.name} Review and Service Offering - Bank.Green`
+  )
 }
 
 const institutionType: ComputedRef<string | undefined> = computed(() => {
@@ -73,11 +73,11 @@ const institutionType: ComputedRef<string | undefined> = computed(() => {
     Array.isArray(details.value.commentary.institutionType) &&
     details.value.commentary.institutionType.length
       ? details.value.commentary.institutionType[0].name
-      : undefined;
-  return result;
-});
+      : undefined
+  return result
+})
 
 const institutionCredentials = computed(
-  () => details.value.commentary.institutionCredentials || [],
-);
+  () => details.value.commentary.institutionCredentials || []
+)
 </script>

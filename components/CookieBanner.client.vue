@@ -12,8 +12,9 @@
           <NuxtLink
             to="/privacy"
             class="cursor-pointer text-sushi-200 hover:text-sushi-100 font-bold no-underline mr-4"
-            >Privacy policy</NuxtLink
           >
+            Privacy policy
+          </NuxtLink>
           <div
             class="bg-red-500 hover:bg-red-400 rounded text-white cursor-pointer px-4 no-underline py-2 mr-2"
             @click="noCookies"
@@ -34,19 +35,19 @@
 </template>
 
 <script setup>
-import { useGtm } from "@gtm-support/vue-gtm";
+import { useGtm } from '@gtm-support/vue-gtm'
 
-const showBanner = useCookie("bg.showbanner", { default: () => true });
-const allowCookies = useCookie("bg.allowcookies", { default: () => false });
-function yesCookies() {
-  showBanner.value = false;
-  allowCookies.value = true;
-  const gtm = useGtm();
-  gtm.enable(true);
+const showBanner = useCookie('bg.showbanner', { default: () => true })
+const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+function yesCookies () {
+  showBanner.value = false
+  allowCookies.value = true
+  const gtm = useGtm()
+  gtm.enable(true)
 }
 
-function noCookies() {
-  showBanner.value = false;
-  allowCookies.value = false;
+function noCookies () {
+  showBanner.value = false
+  allowCookies.value = false
 }
 </script>

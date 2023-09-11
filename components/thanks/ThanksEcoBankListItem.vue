@@ -26,7 +26,7 @@
       </div>
 
       <div v-else class="w-full flex items-center truncate">
-        <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse"></div>
+        <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse" />
         <div class="ml-3 flex-1 font-semibold text-gray-200 block truncate">
           loading...
         </div>
@@ -53,11 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import ClearbitLogo from "../icons/ClearbitLogo.vue";
+import ClearbitLogo from '../icons/ClearbitLogo.vue'
 
 defineProps<{
   tag: string;
   website: string;
   name: string;
-}>();
+}>()
 </script>

@@ -52,8 +52,8 @@
             :dark="true"
           >
             I wish to receive more information via email from
-            Bank.Green.</CheckboxSection
-          >
+            Bank.Green.
+          </CheckboxSection>
           <CheckboxSection
             v-model="isAgreeTerms"
             class="col-span-2"
@@ -62,7 +62,9 @@
             :warning="warningsMap['isAgreeTerms']"
           >
             I have read and understood Bank.Green’s
-            <NuxtLink to="/privacy" class="link">privacy policy </NuxtLink>.
+            <NuxtLink to="/privacy" class="link">
+              privacy policy
+            </NuxtLink>.
           </CheckboxSection>
         </div>
         <button
@@ -94,17 +96,17 @@
 </template>
 
 <script setup lang="ts">
-import CheckboxSection from "@/components/forms/CheckboxSection.vue";
-import TextField from "@/components/forms/TextField.vue";
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import TextField from '@/components/forms/TextField.vue'
 
 const props = withDefaults(
   defineProps<{
     tag: string;
   }>(),
   {
-    tag: "submitbank",
-  },
-);
+    tag: 'submitbank'
+  }
+)
 
 const {
   firstName,
@@ -115,6 +117,6 @@ const {
   isSent,
   warningsMap,
   send,
-  busy,
-} = useContactForm(props.tag, ["email", "bank", "isAgreeTerms"], ref({}));
+  busy
+} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}))
 </script>

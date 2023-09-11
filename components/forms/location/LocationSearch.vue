@@ -55,49 +55,49 @@
 </template>
 
 <script setup>
-import en from "../../../lang/en.json";
-import LocationSearchItem from "./LocationSearchItem.vue";
-import PinIcon from "./PinIcon.vue";
-import { findCountries } from "./countries";
-import SearchInput from "@/components/forms/input/SearchInput";
-import ListPicker from "@/components/forms/ListPicker";
+import en from '../../../lang/en.json'
+import LocationSearchItem from './LocationSearchItem.vue'
+import PinIcon from './PinIcon.vue'
+import { findCountries } from './countries'
+import SearchInput from '@/components/forms/input/SearchInput'
+import ListPicker from '@/components/forms/ListPicker'
 
 const props = defineProps({
-  modelValue: String,
-});
+  modelValue: String
+})
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
-const isShowing = ref(false);
+const isShowing = ref(false)
 // const country = useCountry()
-const search = ref("");
+const search = ref('')
 if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
-  search.value = en[`COUNTRY_${props.modelValue}`];
+  search.value = en[`COUNTRY_${props.modelValue}`]
 }
 
-const filteredCountries = computed(() => findCountries(search.value));
+const filteredCountries = computed(() => findCountries(search.value))
 
-function showList() {
-  isShowing.value = true;
+function showList () {
+  isShowing.value = true
 }
-function hideList() {
-  isShowing.value = false;
+function hideList () {
+  isShowing.value = false
   // if clicking away, go back to originally selected country
-  if (search.value === "") {
-    emit("update:modelValue", "");
+  if (search.value === '') {
+    emit('update:modelValue', '')
   } else if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
-    search.value = en[`COUNTRY_${props.modelValue}`];
+    search.value = en[`COUNTRY_${props.modelValue}`]
   }
 }
 
-async function onSelectCountry(code) {
-  search.value = en[`COUNTRY_${code}`];
-  emit("update:modelValue", code);
-  isShowing.value = false;
+async function onSelectCountry (code) {
+  search.value = en[`COUNTRY_${code}`]
+  emit('update:modelValue', code)
+  isShowing.value = false
 }
 
-function onCloseClick() {
-  search.value = "";
-  emit("update:modelValue", "");
+function onCloseClick () {
+  search.value = ''
+  emit('update:modelValue', '')
 }
 </script>

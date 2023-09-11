@@ -16,17 +16,17 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import { components } from "~~/slices";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 
-useHeadHelper("Disclaimer");
+useHeadHelper('Disclaimer')
 
-const sliceComps = ref(defineSliceZoneComponents(components));
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const { client } = usePrismic();
-const { data: disclaimer } = await useAsyncData("disclaimer", () =>
-  client.getSingle("disclaimerpage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
+const { client } = usePrismic()
+const { data: disclaimer } = await useAsyncData('disclaimer', () =>
+  client.getSingle('disclaimerpage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
 </script>

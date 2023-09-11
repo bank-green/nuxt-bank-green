@@ -53,27 +53,27 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Swoosh from "@/components/Swoosh.vue";
-import CheckList from "@/components/CheckList.vue";
+import { ref } from 'vue'
+import Swoosh from '@/components/Swoosh.vue'
+import CheckList from '@/components/CheckList.vue'
 
 const checkList = [
-  "Send a message to your bank that it must defund fossil fuels",
-  "Join a fast-growing movement of consumers standing up for their future",
-  "Take a critical climate action with profound effects",
-];
-const { client } = usePrismic();
-const { data: pledge } = await useAsyncData("pledge", () =>
-  client.getSingle("pledgepage"),
-);
-usePrismicSEO(pledge.value.data);
+  'Send a message to your bank that it must defund fossil fuels',
+  'Join a fast-growing movement of consumers standing up for their future',
+  'Take a critical climate action with profound effects'
+]
+const { client } = usePrismic()
+const { data: pledge } = await useAsyncData('pledge', () =>
+  client.getSingle('pledgepage')
+)
+usePrismicSEO(pledge.value.data)
 
-const signUpForm = ref();
+const signUpForm = ref()
 const scrollToForm = () => {
-  if (!signUpForm.value) return;
+  if (!signUpForm.value) { return }
   window.scrollTo({
     top: signUpForm.value.offsetTop - 100,
-    behavior: "smooth",
-  });
-};
+    behavior: 'smooth'
+  })
+}
 </script>

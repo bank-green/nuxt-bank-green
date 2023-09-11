@@ -5,7 +5,7 @@
         class="relative z-50 bg-primary-dark rounded-xl flex items-center justify-between pr-4"
       >
         <NuxtLink to="/" class="py-4 px-6" @click="isOpen = false">
-          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green" />
+          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green">
         </NuxtLink>
 
         <button
@@ -73,8 +73,9 @@
             inactive-class="hover:bg-primary-light"
             class="px-4 py-2 text-base text-white font-medium rounded-xl"
             @click="isOpen = false"
-            >{{ link.short_title || link.title }}</NuxtLink
           >
+            {{ link.short_title || link.title }}
+          </NuxtLink>
           <NuxtLink
             to="/donate"
             active-class="bg-sushi-600"
@@ -106,8 +107,9 @@
           inactive-class="'hover:bg-primary-light'"
           class="block py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-white text-sm font-medium bg-primary-dark rounded-xl"
           @click="isOpen = false"
-          >{{ link.title }}</NuxtLink
         >
+          {{ link.title }}
+        </NuxtLink>
         <NuxtLink
           to="/impact"
           class="block w-full text-left py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium text-white rounded-xl bg-sushi-500 hover:bg-sushi-600"
@@ -121,14 +123,14 @@
 </template>
 
 <script setup>
-import links from "./links";
+import links from './links'
 
-const isOpen = ref(false);
+const isOpen = ref(false)
 const headerLinks = computed(() => {
-  return links({ isHeader: true });
-});
+  return links({ isHeader: true })
+})
 
-function closePopup() {
-  isOpen.value = false;
+function closePopup () {
+  isOpen.value = false
 }
 </script>

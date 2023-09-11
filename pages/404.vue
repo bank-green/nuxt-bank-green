@@ -25,5 +25,5 @@
 </template>
 
 <script setup>
-useHeadHelper("404");
+useHeadHelper('404')
 </script>

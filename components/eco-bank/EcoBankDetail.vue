@@ -4,9 +4,15 @@
       :tab-ids="['key-facts', 'products', 'fees']"
       class="w-full lg:w-3/4 xl:w-2/3 mx-auto"
     >
-      <template #key-facts-nav>Key Facts</template>
-      <template #products-nav>Products</template>
-      <template #fees-nav>Fees</template>
+      <template #key-facts-nav>
+        Key Facts
+      </template>
+      <template #products-nav>
+        Products
+      </template>
+      <template #fees-nav>
+        Fees
+      </template>
       <template #key-facts>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-16">
           <p>
@@ -26,8 +32,7 @@
             <span
               v-if="prismicPageData?.founded"
               :field="prismicPageData.founded"
-              >{{ prismicPageData.founded }}</span
-            >
+            >{{ prismicPageData.founded }}</span>
           </p>
           <p>
             <strong>Serving: </strong>
@@ -94,10 +99,18 @@
       :tab-ids="tabIds"
       justify-tab-navigation="space-around"
     >
-      <template #impact-nav>Impact</template>
-      <template #security-nav>Security</template>
-      <template #services-nav>Service</template>
-      <template #convenience-nav>Convenience</template>
+      <template #impact-nav>
+        Impact
+      </template>
+      <template #security-nav>
+        Security
+      </template>
+      <template #services-nav>
+        Service
+      </template>
+      <template #convenience-nav>
+        Convenience
+      </template>
       <template #impact>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <PrismicRichText
@@ -130,7 +143,7 @@
             <PrismicImage
               v-if="
                 prismicDefaultPageData &&
-                prismicDefaultPageData['security-image']
+                  prismicDefaultPageData['security-image']
               "
               class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="security-image"
@@ -151,7 +164,7 @@
             <PrismicImage
               v-if="
                 prismicDefaultPageData &&
-                prismicDefaultPageData['service-image']
+                  prismicDefaultPageData['service-image']
               "
               class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="service-image"
@@ -172,7 +185,7 @@
             <PrismicImage
               v-if="
                 prismicDefaultPageData &&
-                prismicDefaultPageData['convenience-image']
+                  prismicDefaultPageData['convenience-image']
               "
               class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="convenience-image"
@@ -222,34 +235,33 @@ const props = defineProps<{
   tag: string;
   prismicPageData: Record<string, any> | null;
   prismicDefaultPageData: Record<string, any> | null;
-}>();
+}>()
 
 const tabIds = computed(() =>
-  ["impact", "security", "services", "convenience"].filter(
-    (tabId) =>
+  ['impact', 'security', 'services', 'convenience'].filter(
+    tabId =>
       props?.prismicPageData &&
       props.prismicPageData[tabId] &&
-      props.prismicPageData[tabId].length > 0,
-  ),
-);
+      props.prismicPageData[tabId].length > 0
+  )
+)
 
-function getBankFeature(featureName: string, defaultValue: string = "No") {
+function getBankFeature (featureName: string, defaultValue: string = 'No') {
   const feature = props.bankFeatures.find(
-    (feature) => feature.feature.name === featureName,
-  );
-  if (feature) return feature.details || feature.offered;
-  return defaultValue;
+    feature => feature.feature.name === featureName
+  )
+  if (feature) { return feature.details || feature.offered }
+  return defaultValue
 }
 
-function getInvertedBankFeature(
+function getInvertedBankFeature (
   featureName: string,
-  defaultValue: string = "No",
+  defaultValue: string = 'No'
 ) {
   const feature = props.bankFeatures.find(
-    (feature) => feature.feature.name === featureName,
-  );
-  if (feature)
-    return feature.details || (feature.offered === "Yes" ? "No" : "Yes");
-  return defaultValue;
+    feature => feature.feature.name === featureName
+  )
+  if (feature) { return feature.details || (feature.offered === 'Yes' ? 'No' : 'Yes') }
+  return defaultValue
 }
 </script>

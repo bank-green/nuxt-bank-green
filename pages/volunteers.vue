@@ -16,14 +16,14 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import { components } from "~~/slices";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 
-const sliceComps = ref(defineSliceZoneComponents(components));
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const { client } = usePrismic();
-const { data: volunteers } = await useAsyncData("volunteers", () =>
-  client.getSingle("volunteerspage"),
-);
-usePrismicSEO(volunteers.value.data);
+const { client } = usePrismic()
+const { data: volunteers } = await useAsyncData('volunteers', () =>
+  client.getSingle('volunteerspage')
+)
+usePrismicSEO(volunteers.value.data)
 </script>

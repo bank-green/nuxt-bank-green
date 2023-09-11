@@ -9,43 +9,42 @@
       <PrismicRichText
         v-if="switchSurveyText"
         :field="switchSurveyText"
-      ></PrismicRichText>
+      />
       <PrismicRichText
         v-if="switchSurveyLink"
         class="font-semibold"
         :field="switchSurveyLink"
-      ></PrismicRichText>
+      />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { RichTextField } from "@prismicio/types";
+import { RichTextField } from '@prismicio/types'
 
-const BANK_NAME_TEMPLATE = "{{Bank Name}}";
+const BANK_NAME_TEMPLATE = '{{Bank Name}}'
 
 const props = defineProps<{
   bankName: string | undefined;
   prismicDefaultPageData: Record<string, any> | null;
   website?: string;
-}>();
+}>()
 
 const switchSurveyText: ComputedRef<RichTextField | null> = computed(() => {
   const result =
     props.prismicDefaultPageData != null &&
-    props.prismicDefaultPageData["switch-survey-text"];
+    props.prismicDefaultPageData['switch-survey-text']
   if (
     result &&
     result[0] &&
-    typeof result[0].text === "string" &&
+    typeof result[0].text === 'string' &&
     props.bankName
-  )
-    result[0].text = result[0].text.replace(BANK_NAME_TEMPLATE, props.bankName);
-  return result;
-});
+  ) { result[0].text = result[0].text.replace(BANK_NAME_TEMPLATE, props.bankName) }
+  return result
+})
 
 const switchSurveyLink: ComputedRef<RichTextField | null> = computed(
   () =>
     props.prismicDefaultPageData != null &&
-    props.prismicDefaultPageData["switch-survey-link"],
-);
+    props.prismicDefaultPageData['switch-survey-link']
+)
 </script>

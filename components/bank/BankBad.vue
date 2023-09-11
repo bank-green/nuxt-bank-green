@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex justify-center md:block mb-8 w-full"></div>
+        <div class="flex justify-center md:block mb-8 w-full" />
         <div
           class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6"
         >
@@ -43,13 +43,13 @@
         v-else
         class="text-lg md:text-2xl whitespace-pre-line text-gray-900"
         v-text="piggyText"
-      ></p>
+      />
     </template>
   </BankLayoutBadWorst>
 </template>
 
 <script setup lang="ts">
-import { PrismicDocument } from "@prismicio/types";
+import { PrismicDocument } from '@prismicio/types'
 
 const props = defineProps<{
   name: string;
@@ -60,11 +60,11 @@ const props = defineProps<{
   };
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
   amountFinancedSince2016: string;
-}>();
+}>()
 
 const piggyText = `While you’ve been stashing away money for a house or a weekend get-away, ${
   props.name
 } has been using your savings to lend to some very questionable fossil fuel friends.\n\nAnd it's not just a little here and there, we’re talking about ${
-  props.amountFinancedSince2016 ?? "large amounts"
-} in the 7 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`;
+  props.amountFinancedSince2016 ?? 'large amounts'
+} in the 7 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`
 </script>

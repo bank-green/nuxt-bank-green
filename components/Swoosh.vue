@@ -21,15 +21,15 @@
 const props = defineProps({
   direction: {
     type: String,
-    default: "up",
+    default: 'up'
   },
   color: {
     type: String,
-    default: "text-gray-50",
+    default: 'text-gray-50'
   },
   paddingClasses: {
     type: String,
-    default: "py-8 sm:py-10 md:py-12",
-  },
-});
+    default: 'py-8 sm:py-10 md:py-12'
+  }
+})
 </script>

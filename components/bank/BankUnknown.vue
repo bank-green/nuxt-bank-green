@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
-        <div class="flex justify-center md:block mb-8 w-full"></div>
+        <div class="flex justify-center md:block mb-8 w-full" />
         <div
           class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6"
         >
@@ -66,7 +66,7 @@
           class="md:order-first md:w-1/2 -mx-24 sm:mx-0 lg:-ml-32 md:mr-16"
           src="/img/illustrations/dig.svg"
           alt=""
-        />
+        >
       </div>
     </template>
 
@@ -82,8 +82,8 @@
 </template>
 
 <script setup lang="ts">
-import { PrismicDocument } from "@prismicio/types";
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
+import { PrismicDocument } from '@prismicio/types'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 const props = defineProps<{
   name: string;
   website: string;
@@ -92,11 +92,11 @@ const props = defineProps<{
     name: string;
   };
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
-}>();
+}>()
 
 const checkList = [
-  "Learn about the issues via our blog updates",
-  "Join our campaigns to take action against fossil finance",
-  "Discover other ways to divest from fossil fuels",
-];
+  'Learn about the issues via our blog updates',
+  'Join our campaigns to take action against fossil finance',
+  'Discover other ways to divest from fossil fuels'
+]
 </script>

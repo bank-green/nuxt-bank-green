@@ -16,6 +16,6 @@
 <script setup>
 const props = defineProps({
   list: Array,
-  isNoCredit: Boolean,
-});
+  isNoCredit: Boolean
+})
 </script>

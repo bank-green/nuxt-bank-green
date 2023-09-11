@@ -20,8 +20,9 @@
           <NuxtLink
             to="/contact"
             class="font-bold text-sushi-500 hover:underline"
-            >tell us your bank’s name </NuxtLink
-          >, we’ll try to include it as soon as possible. In the meantime, we
+          >
+            tell us your bank’s name
+          </NuxtLink>, we’ll try to include it as soon as possible. In the meantime, we
           encourage you to consider contacting your bank to ask them whether
           they fund fossil fuels. But that’s not all you can do. To take further
           positive action, keep on scrolling…
@@ -37,10 +38,8 @@
         >
           <div class="md:w-1/2 max-w-sm">
             <p class="text-lg md:text-2xl tracking-wide mb-4">
-              <b
-                >Bank.Green was founded on the belief that banks have had an
-                easy time from their customers for too long</b
-              >. Mass movements will pull us out of the climate crisis – and
+              <b>Bank.Green was founded on the belief that banks have had an
+                easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
               they’ll pull your bank out, too.
             </p>
             <p
@@ -57,7 +56,7 @@
             class="md:order-first md:w-2/5 -mx-24 md:mx-0 md:mr-24"
             src="/img/illustrations/dig.svg"
             alt=""
-          />
+          >
         </div>
       </div>
     </div>
@@ -95,12 +94,12 @@
   </div>
 </template>
 <script setup>
-import SubmitBank from "@/components/forms/SubmitBank.vue";
+import SubmitBank from '@/components/forms/SubmitBank.vue'
 
 const checkList = [
-  "Learn about the issues via our blog updates",
-  "Join our campaigns to take action against fossil finance",
-  "Discover other ways to divest from fossil fuels",
-];
-useHeadHelper("Not listed");
+  'Learn about the issues via our blog updates',
+  'Join our campaigns to take action against fossil finance',
+  'Discover other ways to divest from fossil fuels'
+]
+useHeadHelper('Not listed')
 </script>

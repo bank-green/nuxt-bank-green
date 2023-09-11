@@ -20,17 +20,17 @@
           @click.prevent="setActive(tabId)"
         >
           <!-- Tab Title (desktop) -->
-          <slot :name="`${tabId}-nav`"></slot>
+          <slot :name="`${tabId}-nav`" />
         </a>
         <div
           :class="[
             'Tab_NavItemUnderline mx-2 mt-2 border rounded h-2 border-transparent',
             isActive(tabId) ? 'bg-sushi-500' : 'bg-transparent',
           ]"
-        ></div>
+        />
       </li>
     </ul>
-    <br />
+    <br>
     <div class="space-y-8 md:space-y-0">
       <div
         v-for="tabId in tabIds"
@@ -40,12 +40,12 @@
         <div class="flex flex-col items-center md:hidden">
           <h3 class="text-2xl font-semibold text-sushi-500">
             <!-- Tab Title (mobile) -->
-            <slot :name="`${tabId}-nav`"> </slot>
+            <slot :name="`${tabId}-nav`" />
           </h3>
           <div
             class="mx-2 mt-2 border rounded h-2 border-transparent bg-sushi-500"
             style="width: calc(100% - 1rem)"
-          ></div>
+          />
         </div>
         <div
           :id="tabId"
@@ -55,7 +55,7 @@
           ]"
         >
           <!-- Tab Content -->
-          <slot :name="tabId"></slot>
+          <slot :name="tabId" />
         </div>
       </div>
     </div>
@@ -65,22 +65,22 @@
 const props = withDefaults(
   defineProps<{
     tabIds: string[];
-    justifyTabNavigation?: "space-between" | "center" | "space-around";
+    justifyTabNavigation?: 'space-between' | 'center' | 'space-around';
   }>(),
   {
     tabIds: () => [],
-    justifyTabNavigation: "center",
-  },
-);
+    justifyTabNavigation: 'center'
+  }
+)
 
-const activeTab = ref("");
-if (props.tabIds.length) activeTab.value = props.tabIds[0];
+const activeTab = ref('')
+if (props.tabIds.length) { activeTab.value = props.tabIds[0] }
 
-function setActive(tabName: string) {
-  if (!isActive(tabName)) activeTab.value = tabName;
+function setActive (tabName: string) {
+  if (!isActive(tabName)) { activeTab.value = tabName }
 }
-function isActive(tabName: string) {
-  return activeTab.value === tabName;
+function isActive (tabName: string) {
+  return activeTab.value === tabName
 }
 
 watch(
@@ -90,10 +90,9 @@ watch(
       newValue != oldValue &&
       newValue.length &&
       !newValue.includes(activeTab.value)
-    )
-      setActive(newValue[0]);
-  },
-);
+    ) { setActive(newValue[0]) }
+  }
+)
 </script>
 <style scoped>
 .Tab_NavItem .Tab_NavItemUnderline {

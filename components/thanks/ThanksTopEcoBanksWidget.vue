@@ -10,28 +10,29 @@
     <NuxtLink
       to="/sustainable-eco-banks"
       class="mt-6 button-green sm:inline-block sm:w-64"
-      >Show more</NuxtLink
     >
+      Show more
+    </NuxtLink>
   </div>
 </template>
 
 <script setup>
-import LocationSearch from "@/components/forms/location/LocationSearch.vue";
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 
-const { country } = useCountry();
+const { country } = useCountry()
 
-const banks = ref([]);
-const loaded = ref(false);
+const banks = ref([])
+const loaded = ref(false)
 const loadBanks = async () => {
   if (!country.value) {
-    return;
+    return
   }
   banks.value = await getBanksList({
     country: country.value,
-    topOnly: true,
-  });
-  loaded.value = true;
-};
-onMounted(loadBanks);
-watch(country, loadBanks);
+    topOnly: true
+  })
+  loaded.value = true
+}
+onMounted(loadBanks)
+watch(country, loadBanks)
 </script>

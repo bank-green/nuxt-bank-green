@@ -32,10 +32,15 @@
     <div
       class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8"
     >
-      <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto"
-        >Move Your Money Today
+      <NuxtLink
+        to="/sustainable-eco-banks"
+        class="button-green w-auto"
+      >
+        Move Your Money Today
       </NuxtLink>
-      <div class="text-xs text-gray-500 mx-4 uppercase">Or</div>
+      <div class="text-xs text-gray-500 mx-4 uppercase">
+        Or
+      </div>
       <NuxtLink
         to="/pledge"
         :class="['underline', light ? 'text-gray-800' : 'text-white']"
@@ -47,19 +52,19 @@
 </template>
 
 <script setup>
-import { asText } from "@prismicio/helpers";
-import CheckList from "@/components/CheckList.vue";
+import { asText } from '@prismicio/helpers'
+import CheckList from '@/components/CheckList.vue'
 
-const { client } = usePrismic();
-const { data: call } = await useAsyncData("calltoaction", () =>
-  client.getSingle("calltoaction"),
-);
+const { client } = usePrismic()
+const { data: call } = await useAsyncData('calltoaction', () =>
+  client.getSingle('calltoaction')
+)
 const props = defineProps({
   title: String,
   paragraph: String,
   checkListItems: Array,
   buttonText: String,
   light: Boolean,
-  spaced: Boolean,
-});
+  spaced: Boolean
+})
 </script>

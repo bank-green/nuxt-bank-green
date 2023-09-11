@@ -25,8 +25,9 @@
           <NuxtLink
             class="underline"
             :to="`/banks/${inheritBrandRating.tag}`"
-            >{{ inheritBrandRating.name }}</NuxtLink
           >
+            {{ inheritBrandRating.name }}
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -34,15 +35,15 @@
 </template>
 
 <script setup>
-import ClearbitLogo from "@/components/icons/ClearbitLogo.vue";
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 
 const props = defineProps({
   name: String,
   website: String,
   inheritBrandRating: {
     name: String,
-    tag: String,
+    tag: String
   },
-  prismicFieldSubtitle: undefined,
-});
+  prismicFieldSubtitle: undefined
+})
 </script>

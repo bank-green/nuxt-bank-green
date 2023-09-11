@@ -31,8 +31,7 @@
               v-if="country"
               :location="country"
               @filter="applyFilter"
-            >
-            </EcoBankFilters>
+            />
           </div>
 
           <div class="relative w-full md:ml-6">
@@ -42,7 +41,9 @@
               <h2
                 class="w-full px-5 py-4 bg-gray-100 border border-gray-300 rounded-2xl text-sm"
               >
-                <div class="font-medium text-gray-600">No country selected</div>
+                <div class="font-medium text-gray-600">
+                  No country selected
+                </div>
                 <div class="text-sm text-gray-500">
                   To continue, please select a country.
                 </div>
@@ -92,70 +93,70 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import LocationSearch from "@/components/forms/location/LocationSearch.vue";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 
-import { components } from "~~/slices";
-const sliceComps = ref(defineSliceZoneComponents(components));
+import { components } from '~~/slices'
+const sliceComps = ref(defineSliceZoneComponents(components))
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
-const { client } = usePrismic();
+const { client } = usePrismic()
 
-const { data: ecobanks } = await useAsyncData("ecobanks", () =>
-  client.getSingle("ecobankspage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
-usePrismicSEO(ecobanks.value.data);
+const { data: ecobanks } = await useAsyncData('ecobanks', () =>
+  client.getSingle('ecobankspage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
+usePrismicSEO(ecobanks.value.data)
 
-const { country } = useCountry();
+const { country } = useCountry()
 
-const banks = ref([]);
-const loading = ref(false);
-const errorMessage = ref(null);
+const banks = ref([])
+const loading = ref(false)
+const errorMessage = ref(null)
 const loadBanks = async ({
   regions,
   subregions,
   fossilFreeAlliance,
-  features,
+  features
 }) => {
-  loading.value = true;
+  loading.value = true
   if (!country.value) {
-    return;
+    return
   }
   const result = await getBanksListWithFilter({
     country: country.value,
     regions,
     subregions,
     fossilFreeAlliance,
-    features,
-  });
+    features
+  })
 
   banks.value = result
     // filter show_on_sustainable_banks_page
-    .filter((a) => a.showOnSustainableBanksPage)
+    .filter(a => a.showOnSustainableBanksPage)
     // sort by fossiil_free_alliance_rating first, then by name
     .sort(
       (a, b) =>
         b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
-        a.name - b.name,
-    );
-  loading.value = false;
+        a.name - b.name
+    )
+  loading.value = false
   if (banks.value.length === 0) {
     errorMessage.value =
-      "Sorry, we don't have any banks that meet the required filter.";
+      "Sorry, we don't have any banks that meet the required filter."
   }
-};
+}
 watch(country, () => {
-  banks.value = [];
-});
+  banks.value = []
+})
 
 const isNoCredit = computed(() => {
-  return country.value === "FR" || country.value === "DE";
-});
+  return country.value === 'FR' || country.value === 'DE'
+})
 
 const applyFilter = (payload) => {
-  loadBanks(payload);
-};
+  loadBanks(payload)
+}
 </script>
