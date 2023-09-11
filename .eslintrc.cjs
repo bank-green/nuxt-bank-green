@@ -14,5 +14,5 @@ module.exports = {
   rules: {
     "no-console": "off",
   },
-  ignorePatterns: ["temp.js", "**/slices/*"],
+  ignorePatterns: ["**/slices/*"],
 };
