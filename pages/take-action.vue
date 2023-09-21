@@ -80,11 +80,11 @@
         </div>
       </div>
     </div>
+    <!-- FIXME: had to add this so the tailwind classes get loaded for the SharePicGallerySlice -->
+    <div
+      class="w-full flex flex-row flex-wrap sm:w-1/2 md:w-1/3 w-full p-2 mt-0"
+    />
   </div>
-  <!-- FIXME: had to add this so the tailwind classes get loaded for the SharePicGallerySlice -->
-  <div
-    class="w-full flex flex-row flex-wrap sm:w-1/2 md:w-1/3 w-full p-2 mt-0"
-  />
 </template>
 
 <script setup>

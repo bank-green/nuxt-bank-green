@@ -147,7 +147,7 @@ const isOneTimePayment = computed(
 )
 
 const isRecurring = computed(
-  () => selectedMethod.value == 'recurring' && selectedAmount.value != null
+  () => selectedMethod.value === 'recurring' && selectedAmount.value != null
 )
 
 const { client } = usePrismic()
@@ -164,7 +164,7 @@ const { isStripeLoaded, initOneTimePayment, handleSubmit } = useStripe(
 
 watch(
   () => selectedAmount.value,
-  (newVal, oldVal) => {
+  (newVal, _) => {
     if (isOneTimePayment.value && newVal !== null) {
       isStripeLoaded.value = false
       initOneTimePayment(newVal)
@@ -192,7 +192,7 @@ watch(
 )
 
 const handleOneTimePayment = async () => {
-  if (selectedAmount.value == null) {} else if (isStripeLoaded.value) { handleSubmit() } else {
+  if (selectedAmount.value == null) { /* empty */ } else if (isStripeLoaded.value) { handleSubmit() } else {
     await initOneTimePayment(selectedAmount.value)
   }
 }

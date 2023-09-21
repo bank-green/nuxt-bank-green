@@ -24,7 +24,7 @@ function fixYoutube (html) {
   return html.replace(widthRe, 'width=100%').replace(heightRe, 'height=100%')
 }
 
-const props = defineProps(
+defineProps(
   getSliceComponentProps(['slice', 'index', 'slices', 'context'])
 )
 </script>

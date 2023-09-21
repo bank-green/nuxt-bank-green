@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   title: String,
   description: String,
   loaded: { type: Boolean, default: true },

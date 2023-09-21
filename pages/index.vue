@@ -213,7 +213,7 @@ const onCheckBankClick = () => {
 
 const { country } = useCountry()
 
-watch(country, (loc) => {
+watch(country, (_) => {
   bank.value = null
 })
 </script>
