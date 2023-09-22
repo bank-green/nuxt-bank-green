@@ -54,8 +54,10 @@
 </template>
 
 <script setup>
-defineProps({
-  title: String,
-  description: String
-})
+
+defineProps<{
+  eventStart: Date;
+  eventIsPastMessage: String;
+  showTooltip: Boolean;
+}>()
 </script>

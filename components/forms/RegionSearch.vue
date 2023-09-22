@@ -7,9 +7,9 @@
       @keydown.down="onKeyDown"
       @keydown.up="onKeyUp"
       @keydown.enter="onKeyEnter"
-      @onFocus="showList"
-      @onClick="showList"
-      @onCloseClick="onCloseClick"
+      @on-focus="showList"
+      @on-click="showList"
+      @on-close-click="onCloseClick"
     >
       <template #icon>
         <PinIcon class="h-6 w-6 absolute inset-0 m-4" />
@@ -43,7 +43,7 @@
           ref="listPicker"
           v-slot="{ item }"
           :items="filteredOptions"
-          @selectItem="onSelectLocation"
+          @select-item="onSelectLocation"
         >
           <div>
             {{ item.toponymName
@@ -57,6 +57,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+// eslint-disable-next-line import/no-named-as-default
 import Geonames from 'geonames.js'
 import Fuse from 'fuse.js'
 import PinIcon from './location/PinIcon.vue'

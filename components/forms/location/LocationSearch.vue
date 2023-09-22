@@ -8,9 +8,9 @@
       @keydown.down="(event) => $refs['listPicker'].incrementFocus(event)"
       @keydown.up="(event) => $refs['listPicker'].decrementFocus(event)"
       @keydown.enter="(event) => $refs['listPicker'].selectCurrentItem()"
-      @onFocus="showList"
-      @onClick="showList"
-      @onCloseClick="onCloseClick"
+      @on-focus="showList"
+      @on-click="showList"
+      @on-close-click="onCloseClick"
     >
       <template #icon>
         <PinIcon class="h-6 w-6 absolute inset-0 m-4" />
@@ -41,7 +41,7 @@
           ref="listPicker"
           v-slot="{ item }"
           :items="filteredCountries"
-          @selectItem="onSelectCountry"
+          @select-item="onSelectCountry"
         >
           <LocationSearchItem
             :id="item"

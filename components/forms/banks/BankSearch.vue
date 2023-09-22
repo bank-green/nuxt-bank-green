@@ -18,9 +18,9 @@
           (_event: PointerEvent) =>
             ($refs['listPicker'] as typeof ListPicker).selectCurrentItem()
         "
-        @onFocus="showList"
-        @onClick="showList"
-        @onCloseClick="onCloseClick"
+        @on-focus="showList"
+        @on-click="showList"
+        @on-close-click="onCloseClick"
       >
         <template #icon>
           <img
@@ -55,7 +55,7 @@
             ref="listPicker"
             v-slot="{ item }"
             :items="filteredBanks"
-            @selectItem="onSelectBank"
+            @select-item="onSelectBank"
           >
             <BankSearchItem
               :id="item.tag"

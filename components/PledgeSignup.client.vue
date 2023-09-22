@@ -67,7 +67,7 @@
             class="w-full text-gray-700"
             :disabled="!country"
             :country="country"
-            @searchInputChange="searchValue = $event"
+            @search-input-change="searchValue = $event"
           >
             <template #not-listed>
               <p class="text-gray-500 p-4 shadow-lg">

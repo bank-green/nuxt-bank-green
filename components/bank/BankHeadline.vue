@@ -40,10 +40,7 @@ import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 defineProps({
   name: String,
   website: String,
-  inheritBrandRating: {
-    name: String,
-    tag: String
-  },
+  inheritBrandRating: Object,
   prismicFieldSubtitle: undefined
 })
 </script>
