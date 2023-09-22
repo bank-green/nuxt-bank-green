@@ -50,7 +50,7 @@
               alt="Fossil Free Certified"
               title="Fossil Free Certified"
             >
-            <template v-for="cred in institutionCredentials">
+            <template v-for="cred in institutionCredentials" :key="cred">
               <!-- <img v-if="isFossilFreeCertification(cred)" class="h-16 w-auto"
                                 src="/img/certification/fossil-free-certified.png" :alt="cred?.name" /> -->
 
@@ -75,11 +75,6 @@
 <script setup lang="ts">
 import { RichTextField } from '@prismicio/types'
 
-interface InstitutionCredential {
-  name: string;
-  prismicApiId: string;
-}
-
 const props = defineProps<{
   website: string;
   name: string;
@@ -98,10 +93,4 @@ const hasInstitutionCredentials: ComputedRef<boolean> = computed(
   () => props.institutionCredentials && props.institutionCredentials.length > 0
 )
 
-const isFossilFreeCertification = (institutionCredential: any) => {
-  return (
-    (institutionCredential as InstitutionCredential).name ==
-    'Fossil Free Certification'
-  )
-}
 </script>

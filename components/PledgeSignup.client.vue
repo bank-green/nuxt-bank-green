@@ -164,10 +164,7 @@ const {
   email,
   isAgreeTerms,
   isAgreeMarketing,
-  isSent,
-  showWarnings,
   warningsMap,
-  hasWarnings,
   send,
   validate,
   busy

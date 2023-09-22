@@ -143,7 +143,7 @@ const selectedMethod = ref<string>('one-time')
 const selectedAmount = ref<number | null>(null)
 
 const isOneTimePayment = computed(
-  () => selectedMethod.value == 'one-time' && selectedAmount.value != null
+  () => selectedMethod.value === 'one-time' && selectedAmount.value != null
 )
 
 const isRecurring = computed(
@@ -175,8 +175,8 @@ watch(
 watch(
   () => selectedMethod.value,
   (newVal, oldVal) => {
-    const _isOneTimePayment = newVal != oldVal && newVal === 'one-time'
-    const _isRecurringPayment = newVal != oldVal && newVal === 'recurring'
+    const _isOneTimePayment = newVal !== oldVal && newVal === 'one-time'
+    const _isRecurringPayment = newVal !== oldVal && newVal === 'recurring'
 
     if (_isRecurringPayment && isStripeLoaded.value) { isStripeLoaded.value = false }
 

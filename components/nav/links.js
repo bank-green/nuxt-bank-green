@@ -1,7 +1,3 @@
-import locales from '~~/lang/en.json' assert { type: 'json' }
-
-const get = k => locales[k]
-
 export default function getLinks ({ isHeader = false }) {
   const links = [
     {

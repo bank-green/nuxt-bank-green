@@ -110,11 +110,6 @@ const emit = defineEmits([
   'onCloseClick'
 ])
 
-const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null)
-
-const focus = () => {
-  inputRef.value?.focus()
-}
 const onInput = ($event: Event) => {
   emit('update:modelValue', ($event.target as HTMLInputElement).value)
 }

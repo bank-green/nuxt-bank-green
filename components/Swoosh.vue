@@ -18,7 +18,7 @@
   </div>
 </template>
 <script setup>
-const props = defineProps({
+defineProps({
   direction: {
     type: String,
     default: 'up'

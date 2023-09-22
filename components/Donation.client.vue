@@ -25,7 +25,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PrismicDocument } from '@prismicio/types'
 
 withDefaults(
   defineProps<{

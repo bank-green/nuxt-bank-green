@@ -52,10 +52,8 @@ function incrementFocus (eventToPrevent: Event) {
 function decrementFocus (eventToPrevent: Event) {
   focusItem(focusedItemIndex.value - 1, eventToPrevent)
 }
-function selectCurrentItem () {
-  onSelectItem(focusedItemIndex.value)
-}
-async function onSelectItem (index: number) {
+
+function onSelectItem (index: number) {
   const item = props.items[index]
   if (item) {
     emit('selectItem', item)

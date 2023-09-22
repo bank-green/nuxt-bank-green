@@ -90,7 +90,7 @@ function hideList () {
   }
 }
 
-async function onSelectCountry (code) {
+function onSelectCountry (code) {
   search.value = en[`COUNTRY_${code}`]
   emit('update:modelValue', code)
   isShowing.value = false

@@ -132,7 +132,7 @@ watch(
 watch(
   () => search,
   function (newValue) {
-    if (props.modelValue && newValue != selectedItem.value) {
+    if (props.modelValue && newValue !== selectedItem.value) {
       emit('update:modelValue', null)
     }
     emit('searchInputChange', newValue)

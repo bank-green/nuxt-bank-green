@@ -70,7 +70,7 @@ type Place = {
   adminName1: string;
 };
 
-const props = defineProps({
+defineProps({
   modelValue: String
 })
 

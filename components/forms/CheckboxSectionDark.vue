@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   modelValue: Boolean,
   name: String
 })

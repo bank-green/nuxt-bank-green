@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
-const props = defineProps<{
+defineProps<{
   id: String;
   name: String;
   website: String;

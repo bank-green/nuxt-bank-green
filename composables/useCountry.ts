@@ -25,9 +25,10 @@ const defaultCountry = () => {
         if (isValidCode(region)) { return region }
       }
     }
-  } finally {
+  } catch (e: unknown) {
     return 'US'
   }
+  return 'US'
 }
 
 export const useCountry = () => {

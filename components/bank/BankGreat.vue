@@ -92,7 +92,7 @@
 <script setup lang="ts">
 import { PrismicDocument } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-const props = defineProps<{
+defineProps<{
   name: string;
   website: string;
   inheritBrandRating: {

@@ -37,7 +37,7 @@
 <script setup>
 import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 
-const props = defineProps({
+defineProps({
   name: String,
   website: String,
   inheritBrandRating: {

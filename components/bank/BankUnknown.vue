@@ -84,7 +84,7 @@
 <script setup lang="ts">
 import { PrismicDocument } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-const props = defineProps<{
+defineProps<{
   name: string;
   website: string;
   inheritBrandRating: {
@@ -94,9 +94,4 @@ const props = defineProps<{
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
 }>()
 
-const checkList = [
-  'Learn about the issues via our blog updates',
-  'Join our campaigns to take action against fossil finance',
-  'Discover other ways to divest from fossil fuels'
-]
 </script>

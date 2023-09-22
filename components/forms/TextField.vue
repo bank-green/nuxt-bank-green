@@ -87,8 +87,6 @@ const props = withDefaults(
 
 const emit = defineEmits(['update:modelValue'])
 
-const inputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null)
-
 const inputClasses = computed(() => {
   if (props.disabled) {
     return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
@@ -102,9 +100,6 @@ const inputClasses = computed(() => {
   return 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'
 })
 
-const focus = () => {
-  inputRef.value?.focus()
-}
 const onInput = ($event: Event) => {
   emit('update:modelValue', ($event.target as HTMLInputElement).value)
 }

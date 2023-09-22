@@ -87,7 +87,7 @@ watch(
   () => props.tabIds,
   (newValue, oldValue) => {
     if (
-      newValue != oldValue &&
+      newValue !== oldValue &&
       newValue.length &&
       !newValue.includes(activeTab.value)
     ) { setActive(newValue[0]) }

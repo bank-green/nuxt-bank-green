@@ -59,7 +59,7 @@ const { client } = usePrismic()
 const { data: call } = await useAsyncData('calltoaction', () =>
   client.getSingle('calltoaction')
 )
-const props = defineProps({
+defineProps({
   title: String,
   paragraph: String,
   checkListItems: Array,
