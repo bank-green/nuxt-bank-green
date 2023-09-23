@@ -154,6 +154,8 @@ const { client } = usePrismic()
 const { data: donation } = await useAsyncData('donation', () =>
   client.getSingle('donationpage')
 )
+console.log('data', donation.value?.data)
+usePrismicSEO(donation.value?.data)
 
 const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY
 

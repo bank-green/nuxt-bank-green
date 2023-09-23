@@ -3,6 +3,7 @@
   "label": "DonationPage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": {
@@ -21,11 +22,7 @@
       },
       "photo": {
         "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Photo"
-        }
+        "config": { "constraint": {}, "thumbnails": [], "label": "Photo" }
       },
       "donation-title": {
         "type": "StructuredText",
@@ -43,10 +40,15 @@
       },
       "donation-button": {
         "type": "StructuredText",
-        "config": {
-          "single": "heading6",
-          "label": "Donation-button"
-        }
+        "config": { "single": "heading6", "label": "Donation-button" }
+      },
+      "seo_title": {
+        "type": "Text",
+        "config": { "label": "seo_title", "placeholder": "" }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "seo_description", "placeholder": "" }
       }
     }
   }
