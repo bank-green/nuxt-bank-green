@@ -504,6 +504,93 @@ export type DisclaimerpageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for DonationPage documents
+ */
+interface DonationpageDocumentData {
+  /**
+   * Title field in *DonationPage*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: donationpage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.TitleField;
+
+  /**
+   * Description field in *DonationPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: donationpage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Photo field in *DonationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: donationpage.photo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  photo: prismic.ImageField<never>;
+
+  /**
+   * Donation-title field in *DonationPage*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: donationpage.donation-title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  "donation-title": prismic.TitleField;
+
+  /**
+   * Donation-description field in *DonationPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: donationpage.donation-description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  "donation-description": prismic.RichTextField;
+
+  /**
+   * Donation-button field in *DonationPage*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: donationpage.donation-button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  "donation-button": prismic.TitleField;
+}
+
+/**
+ * DonationPage document from Prismic
+ *
+ * - **API ID**: `donationpage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type DonationpageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<DonationpageDocumentData>,
+    "donationpage",
+    Lang
+  >;
+
 type EcobankspageDocumentDataSlicesSlice = AccordionSliceSlice | TextSliceSlice;
 
 type EcobankspageDocumentDataSlices1Slice =
@@ -545,7 +632,7 @@ interface EcobankspageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice>;
+  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice>
   /**
    * Slice Zone field in *EcoBanksPage*
    *
@@ -554,7 +641,7 @@ interface EcobankspageDocumentData {
    * - **API ID Path**: ecobankspage.slices1[]
    * - **Tab**: FAQ
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
+   */;
   slices1: prismic.SliceZone<EcobankspageDocumentDataSlices1Slice>;
 }
 
@@ -711,7 +798,7 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField;
+  seo_description: prismic.KeyTextField
   /**
    * Slice Zone field in *HomePage*
    *
@@ -720,7 +807,7 @@ interface HomepageDocumentData {
    * - **API ID Path**: homepage.slices1[]
    * - **Tab**: As Featured In
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
+   */;
   slices1: prismic.SliceZone<HomepageDocumentDataSlices1Slice>;
 }
 
@@ -1151,21 +1238,166 @@ export type SfiPageDocument<Lang extends string = string> =
     Lang
   >;
 
-interface SfipagexDocumentData {}
+/**
+ * Content for SFIPage documents
+ */
+interface SfipageDocumentData {
+  /**
+   * Impact field in *SFIPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.impact
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  impact: prismic.RichTextField;
+
+  /**
+   * Security field in *SFIPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.security
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  security: prismic.RichTextField;
+
+  /**
+   * Services field in *SFIPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.services
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  services: prismic.RichTextField;
+
+  /**
+   * Convenience field in *SFIPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.convenience
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  convenience: prismic.RichTextField;
+
+  /**
+   * Founded field in *SFIPage*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.founded
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  founded: prismic.NumberField;
+
+  /**
+   * our take field in *SFIPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.our_take
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  our_take: prismic.RichTextField;
+
+  /**
+   * serving field in *SFIPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.serving
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  serving: prismic.RichTextField;
+}
 
 /**
- * SFIPaged document from Prismic
+ * SFIPage document from Prismic
  *
- * - **API ID**: `sfipagex`
+ * - **API ID**: `sfipage`
  * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type SfipagexDocument<Lang extends string = string> =
+export type SfipageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<
-    Simplify<SfipagexDocumentData>,
-    "sfipagex",
+    Simplify<SfipageDocumentData>,
+    "sfipage",
+    Lang
+  >;
+
+/**
+ * Content for SwitchSurveyExit documents
+ */
+interface SwitchsurveyexitDocumentData {
+  /**
+   * title field in *SwitchSurveyExit*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: switchsurveyexit.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * subtitle field in *SwitchSurveyExit*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: switchsurveyexit.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * buttontext field in *SwitchSurveyExit*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: switchsurveyexit.buttontext
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  buttontext: prismic.RichTextField;
+
+  /**
+   * link field in *SwitchSurveyExit*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: switchsurveyexit.link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * SwitchSurveyExit document from Prismic
+ *
+ * - **API ID**: `switchsurveyexit`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SwitchsurveyexitDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<SwitchsurveyexitDocumentData>,
+    "switchsurveyexit",
     Lang
   >;
 
@@ -1234,7 +1466,7 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField;
+  seo_description: prismic.KeyTextField
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1243,8 +1475,8 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices1[]
    * - **Tab**: Pressure
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice>;
+   */;
+  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice>
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1253,8 +1485,8 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices2[]
    * - **Tab**: Switch
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice>;
+   */;
+  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice>
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1263,8 +1495,8 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices3[]
    * - **Tab**: Share
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice>;
+   */;
+  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice>
   /**
    * Slice Zone field in *TakeActionPage*
    *
@@ -1273,7 +1505,7 @@ interface TakeactionpageDocumentData {
    * - **API ID Path**: takeactionpage.slices4[]
    * - **Tab**: Learn
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
+   */;
   slices4: prismic.SliceZone<TakeactionpageDocumentDataSlices4Slice>;
 }
 
@@ -1413,6 +1645,7 @@ export type AllDocumentTypes =
   | CertificationpageDocument
   | ContactpageDocument
   | DisclaimerpageDocument
+  | DonationpageDocument
   | EcobankspageDocument
   | FaqpageDocument
   | HomepageDocument
@@ -1421,7 +1654,8 @@ export type AllDocumentTypes =
   | PresspostDocument
   | PrivacypageDocument
   | SfiPageDocument
-  | SfipagexDocument
+  | SfipageDocument
+  | SwitchsurveyexitDocument
   | TakeactionpageDocument
   | TeampageDocument
   | VolunteerspageDocument;
@@ -1879,7 +2113,7 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
+      options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
   }
 
@@ -1899,6 +2133,8 @@ declare module "@prismicio/client" {
       ContactpageDocumentData,
       DisclaimerpageDocument,
       DisclaimerpageDocumentData,
+      DonationpageDocument,
+      DonationpageDocumentData,
       EcobankspageDocument,
       EcobankspageDocumentData,
       FaqpageDocument,
@@ -1915,8 +2151,10 @@ declare module "@prismicio/client" {
       PrivacypageDocumentData,
       SfiPageDocument,
       SfiPageDocumentData,
-      SfipagexDocument,
-      SfipagexDocumentData,
+      SfipageDocument,
+      SfipageDocumentData,
+      SwitchsurveyexitDocument,
+      SwitchsurveyexitDocumentData,
       TakeactionpageDocument,
       TakeactionpageDocumentData,
       TeampageDocument,
