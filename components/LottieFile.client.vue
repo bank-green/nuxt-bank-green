@@ -1,13 +1,11 @@
 <template>
-    <div ref="container"></div>
+  <div ref="container" />
 </template>
 
 <script setup>
 const props = defineProps({
-    path: String,
+  path: String
 })
 const path = toRef(props, 'path')
 const { container } = useLottieLooper({ path })
-
-
 </script>

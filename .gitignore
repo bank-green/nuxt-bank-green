@@ -6,6 +6,7 @@ node_modules
 .output
 .env
 dist
+.vscode/
 
 # OSX
 .DS_Store

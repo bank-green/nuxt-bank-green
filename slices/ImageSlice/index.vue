@@ -1,8 +1,13 @@
 <template>
   <figure>
-    <img class="mx-auto" :alt="slice.primary.image.alt" :src="slice.primary.image.url" :style="{
-      'max-width': `100%`,
-    }" />
+    <img
+      class="mx-auto"
+      :alt="slice.primary.image.alt"
+      :src="slice.primary.image.url"
+      :style="{
+        'max-width': `100%`,
+      }"
+    >
     <figcaption>
       <PrismicRichText class="text-center" :field="slice.primary.caption" />
     </figcaption>
@@ -10,9 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import { getSliceComponentProps } from '@prismicio/vue';
+import { getSliceComponentProps } from '@prismicio/vue'
 
-defineProps(getSliceComponentProps(["slice", "index", "slices", "context"]));
+defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
 </script>
 
 <style scoped>
