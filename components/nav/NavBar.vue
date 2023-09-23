@@ -74,12 +74,14 @@
             class="px-4 py-2 text-base text-white font-medium rounded-xl"
             @click="isOpen = false"
           >
-            {{ link.short_title || link.title }}
+            {{
+              link.short_title || link.title
+            }}
           </NuxtLink>
           <NuxtLink
             to="/donate"
             active-class="bg-sushi-600"
-            class="inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center w-full rounded-xl shadow-green capitalize"
+            class="whitespace-nowrap inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center w-full rounded-xl shadow-green capitalize"
           >
             Donate
           </NuxtLink>
