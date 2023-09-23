@@ -53,11 +53,9 @@
   </div>
 </template>
 
-<script setup>
-
-defineProps<{
-  eventStart: Date;
-  eventIsPastMessage: String;
-  showTooltip: Boolean;
-}>()
+<script setup lang="ts">
+defineProps({
+  title: String,
+  description: String
+})
 </script>
