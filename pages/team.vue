@@ -50,6 +50,11 @@
           description="Luke is an ex-oil-and-gas Chemical Engineer who - after hearing the bleak image that climate scientists are painting of our future - has made the switch to fighting for a planet we can all live on for the next hundred generations."
           img="/img/team/gelmi.png"
         />
+        <TeamMember
+          name="Christian Harries"
+          description="Christian is a software engineer who is new to the tech industry. He is passionate about using his skills to help fight climate change and is currently working on a project to help people reduce their carbon footprint."
+          img="/img/team/albert.jpg"
+        />
       </ul>
     </div>
   </div>
