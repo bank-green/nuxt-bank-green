@@ -53,7 +53,7 @@
         <TeamMember
           name="Christian Harries"
           description="Christian is a software engineer who is new to the tech industry. He is passionate about using his skills to help fight climate change and is currently working on a project to help people reduce their carbon footprint."
-          img="/img/team/albert.jpg"
+          img="/img/team/og/christian.jpg"
         />
       </ul>
     </div>
