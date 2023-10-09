@@ -10,7 +10,7 @@
 
         <button
           type="button"
-          class="lg:hidden bg-sushi-900 bg-opacity-10 rounded-md p-2 inline-flex items-center justify-center text-white hover:text-sushi-400 hover:bg-sushi-500 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500"
+          class="custom:hidden bg-sushi-900 bg-opacity-10 rounded-md p-2 inline-flex items-center justify-center text-white hover:text-sushi-400 hover:bg-sushi-500 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500"
           @click.prevent.stop="isOpen = !isOpen"
         >
           <template v-if="!isOpen">
@@ -64,7 +64,7 @@
           </template>
         </button>
 
-        <div class="hidden lg:block py-2 space-x-2">
+        <div class="hidden custom:block py-2 space-x-2">
           <NuxtLink
             v-for="link in headerLinks"
             :key="link.href"
