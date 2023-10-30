@@ -8,8 +8,17 @@
           <h1
             class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
           >
-            {{ pledge.data.introduction }}
+            {{ embrace.data.introduction }}
           </h1>
+          <h3
+            class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
+          >
+            {{ embrace.data.sub_introduction }}
+          </h3>
+          <PrismicRichText
+                class="prose md:text-lg whitespace-pre-wrap"
+                :field="embrace.data.description1"
+          />
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
             <div ref="signUpForm" class="w-full relative z-10">
               <Embrace />
@@ -28,10 +37,10 @@ import { ref } from 'vue'
 import Swoosh from '@/components/Swoosh.vue'
 
 const { client } = usePrismic()
-const { data: pledge } = await useAsyncData('pledge', () =>
-  client.getSingle('pledgepage')
+const { data: embrace } = await useAsyncData('embrace', () =>
+  client.getSingle('embracepage')
 )
-usePrismicSEO(pledge.value.data)
+usePrismicSEO(embrace.value.data)
 
 const signUpForm = ref()
 </script>
