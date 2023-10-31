@@ -31,13 +31,7 @@
               Thank you for your pledge!
             </h1>
 
-            <p class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line">
-              You've just taken an amazing action to help build a better future
-              for people and planet.
-            </p>
-            <p class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line">
-              Why not encourage your friends to do the same...
-            </p>
+            <PrismicText class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line" :field="thankyou.data.thank_you_text" />
             <div class="flex justify-center">
               <SocialSharer
                 class="text-sushi-500"
@@ -56,4 +50,9 @@
 
 <script setup>
 useHeadHelper('Thank you')
+const p = usePrismic()
+const { data: thankyou } = await useAsyncData('thankyou', () =>
+  p.client.getSingle('thankyoupage')
+)
+
 </script>

@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
       <div class="page-fade-in contain max-w-3xl pt-28 pb-8">
