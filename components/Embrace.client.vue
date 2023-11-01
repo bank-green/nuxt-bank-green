@@ -4,10 +4,10 @@
   >
     <form
       class="flex flex-col items-center"
-      @submit.prevent.stop="checkAndSend"
+      @submit.prevent.stop=" checkAndDisplayPreview"
     >
       <p class="text-xl md:text-2xl mb-6 font-semibold whitespace-pre-wrap">
-        {{ title || "Share your thoughts" }}
+        {{ embrace?.data.form_title || "Share your thoughts" }}
       </p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
         <TextField
@@ -15,8 +15,9 @@
           class="col-span-2"
           name="fullName"
           type="text"
-          :title="'Your full name'"
-          :placeholder="'Full name, so we can say hi'"
+          :title="embrace?.data.full_name_label || 'Your full name'"
+          :placeholder="embrace?.data.full_name_placeholder || 'Write your full name'"
+          :warning="fullNameWarning"
           dark
         />
         <!-- <TextField
@@ -32,8 +33,11 @@
           <span
             class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
           >
-            Choose your current bank
+            {{ embrace?.data.bank_select_label || 'Choose your current bank' }}
           </span>
+
+          <!-- TODO need to add hover/help text ?  is this
+          already in BankSearch? -->
           <BankSearch
             ref="bankSearch"
             v-model="bank"
@@ -43,11 +47,12 @@
             @search-input-change="searchValue = $event"
           >
             <template #not-listed>
-              <p class="text-gray-500 p-4 shadow-lg">
+              <PrismicRichText :field="embrace?.data.bank_not_found" />
+              <!-- <p class="text-gray-500 p-4 shadow-lg">
                 We couldn't find your bank. <br>
                 But that's ok! Just type in your bank's name and leave it at
                 that.
-              </p>
+              </p>-->
             </template>
           </BankSearch>
         </div>
@@ -56,8 +61,8 @@
           class="col-span-2"
           type="email"
           name="email"
-          :title="'Your email address'"
-          :placeholder="'Your email address'"
+          :title="embrace?.data.email_label"
+          :placeholder="embrace?.data.email_placeholder"
           :warning="warningsMap['email']"
           dark
         />
@@ -66,37 +71,38 @@
           class="col-span-2"
           name="hometown"
           type="text"
-          :title="'Your hometown (optional)'"
-          :placeholder="'Your hometown (optional)'"
+          :title="embrace?.data.hometown_label || 'hometown'"
+          :placeholder="embrace?.data.hometown_placeholder || 'hometown'"
           dark
         />
         <TextField
-          v-model="backgound"
+          v-model="background"
           class="col-span-full"
+          rows="3"
           name="backgound"
           type="text"
-          :title="'What is your background?'"
-          :placeholder="'What is your background?'"
+          :title="embrace?.data.background_label || 'Your background'"
+          :placeholder="embrace?.data.background_placeholder || 'Your background'"
           dark
         />
         <TextField
-          v-model="embraceText"
+          v-model="whyEmbrace"
           class="col-span-full"
+          rows="5"
           name="embraceText"
           type="text"
-          :title="'Why do you think it\'s important for the bank to embrace a sustainability policy?'"
-          :placeholder="'Why do you think it\'s important for the bank to embrace a sustainability policy?'"
+          :title="embrace?.data.why_embrace_label || 'Why embrace?'"
+          :placeholder="embrace?.data.why_embrace_placeholder || 'Answer'"
           dark
         />
         <CheckboxSection
           v-model="isAgreeMarketing"
           class="col-span-full"
           name="isAgreeMarketing"
-          :warning="warningsMap['isAgreeMarketing']"
           dark
         >
-          I wish to receive more information via email from
-          Bank.Green.
+          <PrismicRichText :field="embrace?.data.marketing_checkbox_label" />
+          <!--'I wish to receive more information via email from Bank.Green.'-->
         </CheckboxSection>
         <CheckboxSection
           v-model="isAgreeTerms"
@@ -105,18 +111,19 @@
           :warning="warningsMap['isAgreeTerms']"
           dark
         >
-          I have read and understood Bank.Green’s
+          <PrismicText :field="embrace?.data.privacy_checkbox_label" wrapper="span" />
+          <!--'I have read and understood Bank.Green’s'-->
           <NuxtLink to="/privacy" class="link">
-            privacy policy
-          </NuxtLink>.
+            {{
+              ' ' + (embrace?.data.privacy_policy_link_text || "privacy policy")
+            }}
+          </NuxtLink>
         </CheckboxSection>
       </div>
       <button
         type="submit"
         class="button-green w-full md:w-auto mt-6 flex justify-center"
-        :class="{
-          'pointer-events-none opacity-75': busy,
-        }"
+        :class="{'pointer-events-none opacity-75': busy}"
       >
         <span v-if="!busy"> Generate Email Preview </span>
         <span v-else>
@@ -143,56 +150,89 @@ import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 
+const { client } = usePrismic()
+
+// TODO: pass embracepage as a prop instead of requesting it again
+const { data: embrace } = await useAsyncData('embrace', () =>
+  client.getSingle('embracepage')
+)
+
+/*
 const props = defineProps({
-  title: String,
   successRedirectURL: { type: String, default: '/thanks-pledge' } //  THIS LINE SHOULD CHANGE
 })
+*/
 
+const fullName = ref(null)
+const fullNameWarning = ref(null)
 const bank = ref(null)
-const reminderDate = ref(null)
 const searchValue = ref(null)
-const reminderWarning = ref(null)
-
 const { country } = useCountry()
+const hometown = ref(null)
+const background = ref(null)
+const whyEmbrace = ref(null)
 
 const extras = computed(() => {
   return {
-    reminder: reminderDate.value || '',
+    fullName: fullName.value || '',
     country: country.value || '',
     bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
-    bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
+    bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
+    hometown: hometown.value || '',
+    background: background.value || '',
+    whyEmbrace: whyEmbrace.value || ''
   }
 })
 
+// TODO: add custom warning for fullName, since this is not builtin to
+//       useContactForm
+
 const {
-  fullName,
   email,
   isAgreeTerms,
   isAgreeMarketing,
+  //  showWarnings,  // may need this to do check prior to popup?
+  //  hasWarnings,  // may need this to do check prior to popup?
   warningsMap,
-  send,
+  //  send,  // this won't work for this page
   validate,
   busy
 } = useContactForm(
-  'pledge',
-  ['firstName', 'lastName', 'email', 'isAgreeTerms'],
+  'embrace',
+  ['email', 'isAgreeTerms', 'bank'],
   extras
 )
 
-const emit = defineEmits(['success'])
+// const emit = defineEmits(['success'])
 
-async function checkAndSend () {
+// TODO We are not submitting the form, we need to display the popup, and from the
+// popup generate a mailto link
+
+function checkAndDisplayPreview () {
   validate()
-  if (!extras.value.reminder) {
-    reminderWarning.value = 'Please enter a date.'
+  if (!extras.value.fullName) {
+    fullNameWarning.value = embrace?.value.data.full_name_warning || 'Your name is required'
     return
   }
-  reminderWarning.value = null
+  fullNameWarning.value = null
+
+  // TODO: show preview...
+}
+/*
+async function checkAndSend () {
+  validate()
+
+   if (!extras.value.reminder) {
+     reminderWarning.value = 'Please enter a date.'
+     return
+   }
+   reminderWarning.value = null
   if (await send()) {
     emit('success')
     navigateTo(props.successRedirectURL)
   }
 }
+*/
 </script>

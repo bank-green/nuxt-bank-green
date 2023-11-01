@@ -6,18 +6,18 @@
           class="contain flex flex-col justify-center items-center pb-4 lg:pb-0 mb-4"
         >
           <h1
-            class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
+            class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-2 text-center"
           >
-            {{ embrace.data.introduction }}
+            {{ embrace.data.title }}
           </h1>
           <h3
-            class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
+            class="max-w-3xl text-2lg font-semibold whitespace-pre-line mb-6 text-center"
           >
-            {{ embrace.data.sub_introduction }}
+            {{ embrace.data.subtitle }}
           </h3>
           <PrismicRichText
-                class="prose md:text-lg whitespace-pre-wrap"
-                :field="embrace.data.description1"
+            class="prose md:text-lg whitespace-pre-wrap mb-10"
+            :field="embrace.data.description1"
           />
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
             <div ref="signUpForm" class="w-full relative z-10">
