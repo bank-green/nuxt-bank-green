@@ -124,6 +124,7 @@
         type="submit"
         class="button-green w-full md:w-auto mt-6 flex justify-center"
         :class="{'pointer-events-none opacity-75': busy}"
+        @click="showModal = true"
       >
         <span v-if="!busy"> Generate Email Preview </span>
         <span v-else>
@@ -142,6 +143,7 @@
         </span>
       </button>
     </form>
+    <EmbraceModal v-show="showModal" @close-modal="showModal = false" />
   </div>
 </template>
 
@@ -149,6 +151,7 @@
 import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
+import EmbraceModal from '@/components/EmbraceModal.vue'
 
 const { client } = usePrismic()
 
