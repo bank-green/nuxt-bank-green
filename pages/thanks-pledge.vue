@@ -3,12 +3,11 @@
     <div class="bg-sushi-50">
       <div class="page-fade-in contain pt-28">
         <div class="pb-16">
-          <div class="text-center relative">
+          <div>
             <LottiePlayer
               class="absolute -top-28 inset-x-0 w-64 mx-auto"
               path="/anim/pop.json"
             />
-
             <svg
               class="mx-auto relative z-1"
               width="119"
@@ -26,18 +25,18 @@
                 stroke-linejoin="round"
               />
             </svg>
-
-            <h1 class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
-              Thank you for your pledge!
-            </h1>
-
-            <PrismicText class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line" :field="thankyou.data.thank_you_text" />
+            <div class="text-gray-700 max-w-lg mx-auto whitespace-pre-line headerstyle" style="text-align: center;">
+              <SliceZone
+                :slices="thankyou.data.slices"
+                :components="sliceComps"
+              />
+            </div>
             <div class="flex justify-center">
               <SocialSharer
                 class="text-sushi-500"
                 url="https://bank.green"
                 :hashtags="['climatecrisis', 'fossilbanks']"
-                :text="'I just pledged to move my money away from fossil fuels! Check your bank and do the same'"
+                :text="'yoo'"
                 :large="true"
               />
             </div>
@@ -49,10 +48,24 @@
 </template>
 
 <script setup>
-useHeadHelper('Thank you')
-const p = usePrismic()
-const { data: thankyou } = await useAsyncData('thankyou', () =>
-  p.client.getSingle('thankyoupage')
-)
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 
+const sliceComps = ref(defineSliceZoneComponents(components))
+
+useHeadHelper('Thank you')
+const { client } = usePrismic()
+const { data: thankyou } = await useAsyncData('thankyou', () =>
+  client.getSingle('thankyoupage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  }))
 </script>
+<style>
+  .headerstyle h1{
+    margin-top: 2rem; /* Equivalent to mt-8 */
+    font-size: 1.5rem; /* Equivalent to text-2xl */
+    font-weight: 600; /* Equivalent to font-semibold */
+    white-space: pre-line; /* Equivalent to whitespace-pre-line */
+    margin-bottom: 2rem; /* Equivalent to mb-8 */
+  }
+</style>

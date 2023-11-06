@@ -2,31 +2,18 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
       <div
-        class="page-fade-in relative z-10 contain max-w-4xl flex flex-col justify-center items-center"
+        class="page-fade-in relative z-10 contain max-w-4xl flex flex-col"
       >
+      <div class="max-w-4xl flex flex-col justify-center items-center">
         <LottiePlayer
           class="w-20 h-20 mb-4 md:mb-6"
           :path="'/anim/emoji/Sad_Tear_Flat.json'"
         />
-
-        <h1
-          class="text-2xl md:text-4xl text-center text-gray-800 font-semibold whitespace-pre-line mb-8"
-        >
-          Sorry, we haven’t listed your bank yet.
+      </div>
+        <h1 class="text-2xl md:text-4xl text-center text-gray-800 font-semibold whitespace-pre-line mb-8">
+          {{ $prismic.asText(notlisted.data.title) }}
         </h1>
-        <p>
-          We’re working hard to increase the number of banks we provide data on.
-          If you
-          <NuxtLink
-            to="/contact"
-            class="font-bold text-sushi-500 hover:underline"
-          >
-            tell us your bank’s name
-          </NuxtLink>, we’ll try to include it as soon as possible. In the meantime, we
-          encourage you to consider contacting your bank to ask them whether
-          they fund fossil fuels. But that’s not all you can do. To take further
-          positive action, keep on scrolling…
-        </p>
+        <PrismicRichText class="custom-styling" :field="notlisted.data.paragraph1" />
       </div>
       <Swoosh />
     </div>
@@ -93,9 +80,11 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import SubmitBank from '@/components/forms/SubmitBank.vue'
-
+const p = usePrismic()
+const { data: notlisted } = await useAsyncData('notlisted', () => p.client.getSingle('notlistedpage'))
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',
@@ -103,3 +92,14 @@ const checkList = [
 ]
 useHeadHelper('Not listed')
 </script>
+<style>
+.custom-styling a {
+  font-weight: bold;
+  color: rgb(123, 177, 35);
+  text-decoration: none;
+}
+
+.custom-styling a:hover {
+  text-decoration: underline;
+}
+</style>

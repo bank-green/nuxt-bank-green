@@ -3,8 +3,8 @@
     <div class="bg-white">
       <div class="page-fade-in pt-28">
         <ThanksSection
-          title="Thank you for joining Bank.Green!"
-          description="We appreciate your support in defunding fossil banks."
+          :title="$prismic.asText(thanks.data.title)"
+          :description="$prismic.asText(thanks.data.description)"
         />
       </div>
     </div>
@@ -13,4 +13,6 @@
 
 <script setup>
 useHeadHelper('Thank you')
+const p = usePrismic()
+const { data: thanks } = await useAsyncData('thanks', () => p.client.getSingle('thankspage'))
 </script>
