@@ -22,7 +22,8 @@ export default defineNuxtConfig({
     STRIPE_SUBSCRIPTION_PRICE_5:
       process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
     STRIPE_SUBSCRIPTION_PRICE_6:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
+    HAPTCHA_SITEKEY: process.env.PRIVATE_HCAPTCHA_SITEKEY,
   },
   vue: {
     compilerOptions: {

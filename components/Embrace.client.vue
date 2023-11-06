@@ -118,6 +118,11 @@
               ' ' + (embrace?.data.privacy_policy_link_text || "privacy policy")
             }}
           </NuxtLink>
+          <vue-hcaptcha
+            :sitekey="hcaptchSitekey"
+            class="col-span-full"
+          >
+          </vue-hcaptcha>
         </CheckboxSection>
       </div>
       <button
@@ -148,6 +153,7 @@
 </template>
 
 <script setup>
+import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
 import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
@@ -160,6 +166,7 @@ const { data: embrace } = await useAsyncData('embrace', () =>
   client.getSingle('embracepage')
 )
 
+const hcaptchSitekey = useRuntimeConfig().HAPTCHA_SITEKEY
 /*
 const props = defineProps({
   successRedirectURL: { type: String, default: '/thanks-pledge' } //  THIS LINE SHOULD CHANGE
@@ -223,19 +230,4 @@ function checkAndDisplayPreview () {
 
   // TODO: show preview...
 }
-/*
-async function checkAndSend () {
-  validate()
-
-   if (!extras.value.reminder) {
-     reminderWarning.value = 'Please enter a date.'
-     return
-   }
-   reminderWarning.value = null
-  if (await send()) {
-    emit('success')
-    navigateTo(props.successRedirectURL)
-  }
-}
-*/
 </script>
