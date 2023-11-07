@@ -1547,7 +1547,7 @@ export type TakeactionpageDocument<Lang extends string = string> =
     Lang
   >;
 
-type TeampageDocumentDataSlicesSlice = TextSliceSlice;
+type TeampageDocumentDataSlicesSlice = TextSliceSlice | TeamMemberSliceSlice;
 
 /**
  * Content for TeamPage documents
@@ -2087,6 +2087,81 @@ export type SocialSharerSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TeamMemberSlice → Primary*
+ */
+export interface TeamMemberSliceSliceDefaultPrimary {
+  /**
+   * name field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member_slice.primary.name
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  name: prismic.RichTextField;
+
+  /**
+   * personal_link field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member_slice.primary.personal_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  personal_link: prismic.LinkField;
+
+  /**
+   * description field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member_slice.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * image field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member_slice.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for TeamMemberSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamMemberSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamMemberSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TeamMemberSlice*
+ */
+type TeamMemberSliceSliceVariation = TeamMemberSliceSliceDefault;
+
+/**
+ * TeamMemberSlice Shared Slice
+ *
+ * - **API ID**: `team_member_slice`
+ * - **Description**: TeamMemberSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamMemberSliceSlice = prismic.SharedSlice<
+  "team_member_slice",
+  TeamMemberSliceSliceVariation
+>;
+
+/**
  * Primary content in *TextSlice → Primary*
  */
 export interface TextSliceSliceDefaultPrimary {
@@ -2207,6 +2282,9 @@ declare module "@prismicio/client" {
       SocialSharerSliceSlice,
       SocialSharerSliceSliceVariation,
       SocialSharerSliceSliceDefault,
+      TeamMemberSliceSlice,
+      TeamMemberSliceSliceVariation,
+      TeamMemberSliceSliceDefault,
       TextSliceSlice,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
