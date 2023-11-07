@@ -8,7 +8,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
-      DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL
+      DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
+      HAPTCHA_SITEKEY: process.env.NUXT_PUBLIC_HCAPTCHA_SITEKEY,
     },
     STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
     STRIPE_SUBSCRIPTION_PRICE_1:
@@ -23,7 +24,6 @@ export default defineNuxtConfig({
       process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
     STRIPE_SUBSCRIPTION_PRICE_6:
       process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
-    HAPTCHA_SITEKEY: process.env.PRIVATE_HCAPTCHA_SITEKEY,
   },
   vue: {
     compilerOptions: {

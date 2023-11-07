@@ -120,7 +120,7 @@
           </NuxtLink>
           <vue-hcaptcha
             :sitekey="hcaptchSitekey"
-            class="col-span-full"
+            class="col-span-full mt-4"
           >
           </vue-hcaptcha>
         </CheckboxSection>
@@ -166,7 +166,7 @@ const { data: embrace } = await useAsyncData('embrace', () =>
   client.getSingle('embracepage')
 )
 
-const hcaptchSitekey = useRuntimeConfig().HAPTCHA_SITEKEY
+const hcaptchSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
 /*
 const props = defineProps({
   successRedirectURL: { type: String, default: '/thanks-pledge' } //  THIS LINE SHOULD CHANGE
