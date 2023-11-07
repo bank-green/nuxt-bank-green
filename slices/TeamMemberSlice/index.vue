@@ -13,7 +13,13 @@ defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    Placeholder component for team_member_slice (variation:
-    {{ slice.variation }}) Slices
+    <!-- Placeholder component for team_member_slice (variation:
+    {{ slice.variation }}) Slices -->
+    <div v-for="(item, index) in slice.items" :key="index">
+      <h2>{{ item.name }}</h2>
+      <p>{{ item.description }}</p>
+      <a :href="item.personal_link.url">Personal Link</a>
+      <img :src="item.image.url" :alt="item.image.alt">
+    </div>
   </section>
 </template>
