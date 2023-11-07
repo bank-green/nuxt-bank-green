@@ -15,12 +15,12 @@
         class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
       >
         <TeamMember
-          v-for="(slice, index) in team?.data.slices.slice(1)"
+          v-for="(item, index) in team?.data.slices[1].items"
           :key="index"
-          :name="slice.items[0].name1[0].text"
-          :href="slice.items[0].personal_link?.url"
-          :description="slice.items[0].description1[0].text"
-          :img="slice.items[0].image.url"
+          :name="item.name1[0].text"
+          :href="item.personal_link?.url"
+          :description="item.description1[0].text"
+          :img="item.image.url"
         />
       </ul>
     </div>
@@ -35,10 +35,8 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: team } = await useAsyncData('team', () =>
   client.getSingle('teampage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices', 'name', 'personal_link', 'description', 'image']
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-console.log('team', team)
-console.log('team?.data.slices', team?.data)
 usePrismicSEO(team.value.data)
 </script>
