@@ -4,10 +4,10 @@
   >
     <form
       class="flex flex-col items-center"
-      @submit.prevent.stop=" checkAndDisplayPreview"
+      @submit.prevent.stop="checkAndDisplayPreview"
     >
       <p class="text-xl md:text-2xl mb-6 font-semibold whitespace-pre-wrap">
-        {{ embrace?.data.form_title || "Share your thoughts" }}
+        {{ embracePage?.data.form_title || 'Share your thoughts' }}
       </p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
         <TextField
@@ -15,8 +15,8 @@
           class="col-span-2"
           name="fullName"
           type="text"
-          :title="embrace?.data.full_name_label || 'Your full name'"
-          :placeholder="embrace?.data.full_name_placeholder || 'Write your full name'"
+          :title="embracePage?.data.full_name_label || 'Your full name'"
+          :placeholder="embracePage?.data.full_name_placeholder || 'Write your full name'"
           :warning="fullNameWarning"
           dark
         />
@@ -33,7 +33,7 @@
           <span
             class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
           >
-            {{ embrace?.data.bank_select_label || 'Choose your current bank' }}
+            {{ embracePage?.data.bank_select_label || 'Choose your current bank' }}
           </span>
 
           <!-- TODO need to add hover/help text ?  is this
@@ -47,7 +47,7 @@
             @search-input-change="searchValue = $event"
           >
             <template #not-listed>
-              <PrismicRichText :field="embrace?.data.bank_not_found" />
+              <PrismicRichText :field="embracePage?.data.bank_not_found" />
               <!-- <p class="text-gray-500 p-4 shadow-lg">
                 We couldn't find your bank. <br>
                 But that's ok! Just type in your bank's name and leave it at
@@ -61,8 +61,8 @@
           class="col-span-2"
           type="email"
           name="email"
-          :title="embrace?.data.email_label"
-          :placeholder="embrace?.data.email_placeholder"
+          :title="embracePage?.data.email_label"
+          :placeholder="embracePage?.data.email_placeholder"
           :warning="warningsMap['email']"
           dark
         />
@@ -71,8 +71,8 @@
           class="col-span-2"
           name="hometown"
           type="text"
-          :title="embrace?.data.hometown_label || 'hometown'"
-          :placeholder="embrace?.data.hometown_placeholder || 'hometown'"
+          :title="embracePage?.data.hometown_label || 'hometown'"
+          :placeholder="embracePage?.data.hometown_placeholder || 'hometown'"
           dark
         />
         <TextField
@@ -81,8 +81,8 @@
           rows="5"
           name="backgound"
           type="text"
-          :title="embrace?.data.background_label || 'Your background'"
-          :placeholder="embrace?.data.background_placeholder || 'Your background'"
+          :title="embracePage?.data.background_label || 'Your background'"
+          :placeholder="embracePage?.data.background_placeholder || 'Your background'"
           dark
         />
         <CheckboxSection
@@ -91,7 +91,7 @@
           name="isAgreeMarketing"
           dark
         >
-          <PrismicRichText :field="embrace?.data.marketing_checkbox_label" />
+          <PrismicRichText :field="embracePage?.data.marketing_checkbox_label" />
           <!--'I wish to receive more information via email from Bank.Green.'-->
         </CheckboxSection>
         <CheckboxSection
@@ -101,25 +101,25 @@
           :warning="warningsMap['isAgreeTerms']"
           dark
         >
-          <PrismicText :field="embrace?.data.privacy_checkbox_label" wrapper="span" />
+          <PrismicText :field="embracePage?.data.privacy_checkbox_label" wrapper="span" />
           <!--'I have read and understood Bank.Green’s'-->
           <NuxtLink to="/privacy" class="link">
             {{
-              ' ' + (embrace?.data.privacy_policy_link_text || "privacy policy")
+              ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
             }}
           </NuxtLink>
           <vue-hcaptcha
-            :sitekey="hcaptchSitekey"
+            v-if="!isLocal"
+            :sitekey="hcaptchaSitekey"
             class="col-span-full mt-4"
-          >
-          </vue-hcaptcha>
+          />
         </CheckboxSection>
       </div>
       <button
-        type="submit"
+        type=""
         class="button-green w-full md:w-auto mt-6 flex justify-center"
         :class="{'pointer-events-none opacity-75': busy}"
-        @click="showModal = true"
+        @click="checkAndDisplayPreview"
       >
         <span v-if="!busy"> Generate Email Preview </span>
         <span v-else>
@@ -138,12 +138,17 @@
         </span>
       </button>
     </form>
-    <EmbraceModal v-show="showModal" @close-modal="showModal = false" />
   </div>
+  <EmbraceModal
+    v-show="showModal"
+    v-model="showModal"
+    tag="popup"
+  />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
+// import { PrismicDocument } from '@prismicio/types'
 import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
@@ -152,15 +157,27 @@ import EmbraceModal from '@/components/EmbraceModal.vue'
 const { client } = usePrismic()
 
 // TODO: pass embracepage as a prop instead of requesting it again
-const { data: embrace } = await useAsyncData('embrace', () =>
+const { data: embracePage } = await useAsyncData('embrace', () =>
   client.getSingle('embracepage')
 )
 
-const hcaptchSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
+const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
 /*
 const props = defineProps({
-  successRedirectURL: { type: String, default: '/thanks-pledge' } //  THIS LINE SHOULD CHANGE
+  // embracePage: PrismicDocument<Record<string, any>, string, string> | null
+  // successRedirectURL: { type: String, default: '/thanks-pledge' } //  THIS LINE SHOULD CHANGE
 })
+*/
+/*
+defineProps<{
+  name: string;
+  website: string;
+  inheritBrandRating: {
+    tag: string;
+    name: string;
+  };
+  embracePage: PrismicDocument<Record<string, any>, string, string> | null;
+}>()
 */
 
 const fullName = ref(null)
@@ -170,6 +187,7 @@ const searchValue = ref(null)
 const { country } = useCountry()
 const hometown = ref(null)
 const background = ref(null)
+const showModal = ref(false)
 
 const extras = computed(() => {
   return {
@@ -210,12 +228,25 @@ const {
 
 function checkAndDisplayPreview () {
   validate()
+
   if (!extras.value.fullName) {
-    fullNameWarning.value = embrace?.value.data.full_name_warning || 'Your name is required'
+    console.log(embracePage)
+    fullNameWarning.value = embracePage?.value.data.full_name_warning || 'Your name is required'
     return
   }
-  fullNameWarning.value = null
-
+  console.log('valid')
+  if (fullNameWarning) {
+    fullNameWarning.value = null
+  }
+  showModal.value = true
   // TODO: show preview...
 }
+
+const isLocal = computed(() => {
+  if (window.location.hostname === 'localhost') {
+    return true
+  }
+  return false
+})
+
 </script>

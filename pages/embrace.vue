@@ -20,7 +20,7 @@
             :field="embrace.data.description1"
           />
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
-            <div ref="signUpForm" class="w-full relative z-10">
+            <div ref="embraceForm" class="w-full relative z-10">
               <Embrace />
             </div>
           </div>
@@ -42,5 +42,5 @@ const { data: embrace } = await useAsyncData('embrace', () =>
 )
 usePrismicSEO(embrace.value.data)
 
-const signUpForm = ref()
+const embraceForm = ref()
 </script>
