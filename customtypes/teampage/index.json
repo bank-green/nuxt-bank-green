@@ -17,12 +17,7 @@
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "text_slice": { "type": "SharedSlice" },
-            "team_member_slice": { "type": "SharedSlice" }
-          }
-        }
+        "config": { "choices": { "text_slice": { "type": "SharedSlice" } } }
       }
     }
   }

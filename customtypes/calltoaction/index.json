@@ -7,10 +7,7 @@
     "Main": {
       "title": {
         "type": "Text",
-        "config": {
-          "label": "Title",
-          "placeholder": ""
-        }
+        "config": { "label": "Title", "placeholder": "" }
       },
       "text": {
         "type": "StructuredText",
@@ -49,5 +46,6 @@
         }
       }
     }
-  }
+  },
+  "format": "custom"
 }

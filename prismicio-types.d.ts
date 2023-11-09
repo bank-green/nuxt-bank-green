@@ -683,6 +683,366 @@ export type EcobankspageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for EmbracePage documents
+ */
+interface EmbracepageDocumentData {
+  /**
+   * Title field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * SubTitle field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Description1 field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.description1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description1: prismic.RichTextField;
+
+  /**
+   * Description2 field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.description2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description2: prismic.RichTextField;
+
+  /**
+   * SEO Title field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO Description field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField
+  /**
+   * Preview Title field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.preview_title
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  preview_title: prismic.KeyTextField;
+
+  /**
+   * Preview Description field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.preview_description
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  preview_description: prismic.RichTextField;
+
+  /**
+   * Preview Area Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.preview_area_label
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  preview_area_label: prismic.KeyTextField;
+
+  /**
+   * Copy Text Button Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.copy_text_button_label
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copy_text_button_label: prismic.KeyTextField;
+
+  /**
+   * Preview Footnote field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.preview_footnote
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  preview_footnote: prismic.RichTextField;
+
+  /**
+   * cancel_button_label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.cancel_button_label
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cancel_button_label: prismic.KeyTextField;
+
+  /**
+   * Proceed Button Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.proceed_button_label
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  proceed_button_label: prismic.KeyTextField
+  /**
+   * Form Title field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.form_title
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  form_title: prismic.KeyTextField;
+
+  /**
+   * Full Name Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.full_name_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  full_name_label: prismic.KeyTextField;
+
+  /**
+   * Full Name Placeholder field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.full_name_placeholder
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  full_name_placeholder: prismic.KeyTextField;
+
+  /**
+   * Full Name Warning field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.full_name_warning
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  full_name_warning: prismic.KeyTextField;
+
+  /**
+   * Bank Select_label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_select_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  bank_select_label: prismic.KeyTextField;
+
+  /**
+   * Bank Select Info field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_select_info
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  bank_select_info: prismic.KeyTextField;
+
+  /**
+   * Bank Not Found field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_not_found
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bank_not_found: prismic.RichTextField;
+
+  /**
+   * Email Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.email_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  email_label: prismic.KeyTextField;
+
+  /**
+   * Email Placeholder field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.email_placeholder
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  email_placeholder: prismic.KeyTextField;
+
+  /**
+   * Hometown Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.hometown_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hometown_label: prismic.KeyTextField;
+
+  /**
+   * Hometown_placeholder field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.hometown_placeholder
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hometown_placeholder: prismic.KeyTextField;
+
+  /**
+   * Background Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.background_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  background_label: prismic.KeyTextField;
+
+  /**
+   * Background Placeholder field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.background_placeholder
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  background_placeholder: prismic.KeyTextField;
+
+  /**
+   * Why Embrace Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.why_embrace_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  why_embrace_label: prismic.KeyTextField;
+
+  /**
+   * Why Embrace Placeholder field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.why_embrace_placeholder
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  why_embrace_placeholder: prismic.KeyTextField;
+
+  /**
+   * Marketing Checkbox Label field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.marketing_checkbox_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  marketing_checkbox_label: prismic.RichTextField;
+
+  /**
+   * Privacy Checkbox Label field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.privacy_checkbox_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  privacy_checkbox_label: prismic.RichTextField;
+
+  /**
+   * Privacy Policy Link Text field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.privacy_policy_link_text
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  privacy_policy_link_text: prismic.KeyTextField;
+}
+
+/**
+ * EmbracePage document from Prismic
+ *
+ * - **API ID**: `embracepage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type EmbracepageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<EmbracepageDocumentData>,
+    "embracepage",
+    Lang
+  >;
+
 type FaqpageDocumentDataSlicesSlice = AccordionSliceSlice;
 
 /**
@@ -1547,7 +1907,7 @@ export type TakeactionpageDocument<Lang extends string = string> =
     Lang
   >;
 
-type TeampageDocumentDataSlicesSlice = TextSliceSlice | TeamMemberSliceSlice;
+type TeampageDocumentDataSlicesSlice = TextSliceSlice;
 
 /**
  * Content for TeamPage documents
@@ -1669,6 +2029,7 @@ export type AllDocumentTypes =
   | DisclaimerpageDocument
   | DonationpageDocument
   | EcobankspageDocument
+  | EmbracepageDocument
   | FaqpageDocument
   | HomepageDocument
   | PledgepageDocument
@@ -2087,81 +2448,6 @@ export type SocialSharerSliceSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *TeamMemberSlice → Primary*
- */
-export interface TeamMemberSliceSliceDefaultPrimary {
-  /**
-   * name field in *TeamMemberSlice → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team_member_slice.primary.name
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  name: prismic.RichTextField;
-
-  /**
-   * personal_link field in *TeamMemberSlice → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team_member_slice.primary.personal_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  personal_link: prismic.LinkField;
-
-  /**
-   * description field in *TeamMemberSlice → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team_member_slice.primary.description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
-
-  /**
-   * image field in *TeamMemberSlice → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team_member_slice.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Default variation for TeamMemberSlice Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TeamMemberSliceSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TeamMemberSliceSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *TeamMemberSlice*
- */
-type TeamMemberSliceSliceVariation = TeamMemberSliceSliceDefault;
-
-/**
- * TeamMemberSlice Shared Slice
- *
- * - **API ID**: `team_member_slice`
- * - **Description**: TeamMemberSlice
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TeamMemberSliceSlice = prismic.SharedSlice<
-  "team_member_slice",
-  TeamMemberSliceSliceVariation
->;
-
-/**
  * Primary content in *TextSlice → Primary*
  */
 export interface TextSliceSliceDefaultPrimary {
@@ -2234,6 +2520,8 @@ declare module "@prismicio/client" {
       DonationpageDocumentData,
       EcobankspageDocument,
       EcobankspageDocumentData,
+      EmbracepageDocument,
+      EmbracepageDocumentData,
       FaqpageDocument,
       FaqpageDocumentData,
       HomepageDocument,
@@ -2282,9 +2570,6 @@ declare module "@prismicio/client" {
       SocialSharerSliceSlice,
       SocialSharerSliceSliceVariation,
       SocialSharerSliceSliceDefault,
-      TeamMemberSliceSlice,
-      TeamMemberSliceSliceVariation,
-      TeamMemberSliceSliceDefault,
       TextSliceSlice,
       TextSliceSliceVariation,
       TextSliceSliceDefault,

@@ -6,13 +6,7 @@
   "status": true,
   "json": {
     "Main": {
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "tag",
-          "placeholder": ""
-        }
-      },
+      "uid": { "type": "UID", "config": { "label": "tag", "placeholder": "" } },
       "impact": {
         "type": "StructuredText",
         "config": {
@@ -51,10 +45,7 @@
       },
       "founded": {
         "type": "Number",
-        "config": {
-          "label": "Founded",
-          "placeholder": ""
-        }
+        "config": { "label": "Founded", "placeholder": "" }
       },
       "our_take": {
         "type": "StructuredText",
@@ -66,10 +57,7 @@
       },
       "serving": {
         "type": "StructuredText",
-        "config": {
-          "single": "paragraph",
-          "label": "serving"
-        }
+        "config": { "single": "paragraph", "label": "serving" }
       }
     }
   }

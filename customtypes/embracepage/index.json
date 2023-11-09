@@ -1,0 +1,152 @@
+{
+  "id": "embracepage",
+  "label": "EmbracePage",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": { "type": "Text", "config": { "label": "Title" } },
+      "subtitle": { "type": "Text", "config": { "label": "SubTitle" } },
+      "description1": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Description1"
+        }
+      },
+      "description2": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Description2"
+        }
+      },
+      "seo_title": { "type": "Text", "config": { "label": "SEO Title" } },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "SEO Description" }
+      }
+    },
+    "Preview": {
+      "preview_title": {
+        "type": "Text",
+        "config": { "label": "Preview Title" }
+      },
+      "preview_description": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Preview Description"
+        }
+      },
+      "preview_area_label": {
+        "type": "Text",
+        "config": { "label": "Preview Area Label" }
+      },
+      "copy_text_button_label": {
+        "type": "Text",
+        "config": { "label": "Copy Text Button Label" }
+      },
+      "preview_footnote": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Preview Footnote"
+        }
+      },
+      "cancel_button_label": {
+        "type": "Text",
+        "config": { "label": "cancel_button_label" }
+      },
+      "proceed_button_label": {
+        "type": "Text",
+        "config": { "label": "Proceed Button Label" }
+      }
+    },
+    "Form": {
+      "form_title": { "type": "Text", "config": { "label": "Form Title" } },
+      "full_name_label": {
+        "type": "Text",
+        "config": { "label": "Full Name Label" }
+      },
+      "full_name_placeholder": {
+        "type": "Text",
+        "config": { "label": "Full Name Placeholder" }
+      },
+      "full_name_warning": {
+        "type": "Text",
+        "config": { "label": "Full Name Warning" }
+      },
+      "bank_select_label": {
+        "type": "Text",
+        "config": { "label": "Bank Select_label" }
+      },
+      "bank_select_info": {
+        "type": "Text",
+        "config": { "label": "Bank Select Info" }
+      },
+      "bank_not_found": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Bank Not Found"
+        }
+      },
+      "email_label": { "type": "Text", "config": { "label": "Email Label" } },
+      "email_placeholder": {
+        "type": "Text",
+        "config": { "label": "Email Placeholder" }
+      },
+      "hometown_label": {
+        "type": "Text",
+        "config": { "label": "Hometown Label" }
+      },
+      "hometown_placeholder": {
+        "type": "Text",
+        "config": { "label": "Hometown_placeholder" }
+      },
+      "background_label": {
+        "type": "Text",
+        "config": { "label": "Background Label" }
+      },
+      "background_placeholder": {
+        "type": "Text",
+        "config": { "label": "Background Placeholder" }
+      },
+      "why_embrace_label": {
+        "type": "Text",
+        "config": { "label": "Why Embrace Label" }
+      },
+      "why_embrace_placeholder": {
+        "type": "Text",
+        "config": { "label": "Why Embrace Placeholder" }
+      },
+      "marketing_checkbox_label": {
+        "type": "StructuredText",
+        "config": {
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Marketing Checkbox Label"
+        }
+      },
+      "privacy_checkbox_label": {
+        "type": "StructuredText",
+        "config": {
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true,
+          "label": "Privacy Checkbox Label"
+        }
+      },
+      "privacy_policy_link_text": {
+        "type": "Text",
+        "config": { "label": "Privacy Policy Link Text" }
+      }
+    }
+  },
+  "format": "custom"
+}
