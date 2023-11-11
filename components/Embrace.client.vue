@@ -78,21 +78,11 @@
         <TextField
           v-model="background"
           class="col-span-full"
-          rows="3"
+          rows="5"
           name="backgound"
           type="text"
           :title="embrace?.data.background_label || 'Your background'"
           :placeholder="embrace?.data.background_placeholder || 'Your background'"
-          dark
-        />
-        <TextField
-          v-model="whyEmbrace"
-          class="col-span-full"
-          rows="5"
-          name="embraceText"
-          type="text"
-          :title="embrace?.data.why_embrace_label || 'Why embrace?'"
-          :placeholder="embrace?.data.why_embrace_placeholder || 'Answer'"
           dark
         />
         <CheckboxSection
@@ -180,7 +170,6 @@ const searchValue = ref(null)
 const { country } = useCountry()
 const hometown = ref(null)
 const background = ref(null)
-const whyEmbrace = ref(null)
 
 const extras = computed(() => {
   return {
@@ -191,8 +180,7 @@ const extras = computed(() => {
     rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     hometown: hometown.value || '',
-    background: background.value || '',
-    whyEmbrace: whyEmbrace.value || ''
+    background: background.value || ''
   }
 })
 
