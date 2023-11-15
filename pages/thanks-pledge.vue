@@ -28,25 +28,15 @@
             </svg>
 
             <h1 class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
-              Thank you for your pledge!
+              <PrismicRichText :field="thankspledge.data.title" />
             </h1>
 
-            <p class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line">
-              You've just taken an amazing action to help build a better future
-              for people and planet.
-            </p>
-            <p class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line">
-              Why not encourage your friends to do the same...
-            </p>
-            <div class="flex justify-center">
-              <SocialSharer
-                class="text-sushi-500"
-                url="https://bank.green"
-                :hashtags="['climatecrisis', 'fossilbanks']"
-                :text="'I just pledged to move my money away from fossil fuels! Check your bank and do the same'"
-                :large="true"
-              />
-            </div>
+            <PrismicRichText class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line" :field="thankspledge.data.content1" />
+            <PrismicRichText class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line" :field="thankspledge.data.content2" />
+            <SliceZone
+              :slices="thankspledge?.data.slices ?? []"
+              :components="sliceComps"
+            />
           </div>
         </div>
       </div>
@@ -55,5 +45,12 @@
 </template>
 
 <script setup>
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 useHeadHelper('Thank you')
+const sliceComps = ref(defineSliceZoneComponents(components))
+const { client } = usePrismic()
+const { data: thankspledge } = await useAsyncData('thankspledge', () =>
+  client.getSingle('thankspledge')
+)
 </script>

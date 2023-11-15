@@ -12,21 +12,9 @@
         <h1
           class="text-2xl md:text-4xl text-center text-gray-800 font-semibold whitespace-pre-line mb-8"
         >
-          Sorry, we haven’t listed your bank yet.
+          <PrismicRichText :field="notlisted.data.text1" />
         </h1>
-        <p>
-          We’re working hard to increase the number of banks we provide data on.
-          If you
-          <NuxtLink
-            to="/contact"
-            class="font-bold text-sushi-500 hover:underline"
-          >
-            tell us your bank’s name
-          </NuxtLink>, we’ll try to include it as soon as possible. In the meantime, we
-          encourage you to consider contacting your bank to ask them whether
-          they fund fossil fuels. But that’s not all you can do. To take further
-          positive action, keep on scrolling…
-        </p>
+        <PrismicRichText class="textlink" :field="notlisted.data.text2" />
       </div>
       <Swoosh />
     </div>
@@ -38,18 +26,12 @@
         >
           <div class="md:w-1/2 max-w-sm">
             <p class="text-lg md:text-2xl tracking-wide mb-4">
-              <b>Bank.Green was founded on the belief that banks have had an
-                easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
-              they’ll pull your bank out, too.
+              <b>{{ asText(notlisted.data.text3) }} </b> {{ asText(notlisted?.data.text4) }}
             </p>
             <p
               class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
             >
-              Our mission is to encourage as many people as possible to take a
-              stand - to refuse to let their money fuel environmental
-              destruction any longer. Considering who you bank with, we think
-              you probably agree. This is your chance to spread the word with
-              us.
+              <PrismicRichText :field="notlisted?.data.text5" />
             </p>
           </div>
           <img
@@ -69,11 +51,7 @@
             class="max-w-4xl flex flex-col md:flex-row items-center justify-center md:space-x-8"
           >
             <div class="md:w-1/2 max-w-sm">
-              <p class="text-lg md:text-2xl tracking-wide mb-4">
-                We can’t say it better than environmentalist Bill McKibben:
-                “Money is the oxygen on which the fire of global warming burns.”
-                But don’t wait for the fire department to turn up – join us!
-              </p>
+              <PrismicRichText :field="notlisted?.data.text6" class="text-lg md:text-2xl tracking-wide mb-4" />
             </div>
             <CheckList class="md:w-1/2 my-8" :list="checkList" />
           </div>
@@ -94,7 +72,11 @@
   </div>
 </template>
 <script setup>
+import { asText } from '@prismicio/helpers'
 import SubmitBank from '@/components/forms/SubmitBank.vue'
+const { client } = usePrismic()
+const { data: notlisted } = await useAsyncData('notlisted', () =>
+  client.getByUID('textonlypages', 'notlisted'))
 
 const checkList = [
   'Learn about the issues via our blog updates',

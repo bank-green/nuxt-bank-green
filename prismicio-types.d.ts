@@ -1603,6 +1603,194 @@ export type TeampageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for TextOnlyPages documents
+ */
+interface TextonlypagesDocumentData {
+  /**
+   * text1 field in *TextOnlyPages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: textonlypages.text1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text1: prismic.RichTextField;
+
+  /**
+   * text2 field in *TextOnlyPages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: textonlypages.text2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text2: prismic.RichTextField;
+
+  /**
+   * text3 field in *TextOnlyPages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: textonlypages.text3
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text3: prismic.RichTextField;
+
+  /**
+   * text4 field in *TextOnlyPages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: textonlypages.text4
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text4: prismic.RichTextField;
+
+  /**
+   * text5 field in *TextOnlyPages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: textonlypages.text5
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text5: prismic.RichTextField;
+
+  /**
+   * text6 field in *TextOnlyPages*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: textonlypages.text6
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text6: prismic.RichTextField;
+}
+
+/**
+ * TextOnlyPages document from Prismic
+ *
+ * - **API ID**: `textonlypages`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TextonlypagesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TextonlypagesDocumentData>,
+    "textonlypages",
+    Lang
+  >;
+
+type ThankspagesDocumentDataSlicesSlice = ThanksSliceSlice;
+
+/**
+ * Content for thankspages documents
+ */
+interface ThankspagesDocumentData {
+  /**
+   * Slice Zone field in *thankspages*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspages.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ThankspagesDocumentDataSlicesSlice>;
+}
+
+/**
+ * thankspages document from Prismic
+ *
+ * - **API ID**: `thankspages`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ThankspagesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ThankspagesDocumentData>,
+    "thankspages",
+    Lang
+  >;
+
+type ThankspledgeDocumentDataSlicesSlice = SocialSharerSliceSlice;
+
+/**
+ * Content for thankspledge documents
+ */
+interface ThankspledgeDocumentData {
+  /**
+   * title field in *thankspledge*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspledge.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * content1 field in *thankspledge*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspledge.content1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content1: prismic.RichTextField;
+
+  /**
+   * content2 field in *thankspledge*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspledge.content2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content2: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *thankspledge*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspledge.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ThankspledgeDocumentDataSlicesSlice>;
+}
+
+/**
+ * thankspledge document from Prismic
+ *
+ * - **API ID**: `thankspledge`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ThankspledgeDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<ThankspledgeDocumentData>,
+    "thankspledge",
+    Lang
+  >;
+
 type VolunteerspageDocumentDataSlicesSlice = TextSliceSlice;
 
 /**
@@ -1680,6 +1868,9 @@ export type AllDocumentTypes =
   | SwitchsurveyexitDocument
   | TakeactionpageDocument
   | TeampageDocument
+  | TextonlypagesDocument
+  | ThankspagesDocument
+  | ThankspledgeDocument
   | VolunteerspageDocument;
 
 /**
@@ -2057,6 +2248,21 @@ export type SharePicGallerySliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *SocialSharerSlice → Primary*
+ */
+export interface SocialSharerSliceSliceDefaultPrimary {
+  /**
+   * text field in *SocialSharerSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: social_sharer_slice.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
  * Default variation for SocialSharerSlice Slice
  *
  * - **API ID**: `default`
@@ -2065,7 +2271,7 @@ export type SharePicGallerySliceSlice = prismic.SharedSlice<
  */
 export type SocialSharerSliceSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<SocialSharerSliceSliceDefaultPrimary>,
   never
 >;
 
@@ -2131,6 +2337,61 @@ export type TextSliceSlice = prismic.SharedSlice<
   TextSliceSliceVariation
 >;
 
+/**
+ * Primary content in *ThanksSlice → Primary*
+ */
+export interface ThanksSliceSliceDefaultPrimary {
+  /**
+   * title field in *ThanksSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thanks_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * description field in *ThanksSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thanks_slice.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ThanksSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ThanksSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ThanksSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ThanksSlice*
+ */
+type ThanksSliceSliceVariation = ThanksSliceSliceDefault;
+
+/**
+ * ThanksSlice Shared Slice
+ *
+ * - **API ID**: `thanks_slice`
+ * - **Description**: ThanksSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ThanksSliceSlice = prismic.SharedSlice<
+  "thanks_slice",
+  ThanksSliceSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -2181,6 +2442,12 @@ declare module "@prismicio/client" {
       TakeactionpageDocumentData,
       TeampageDocument,
       TeampageDocumentData,
+      TextonlypagesDocument,
+      TextonlypagesDocumentData,
+      ThankspagesDocument,
+      ThankspagesDocumentData,
+      ThankspledgeDocument,
+      ThankspledgeDocumentData,
       VolunteerspageDocument,
       VolunteerspageDocumentData,
       AllDocumentTypes,
@@ -2210,6 +2477,9 @@ declare module "@prismicio/client" {
       TextSliceSlice,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
+      ThanksSliceSlice,
+      ThanksSliceSliceVariation,
+      ThanksSliceSliceDefault,
     };
   }
 }

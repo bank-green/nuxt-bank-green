@@ -8,6 +8,7 @@ import ImageSlice from './ImageSlice'
 import SharePicGallerySlice from './SharePicGallerySlice'
 import SocialSharerSlice from './SocialSharerSlice'
 import TextSlice from './TextSlice'
+import ThanksSlice from './ThanksSlice'
 
 export {
   AccordionSlice,
@@ -17,7 +18,8 @@ export {
   ImageSlice,
   SharePicGallerySlice,
   SocialSharerSlice,
-  TextSlice
+  TextSlice,
+  ThanksSlice
 }
 
 export const components = {
@@ -28,5 +30,6 @@ export const components = {
   image_slice: ImageSlice,
   share_pic_gallery_slice: SharePicGallerySlice,
   social_sharer_slice: SocialSharerSlice,
-  text_slice: TextSlice
+  text_slice: TextSlice,
+  thanks_slice: ThanksSlice
 }

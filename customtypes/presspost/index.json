@@ -7,38 +7,23 @@
     "Main": {
       "title": {
         "type": "Text",
-        "config": {
-          "label": "Title",
-          "placeholder": ""
-        }
+        "config": { "label": "Title", "placeholder": "" }
       },
       "author": {
         "type": "Text",
-        "config": {
-          "label": "Author",
-          "placeholder": ""
-        }
+        "config": { "label": "Author", "placeholder": "" }
       },
       "email": {
         "type": "Text",
-        "config": {
-          "label": "Email",
-          "placeholder": ""
-        }
+        "config": { "label": "Email", "placeholder": "" }
       },
       "phone": {
         "type": "Text",
-        "config": {
-          "label": "Phone",
-          "placeholder": ""
-        }
+        "config": { "label": "Phone", "placeholder": "" }
       },
       "releasedate": {
         "type": "Date",
-        "config": {
-          "label": "ReleaseDate",
-          "placeholder": ""
-        }
+        "config": { "label": "ReleaseDate", "placeholder": "" }
       },
       "description": {
         "type": "StructuredText",
@@ -51,28 +36,20 @@
       },
       "uid": {
         "type": "UID",
-        "config": {
-          "label": "slug",
-          "placeholder": ""
-        }
+        "config": { "label": "slug", "placeholder": "" }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "text_slice": {
-              "type": "SharedSlice"
-            },
-            "image_slice": {
-              "type": "SharedSlice"
-            },
-            "embed_slice": {
-              "type": "SharedSlice"
-            }
+            "text_slice": { "type": "SharedSlice" },
+            "image_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" }
           }
         }
       }
     }
-  }
+  },
+  "format": "custom"
 }
