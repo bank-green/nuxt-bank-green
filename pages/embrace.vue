@@ -8,17 +8,21 @@
           <h1
             class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-2 text-center"
           >
-            {{ embrace.data.title }}
+            {{ embrace?.data.title || 'title' }}
           </h1>
           <h3
             class="max-w-3xl text-2lg font-semibold whitespace-pre-line mb-6 text-center"
           >
-            {{ embrace.data.subtitle }}
+            {{ embrace?.data.subtitle || 'subtitle' }}
           </h3>
           <PrismicRichText
+            v-if="embrace?.data"
             class="prose md:text-lg whitespace-pre-wrap mb-10"
-            :field="embrace.data.description1"
+            :field="embrace?.data.description1"
           />
+          <div v-else>
+            description1
+          </div>
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
             <div ref="embraceForm" class="w-full relative z-10">
               <Embrace />
@@ -32,7 +36,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import Swoosh from '@/components/Swoosh.vue'
 
@@ -40,7 +44,13 @@ const { client } = usePrismic()
 const { data: embrace } = await useAsyncData('embrace', () =>
   client.getSingle('embracepage')
 )
-usePrismicSEO(embrace.value.data)
-
+try {
+  if (embrace?.value) {
+    usePrismicSEO(embrace.value.data)
+  }
+} catch (e) {
+  console.log(e)
+  throw (e)
+}
 const embraceForm = ref()
 </script>

@@ -47,12 +47,12 @@
             @search-input-change="searchValue = $event"
           >
             <template #not-listed>
-              <PrismicRichText :field="embracePage?.data.bank_not_found" />
-              <!-- <p class="text-gray-500 p-4 shadow-lg">
+              <PrismicRichText v-if="embracePage.data" :field="embracePage?.data.bank_not_found" />
+              <p v-else class="text-gray-500 p-4 shadow-lg">
                 We couldn't find your bank. <br>
                 But that's ok! Just type in your bank's name and leave it at
                 that.
-              </p>-->
+              </p>
             </template>
           </BankSearch>
         </div>
@@ -61,8 +61,8 @@
           class="col-span-2"
           type="email"
           name="email"
-          :title="embracePage?.data.email_label"
-          :placeholder="embracePage?.data.email_placeholder"
+          :title="embracePage?.data.email_label || 'email'"
+          :placeholder="embracePage?.data.email_placeholder || 'email@example.com'"
           :warning="warningsMap['email']"
           dark
         />
@@ -91,8 +91,8 @@
           name="isAgreeMarketing"
           dark
         >
-          <PrismicRichText :field="embracePage?.data.marketing_checkbox_label" />
-          <!--'I wish to receive more information via email from Bank.Green.'-->
+          <PrismicRichText v-if="embracePage?.data" :field="embracePage?.data.marketing_checkbox_label" />
+          <p v-else>I wish to receive more information via email from Bank.Green.</p>
         </CheckboxSection>
         <CheckboxSection
           v-model="isAgreeTerms"
@@ -101,13 +101,14 @@
           :warning="warningsMap['isAgreeTerms']"
           dark
         >
-          <PrismicText :field="embracePage?.data.privacy_checkbox_label" wrapper="span" />
-          <!--'I have read and understood Bank.Green’s'-->
-          <NuxtLink to="/privacy" class="link">
+          <PrismicText v-if="embracePage?.data" :field="embracePage?.data.privacy_checkbox_label" wrapper="span" />
+          <p v-else>I have read and understood Bank.Green</p>
+          <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
             {{
               ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
             }}
           </NuxtLink>
+          <a v-else href="../privacy">privacy policy</a>
           <vue-hcaptcha
             v-if="!isLocal"
             :sitekey="hcaptchaSitekey"
@@ -230,7 +231,6 @@ function checkAndDisplayPreview () {
   validate()
 
   if (!extras.value.fullName) {
-    console.log(embracePage)
     fullNameWarning.value = embracePage?.value.data.full_name_warning || 'Your name is required'
     return
   }

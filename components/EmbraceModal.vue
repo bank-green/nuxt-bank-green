@@ -6,10 +6,13 @@
       </div>
       <div>
         <PrismicRichText
-          v-if="embracePage?.data?.preview_description"
+          v-if="embracePage?.data"
           :field="embracePage?.data.preview_description"
           class="text-left text-md mb-6 whitespace-pre-wrap text-gray-800"
         />
+        <p v-else>
+          preview_description
+        </p>
       </div>
       <div class="flex items-center justify-start grid-cols-4 gap-6 col-span-full w-full text-gray-800 py-2">
         <div class="items-center text-left w-full">
