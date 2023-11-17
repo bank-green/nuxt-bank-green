@@ -42,7 +42,7 @@
       </div>
       <NuxtImg
         src="/img/illustrations/pledge.png"
-        class="w-full"
+        class="md:w-2/5 max-w-full md:ml-24"
         loading="lazy"
         provider="none"
       />
