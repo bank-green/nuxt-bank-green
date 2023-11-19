@@ -6,17 +6,12 @@
           class="prose mx-auto max-w-4xl text-center prose-headings:font-semibold"
         >
           <h1>
-            Opened an account with a bank that doesn't finance fossil fuels?
+            <PrismicRichText :field="impact?.data.text1" />
           </h1>
           <h2 class="mt-0">
-            Maximise your impact by letting us know.
+            <PrismicRichText :field="impact?.data.text2" />
           </h2>
-          <p>
-            Taking this survey helps advocate for change. Bank.Green uses your
-            response to push fossil banks to divest, push sustainable eco banks
-            to improve their customer experience, and encourage other people to
-            join you in greening their finances.
-          </p>
+          <PrismicRichText :field="impact?.data.text3" />
           <SwitchForm :opts="{ height: 600 }" />
         </div>
       </div>
@@ -24,4 +19,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const { client } = usePrismic()
+const { data: impact } = await useAsyncData('impact', () =>
+  client.getByUID('textonlypages', 'impactpage'))
+</script>
