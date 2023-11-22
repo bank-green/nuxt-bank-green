@@ -1,11 +1,9 @@
 <template>
   <div class="flex justify-center">
-    <SocialSharer
-      class="text-sushi-500"
-      url="https://bank.green"
-      :text=asText(slice?.primary.text)!
-      :hashtags="['climatecrisis', 'fossilbanks']"
-      :large="true"
+    <TeamMember
+      :name=asText(slice.primary.name)!
+      :description=asText(slice.primary.description)!
+      :img=asText(slice.primary.imgsrc)!
     />
   </div>
 </template>

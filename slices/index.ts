@@ -19,5 +19,9 @@ export const components = defineSliceZoneComponents({
   social_sharer_slice: defineAsyncComponent(
     () => import("./SocialSharerSlice/index.vue")
   ),
+  team_member_slice: defineAsyncComponent(
+    () => import("./TeamMemberSlice/index.vue")
+  ),
   text_slice: defineAsyncComponent(() => import("./TextSlice/index.vue")),
+  thanks_slice: defineAsyncComponent(() => import("./ThanksSlice/index.vue")),
 });

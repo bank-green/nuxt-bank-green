@@ -4,7 +4,7 @@
       <div class="page-fade-in contain max-w-3xl xl:max-w-4xl py-24 sm:py-32">
         <article class="prose sm:prose-lg xl:prose-xl mx-auto">
           <SliceZone
-            :slices="team?.data.slices ?? []"
+            :slices="team?.data.slices.text_slices ?? []"
             :components="sliceComps"
           />
         </article>
@@ -14,13 +14,9 @@
       <ul
         class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
       >
-        <TeamMember
-          v-for="(item, index) in team?.data.slices[1].items"
-          :key="index"
-          :name="item.name1[0].text"
-          :href="item.personal_link?.url"
-          :description="item.description1[0].text"
-          :img="item.image.url"
+        <SliceZone
+          :slices="team?.data.slices ?? []"
+          :components="sliceComps"
         />
       </ul>
     </div>
