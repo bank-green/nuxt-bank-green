@@ -4,7 +4,7 @@
       <div class="page-fade-in contain max-w-3xl xl:max-w-4xl py-24 sm:py-32">
         <article class="prose sm:prose-lg xl:prose-xl mx-auto">
           <SliceZone
-            :slices="team?.data.slices.text_slices ?? []"
+            :slices="team?.data.slices ?? []"
             :components="sliceComps"
           />
         </article>
@@ -15,7 +15,7 @@
         class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
       >
         <SliceZone
-          :slices="team?.data.slices ?? []"
+          :slices="team?.data.slices1 ?? []"
           :components="sliceComps"
         />
       </ul>

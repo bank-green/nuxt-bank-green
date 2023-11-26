@@ -1907,7 +1907,9 @@ export type TakeactionpageDocument<Lang extends string = string> =
     Lang
   >;
 
-type TeampageDocumentDataSlicesSlice = TextSliceSlice | TeamMemberSliceSlice;
+type TeampageDocumentDataSlicesSlice = TextSliceSlice;
+
+type TeampageDocumentDataSlices1Slice = TeamMemberSliceSlice;
 
 /**
  * Content for TeamPage documents
@@ -1944,7 +1946,17 @@ interface TeampageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<TeampageDocumentDataSlicesSlice>;
+  slices: prismic.SliceZone<TeampageDocumentDataSlicesSlice>
+  /**
+   * Slice Zone field in *TeamPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: teampage.slices1[]
+   * - **Tab**: teammember
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */;
+  slices1: prismic.SliceZone<TeampageDocumentDataSlices1Slice>;
 }
 
 /**
@@ -2686,6 +2698,16 @@ export interface TeamMemberSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   imgsrc: prismic.RichTextField;
+
+  /**
+   * link field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member_slice.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
 }
 
 /**
