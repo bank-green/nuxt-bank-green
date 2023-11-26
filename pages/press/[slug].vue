@@ -35,7 +35,7 @@
           style="width: 100%"
           class="prose sm:prose-lg xl:prose-xl break-words"
         >
-          <SliceZone :slices="post?.data.slices ?? []" :components="comps" />
+          <SliceZone :slices="post?.data.slices ?? []" :components="sliceComps" />
         </div>
       </div>
     </div>
@@ -55,11 +55,7 @@ const { data: post } = await useAsyncData(slug, () =>
   client.getByUID('presspost', slug)
 )
 
-const comps = ref(
-  defineSliceZoneComponents({
-    components
-  })
-)
+const sliceComps = ref(defineSliceZoneComponents(components))
 
 useHeadHelper(
   post?.value?.data?.title ?? 'Press Post',
