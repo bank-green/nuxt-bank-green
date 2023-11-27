@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { asText } from '@prismicio/helpers'
 import BlogCard from '@/components/blog/BlogCard.vue'

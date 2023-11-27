@@ -35,7 +35,7 @@
           style="width: 100%"
           class="prose sm:prose-lg xl:prose-xl break-words"
         >
-          <SliceZone :slices="post?.data.slices ?? []" :components="comps" />
+          <SliceZone :slices="post?.data.slices ?? []" :components="sliceComps" />
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
 <script setup>
 import { defineSliceZoneComponents } from '@prismicio/vue'
 
-import { EmbedSlice, TextSlice, ImageSlice } from '~~/slices'
+import { components } from '~~/slices'
 
 const route = useRoute()
 
@@ -55,13 +55,7 @@ const { data: post } = await useAsyncData(slug, () =>
   client.getByUID('presspost', slug)
 )
 
-const comps = ref(
-  defineSliceZoneComponents({
-    image_slice: ImageSlice,
-    text_slice: TextSlice,
-    embed_slice: EmbedSlice
-  })
-)
+const sliceComps = ref(defineSliceZoneComponents(components))
 
 useHeadHelper(
   post?.value?.data?.title ?? 'Press Post',
