@@ -2065,11 +2065,11 @@ export type TextonlypagesDocument<Lang extends string = string> =
 type ThankspagesDocumentDataSlicesSlice = ThanksSliceSlice;
 
 /**
- * Content for thankspages documents
+ * Content for ThanksPages documents
  */
 interface ThankspagesDocumentData {
   /**
-   * Slice Zone field in *thankspages*
+   * Slice Zone field in *ThanksPages*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -2081,7 +2081,7 @@ interface ThankspagesDocumentData {
 }
 
 /**
- * thankspages document from Prismic
+ * ThanksPages document from Prismic
  *
  * - **API ID**: `thankspages`
  * - **Repeatable**: `true`
@@ -2099,11 +2099,11 @@ export type ThankspagesDocument<Lang extends string = string> =
 type ThankspledgeDocumentDataSlicesSlice = SocialSharerSliceSlice;
 
 /**
- * Content for thankspledge documents
+ * Content for ThanksPledge documents
  */
 interface ThankspledgeDocumentData {
   /**
-   * title field in *thankspledge*
+   * title field in *ThanksPledge*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2114,7 +2114,7 @@ interface ThankspledgeDocumentData {
   title: prismic.RichTextField;
 
   /**
-   * content1 field in *thankspledge*
+   * content1 field in *ThanksPledge*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2125,7 +2125,7 @@ interface ThankspledgeDocumentData {
   content1: prismic.RichTextField;
 
   /**
-   * content2 field in *thankspledge*
+   * content2 field in *ThanksPledge*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2136,7 +2136,7 @@ interface ThankspledgeDocumentData {
   content2: prismic.RichTextField;
 
   /**
-   * Slice Zone field in *thankspledge*
+   * Slice Zone field in *ThanksPledge*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
@@ -2148,7 +2148,7 @@ interface ThankspledgeDocumentData {
 }
 
 /**
- * thankspledge document from Prismic
+ * ThanksPledge document from Prismic
  *
  * - **API ID**: `thankspledge`
  * - **Repeatable**: `false`
@@ -2690,16 +2690,6 @@ export interface TeamMemberSliceSliceDefaultPrimary {
   description: prismic.RichTextField;
 
   /**
-   * imgsrc field in *TeamMemberSlice → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: team_member_slice.primary.imgsrc
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  imgsrc: prismic.RichTextField;
-
-  /**
    * link field in *TeamMemberSlice → Primary*
    *
    * - **Field Type**: Link
@@ -2708,6 +2698,16 @@ export interface TeamMemberSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField;
+
+  /**
+   * img field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member_slice.primary.img
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  img: prismic.LinkToMediaField;
 }
 
 /**

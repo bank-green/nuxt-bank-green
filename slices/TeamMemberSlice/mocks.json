@@ -25,22 +25,22 @@
 					}
 				]
 			},
-			"imgsrc": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Ea exercitation et sit id non eiusmod ut elit adipisicing excepteur. Cillum mollit commodo deserunt dolor. Aliquip ullamco culpa nisi magna dolor excepteur ullamco."
-						}
-					}
-				]
-			},
 			"link": {
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "ExternalLink",
 					"url": "http://twitter.com"
+				}
+			},
+			"img": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"id": "mock_Media_link",
+					"kind": "image/jpeg",
+					"name": "mock_name",
+					"url": "https://source.unsplash.com/daily",
+					"size": "0",
+					"__TYPE__": "FileLink"
 				}
 			}
 		},
