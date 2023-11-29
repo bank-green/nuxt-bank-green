@@ -6,8 +6,14 @@
           <h1 class="text-2xl sm:text-5xl font-extrabold text-sushi-900 mb-4">
             {{ post?.data.title }}
           </h1>
-          <span class="text-base text-gray-700 font-semibold">
-            {{ post?.data.publicationdate }} by {{ post?.data.author }}
+          <span v-if="isUpdated" class="text-base text-gray-700 font-semibold">
+            Updated {{ modifiedDateDisplay }} by {{ post?.data.author }}
+          </span>
+          <span
+            v-else
+            class="text-base text-gray-700 font-semibold"
+          >
+            Posted {{ publishedDateDisplay }} by {{ post?.data.author }}
           </span>
         </div>
         <div class="flex flex-col justify-center items-center">
@@ -70,7 +76,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
@@ -78,18 +84,113 @@ const route = useRoute()
 const error = ref(false)
 
 const { client } = usePrismic()
-const slug = route.path.split('/').at(-1)
+const slug = route.path.split('/').at(-1) ?? ''
 const { data: post } = await useAsyncData(slug, () =>
   client.getByUID('blogpost', slug)
 )
-console.log('post', post.value)
 
 const comps = ref(defineSliceZoneComponents(components))
 
-useHeadHelper(
-  post.value?.data?.title ?? 'Blog Post',
-  post?.value?.data?.description
-)
+const publishedDateDisplay = computed(() => {
+  if (!post.value?.first_publication_date) {
+    return ''
+  }
+  const date = new Date(post.value?.first_publication_date)
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+})
+
+const modifiedDateDisplay = computed(() => {
+  if (!post.value?.last_publication_date) {
+    return ''
+  }
+  const date = new Date(post.value?.last_publication_date)
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+})
+
+const isUpdated = computed(() => {
+  return (
+    post.value?.first_publication_date !==
+    post.value?.last_publication_date
+  )
+})
+
+const getDescription = (p: typeof post) => {
+  const array = p.value?.data?.description ?? []
+  for (const item of array) {
+    if (item.type === 'paragraph') {
+      return item.text
+    }
+  }
+  return ''
+}
+
+const title = post.value?.data?.title ?? 'Blog Post'
+const description = getDescription(post)
+
+const url = computed(() => {
+  return `https://bank.green/blog/${slug}`
+})
+
+useHead({
+  title,
+  htmlAttrs: {
+    lang: 'en'
+  },
+  link: [
+    {
+      hid: 'canonical',
+      rel: 'canonical',
+      href: url.value
+    }
+  ],
+  meta: [
+    { property: 'og:locale', content: 'en_US' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:site_name', content: 'Bank Green' },
+    { property: 'article:published_time', content: post.value?.first_publication_date ?? '' },
+    { property: 'article:modified_time', content: post.value?.last_publication_date ?? '' },
+    { property: 'og:url', content: url.value },
+    { property: 'og:image', content: post.value?.data.cardimage.url ?? '' },
+    { property: 'og:image:alt', content: post.value?.data.cardimage.alt ?? title },
+    { property: 'og:image:width', content: post.value?.data.cardimage.dimensions?.width ?? 1200 },
+    { property: 'og:image:height', content: post.value?.data.cardimage.dimensions?.height ?? 630 },
+    { property: 'og:title', content: title },
+    { name: 'apple-mobile-web-app-title', content: title },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:image', content: post.value?.data.cardimage.url ?? '' },
+    { name: 'twitter:site', content: '@BankGreen_' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:label1', content: 'Written by' },
+    { name: 'twitter:data1', content: post.value?.data.author ?? '' },
+    { name: 'twitter:label2', content: 'Published on' },
+    { name: 'twitter:data2', content: publishedDateDisplay.value },
+    { property: 'og:description', content: description },
+    { name: 'description', content: description },
+    { name: 'robots', content: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large' }
+  ]
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url.value
+  },
+  headline: title,
+  image: post.value?.data.cardimage.url ?? '',
+  datePublished: post.value?.first_publication_date ?? '',
+  dateModified: post.value?.last_publication_date ?? ''
+})
 </script>
 
 <style></style>
