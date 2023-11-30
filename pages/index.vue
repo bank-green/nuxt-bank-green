@@ -47,7 +47,7 @@
             </ClientOnly>
             <NuxtLink
               :to="`/banks/${bank?.tag}`"
-              class="flex-initial md:w-48 button-green hidden lg:block"
+              class="flex-initial md:w-48 button-green"
               :class="{ disabled: !bank }"
               @click="onCheckBankClick"
             >

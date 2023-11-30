@@ -102,7 +102,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
-const router = useRouter()
+
 const pageStart = new Date()
 const banks = ref([])
 const loaded = ref(false)
@@ -162,7 +162,6 @@ async function onSelectBank (item) {
   selectedItem.value = item.name
   emit('update:modelValue', item)
   isShowing.value = false
-  router.push(`banks/${item.tag}`)
 }
 
 function onCloseClick () {
