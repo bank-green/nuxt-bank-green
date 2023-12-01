@@ -20,6 +20,7 @@ export default defineEventHandler(
 
       const requBody = {
         email: body.email,
+        // this is for now the only solution to note in Stripe whether we are allowed to send emails since there is no specific props on customers object for that
         description: `Consent for promotional emails: ${body.consent ? 'Yes' : 'No'}`
       }
 

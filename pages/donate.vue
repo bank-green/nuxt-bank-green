@@ -169,7 +169,7 @@ const {
   warningsMap,
   isAgreeMarketing,
   send
-} = useContactForm('', ['email', 'bank', 'isAgreeTerms'], ref({}))
+} = useContactForm('', ['email'], ref({}))
 
 const isOneTimePayment = computed(
   () => selectedMethod.value === 'one-time' && selectedAmount.value != null
@@ -240,7 +240,7 @@ const handleRecurringPayment = async () => {
 
 const submit = () => {
   if (isOneTimePayment.value) {
-    send()
+    if (email.value.length > 0) { send() }
     handleOneTimePayment()
   } else if (isRecurring.value) {
     handleRecurringPayment()

@@ -27,6 +27,7 @@ export default defineEventHandler(
         }
       };
 
+      // we have to create the customer already on payment intent to link the payment to the customer to then update it later with email address
       const customer = await $fetch('https://api.stripe.com/v1/customers', {
         method: 'POST',
         headers: {

@@ -16,7 +16,7 @@ export default function useStripe (
 
   let stripe: Stripe | null = null
   let elements: StripeElements | null = null
-  let customerID: string | null = null
+  let customerId: string | null = null
 
   const initOneTimePayment = async (amount: number) => {
     isStripeLoaded.value = false
@@ -32,7 +32,7 @@ export default function useStripe (
     console.info(stripePaymentIntent)
     if (stripePaymentIntent?.clientSecret == null) { return }
 
-    customerID = stripePaymentIntent.customerId
+    customerId = stripePaymentIntent.customerId
 
     stripe = await loadStripe(publishableKey)
 
@@ -65,13 +65,11 @@ export default function useStripe (
         method: 'POST',
         body: {
           email,
-          id: customerID,
+          id: customerId,
           consent
         }
       }
     )
-
-    console.log({ customer: customer.customerId })
 
     if (customer.customerId && customer.customerId.length > 0) {
       const { error } = await stripe.confirmPayment({
