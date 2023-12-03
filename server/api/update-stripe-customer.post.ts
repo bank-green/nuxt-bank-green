@@ -10,14 +10,6 @@ export default defineEventHandler(
         body = JSON.parse(new TextDecoder().decode(body))
       }
 
-      if (body.email.length === 0) {
-        return {
-          success: false,
-          customerId: null,
-          error: 'Invalid amount'
-        }
-      }
-
       const requBody = {
         email: body.email,
         // this is for now the only solution to note in Stripe whether we are allowed to send emails since there is no specific props on customers object for that

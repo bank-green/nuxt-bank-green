@@ -4,7 +4,7 @@ import {
   StripeElements,
   loadStripe
 } from '@stripe/stripe-js'
-import { CreatePaymentIntentResponse, UpdateStripeCustomerResponse } from './interfaces/donate'
+import { CreatePaymentIntentResponse } from './interfaces/donate'
 
 export default function useStripe (
   publishableKey: string,
@@ -59,31 +59,32 @@ export default function useStripe (
       return
     }
 
-    const customer: UpdateStripeCustomerResponse = await $fetch(
-      '/api/update-stripe-customer',
-      {
-        method: 'POST',
-        body: {
-          email,
-          id: customerId,
-          consent
+    // only update customer if user entered email address
+    if (email && email?.length > 0) {
+      await $fetch(
+        '/api/update-stripe-customer',
+        {
+          method: 'POST',
+          body: {
+            email,
+            id: customerId,
+            consent
+          }
         }
-      }
-    )
+      )
+    }
 
-    if (customer.customerId && customer.customerId.length > 0) {
-      const { error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${window.location.origin}/donate-complete`
-        }
-      })
-
-      if (error.type === 'card_error' || error.type === 'validation_error') {
-        stripeMessages.value.push(error.message as string)
-      } else {
-        stripeMessages.value.push('An unexpected error occured.')
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/donate-complete`
       }
+    })
+
+    if (error.type === 'card_error' || error.type === 'validation_error') {
+      stripeMessages.value.push(error.message as string)
+    } else {
+      stripeMessages.value.push('An unexpected error occured.')
     }
   }
 
