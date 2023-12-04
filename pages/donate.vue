@@ -96,7 +96,7 @@
                     </label>
                   </div>
                 </div>
-                <div class="flex flex-col gap-4 mt-12" :class="!isStripeLoaded && 'hidden'">
+                <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
                   <TextField
                     v-model="email"
                     name="email"
