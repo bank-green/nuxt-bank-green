@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center"
+    class="w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-8 py-8 text-gray-50 text-center"
   >
     <form
       class="flex flex-col items-center"
@@ -20,15 +20,24 @@
           :warning="fullNameWarning"
           dark
         />
-        <!-- <TextField
-          v-model="lastName"
+        <TextField
+          v-model="form.email"
           class="col-span-2"
-          name="lastName"
-          type="text"
-          :title="'Your last name'"
-          :placeholder="'Your last name'"
+          type="email"
+          name="email"
+          :title="embracePage?.data.email_label || 'Email'"
+          :placeholder="embracePage?.data.email_placeholder || 'email@example.com'"
+          :warning="warningsMap['email']"
           dark
-        /> -->
+        />
+        <div class="col-span-2">
+          <span
+            class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
+          >
+            {{ embracePage?.data?.country_select_label || 'Choose your country' }}
+          </span>
+          <LocationSearch v-model="country" class="w-full text-gray-700" />
+        </div>
         <div class="col-span-2">
           <span
             class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
@@ -37,46 +46,43 @@
           </span>
 
           <!-- TODO need to add hover/help text ?  is this
-          already in BankSearch? -->
+          already in BankSearch? and add a warning message if this is not filled -->
           <BankSearch
             ref="bankSearch"
-            v-model="bank"
-            class="w-full text-gray-700"
+            v-model="form.bank"
+            class="w-full"
             :disabled="!country"
             :country="country"
+            :class="bankSearchClasses"
             @search-input-change="searchValue = $event"
+            @update:model-value="searchInputChange"
           >
             <template #not-listed>
-              <PrismicRichText v-if="embracePage.data" :field="embracePage?.data.bank_not_found" />
-              <p v-else class="text-gray-500 p-4 shadow-lg">
-                We couldn't find your bank. <br>
-                But that's ok! Just type in your bank's name and leave it at
-                that.
-              </p>
+              <PrismicRichText
+                :field="embracePage?.data.bank_not_found"
+                fallback="We couldn't find your bank. <br>
+                For now, we are only considering certain banks for this campaign. We may add more eventually."
+              />
             </template>
           </BankSearch>
+          <span
+            v-if="warningsMap['bank']"
+            class="px-5 py-6 text-xs font-bold"
+          >
+            {{ warningsMap['bank'] }}
+          </span>
         </div>
         <TextField
-          v-model="email"
-          class="col-span-2"
-          type="email"
-          name="email"
-          :title="embracePage?.data.email_label || 'email'"
-          :placeholder="embracePage?.data.email_placeholder || 'email@example.com'"
-          :warning="warningsMap['email']"
-          dark
-        />
-        <TextField
-          v-model="hometown"
-          class="col-span-2"
+          v-model="form.hometown"
+          class="col-span-full"
           name="hometown"
           type="text"
-          :title="embracePage?.data.hometown_label || 'hometown'"
-          :placeholder="embracePage?.data.hometown_placeholder || 'hometown'"
+          :title="embracePage?.data.hometown_label || 'Your hometown'"
+          :placeholder="embracePage?.data.hometown_placeholder || 'Hometown'"
           dark
         />
         <TextField
-          v-model="background"
+          v-model="form.background"
           class="col-span-full"
           rows="5"
           name="backgound"
@@ -91,8 +97,10 @@
           name="isAgreeMarketing"
           dark
         >
-          <PrismicRichText v-if="embracePage?.data" :field="embracePage?.data.marketing_checkbox_label" />
-          <p v-else>I wish to receive more information via email from Bank.Green.</p>
+          <PrismicRichText
+            :field="embracePage?.data.marketing_checkbox_label"
+            fallback="I wish to receive more information via email from Bank.Green."
+          />
         </CheckboxSection>
         <CheckboxSection
           v-model="isAgreeTerms"
@@ -101,14 +109,20 @@
           :warning="warningsMap['isAgreeTerms']"
           dark
         >
-          <PrismicText v-if="embracePage?.data" :field="embracePage?.data.privacy_checkbox_label" wrapper="span" />
-          <p v-else>I have read and understood Bank.Green</p>
+          <PrismicText
+            :field="embracePage?.data.privacy_checkbox_label"
+            wrapper="span"
+            fallback="I have read and understood the Bank.Green "
+          />
+          <!--<p v-else>I have read and understood Bank.Green</p>-->
           <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
             {{
               ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
             }}
           </NuxtLink>
-          <a v-else href="../privacy">privacy policy</a>
+          <NuxtLink v-else to="/privacy" class="link">
+            privacy policy
+          </NuxtLink>
           <vue-hcaptcha
             v-if="!isLocal"
             :sitekey="hcaptchaSitekey"
@@ -143,13 +157,17 @@
   <EmbraceModal
     v-show="showModal"
     v-model="showModal"
+    v-model:message="generatedMessage"
     tag="popup"
+    :form="form"
+    @success="successRedirect()"
   />
 </template>
 
 <script setup lang="ts">
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
 // import { PrismicDocument } from '@prismicio/types'
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
@@ -157,44 +175,40 @@ import EmbraceModal from '@/components/EmbraceModal.vue'
 
 const { client } = usePrismic()
 
-// TODO: pass embracepage as a prop instead of requesting it again
+// TODO: Maybe update this to pass embracepage as a prop
+//       instead of requesting it again
 const { data: embracePage } = await useAsyncData('embrace', () =>
   client.getSingle('embracepage')
 )
 
+if (!embracePage?.value) {
+  console.log('Warning: Unable to retrieve embracepage')
+}
+
 const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
-/*
-const props = defineProps({
-  // embracePage: PrismicDocument<Record<string, any>, string, string> | null
-  // successRedirectURL: { type: String, default: '/thanks-pledge' } //  THIS LINE SHOULD CHANGE
-})
-*/
-/*
-defineProps<{
-  name: string;
-  website: string;
-  inheritBrandRating: {
-    tag: string;
-    name: string;
-  };
-  embracePage: PrismicDocument<Record<string, any>, string, string> | null;
+
+const props = defineProps<{
+  name?: String;
+  // TODO: update to actual embrace thank you page (once we have one)
+  successRedirectURL?: { type: String, default: '/thanks' }
+  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null;
 }>()
-*/
 
 const fullName = ref(null)
 const fullNameWarning = ref(null)
-const bank = ref(null)
 const searchValue = ref(null)
 const { country } = useCountry()
 const hometown = ref(null)
 const background = ref(null)
 const showModal = ref(false)
+const bankEmail = ref(null)
+const subject = ref(null)
+const generatedMessage = ref(null) // pass to preview component as v-model??
 
 const extras = computed(() => {
   return {
     fullName: fullName.value || '',
     country: country.value || '',
-    bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
@@ -203,17 +217,13 @@ const extras = computed(() => {
   }
 })
 
-// TODO: add custom warning for fullName, since this is not builtin to
-//       useContactForm
-
 const {
   email,
+  bank,
   isAgreeTerms,
   isAgreeMarketing,
-  //  showWarnings,  // may need this to do check prior to popup?
-  //  hasWarnings,  // may need this to do check prior to popup?
+  hasWarnings,
   warningsMap,
-  //  send,  // this won't work for this page
   validate,
   busy
 } = useContactForm(
@@ -222,28 +232,79 @@ const {
   extras
 )
 
+const form = ref({
+  fullName,
+  email,
+  subject,
+  bank,
+  bankEmail,
+  searchValue,
+  country,
+  hometown,
+  background
+})
+
 // const emit = defineEmits(['success'])
 
-// TODO We are not submitting the form, we need to display the popup, and from the
-// popup generate a mailto link
+function searchInputChange (event) {
+  // When bank is selected we need to fetch/update bank contact email
+  if (event && form.value?.bank?.name) {
+    getBankEmail(form.value?.bank)
+  }
+}
+
+// TODO: connect to api to retrieve email or list of bank emails
+//       May want to use 'busy' if we retrieve individually rather than loading
+//       a full list at page load
+function getBankEmail (bank) {
+  console.log(`getBankEmail(${bank?.name})`)
+  bankEmail.value = 'fakeBank@example.com'
+  subject.value = 'Fake subject line'
+}
+
+// TODO: connect to api to generate message body
+//       Will need to wait for message before showing modal
+function getGeneratedMessage () {
+  console.log('getGeneratedMessage()')
+  generatedMessage.value = 'fake generated message'
+}
 
 function checkAndDisplayPreview () {
   validate()
-
   if (!extras.value.fullName) {
-    fullNameWarning.value = embracePage?.value.data.full_name_warning || 'Your name is required'
+    if (embracePage?.value) {
+      fullNameWarning.value = embracePage?.value.data.full_name_warning
+    } else {
+      fullNameWarning.value = 'Your name is required'
+    }
     return
   }
-  console.log('valid')
   if (fullNameWarning) {
     fullNameWarning.value = null
   }
+  if (hasWarnings?.value) {
+    return
+  }
+  // TODO: Call function or use some other trigger
+  // to get generated message body and message subject
+  // and store it in the values passed to modal
+  getGeneratedMessage()
   showModal.value = true
-  // TODO: show preview...
 }
 
+function successRedirect () {
+  navigateTo(props.successRedirectURL)
+}
+
+const bankSearchClasses = computed(() => {
+  if (warningsMap?.value?.bank) {
+    return 'border-red-300 tdext-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
+  }
+  return 'text-gray-700'
+})
+
 const isLocal = computed(() => {
-  if (window.location.hostname === 'localhost') {
+  if (process.env.NODE_ENV === 'development') {
     return true
   }
   return false

@@ -8,21 +8,20 @@
           <h1
             class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-2 text-center"
           >
-            {{ embrace?.data.title || 'title' }}
+            {{ embrace?.data.title || 'Encourage Real Policy Implementation!' }}
           </h1>
           <h3
             class="max-w-3xl text-2lg font-semibold whitespace-pre-line mb-6 text-center"
           >
-            {{ embrace?.data.subtitle || 'subtitle' }}
+            {{ embrace?.data.subtitle || 'Together for sustainability' }}
           </h3>
           <PrismicRichText
-            v-if="embrace?.data"
             class="prose md:text-lg whitespace-pre-wrap mb-10"
             :field="embrace?.data.description1"
+            fallback="Share your concerns and suggestions in the form below.
+
+(Please note that some resources were not reachable and this is a simplified version of this page.)"
           />
-          <div v-else>
-            description1
-          </div>
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
             <div ref="embraceForm" class="w-full relative z-10">
               <Embrace />

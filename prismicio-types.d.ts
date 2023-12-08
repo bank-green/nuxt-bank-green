@@ -827,7 +827,18 @@ interface EmbracepageDocumentData {
    * - **Tab**: Preview
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  proceed_button_label: prismic.KeyTextField
+  proceed_button_label: prismic.KeyTextField;
+
+  /**
+   * BCC email field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bcc_email
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  bcc_email: prismic.KeyTextField
   /**
    * Form Title field in *EmbracePage*
    *

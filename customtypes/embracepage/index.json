@@ -3,6 +3,7 @@
   "label": "EmbracePage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": { "type": "Text", "config": { "label": "Title" } },
@@ -65,6 +66,10 @@
       "proceed_button_label": {
         "type": "Text",
         "config": { "label": "Proceed Button Label" }
+      },
+      "bcc_email": {
+        "type": "Text",
+        "config": { "label": "BCC email", "placeholder": "" }
       }
     },
     "Form": {
@@ -147,6 +152,5 @@
         "config": { "label": "Privacy Policy Link Text" }
       }
     }
-  },
-  "format": "custom"
+  }
 }
