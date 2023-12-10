@@ -20,6 +20,11 @@
           img="/img/team/albert.jpg"
         />
         <TeamMember
+          name="Nicole Gustas"
+          description="Nicole has spent her career creating and optimising tourism content and marketing campaigns. She put her skills to work for climate activism when she realised that the climate crisis was destroying all of the beautiful places she promoted."
+          img="/img/team/nicole.jpg"
+        />
+        <TeamMember
           name="Alice Hu"
           description="When Alice finished school in 2019, she had the strongly felt but vaguely conceived plan to somehow do some good in the world. As she reckoned with her own eco-grief, she found her place in climate campaigning, working to create a livable world for all from New York City."
           img="/img/team/alice.jpg"
