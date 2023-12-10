@@ -36,6 +36,11 @@
           img="/img/team/martha.jpg"
         />
         <TeamMember
+          name="Nicole Gustas"
+          description="Nicole has spent her career creating and optimising tourism content and marketing campaigns. She put her skills to work for climate activism when she realised that the climate crisis was destroying all of the beautiful places she promoted."
+          img="/img/team/nikki.jpg"
+        />
+        <TeamMember
           name="Neil Simpson"
           description="Neil used to write for London restaurant guides and tourism magazines, until he realised that he only wanted to write about protecting the environment. Neil is currently travelling around Australia, volunteering on farms, and writing as he goes."
           img="/img/team/neil.jpg"
