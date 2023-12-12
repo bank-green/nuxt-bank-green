@@ -1,18 +1,17 @@
 <template>
   <div class="flex justify-center">
-    <SocialSharer
-      class="text-sushi-500"
-      url="https://bank.green"
-      :text="asText(slice?.primary.text)!"
-      :hashtags="['climatecrisis', 'fossilbanks']"
-      :large="true"
+    <TeamMember
+      :name="asText(slice.primary.name)!"
+      :description="asText(slice.primary.description)!"
+      :img="asImageSrc(slice?.primary.img)!"
+      :href="asLink(slice?.primary.link)!"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { getSliceComponentProps } from '@prismicio/vue'
-import { asText } from '@prismicio/helpers'
+import { asText, asLink, asImageSrc } from '@prismicio/helpers'
 
 defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
 </script>

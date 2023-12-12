@@ -1,51 +1,45 @@
 {
-  "id": "calltoaction",
-  "label": "CallToAction",
+  "id": "thankspledge",
+  "label": "ThanksPledge",
+  "format": "custom",
   "repeatable": false,
   "status": true,
   "json": {
     "Main": {
       "title": {
-        "type": "Text",
-        "config": { "label": "Title", "placeholder": "" }
-      },
-      "text": {
         "type": "StructuredText",
         "config": {
-          "label": "Text",
+          "label": "title",
           "placeholder": "",
           "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
-      "checklist1": {
+      "content1": {
         "type": "StructuredText",
         "config": {
-          "label": "checklist1",
+          "label": "content1",
           "placeholder": "",
           "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
-      "checklist2": {
+      "content2": {
         "type": "StructuredText",
         "config": {
-          "label": "checklist2",
+          "label": "content2",
           "placeholder": "",
           "allowTargetBlank": true,
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
-      "checklist3": {
-        "type": "StructuredText",
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
-          "label": "checklist3",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "choices": { "social_sharer_slice": { "type": "SharedSlice" } }
         }
       }
     }
-  },
-  "format": "custom"
+  }
 }

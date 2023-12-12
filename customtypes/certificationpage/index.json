@@ -7,41 +7,26 @@
     "Main": {
       "seo_title": {
         "type": "Text",
-        "config": {
-          "label": "SEO Title",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Title", "placeholder": "" }
       },
       "seo_description": {
         "type": "Text",
-        "config": {
-          "label": "SEO Description",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Description", "placeholder": "" }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "accordion_slice": {
-              "type": "SharedSlice"
-            },
-            "embed_slice": {
-              "type": "SharedSlice"
-            },
-            "button_slice": {
-              "type": "SharedSlice"
-            },
-            "image_slice": {
-              "type": "SharedSlice"
-            },
-            "text_slice": {
-              "type": "SharedSlice"
-            }
+            "accordion_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" },
+            "button_slice": { "type": "SharedSlice" },
+            "image_slice": { "type": "SharedSlice" },
+            "text_slice": { "type": "SharedSlice" }
           }
         }
       }
     }
-  }
+  },
+  "format": "custom"
 }

@@ -14,13 +14,7 @@
           "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "tag",
-          "placeholder": ""
-        }
-      },
+      "uid": { "type": "UID", "config": { "label": "tag", "placeholder": "" } },
       "description1": {
         "type": "StructuredText",
         "config": {
@@ -50,17 +44,11 @@
       },
       "seo_title": {
         "type": "Text",
-        "config": {
-          "label": "SEO Title",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Title", "placeholder": "" }
       },
       "seo_description": {
         "type": "Text",
-        "config": {
-          "label": "SEO Description",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Description", "placeholder": "" }
       },
       "subtitle": {
         "type": "StructuredText",
@@ -74,10 +62,9 @@
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
-        "config": {
-          "choices": {}
-        }
+        "config": { "choices": {} }
       }
     }
-  }
+  },
+  "format": "custom"
 }

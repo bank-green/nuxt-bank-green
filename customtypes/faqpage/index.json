@@ -16,29 +16,20 @@
       },
       "seo_title": {
         "type": "Text",
-        "config": {
-          "label": "SEO Title",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Title", "placeholder": "" }
       },
       "seo_description": {
         "type": "Text",
-        "config": {
-          "label": "SEO Description",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Description", "placeholder": "" }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {
-            "accordion_slice": {
-              "type": "SharedSlice"
-            }
-          }
+          "choices": { "accordion_slice": { "type": "SharedSlice" } }
         }
       }
     }
-  }
+  },
+  "format": "custom"
 }

@@ -26,13 +26,8 @@
           "label": "buttontext"
         }
       },
-      "link": {
-        "type": "Link",
-        "config": {
-          "label": "link",
-          "select": null
-        }
-      }
+      "link": { "type": "Link", "config": { "label": "link", "select": null } }
     }
-  }
+  },
+  "format": "custom"
 }

@@ -7,29 +7,18 @@
     "Main": {
       "seo_title": {
         "type": "Text",
-        "config": {
-          "label": "SEO Title",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Title", "placeholder": "" }
       },
       "seo_description": {
         "type": "Text",
-        "config": {
-          "label": "SEO Description",
-          "placeholder": ""
-        }
+        "config": { "label": "SEO Description", "placeholder": "" }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "text_slice": {
-              "type": "SharedSlice"
-            }
-          }
-        }
+        "config": { "choices": { "text_slice": { "type": "SharedSlice" } } }
       }
     }
-  }
+  },
+  "format": "custom"
 }
