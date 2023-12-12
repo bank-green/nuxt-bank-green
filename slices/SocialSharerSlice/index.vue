@@ -3,7 +3,7 @@
     <SocialSharer
       class="text-sushi-500"
       url="https://bank.green"
-      :text=asText(slice?.primary.text)!
+      :text="asText(slice?.primary.text)!"
       :hashtags="['climatecrisis', 'fossilbanks']"
       :large="true"
     />
