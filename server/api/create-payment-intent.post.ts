@@ -22,15 +22,28 @@ export default defineEventHandler(
         return {
           success: false,
           clientSecret: null,
+          customerId: null,
           error: 'Invalid amount'
         }
-      }
+      };
+
+      // we have to create the customer already on payment intent to link the payment to the customer to then update it later with email address
+      const customer = await $fetch('https://api.stripe.com/v1/customers', {
+        method: 'POST',
+        headers: {
+          authorization: `Basic ${Buffer.from(stripeSecretKey + ':').toString(
+            'base64'
+          )}`
+        },
+        parseResponse: JSON.parse
+      })
 
       // we have to build the request ourself because the Stripe SDK does not play well with Cloudflare
       const reqBody = {
         amount: `${body.amount * DEFAULT_MULTIPLIER}`,
         currency: DEFAULT_CURRENCY,
-        'automatic_payment_methods[enabled]': 'true'
+        'automatic_payment_methods[enabled]': 'true',
+        customer: customer.id
       }
 
       const res = await $fetch('https://api.stripe.com/v1/payment_intents', {
@@ -47,6 +60,7 @@ export default defineEventHandler(
       return {
         success: true,
         clientSecret: res.client_secret,
+        customerId: customer.id,
         error: null
       }
     } catch (e) {
@@ -55,6 +69,7 @@ export default defineEventHandler(
       return {
         success: false,
         clientSecret: null,
+        customerId: null,
         error: _e.message
       }
     }

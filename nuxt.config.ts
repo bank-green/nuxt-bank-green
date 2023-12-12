@@ -1,7 +1,7 @@
 import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', '@nuxtjs/prismic'],
+  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', '@nuxtjs/prismic', 'nuxt-jsonld'],
   prismic: {
     endpoint: 'bankgreen'
   },

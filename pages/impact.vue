@@ -24,4 +24,26 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+useHead({
+  title: 'Take Our Fossil Free Banking Survey - Maximize Your Impact',
+  htmlAttrs: {
+    lang: 'en'
+  },
+  link: [
+    {
+      hid: 'canonical',
+      rel: 'canonical',
+      href: 'https://bank.green/impact'
+    }
+  ],
+  meta: [
+    { property: 'og:locale', content: 'en_US' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'Bank Green' },
+    { property: 'og:url', content: 'https://bank.green/impact' },
+    { name: 'description', content: 'Maximize your impact by letting us know you opened an account with a bank that doesn\'t finance fossil fuels.' }
+  ]
+})
+</script>

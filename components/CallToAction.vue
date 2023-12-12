@@ -3,12 +3,12 @@
     class="flex flex-col justify-center items-center rounded-xl py-6 md:py-12 px-6 md:px-16"
     :class="light ? 'bg-transparent' : 'bg-primary-dark'"
   >
-    <h1
+    <h2
       class="w-full text-center font-semibold text-xl md:text-3xl tracking-wider mb-8 md:mb-4"
       :class="light ? 'text-gray-800' : 'text-gray-50'"
     >
       {{ call.data.title }}
-    </h1>
+    </h2>
     <div
       class="flex flex-col md:flex-row items-center justify-center md:space-x-8"
       :class="spaced ? 'py-4' : ''"
