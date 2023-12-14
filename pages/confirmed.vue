@@ -2,16 +2,24 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <SliceZone
-          :slices="confirmed?.data.slices"
-          :components="sliceComps"
-        />
+        <div v-if="confirmed?.data.slices">
+          <SliceZone
+            :slices="confirmed?.data.slices"
+            :components="sliceComps"
+          />
+        </div>
+        <div v-else>
+          <ThanksSection
+            :title="'Thanks for joining the Money Movement and our emailing list!'"
+            :description="`You'll be hearing from us soon!`"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="js">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 useHeadHelper('Thank you')

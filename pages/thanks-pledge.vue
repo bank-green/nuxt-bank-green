@@ -28,15 +28,37 @@
             </svg>
 
             <h1 class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
-              <PrismicRichText :field="thankspledge.data.title" />
+              <PrismicRichText
+                :field="thankspledge?.data.title"
+                fallback="Thank you for your pledge!"
+              />
             </h1>
 
-            <PrismicRichText class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line" :field="thankspledge.data.content1" />
-            <PrismicRichText class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line" :field="thankspledge.data.content2" />
-            <SliceZone
-              :slices="thankspledge?.data.slices ?? []"
-              :components="sliceComps"
+            <PrismicRichText
+              class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line"
+              :field="thankspledge?.data.content1"
+              fallback="You've just taken an amazing action to help build a better future"
             />
+            <PrismicRichText
+              class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line"
+              :field="thankspledge?.data.content2"
+              fallback="Why not encourage your friends to do the same..."
+            />
+            <div v-if="thankspledge?.data.slices">
+              <SliceZone
+                :slices="thankspledge?.data.slices ?? []"
+                :components="sliceComps"
+              />
+            </div>
+            <div v-else>
+              <SocialSharer
+                class="text-sushi-500"
+                url="https://bank.green"
+                :hashtags="['climatecrisis', 'fossilbanks']"
+                :text="'I just pledged to move my money away from fossil fuels! Check your bank and do the same'"
+                :large="true"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -44,7 +66,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="js">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 useHeadHelper('Thank you')

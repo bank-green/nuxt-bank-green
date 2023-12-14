@@ -10,10 +10,22 @@
             src="/img/certification/fossil-free-certified.png"
             alt="Fossil-free certified badge"
           >
-          <SliceZone
-            :slices="certification?.data.slices ?? []"
-            :components="sliceComps"
-          />
+          <div v-if="certification?.data">
+            <SliceZone
+              :slices="certification?.data.slices ?? []"
+              :components="sliceComps"
+            />
+          </div>
+          <div v-else>
+            <h1>Fossil Free Certification</h1>
+            <p>
+              Financial institutions that are Fossil Free Certified have pledged not to finance new fossil fuel companies or projects,
+              and the majority already do not do so. Fossil Free Certification is the simplest, most straightforward way to signal to customers,
+              professionals in the banking sector, and the general public that a
+              sustainability-conscious financial institution is truly putting its money where its mouth is.
+            </p>
+            <h2>Error Loading Content!</h2>
+          </div>
         </article>
       </div>
     </div>

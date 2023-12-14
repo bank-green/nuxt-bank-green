@@ -5,10 +5,15 @@
         <article
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
         >
-          <SliceZone
-            :slices="privacy?.data.slices ?? []"
-            :components="sliceComps"
-          />
+          <div v-if="privacy?.data.slices">
+            <SliceZone
+              :slices="privacy?.data.slices ?? []"
+              :components="sliceComps"
+            />
+          </div>
+          <div v-else>
+            <h1>Error Loading Content!</h1>
+          </div>
         </article>
       </div>
     </div>

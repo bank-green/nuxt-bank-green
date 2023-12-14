@@ -2,10 +2,17 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <SliceZone
-          :slices="thankssign?.data.slices ?? []"
-          :components="sliceComps"
-        />
+        <div v-if="thankssign?.data.slices">
+          <SliceZone
+            :slices="thankssign?.data.slices ?? []"
+            :components="sliceComps"
+          />
+        </div>
+        <div v-else>
+          <ThanksSection
+            title="Thanks, we've emailed you a link to sign up later."
+          />
+        </div>
       </div>
     </div>
   </div>

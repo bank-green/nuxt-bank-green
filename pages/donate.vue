@@ -5,22 +5,24 @@
         <div
           class="contain grid grid-cols-1 md:grid-cols-2 justify-center items-center pb-4 lg:pb-0 mb-4 gap-16"
         >
-          <template v-if="donation">
+          <template v-if="donation?.data">
             <div class="space-y-8">
               <PrismicImage
-                v-if="donation.data['photo']"
                 class="w-full h-full object-contain object-top"
                 alt="donation-image"
-                :field="donation.data['photo']"
+                :field="donation?.data.photo"
               />
               <PrismicText
-                :field="donation.data['title']"
+                :field="donation?.data.title"
                 wrapper="h1"
                 class="font-semibold text-xl md:text-3xl tracking-wider"
+                fallback="Help us build a greener future!"
               />
               <PrismicRichText
-                :field="donation.data['description']"
+                :field="donation?.data.description"
                 class="prose sm:prose-lg xl:prose-xl prose-blurb"
+                fallback="By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
+                responsible financial decisions, channeling their deposits towards green financial institutions."
               />
             </div>
             <div
@@ -38,13 +40,16 @@
                 @submit.prevent.stop="submit"
               >
                 <PrismicText
-                  :field="donation.data['donation-title']"
+                  :field="donation?.data['donation-title']"
                   wrapper="h1"
                   class="font-semibold text-xl md:text-3xl tracking-wider text-white"
+                  fallback="Donate to Bank.Green"
                 />
                 <PrismicRichText
-                  :field="donation.data['donation-description']"
+                  :field="donation?.data['donation-description']"
                   class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify"
+                  fallback="...and make a big difference in the world. Your donation will give us greater
+                  capacity to green the banking sector and protect our collective future."
                 />
                 <div class="grid grid-cols-2 md:grid-cols-2 px-4 gap-4 mt-8">
                   <div
@@ -108,7 +113,7 @@
                   <PrismicText
                     wrapper="span"
                     class="text-2xl font-semibold"
-                    :field="donation.data['donation-button']"
+                    :field="donation?.data['donation-button']"
                   />
                 </button>
               </form>

@@ -2,7 +2,13 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
       <div class="page-fade-in contain max-w-3xl pt-28 pb-8">
-        <PrismicRichText class="text-gray-600 mb-12 whitespace-pre-line prose" :field="contact.data.description" />
+        <PrismicRichText
+          class="text-gray-600 mb-12 whitespace-pre-line prose"
+          :field="contact.data.description"
+          fallback="Unfortunately we are not currently accepting requests to research new banks,
+          but we encourage you to reach out to your own bank to establish whether or not they are financing
+          fossil fuels. You can also volunteer 😄"
+        />
 
         <form class="flex flex-col justify-center items-center" @submit.prevent.stop="onSend">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -86,7 +92,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="js">
 import { ref } from 'vue'
 import CheckboxSection from '../components/forms/CheckboxSection.vue'
 import TextField from '../components/forms/TextField.vue'

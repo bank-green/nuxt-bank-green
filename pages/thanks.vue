@@ -2,10 +2,18 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <SliceZone
-          :slices="thanks?.data.slices ?? []"
-          :components="sliceComps"
-        />
+        <div v-if="thanks?.data.slices">
+          <SliceZone
+            :slices="thanks?.data.slices ?? []"
+            :components="sliceComps"
+          />
+        </div>
+        <div v-else>
+          <ThanksSection
+            title="Thank you for joining Bank.Green!"
+            description="We appreciate your support in defunding fossil banks."
+          />
+        </div>
       </div>
     </div>
   </div>

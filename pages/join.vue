@@ -39,7 +39,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="js">
 import CheckList from '@/components/CheckList.vue'
 import SignupBox from '@/components/forms/SignupBox.vue'
 

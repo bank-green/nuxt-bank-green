@@ -5,6 +5,7 @@
         <PrismicRichText
           :field="action?.data.introduction"
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
+          fallback="Error Loading Content"
         />
         <div
           class="mt-8 lg:mt-16 rounded-xl ring-2 ring-sushi-600 overflow-hidden bg-white"
