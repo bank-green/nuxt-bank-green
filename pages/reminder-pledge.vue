@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 const sliceComps = ref(defineSliceZoneComponents(components))

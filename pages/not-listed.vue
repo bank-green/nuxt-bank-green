@@ -113,7 +113,7 @@
     </div>
   </div>
 </template>
-<script setup lang="js">
+<script setup lang="ts">
 import { asText } from '@prismicio/helpers'
 import SubmitBank from '@/components/forms/SubmitBank.vue'
 const { client } = usePrismic()

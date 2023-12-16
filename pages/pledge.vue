@@ -5,20 +5,11 @@
         <div
           class="contain flex flex-col justify-center items-center pb-4 lg:pb-0 mb-4"
         >
-          <div v-if="pledge?.data.introduction">
-            <h1
-              class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
-            >
-              {{ pledge.data.introduction }}
-            </h1>
-          </div>
-          <div v-else>
-            <h1
-              class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
-            >
-              Let's send a message to the climate crisis funders that we won't tolerate their behavior
-            </h1>
-          </div>
+          <h1
+            class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-8 text-center"
+          >
+            {{ asText(pledge?.data.introduction) || "Let's send a message to the climate crisis funders that we won't tolerate their behavior" }}
+          </h1>
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
             <div ref="signUpForm" class="w-full lg:w-3/5 relative z-10">
               <PledgeSignup />
@@ -46,7 +37,7 @@
         class="md:max-w-lg prose md:text-lg whitespace-pre-wrap md:mr-8 mb-12 md:mt-0"
       >
         <PrismicRichText
-          :field="pledge.data.description2"
+          :field="pledge?.data.description2"
           fallback="Error Loading Content!"
         />
         <div class="w-full flex justify-center mt-12">
@@ -68,6 +59,7 @@
 </template>
 
 <script setup>
+import { asText } from '@prismicio/helpers'
 import { ref } from 'vue'
 import Swoosh from '@/components/Swoosh.vue'
 import CheckList from '@/components/CheckList.vue'

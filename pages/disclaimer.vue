@@ -7,7 +7,7 @@
         >
           <div v-if="disclaimer?.data.slices">
             <SliceZone
-              :slices="disclaimer?.data.slices ?? []"
+              :slices="disclaimer?.data.slices"
               :components="sliceComps"
             />
           </div>
@@ -38,7 +38,7 @@
   </div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 

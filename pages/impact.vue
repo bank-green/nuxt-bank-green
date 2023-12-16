@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 const { client } = usePrismic()
 const { data: impact } = await useAsyncData('impact', () =>
   client.getByUID('textonlypages', 'impactpage'))

@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
@@ -44,5 +44,5 @@ const { data: certification } = await useAsyncData('certification', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(certification.value.data)
+usePrismicSEO(certification?.value?.data)
 </script>

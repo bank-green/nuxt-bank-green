@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
@@ -32,5 +32,5 @@ const { data: privacy } = await useAsyncData('privacy', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(privacy.value.data)
+usePrismicSEO(privacy.value?.data)
 </script>

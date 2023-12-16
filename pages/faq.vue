@@ -38,7 +38,7 @@
   </div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import SignupBox from '@/components/forms/SignupBox.vue'
 import { components } from '~~/slices'
@@ -51,5 +51,6 @@ const { data: faq } = await useAsyncData('faq', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(faq.value.data)
+usePrismicSEO(faq.value?.data)
+
 </script>

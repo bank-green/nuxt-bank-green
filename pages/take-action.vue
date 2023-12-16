@@ -16,7 +16,7 @@
             >
               <div v-for="(tab, index) in tabs" :key="index" class="flex-grow">
                 <input
-                  :id="index"
+                  :id="index.toString()"
                   v-model="selectedTabIndex"
                   class="hidden"
                   type="radio"
@@ -27,7 +27,7 @@
                   :class="
                     selectedTabIndex === index ? 'bg-sushi-200' : 'text-white'
                   "
-                  :for="index"
+                  :for="index.toString()"
                 >{{ tab }}</label>
               </div>
             </div>
@@ -88,7 +88,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 const sliceComps = ref(defineSliceZoneComponents(components))
@@ -99,7 +99,7 @@ const { data: action } = await useAsyncData('takeaction', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(action.value.data)
+usePrismicSEO(action.value?.data)
 
 const tabs = ['Pressure', 'Switch', 'Share', 'Learn']
 const selectedTabIndex = ref(0)

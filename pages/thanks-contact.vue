@@ -2,7 +2,7 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <div v-if="thankscontact.data.slices">
+        <div v-if="thankscontact?.data.slices">
           <SliceZone
             :slices="thankscontact?.data.slices ?? []"
             :components="sliceComps"
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
