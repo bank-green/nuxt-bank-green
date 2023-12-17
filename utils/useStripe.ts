@@ -16,6 +16,7 @@ export default function useStripe (
 
   let stripe: Stripe | null = null
   let elements: StripeElements | null = null
+  let customerId: string | null = null
 
   const initOneTimePayment = async (amount: number) => {
     isStripeLoaded.value = false
@@ -30,6 +31,8 @@ export default function useStripe (
     )
     console.info(stripePaymentIntent)
     if (stripePaymentIntent?.clientSecret == null) { return }
+
+    customerId = stripePaymentIntent.customerId
 
     stripe = await loadStripe(publishableKey)
 
@@ -51,9 +54,24 @@ export default function useStripe (
     isStripeLoaded.value = true
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (consent: boolean, email?: string) => {
     if (!isStripeLoaded.value || stripe == null || elements == null) {
       return
+    }
+
+    // only update customer if user entered email address
+    if (email && email?.length > 0) {
+      await $fetch(
+        '/api/update-stripe-customer',
+        {
+          method: 'POST',
+          body: {
+            email,
+            id: customerId,
+            consent
+          }
+        }
+      )
     }
 
     const { error } = await stripe.confirmPayment({

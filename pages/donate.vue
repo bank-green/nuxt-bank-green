@@ -75,10 +75,34 @@
                     {{ _option.label }}
                   </label>
                 </div>
-                <div
-                  v-for="_option in donationOptions"
-                  :key="_option.value"
-                  class="inline-block"
+                <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
+                  <TextField
+                    v-model="email"
+                    name="email"
+                    type="email"
+                    :placeholder="'youremail@address.com'"
+                    :warning="warningsMap['email']"
+                    :dark="true"
+                    :required="false"
+                  />
+                  <CheckboxSection
+                    v-model="isAgreeMarketing"
+                    class="col-span-2"
+                    name="isAgreeMarketing"
+                    :warning="warningsMap['isAgreeMarketing']"
+                    :dark="true"
+                  >
+                    I wish to receive more information via email from
+                    Bank.Green.
+                  </CheckboxSection>
+                  <div
+                    id="stripe-payment-element"
+                    class="bg-gray-50 px-6 py-8 rounded-xl"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="button-green w-full md:w-auto mt-12 flex justify-center"
                 >
                   <input
                     :id="_option.value.toString()"
@@ -124,6 +148,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import TextField from '@/components/forms/TextField.vue'
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+
 interface DonationOption<T> {
   label: string;
   value: T;
@@ -145,6 +172,12 @@ const donationOptions: DonationOption<number>[] = [
 
 const selectedMethod = ref<string>('one-time')
 const selectedAmount = ref<number | null>(null)
+const {
+  email,
+  warningsMap,
+  isAgreeMarketing,
+  send
+} = useContactForm('', ['email'], ref({}))
 
 const isOneTimePayment = computed(
   () => selectedMethod.value === 'one-time' && selectedAmount.value != null
@@ -198,7 +231,7 @@ watch(
 )
 
 const handleOneTimePayment = async () => {
-  if (selectedAmount.value == null) { /* empty */ } else if (isStripeLoaded.value) { handleSubmit() } else {
+  if (selectedAmount.value == null) { /* empty */ } else if (isStripeLoaded.value) { handleSubmit(isAgreeMarketing.value, email.value) } else {
     await initOneTimePayment(selectedAmount.value)
   }
 }
@@ -215,6 +248,7 @@ const handleRecurringPayment = async () => {
 
 const submit = () => {
   if (isOneTimePayment.value) {
+    if (email.value.length > 0) { send() }
     handleOneTimePayment()
   } else if (isRecurring.value) {
     handleRecurringPayment()

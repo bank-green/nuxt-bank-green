@@ -9,6 +9,7 @@ import SharePicGallerySlice from './SharePicGallerySlice'
 import SocialSharerSlice from './SocialSharerSlice'
 import TextSlice from './TextSlice'
 import ThanksSlice from './ThanksSlice'
+import TeamMemberSlice from './TeamMemberSlice'
 
 export {
   AccordionSlice,
@@ -19,7 +20,8 @@ export {
   SharePicGallerySlice,
   SocialSharerSlice,
   TextSlice,
-  ThanksSlice
+  ThanksSlice,
+  TeamMemberSlice
 }
 
 export const components = {
@@ -31,5 +33,6 @@ export const components = {
   share_pic_gallery_slice: SharePicGallerySlice,
   social_sharer_slice: SocialSharerSlice,
   text_slice: TextSlice,
-  thanks_slice: ThanksSlice
+  thanks_slice: ThanksSlice,
+  team_member_slice: TeamMemberSlice
 }

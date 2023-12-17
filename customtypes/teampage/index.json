@@ -3,6 +3,7 @@
   "label": "TeamPage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "seo_title": {
@@ -17,6 +18,15 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": { "choices": { "text_slice": { "type": "SharedSlice" } } }
+      }
+    },
+    "teammember": {
+      "slices1": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": { "team_member_slice": { "type": "SharedSlice" } }
+        }
       }
     }
   },
