@@ -30,7 +30,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 const { client } = usePrismic()
 const { data: impact } = await useAsyncData('impact', () =>

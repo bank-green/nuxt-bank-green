@@ -34,5 +34,5 @@ const { data: team } = await useAsyncData('team', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(team.value.data)
+usePrismicSEO(team.value?.data)
 </script>

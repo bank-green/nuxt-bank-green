@@ -7,9 +7,10 @@
         >
           <div class="space-y-8">
             <PrismicImage
+              v-if="donation?.data.photo"
               class="w-full h-full object-contain object-top"
               alt="donation-image"
-              :field="donation?.data.photo!"
+              :field="donation?.data.photo"
             />
             <PrismicText
               :field="donation?.data.title"
@@ -75,34 +76,10 @@
                     {{ _option.label }}
                   </label>
                 </div>
-                <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
-                  <TextField
-                    v-model="email"
-                    name="email"
-                    type="email"
-                    :placeholder="'youremail@address.com'"
-                    :warning="warningsMap['email']"
-                    :dark="true"
-                    :required="false"
-                  />
-                  <CheckboxSection
-                    v-model="isAgreeMarketing"
-                    class="col-span-2"
-                    name="isAgreeMarketing"
-                    :warning="warningsMap['isAgreeMarketing']"
-                    :dark="true"
-                  >
-                    I wish to receive more information via email from
-                    Bank.Green.
-                  </CheckboxSection>
-                  <div
-                    id="stripe-payment-element"
-                    class="bg-gray-50 px-6 py-8 rounded-xl"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="button-green w-full md:w-auto mt-12 flex justify-center"
+                <div
+                  v-for="_option in donationOptions"
+                  :key="_option.value"
+                  class="inline-block"
                 >
                   <input
                     :id="_option.value.toString()"
@@ -124,11 +101,31 @@
                   </label>
                 </div>
               </div>
-              <div
-                id="stripe-payment-element"
-                class="bg-gray-50 -mx-4 mt-12 px-6 py-8 rounded-xl"
-                :class="!isStripeLoaded && 'hidden'"
-              />
+              <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
+                <TextField
+                  v-model="email"
+                  name="email"
+                  type="email"
+                  :placeholder="'youremail@address.com'"
+                  :warning="warningsMap['email']"
+                  :dark="true"
+                  :required="false"
+                />
+                <CheckboxSection
+                  v-model="isAgreeMarketing"
+                  class="col-span-2"
+                  name="isAgreeMarketing"
+                  :warning="warningsMap['isAgreeMarketing']"
+                  :dark="true"
+                >
+                  I wish to receive more information via email from
+                  Bank.Green.
+                </CheckboxSection>
+                <div
+                  id="stripe-payment-element"
+                  class="bg-gray-50 px-6 py-8 rounded-xl"
+                />
+              </div>
               <button
                 type="submit"
                 class="button-green w-full md:w-auto mt-12 flex justify-center"
