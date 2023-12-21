@@ -24,7 +24,9 @@
               professionals in the banking sector, and the general public that a
               sustainability-conscious financial institution is truly putting its money where its mouth is.
             </p>
-            <h2 style="text-align: center;">Error Loading Content!</h2>
+            <h2 style="text-align: center;">
+              Error Loading Content!
+            </h2>
           </div>
         </article>
       </div>

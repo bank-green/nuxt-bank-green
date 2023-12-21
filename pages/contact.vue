@@ -2,13 +2,34 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
       <div class="page-fade-in contain max-w-3xl pt-28 pb-8">
-        <PrismicRichText
-          class="text-gray-600 mb-12 whitespace-pre-line prose"
-          :field="contact?.data.description"
-          fallback="Unfortunately we are not currently accepting requests to research new banks,
-          but we encourage you to reach out to your own bank to establish whether or not they are financing
-          fossil fuels. You can also volunteer 😄"
-        />
+        <div v-if="contact?.data.description">
+          <PrismicRichText
+            class="text-gray-600 mb-12 whitespace-pre-line prose"
+            :field="contact?.data.description"
+          />
+        </div>
+        <div v-else class="text-gray-600 mb-12 whitespace-pre-line prose">
+          <h1>
+            Contact us
+          </h1>
+          <p>
+            Unfortunately we are not currently accepting requests to research new banks,
+            but we encourage you to
+            <strong>
+              <NuxtLink to="/take-action" class="underline">
+              reach out to your own bank
+              </NuxtLink>
+            </strong>
+            to establish whether or not they
+            are financing fossil fuels.
+            <strong>
+              <NuxtLink to="/take-action" class="underline">
+              You can also volunteer
+              </NuxtLink>
+            </strong>
+            😄
+          </p>
+        </div>
 
         <form class="flex flex-col justify-center items-center" @submit.prevent.stop="onSend">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -102,7 +123,7 @@ import { ContactFormWarningsMap } from 'utils/interfaces/contactForm'
 
 const p = usePrismic()
 const { data: contact } = await useAsyncData('contact', () =>
-  p.client.getSingle('contactpage')
+  p.client.getSingle('contactpage-error')
 )
 usePrismicSEO(contact.value?.data)
 
