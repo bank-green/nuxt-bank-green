@@ -60,13 +60,13 @@
     </div>
 
     <!-- FOOTER -->
-    <InfoFooter />
+    <BankInfoFooter />
   </div>
 </template>
 <script setup lang="ts">
 import SignupBox from '../forms/SignupBox.vue'
 import Swoosh from '@/components/Swoosh.vue'
-import InfoFooter from '@/components/InfoFooter.vue'
+import BankInfoFooter from '@/components/bank/BankInfoFooter.vue'
 
 const checkList = [
   'Learn about the issues via our blog updates',

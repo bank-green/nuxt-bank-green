@@ -135,7 +135,7 @@
     </div>
 
     <!-- FOOTER -->
-    <InfoFooter />
+    <BankInfoFooter />
   </div>
 </template>
 
@@ -144,6 +144,6 @@ import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInVi
 import Swoosh from '@/components/Swoosh.vue'
 import CallToAction from '@/components/CallToAction.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import InfoFooter from '@/components/InfoFooter.vue'
+import BankInfoFooter from '@/components/bank/BankInfoFooter.vue'
 
 </script>
