@@ -3,7 +3,7 @@
     <div class="page-fade-in overflow-hidden max-w-screen">
       <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
         <div
-          class="contain flex flex-col justify-center items-center pb-4 lg:pb-0 mb-4"
+          class="contain flex flex-col justify-center items-center pb-20 md:pb-40"
         >
           <h1
             class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-2 text-center"
@@ -28,16 +28,15 @@
             </div>
           </div>
         </div>
-        <Swoosh />
       </div>
     </div>
-    <Donation background="dark" />
+    <InfoFooter />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Swoosh from '@/components/Swoosh.vue'
+import InfoFooter from '@/components/InfoFooter.vue'
 
 const { client } = usePrismic()
 const { data: embrace } = await useAsyncData('embrace', () =>
