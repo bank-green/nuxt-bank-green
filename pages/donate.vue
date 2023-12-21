@@ -26,9 +26,9 @@
             </div>
             <div v-else class="prose sm:prose-lg xl:prose-xl prose-blurb">
               <p>
-              By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
-              responsible financial decisions, channeling their deposits towards green financial institutions.
-              Bank.Green is a project of a registered charity and all U.S. donations are tax-deductible.
+                By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
+                responsible financial decisions, channeling their deposits towards green financial institutions.
+                Bank.Green is a project of a registered charity and all U.S. donations are tax-deductible.
               </p>
               <p>
                 Your donation will help us raise awareness, provide resources, and foster a global
