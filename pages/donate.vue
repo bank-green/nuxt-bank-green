@@ -18,12 +18,26 @@
               class="font-semibold text-xl md:text-3xl tracking-wider"
               fallback="Help us build a greener future!"
             />
-            <PrismicRichText
-              :field="donation?.data.description"
-              class="prose sm:prose-lg xl:prose-xl prose-blurb"
-              fallback="By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
-              responsible financial decisions, channeling their deposits towards green financial institutions."
-            />
+            <div v-if="donation?.data.description">
+              <PrismicRichText
+                :field="donation?.data.description"
+                class="prose sm:prose-lg xl:prose-xl prose-blurb"
+              />
+            </div>
+            <div v-else class="prose sm:prose-lg xl:prose-xl prose-blurb">
+              <p>
+              By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
+              responsible financial decisions, channeling their deposits towards green financial institutions.
+              Bank.Green is a project of a registered charity and all U.S. donations are tax-deductible.
+              </p>
+              <p>
+                Your donation will help us raise awareness, provide resources, and foster a global
+                community dedicated to protecting our planet.
+              </p>
+              <p>
+                <em>Bank.Green is a project of a registered charity and all U.S. donations are tax-deductible.</em>
+              </p>
+            </div>
           </div>
           <div
             class="relative w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center"
