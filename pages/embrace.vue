@@ -3,7 +3,7 @@
     <div class="page-fade-in overflow-hidden max-w-screen">
       <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
         <div
-          class="contain flex flex-col justify-center items-center pb-4 lg:pb-0 mb-4"
+          class="contain flex flex-col justify-center items-center md:pb-20 pb-10 mb-4"
         >
           <h1
             class="max-w-3xl text-2xl font-semibold whitespace-pre-line mb-2 text-center"
