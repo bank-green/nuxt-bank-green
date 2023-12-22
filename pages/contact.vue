@@ -17,14 +17,14 @@
             but we encourage you to
             <strong>
               <NuxtLink to="/take-action" class="underline">
-              reach out to your own bank
+                reach out to your own bank
               </NuxtLink>
             </strong>
             to establish whether or not they
             are financing fossil fuels.
             <strong>
               <NuxtLink to="/take-action" class="underline">
-              You can also volunteer
+                You can also volunteer
               </NuxtLink>
             </strong>
             😄

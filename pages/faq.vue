@@ -21,7 +21,9 @@
             />
           </div>
           <div v-else>
-            <h1>Error Loading Content</h1>
+            <h3 style="text-align:center">
+              Error Loading Content
+            </h3>
           </div>
         </div>
       </div>
