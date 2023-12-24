@@ -44,13 +44,13 @@
               :field="thankspledge?.data.content2"
               fallback="Why not encourage your friends to do the same..."
             />
-            <div v-if="thankspledge?.data.slices">
+            <div v-if="thankspledge?.data.slices" class="flex justify-center">
               <SliceZone
                 :slices="thankspledge?.data.slices ?? []"
                 :components="sliceComps"
               />
             </div>
-            <div v-else>
+            <div v-else class="flex justify-center">
               <SocialSharer
                 class="text-sushi-500"
                 url="https://bank.green"

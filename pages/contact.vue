@@ -56,7 +56,6 @@
               name="subject"
               :title="'Subject'"
               :placeholder="'Subject'"
-              :warning="warningsMap.subject"
               :required="true"
             />
             <TextField
@@ -66,7 +65,6 @@
               name="message"
               :title="'Your message'"
               :placeholder="'Your message'"
-              :warning="warningsMap.message"
               :required="true"
             />
             <CheckboxSection v-model="isAgreeMarketing" class="md:col-span-2" name="isAgreeMarketing">

@@ -40,7 +40,5 @@ const { client } = usePrismic()
 const { data: volunteers } = await useAsyncData('volunteers', () =>
   client.getSingle('volunteerspage')
 )
-if (volunteers.value?.data != null) {
-  usePrismicSEO(volunteers?.value.data)
-}
+usePrismicSEO(volunteers.value?.data)
 </script>
