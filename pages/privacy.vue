@@ -12,7 +12,9 @@
             />
           </div>
           <div v-else>
-            <h1>Error Loading Content!</h1>
+            <ThanksSection
+              title="Thanks! We’ll be in touch again when it’s time to move your money out of fossil banking."
+            />
           </div>
         </article>
       </div>
