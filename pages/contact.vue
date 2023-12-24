@@ -48,7 +48,7 @@
               name="email"
               :title="'Your email address'"
               :placeholder="'Your email address'"
-              :warning="warningsMap['email' as keyof ContactFormWarningsMap]"
+              :warning="warningsMap.email"
             />
             <TextField
               v-model="subject"
@@ -56,7 +56,7 @@
               name="subject"
               :title="'Subject'"
               :placeholder="'Subject'"
-              :warning="warningsMap['subject' as keyof ContactFormWarningsMap]"
+              :warning="warningsMap.subject"
               :required="true"
             />
             <TextField
@@ -66,7 +66,7 @@
               name="message"
               :title="'Your message'"
               :placeholder="'Your message'"
-              :warning="warningsMap['message' as keyof ContactFormWarningsMap]"
+              :warning="warningsMap.message"
               :required="true"
             />
             <CheckboxSection v-model="isAgreeMarketing" class="md:col-span-2" name="isAgreeMarketing">
@@ -77,7 +77,7 @@
               v-model="isAgreeTerms"
               class="md:col-span-2"
               name="isAgreeTerms"
-              :warning="warningsMap['isAgreeTerms' as keyof ContactFormWarningsMap]"
+              :warning="warningsMap.isAgreeTerms"
             >
               I have read and understood Bank.Green’s
               <NuxtLink to="/privacy" class="link">
@@ -119,11 +119,10 @@ import CheckboxSection from '../components/forms/CheckboxSection.vue'
 import TextField from '../components/forms/TextField.vue'
 
 import Swoosh from '@/components/Swoosh.vue'
-import { ContactFormWarningsMap } from 'utils/interfaces/contactForm'
 
 const p = usePrismic()
 const { data: contact } = await useAsyncData('contact', () =>
-  p.client.getSingle('contactpage-error')
+  p.client.getSingle('contactpage')
 )
 usePrismicSEO(contact.value?.data)
 
