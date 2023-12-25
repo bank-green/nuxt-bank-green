@@ -11,10 +11,8 @@
               :components="sliceComps"
             />
           </div>
-          <div v-else>
-            <ThanksSection
-              title="Thanks! We’ll be in touch again when it’s time to move your money out of fossil banking."
-            />
+          <div v-else class="flex justify-center">
+            <h3>Error loading content.</h3>
           </div>
         </article>
       </div>
