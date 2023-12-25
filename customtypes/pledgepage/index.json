@@ -3,6 +3,7 @@
   "label": "PledgePage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "introduction": {
@@ -27,6 +28,10 @@
           "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
+      "button": {
+        "type": "Text",
+        "config": { "label": "button", "placeholder": "" }
+      },
       "seo_title": {
         "type": "Text",
         "config": { "label": "SEO Title", "placeholder": "" }
@@ -36,6 +41,5 @@
         "config": { "label": "SEO Description", "placeholder": "" }
       }
     }
-  },
-  "format": "custom"
+  }
 }

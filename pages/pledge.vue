@@ -42,7 +42,7 @@
         />
         <div class="w-full flex justify-center mt-12">
           <button class="button-green max-w-md md:w-max" @click="scrollToForm">
-            Take the Pledge
+            {{ pledge?.data.button || "Take the Pledge" }}
           </button>
         </div>
       </div>

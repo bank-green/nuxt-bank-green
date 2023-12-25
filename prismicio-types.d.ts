@@ -1247,6 +1247,17 @@ interface PledgepageDocumentData {
   description2: prismic.RichTextField;
 
   /**
+   * button field in *PledgePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pledgepage.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button: prismic.KeyTextField;
+
+  /**
    * SEO Title field in *PledgePage*
    *
    * - **Field Type**: Text
