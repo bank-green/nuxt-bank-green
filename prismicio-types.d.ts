@@ -367,6 +367,17 @@ interface CertificationpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * certification_img field in *CertificationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificationpage.certification_img
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  certification_img: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *CertificationPage*
    *
    * - **Field Type**: Slice Zone

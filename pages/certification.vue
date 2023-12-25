@@ -5,11 +5,11 @@
         <article
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
         >
-          <img
+          <PrismicImage
+            :field="certification?.data.certification_img!"
             class="w-48 h-48"
-            src="/img/certification/fossil-free-certified.png"
             alt="Fossil-free certified badge"
-          >
+          />
           <div v-if="certification?.data">
             <SliceZone
               :slices="certification?.data.slices ?? []"
