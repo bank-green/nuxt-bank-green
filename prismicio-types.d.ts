@@ -2091,6 +2091,17 @@ type ThankspagesDocumentDataSlicesSlice = ThanksSliceSlice;
  */
 interface ThankspagesDocumentData {
   /**
+   * head_helper_title field in *ThanksPages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspages.head_helper_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  head_helper_title: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *ThanksPages*
    *
    * - **Field Type**: Slice Zone
