@@ -2,7 +2,11 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
       <div class="page-fade-in contain max-w-3xl pb-16">
-        <PrismicRichText :field="faq?.data.introduction" class="prose" fallback="Frequently asked questions" />
+        <PrismicRichText
+          :field="faq?.data.introduction"
+          class="prose"
+          fallback="Frequently asked questions"
+        />
         <div
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
         >
@@ -22,7 +26,7 @@
           </div>
           <div v-else>
             <h3 style="text-align:center">
-              Error Loading Content
+              Error Loading Content.
             </h3>
           </div>
         </div>
