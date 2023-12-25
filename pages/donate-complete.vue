@@ -22,9 +22,9 @@
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
-useHeadHelper('Thank you')
 const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: donatecomplete } = await useAsyncData('donatecomplete', () =>
   client.getByUID('thankspages', 'donatecompleted'))
+useHeadHelper(donatecomplete.value?.data.head_helper_title)
 </script>
