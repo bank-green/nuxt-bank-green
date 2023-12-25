@@ -546,33 +546,33 @@ interface DonationpageDocumentData {
    *
    * - **Field Type**: Title
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-title
+   * - **API ID Path**: donationpage.donation_title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-title": prismic.TitleField;
+  donation_title: prismic.TitleField;
 
   /**
    * Donation-description field in *DonationPage*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-description
+   * - **API ID Path**: donationpage.donation_description
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-description": prismic.RichTextField;
+  donation_description: prismic.RichTextField;
 
   /**
    * Donation-button field in *DonationPage*
    *
    * - **Field Type**: Title
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-button
+   * - **API ID Path**: donationpage.donation_button
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-button": prismic.TitleField;
+  donation_button: prismic.TitleField;
 
   /**
    * seo_title field in *DonationPage*

@@ -72,7 +72,7 @@ const { client } = usePrismic()
 const { data: pledge } = await useAsyncData('pledge', () =>
   client.getSingle('pledgepage')
 )
-usePrismicSEO(pledge.value.data)
+usePrismicSEO(pledge.value?.data)
 
 const signUpForm = ref()
 const scrollToForm = () => {

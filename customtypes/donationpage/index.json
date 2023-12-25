@@ -24,23 +24,32 @@
         "type": "Image",
         "config": { "constraint": {}, "thumbnails": [], "label": "Photo" }
       },
-      "donation-title": {
+      "donation_title": {
         "type": "StructuredText",
         "config": {
-          "single": "heading1,heading2,heading3,heading4,heading5,heading6",
-          "label": "Donation-title"
+          "label": "Donation-title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading1,heading2,heading3,heading4,heading5,heading6"
         }
       },
-      "donation-description": {
+      "donation_description": {
         "type": "StructuredText",
         "config": {
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
-          "label": "Donation-description"
+          "label": "Donation-description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
-      "donation-button": {
+      "donation_button": {
         "type": "StructuredText",
-        "config": { "single": "heading6", "label": "Donation-button" }
+        "config": {
+          "label": "Donation-button",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading6"
+        }
       },
       "seo_title": {
         "type": "Text",

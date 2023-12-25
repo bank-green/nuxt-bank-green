@@ -54,13 +54,13 @@
               @submit.prevent.stop="submit"
             >
               <PrismicText
-                :field="donation?.data['donation-title']"
+                :field="donation?.data.donation_title"
                 wrapper="h1"
                 class="font-semibold text-xl md:text-3xl tracking-wider text-white"
                 fallback="Donate to Bank.Green"
               />
               <PrismicRichText
-                :field="donation?.data['donation-description']"
+                :field="donation?.data.donation_description"
                 class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify"
                 fallback="...and make a big difference in the world. Your donation will give us greater
                 capacity to green the banking sector and protect our collective future."
@@ -121,7 +121,7 @@
                   name="email"
                   type="email"
                   :placeholder="'youremail@address.com'"
-                  :warning="warningsMap['email']"
+                  :warning="warningsMap.email"
                   :dark="true"
                   :required="false"
                 />
@@ -129,7 +129,7 @@
                   v-model="isAgreeMarketing"
                   class="col-span-2"
                   name="isAgreeMarketing"
-                  :warning="warningsMap['isAgreeMarketing']"
+                  :warning="warningsMap.isAgreeMarketing"
                   :dark="true"
                 >
                   I wish to receive more information via email from
@@ -147,7 +147,7 @@
                 <PrismicText
                   wrapper="span"
                   class="text-2xl font-semibold"
-                  :field="donation?.data['donation-button']"
+                  :field="donation?.data.donation_button"
                   fallback="Donate Now"
                 />
               </button>
