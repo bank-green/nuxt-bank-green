@@ -488,6 +488,17 @@ interface DisclaimerpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * head_helper_title field in *DisclaimerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: disclaimerpage.head_helper_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  head_helper_title: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *DisclaimerPage*
    *
    * - **Field Type**: Slice Zone

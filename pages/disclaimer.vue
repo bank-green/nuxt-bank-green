@@ -42,8 +42,6 @@
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
-useHeadHelper('Disclaimer')
-
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { client } = usePrismic()
@@ -52,4 +50,5 @@ const { data: disclaimer } = await useAsyncData('disclaimer', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
+useHeadHelper(disclaimer.value?.data.head_helper_title)
 </script>
