@@ -52,7 +52,9 @@
             v-model="form.bank"
             class="w-full"
             :disabled="!country"
+            dark
             :country="country"
+            :warning="warningsMap['bank']"
             :class="bankSearchClasses"
             @search-input-change="searchValue = $event"
             @update:model-value="searchInputChange"
@@ -65,12 +67,6 @@
               />
             </template>
           </BankSearch>
-          <span
-            v-if="warningsMap['bank']"
-            class="px-5 py-6 text-xs font-bold"
-          >
-            {{ warningsMap['bank'] }}
-          </span>
         </div>
         <TextField
           v-model="form.hometown"

@@ -6,6 +6,8 @@
         v-model="search"
         :aria-expanded="isShowing"
         :placeholder="'Search bank...'"
+        :warning="warning"
+        :dark="dark"
         @keydown.down="
           (event: PointerEvent) =>
             ($refs['listPicker'] as typeof ListPicker).incrementFocus(event)
@@ -95,20 +97,27 @@ import ListPicker from '../ListPicker.vue'
 import BankSearchItem from './BankSearchItem.vue'
 import { findBanks } from './banks'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   disabled: Boolean;
   country: String;
   modelValue: Object | null;
-}>()
+  warning?: string | boolean;
+  infoTooltip?: string;
+  dark?: boolean
+}>(), {
+  warning: false,
+  infoTooltip: undefined,
+  dark: false
+})
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
 
 const pageStart = new Date()
 const banks = ref([])
-const loaded = ref(false)
-const search = ref('')
-const isShowing = ref(false)
-const selectedItem = ref(null)
+const loaded = ref<boolean>(false)
+const search = ref<string>('')
+const isShowing = ref<boolean>(false)
+const selectedItem = ref<string | null>(null)
 const input = ref<HTMLInputElement | null>(null)
 
 const hasBanks = computed(() => banks.value.length > 0)
@@ -132,7 +141,7 @@ watch(
 watch(
   () => search,
   function (newValue) {
-    if (props.modelValue && newValue !== selectedItem.value) {
+    if (props.modelValue && newValue.value !== selectedItem.value) {
       emit('update:modelValue', null)
     }
     emit('searchInputChange', newValue)
@@ -155,7 +164,7 @@ function hideList () {
   isShowing.value = false
 }
 
-async function onSelectBank (item) {
+async function onSelectBank (item: {name: string}) {
   emit('update:modelValue', null)
   await nextTick()
   search.value = item.name
