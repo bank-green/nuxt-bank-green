@@ -34,7 +34,12 @@
         @on-close-click="onCloseClick"
       >
         <template #icon>
+          <LoadingJumper
+            v-if="!loaded && !disabled"
+            class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
+          />
           <img
+            v-else
             src="/img/icons/bank-icon.svg"
             class="h-6 w-6 absolute inset-0 m-4"
           >
@@ -78,18 +83,6 @@
         </div>
       </transition>
     </BaseField>
-
-    <div v-if="!loaded && !disabled" class="relative flex items-center">
-      <LoadingJumper
-        v-if="!loaded && !disabled"
-        class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
-      />
-      <img
-        v-else
-        src="/img/icons/bank-icon.svg"
-        class="h-6 w-6 absolute inset-0 m-4"
-      >
-    </div>
   </div>
 </template>
 <script setup lang="ts">
