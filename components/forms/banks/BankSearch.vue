@@ -7,6 +7,7 @@
       :dark="dark"
       :title="title"
       :show-warning="warning"
+      :info-tooltip="infoTooltip"
     >
       <SearchInput
         ref="input"
