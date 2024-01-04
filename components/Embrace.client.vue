@@ -33,8 +33,7 @@
 
         <LocationSearch v-model="country" dark class="w-full text-gray-700" :title="embracePage?.data?.country_select_label || 'Choose your country' " />
 
-        <!-- TODO need to add hover/help text ?  is this
-          already in BankSearch? and add a warning message if this is not filled -->
+        <!-- TODO: need to add correct text for info tooltip -->
         <BankSearch
           ref="bankSearch"
           v-model="form.bank"
