@@ -45,6 +45,7 @@
           :country="country"
           :warning="warningsMap['bank']"
           :class="bankSearchClasses"
+          :info-tooltip="'This is a nice info'"
           @search-input-change="searchValue = $event"
           @update:model-value="searchInputChange"
         >

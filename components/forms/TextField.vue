@@ -4,7 +4,6 @@
     :description="description"
     :name="name"
     :show-warning="warning"
-    :right-label="rightLabel"
     :currency-label="currencyLabel"
     :type-label="typeLabel"
     :dark="dark"
@@ -55,7 +54,6 @@ const props = withDefaults(
     description?: string;
     name?: string;
     placeholder?: string;
-    rightLabel?: string | object;
     currencyLabel?: string;
     typeLabel?: string;
     type?: string;
@@ -72,7 +70,6 @@ const props = withDefaults(
     description: '',
     name: '',
     placeholder: '',
-    rightLabel: '',
     currencyLabel: '',
     typeLabel: '',
     type: 'text',
