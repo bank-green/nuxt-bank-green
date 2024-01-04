@@ -1,11 +1,19 @@
 <template>
-  <div v-if="hasBanks && loaded && !disabled" v-clickaway="hideList">
-    <div class="relative">
+  <div class="col-span-2">
+    <BaseField
+      v-clickaway="hideList"
+      name="bankSearch"
+      class="w-full"
+      :dark="dark"
+      :title="title"
+      :show-warning="warning"
+    >
       <SearchInput
         ref="input"
         v-model="search"
+        :disabled="disabled"
         :aria-expanded="isShowing"
-        :placeholder="'Search bank...'"
+        :placeholder="disabled ? 'Set a country first' : !loaded ? 'Loading banks...' : !hasBanks ? 'No banks available in this country.' : 'Search bank...'"
         :warning="warning"
         :dark="dark"
         @keydown.down="
@@ -68,46 +76,43 @@
           </ListPicker>
         </div>
       </transition>
-    </div>
-  </div>
-  <div v-else class="relative flex items-center">
-    <div
-      class="relative w-full border border-gray-50 text-gray-400 bg-gray-50 rounded-xl shadow-sm pl-12 pr-10 py-4 text-left cursor-default sm:text-sm truncate select-none"
-    >
-      <span v-if="disabled"> Set a country first </span>
-      <span v-else-if="!loaded"> Loading banks... </span>
-      <span v-else-if="!hasBanks"> No banks available in this country. </span>
-    </div>
+    </BaseField>
 
-    <LoadingJumper
-      v-if="!loaded && !disabled"
-      class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
-    />
-    <img
-      v-else
-      src="/img/icons/bank-icon.svg"
-      class="h-6 w-6 absolute inset-0 m-4"
-    >
+    <div v-if="!loaded && !disabled" class="relative flex items-center">
+      <LoadingJumper
+        v-if="!loaded && !disabled"
+        class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
+      />
+      <img
+        v-else
+        src="/img/icons/bank-icon.svg"
+        class="h-6 w-6 absolute inset-0 m-4"
+      >
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import LoadingJumper from '../../LoadingJumper.vue'
 import SearchInput from '../input/SearchInput.vue'
 import ListPicker from '../ListPicker.vue'
+import BaseField from '../BaseField.vue'
 import BankSearchItem from './BankSearchItem.vue'
 import { findBanks } from './banks'
 
 const props = withDefaults(defineProps<{
-  disabled: Boolean;
+  disabled?: boolean;
   country: String;
   modelValue: Object | null;
   warning?: string | boolean;
   infoTooltip?: string;
-  dark?: boolean
+  dark?: boolean;
+  title?: string;
 }>(), {
+  disabled: false,
   warning: false,
   infoTooltip: undefined,
-  dark: false
+  dark: false,
+  title: ''
 })
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
