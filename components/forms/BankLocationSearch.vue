@@ -11,7 +11,7 @@
     :warning="warningText"
     :class="bankSearchClasses"
     :info-tooltip="infoTooltipBank"
-    @search-input-change="searchValue = $event"
+    @search-input-change="'searchInputChange'"
     @update:model-value="onBankUpdateModel"
   >
     <slot name="bankSearchChild" />
@@ -43,27 +43,21 @@ const props = withDefaults(defineProps<{
 const { country } = useCountry()
 const bank = ref(props.bankValue)
 const warningText = ref(props.warning)
-const searchValue = ref<string>('')
 
-watch(
-  () => props.bankValue,
-  () => {
-    if (props.bankValue) {
-      bank.value = props.bankValue
-    }
+watch(() => props.warning, (newVal) => {
+  // synch passed down warning with the state here
+  warningText.value = newVal
+})
 
-    console.log({ bank: bank.value, warning: warningText.value, otherWarning: props.warning })
-  }
-)
-
-/* watch(
-  () => props.warning,
-  () => {
-    if (props.warning) {
-      warningText.value = ''
-    }
+watch(bank, (newVal) => {
+  if (bank?.value) {
+    // make sure that warning is not shown once a bank is selected
+    warningText.value = false
+    bank.value = newVal
+  } else {
+    // if bank is removed again, make sure the warning is shown again
     warningText.value = props.warning
   }
-) */
+})
 
 </script>
