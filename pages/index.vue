@@ -16,13 +16,11 @@
             class="flex flex-col md:flex-row items-stretch md:items-center space-y-2 md:space-y-0 md:space-x-4 mt-8 md:mt-10 md:mb-10"
           >
             <ClientOnly>
-              <LocationSearch v-model="country" class="md:w-1/2 flex-initial" />
-              <BankSearch
-                ref="bankSearch"
+              <BankLocationSearch
                 v-model="bank"
-                class="md:w-1/2 flex-initial"
-                :disabled="!country"
-                :country="country"
+                :warning="warningsMap['bank']"
+                bank-search-classes="md:w-1/2 flex-initial"
+                location-search-classes="md:w-1/2 flex-initial"
               />
               <template #fallback>
                 <div class="relative md:w-1/2 flex-initial">
@@ -187,14 +185,19 @@
 <script setup>
 import { useGtm } from '@gtm-support/vue-gtm'
 import { defineSliceZoneComponents } from '@prismicio/vue'
-import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import BankSearch from '@/components/forms/banks/BankSearch.vue'
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 import { components } from '~~/slices'
 import { usePrismicSEO } from '~~/composables/useHeadHelpers'
 const sliceComps = ref(defineSliceZoneComponents(components))
 
-const bank = ref(null)
+const {
+  bank,
+  warningsMap
+} = useContactForm(
+  'homepage',
+  ['bank']
+)
 
 const { client } = usePrismic()
 const { data: home } = await useAsyncData('home', () =>

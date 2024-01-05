@@ -30,42 +30,17 @@
           :warning="warningsMap['email']"
           dark
         />
-
-        <!-- <LocationSearch v-model="country" dark class="w-full text-gray-700" :title="embracePage?.data?.country_select_label || 'Choose your country' " />
-        <BankSearch
-          ref="bankSearch"
-          v-model="form.bank"
-          class="col-span-2"
-          :disabled="!country"
-          :title="embracePage?.data.bank_select_label || 'Choose your current bank'"
-          dark
-          :country="country"
-          :warning="warningsMap['bank']"
-          :class="bankSearchClasses"
-          :info-tooltip="'This is a nice info'"
-          @search-input-change="searchValue = $event"
-          @update:model-value="searchInputChange"
-        >
-          <template #not-listed>
-            <PrismicRichText
-              :field="embracePage?.data.bank_not_found"
-              fallback="We couldn't find your bank. <br>
-                For now, we are only considering certain banks for this campaign. We may add more eventually."
-            />
-          </template>
-        </BankSearch> -->
         <BankLocationSearch
-          :bank-value="form.bank"
+          v-model="form.bank"
           :bank-search-classes="bankSearchClasses"
           :warning="warningsMap['bank']"
-          :on-bank-update-model="searchInputChange"
           info-tooltip-bank="This is a nice info"
           dark
-          placement="embrace"
           class="col-span-2"
           :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
           :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
           @search-input-change="searchValue = $event"
+          @update:model-value="searchInputChange"
         >
           <template #not-listed>
             <PrismicRichText
@@ -170,9 +145,7 @@
 <script setup lang="ts">
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
 import { PrismicDocument } from '@prismicio/types'
-import BankLocationSearch from './forms/BankLocationSearch.vue'
-/* import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import BankSearch from '@/components/forms/banks/BankSearch.vue' */
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmbraceModal from '@/components/EmbraceModal.vue'

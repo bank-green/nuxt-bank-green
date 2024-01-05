@@ -47,37 +47,23 @@
           :placeholder="'When would you like to be reminded to switch?'"
           :warning="reminderWarning"
         />
-        <div class="col-span-2">
-          <span
-            class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
-          >
-            Choose your country
-          </span>
-          <LocationSearch v-model="country" class="w-full text-gray-700" />
-        </div>
-        <div class="col-span-2">
-          <span
-            class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
-          >
-            Choose your current bank
-          </span>
-          <BankSearch
-            ref="bankSearch"
-            v-model="bank"
-            class="w-full text-gray-700"
-            :disabled="!country"
-            :country="country"
-            @search-input-change="searchValue = $event"
-          >
-            <template #not-listed>
-              <p class="text-gray-500 p-4 shadow-lg">
-                We couldn't find your bank. <br>
-                But that's ok! Just type in your bank's name and leave it at
-                that.
-              </p>
-            </template>
-          </BankSearch>
-        </div>
+        <BankLocationSearch
+          v-model="bank"
+          :warning="warningsMap['bank']"
+          class="col-span-2"
+          dark
+          bank-title="Choose your current bank"
+          location-title="Choose your country"
+          @search-input-change="searchValue = $event"
+        >
+          <template #not-listed>
+            <p class="text-gray-500 p-4 shadow-lg">
+              We couldn't find your bank. <br>
+              But that's ok! Just type in your bank's name and leave it at
+              that.
+            </p>
+          </template>
+        </BankLocationSearch>
         <CheckboxSection
           v-model="isAgreeMarketing"
           class="col-span-full"
@@ -129,9 +115,8 @@
 </template>
 
 <script setup>
-import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import BankSearch from '@/components/forms/banks/BankSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import TextField from '@/components/forms/TextField.vue'
 import DateField from '@/components/forms/DateField.vue'
 
@@ -140,7 +125,6 @@ const props = defineProps({
   successRedirectURL: { type: String, default: '/thanks-pledge' }
 })
 
-const bank = ref(null)
 const reminderDate = ref(null)
 const searchValue = ref(null)
 const reminderWarning = ref(null)
@@ -151,7 +135,6 @@ const extras = computed(() => {
   return {
     reminder: reminderDate.value || '',
     country: country.value || '',
-    bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
@@ -165,12 +148,13 @@ const {
   isAgreeTerms,
   isAgreeMarketing,
   warningsMap,
+  bank,
   send,
   validate,
   busy
 } = useContactForm(
   'pledge',
-  ['firstName', 'lastName', 'email', 'isAgreeTerms'],
+  ['firstName', 'lastName', 'email', 'isAgreeTerms', 'bank'],
   extras
 )
 

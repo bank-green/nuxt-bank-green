@@ -1,5 +1,5 @@
 <template>
-  <LocationSearch v-model="country" :dark="dark" class="w-full text-gray-700" :title="locationTitle" />
+  <LocationSearch v-model="country" :dark="dark" class="col-span-2" :title="locationTitle" :class="locationSearchClasses" />
   <BankSearch
     ref="bankSearch"
     v-model="bank"
@@ -11,8 +11,8 @@
     :warning="warningText"
     :class="bankSearchClasses"
     :info-tooltip="infoTooltipBank"
-    @search-input-change="'searchInputChange'"
-    @update:model-value="onBankUpdateModel"
+    @search-input-change="onSearchInputChange"
+    @update:model-value="onUpdateModel"
   >
     <slot name="bankSearchChild" />
   </BankSearch>
@@ -24,11 +24,11 @@ import LocationSearch from './location/LocationSearch.vue'
 const props = withDefaults(defineProps<{
     bankTitle?: string;
     locationTitle?: string;
-    placement?: string;
-    bankValue: Object | null;
+    modelValue: Object | null;
     warning?: string | boolean;
     infoTooltipBank?: string;
     bankSearchClasses?: string;
+    locationSearchClasses?: string;
     onBankUpdateModel?:(event: HTMLInputElement) => void;
     dark?: boolean;
   }>(), {
@@ -36,13 +36,22 @@ const props = withDefaults(defineProps<{
   infoTooltipBank: undefined,
   dark: false,
   bankTitle: '',
-  locationTitle: '',
-  placement: 'unknown'
+  locationTitle: ''
 })
 
 const { country } = useCountry()
-const bank = ref(props.bankValue)
+const bank = ref(props.modelValue)
 const warningText = ref(props.warning)
+
+const emit = defineEmits(['update:modelValue', 'searchInputChange'])
+
+const onUpdateModel = (ev: HTMLInputElement) => {
+  emit('update:modelValue', ev)
+}
+
+const onSearchInputChange = () => {
+  emit('searchInputChange')
+}
 
 watch(() => props.warning, (newVal) => {
   // synch passed down warning with the state here
@@ -53,11 +62,12 @@ watch(bank, (newVal) => {
   if (bank?.value) {
     // make sure that warning is not shown once a bank is selected
     warningText.value = false
-    bank.value = newVal
   } else {
     // if bank is removed again, make sure the warning is shown again
     warningText.value = props.warning
   }
+
+  bank.value = newVal
 })
 
 </script>
