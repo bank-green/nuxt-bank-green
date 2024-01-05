@@ -15,7 +15,7 @@ export default function useContactForm (
   const email = ref(prefill.value?.email || '')
   const subject = ref(prefill.value?.subject || '')
   const message = ref(prefill.value?.message || '')
-  const bank = ref(prefill.value?.bank || '')
+  const bank = ref(prefill.value?.bank || null)
   const isAgreeTerms = ref(prefill.value?.isAgreeTerms || false)
   const isAgreeMarketing = ref(prefill.value?.isAgreeTerms || false)
   const busy = ref(false)
