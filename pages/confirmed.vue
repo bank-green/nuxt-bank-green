@@ -26,5 +26,5 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: confirmed } = await useAsyncData('confirmed', () =>
   client.getByUID('thankspages', 'confirmed'))
-useHeadHelper(confirmed.value?.data.head_helper_title)
+useHeadHelper(confirmed.value?.data.head_helper_title || 'Thank you')
 </script>

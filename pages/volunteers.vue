@@ -19,7 +19,7 @@
               switching to a greener alternative, we would love for you to join our team!
             </p>
             <p>
-              please do reach out to volunteers@bank.green, attaching a copy of your C.V. and
+              Please do reach out to volunteers@bank.green, attaching a copy of your C.V. and
               letting us know about your availability! We are still a small team and receive a lot of enquiries,
               but we will do our best to get back to you, even if we feel it may not be the best fit.
             </p>

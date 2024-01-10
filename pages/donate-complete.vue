@@ -26,5 +26,5 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: donatecomplete } = await useAsyncData('donatecomplete', () =>
   client.getByUID('thankspages', 'donatecompleted'))
-useHeadHelper(donatecomplete.value?.data.head_helper_title)
+useHeadHelper(donatecomplete.value?.data.head_helper_title || 'Thank you')
 </script>
