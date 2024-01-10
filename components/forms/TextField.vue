@@ -7,6 +7,7 @@
     :currency-label="currencyLabel"
     :type-label="typeLabel"
     :dark="dark"
+    :info-tooltip="infoTooltip"
   >
     <textarea
       v-if="rows"
@@ -64,6 +65,7 @@ const props = withDefaults(
     disabled?: boolean;
     warning?: string | boolean;
     dark?: boolean;
+    infoTooltip?: string;
   }>(),
   {
     title: '',
@@ -78,7 +80,8 @@ const props = withDefaults(
     required: false,
     disabled: false,
     warning: false,
-    dark: false
+    dark: false,
+    infoTooltip: ''
   }
 )
 
