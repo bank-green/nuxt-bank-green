@@ -11,7 +11,7 @@
         'border-white': !modelValue,
         'border-sushi-100': modelValue,
         'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red': !!warning,
-        'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300': disabled,
+        'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400': disabled,
       }"
       autocomplete="chrome-off"
       :aria-invalid="!!warning"
