@@ -109,10 +109,9 @@
         </CheckboxSection>
       </div>
       <button
-        type="button"
+        type="submit"
         class="button-green w-full md:w-auto mt-6 flex justify-center"
         :class="{'pointer-events-none opacity-75': busy}"
-        @click="checkAndDisplayPreview"
       >
         <span v-if="!busy"> Generate Email Preview </span>
         <span v-else>
@@ -260,7 +259,8 @@ function checkAndDisplayPreview () {
     fullNameWarning.value = null
   }
   if (hasWarnings?.value) {
-    return
+    busy.value = false
+    return false
   }
   // TODO: Call function or use some other trigger
   // to get generated message body and message subject
