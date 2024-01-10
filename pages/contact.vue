@@ -2,12 +2,11 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
       <div class="page-fade-in contain max-w-3xl pt-28 pb-8">
-        <div v-if="contact?.data.description">
-          <PrismicRichText
-            class="text-gray-600 mb-12 whitespace-pre-line prose"
-            :field="contact?.data.description"
-          />
-        </div>
+        <PrismicRichText
+          v-if="contact?.data.description"
+          class="text-gray-600 mb-12 whitespace-pre-line prose"
+          :field="contact?.data.description"
+        />
         <div v-else class="text-gray-600 mb-12 whitespace-pre-line prose">
           <h1>
             Contact us
