@@ -17,7 +17,7 @@
           type="text"
           :title="embracePage?.data.full_name_label || 'Your full name'"
           :placeholder="embracePage?.data.full_name_placeholder || 'Write your full name'"
-          :warning="fullNameWarning"
+          :warning="fullNameWarning ? fullNameWarning : false"
           dark
         />
         <TextField
@@ -30,48 +30,26 @@
           :warning="warningsMap['email']"
           dark
         />
-        <div class="col-span-2">
-          <span
-            class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
-          >
-            {{ embracePage?.data?.country_select_label || 'Choose your country' }}
-          </span>
-          <LocationSearch v-model="country" class="w-full text-gray-700" />
-        </div>
-        <div class="col-span-2">
-          <span
-            class="block text-sm leading-5 text-blue-100 font-semibold mb-2"
-          >
-            {{ embracePage?.data.bank_select_label || 'Choose your current bank' }}
-          </span>
-
-          <!-- TODO need to add hover/help text ?  is this
-          already in BankSearch? and add a warning message if this is not filled -->
-          <BankSearch
-            ref="bankSearch"
-            v-model="form.bank"
-            class="w-full"
-            :disabled="!country"
-            :country="country"
-            :class="bankSearchClasses"
-            @search-input-change="searchValue = $event"
-            @update:model-value="searchInputChange"
-          >
-            <template #not-listed>
-              <PrismicRichText
-                :field="embracePage?.data.bank_not_found"
-                fallback="We couldn't find your bank. <br>
+        <BankLocationSearch
+          v-model="form.bank"
+          :bank-search-classes="bankSearchClasses"
+          :warning="warningsMap['bank']"
+          :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
+          dark
+          class="col-span-2"
+          :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
+          :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
+          @search-input-change="searchValue = $event"
+          @update:model-value="searchInputChange"
+        >
+          <template #not-listed>
+            <PrismicRichText
+              :field="embracePage?.data.bank_not_found"
+              fallback="We couldn't find your bank. <br>
                 For now, we are only considering certain banks for this campaign. We may add more eventually."
-              />
-            </template>
-          </BankSearch>
-          <span
-            v-if="warningsMap['bank']"
-            class="px-5 py-6 text-xs font-bold"
-          >
-            {{ warningsMap['bank'] }}
-          </span>
-        </div>
+            />
+          </template>
+        </BankLocationSearch>
         <TextField
           v-model="form.hometown"
           class="col-span-full"
@@ -131,7 +109,7 @@
         </CheckboxSection>
       </div>
       <button
-        type=""
+        type="button"
         class="button-green w-full md:w-auto mt-6 flex justify-center"
         :class="{'pointer-events-none opacity-75': busy}"
         @click="checkAndDisplayPreview"
@@ -166,9 +144,8 @@
 
 <script setup lang="ts">
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
-// import { PrismicDocument } from '@prismicio/types'
-import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import BankSearch from '@/components/forms/banks/BankSearch.vue'
+import { PrismicDocument } from '@prismicio/types'
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmbraceModal from '@/components/EmbraceModal.vue'
@@ -194,16 +171,16 @@ const props = defineProps<{
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null;
 }>()
 
-const fullName = ref(null)
-const fullNameWarning = ref(null)
-const searchValue = ref(null)
+const fullName = ref<string>('')
+const fullNameWarning = ref<string | null>(null)
+const searchValue = ref<string>('')
 const { country } = useCountry()
-const hometown = ref(null)
-const background = ref(null)
-const showModal = ref(false)
-const bankEmail = ref(null)
-const subject = ref(null)
-const generatedMessage = ref(null) // pass to preview component as v-model??
+const hometown = ref<string>('')
+const background = ref<string>('')
+const showModal = ref<boolean>(false)
+const bankEmail = ref<string>('')
+const subject = ref<string>('')
+const generatedMessage = ref<string>('') // pass to preview component as v-model??
 
 const extras = computed(() => {
   return {
@@ -246,7 +223,7 @@ const form = ref({
 
 // const emit = defineEmits(['success'])
 
-function searchInputChange (event) {
+function searchInputChange (event: HTMLInputElement) {
   // When bank is selected we need to fetch/update bank contact email
   if (event && form.value?.bank?.name) {
     getBankEmail(form.value?.bank)
@@ -256,7 +233,7 @@ function searchInputChange (event) {
 // TODO: connect to api to retrieve email or list of bank emails
 //       May want to use 'busy' if we retrieve individually rather than loading
 //       a full list at page load
-function getBankEmail (bank) {
+function getBankEmail (bank: {name: string}) {
   console.log(`getBankEmail(${bank?.name})`)
   bankEmail.value = 'fakeBank@example.com'
   subject.value = 'Fake subject line'
