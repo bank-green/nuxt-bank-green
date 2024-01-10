@@ -89,7 +89,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const inputClasses = computed(() => {
   if (props.disabled) {
-    return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
+    return 'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400'
   }
   if (props.warning) {
     return 'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'

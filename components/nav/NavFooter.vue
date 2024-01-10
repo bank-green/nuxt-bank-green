@@ -27,7 +27,7 @@
   </nav>
   <div class="bg-gray-100 py-4">
     <div
-      class="contain text-gray-500 text-xs flex items-center justify-between"
+      class="contain text-gray-700 text-xs flex items-center justify-between"
     >
       <div>Bank.Green is a project of Empowerment Works Inc. 501(c)(3)</div>
       <div class="space-x-4">

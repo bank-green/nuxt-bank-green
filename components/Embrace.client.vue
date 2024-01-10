@@ -34,7 +34,7 @@
           v-model="form.bank"
           :bank-search-classes="bankSearchClasses"
           :warning="warningsMap['bank']"
-          info-tooltip-bank="This is a nice info"
+          :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
           dark
           class="col-span-2"
           :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
