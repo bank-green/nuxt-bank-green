@@ -135,6 +135,7 @@ const extras = computed(() => {
   return {
     reminder: reminderDate.value || '',
     country: country.value || '',
+    bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || ''

@@ -14,7 +14,7 @@
     @search-input-change="onSearchInputChange"
     @update:model-value="onUpdateModel"
   >
-    <slot name="bankSearchChild" />
+    <slot name="bank-not-listed" />
   </BankSearch>
 </template>
 <script setup lang="ts">
@@ -29,11 +29,9 @@ const props = withDefaults(defineProps<{
     infoTooltipBank?: string;
     bankSearchClasses?: string;
     locationSearchClasses?: string;
-    onBankUpdateModel?:(event: HTMLInputElement) => void;
     dark?: boolean;
   }>(), {
   warning: false,
-  infoTooltipBank: undefined,
   dark: false,
   bankTitle: '',
   locationTitle: ''
