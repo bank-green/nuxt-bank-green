@@ -14,16 +14,15 @@
             />
             <PrismicText
               :field="donation?.data.title"
-              wrapper="h1"
+              wrapper="h2"
               class="font-semibold text-xl md:text-3xl tracking-wider"
               fallback="Help us build a greener future!"
             />
-            <div v-if="donation?.data.description">
-              <PrismicRichText
-                :field="donation?.data.description"
-                class="prose sm:prose-lg xl:prose-xl prose-blurb"
-              />
-            </div>
+            <PrismicRichText
+              v-if="donation?.data.description"
+              :field="donation?.data.description"
+              class="prose sm:prose-lg xl:prose-xl prose-blurb"
+            />
             <div v-else class="prose sm:prose-lg xl:prose-xl prose-blurb">
               <p>
                 By supporting Bank.Green’s mission, you'll empower individuals and businesses to make

@@ -17,12 +17,11 @@
             src="/img/certification/fossil-free-certified.png"
             alt="Fossil-free certified badge"
           >
-          <div v-if="certification?.data">
-            <SliceZone
-              :slices="certification?.data.slices ?? []"
-              :components="sliceComps"
-            />
-          </div>
+          <SliceZone
+            v-if="certification?.data"
+            :slices="certification?.data.slices ?? []"
+            :components="sliceComps"
+          />
           <div v-else>
             <h1>Fossil Free Certification</h1>
             <p>

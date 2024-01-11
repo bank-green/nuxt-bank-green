@@ -47,18 +47,14 @@
           class="flex flex-col md:flex-row items-center justify-center pt-8 pb-16"
         >
           <div class="md:w-1/2 max-w-sm">
-            <div v-if="notlisted?.data">
-              <p class="text-lg md:text-2xl tracking-wide mb-4">
-                <b>{{ asText(notlisted?.data.text3) }} </b> {{ asText(notlisted?.data.text4) }}
-              </p>
-            </div>
-            <div v-else>
-              <p class="text-lg md:text-2xl tracking-wide mb-4">
-                <b>Bank.Green was founded on the belief that banks have had an
-                  easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
-                they’ll pull your bank out, too.
-              </p>
-            </div>
+            <p v-if="notlisted?.data" class="text-lg md:text-2xl tracking-wide mb-4">
+              <b>{{ asText(notlisted?.data.text3) }} </b> {{ asText(notlisted?.data.text4) }}
+            </p>
+            <p v-else class="text-lg md:text-2xl tracking-wide mb-4">
+              <b>Bank.Green was founded on the belief that banks have had an
+                easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
+              they’ll pull your bank out, too.
+            </p>
             <p
               class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
             >

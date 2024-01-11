@@ -3,12 +3,11 @@
     <div class="bg-sushi-50">
       <div class="page-fade-in contain max-w-3xl xl:max-w-4xl py-24 sm:py-32">
         <article class="prose sm:prose-lg xl:prose-xl mx-auto">
-          <div v-if="team?.data.slices">
-            <SliceZone
-              :slices="team?.data.slices ?? []"
-              :components="sliceComps"
-            />
-          </div>
+          <SliceZone
+            v-if="team?.data.slices"
+            :slices="team?.data.slices ?? []"
+            :components="sliceComps"
+          />
           <div v-else>
             <h1>Who we are</h1>
             <p>

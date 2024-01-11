@@ -18,17 +18,14 @@
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
           />
-          <div v-if="faq?.data.slices">
-            <SliceZone
-              :slices="faq?.data.slices ?? []"
-              :components="sliceComps"
-            />
-          </div>
-          <div v-else>
-            <h3 style="text-align:center">
-              Error Loading Content.
-            </h3>
-          </div>
+          <SliceZone
+            v-if="faq?.data.slices"
+            :slices="faq?.data.slices ?? []"
+            :components="sliceComps"
+          />
+          <h3 v-else style="text-align:center">
+            Error Loading Content.
+          </h3>
         </div>
       </div>
 

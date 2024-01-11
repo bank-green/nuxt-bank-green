@@ -5,15 +5,12 @@
         <article
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
         >
-          <div v-if="privacy?.data.slices">
-            <SliceZone
-              :slices="privacy?.data.slices ?? []"
-              :components="sliceComps"
-            />
-          </div>
-          <div v-else class="flex justify-center">
-            <h3>Error loading content.</h3>
-          </div>
+          <SliceZone
+            v-if="privacy?.data.slices"
+            :slices="privacy?.data.slices ?? []"
+            :components="sliceComps"
+          />
+          <h3 v-else class="flex justify-center">Error loading content.</h3>
         </article>
       </div>
     </div>

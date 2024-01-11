@@ -5,12 +5,11 @@
         <article
           class="prose mx-auto max-w-4xl prose-h1:text-center prose-h1:font-semibold"
         >
-          <div v-if="volunteers?.data.slices">
-            <SliceZone
-              :slices="volunteers?.data.slices ?? []"
-              :components="sliceComps"
-            />
-          </div>
+          <SliceZone
+            v-if="volunteers?.data.slices"
+            :slices="volunteers?.data.slices ?? []"
+            :components="sliceComps"
+          />
           <div v-else>
             <h1>Volunteering with Bank.Green</h1>
             <p>

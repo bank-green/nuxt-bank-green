@@ -5,12 +5,11 @@
         <article
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
         >
-          <div v-if="disclaimer?.data.slices">
-            <SliceZone
-              :slices="disclaimer?.data.slices"
-              :components="sliceComps"
-            />
-          </div>
+          <SliceZone
+            v-if="disclaimer?.data.slices"
+            :slices="disclaimer?.data.slices"
+            :components="sliceComps"
+          />
           <div v-else>
             <h1>Disclaimer</h1>
             <p>

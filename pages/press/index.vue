@@ -5,12 +5,11 @@
         <article
           class="prose-h1:text-2xl prose-h1:font-semibold prose-p:leading-10 prose-p:text-gray-600"
         >
-          <div v-if="press?.data">
-            <SliceZone
-              :slices="press?.data.slices ?? []"
-              :components="sliceComps"
-            />
-          </div>
+          <SliceZone
+            v-if="press?.data"
+            :slices="press?.data.slices ?? []"
+            :components="sliceComps"
+          />
           <div v-else>
             <h1>Press</h1>
             <p>
@@ -23,19 +22,16 @@
         <div
           class="-mx-4 mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12"
         >
-          <div v-if="posts?.length">
-            <BlogCard
-              v-for="post in posts ?? []"
-              :key="post.uid"
-              :to="`/press/${post.uid}`"
-              :date="String(post.data.releasedate)"
-              :description="asText(post.data.description)"
-              :title="String(post.data.title)"
-            />
-          </div>
-          <div v-else>
-            <h3>Error loading content.</h3>
-          </div>
+          <BlogCard
+            v-if="posts?.length"
+            v-for="post in posts ?? []"
+            :key="post.uid"
+            :to="`/press/${post.uid}`"
+            :date="String(post.data.releasedate)"
+            :description="asText(post.data.description)"
+            :title="String(post.data.title)"
+          />
+          <h3 v-else >Error loading content.</h3>
         </div>
       </div>
     </div>

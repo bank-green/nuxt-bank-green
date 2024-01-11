@@ -2,17 +2,15 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <div v-if="reminderpledge?.data.slices">
-          <SliceZone
-            :slices="reminderpledge?.data.slices ?? []"
-            :components="sliceComps"
-          />
-        </div>
-        <div v-else>
-          <ThanksSection
-            title="Thanks! We’ll be in touch again when it’s time to move your money out of fossil banking."
-          />
-        </div>
+        <SliceZone
+          v-if="reminderpledge?.data.slices"
+          :slices="reminderpledge?.data.slices ?? []"
+          :components="sliceComps"
+        />
+        <ThanksSection
+          v-else
+          title="Thanks! We’ll be in touch again when it’s time to move your money out of fossil banking."
+        />
       </div>
     </div>
   </div>

@@ -2,18 +2,16 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <div v-if="confirmed?.data.slices">
-          <SliceZone
-            :slices="confirmed?.data.slices"
-            :components="sliceComps"
-          />
-        </div>
-        <div v-else>
-          <ThanksSection
-            :title="'Thanks for joining the Money Movement and our emailing list!'"
-            :description="`You'll be hearing from us soon!`"
-          />
-        </div>
+        <SliceZone
+          v-if="confirmed?.data.slices"
+          :slices="confirmed?.data.slices"
+          :components="sliceComps"
+        />
+        <ThanksSection
+          v-else
+          :title="'Thanks for joining the Money Movement and our emailing list!'"
+          :description="`You'll be hearing from us soon!`"
+        />
       </div>
     </div>
   </div>

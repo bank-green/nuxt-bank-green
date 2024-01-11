@@ -2,18 +2,16 @@
   <div class="page">
     <div class="bg-white">
       <div class="page-fade-in pt-28">
-        <div v-if="donatecomplete?.data.slices">
-          <SliceZone
-            :slices="donatecomplete?.data.slices"
-            :components="sliceComps"
-          />
-        </div>
-        <div v-else>
-          <ThanksSection
-            title="Thank you for your donation!"
-            description="We appreciate your support in defunding fossil banks."
-          />
-        </div>
+        <SliceZone
+          v-if="donatecomplete?.data.slices"
+          :slices="donatecomplete?.data.slices"
+          :components="sliceComps"
+        />
+        <ThanksSection
+          v-else
+          title="Thank you for your donation!"
+          description="We appreciate your support in defunding fossil banks."
+        />
       </div>
     </div>
   </div>

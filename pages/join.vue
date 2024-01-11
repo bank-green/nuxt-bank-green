@@ -12,18 +12,14 @@
             class="max-w-4xl flex flex-col md:flex-row items-center justify-center md:space-x-8"
           >
             <div class="md:w-1/2 max-w-sm">
-              <div v-if="joinpage?.data.text2 && joinpage?.data.text3 ">
-                <p class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
-                  <b>{{ asText(joinpage?.data.text2) }}</b> {{ asText(joinpage?.data.text3) }}
-                </p>
-              </div>
-              <div v-else>
-                <p class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
-                  <b>Bank.Green was founded on the belief that banks have had an
-                    easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
-                  they’ll pull your bank out, too.
-                </p>
-              </div>
+              <p  v-if="joinpage?.data.text2 && joinpage?.data.text3 " class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
+                <b>{{ asText(joinpage?.data.text2) }}</b> {{ asText(joinpage?.data.text3) }}
+              </p>
+              <p v-else class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
+                <b>Bank.Green was founded on the belief that banks have had an
+                  easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
+                they’ll pull your bank out, too.
+              </p>
             </div>
             <CheckList class="md:w-1/2 my-8" :list="checkList" />
           </div>
