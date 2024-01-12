@@ -797,6 +797,17 @@ interface EmbracepageDocumentData {
   copy_text_button_label: prismic.KeyTextField;
 
   /**
+   * Copied Text Button Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.copied_text_button_label
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copied_text_button_label: prismic.KeyTextField;
+
+  /**
    * Preview Footnote field in *EmbracePage*
    *
    * - **Field Type**: Rich Text

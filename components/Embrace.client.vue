@@ -135,6 +135,7 @@
     v-show="showModal"
     v-model="showModal"
     v-model:message="generatedMessage"
+    :title="embracePage?.data.preview_title || 'Email Preview'"
     tag="popup"
     :form="form"
     @success="successRedirect()"

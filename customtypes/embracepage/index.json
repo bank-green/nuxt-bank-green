@@ -51,6 +51,10 @@
         "type": "Text",
         "config": { "label": "Copy Text Button Label" }
       },
+      "copied_text_button_label": {
+        "type": "Text",
+        "config": { "label": "Copied Text Button Label", "placeholder": "" }
+      },
       "preview_footnote": {
         "type": "StructuredText",
         "config": {
