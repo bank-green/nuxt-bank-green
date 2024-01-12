@@ -3,6 +3,7 @@
   "label": "CertificationPage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "seo_title": {
@@ -12,6 +13,14 @@
       "seo_description": {
         "type": "Text",
         "config": { "label": "SEO Description", "placeholder": "" }
+      },
+      "certification_img": {
+        "type": "Image",
+        "config": {
+          "label": "certification_img",
+          "constraint": {},
+          "thumbnails": []
+        }
       },
       "slices": {
         "type": "Slices",
@@ -27,6 +36,5 @@
         }
       }
     }
-  },
-  "format": "custom"
+  }
 }

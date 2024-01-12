@@ -10,7 +10,7 @@
         >
           <BlogCard
             v-for="post in posts"
-            :key="post.uid"
+            :key="post?.uid"
             :to="`/blog/${post.uid}`"
             :date="post.data.publicationdate"
             :description="asText(post.data.description)"
@@ -19,6 +19,9 @@
           />
         </div>
       </div>
+    </div>
+    <div v-else>
+
     </div>
   </div>
 </template>

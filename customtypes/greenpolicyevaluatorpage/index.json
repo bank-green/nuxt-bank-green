@@ -1,0 +1,42 @@
+{
+  "id": "greenpolicyevaluatorpage",
+  "label": "GreenPolicyEvaluatorPage",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "seo_title": {
+        "type": "Text",
+        "config": { "label": "Seo Title", "placeholder": "" }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "Seo Description", "placeholder": "" }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "button_slice": { "type": "SharedSlice" },
+            "accordion_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" },
+            "text_slice": { "type": "SharedSlice" },
+            "text_with_logo_slice": { "type": "SharedSlice" },
+            "text_with_image_slice": { "type": "SharedSlice" }
+          }
+        }
+      }
+    },
+    "As Featured In": {
+      "slices1": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": { "featured_in_slice": { "type": "SharedSlice" } }
+        }
+      }
+    }
+  }
+}

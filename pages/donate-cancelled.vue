@@ -5,11 +5,19 @@
         <div
           class="prose mx-auto max-w-4xl text-center prose-headings:font-semibold"
         >
-          <h1>Your donation was cancelled.</h1>
+          <PrismicRichText
+            v-if="donatecancelled?.data.text1"
+            :field="donatecancelled?.data.text1"
+          />
+          <h1 v-else>Your donation was cancelled.</h1>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+const { client } = usePrismic()
+const { data: donatecancelled } = await useAsyncData('donatecancelled', () =>
+  client.getByUID('textonlypages', 'donatecancelled'))
+</script>

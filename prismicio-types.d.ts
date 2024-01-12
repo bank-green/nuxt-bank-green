@@ -367,6 +367,17 @@ interface CertificationpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * certification_img field in *CertificationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificationpage.certification_img
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  certification_img: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *CertificationPage*
    *
    * - **Field Type**: Slice Zone
@@ -477,6 +488,17 @@ interface DisclaimerpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * head_helper_title field in *DisclaimerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: disclaimerpage.head_helper_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  head_helper_title: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *DisclaimerPage*
    *
    * - **Field Type**: Slice Zone
@@ -546,33 +568,33 @@ interface DonationpageDocumentData {
    *
    * - **Field Type**: Title
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-title
+   * - **API ID Path**: donationpage.donation_title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-title": prismic.TitleField;
+  donation_title: prismic.TitleField;
 
   /**
    * Donation-description field in *DonationPage*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-description
+   * - **API ID Path**: donationpage.donation_description
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-description": prismic.RichTextField;
+  donation_description: prismic.RichTextField;
 
   /**
    * Donation-button field in *DonationPage*
    *
    * - **Field Type**: Title
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-button
+   * - **API ID Path**: donationpage.donation_button
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-button": prismic.TitleField;
+  donation_button: prismic.TitleField;
 
   /**
    * seo_title field in *DonationPage*
@@ -1110,6 +1132,80 @@ export type FaqpageDocument<Lang extends string = string> =
     Lang
   >;
 
+type GreenpolicyevaluatorpageDocumentDataSlicesSlice =
+  | ButtonSliceSlice
+  | AccordionSliceSlice
+  | EmbedSliceSlice
+  | TextSliceSlice
+  | TextWithLogoSliceSlice
+  | TextWithImageSliceSlice;
+
+type GreenpolicyevaluatorpageDocumentDataSlices1Slice = FeaturedInSliceSlice;
+
+/**
+ * Content for GreenPolicyEvaluatorPage documents
+ */
+interface GreenpolicyevaluatorpageDocumentData {
+  /**
+   * Seo Title field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * Seo Description field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlicesSlice>
+  /**
+   * Slice Zone field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.slices1[]
+   * - **Tab**: As Featured In
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */;
+  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice>;
+}
+
+/**
+ * GreenPolicyEvaluatorPage document from Prismic
+ *
+ * - **API ID**: `greenpolicyevaluatorpage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type GreenpolicyevaluatorpageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<GreenpolicyevaluatorpageDocumentData>,
+    "greenpolicyevaluatorpage",
+    Lang
+  >;
+
 type HomepageDocumentDataSlices1Slice = FeaturedInSliceSlice;
 
 /**
@@ -1245,6 +1341,17 @@ interface PledgepageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description2: prismic.RichTextField;
+
+  /**
+   * button field in *PledgePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pledgepage.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button: prismic.KeyTextField;
 
   /**
    * SEO Title field in *PledgePage*
@@ -2069,6 +2176,17 @@ type ThankspagesDocumentDataSlicesSlice = ThanksSliceSlice;
  */
 interface ThankspagesDocumentData {
   /**
+   * head_helper_title field in *ThanksPages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspages.head_helper_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  head_helper_title: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *ThanksPages*
    *
    * - **Field Type**: Slice Zone
@@ -2231,6 +2349,7 @@ export type AllDocumentTypes =
   | EcobankspageDocument
   | EmbracepageDocument
   | FaqpageDocument
+  | GreenpolicyevaluatorpageDocument
   | HomepageDocument
   | PledgepageDocument
   | PresspageDocument
@@ -2786,6 +2905,136 @@ export type TextSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TextWithImageSlice → Primary*
+ */
+export interface TextWithImageSliceSliceDefaultPrimary {
+  /**
+   * title field in *TextWithImageSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_with_image_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *TextWithImageSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_with_image_slice.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * image field in *TextWithImageSlice → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_with_image_slice.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for TextWithImageSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextWithImageSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextWithImageSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextWithImageSlice*
+ */
+type TextWithImageSliceSliceVariation = TextWithImageSliceSliceDefault;
+
+/**
+ * TextWithImageSlice Shared Slice
+ *
+ * - **API ID**: `text_with_image_slice`
+ * - **Description**: TextWithImageSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextWithImageSliceSlice = prismic.SharedSlice<
+  "text_with_image_slice",
+  TextWithImageSliceSliceVariation
+>;
+
+/**
+ * Primary content in *TextWithLogoSlice → Primary*
+ */
+export interface TextWithLogoSliceSliceDefaultPrimary {
+  /**
+   * title field in *TextWithLogoSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_with_logo_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *TextWithLogoSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_with_logo_slice.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * logo field in *TextWithLogoSlice → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_with_logo_slice.primary.logo
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for TextWithLogoSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextWithLogoSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextWithLogoSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextWithLogoSlice*
+ */
+type TextWithLogoSliceSliceVariation = TextWithLogoSliceSliceDefault;
+
+/**
+ * TextWithLogoSlice Shared Slice
+ *
+ * - **API ID**: `text_with_logo_slice`
+ * - **Description**: TextWithLogoSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextWithLogoSliceSlice = prismic.SharedSlice<
+  "text_with_logo_slice",
+  TextWithLogoSliceSliceVariation
+>;
+
+/**
  * Primary content in *ThanksSlice → Primary*
  */
 export interface ThanksSliceSliceDefaultPrimary {
@@ -2872,6 +3121,8 @@ declare module "@prismicio/client" {
       EmbracepageDocumentData,
       FaqpageDocument,
       FaqpageDocumentData,
+      GreenpolicyevaluatorpageDocument,
+      GreenpolicyevaluatorpageDocumentData,
       HomepageDocument,
       HomepageDocumentData,
       PledgepageDocument,
@@ -2930,6 +3181,12 @@ declare module "@prismicio/client" {
       TextSliceSlice,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
+      TextWithImageSliceSlice,
+      TextWithImageSliceSliceVariation,
+      TextWithImageSliceSliceDefault,
+      TextWithLogoSliceSlice,
+      TextWithLogoSliceSliceVariation,
+      TextWithLogoSliceSliceDefault,
       ThanksSliceSlice,
       ThanksSliceSliceVariation,
       ThanksSliceSliceDefault,

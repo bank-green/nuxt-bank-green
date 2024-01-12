@@ -5,135 +5,153 @@
         <div
           class="contain grid grid-cols-1 md:grid-cols-2 justify-center items-center pb-4 lg:pb-0 mb-4 gap-16"
         >
-          <template v-if="donation">
-            <div class="space-y-8">
-              <PrismicImage
-                v-if="donation.data['photo']"
-                class="w-full h-full object-contain object-top"
-                alt="donation-image"
-                :field="donation.data['photo']"
-              />
+          <div class="space-y-8">
+            <PrismicImage
+              v-if="donation?.data.photo"
+              class="w-full h-full object-contain object-top"
+              alt="donation-image"
+              :field="donation?.data.photo"
+            />
+            <PrismicText
+              :field="donation?.data.title"
+              wrapper="h2"
+              class="font-semibold text-xl md:text-3xl tracking-wider"
+              fallback="Help us build a greener future!"
+            />
+            <PrismicRichText
+              v-if="donation?.data.description"
+              :field="donation?.data.description"
+              class="prose sm:prose-lg xl:prose-xl prose-blurb"
+            />
+            <div v-else class="prose sm:prose-lg xl:prose-xl prose-blurb">
+              <p>
+                By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
+                responsible financial decisions, channeling their deposits towards green financial institutions.
+                Bank.Green is a project of a registered charity and all U.S. donations are tax-deductible.
+              </p>
+              <p>
+                Your donation will help us raise awareness, provide resources, and foster a global
+                community dedicated to protecting our planet.
+              </p>
+              <p>
+                <em>Bank.Green is a project of a registered charity and all U.S. donations are tax-deductible.</em>
+              </p>
+            </div>
+          </div>
+          <div
+            class="relative w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center"
+          >
+            <div class="absolute -top-4 md:-top-8 -right-4 md:-right-8">
+              <img
+                class="h-12 md:h-20 w-auto"
+                src="/img/logos/bankgreen-logo.png"
+                alt="Bank Green"
+              >
+            </div>
+            <form
+              class="flex flex-col rounded-xl"
+              @submit.prevent.stop="submit"
+            >
               <PrismicText
-                :field="donation.data['title']"
+                :field="donation?.data.donation_title"
                 wrapper="h1"
-                class="font-semibold text-xl md:text-3xl tracking-wider"
+                class="font-semibold text-xl md:text-3xl tracking-wider text-white"
+                fallback="Donate to Bank.Green"
               />
               <PrismicRichText
-                :field="donation.data['description']"
-                class="prose sm:prose-lg xl:prose-xl prose-blurb"
+                :field="donation?.data.donation_description"
+                class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify"
+                fallback="...and make a big difference in the world. Your donation will give us greater
+                capacity to green the banking sector and protect our collective future."
               />
-            </div>
-            <div
-              class="relative w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-6 lg:px-10 py-8 text-gray-50 text-center"
-            >
-              <div class="absolute -top-4 md:-top-8 -right-4 md:-right-8">
-                <img
-                  class="h-12 md:h-20 w-auto"
-                  src="/img/logos/bankgreen-logo.png"
-                  alt="Bank Green"
+              <div class="grid grid-cols-2 md:grid-cols-2 px-4 gap-4 mt-8">
+                <div
+                  v-for="_option in methodOptions"
+                  :key="_option.value"
+                  class="inline-block"
                 >
+                  <input
+                    :id="_option.value.toString()"
+                    v-model="selectedMethod"
+                    type="radio"
+                    :value="_option.value"
+                    class="hidden"
+                  >
+                  <label
+                    class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
+                    :class="
+                      selectedMethod !== _option.value
+                        ? 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500'
+                        : 'bg-white text-leaf-500'
+                    "
+                    :for="_option.value.toString()"
+                  >
+                    {{ _option.label }}
+                  </label>
+                </div>
+                <div
+                  v-for="_option in donationOptions"
+                  :key="_option.value"
+                  class="inline-block"
+                >
+                  <input
+                    :id="_option.value.toString()"
+                    v-model="selectedAmount"
+                    type="radio"
+                    :value="_option.value"
+                    class="hidden"
+                  >
+                  <label
+                    class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
+                    :class="
+                      selectedAmount !== _option.value
+                        ? 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500'
+                        : 'bg-white text-leaf-500'
+                    "
+                    :for="_option.value.toString()"
+                  >
+                    {{ _option.label }}
+                  </label>
+                </div>
               </div>
-              <form
-                class="flex flex-col rounded-xl"
-                @submit.prevent.stop="submit"
+              <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
+                <TextField
+                  v-model="email"
+                  name="email"
+                  type="email"
+                  :placeholder="'youremail@address.com'"
+                  :warning="warningsMap.email"
+                  :dark="true"
+                  :required="false"
+                />
+                <CheckboxSection
+                  v-model="isAgreeMarketing"
+                  class="col-span-2"
+                  name="isAgreeMarketing"
+                  :warning="warningsMap.isAgreeMarketing"
+                  :dark="true"
+                >
+                  I wish to receive more information via email from
+                  Bank.Green.
+                </CheckboxSection>
+                <div
+                  id="stripe-payment-element"
+                  class="bg-gray-50 px-6 py-8 rounded-xl"
+                />
+              </div>
+              <button
+                type="submit"
+                class="button-green w-full md:w-auto mt-12 flex justify-center"
               >
                 <PrismicText
-                  :field="donation.data['donation-title']"
-                  wrapper="h1"
-                  class="font-semibold text-xl md:text-3xl tracking-wider text-white"
+                  wrapper="span"
+                  class="text-2xl font-semibold"
+                  :field="donation?.data.donation_button"
+                  fallback="Donate Now"
                 />
-                <PrismicRichText
-                  :field="donation.data['donation-description']"
-                  class="prose sm:prose-lg xl:prose-xl prose-blurb text-white mt-4 text-justify"
-                />
-                <div class="grid grid-cols-2 md:grid-cols-2 px-4 gap-4 mt-8">
-                  <div
-                    v-for="_option in methodOptions"
-                    :key="_option.value"
-                    class="inline-block"
-                  >
-                    <input
-                      :id="_option.value.toString()"
-                      v-model="selectedMethod"
-                      type="radio"
-                      :value="_option.value"
-                      class="hidden"
-                    >
-                    <label
-                      class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
-                      :class="
-                        selectedMethod !== _option.value
-                          ? 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500'
-                          : 'bg-white text-leaf-500'
-                      "
-                      :for="_option.value.toString()"
-                    >
-                      {{ _option.label }}
-                    </label>
-                  </div>
-                  <div
-                    v-for="_option in donationOptions"
-                    :key="_option.value"
-                    class="inline-block"
-                  >
-                    <input
-                      :id="_option.value.toString()"
-                      v-model="selectedAmount"
-                      type="radio"
-                      :value="_option.value"
-                      class="hidden"
-                    >
-                    <label
-                      class="md:w-auto flex justify-center block font-medium focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-leaf-500 p-2 md:p-4 text-center w-full rounded-lg shadow-green capitalize cursor-pointer"
-                      :class="
-                        selectedAmount !== _option.value
-                          ? 'bg-leaf-500 hover:bg-white  text-white hover:text-leaf-500'
-                          : 'bg-white text-leaf-500'
-                      "
-                      :for="_option.value.toString()"
-                    >
-                      {{ _option.label }}
-                    </label>
-                  </div>
-                </div>
-                <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
-                  <TextField
-                    v-model="email"
-                    name="email"
-                    type="email"
-                    :placeholder="'youremail@address.com'"
-                    :warning="warningsMap['email']"
-                    :dark="true"
-                    :required="false"
-                  />
-                  <CheckboxSection
-                    v-model="isAgreeMarketing"
-                    class="col-span-2"
-                    name="isAgreeMarketing"
-                    :warning="warningsMap['isAgreeMarketing']"
-                    :dark="true"
-                  >
-                    I wish to receive more information via email from
-                    Bank.Green.
-                  </CheckboxSection>
-                  <div
-                    id="stripe-payment-element"
-                    class="bg-gray-50 px-6 py-8 rounded-xl"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="button-green w-full md:w-auto mt-12 flex justify-center"
-                >
-                  <PrismicText
-                    wrapper="span"
-                    class="text-2xl font-semibold"
-                    :field="donation.data['donation-button']"
-                  />
-                </button>
-              </form>
-            </div>
-          </template>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
