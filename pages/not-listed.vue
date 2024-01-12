@@ -55,15 +55,15 @@
                 easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
               they’ll pull your bank out, too.
             </p>
-            <p
+            <PrismicRichText
+              v-if="notlisted?.data.text5"
               class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
-            >
-              <PrismicRichText
-                :field="notlisted?.data.text5"
-                fallback="Our mission is to encourage as many people as possible to take a stand - to refuse to
-                let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree.
-                This is your chance to spread the word with us."
-              />
+              :field="notlisted?.data.text5"
+            />
+            <p v-else class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0">
+              Our mission is to encourage as many people as possible to take a stand - to refuse to
+              let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree.
+              This is your chance to spread the word with us.
             </p>
           </div>
           <img

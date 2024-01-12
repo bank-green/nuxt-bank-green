@@ -26,12 +26,13 @@
                 stroke-linejoin="round"
               />
             </svg>
-
-            <h1 class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
-              <PrismicRichText
-                :field="thankspledge?.data.title"
-                fallback="Thank you for your pledge!"
-              />
+            <PrismicRichText
+              v-if="thankspledge?.data.title"
+              class = "mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
+              :field="thankspledge?.data.title"
+            />
+            <h1 v-else class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
+              Thank you for your pledge!
             </h1>
 
             <PrismicRichText

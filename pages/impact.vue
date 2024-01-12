@@ -5,18 +5,17 @@
         <div
           class="prose mx-auto max-w-4xl text-center prose-headings:font-semibold"
         >
-          <h1>
-            <PrismicRichText
-              :field="impact?.data.text1"
-              fallback="Opened an account with a bank that doesn't finance fossil fuels?"
-            />
-          </h1>
-          <h2 class="mt-0">
-            <PrismicRichText
-              :field="impact?.data.text2"
-              fallback="Maximise your impact by letting us know."
-            />
-          </h2>
+          <PrismicRichText
+            v-if="impact?.data.text1"
+            :field="impact?.data.text1"
+          />
+          <h1 v-else>Opened an account with a bank that doesn't finance fossil fuels?</h1>
+          <PrismicRichText
+            v-if="impact?.data.text2"
+            class="mt-0"
+            :field="impact?.data.text2"
+          />
+          <h2 class="mt-0" v-else>Maximise your impact by letting us know.</h2>
           <PrismicRichText
             :field="impact?.data.text3"
             fallback="Taking this survey helps advocate for change. Bank.Green uses your

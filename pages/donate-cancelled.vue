@@ -5,12 +5,11 @@
         <div
           class="prose mx-auto max-w-4xl text-center prose-headings:font-semibold"
         >
-          <h1>
-            <PrismicRichText
-              :field="donatecancelled?.data.text1"
-              fallback="Your donation was cancelled."
-            />
-          </h1>
+          <PrismicRichText
+            v-if="donatecancelled?.data.text1"
+            :field="donatecancelled?.data.text1"
+          />
+          <h1 v-else>Your donation was cancelled.</h1>
         </div>
       </div>
     </div>
