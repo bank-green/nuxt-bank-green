@@ -44,6 +44,17 @@
     </div>
 
     <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
+      Top Pick
+    </h5>
+    <CheckboxSection
+      v-model="filterPayload.topPick"
+      class="col-span-full"
+      name="topPick"
+    >
+      Top Pick
+    </CheckboxSection>
+
+    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
       Fossil Free Alliance
     </h5>
     <CheckboxSection
@@ -185,6 +196,7 @@ const getDefaultFilter = () => ({
   location: {
     'Mobile banking': false
   },
+  topPick: false,
   fossilFreeAlliance: false,
   convenience: {
     'Mobile banking': false,
@@ -220,6 +232,9 @@ const parsedFilterPayload = computed(() => {
       : undefined,
     subregions: filterPayload.value.subregion
       ? [filterPayload.value.subregion]
+      : undefined,
+    topPick: filterPayload.value.topPick
+      ? filterPayload.value.topPick
       : undefined,
     fossilFreeAlliance: filterPayload.value.fossilFreeAlliance
       ? filterPayload.value.fossilFreeAlliance

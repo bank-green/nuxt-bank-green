@@ -119,6 +119,7 @@ const loadBanks = async ({
   regions,
   subregions,
   fossilFreeAlliance,
+  topPick,
   features
 }) => {
   loading.value = true
@@ -129,16 +130,17 @@ const loadBanks = async ({
     country: country.value,
     regions,
     subregions,
+    topPick,
     fossilFreeAlliance,
     features
   })
-
   banks.value = result
     // filter show_on_sustainable_banks_page
     .filter(a => a.showOnSustainableBanksPage)
-    // sort by fossiil_free_alliance_rating first, then by name
+    // sort by top_pick first, then fossil_free_alliance_rating, then by name
     .sort(
       (a, b) =>
+        b.topPick - a.topPick ||
         b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
         a.name - b.name
     )
@@ -146,7 +148,7 @@ const loadBanks = async ({
   if (banks.value.length === 0) {
     errorMessage.value =
       "Sorry, we don't have any banks that meet the required filter."
-  }
+  } // TODO: should put this string in Prismic
 }
 watch(country, () => {
   banks.value = []
