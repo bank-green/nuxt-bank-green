@@ -94,7 +94,7 @@
           target="_blank"
           class="button-green"
           :class="{'pointer-events-none opacity-75': busy}"
-          @click.prevent.stop="() => emit('success')"
+          @click.stop="emit('success')"
         >
           <span class="font-semibold">
             {{ embracePage?.data.proceed_button_label || 'Go To Your Mail App' }}
