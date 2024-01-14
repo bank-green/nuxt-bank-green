@@ -2,8 +2,11 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
       <div class="page-fade-in contain max-w-3xl pb-16">
-        <PrismicRichText :field="faq?.data.introduction" class="prose" />
-
+        <PrismicRichText
+          :field="faq?.data.introduction"
+          class="prose"
+          fallback="Frequently asked questions"
+        />
         <div
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
         >
@@ -16,9 +19,13 @@
             leave-to-class="opacity-0"
           />
           <SliceZone
+            v-if="faq?.data.slices"
             :slices="faq?.data.slices ?? []"
             :components="sliceComps"
           />
+          <h3 v-else style="text-align:center">
+            Error Loading Content.
+          </h3>
         </div>
       </div>
 
@@ -34,7 +41,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import SignupBox from '@/components/forms/SignupBox.vue'
 import { components } from '~~/slices'
@@ -47,5 +54,6 @@ const { data: faq } = await useAsyncData('faq', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(faq.value.data)
+usePrismicSEO(faq.value?.data)
+
 </script>

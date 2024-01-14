@@ -6,16 +6,18 @@
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
         >
           <SliceZone
+            v-if="privacy?.data.slices"
             :slices="privacy?.data.slices ?? []"
             :components="sliceComps"
           />
+          <h3 v-else class="flex justify-center">Error loading content.</h3>
         </article>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
@@ -27,5 +29,5 @@ const { data: privacy } = await useAsyncData('privacy', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(privacy.value.data)
+usePrismicSEO(privacy.value?.data)
 </script>

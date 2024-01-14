@@ -3,6 +3,7 @@
   "label": "DisclaimerPage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "seo_title": {
@@ -13,12 +14,15 @@
         "type": "Text",
         "config": { "label": "SEO Description", "placeholder": "" }
       },
+      "head_helper_title": {
+        "type": "Text",
+        "config": { "label": "head_helper_title", "placeholder": "" }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": { "choices": { "text_slice": { "type": "SharedSlice" } } }
       }
     }
-  },
-  "format": "custom"
+  }
 }

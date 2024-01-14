@@ -126,11 +126,15 @@
       <div class="md:w-1/2 max-w-sm">
         <PrismicRichText
           class="text-lg md:text-2xl tracking-wide mb-4"
-          :field="home.data.description1"
+          :field="home?.data.description1"
+          fallback="The fight for a habitable planet is the fight for our lives. But while we look at ways to make our lives more sustainable,
+          most of us are also funding environmental catastrophe."
         />
         <PrismicRichText
           class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
-          :field="home.data.description2"
+          :field="home?.data.description2"
+          fallback="During the 7 years following the Paris Agreement, the world’s top 60
+          private-sector banks pumped $5.5 trillion into fossil fuels."
         />
       </div>
 
@@ -152,11 +156,16 @@
             <div class="md:w-1/2 max-w-sm">
               <PrismicRichText
                 class="text-lg md:text-2xl tracking-wide mb-4"
-                :field="home.data.description3"
+                :field="home?.data.description3"
+                fallback="We have the power to change our banking system because it will not change itself.
+                Mass pressure from customers will force our banks to  defund fossil fuels."
               />
               <PrismicRichText
                 class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
-                :field="home.data.description4"
+                :field="home?.data.description4"
+                fallback="Bank.Green and our partners are leading a global reckoning with the world’s
+                most powerful driver of environmental destruction.
+                But we need your help."
               />
             </div>
             <img
@@ -182,7 +191,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useGtm } from '@gtm-support/vue-gtm'
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
@@ -204,14 +213,14 @@ const { data: home } = await useAsyncData('home', () =>
   client.getSingle('homepage')
 )
 
-usePrismicSEO(home.value.data)
+usePrismicSEO(home.value?.data)
 
 const onCheckBankClick = () => {
   const allowCookies = useCookie('bg.allowcookies', { default: () => false })
   if (!allowCookies.value) { return }
   const gtm = useGtm()
-  gtm.enable(true)
-  gtm.trackEvent({ event: 'onBankCheckClick' })
+  gtm?.enable(true)
+  gtm?.trackEvent({ event: 'onBankCheckClick' })
 }
 
 const { country } = useCountry()

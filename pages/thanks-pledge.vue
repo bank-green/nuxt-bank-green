@@ -26,19 +26,32 @@
                 stroke-linejoin="round"
               />
             </svg>
-
-            <h1 class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
+            <PrismicRichText
+              v-if="thankspledge?.data.title"
+              class = "mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
+              :field="thankspledge?.data.title"
+            />
+            <h1 v-else class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
               Thank you for your pledge!
             </h1>
 
-            <p class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line">
-              You've just taken an amazing action to help build a better future
-              for people and planet.
-            </p>
-            <p class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line">
-              Why not encourage your friends to do the same...
-            </p>
-            <div class="flex justify-center">
+            <PrismicRichText
+              class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line"
+              :field="thankspledge?.data.content1"
+              fallback="You've just taken an amazing action to help build a better future"
+            />
+            <PrismicRichText
+              class="text-gray-700 px-4 max-w-lg mx-auto whitespace-pre-line"
+              :field="thankspledge?.data.content2"
+              fallback="Why not encourage your friends to do the same..."
+            />
+            <div v-if="thankspledge?.data.slices" class="flex justify-center">
+              <SliceZone
+                :slices="thankspledge?.data.slices ?? []"
+                :components="sliceComps"
+              />
+            </div>
+            <div v-else class="flex justify-center">
               <SocialSharer
                 class="text-sushi-500"
                 url="https://bank.green"
@@ -54,6 +67,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 useHeadHelper('Thank you')
+const sliceComps = ref(defineSliceZoneComponents(components))
+const { client } = usePrismic()
+const { data: thankspledge } = await useAsyncData('thankspledge', () =>
+  client.getSingle('thankspledge')
+)
 </script>

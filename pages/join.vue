@@ -6,13 +6,16 @@
           <h2
             class="w-full max-w-4xl text-center bg-primary-dark text-gray-50 rounded-xl font-semibold text-xl md:text-3xl tracking-wider mb-8 md:mb-4 py-4"
           >
-            Join the Money Movement
+            {{ asText(joinpage?.data.text1) || 'Join the Money Movement' }}
           </h2>
           <div
             class="max-w-4xl flex flex-col md:flex-row items-center justify-center md:space-x-8"
           >
             <div class="md:w-1/2 max-w-sm">
-              <p class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
+              <p  v-if="joinpage?.data.text2 && joinpage?.data.text3 " class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
+                <b>{{ asText(joinpage?.data.text2) }}</b> {{ asText(joinpage?.data.text3) }}
+              </p>
+              <p v-else class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4">
                 <b>Bank.Green was founded on the belief that banks have had an
                   easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
                 they’ll pull your bank out, too.
@@ -40,8 +43,12 @@
 </template>
 
 <script setup lang="ts">
+import { asText } from '@prismicio/helpers'
 import CheckList from '@/components/CheckList.vue'
 import SignupBox from '@/components/forms/SignupBox.vue'
+const { client } = usePrismic()
+const { data: joinpage } = await useAsyncData('joinpage', () =>
+  client.getByUID('textonlypages', 'joinpage'))
 
 useHeadHelper(
   'Join the Money Movement - Bank.Green',
