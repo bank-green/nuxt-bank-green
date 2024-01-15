@@ -21,7 +21,9 @@
       </div>
     </div>
     <div v-else>
-
+      <h1>
+        Error Loading content!
+      </h1>
     </div>
   </div>
 </template>

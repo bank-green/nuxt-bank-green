@@ -9,7 +9,9 @@
             v-if="impact?.data.text1"
             :field="impact?.data.text1"
           />
-          <h1 v-else>Opened an account with a bank that doesn't finance fossil fuels?</h1>
+          <h1 v-else>
+            Opened an account with a bank that doesn't finance fossil fuels?
+          </h1>
           <PrismicRichText
             v-if="impact?.data.text2"
             class="mt-0"
