@@ -13,6 +13,7 @@ export const components = defineSliceZoneComponents({
     () => import("./FeaturedInSlice/index.vue")
   ),
   image_slice: defineAsyncComponent(() => import("./ImageSlice/index.vue")),
+  leaf_slice: defineAsyncComponent(() => import("./LeafSlice/index.vue")),
   share_pic_gallery_slice: defineAsyncComponent(
     () => import("./SharePicGallerySlice/index.vue")
   ),

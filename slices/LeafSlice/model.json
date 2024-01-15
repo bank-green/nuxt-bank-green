@@ -1,0 +1,31 @@
+{
+  "id": "leaf_slice",
+  "type": "SharedSlice",
+  "name": "LeafSlice",
+  "description": "LeafSlice",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": { "label": "title", "placeholder": "" }
+        },
+        "description": {
+          "type": "Text",
+          "config": { "label": "description", "placeholder": "" }
+        },
+        "image": {
+          "type": "Link",
+          "config": { "label": "image", "placeholder": "", "select": "media" }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

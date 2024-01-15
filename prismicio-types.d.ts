@@ -2710,6 +2710,71 @@ export type ImageSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *LeafSlice → Primary*
+ */
+export interface LeafSliceSliceDefaultPrimary {
+  /**
+   * title field in *LeafSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leaf_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *LeafSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leaf_slice.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * image field in *LeafSlice → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leaf_slice.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  image: prismic.LinkToMediaField;
+}
+
+/**
+ * Default variation for LeafSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LeafSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LeafSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *LeafSlice*
+ */
+type LeafSliceSliceVariation = LeafSliceSliceDefault;
+
+/**
+ * LeafSlice Shared Slice
+ *
+ * - **API ID**: `leaf_slice`
+ * - **Description**: LeafSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LeafSliceSlice = prismic.SharedSlice<
+  "leaf_slice",
+  LeafSliceSliceVariation
+>;
+
+/**
  * Default variation for SharePicGallerySlice Slice
  *
  * - **API ID**: `default`
@@ -3169,6 +3234,9 @@ declare module "@prismicio/client" {
       ImageSliceSlice,
       ImageSliceSliceVariation,
       ImageSliceSliceDefault,
+      LeafSliceSlice,
+      LeafSliceSliceVariation,
+      LeafSliceSliceDefault,
       SharePicGallerySliceSlice,
       SharePicGallerySliceSliceVariation,
       SharePicGallerySliceSliceDefault,
