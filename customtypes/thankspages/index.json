@@ -7,6 +7,10 @@
   "json": {
     "Main": {
       "uid": { "config": { "label": "UID" }, "type": "UID" },
+      "head_helper_title": {
+        "type": "Text",
+        "config": { "label": "head_helper_title", "placeholder": "" }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

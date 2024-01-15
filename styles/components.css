@@ -2,6 +2,10 @@ img {
   max-width: none;
 }
 
+.textlink a{
+  @apply font-bold text-sushi-500  hover:underline hover:text-sushi-600 focus:underline;
+}
+
 .constrain-images img {
   max-width: 100%;
 }
@@ -179,3 +183,4 @@ article img {
 .backdrop-blur {
   backdrop-filter: blur(3px);
 }
+

@@ -367,6 +367,17 @@ interface CertificationpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * certification_img field in *CertificationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: certificationpage.certification_img
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  certification_img: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *CertificationPage*
    *
    * - **Field Type**: Slice Zone
@@ -477,6 +488,17 @@ interface DisclaimerpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * head_helper_title field in *DisclaimerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: disclaimerpage.head_helper_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  head_helper_title: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *DisclaimerPage*
    *
    * - **Field Type**: Slice Zone
@@ -546,33 +568,33 @@ interface DonationpageDocumentData {
    *
    * - **Field Type**: Title
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-title
+   * - **API ID Path**: donationpage.donation_title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-title": prismic.TitleField;
+  donation_title: prismic.TitleField;
 
   /**
    * Donation-description field in *DonationPage*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-description
+   * - **API ID Path**: donationpage.donation_description
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-description": prismic.RichTextField;
+  donation_description: prismic.RichTextField;
 
   /**
    * Donation-button field in *DonationPage*
    *
    * - **Field Type**: Title
    * - **Placeholder**: *None*
-   * - **API ID Path**: donationpage.donation-button
+   * - **API ID Path**: donationpage.donation_button
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  "donation-button": prismic.TitleField;
+  donation_button: prismic.TitleField;
 
   /**
    * seo_title field in *DonationPage*
@@ -1319,6 +1341,17 @@ interface PledgepageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description2: prismic.RichTextField;
+
+  /**
+   * button field in *PledgePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: pledgepage.button
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button: prismic.KeyTextField;
 
   /**
    * SEO Title field in *PledgePage*
@@ -2142,6 +2175,17 @@ type ThankspagesDocumentDataSlicesSlice = ThanksSliceSlice;
  * Content for ThanksPages documents
  */
 interface ThankspagesDocumentData {
+  /**
+   * head_helper_title field in *ThanksPages*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: thankspages.head_helper_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  head_helper_title: prismic.KeyTextField;
+
   /**
    * Slice Zone field in *ThanksPages*
    *
