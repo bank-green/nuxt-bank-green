@@ -1,24 +1,18 @@
-<script setup lang="ts">
-import { Content } from "@prismicio/client";
-
-// The array passed to `getSliceComponentProps` is purely optional.
-// Consider it as a visual hint for you when templating your slice.
-defineProps(
-  getSliceComponentProps<Content.TextWithLogoSliceSlice>([
-    "slice",
-    "index",
-    "slices",
-    "context",
-  ])
-);
-</script>
-
 <template>
-  <section
-    :data-slice-type="slice.slice_type"
-    :data-slice-variation="slice.variation"
-  >
-    Placeholder component for text_with_logo_slice (variation:
-    {{ slice.variation }}) Slices
-  </section>
+  <div class="flex-col p-4">
+    <NuxtImg
+      :src="slice.primary.logo?.url"
+      :alt="slice.primary.logo.alt"
+      width="524"
+    />
+    <article>
+      <h1><b>{{ slice.primary.title }}</b></h1>
+      <p>{{ slice.primary.description }}</p>
+    </article>
+  </div>
 </template>
+
+<script setup lang="ts">
+import { getSliceComponentProps } from '@prismicio/vue'
+defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
+</script>
