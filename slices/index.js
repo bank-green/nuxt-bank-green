@@ -10,7 +10,6 @@ import SocialSharerSlice from './SocialSharerSlice'
 import TextSlice from './TextSlice'
 import ThanksSlice from './ThanksSlice'
 import TeamMemberSlice from './TeamMemberSlice'
-import TextWithLogoSlice from './TextWithLogoSlice'
 
 export {
   AccordionSlice,
@@ -22,8 +21,7 @@ export {
   SocialSharerSlice,
   TextSlice,
   ThanksSlice,
-  TeamMemberSlice,
-  TextWithLogoSlice
+  TeamMemberSlice
 }
 
 export const components = {
@@ -36,6 +34,5 @@ export const components = {
   social_sharer_slice: SocialSharerSlice,
   text_slice: TextSlice,
   thanks_slice: ThanksSlice,
-  team_member_slice: TeamMemberSlice,
-  text_with_logo_slice: TextWithLogoSlice
+  team_member_slice: TeamMemberSlice
 }

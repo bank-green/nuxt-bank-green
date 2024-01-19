@@ -6,6 +6,14 @@
   "status": true,
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": { "label": "Title", "placeholder": "" }
+      },
+      "description": {
+        "type": "Text",
+        "config": { "label": "Description", "placeholder": "" }
+      },
       "seo_title": {
         "type": "Text",
         "config": { "label": "Seo Title", "placeholder": "" }
@@ -14,6 +22,66 @@
         "type": "Text",
         "config": { "label": "Seo Description", "placeholder": "" }
       },
+      "leafslice1": {
+        "type": "Group",
+        "config": {
+          "label": "LeafSlice1",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "leafslice2": {
+        "type": "Group",
+        "config": {
+          "label": "LeafSlice2",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "leafslice3": {
+        "type": "Group",
+        "config": {
+          "label": "LeafSlice3",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
@@ -21,20 +89,214 @@
           "choices": {
             "button_slice": { "type": "SharedSlice" },
             "accordion_slice": { "type": "SharedSlice" },
-            "embed_slice": { "type": "SharedSlice" },
-            "text_slice": { "type": "SharedSlice" },
-            "text_with_logo_slice": { "type": "SharedSlice" },
-            "text_with_image_slice": { "type": "SharedSlice" }
+            "embed_slice": { "type": "SharedSlice" }
           }
         }
       }
     },
     "As Featured In": {
+      "title_as_featured_in": {
+        "type": "Text",
+        "config": { "label": "Title_as_featured_in", "placeholder": "" }
+      },
       "slices1": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": { "featured_in_slice": { "type": "SharedSlice" } }
+        }
+      }
+    },
+    "Features": {
+      "title_features": {
+        "type": "Text",
+        "config": { "label": "Title_Features", "placeholder": "" }
+      },
+      "description_features": {
+        "type": "Text",
+        "config": { "label": "Description_features", "placeholder": "" }
+      },
+      "textwithimage1": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithImage1",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "textwithimage2": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithImage2",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "textwithimage3": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithImage3",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "textwithimage4": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithImage4",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "description_features_2": {
+        "type": "Text",
+        "config": { "label": "Description_features_2", "placeholder": "" }
+      },
+      "slices2": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "button_slice": { "type": "SharedSlice" } } }
+      }
+    },
+    "USP": {
+      "title_usp": {
+        "type": "Text",
+        "config": { "label": "Title_USP", "placeholder": "" }
+      },
+      "textwithlogo1": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithLogo1",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "textwithlogo2": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithLogo2",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "textwithlogo3": {
+        "type": "Group",
+        "config": {
+          "label": "TextWithLogo3",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      }
+    },
+    "CTA": {
+      "title_cta": {
+        "type": "Text",
+        "config": { "label": "Title_CTA", "placeholder": "" }
+      },
+      "description_cta": {
+        "type": "Text",
+        "config": { "label": "Description_CTA", "placeholder": "" }
+      },
+      "slices4": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "button_slice": { "type": "SharedSlice" } } }
+      }
+    },
+    "FAQ": {
+      "title_faq": {
+        "type": "Text",
+        "config": { "label": "Title_FAQ", "placeholder": "" }
+      },
+      "slices5": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": { "accordion_slice": { "type": "SharedSlice" } }
         }
       }
     }

@@ -13,22 +13,15 @@ export const components = defineSliceZoneComponents({
     () => import("./FeaturedInSlice/index.vue")
   ),
   image_slice: defineAsyncComponent(() => import("./ImageSlice/index.vue")),
-  leaf_slice: defineAsyncComponent(() => import("./LeafSlice/index.vue")),
   share_pic_gallery_slice: defineAsyncComponent(
     () => import("./SharePicGallerySlice/index.vue")
   ),
   social_sharer_slice: defineAsyncComponent(
-    () => import('./SocialSharerSlice/index.vue')
+    () => import("./SocialSharerSlice/index.vue")
   ),
   team_member_slice: defineAsyncComponent(
     () => import("./TeamMemberSlice/index.vue")
   ),
   text_slice: defineAsyncComponent(() => import("./TextSlice/index.vue")),
-  text_with_image_slice: defineAsyncComponent(
-    () => import("./TextWithImageSlice/index.vue")
-  ),
-  text_with_logo_slice: defineAsyncComponent(
-    () => import("./TextWithLogoSlice/index.vue")
-  ),
   thanks_slice: defineAsyncComponent(() => import("./ThanksSlice/index.vue")),
 });
