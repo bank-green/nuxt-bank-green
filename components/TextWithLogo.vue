@@ -1,13 +1,13 @@
 <template>
-  <div class="flex-col p-4">
+  <div class="flex-col p-4 gap-4">
     <NuxtImg
       :src="img"
-      width="524"
+      class="w-full md:w-3/4"
     />
-    <article>
+    <div>
       <h1><b>{{ title }}</b></h1>
       <p>{{ description }}</p>
-    </article>
+    </div>
   </div>
 </template>
 

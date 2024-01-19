@@ -4,7 +4,7 @@
       <SliceZone
         :components="sliceComps"
         :slices="gpe?.data.slices ?? []"
-        />
+      />
     </div>
     <div class="bg-white">
       <div class=" page-fade-in grid grid-cols-2 gap-4 pt-28">
