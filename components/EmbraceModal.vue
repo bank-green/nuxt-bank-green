@@ -72,10 +72,6 @@
           src="/img/icons/check.svg"
           alt=""
         >
-        <!-- TODO: sync embracePage to Prismic using SliceMachine once
-                   migrate hardcode/gpe page branches are merged and their
-                   custom types can be merged back to this branch (this is
-                   so we don't accidentally destroy any of that work). -->
         <span v-if="messageCopied">
           {{ embracePage?.data.copied_text_button_label || "Copied!" }}
         </span>
@@ -83,7 +79,7 @@
       <div
         class="self-stretch text-left text-slate-800 text-sm font-medium leading-6 tracking-wide mt-6 max-md:max-w-full"
       >
-        {{ embracePage?.data.footnote|| 'Please keep us (embrace@bank.green) in the BCC field of your email to help us keep track of messages sent.' }}
+        {{ embracePage?.data.preview_footnote|| 'Please keep us (embrace@bank.green) in the BCC field of your email to help us keep track of messages sent.' }}
       </div>
       <div class="grid grid-cols-2 items-center self-center flex w-full gap-5 mt-6 mb-6 max-md:max-w-full max-md:flex-wrap max-md:mt-8 max-md:mb-8">
         <button
@@ -110,6 +106,7 @@
 </template>
 
 <script setup lang="ts">
+import { PrismicDocument } from '@prismicio/types'
 import TextField from '@/components/forms/TextField.vue'
 import EmailPreviewField from '@/components/forms/EmailPreviewField.vue'
 
@@ -123,7 +120,18 @@ const { data: embracePage } = await useAsyncData('embrace', () =>
 const props = defineProps<{
   modelValue: boolean;
   message: string | null;
-  form: object;
+  form: {
+    fullName: string;
+    email: string;
+    subject: string;
+    bank: string | null;
+    bankEmail: string;
+    searchValue: string;
+    country: string;
+    hometown: string;
+    background: string;
+    body: string;
+};
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
 }>()
 

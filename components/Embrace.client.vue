@@ -164,12 +164,13 @@ if (!embracePage?.value) {
 
 const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   name?: String;
-  // TODO: update to actual embrace thank you page (once we have one)
-  successRedirectURL?: { type: String, default: '/thanks' }
+  successRedirectURL: string
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null;
-}>()
+}>(), {
+  successRedirectURL: '/thanks-embrace'
+})
 
 const fullName = ref<string>('')
 const fullNameWarning = ref<string | null>(null)
