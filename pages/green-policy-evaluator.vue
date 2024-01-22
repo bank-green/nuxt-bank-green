@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="bg-sushi-100 md:pt-28 max-w-screen ">
+    <section class="bg-sushi-100 md:pt-28 max-w-screen ">
       <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl pt-28 pb-20 md:pb-0 lg:pt-12 md:gap-8 gap-10">
         <div class="text-center prose sm:prose-lg xl:prose-xl">
           <div>
@@ -49,8 +49,8 @@
         </div>
       </div>
       <Swoosh />
-    </div>
-    <div id="features" class="page-fade-in contain items-center max-w-6xl pt-28 lg:pt-24">
+    </section>
+    <section id="features" class="page-fade-in contain items-center max-w-6xl pt-28 lg:pt-24">
       <div class="prose sm:prose-lg xl:prose-xl contain text-center">
         <h2 class="text-center">
           {{ gpe?.data.title_features }}
@@ -67,7 +67,26 @@
           :description="feature?.description!"
         />
       </div>
-    </div>
+    </section>
+    <section class="bg-sushi-100 md:pt-28 max-w-screen">
+      <div class="page-fade-in contain justify-center items-center max-w-6xl pt-12 pb-20 md:pb-0 lg:pt-5 md:gap-8 gap-10  grid grid-cols-2">
+        <div class="prose sm:prose-lg xl:prose-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" width="145" height="130" viewBox="0 0 145 130" fill="none">
+            <path d="M145 1.35555C145 126.794 49.9866 137.638 0 126.794C0 53.4741 36.0434 -10.1654 145 1.35555Z" fill="#7BB122" fill-opacity="0.5" />
+          </svg>
+          <h2>{{ gpe?.data.title_usp || "What Sets the Green Policy Evaluator Apart?" }}</h2>
+        </div>
+        <div class="flex flex-col gap-4 pt-28">
+          <TextWithLogo
+            v-for="usp in gpe?.data.textwithlogo1"
+            :key="usp.title!"
+            :title="usp?.title!"
+            :img="asImageSrc(usp?.image)!"
+            :description="usp?.description!"
+          />
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
