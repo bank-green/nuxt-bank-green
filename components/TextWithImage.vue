@@ -5,7 +5,7 @@
       class="w-1/12 h-min"
     />
     <div class="flex flex-col gap-2">
-      <h1><b>{{ title }}</b></h1>
+      <h1 class="font-bold">{{ title }}</h1>
       <p>{{ description }}</p>
     </div>
   </div>
