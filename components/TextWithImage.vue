@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col p-4 gap-2 bg-white rounded-tl-[80px] rounded-br-[80px] items-center">
+  <div class="flex flex-row p-4 gap-4 bg-white align-top rounded-lg">
     <NuxtImg
       :src="img"
-      class="w-4/12"
+      class="w-1/12 h-min"
     />
-    <div class="flex flex-col items-center prose xl:prose-sm space-y-0">
+    <div class="flex flex-col gap-2">
       <h1><b>{{ title }}</b></h1>
       <p>{{ description }}</p>
     </div>

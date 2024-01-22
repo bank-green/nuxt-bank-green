@@ -38,8 +38,8 @@
         </div>
         <div class="z-10 w-full md:h-48 static md:relative h-full">
           <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-4 static md:absolute -bottom-13 md:-bottom-13 inset-x-0 w-full h-full">
-            <TextWithLogo
-              v-for="feature in gpe?.data.leafslice1"
+            <LeafSlice
+              v-for="feature in gpe?.data.key_points_items"
               :key="feature.title!"
               :title="feature?.title!"
               :img="asImageSrc(feature?.image)!"
@@ -60,7 +60,7 @@
 
       <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 pt-28">
         <TextWithLogo
-          v-for="feature in gpe?.data.textwithimage1"
+          v-for="feature in gpe?.data.key_points_items"
           :key="feature.title!"
           :title="feature?.title!"
           :img="asImageSrc(feature?.image)!"
@@ -77,8 +77,8 @@
           <h2>{{ gpe?.data.title_usp || "What Sets the Green Policy Evaluator Apart?" }}</h2>
         </div>
         <div class="flex flex-col gap-4 pt-28">
-          <TextWithLogo
-            v-for="usp in gpe?.data.textwithlogo1"
+          <TextWithImage
+            v-for="usp in gpe?.data.usp_items"
             :key="usp.title!"
             :title="usp?.title!"
             :img="asImageSrc(usp?.image)!"
