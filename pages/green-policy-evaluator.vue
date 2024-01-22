@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="bg-sushi-100 md:pt-28 max-w-screen ">
-      <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl pt-28 lg:pt-12 gap-6">
+      <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl pt-28 pb-20 md:pb-0 lg:pt-12 md:gap-8 gap-10">
         <div class="text-center prose sm:prose-lg xl:prose-xl">
           <div>
             <h1>{{ gpe?.data.title || "Reveal data-backed insights from sustainability reports faster than ever" }}</h1>
@@ -19,7 +19,7 @@
           v-model="showModal"
         />
         <div
-          class="flex flex-col items-center md:flex-row w-full pt-10 md:pt-8 md:pb-16"
+          class="flex flex-col items-center md:flex-row w-full md:pt-8 md:pb-16"
         >
           <h3
             class="text-center text-2xl md:text-xl font-semibold whitespace-nowrap mb-6 md:mb-0 md:mr-2 lg:mr-12"
@@ -36,8 +36,8 @@
             />
           </div>
         </div>
-        <div class="relative z-1 w-full h-full py-8 sm:py-10 md:py-12">
-          <div class="grid grid-cols-3 gap-4 absolute max-h-6 top-0 inset-x-0 w-full max-h-3/2 min-h-full">
+        <div class="z-10 w-full md:h-48 static md:relative h-full">
+          <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-4 static md:absolute -bottom-13 md:-bottom-13 inset-x-0 w-full h-full">
             <TextWithLogo
               v-for="feature in gpe?.data.leafslice1"
               :key="feature.title!"
@@ -50,7 +50,7 @@
       </div>
       <Swoosh />
     </div>
-    <div id="features" class="page-fade-in contain items-center max-w-6xl pt-28 lg:pt-12">
+    <div id="features" class="page-fade-in contain items-center max-w-6xl pt-28 lg:pt-24">
       <div class="prose sm:prose-lg xl:prose-xl contain text-center">
         <h2 class="text-center">
           {{ gpe?.data.title_features }}
@@ -58,7 +58,7 @@
         <p>{{ gpe?.data.description_features }}</p>
       </div>
 
-      <div class=" grid grid-cols-2 gap-4 pt-28">
+      <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 pt-28">
         <TextWithLogo
           v-for="feature in gpe?.data.textwithimage1"
           :key="feature.title!"

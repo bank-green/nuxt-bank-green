@@ -1,10 +1,10 @@
 <template>
-  <div class="flex-col p-4 gap-4">
+  <div class="flex flex-col p-4 gap-4 bg-white">
     <NuxtImg
       :src="img"
       class="w-full md:w-3/4"
     />
-    <div>
+    <div class="flex flex-col gap-2">
       <h1><b>{{ title }}</b></h1>
       <p>{{ description }}</p>
     </div>
