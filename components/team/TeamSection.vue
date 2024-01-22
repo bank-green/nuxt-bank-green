@@ -1,13 +1,13 @@
 <template>
   <li>
     <div>
-      <h3>Founders</h3>
+      <h2>{{ departmentName }}</h2>
     </div>
   </li>
 </template>
 
 <script setup>
 defineProps({
-  teamName: String
+  departmentName: String
 })
 </script>

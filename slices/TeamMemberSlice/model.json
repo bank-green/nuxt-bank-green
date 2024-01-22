@@ -21,10 +21,10 @@
             "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "teamName": {
+        "department": {
           "type": "Select",
           "config": {
-            "label": "teamName",
+            "label": "department",
             "options": ["Founders", "Research", "Product & Engineering", "Content", "Data", "People Ops", "Alumni"],
             "default_value": "Product & Engineering",
             "placeholder": "Select the team name",

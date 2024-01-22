@@ -11,14 +11,35 @@
       </div>
     </div>
     <div class="contain py-16">
-      <ul
-        class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
-      >
-        <SliceZone
-          :slices="team?.data.slices1 ?? []"
-          :components="sliceComps"
-        />
-      </ul>
+      <p>{{ teamStructure }}</p>
+      <div v-for="(subTeam, mainKey) in teamStructure" :key="mainKey">
+        <TeamSection :departmentName="subTeam.teamName" />
+        <ul
+          class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
+        >
+          <!-- <SliceZone
+            :slices="team?.data.slices1 ?? []"
+            :components="sliceComps"
+          /> -->
+          <!-- <p>{{ team?.data.slices1 }}</p> -->
+          <!-- <div v-for="(member, key) in team?.data.slices1 ?? []" :key="key">
+            <TeamMember
+              :name="member.primary.name[0].text"
+              :href="member.primary.link.url"
+              :img="member.primary.img.url"
+              :description="member.primary.description[0].text"
+            />
+          </div> -->
+          <div v-for="(member, key) in subTeam.members" :key="key">
+            <TeamMember
+              :name="member.primary.name[0].text"
+              :href="member.primary.link.url"
+              :img="member.primary.img.url"
+              :description="member.primary.description[0].text"
+            />
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -35,4 +56,20 @@ const { data: team } = await useAsyncData('team', () =>
   })
 )
 usePrismicSEO(team.value.data)
+// const teamStructure = []
+// // member.primary.department[0].text
+// for (const member of team.value.data.slices1) {
+//   teamStructure.push({ teamName: 'Other', members: [member] })
+// }
+const teamStructure = team.value.data.slices1.reduce((accumulator, member) => {
+  const department = 'Other'
+  const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)
+
+  if (existingTeamIndex >= 0) {
+    accumulator[existingTeamIndex].members.push(member)
+  } else {
+    accumulator.push({ teamName: department, members: [member] })
+  }
+  return accumulator
+}, [])
 </script>
