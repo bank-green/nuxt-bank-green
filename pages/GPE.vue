@@ -8,10 +8,10 @@
     </div>
     <div class="bg-white">
       <div class=" page-fade-in grid grid-cols-2 gap-4 pt-28">
-        <TextWithLogo
-          :title="gpe?.data.leafslice1.at(0)?.title!"
-          :img="asImageSrc(gpe?.data.leafslice1.at(0)?.image)!"
-          :description="gpe?.data.leafslice1.at(0)?.description!"
+        <LeafSlice
+          :title="gpe?.data.key_points_items.at(0)?.title!"
+          :img="asImageSrc(gpe?.data.key_points_items.at(0)?.image)!"
+          :description="gpe?.data.key_points_items.at(0)?.description!"
         />
       </div>
     </div>

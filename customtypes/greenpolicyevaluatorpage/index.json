@@ -22,10 +22,10 @@
         "type": "Text",
         "config": { "label": "Seo Description", "placeholder": "" }
       },
-      "leafslice1": {
+      "key_points_items": {
         "type": "Group",
         "config": {
-          "label": "LeafSlice1",
+          "label": "Key Points Items",
           "fields": {
             "title": {
               "type": "Text",
@@ -42,45 +42,9 @@
           }
         }
       },
-      "leafslice2": {
-        "type": "Group",
-        "config": {
-          "label": "LeafSlice2",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "Title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
-      },
-      "leafslice3": {
-        "type": "Group",
-        "config": {
-          "label": "LeafSlice3",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
+      "button_title": {
+        "type": "Text",
+        "config": { "label": "button_title", "placeholder": "" }
       },
       "slices": {
         "type": "Slices",
@@ -116,70 +80,10 @@
         "type": "Text",
         "config": { "label": "Description_features", "placeholder": "" }
       },
-      "textwithimage1": {
+      "features_items": {
         "type": "Group",
         "config": {
-          "label": "TextWithImage1",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "Title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
-      },
-      "textwithimage2": {
-        "type": "Group",
-        "config": {
-          "label": "TextWithImage2",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "Title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
-      },
-      "textwithimage3": {
-        "type": "Group",
-        "config": {
-          "label": "TextWithImage3",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "Title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
-      },
-      "textwithimage4": {
-        "type": "Group",
-        "config": {
-          "label": "TextWithImage4",
+          "label": "Features Items",
           "fields": {
             "title": {
               "type": "Text",
@@ -211,50 +115,10 @@
         "type": "Text",
         "config": { "label": "Title_USP", "placeholder": "" }
       },
-      "textwithlogo1": {
+      "usp_items": {
         "type": "Group",
         "config": {
-          "label": "TextWithLogo1",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "Title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
-      },
-      "textwithlogo2": {
-        "type": "Group",
-        "config": {
-          "label": "TextWithLogo2",
-          "fields": {
-            "title": {
-              "type": "Text",
-              "config": { "label": "Title", "placeholder": "" }
-            },
-            "image": {
-              "type": "Image",
-              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
-            },
-            "description": {
-              "type": "Text",
-              "config": { "label": "Description", "placeholder": "" }
-            }
-          }
-        }
-      },
-      "textwithlogo3": {
-        "type": "Group",
-        "config": {
-          "label": "TextWithLogo3",
+          "label": "USP Items",
           "fields": {
             "title": {
               "type": "Text",

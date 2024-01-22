@@ -1133,105 +1133,35 @@ export type FaqpageDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *GreenPolicyEvaluatorPage → LeafSlice1*
+ * Item in *GreenPolicyEvaluatorPage → Key Points Items*
  */
-export interface GreenpolicyevaluatorpageDocumentDataLeafslice1Item {
+export interface GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem {
   /**
-   * title field in *GreenPolicyEvaluatorPage → LeafSlice1*
+   * title field in *GreenPolicyEvaluatorPage → Key Points Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice1[].title
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[].title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
 
   /**
-   * image field in *GreenPolicyEvaluatorPage → LeafSlice1*
+   * image field in *GreenPolicyEvaluatorPage → Key Points Items*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice1[].image
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[].image
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
 
   /**
-   * Description field in *GreenPolicyEvaluatorPage → LeafSlice1*
+   * Description field in *GreenPolicyEvaluatorPage → Key Points Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice1[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → LeafSlice2*
- */
-export interface GreenpolicyevaluatorpageDocumentDataLeafslice2Item {
-  /**
-   * Title field in *GreenPolicyEvaluatorPage → LeafSlice2*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice2[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * image field in *GreenPolicyEvaluatorPage → LeafSlice2*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice2[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → LeafSlice2*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice2[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → LeafSlice3*
- */
-export interface GreenpolicyevaluatorpageDocumentDataLeafslice3Item {
-  /**
-   * title field in *GreenPolicyEvaluatorPage → LeafSlice3*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice3[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * image field in *GreenPolicyEvaluatorPage → LeafSlice3*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice3[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → LeafSlice3*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice3[].description
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[].description
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
@@ -1245,140 +1175,35 @@ type GreenpolicyevaluatorpageDocumentDataSlicesSlice =
 type GreenpolicyevaluatorpageDocumentDataSlices1Slice = FeaturedInSliceSlice;
 
 /**
- * Item in *GreenPolicyEvaluatorPage → TextWithImage1*
+ * Item in *GreenPolicyEvaluatorPage → Features Items*
  */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithimage1Item {
+export interface GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem {
   /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithImage1*
+   * Title field in *GreenPolicyEvaluatorPage → Features Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage1[].title
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[].title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
 
   /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithImage1*
+   * Image field in *GreenPolicyEvaluatorPage → Features Items*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage1[].image
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[].image
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
 
   /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithImage1*
+   * Description field in *GreenPolicyEvaluatorPage → Features Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage1[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → TextWithImage2*
- */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithimage2Item {
-  /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithImage2*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage2[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithImage2*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage2[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithImage2*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage2[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → TextWithImage3*
- */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithimage3Item {
-  /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithImage3*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage3[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithImage3*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage3[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithImage3*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage3[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → TextWithImage4*
- */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithimage4Item {
-  /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithImage4*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage4[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithImage4*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage4[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithImage4*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage4[].description
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[].description
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
@@ -1387,105 +1212,35 @@ export interface GreenpolicyevaluatorpageDocumentDataTextwithimage4Item {
 type GreenpolicyevaluatorpageDocumentDataSlices2Slice = ButtonSliceSlice;
 
 /**
- * Item in *GreenPolicyEvaluatorPage → TextWithLogo1*
+ * Item in *GreenPolicyEvaluatorPage → USP Items*
  */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithlogo1Item {
+export interface GreenpolicyevaluatorpageDocumentDataUspItemsItem {
   /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithLogo1*
+   * Title field in *GreenPolicyEvaluatorPage → USP Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo1[].title
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[].title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
 
   /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithLogo1*
+   * Image field in *GreenPolicyEvaluatorPage → USP Items*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo1[].image
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[].image
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
 
   /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithLogo1*
+   * Description field in *GreenPolicyEvaluatorPage → USP Items*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo1[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → TextWithLogo2*
- */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithlogo2Item {
-  /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithLogo2*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo2[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithLogo2*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo2[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithLogo2*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo2[].description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-}
-
-/**
- * Item in *GreenPolicyEvaluatorPage → TextWithLogo3*
- */
-export interface GreenpolicyevaluatorpageDocumentDataTextwithlogo3Item {
-  /**
-   * Title field in *GreenPolicyEvaluatorPage → TextWithLogo3*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo3[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * Image field in *GreenPolicyEvaluatorPage → TextWithLogo3*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo3[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Description field in *GreenPolicyEvaluatorPage → TextWithLogo3*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo3[].description
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[].description
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
@@ -1544,43 +1299,28 @@ interface GreenpolicyevaluatorpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
-   * LeafSlice1 field in *GreenPolicyEvaluatorPage*
+   * Key Points Items field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice1[]
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  leafslice1: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataLeafslice1Item>
+  key_points_items: prismic.GroupField<
+    Simplify<GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem>
   >;
 
   /**
-   * LeafSlice2 field in *GreenPolicyEvaluatorPage*
+   * button_title field in *GreenPolicyEvaluatorPage*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice2[]
+   * - **API ID Path**: greenpolicyevaluatorpage.button_title
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  leafslice2: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataLeafslice2Item>
-  >;
-
-  /**
-   * LeafSlice3 field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.leafslice3[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  leafslice3: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataLeafslice3Item>
-  >;
+  button_title: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *GreenPolicyEvaluatorPage*
@@ -1636,55 +1376,16 @@ interface GreenpolicyevaluatorpageDocumentData {
   description_features: prismic.KeyTextField;
 
   /**
-   * TextWithImage1 field in *GreenPolicyEvaluatorPage*
+   * Features Items field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage1[]
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[]
    * - **Tab**: Features
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  textwithimage1: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithimage1Item>
-  >;
-
-  /**
-   * TextWithImage2 field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage2[]
-   * - **Tab**: Features
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  textwithimage2: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithimage2Item>
-  >;
-
-  /**
-   * TextWithImage3 field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage3[]
-   * - **Tab**: Features
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  textwithimage3: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithimage3Item>
-  >;
-
-  /**
-   * TextWithImage4 field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithimage4[]
-   * - **Tab**: Features
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  textwithimage4: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithimage4Item>
+  features_items: prismic.GroupField<
+    Simplify<GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem>
   >;
 
   /**
@@ -1720,42 +1421,16 @@ interface GreenpolicyevaluatorpageDocumentData {
   title_usp: prismic.KeyTextField;
 
   /**
-   * TextWithLogo1 field in *GreenPolicyEvaluatorPage*
+   * USP Items field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo1[]
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[]
    * - **Tab**: USP
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  textwithlogo1: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithlogo1Item>
-  >;
-
-  /**
-   * TextWithLogo2 field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo2[]
-   * - **Tab**: USP
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  textwithlogo2: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithlogo2Item>
-  >;
-
-  /**
-   * TextWithLogo3 field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.textwithlogo3[]
-   * - **Tab**: USP
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  textwithlogo3: prismic.GroupField<
-    Simplify<GreenpolicyevaluatorpageDocumentDataTextwithlogo3Item>
+  usp_items: prismic.GroupField<
+    Simplify<GreenpolicyevaluatorpageDocumentDataUspItemsItem>
   >
   /**
    * Title_CTA field in *GreenPolicyEvaluatorPage*
