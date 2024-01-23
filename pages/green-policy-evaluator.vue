@@ -14,16 +14,15 @@
           {{ gpe?.data.button_title || "Book a demo" }}
         </button>
         <div
-          class="flex flex-col items-center md:flex-row w-full md:pt-8 md:pb-16"
+          class="flex flex-col items-center md:flex-wrap lg:flex-nowrap md:flex-row w-full md:pt-8 md:pb-16 gap-4 justify-center"
         >
           <h3
-            class="text-center text-2xl md:text-xl font-semibold whitespace-nowrap mb-6 md:mb-0 md:mr-2 lg:mr-12"
-            style="font-family: serif"
+            class="text-center text-gray-600 font-semibold text-2xl md:text-xl  whitespace-nowrap mb-6 md:mb-0 md:mr-2 lg:mr-12"
           >
             {{ gpe?.data.title_as_featured_in || "We have been featured in" }}
           </h3>
           <div
-            class="flex flex-col flex-wrap space-y-6 md:space-y-0 md:flex-row justify-between items-center w-full filter-grayscale opacity-20"
+            class="flex flex-col gap-2 space-y-6 md:space-y-0 md:flex-row justify-between items-center w-full filter-grayscale opacity-40"
           >
             <SliceZone
               :slices="gpe?.data.slices1 ?? []"
@@ -31,8 +30,8 @@
             />
           </div>
         </div>
-        <div class="z-10 w-full lg:h-28 static lg:relative h-full">
-          <div class="grid grid-cols-1 lg:grid-cols-3 z-10 gap-4 static lg:absolute lg:-bottom-8 inset-x-0 w-full h-full">
+        <div v-if="!!gpe?.data.key_points_items" class="z-10 w-full lg:h-28 md:h-40 static md:relative h-full">
+          <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-4 static md:absolute md:-bottom-8 inset-x-0 w-full h-full">
             <LeafSlice
               v-for="feature in gpe?.data.key_points_items"
               :key="feature.title!"
@@ -52,7 +51,7 @@
         </h2>
         <p>{{ gpe?.data.description_features || "Elevate your advocacy efforts with a transformative approach to policy analysis. By allowing long and messy sustainability reports to be standardised, our tool enables:" }}</p>
       </div>
-      <div class=" grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div v-if="!!gpe?.data.features_items" class=" grid grid-cols-1 md:grid-cols-2 gap-4">
         <TextWithImage
           v-for="feature in gpe?.data.features_items"
           :key="feature.title!"
@@ -61,7 +60,9 @@
           :description="feature?.description!"
         />
       </div>
-      <p>{{ gpe?.data.description_features_2 }}</p>
+      <p class="max-w-3xl text-center">
+        {{ gpe?.data.description_features_2 || "Leverage The Green Policy Evaluator to revolutionise how company sustainability policies are understood and influenced." }}
+      </p>
       <button class="button-green md:w-48 flex justify-center shadow-md" @click="() => showModal = true">
         {{ gpe?.data.button_title || "Book a demo" }}
       </button>
@@ -82,6 +83,43 @@
             :img="asImageSrc(usp?.image)!"
             :description="usp?.description!"
           />
+        </div>
+      </div>
+    </section>
+    <section id="cta" class="page-fade-in contain items-center max-w-6xl py-24 md:py-24 flex flex-col gap-10">
+      <div class="prose sm:prose-lg xl:prose-xl contain text-center">
+        <h2 class="text-center">
+          {{ gpe?.data.title_cta || "Discover a faster, more efficient way to gain actionable insights from complex sustainability reports" }}
+        </h2>
+        <p>{{ gpe?.data.description_cta || "Accelerate your impact, save time, and make informed decisions effortlessly." }}</p>
+      </div>
+      <button class="button-green md:w-48 flex justify-center shadow-md" @click="() => showModal = true">
+        {{ gpe?.data.button_title || "Book a demo" }}
+      </button>
+    </section>
+    <section id="faq" class="bg-blue-100 overflow-hidden">
+      <Swoosh direction="down" />
+      <div class="prose sm:prose-lg xl:prose-xl contain text-center bg-max-w-screen py-24 lg:py-20">
+        <h2>{{ gpe?.data.title_faq || "Still have questions? We have answers." }}</h2>
+        <div
+          class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
+        >
+          <transition-group
+            enter-active-class="transform-gpu ease-out duration-300 transition"
+            enter-from-class="-translate-y-2 opacity-0"
+            enter-to-class="translate-y-0 opacity-100"
+            leave-active-class="transform-gpu transition ease-in duration-190"
+            leave-from-class="opacity-100"
+            leave-to-class="opacity-0"
+          />
+          <SliceZone
+            v-if="gpe?.data.slices5"
+            :slices="gpe?.data.slices5 ?? []"
+            :components="sliceComps"
+          />
+          <h3 v-else style="text-align:center">
+            Error Loading Content.
+          </h3>
         </div>
       </div>
     </section>

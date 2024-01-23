@@ -2,7 +2,7 @@
   <img
     :src="`${slice.primary.logo.url}&w=400`"
     :alt="slice.primary.logo.alt"
-    :class="slice.primary.class ?? 'h-10 w-auto'"
+    :class="slice.primary.class ?? 'h-8 w-auto'"
   >
 </template>
 
