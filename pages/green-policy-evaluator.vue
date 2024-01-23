@@ -64,7 +64,7 @@
           :description="feature?.description!"
         />
       </div>
-      <p class="max-w-3xl text-center">
+      <p class="max-w-3xl text-center mt-8 font-medium">
         {{ gpe?.data.description_features_2 || "Leverage The Green Policy Evaluator to revolutionise how company sustainability policies are understood and influenced." }}
       </p>
       <button class="button-green md:w-48 flex justify-center shadow-md" @click="() => showModal = true">
@@ -90,7 +90,7 @@
         </div>
       </div>
     </section>
-    <section id="cta" class="page-fade-in contain items-center max-w-6xl py-24 md:py-24 flex flex-col gap-10">
+    <section id="cta" class="page-fade-in contain items-center max-w-6xl py-20 md:py-28 flex flex-col gap-10">
       <div class="prose sm:prose-lg xl:prose-xl contain text-center">
         <h2 class="text-center">
           {{ gpe?.data.title_cta || "Discover a faster, more efficient way to gain actionable insights from complex sustainability reports" }}
