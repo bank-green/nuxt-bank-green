@@ -35,7 +35,7 @@
           </div>
         </div>
         <div v-if="!!gpe?.data.key_points_items" class="z-10 w-full lg:h-28 md:h-40 static md:relative h-full">
-          <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-4 static md:absolute md:-bottom-8 inset-x-0 w-full h-full">
+          <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-8 static md:absolute md:-bottom-8 inset-x-0 w-full h-full">
             <LeafSlice
               v-for="feature in gpe?.data.key_points_items"
               :key="feature.title!"
@@ -48,7 +48,7 @@
       </div>
       <Swoosh />
     </section>
-    <section id="features" class="page-fade-in contain items-center max-w-6xl py-24 lg:pt-32 lg:pb-20 flex flex-col gap-10">
+    <section id="features" class="page-fade-in contain items-center max-w-6xl py-24 lg:pt-40 lg:pb-20 flex flex-col gap-10">
       <div class="prose sm:prose-lg xl:prose-xl contain text-center">
         <h2 class="text-center">
           {{ gpe?.data.title_features || "What can you do with the Green Policy Evaluator?" }}
@@ -73,7 +73,7 @@
     </section>
     <section class="bg-sushi-100 max-w-screen py-24 lg:py-20">
       <div class="flex flex-col md:flex-row page-fade-in contain justify-center items-center max-w-6xl  md:gap-8 gap-10">
-        <div class="prose sm:prose-lg xl:prose-xl">
+        <div class="prose sm:prose-lg xl:prose-xl md:text-left text-center flex flex-col items-center md:items-start">
           <svg xmlns="http://www.w3.org/2000/svg" width="145" height="130" viewBox="0 0 145 130" fill="none">
             <path d="M145 1.35555C145 126.794 49.9866 137.638 0 126.794C0 53.4741 36.0434 -10.1654 145 1.35555Z" fill="#7BB122" fill-opacity="0.5" />
           </svg>
