@@ -11,13 +11,8 @@
           </div>
         </div>
         <button class="button-green md:w-48 flex justify-center shadow-md" @click="() => showModal = true">
-          Book a demo
+          {{ gpe?.data.button_title || "Book a demo" }}
         </button>
-        <CalModal
-
-          v-show="showModal"
-          v-model="showModal"
-        />
         <div
           class="flex flex-col items-center md:flex-row w-full md:pt-8 md:pb-16"
         >
@@ -36,8 +31,8 @@
             />
           </div>
         </div>
-        <div class="z-10 w-full md:h-48 static md:relative h-full">
-          <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-4 static md:absolute -bottom-13 md:-bottom-13 inset-x-0 w-full h-full">
+        <div class="z-10 w-full lg:h-28 static lg:relative h-full">
+          <div class="grid grid-cols-1 lg:grid-cols-3 z-10 gap-4 static lg:absolute lg:-bottom-8 inset-x-0 w-full h-full">
             <LeafSlice
               v-for="feature in gpe?.data.key_points_items"
               :key="feature.title!"
@@ -50,34 +45,37 @@
       </div>
       <Swoosh />
     </section>
-    <section id="features" class="page-fade-in contain items-center max-w-6xl pt-28 lg:pt-24">
+    <section id="features" class="page-fade-in contain items-center max-w-6xl py-24 lg:pt-32 lg:pb-20 flex flex-col gap-10">
       <div class="prose sm:prose-lg xl:prose-xl contain text-center">
         <h2 class="text-center">
-          {{ gpe?.data.title_features }}
+          {{ gpe?.data.title_features || "What can you do with the Green Policy Evaluator?" }}
         </h2>
-        <p>{{ gpe?.data.description_features }}</p>
+        <p>{{ gpe?.data.description_features || "Elevate your advocacy efforts with a transformative approach to policy analysis. By allowing long and messy sustainability reports to be standardised, our tool enables:" }}</p>
       </div>
-
-      <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 pt-28">
-        <TextWithLogo
-          v-for="feature in gpe?.data.key_points_items"
+      <div class=" grid grid-cols-1 md:grid-cols-2 gap-4">
+        <TextWithImage
+          v-for="feature in gpe?.data.features_items"
           :key="feature.title!"
           :title="feature?.title!"
           :img="asImageSrc(feature?.image)!"
           :description="feature?.description!"
         />
       </div>
+      <p>{{ gpe?.data.description_features_2 }}</p>
+      <button class="button-green md:w-48 flex justify-center shadow-md" @click="() => showModal = true">
+        {{ gpe?.data.button_title || "Book a demo" }}
+      </button>
     </section>
-    <section class="bg-sushi-100 md:pt-28 max-w-screen">
-      <div class="page-fade-in contain justify-center items-center max-w-6xl pt-12 pb-20 md:pb-0 lg:pt-5 md:gap-8 gap-10  grid grid-cols-2">
+    <section class="bg-sushi-100 max-w-screen py-24 lg:py-20">
+      <div class="flex flex-col md:flex-row page-fade-in contain justify-center items-center max-w-6xl  md:gap-8 gap-10">
         <div class="prose sm:prose-lg xl:prose-xl">
           <svg xmlns="http://www.w3.org/2000/svg" width="145" height="130" viewBox="0 0 145 130" fill="none">
             <path d="M145 1.35555C145 126.794 49.9866 137.638 0 126.794C0 53.4741 36.0434 -10.1654 145 1.35555Z" fill="#7BB122" fill-opacity="0.5" />
           </svg>
           <h2>{{ gpe?.data.title_usp || "What Sets the Green Policy Evaluator Apart?" }}</h2>
         </div>
-        <div class="flex flex-col gap-4 pt-28">
-          <TextWithImage
+        <div class="flex flex-col gap-4">
+          <TextWithLogo
             v-for="usp in gpe?.data.usp_items"
             :key="usp.title!"
             :title="usp?.title!"
@@ -87,6 +85,10 @@
         </div>
       </div>
     </section>
+    <CalModal
+      v-show="showModal"
+      v-model="showModal"
+    />
   </div>
 </template>
 

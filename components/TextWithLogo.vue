@@ -1,21 +1,23 @@
 <template>
-  <div class="flex flex-col p-4 gap-4 bg-white">
+  <div class="flex flex-row p-4 gap-4 bg-white align-top rounded-lg">
     <NuxtImg
       :src="img"
-      class="w-full md:w-3/4"
+      class="w-1/12 h-min"
     />
-    <div class="flex flex-col gap-2 prose xl:prose-sm">
-      <h1><b>{{ title }}</b></h1>
+    <div class="flex flex-col gap-2">
+      <h1 class="font-bold">
+        {{ title }}
+      </h1>
       <p>{{ description }}</p>
     </div>
   </div>
 </template>
 
-<script setup>
-defineProps({
-  title: String,
-  img: String,
-  description: String
-})
+<script setup lang="ts">
+defineProps<{
+  title: string,
+  img: string,
+  description: string
+}>()
 
 </script>
