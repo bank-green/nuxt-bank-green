@@ -25,9 +25,13 @@
             class="flex flex-col gap-2 space-y-6 md:space-y-0 md:flex-row justify-between items-center w-full filter-grayscale opacity-40"
           >
             <SliceZone
+              v-if="gpe?.data.slices1"
               :slices="gpe?.data.slices1 ?? []"
               :components="sliceComps"
             />
+            <h3 v-else style="text-align:center">
+              Error Loading Content.
+            </h3>
           </div>
         </div>
         <div v-if="!!gpe?.data.key_points_items" class="z-10 w-full lg:h-28 md:h-40 static md:relative h-full">
@@ -75,7 +79,7 @@
           </svg>
           <h2>{{ gpe?.data.title_usp || "What Sets the Green Policy Evaluator Apart?" }}</h2>
         </div>
-        <div class="flex flex-col gap-4">
+        <div v-if="!!gpe?.data.usp_items" class="flex flex-col gap-4">
           <TextWithLogo
             v-for="usp in gpe?.data.usp_items"
             :key="usp.title!"
