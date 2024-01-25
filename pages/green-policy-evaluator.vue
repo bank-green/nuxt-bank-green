@@ -71,7 +71,7 @@
         {{ gpe?.data.button_title || "Book a demo" }}
       </button>
     </section>
-    <section class="bg-sushi-100 max-w-screen py-24 lg:py-20">
+    <section id="usp" class="bg-sushi-100 max-w-screen py-24 lg:py-20">
       <div class="flex flex-col md:flex-row page-fade-in contain justify-center items-center max-w-6xl  md:gap-8 gap-10">
         <div class="prose sm:prose-lg xl:prose-xl md:text-left text-center flex flex-col items-center md:items-start">
           <svg xmlns="http://www.w3.org/2000/svg" width="145" height="130" viewBox="0 0 145 130" fill="none">
