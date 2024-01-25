@@ -5,10 +5,11 @@
         </pre> -->
     <div class="page-fade-in contain pt-28 pb-16">
       <div
+        v-if="ecobanks?.data?.slices"
         class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold"
       >
         <SliceZone
-          :slices="ecobanks?.data.slices ?? []"
+          :slices="ecobanks?.data?.slices ?? []"
           :components="sliceComps"
         />
       </div>
@@ -79,7 +80,7 @@
         class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
       >
         <SliceZone
-          :slices="ecobanks?.data.slices1 ?? []"
+          :slices="ecobanks?.data?.slices1 ?? []"
           :components="sliceComps"
         />
       </div>
@@ -108,7 +109,7 @@ const { data: ecobanks } = await useAsyncData('ecobanks', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(ecobanks.value.data)
+usePrismicSEO(ecobanks?.value?.data)
 
 const { country } = useCountry()
 
