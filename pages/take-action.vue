@@ -19,7 +19,6 @@
           </p>
         </div>
         <div
-          v-if="action?.data.slices1 || action?.data.slices2 || action?.data.slices3 || action?.data.slices4"
           class="mt-8 lg:mt-16 rounded-xl ring-2 ring-sushi-600 overflow-hidden bg-white"
         >
           <div class="flex flex-col items-center">
