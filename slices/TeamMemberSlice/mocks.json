@@ -14,6 +14,17 @@
 					}
 				]
 			},
+			"department": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Product & Engineering"
+						}
+					}
+				]
+			},
 			"description": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
