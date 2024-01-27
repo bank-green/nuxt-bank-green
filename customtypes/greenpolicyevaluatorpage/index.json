@@ -1,0 +1,168 @@
+{
+  "id": "greenpolicyevaluatorpage",
+  "label": "GreenPolicyEvaluatorPage",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": { "label": "Title", "placeholder": "" }
+      },
+      "description": {
+        "type": "Text",
+        "config": { "label": "Description", "placeholder": "" }
+      },
+      "seo_title": {
+        "type": "Text",
+        "config": { "label": "Seo Title", "placeholder": "" }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "Seo Description", "placeholder": "" }
+      },
+      "key_points_items": {
+        "type": "Group",
+        "config": {
+          "label": "Key Points Items",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "button_title": {
+        "type": "Text",
+        "config": { "label": "button_title", "placeholder": "" }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "button_slice": { "type": "SharedSlice" },
+            "accordion_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" }
+          }
+        }
+      }
+    },
+    "As Featured In": {
+      "title_as_featured_in": {
+        "type": "Text",
+        "config": { "label": "Title_as_featured_in", "placeholder": "" }
+      },
+      "slices1": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": { "featured_in_slice": { "type": "SharedSlice" } }
+        }
+      }
+    },
+    "Features": {
+      "title_features": {
+        "type": "Text",
+        "config": { "label": "Title_Features", "placeholder": "" }
+      },
+      "description_features": {
+        "type": "Text",
+        "config": { "label": "Description_features", "placeholder": "" }
+      },
+      "features_items": {
+        "type": "Group",
+        "config": {
+          "label": "Features Items",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "description_features_2": {
+        "type": "Text",
+        "config": { "label": "Description_features_2", "placeholder": "" }
+      },
+      "slices2": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "button_slice": { "type": "SharedSlice" } } }
+      }
+    },
+    "USP": {
+      "title_usp": {
+        "type": "Text",
+        "config": { "label": "Title_USP", "placeholder": "" }
+      },
+      "usp_items": {
+        "type": "Group",
+        "config": {
+          "label": "USP Items",
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      }
+    },
+    "CTA": {
+      "title_cta": {
+        "type": "Text",
+        "config": { "label": "Title_CTA", "placeholder": "" }
+      },
+      "description_cta": {
+        "type": "Text",
+        "config": { "label": "Description_CTA", "placeholder": "" }
+      },
+      "slices4": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "button_slice": { "type": "SharedSlice" } } }
+      }
+    },
+    "FAQ": {
+      "title_faq": {
+        "type": "Text",
+        "config": { "label": "Title_FAQ", "placeholder": "" }
+      },
+      "slices5": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": { "accordion_slice": { "type": "SharedSlice" } }
+        }
+      }
+    }
+  }
+}

@@ -5,22 +5,42 @@
         <article
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
         >
+          <PrismicImage
+            v-if="certification?.data.certification_img"
+            :field="certification?.data.certification_img!"
+            class="w-48 h-48"
+            alt="Fossil-free certified badge"
+          />
           <img
+            v-else
             class="w-48 h-48"
             src="/img/certification/fossil-free-certified.png"
             alt="Fossil-free certified badge"
           >
           <SliceZone
+            v-if="certification?.data"
             :slices="certification?.data.slices ?? []"
             :components="sliceComps"
           />
+          <div v-else>
+            <h1>Fossil Free Certification</h1>
+            <p>
+              Financial institutions that are Fossil Free Certified have pledged not to finance new fossil fuel companies or projects,
+              and the majority already do not do so. Fossil Free Certification is the simplest, most straightforward way to signal to customers,
+              professionals in the banking sector, and the general public that a
+              sustainability-conscious financial institution is truly putting its money where its mouth is.
+            </p>
+            <h2 style="text-align: center;">
+              Error Loading Content!
+            </h2>
+          </div>
         </article>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 
@@ -32,5 +52,5 @@ const { data: certification } = await useAsyncData('certification', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(certification.value.data)
+usePrismicSEO(certification.value?.data)
 </script>

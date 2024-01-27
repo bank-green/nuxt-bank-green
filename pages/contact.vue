@@ -2,7 +2,33 @@
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
       <div class="page-fade-in contain max-w-3xl pt-28 pb-8">
-        <PrismicRichText class="text-gray-600 mb-12 whitespace-pre-line prose" :field="contact.data.description" />
+        <PrismicRichText
+          v-if="contact?.data.description"
+          class="text-gray-600 mb-12 whitespace-pre-line prose"
+          :field="contact?.data.description"
+        />
+        <div v-else class="text-gray-600 mb-12 whitespace-pre-line prose">
+          <h1>
+            Contact us
+          </h1>
+          <p>
+            Unfortunately we are not currently accepting requests to research new banks,
+            but we encourage you to
+            <strong>
+              <NuxtLink to="/take-action" class="underline">
+                reach out to your own bank
+              </NuxtLink>
+            </strong>
+            to establish whether or not they
+            are financing fossil fuels.
+            <strong>
+              <NuxtLink to="/take-action" class="underline">
+                You can also volunteer
+              </NuxtLink>
+            </strong>
+            😄
+          </p>
+        </div>
 
         <form class="flex flex-col justify-center items-center" @submit.prevent.stop="onSend">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
@@ -21,7 +47,7 @@
               name="email"
               :title="'Your email address'"
               :placeholder="'Your email address'"
-              :warning="warningsMap['email']"
+              :warning="warningsMap.email"
             />
             <TextField
               v-model="subject"
@@ -29,7 +55,6 @@
               name="subject"
               :title="'Subject'"
               :placeholder="'Subject'"
-              :warning="warningsMap['subject']"
               :required="true"
             />
             <TextField
@@ -39,7 +64,6 @@
               name="message"
               :title="'Your message'"
               :placeholder="'Your message'"
-              :warning="warningsMap['message']"
               :required="true"
             />
             <CheckboxSection v-model="isAgreeMarketing" class="md:col-span-2" name="isAgreeMarketing">
@@ -50,7 +74,7 @@
               v-model="isAgreeTerms"
               class="md:col-span-2"
               name="isAgreeTerms"
-              :warning="warningsMap['isAgreeTerms']"
+              :warning="warningsMap.isAgreeTerms"
             >
               I have read and understood Bank.Green’s
               <NuxtLink to="/privacy" class="link">
@@ -86,7 +110,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import CheckboxSection from '../components/forms/CheckboxSection.vue'
 import TextField from '../components/forms/TextField.vue'
@@ -97,7 +121,7 @@ const p = usePrismic()
 const { data: contact } = await useAsyncData('contact', () =>
   p.client.getSingle('contactpage')
 )
-usePrismicSEO(contact.value.data)
+usePrismicSEO(contact.value?.data)
 
 const extras = ref({ isAgreeMarketing: false })
 
