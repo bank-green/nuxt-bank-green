@@ -2,7 +2,6 @@
   <div class="flex justify-center">
     <TeamMember
       :name="asText(slice.primary.name)!"
-      :department="asText(slice.primary.department)!"
       :description="asText(slice.primary.description)!"
       :img="asImageSrc(slice?.primary.img)!"
       :href="asLink(slice?.primary.link)!"

@@ -15,15 +15,9 @@
 				]
 			},
 			"department": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Product & Engineering"
-						}
-					}
-				]
+				"__TYPE__": "FieldContent",
+				"value": "Data",
+				"type": "Select"
 			},
 			"description": {
 				"__TYPE__": "StructuredTextContent",

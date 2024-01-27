@@ -2680,6 +2680,24 @@ export interface TeamMemberSliceSliceDefaultPrimary {
   name: prismic.RichTextField;
 
   /**
+   * department field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Select the team name
+   * - **API ID Path**: team_member_slice.primary.department
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  department: prismic.SelectField<
+    | "Founders"
+    | "Research"
+    | "Product & Engineering"
+    | "Content"
+    | "Data"
+    | "People Ops"
+    | "Alumni"
+  >;
+
+  /**
    * description field in *TeamMemberSlice → Primary*
    *
    * - **Field Type**: Rich Text
