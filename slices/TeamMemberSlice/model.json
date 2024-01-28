@@ -27,14 +27,16 @@
             "label": "department",
             "placeholder": "Select the team name",
             "options": [
+              "Other",
               "Founders",
-              "Research",
               "Product & Engineering",
               "Content",
               "Data",
               "People Ops",
+              "Research",
               "Alumni"
-            ]
+            ],
+            "default_value": "Other"
           }
         },
         "description": {

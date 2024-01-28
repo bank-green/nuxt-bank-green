@@ -1,9 +1,9 @@
 <template>
-  <li>
-    <div>
-      <h2>{{ departmentName }}</h2>
-    </div>
-  </li>
+  <div
+    class="text-neutral-800 text-2xl font-semibold my-4 max-md:text-4xl"
+  >
+    {{ departmentName }}
+  </div>
 </template>
 
 <script setup>

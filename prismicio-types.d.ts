@@ -3100,17 +3100,20 @@ export interface TeamMemberSliceSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: Select the team name
+   * - **Default Value**: Other
    * - **API ID Path**: team_member_slice.primary.department
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   department: prismic.SelectField<
+    | "Other"
     | "Founders"
-    | "Research"
     | "Product & Engineering"
     | "Content"
     | "Data"
     | "People Ops"
-    | "Alumni"
+    | "Research"
+    | "Alumni",
+    "filled"
   >;
 
   /**
