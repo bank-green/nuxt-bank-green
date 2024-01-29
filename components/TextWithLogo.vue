@@ -1,13 +1,13 @@
 <template>
-  <div class="flex flex-row p-4 gap-4 bg-white align-top rounded-lg">
+  <div class="flex flex-row p-8 gap-4 bg-white items-start rounded-lg">
     <NuxtImg
       :src="img"
-      class="w-1/12 h-min"
+      width="56"
     />
-    <div class="flex flex-col gap-2">
-      <h1 class="font-bold">
+    <div class="flex flex-col prose lg:prose-lg">
+      <h3 class="md:!text-xl lg:!text-2xl !font-bold">
         {{ title }}
-      </h1>
+      </h3>
       <p>{{ description }}</p>
     </div>
   </div>

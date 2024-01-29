@@ -1,12 +1,16 @@
 <template>
-  <div class="flex flex-col p-4 gap-4">
+  <div class="flex flex-col md:p-6 gap-4">
     <NuxtImg
       :src="img"
-      class="w-full md:w-3/4"
+      class="w-full"
     />
-    <div class="flex flex-col gap-2 prose xl:prose-sm">
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
+    <div class="flex flex-col prose lg:prose-lg">
+      <h3 class="md:!text-xl lg:!text-2xl !font-bold">
+        {{ title }}
+      </h3>
+      <p class="!text-ocean-800 !text-opacity-75">
+        {{ description }}
+      </p>
     </div>
   </div>
 </template>
