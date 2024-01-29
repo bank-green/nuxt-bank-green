@@ -22,7 +22,7 @@
             {{ gpe?.data.title_as_featured_in || "We have been featured in" }}
           </h3>
           <div
-            class="flex flex-col md:gap-2 space-y-6 md:space-y-0 md:flex-row justify-evenly items-center w-full filter-grayscale opacity-40"
+            class="flex flex-col md:gap-2 space-y-6 md:space-y-0 md:flex-row justify-evenly items-center w-full filter-grayscale opacity-40 max-w-3xl"
           >
             <SliceZone
               v-if="gpe?.data.slices1"
