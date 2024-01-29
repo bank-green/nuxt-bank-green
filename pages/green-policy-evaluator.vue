@@ -99,9 +99,9 @@
         </div>
       </div>
     </section>
-    <section id="cta" class="page-fade-in contain items-center max-w-6xl py-16 md:py-28 flex flex-col gap-10">
-      <div class="prose sm:prose-lg xl:prose-xl contain text-center">
-        <h2 class="text-center">
+    <section id="cta" class="page-fade-in contain items-center max-w-6xl py-16 md:py-24 flex flex-col gap-12">
+      <div class="prose sm:prose-lg xl:prose-xl contain text-center flex flex-col gap-4">
+        <h2 class="!mb-0">
           {{ gpe?.data.title_cta || "Discover a faster, more efficient way to gain actionable insights from complex sustainability reports" }}
         </h2>
         <p>{{ gpe?.data.description_cta || "Accelerate your impact, save time, and make informed decisions effortlessly." }}</p>
@@ -113,7 +113,9 @@
     <section id="faq" class="bg-blue-100 overflow-hidden">
       <Swoosh direction="down" />
       <div class="prose sm:prose-lg xl:prose-xl contain text-center bg-max-w-screen py-16 lg:py-20">
-        <h2>{{ gpe?.data.title_faq || "Still have questions? We have answers." }}</h2>
+        <h2 class="!mb-12">
+          {{ gpe?.data.title_faq || "Still have questions? We have answers." }}
+        </h2>
         <div
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
         >
