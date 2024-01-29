@@ -8,7 +8,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
-      DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL
+      DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
+      DATA_URL: process.env.PUBLIC_DATA_URL,
+      EMBRACE_URL: process.env.PUBLIC_EMBRACE_URL,
+      GPE_URL: process.env.PUBLIC_GPE_URL
     },
     STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
     STRIPE_SUBSCRIPTION_PRICE_1:
