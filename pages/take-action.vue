@@ -3,10 +3,21 @@
     <div class="bg-sushi-50">
       <div class="page-fade-in contain max-w-4xl xl:max-w-5xl pt-28 pb-16">
         <PrismicRichText
+          v-if="action?.data.introduction"
           :field="action?.data.introduction"
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
           fallback="Error Loading Content"
         />
+        <div v-else class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl">
+          <h2>Take action</h2>
+          <p>
+            Do you watch or read climate crisis news and think: "Ok, this is bad, but what now? What can I do about this?"
+
+            We do too. Even this website, as it alerts you to the destructive cycle that our money is stuck in, might be making you feel overwhelmed and powerless.
+
+            Well, no more! It's time to take action:
+          </p>
+        </div>
         <div
           class="mt-8 lg:mt-16 rounded-xl ring-2 ring-sushi-600 overflow-hidden bg-white"
         >
