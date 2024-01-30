@@ -21,6 +21,24 @@
             "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
+        "department": {
+          "type": "Select",
+          "config": {
+            "label": "department",
+            "placeholder": "Select the team name",
+            "options": [
+              "Other",
+              "Founders",
+              "Product & Engineering",
+              "Content",
+              "Data",
+              "People Ops",
+              "Research",
+              "Alumni"
+            ],
+            "default_value": "Other"
+          }
+        },
         "description": {
           "type": "StructuredText",
           "config": {

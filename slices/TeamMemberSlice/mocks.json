@@ -14,6 +14,11 @@
 					}
 				]
 			},
+			"department": {
+				"__TYPE__": "FieldContent",
+				"value": "Other",
+				"type": "Select"
+			},
 			"description": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [

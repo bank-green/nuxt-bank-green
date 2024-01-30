@@ -1,14 +1,15 @@
 <template>
   <div class="page">
-    <section class="bg-sushi-100 md:pt-28 max-w-screen ">
+    <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 md:pt-28 max-w-screen ">
       <div class="page-fade-in contain flex flex-col justify-center items-center max-w-8xl pt-28 pb-20 md:pb-0 lg:pt-12 gap-10">
         <div class="text-center prose sm:prose-lg xl:prose-xl">
-          <div>
-            <h1>{{ gpe?.data.title || "Reveal data-backed insights from sustainability reports faster than ever" }}</h1>
-            <p>
-              {{ gpe?.data.description || "Transform complex policies into actionable data with our Green Policy Evaluator" }}
-            </p>
-          </div>
+          <h1 class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl">
+            {{ gpe?.data.title || "Reveal data-backed insights from sustainability reports faster than ever" }}
+          </h1>
+          <PrismicRichText
+            :field="gpe?.data.description"
+            fallback="Transform complex policies into actionable data with our Green Policy Evaluator"
+          />
         </div>
         <button :class="ctaButtonClass" @click="() => showModal = true">
           {{ gpe?.data.button_title || "Book a demo" }}
@@ -64,14 +65,14 @@
           :description="feature?.description!"
         />
       </div>
-      <p class="max-w-3xl text-center mt-8 text-lg text-opacity-80 text-ocean-800">
+      <p class="max-w-3xl text-center mt-8 text-xl text-opacity-80 text-ocean-800">
         {{ gpe?.data.description_features_2 || "Leverage The Green Policy Evaluator to revolutionise how company sustainability policies are understood and influenced." }}
       </p>
       <button :class="ctaButtonClass + ' -mt-4'" @click="() => showModal = true">
         {{ gpe?.data.button_title || "Book a demo" }}
       </button>
     </section>
-    <section id="usp" class="bg-sushi-100 max-w-screen py-16 lg:py-20">
+    <section id="usp" class="bg-gradient-to-b from-sushi-50 to-sushi-100 max-w-screen py-16 lg:py-20">
       <div class="flex flex-col md:flex-row page-fade-in contain justify-center items-center max-w-8xl  md:gap-8 gap-10">
         <div class="prose sm:prose-xl xl:prose-2xl md:text-left text-center flex flex-col items-center md:items-start gap-4 md:gap-8 md:-mt-12">
           <svg
@@ -155,7 +156,7 @@ const { client } = usePrismic()
 const { data: gpe } = await useAsyncData('gpe', () =>
   client.getSingle('greenpolicyevaluatorpage'))
 
-const ctaButtonClass = computed(() => ('button-green md:w-56 flex justify-center shadow-md'))
+const ctaButtonClass = computed(() => ('button-green md:w-56 flex justify-center shadow-md font-bold'))
 
 // cal.com embed code used within CalModal
 useHead({

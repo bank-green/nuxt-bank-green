@@ -1167,10 +1167,7 @@ export interface GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem {
   description: prismic.KeyTextField;
 }
 
-type GreenpolicyevaluatorpageDocumentDataSlicesSlice =
-  | ButtonSliceSlice
-  | AccordionSliceSlice
-  | EmbedSliceSlice;
+type GreenpolicyevaluatorpageDocumentDataSlicesSlice = EmbedSliceSlice;
 
 type GreenpolicyevaluatorpageDocumentDataSlices1Slice = FeaturedInSliceSlice;
 
@@ -1209,8 +1206,6 @@ export interface GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem {
   description: prismic.KeyTextField;
 }
 
-type GreenpolicyevaluatorpageDocumentDataSlices2Slice = ButtonSliceSlice;
-
 /**
  * Item in *GreenPolicyEvaluatorPage → USP Items*
  */
@@ -1246,8 +1241,6 @@ export interface GreenpolicyevaluatorpageDocumentDataUspItemsItem {
   description: prismic.KeyTextField;
 }
 
-type GreenpolicyevaluatorpageDocumentDataSlices4Slice = ButtonSliceSlice;
-
 type GreenpolicyevaluatorpageDocumentDataSlices5Slice = AccordionSliceSlice;
 
 /**
@@ -1268,13 +1261,13 @@ interface GreenpolicyevaluatorpageDocumentData {
   /**
    * Description field in *GreenPolicyEvaluatorPage*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: greenpolicyevaluatorpage.description
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  description: prismic.KeyTextField;
+  description: prismic.RichTextField;
 
   /**
    * Seo Title field in *GreenPolicyEvaluatorPage*
@@ -1397,18 +1390,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: Features
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description_features_2: prismic.KeyTextField;
-
-  /**
-   * Slice Zone field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.slices2[]
-   * - **Tab**: Features
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices2: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices2Slice>
+  description_features_2: prismic.KeyTextField
   /**
    * Title_USP field in *GreenPolicyEvaluatorPage*
    *
@@ -1452,18 +1434,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: CTA
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description_cta: prismic.KeyTextField;
-
-  /**
-   * Slice Zone field in *GreenPolicyEvaluatorPage*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: greenpolicyevaluatorpage.slices4[]
-   * - **Tab**: CTA
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices4: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices4Slice>
+  description_cta: prismic.KeyTextField
   /**
    * Title_FAQ field in *GreenPolicyEvaluatorPage*
    *
@@ -3094,6 +3065,27 @@ export interface TeamMemberSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   name: prismic.RichTextField;
+
+  /**
+   * department field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Select the team name
+   * - **Default Value**: Other
+   * - **API ID Path**: team_member_slice.primary.department
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  department: prismic.SelectField<
+    | "Other"
+    | "Founders"
+    | "Product & Engineering"
+    | "Content"
+    | "Data"
+    | "People Ops"
+    | "Research"
+    | "Alumni",
+    "filled"
+  >;
 
   /**
    * description field in *TeamMemberSlice → Primary*

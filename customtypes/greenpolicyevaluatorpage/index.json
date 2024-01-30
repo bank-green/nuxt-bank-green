@@ -11,8 +11,13 @@
         "config": { "label": "Title", "placeholder": "" }
       },
       "description": {
-        "type": "Text",
-        "config": { "label": "Description", "placeholder": "" }
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
       },
       "seo_title": {
         "type": "Text",
@@ -49,13 +54,7 @@
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "button_slice": { "type": "SharedSlice" },
-            "accordion_slice": { "type": "SharedSlice" },
-            "embed_slice": { "type": "SharedSlice" }
-          }
-        }
+        "config": { "choices": { "embed_slice": { "type": "SharedSlice" } } }
       }
     },
     "As Featured In": {
@@ -103,11 +102,6 @@
       "description_features_2": {
         "type": "Text",
         "config": { "label": "Description_features_2", "placeholder": "" }
-      },
-      "slices2": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": { "choices": { "button_slice": { "type": "SharedSlice" } } }
       }
     },
     "USP": {
@@ -144,11 +138,6 @@
       "description_cta": {
         "type": "Text",
         "config": { "label": "Description_CTA", "placeholder": "" }
-      },
-      "slices4": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": { "choices": { "button_slice": { "type": "SharedSlice" } } }
       }
     },
     "FAQ": {
