@@ -2,8 +2,8 @@
   <div class="page">
     <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 md:pt-28 max-w-screen ">
       <div class="page-fade-in contain flex flex-col justify-center items-center max-w-8xl pt-28 pb-20 md:pb-0 lg:pt-12 gap-10">
-        <div class="text-center prose sm:prose-lg xl:prose-xl">
-          <h1 class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl">
+        <div class="text-center prose sm:prose-lg xl:prose-xl" style="max-width: unset">
+          <h1 class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl" style="line-height: 1.2;">
             {{ gpe?.data.title || "Reveal data-backed insights from sustainability reports faster than ever" }}
           </h1>
           <PrismicRichText
