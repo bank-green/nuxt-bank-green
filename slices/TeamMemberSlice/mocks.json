@@ -16,7 +16,7 @@
 			},
 			"department": {
 				"__TYPE__": "FieldContent",
-				"value": "Data",
+				"value": "Other",
 				"type": "Select"
 			},
 			"description": {

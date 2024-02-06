@@ -1,12 +1,12 @@
 import { get } from './backend'
 
-const gqlUrl = 'https://data.bank.green/graphql'
+const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
 
 async function callBackend (query, variables) {
   const queryParam = encodeURIComponent(query)
   const variablesParam = encodeURIComponent(JSON.stringify(variables))
-  const url = `${gqlUrl}?query=${queryParam}&variables=${variablesParam}`
+  const url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
   const res = await $fetch(url, options)
   return res
 }
@@ -20,6 +20,7 @@ const commentaryFields = `{
     }
     fromTheWebsite,
     amountFinancedSince2016,
+    topPick,
     fossilFreeAlliance,
     fossilFreeAllianceRating,
     showOnSustainableBanksPage
@@ -88,12 +89,13 @@ export async function getBanksListWithFilter ({
   country,
   regions,
   subregions,
+  topPick,
   fossilFreeAlliance,
   features
 }) {
   const brandsQuery = `
-      query BrandsQuery($country: String, $first: Int, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
-          brands(country: $country, first: $first, fossilFreeAlliance: $fossilFreeAlliance, features: $features, regions: $regions, subregions: $subregions) {
+      query BrandsQuery($country: String, $first: Int, $topPick: Boolean, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
+          brands(country: $country, first: $first, topPick: $topPick, fossilFreeAlliance: $fossilFreeAlliance, features: $features, regions: $regions, subregions: $subregions) {
               edges {
                   node {
                       name
@@ -103,7 +105,7 @@ export async function getBanksListWithFilter ({
                       regions {
                         id,
                         name,
-                        slug          
+                        slug
                       },
                       commentary @include(if: $withCommentary) ${commentaryFields}
                       bankFeatures @include(if: $withFeatures) ${bankFeaturesFields}
@@ -116,6 +118,7 @@ export async function getBanksListWithFilter ({
     country,
     regions,
     subregions,
+    topPick,
     fossilFreeAlliance,
     features,
     first: 300,

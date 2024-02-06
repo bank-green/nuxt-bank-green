@@ -5,10 +5,11 @@
         </pre> -->
     <div class="page-fade-in contain pt-28 pb-16">
       <div
+        v-if="ecobanks?.data?.slices"
         class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold"
       >
         <SliceZone
-          :slices="ecobanks?.data.slices ?? []"
+          :slices="ecobanks?.data?.slices ?? []"
           :components="sliceComps"
         />
       </div>
@@ -79,7 +80,7 @@
         class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
       >
         <SliceZone
-          :slices="ecobanks?.data.slices1 ?? []"
+          :slices="ecobanks?.data?.slices1 ?? []"
           :components="sliceComps"
         />
       </div>
@@ -108,7 +109,7 @@ const { data: ecobanks } = await useAsyncData('ecobanks', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(ecobanks.value.data)
+usePrismicSEO(ecobanks?.value?.data)
 
 const { country } = useCountry()
 
@@ -119,6 +120,7 @@ const loadBanks = async ({
   regions,
   subregions,
   fossilFreeAlliance,
+  topPick,
   features
 }) => {
   loading.value = true
@@ -129,16 +131,17 @@ const loadBanks = async ({
     country: country.value,
     regions,
     subregions,
+    topPick,
     fossilFreeAlliance,
     features
   })
-
   banks.value = result
     // filter show_on_sustainable_banks_page
     .filter(a => a.showOnSustainableBanksPage)
-    // sort by fossiil_free_alliance_rating first, then by name
+    // sort by top_pick first, then fossil_free_alliance_rating, then by name
     .sort(
       (a, b) =>
+        b.topPick - a.topPick ||
         b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
         a.name - b.name
     )
@@ -146,7 +149,7 @@ const loadBanks = async ({
   if (banks.value.length === 0) {
     errorMessage.value =
       "Sorry, we don't have any banks that meet the required filter."
-  }
+  } // TODO: should put this string in Prismic
 }
 watch(country, () => {
   banks.value = []

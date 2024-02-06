@@ -29,12 +29,17 @@
             <span>
               {{ item.name }}
             </span>
-
             <img
               v-if="item.fossilFreeAlliance"
-              class="w-12 ml-6"
+              class="w-10 ml-4"
               src="/img/certification/fossil-free-certified.png"
               alt="Fossil Free Certification"
+            >
+            <img
+              v-if="item.topPick"
+              class="w-10 ml-4"
+              src="/img/certification/TopPick.svg"
+              alt="Top Pick"
             >
           </div>
         </div>

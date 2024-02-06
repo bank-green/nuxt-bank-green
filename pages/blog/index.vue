@@ -1,11 +1,12 @@
 <template>
   <div class="page bg-sushi-50">
-    <div v-if="posts">
+    <div>
       <div class="page-fade-in contain pt-28 pb-16">
         <h1 class="text-2xl font-semibold whitespace-pre-line mb-4">
           Bank.Green Blog: Stories and Tips for Divesting From Fossil Fuels
         </h1>
         <div
+          v-if="posts"
           class="-mx-4 mt-6 pt-10 grid gap-16 md:grid-cols-2 md:gap-x-5 md:gap-y-12"
         >
           <BlogCard
@@ -18,13 +19,12 @@
             :title="post.data.title"
           />
         </div>
+        <h3 v-else>
+          Error Loading Content.
+        </h3>
       </div>
     </div>
-    <div v-else>
-      <h1>
-        Error Loading content!
-      </h1>
-    </div>
+    <!--  <div v-else /> -->
   </div>
 </template>
 

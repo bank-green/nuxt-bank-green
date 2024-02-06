@@ -38,7 +38,7 @@
       >
         <PrismicRichText
           :field="pledge?.data.description2"
-          fallback="Error Loading Content!"
+          fallback="We believe that tackling the climate crisis demands people power, so we’re building a movement. Together, our combined pressure can change banking. The more names we have behind our pledge, the more likely we’ll  succeed in getting banks to divest from fossil fuels. Our pledge includes a reminder function, so you can decide when we next  contact you about sustainable banking options. Currently stuck in a complicated mortgage? Want to talk to your current bank before you move your money? Too young to open a bank account? Just let us know when you want a nudge from Bank.Green."
         />
         <div class="w-full flex justify-center mt-12">
           <button class="button-green max-w-md md:w-max" @click="scrollToForm">
