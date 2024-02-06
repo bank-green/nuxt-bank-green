@@ -30,7 +30,7 @@
   </li>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   name: String,
   href: String,
