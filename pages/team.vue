@@ -98,7 +98,6 @@ const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName:
   const department = member.primary.department
   if (department !== 'Founders' && department !== 'Alumni') {
     const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)
-
     if (existingTeamIndex >= 0) {
       accumulator[existingTeamIndex].members.push(member)
     } else {
