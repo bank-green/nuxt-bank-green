@@ -16,11 +16,10 @@
         ref="modalContainer"
         tabindex="-1"
         class="relative flex items-center justify-center h-screen max-h-4/5 w-full overflow-auto"
-        @click.stop.prevent="closeModal"
       >
         <div
           class="absolute top-0 flex flex-col items-center justify-center mt-28 mb-20 sm:px-6 md:px-8 lg:px-10 text-gray-50 text-center bg-sushi-100 rounded-2xl max-md:px-5"
-          @click.prevent.stop=""
+          v-clickaway="closeModal"
         >
           <div class="flex flex-row items-center justify-center text-black w-full">
             <div

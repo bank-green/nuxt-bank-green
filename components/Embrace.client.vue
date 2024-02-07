@@ -166,7 +166,7 @@ const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
 
 const props = withDefaults(defineProps<{
   name?: String;
-  successRedirectURL: string
+  successRedirectURL: string;
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null;
 }>(), {
   successRedirectURL: '/thanks-embrace'
@@ -182,6 +182,7 @@ const showModal = ref<boolean>(false)
 const bankEmail = ref<string>('')
 const subject = ref<string>('')
 const generatedMessage = ref<string>('') // pass to preview component as v-model??
+const uniqueUrl = ref<string>('')
 
 const extras = computed(() => {
   return {
@@ -237,17 +238,50 @@ function searchInputChange (event: HTMLInputElement) {
 function getBankEmail (bank: {name: string}) {
   console.log(`getBankEmail(${bank?.name})`)
   bankEmail.value = 'fakeBank@example.com'
+  // TODO: Get subject line from Prismic? -- we may want to also vary this
   subject.value = 'Fake subject line'
 }
 
-// TODO: connect to api to generate message body
-//       Will need to wait for message before showing modal
-function getGeneratedMessage () {
-  console.log('getGeneratedMessage()')
-  generatedMessage.value = 'fake generated message'
+// Connect to api to generate message body.
+// Wait for message before showing modal.
+async function getGeneratedMessage () {
+  busy.value = true
+
+  try {
+    const response = await $fetch('message', {
+      baseURL: 'http://localhost:5000',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        name: fullName.value,
+        email: email.value,
+        hometown: hometown.value,
+        background: background.value,
+        bank_name: extras.value.bankDisplayName,
+        // TODO: use actual bank contacts
+        // BUT we may not need to include in message generation
+        contact_emails: 'contact1@example.com,contact2@example.com'
+      },
+      parseResponse: JSON.parse
+    })
+
+    if (response?.text) {
+      generatedMessage.value = response.text
+      uniqueUrl.value = response.unique_url || ''
+    }
+  } catch (e) {
+    console.error('Error fetching or generating message.', e)
+    // TODO: Fallback to boiler plate message stored in Prismic with filled in
+    // values.
+    generatedMessage.value = 'We were unable to generate a message. Please write your own message here.'
+  } finally {
+    busy.value = false
+  }
 }
 
-function checkAndDisplayPreview () {
+async function checkAndDisplayPreview () {
   validate()
   if (!extras.value.fullName) {
     if (embracePage?.value) {
@@ -267,7 +301,7 @@ function checkAndDisplayPreview () {
   // TODO: Call function or use some other trigger
   // to get generated message body and message subject
   // and store it in the values passed to modal
-  getGeneratedMessage()
+  await getGeneratedMessage()
   showModal.value = true
 }
 

@@ -135,6 +135,8 @@ const props = defineProps<{
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
 }>()
 
+const busy = false
+
 const emit = defineEmits([
   'update:modelValue',
   'update:message',
