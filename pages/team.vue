@@ -1,8 +1,8 @@
 <template>
   <div class="page">
-    <div class="bg-sushi-50">
-      <div class="page-fade-in contain max-w-3xl xl:max-w-4xl py-24 sm:py-32">
-        <article class="prose sm:prose-lg xl:prose-xl mx-auto">
+    <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
+      <section class="page-fade-in contain py-24 sm:py-32 flex flex-col gap-8">
+        <div class="prose sm:prose-lg xl:prose-xl max-w-none">
           <SliceZone
             v-if="team?.data.slices"
             :slices="team?.data.slices ?? []"
@@ -38,24 +38,43 @@
               </strong>
             </p>
           </div>
-        </article>
-      </div>
+        </div>
+        <TeamSection v-if="foundersTeam && foundersTeam[0]" :department-name="foundersTeam && foundersTeam[0]?.primary.department ? 'Our ' + foundersTeam[0]?.primary.department : 'Our Founders'">
+          <TeamMember
+            v-for="(member, key) in foundersTeam"
+            :key="key"
+            :name="asText(member.primary.name)!"
+            :href="asLink(member?.primary.link)!"
+            :img="asLink(member?.primary.img)!"
+            :description="asText(member.primary.description)!"
+          />
+        </TeamSection>
+      </section>
+      <Swoosh />
     </div>
-    <div class="contain py-16">
-      <ul
-        class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
-      >
-        <SliceZone
-          :slices="team?.data.slices1 ?? []"
-          :components="sliceComps"
+    <section class="contain py-16 flex flex-col gap-10">
+      <h2 class="text-neutral-800 text-5xl font-semibold max-md:text-4xl ">
+        Meet the Team
+      </h2>
+      <TeamSection v-for="(subTeam, mainKey) in teamStructure" :key="mainKey" :department-name="subTeam.teamName">
+        <TeamMember
+          v-for="(member, key) in subTeam.members"
+          :key="key"
+          :name="asText(member.primary.name)!"
+          :href="asLink(member?.primary.link)!"
+          :img="asLink(member.primary.img)!"
+          :description="asText(member.primary.description)!"
+          class="bg-white rounded-lg p-6"
         />
-      </ul>
-    </div>
+      </TeamSection>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
+import { asText, asLink } from '@prismicio/helpers'
+import { TeamMemberSliceSlice } from 'prismicio-types'
 import { components } from '~~/slices'
 const sliceComps = ref(defineSliceZoneComponents(components))
 
@@ -65,5 +84,21 @@ const { data: team } = await useAsyncData('team', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(team.value?.data)
+usePrismicSEO(team?.value?.data)
+
+const departments = team.value?.data.slices1[0]?.primary.department
+const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: typeof departments, members: TeamMemberSliceSlice[]}[], member) => {
+  const department = member.primary.department
+  if (department !== 'Founders' && department !== 'Alumni') {
+    const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)
+    if (existingTeamIndex >= 0) {
+      accumulator[existingTeamIndex].members.push(member)
+    } else {
+      accumulator.push({ teamName: department, members: [member] })
+    }
+  }
+  return accumulator
+}, []).sort((a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0).sort((a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0)
+
+const foundersTeam = team?.value?.data.slices1.filter(team => team.primary.department === 'Founders')
 </script>

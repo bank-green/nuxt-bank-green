@@ -40,5 +40,7 @@
     "stripe": "^12.8.0",
     "vite-plugin-eslint": "^1.8.1"
   },
-  "dependencies": { "nuxt-jsonld": "^2.0.8" }
+  "dependencies": {
+    "nuxt-jsonld": "^2.0.8"
+  }
 }
