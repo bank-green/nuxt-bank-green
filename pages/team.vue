@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
-      <div class="page-fade-in contain py-24 sm:py-32">
-        <article class="prose sm:prose-lg xl:prose-xl max-w-none">
+      <section class="page-fade-in contain py-24 sm:py-32 flex flex-col gap-8">
+        <div class="prose sm:prose-lg xl:prose-xl max-w-none">
           <SliceZone
             v-if="team?.data.slices"
             :slices="team?.data.slices ?? []"
@@ -38,45 +38,36 @@
               </strong>
             </p>
           </div>
-        </article>
-        <div>
-          <TeamSection :departmentName="foundersTeam && foundersTeam[0]?.primary.department ? 'Our ' + foundersTeam[0]?.primary.department: ''" />
-          <ul
-            class="space-y-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
-          >
-            <div v-for="(member, key) in foundersTeam" :key="key">
-              <TeamMember
-                :name="asText(member.primary.name)!"
-                :href="asLink(member?.primary.link)!"
-                :img="asLink(member?.primary.img)!"
-                :description="asText(member.primary.description)!"
-              />
-            </div>
-          </ul>
         </div>
-      </div>
+        <TeamSection :department-name="foundersTeam && foundersTeam[0]?.primary.department ? 'Our ' + foundersTeam[0]?.primary.department : 'Our Founders'">
+          <TeamMember
+            v-for="(member, key) in foundersTeam"
+            :key="key"
+            :name="asText(member.primary.name)!"
+            :href="asLink(member?.primary.link)!"
+            :img="asLink(member?.primary.img)!"
+            :description="asText(member.primary.description)!"
+          />
+        </TeamSection>
+      </section>
       <Swoosh />
     </div>
-    <div class="contain py-16">
-      <div class="text-neutral-800 text-4xl font-semibold mb-2 max-md:text-4xl">
+    <section class="contain py-16 flex flex-col gap-10">
+      <h2 class="text-neutral-800 text-5xl font-semibold max-md:text-4xl ">
         Meet the Team
-      </div>
-      <div v-for="(subTeam, mainKey) in teamStructure" :key="mainKey">
-        <TeamSection :departmentName="subTeam.teamName" />
-        <ul
-          class="space-y-12 lg:grid lg:grid-cols-3 lg:items-start lg:gap-x-8 lg:gap-y-12 lg:space-y-0"
-        >
-          <div v-for="(member, key) in subTeam.members" :key="key">
-            <TeamMember
-              :name="asText(member.primary.name)!"
-              :href="asLink(member?.primary.link)!"
-              :img="asLink(member.primary.img)!"
-              :description="asText(member.primary.description)!"
-            />
-          </div>
-        </ul>
-      </div>
-    </div>
+      </h2>
+      <TeamSection v-for="(subTeam, mainKey) in teamStructure" :key="mainKey" :department-name="subTeam.teamName">
+        <TeamMember
+          v-for="(member, key) in subTeam.members"
+          :key="key"
+          :name="asText(member.primary.name)!"
+          :href="asLink(member?.primary.link)!"
+          :img="asLink(member.primary.img)!"
+          :description="asText(member.primary.description)!"
+          class="bg-white rounded-lg p-6"
+        />
+      </TeamSection>
+    </section>
   </div>
 </template>
 
@@ -93,8 +84,10 @@ const { data: team } = await useAsyncData('team', () =>
     fetchLinks: ['accordionitem.title', 'accordionitem.slices']
   })
 )
-usePrismicSEO(team.value?.data)
-const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: string, members: TeamMemberSliceSlice[]}[], member) => {
+usePrismicSEO(team?.value?.data)
+
+const departments = team.value?.data.slices1[0]?.primary.department
+const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: typeof departments, members: TeamMemberSliceSlice[]}[], member) => {
   const department = member.primary.department
   if (department !== 'Founders' && department !== 'Alumni') {
     const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)

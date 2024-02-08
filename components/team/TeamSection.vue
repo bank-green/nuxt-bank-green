@@ -1,8 +1,23 @@
 <template>
   <div
-    class="text-neutral-800 text-2xl font-semibold mt-20 mb-5 max-md:text-4xl"
+    class="flex flex-col gap-8"
   >
-    {{ departmentName }}
+    <h3
+      class="text-neutral-800 text-3xl font-semibold mb-5 max-md:text-4xl"
+    >
+      {{ departmentName }}
+    </h3>
+    <ul
+      class="
+      flex
+      gap-8
+      justify-evenly
+      flex-wrap
+      lg:flex-nowrap
+      "
+    >
+      <slot />
+    </ul>
   </div>
 </template>
 
