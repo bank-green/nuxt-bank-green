@@ -1,5 +1,5 @@
 <template>
-  <li class="flex flex-col gap-4 items-center w-full lg:w-96">
+  <li class="flex flex-col gap-4 items-center w-full md:max-w-xs lg:max-w-sm justify-self-center">
     <NuxtImg
       :src="img"
       width="128"

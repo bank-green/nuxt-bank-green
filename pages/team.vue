@@ -39,7 +39,7 @@
             </p>
           </div>
         </div>
-        <TeamSection :department-name="foundersTeam && foundersTeam[0]?.primary.department ? 'Our ' + foundersTeam[0]?.primary.department : 'Our Founders'">
+        <TeamSection v-if="foundersTeam && foundersTeam[0]" :department-name="foundersTeam && foundersTeam[0]?.primary.department ? 'Our ' + foundersTeam[0]?.primary.department : 'Our Founders'">
           <TeamMember
             v-for="(member, key) in foundersTeam"
             :key="key"

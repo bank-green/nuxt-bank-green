@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-8"
+    class="flex flex-col gap-6 w-full"
   >
     <h3
       class="text-neutral-800 text-3xl font-semibold mb-5 max-md:text-4xl"
@@ -8,13 +8,7 @@
       {{ departmentName }}
     </h3>
     <ul
-      class="
-      flex
-      gap-8
-      justify-evenly
-      flex-wrap
-      lg:flex-nowrap
-      "
+      class="flex gap-6 justify-evenly flex-wrap"
     >
       <slot />
     </ul>
