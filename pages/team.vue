@@ -98,7 +98,7 @@ const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName:
     }
   }
   return accumulator
-}, []).sort((a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0)
+}, []).sort((a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0).sort((a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0)
 
 const foundersTeam = team?.value?.data.slices1.filter(team => team.primary.department === 'Founders')
 </script>
