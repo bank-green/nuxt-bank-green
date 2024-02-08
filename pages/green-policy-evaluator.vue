@@ -63,6 +63,7 @@
           :title="feature?.title!"
           :img="asImageSrc(feature?.image)!"
           :description="feature?.description!"
+          class="flex-col md:p-6"
         />
       </div>
       <p class="max-w-3xl text-center mt-8 text-xl text-opacity-80 text-ocean-800">
@@ -90,12 +91,14 @@
           </h2>
         </div>
         <div v-if="!!gpe?.data.usp_items" class="flex flex-col gap-4 md:max-w-2xl">
-          <TextWithLogo
+          <TextWithImage
             v-for="usp in gpe?.data.usp_items"
             :key="usp.title!"
             :title="usp?.title!"
             :img="asImageSrc(usp?.image)!"
             :description="usp?.description!"
+            class="bg-white items-start rounded-lg p-8"
+            img-classes="w-14"
           />
         </div>
       </div>
