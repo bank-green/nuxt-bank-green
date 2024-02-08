@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col md:p-6 gap-4">
+  <div class="flex gap-4">
     <NuxtImg
       :src="img"
-      class="w-full"
+      :class="imgClasses || 'w-full'"
     />
     <div class="flex flex-col prose lg:prose-lg">
       <h3 class="md:!text-xl lg:!text-2xl !font-bold">
@@ -20,6 +20,7 @@ defineProps<{
   title: string,
   img: string,
   description: string
+  imgClasses?: string
 }>()
 
 </script>
