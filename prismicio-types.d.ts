@@ -1132,20 +1132,143 @@ export type FaqpageDocument<Lang extends string = string> =
     Lang
   >;
 
-type GreenpolicyevaluatorpageDocumentDataSlicesSlice =
-  | ButtonSliceSlice
-  | AccordionSliceSlice
-  | EmbedSliceSlice
-  | TextSliceSlice
-  | TextWithLogoSliceSlice
-  | TextWithImageSliceSlice;
+/**
+ * Item in *GreenPolicyEvaluatorPage → Key Points Items*
+ */
+export interface GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem {
+  /**
+   * title field in *GreenPolicyEvaluatorPage → Key Points Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * image field in *GreenPolicyEvaluatorPage → Key Points Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *GreenPolicyEvaluatorPage → Key Points Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+type GreenpolicyevaluatorpageDocumentDataSlicesSlice = EmbedSliceSlice;
 
 type GreenpolicyevaluatorpageDocumentDataSlices1Slice = FeaturedInSliceSlice;
+
+/**
+ * Item in *GreenPolicyEvaluatorPage → Features Items*
+ */
+export interface GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem {
+  /**
+   * Title field in *GreenPolicyEvaluatorPage → Features Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Image field in *GreenPolicyEvaluatorPage → Features Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *GreenPolicyEvaluatorPage → Features Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Item in *GreenPolicyEvaluatorPage → USP Items*
+ */
+export interface GreenpolicyevaluatorpageDocumentDataUspItemsItem {
+  /**
+   * Title field in *GreenPolicyEvaluatorPage → USP Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Image field in *GreenPolicyEvaluatorPage → USP Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *GreenPolicyEvaluatorPage → USP Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+type GreenpolicyevaluatorpageDocumentDataSlices5Slice = AccordionSliceSlice;
 
 /**
  * Content for GreenPolicyEvaluatorPage documents
  */
 interface GreenpolicyevaluatorpageDocumentData {
+  /**
+   * Title field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
   /**
    * Seo Title field in *GreenPolicyEvaluatorPage*
    *
@@ -1169,6 +1292,30 @@ interface GreenpolicyevaluatorpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * Key Points Items field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.key_points_items[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  key_points_items: prismic.GroupField<
+    Simplify<GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem>
+  >;
+
+  /**
+   * button_title field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.button_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_title: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Slice Zone
@@ -1179,6 +1326,17 @@ interface GreenpolicyevaluatorpageDocumentData {
    */
   slices: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlicesSlice>
   /**
+   * Title_as_featured_in field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.title_as_featured_in
+   * - **Tab**: As Featured In
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  title_as_featured_in: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Slice Zone
@@ -1186,8 +1344,118 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **API ID Path**: greenpolicyevaluatorpage.slices1[]
    * - **Tab**: As Featured In
    * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice>
+  /**
+   * Title_Features field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.title_features
+   * - **Tab**: Features
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */;
-  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice>;
+  title_features: prismic.KeyTextField;
+
+  /**
+   * Description_features field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.description_features
+   * - **Tab**: Features
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description_features: prismic.KeyTextField;
+
+  /**
+   * Features Items field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.features_items[]
+   * - **Tab**: Features
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  features_items: prismic.GroupField<
+    Simplify<GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem>
+  >;
+
+  /**
+   * Description_features_2 field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.description_features_2
+   * - **Tab**: Features
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description_features_2: prismic.KeyTextField
+  /**
+   * Title_USP field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.title_usp
+   * - **Tab**: USP
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  title_usp: prismic.KeyTextField;
+
+  /**
+   * USP Items field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.usp_items[]
+   * - **Tab**: USP
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  usp_items: prismic.GroupField<
+    Simplify<GreenpolicyevaluatorpageDocumentDataUspItemsItem>
+  >
+  /**
+   * Title_CTA field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.title_cta
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  title_cta: prismic.KeyTextField;
+
+  /**
+   * Description_CTA field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.description_cta
+   * - **Tab**: CTA
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description_cta: prismic.KeyTextField
+  /**
+   * Title_FAQ field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.title_faq
+   * - **Tab**: FAQ
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  title_faq: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.slices5[]
+   * - **Tab**: FAQ
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices5: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices5Slice>;
 }
 
 /**
@@ -2799,6 +3067,27 @@ export interface TeamMemberSliceSliceDefaultPrimary {
   name: prismic.RichTextField;
 
   /**
+   * department field in *TeamMemberSlice → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Select the team name
+   * - **Default Value**: Other
+   * - **API ID Path**: team_member_slice.primary.department
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  department: prismic.SelectField<
+    | "Other"
+    | "Founders"
+    | "Product & Engineering"
+    | "Content"
+    | "Data"
+    | "People Ops"
+    | "Research"
+    | "Alumni",
+    "filled"
+  >;
+
+  /**
    * description field in *TeamMemberSlice → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2902,136 +3191,6 @@ type TextSliceSliceVariation = TextSliceSliceDefault;
 export type TextSliceSlice = prismic.SharedSlice<
   "text_slice",
   TextSliceSliceVariation
->;
-
-/**
- * Primary content in *TextWithImageSlice → Primary*
- */
-export interface TextWithImageSliceSliceDefaultPrimary {
-  /**
-   * title field in *TextWithImageSlice → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: text_with_image_slice.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * description field in *TextWithImageSlice → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: text_with_image_slice.primary.description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-
-  /**
-   * image field in *TextWithImageSlice → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: text_with_image_slice.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Default variation for TextWithImageSlice Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TextWithImageSliceSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TextWithImageSliceSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *TextWithImageSlice*
- */
-type TextWithImageSliceSliceVariation = TextWithImageSliceSliceDefault;
-
-/**
- * TextWithImageSlice Shared Slice
- *
- * - **API ID**: `text_with_image_slice`
- * - **Description**: TextWithImageSlice
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TextWithImageSliceSlice = prismic.SharedSlice<
-  "text_with_image_slice",
-  TextWithImageSliceSliceVariation
->;
-
-/**
- * Primary content in *TextWithLogoSlice → Primary*
- */
-export interface TextWithLogoSliceSliceDefaultPrimary {
-  /**
-   * title field in *TextWithLogoSlice → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: text_with_logo_slice.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
-   * description field in *TextWithLogoSlice → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: text_with_logo_slice.primary.description
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  description: prismic.KeyTextField;
-
-  /**
-   * logo field in *TextWithLogoSlice → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: text_with_logo_slice.primary.logo
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  logo: prismic.ImageField<never>;
-}
-
-/**
- * Default variation for TextWithLogoSlice Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TextWithLogoSliceSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TextWithLogoSliceSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *TextWithLogoSlice*
- */
-type TextWithLogoSliceSliceVariation = TextWithLogoSliceSliceDefault;
-
-/**
- * TextWithLogoSlice Shared Slice
- *
- * - **API ID**: `text_with_logo_slice`
- * - **Description**: TextWithLogoSlice
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TextWithLogoSliceSlice = prismic.SharedSlice<
-  "text_with_logo_slice",
-  TextWithLogoSliceSliceVariation
 >;
 
 /**
@@ -3181,12 +3340,6 @@ declare module "@prismicio/client" {
       TextSliceSlice,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
-      TextWithImageSliceSlice,
-      TextWithImageSliceSliceVariation,
-      TextWithImageSliceSliceDefault,
-      TextWithLogoSliceSlice,
-      TextWithLogoSliceSliceVariation,
-      TextWithLogoSliceSliceDefault,
       ThanksSliceSlice,
       ThanksSliceSliceVariation,
       ThanksSliceSliceDefault,
