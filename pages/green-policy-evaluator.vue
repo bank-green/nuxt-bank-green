@@ -11,7 +11,7 @@
             fallback="Transform complex policies into actionable data with our Green Policy Evaluator"
           />
           <iframe
-            src="https://www.loom.com/embed/e7a51fa4bcde49eb8e120aaf2e40e894?sid=d0091e02-1364-4798-b02c-2ae3fae268ff&autoplay=1"
+            :src="gpe?.data.demo_video_link+'?autoplay=1'"
             frameborder="0"
             webkitallowfullscreen
             mozallowfullscreen
