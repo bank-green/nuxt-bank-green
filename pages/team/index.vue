@@ -68,6 +68,15 @@
         />
       </TeamSection>
     </section>
+    <div
+      class="flex flex-col justify-center items-center bg-sushi-100 rounded-xl py-6 md:py-12 px-6 md:px-16"
+    >
+      <div class="w-full flex justify-center my-12">
+        <button class="button-green max-w-md md:w-max" @click="$router.push('/team/alumni')">
+          View Alumni
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
