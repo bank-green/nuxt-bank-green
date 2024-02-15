@@ -10,6 +10,15 @@
             :field="gpe?.data.description"
             fallback="Transform complex policies into actionable data with our Green Policy Evaluator"
           />
+          <iframe
+            :src="gpe?.data.demo_video_link+'?autoplay=1'"
+            frameborder="0"
+            webkitallowfullscreen
+            mozallowfullscreen
+            allowfullscreen
+            style="aspect-ratio: 1.77917 / 1"
+            class="rounded-xl w-full h-auto relative max-w-2xl mx-auto"
+          />
         </div>
         <button :class="ctaButtonClass" @click="() => showModal = true">
           {{ gpe?.data.button_title || "Book a demo" }}

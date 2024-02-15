@@ -1316,6 +1316,17 @@ interface GreenpolicyevaluatorpageDocumentData {
   button_title: prismic.KeyTextField;
 
   /**
+   * Demo Video Link field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: https://www.loom.com/embed/be0a92e1d045476097b5e748ea62ba49
+   * - **API ID Path**: greenpolicyevaluatorpage.demo_video_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  demo_video_link: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Slice Zone
