@@ -70,6 +70,13 @@
           >
             Did we get something wrong?
           </h2>
+          <NuxtLink
+            :to="`https://data.bank.green/update/${bankTag}`"
+            target="_blank"
+            class="button-green inline-block w-max"
+          >
+            Help us fix it
+          </NuxtLink>
         </div>
 
         <div class="w-full flex flex-col items-center p-6 md:p-8">
@@ -101,4 +108,6 @@ const checkList = [
   'Discover other ways to divest from fossil fuels'
 ]
 
+const router = useRouter()
+const bankTag = router.currentRoute.value.params.bankTag
 </script>
