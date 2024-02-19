@@ -46,6 +46,12 @@ export default function getLinks ({ isHeader = false }) {
     })
 
     links.push({
+      href: '/green-policy-evaluator',
+      title: 'Green Policy Evaluator',
+      short_title: 'GPE'
+    })
+
+    links.push({
       href: '/team',
       title: 'Who we are',
       short_title: 'Team'
