@@ -11,7 +11,7 @@
             fallback="Transform complex policies into actionable data with our Green Policy Evaluator"
           />
           <iframe
-            :src="gpe?.data.demo_video_link+'?autoplay=1'"
+            :src="gpe?.data.demo_video_link+'?autoplay=1&muted=1'"
             frameborder="0"
             webkitallowfullscreen
             mozallowfullscreen
