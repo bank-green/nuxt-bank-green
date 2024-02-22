@@ -28,7 +28,7 @@
             </svg>
             <PrismicRichText
               v-if="thankspledge?.data.title"
-              class = "mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
+              class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
               :field="thankspledge?.data.title"
             />
             <h1 v-else class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">

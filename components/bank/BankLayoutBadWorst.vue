@@ -135,7 +135,28 @@
     </div>
 
     <!-- FOOTER -->
-    <BankInfoFooter />
+    <div class="bg-primary-dark">
+      <div
+        class="contain py-4 md:py-8 w-full flex flex-wrap md:flex-nowrap items-center text-gray-100"
+      >
+        <div class="w-full flex flex-col items-center p-6 md:p-8">
+          <h2
+            class="w-full text-center font-semibold text-2xl tracking-wider mb-4 text-gray-100"
+          >
+            How do we derive our results?
+          </h2>
+          <NuxtLink
+            :to="{
+              path: '/faq',
+              hash: '#how-do-you-know-what-my-bank-funds',
+            }"
+            class="button-green inline-block w-max"
+          >
+            Find out more
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -144,6 +165,5 @@ import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInVi
 import Swoosh from '@/components/Swoosh.vue'
 import CallToAction from '@/components/CallToAction.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import BankInfoFooter from '@/components/bank/BankInfoFooter.vue'
 
 </script>

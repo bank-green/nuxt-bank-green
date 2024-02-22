@@ -3,12 +3,17 @@
     <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
       <div class="page-fade-in contain max-w-3xl pb-16">
         <PrismicRichText
+          v-if="faq?.data.introduction"
           :field="faq?.data.introduction"
           class="prose"
-          fallback="Frequently asked questions"
         />
+        <div v-else class="prose">
+          <h1 class="text-center">
+            Frequently asked questions
+          </h1>
+        </div>
         <div
-          class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
+          class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10 "
         >
           <transition-group
             enter-active-class="transform-gpu ease-out duration-300 transition"
@@ -23,7 +28,7 @@
             :slices="faq?.data.slices ?? []"
             :components="sliceComps"
           />
-          <h3 v-else style="text-align:center">
+          <h3 v-else class="text-center">
             Error Loading Content.
           </h3>
         </div>

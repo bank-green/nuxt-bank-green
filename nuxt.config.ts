@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     public: {
       STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
       DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
+      DATA_URL: process.env.PUBLIC_DATA_URL,
+      EMBRACE_URL: process.env.PUBLIC_EMBRACE_URL,
+      GPE_URL: process.env.PUBLIC_GPE_URL,
       HAPTCHA_SITEKEY: process.env.NUXT_PUBLIC_HCAPTCHA_SITEKEY,
     },
     STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
