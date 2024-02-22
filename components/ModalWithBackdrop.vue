@@ -18,8 +18,8 @@
         @click.stop.prevent="closeModal"
       >
         <div
+          v-clickaway="closeModal"
           class="absolute top-0 flex flex-col items-center justify-center md:mt-28 mb-20 sm:px-6 md:px-8 lg:px-10 text-gray-50 text-center bg-sushi-100 md:rounded-2xl max-md:px-5 w-full h-full md:w-3/4 md:h-3/4"
-          @click.prevent.stop=""
         >
           <div class="flex flex-row items-center justify-center text-black w-full">
             <div
