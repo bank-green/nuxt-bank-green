@@ -112,12 +112,13 @@
         type="submit"
         class="button-green w-full md:w-auto mt-6 flex justify-center"
         :class="{'pointer-events-none opacity-75': busy}"
+        style="min-width: 20rem;"
       >
         <span v-if="!busy"> Generate Email Preview </span>
         <span v-else>
           <svg
-            width="32"
-            height="32"
+            width="24"
+            height="24"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 561 553"
             style="animation: ring 2s linear infinite"
