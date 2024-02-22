@@ -79,7 +79,10 @@
       <div
         class="self-stretch text-left text-slate-800 text-sm font-medium leading-6 tracking-wide mt-6 max-md:max-w-full"
       >
-        {{ embracePage?.data.preview_footnote|| 'Please keep us (embrace@bank.green) in the BCC field of your email to help us keep track of messages sent.' }}
+        <PrismicRichText
+          :field="embracePage?.data.preview_footnote"
+          fallback="'Please keep us (embrace@bank.green) in the BCC field of your email to help us keep track of messages sent.'"
+        />
       </div>
       <div class="grid grid-cols-2 items-center self-center flex w-full gap-5 mt-6 mb-6 max-md:max-w-full max-md:flex-wrap max-md:mt-8 max-md:mb-8">
         <button
@@ -183,7 +186,7 @@ function getEmailURI () {
 
   const fields = [
     `subject=${encodeURI(props.form?.subject.trim() || 'missing_subjectline')}`,
-    `bcc=${encodeURI(embracePage?.value?.data?.bcc_email.trim() || 'missing_bcc_address')}`,
+    `bcc=${embracePage?.value?.data?.bcc_email ? encodeURI(embracePage?.value?.data?.bcc_email.trim()) : 'missing_bcc_address'}`,
     `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
     `body=${encodeURI(props.message.trim() || 'missing message body')}`
   ]
