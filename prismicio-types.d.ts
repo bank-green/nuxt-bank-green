@@ -1292,6 +1292,17 @@ interface GreenpolicyevaluatorpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * SEO Image field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.seo_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  seo_image: prismic.ImageField<never>;
+
+  /**
    * Key Points Items field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Group

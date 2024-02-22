@@ -1,4 +1,6 @@
-export const useHeadHelper = (title, description) => {
+import { asLink } from '@prismicio/helpers'
+
+export const useHeadHelper = (title, description, imageUrl) => {
   if (title) {
     useHead({
       title,
@@ -30,6 +32,29 @@ export const useHeadHelper = (title, description) => {
         {
           name: 'description',
           content: description
+        }
+      ]
+    })
+  }
+
+  if (imageUrl) {
+    useHead({
+      meta: [
+        {
+          property: 'og:image',
+          content: imageUrl
+        },
+        {
+          property: 'og:image:width',
+          content: '1665'
+        },
+        {
+          property: 'og:image:height',
+          content: '971'
+        },
+        {
+          property: 'twitter:image',
+          content: imageUrl
         }
       ]
     })
@@ -101,5 +126,5 @@ export const useHeadRating = (rating) => {
 
 export const usePrismicSEO = (data) => {
   if (!data) { return }
-  useHeadHelper(data.seo_title, data.seo_description)
+  useHeadHelper(data.seo_title, data.seo_description, asLink(data.seo_image))
 }

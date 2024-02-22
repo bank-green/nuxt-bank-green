@@ -170,6 +170,8 @@ const { data: gpe } = await useAsyncData('gpe', () =>
 
 const ctaButtonClass = computed(() => ('button-green md:w-56 flex justify-center shadow-md font-bold'))
 
+usePrismicSEO(gpe.value?.data)
+
 // cal.com embed code used within CalModal
 useHead({
   script: [
