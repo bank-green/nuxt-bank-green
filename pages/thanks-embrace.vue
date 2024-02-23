@@ -7,6 +7,12 @@
           :slices="thanksembrace?.data.slices ?? []"
           :components="sliceComps"
         />
+        <ThanksSection
+          v-else
+          title="Thank you!"
+          description="Your submission has been received."
+          :show-explore-section="false"
+        />
         <Swoosh direction="up" color="text-sushi-50" />
         <Donation class="bg-sushi-50" />
       </div>
