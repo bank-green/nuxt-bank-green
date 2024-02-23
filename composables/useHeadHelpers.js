@@ -46,11 +46,11 @@ export const useHeadHelper = (title, description, imageUrl) => {
         },
         {
           property: 'og:image:width',
-          content: '1665'
+          content: '1200'
         },
         {
           property: 'og:image:height',
-          content: '971'
+          content: '630'
         },
         {
           property: 'twitter:image',
