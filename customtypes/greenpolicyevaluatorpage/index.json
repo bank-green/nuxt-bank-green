@@ -27,6 +27,10 @@
         "type": "Text",
         "config": { "label": "Seo Description", "placeholder": "" }
       },
+      "seo_image": {
+        "type": "Image",
+        "config": { "label": "SEO image", "constraint": {}, "thumbnails": [] }
+      },
       "key_points_items": {
         "type": "Group",
         "config": {

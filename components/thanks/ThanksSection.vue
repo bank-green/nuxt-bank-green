@@ -26,18 +26,18 @@
 
       <h1
         v-if="title"
-        class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
+        class="mt-8 text-4xl font-semibold whitespace-pre-line mb-8"
       >
         {{ title }}
       </h1>
 
-      <p v-if="description" class="text-gray-700 px-4 max-w-lg mx-auto">
+      <p v-if="description" class="text-gray-700 px-4 max-w-lg mx-auto text-xl">
         {{ description }}
       </p>
     </div>
   </div>
-  <Swoosh direction="up" color="text-sushi-100" />
-  <div class="relative py-8 sm:py-16 bg-sushi-100">
+  <Swoosh v-if="getSliceBoolean(showExploreSection)" direction="up" color="text-sushi-100" />
+  <div v-if="getSliceBoolean(showExploreSection)" class="relative py-8 sm:py-16 bg-sushi-100">
     <div class="contain sm:text-center">
       <h4
         class="font-semibold text-xl text-gray-800 mb-6 sm:text-2xl tracking-wide"
@@ -54,8 +54,15 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  title: String,
-  description: String
-})
+import { getSliceBoolean } from '@/utils/prismic/conversions'
+
+withDefaults(defineProps<{
+    title: string,
+    description: string,
+    showExploreSection?: boolean | null
+  }>(),
+{
+  showExploreSection: true
+}
+)
 </script>

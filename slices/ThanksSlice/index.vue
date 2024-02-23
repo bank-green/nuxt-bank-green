@@ -2,6 +2,7 @@
   <ThanksSection
     :title="asText(slice?.primary.title)!"
     :description="asText(slice?.primary.description)!"
+    :show-explore-section="slice?.primary.show_explore_section"
   />
 </template>
 
