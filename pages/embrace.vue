@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="page-fade-in overflow-hidden max-w-screen">
+    <div class="page-fade-in max-w-screen">
       <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
         <div
           class="contain flex flex-col justify-center items-center md:pb-20 pb-10 mb-4"

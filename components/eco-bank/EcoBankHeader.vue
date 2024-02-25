@@ -40,7 +40,7 @@
             <span v-else-if="rating === 'great'">This bank is great</span>
           </div>
           <div
-            v-if="hasInstitutionCredentials || fossilFreeAlliance"
+            v-if="hasInstitutionCredentials || fossilFreeAlliance || topPick"
             class="flex flex-col md:flex-row justify-start items-center gap-6 mt-4"
           >
             <img
@@ -50,10 +50,14 @@
               alt="Fossil Free Certified"
               title="Fossil Free Certified"
             >
+            <img
+              v-if="topPick"
+              class="h-16 w-auto"
+              src="/img/certification/TopPick.svg"
+              alt="Top Pick"
+              title="Top Pick"
+            >
             <template v-for="cred in institutionCredentials" :key="cred">
-              <!-- <img v-if="isFossilFreeCertification(cred)" class="h-16 w-auto"
-                                src="/img/certification/fossil-free-certified.png" :alt="cred?.name" /> -->
-
               <PrismicImage
                 v-if="
                   cred?.prismicApiId &&
@@ -75,19 +79,26 @@
 <script setup lang="ts">
 import { RichTextField } from '@prismicio/types'
 
-const props = defineProps<{
-  website: string;
-  name: string;
-  inheritBrandRating?: {
-    tag: string;
+const props = withDefaults(
+  defineProps<{
+    website: string;
     name: string;
-  };
-  rating: string;
-  institutionCredentials: any[];
-  prismicDefaultPageData: Record<string, any> | null;
-  prismicOurTake?: RichTextField;
-  fossilFreeAlliance: boolean;
-}>()
+    inheritBrandRating?: {
+      tag: string;
+      name: string;
+    };
+    rating: string;
+    institutionCredentials: any[];
+    prismicDefaultPageData: Record<string, any> | null;
+    prismicOurTake?: RichTextField;
+    fossilFreeAlliance?: boolean;
+    topPick?: boolean;
+  }>(),
+  {
+    fossilFreeAlliance: false,
+    topPick: false
+  }
+)
 
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
   () => props.institutionCredentials && props.institutionCredentials.length > 0

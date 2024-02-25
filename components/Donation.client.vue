@@ -19,7 +19,8 @@
     >
       <PrismicText
         wrapper="span"
-        :field="donationData.data['donation-button']"
+        :field="donationData.data['donation_button']"
+        fallback="Donate Now"
       />
     </NuxtLink>
   </div>

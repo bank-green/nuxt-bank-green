@@ -1,6 +1,6 @@
 <template>
   <ModalWithBackdrop v-model="showModal">
-    <form class="justify-center items-center flex flex-col pt-2 mb-10 max-w-2xl h-128 max-h-full text-slate-800 text-left">
+    <form class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
       <div class="self-stretch text-left text-xl tracking-wide mt-10 max-md:max-w-full max-md:mt-6">
         <PrismicRichText
           :field="embracePage?.data.preview_description"
@@ -84,9 +84,9 @@
           fallback="'Please keep us (embrace@bank.green) in the BCC field of your email to help us keep track of messages sent.'"
         />
       </div>
-      <div class="grid grid-cols-2 items-center self-center flex w-full gap-5 mt-6 mb-6 max-md:max-w-full max-md:flex-wrap max-md:mt-8 max-md:mb-8">
+      <div class="items-center self-center flex w-full gap-5 mt-6 mb-6 max-md:max-w-full max-md:flex-wrap max-md:mt-8 max-md:mb-8">
         <button
-          class="text-slate-800 text-center text-md font-medium leading-6 capitalize hover:text-red-400"
+          class="text-slate-800 text-center text-md font-medium leading-6 capitalize hover:text-red-400 w-full"
           :class="{'pointer-events-none opacity-75': busy}"
           @click="closeModal"
         >

@@ -23,11 +23,5 @@ export const components = defineSliceZoneComponents({
     () => import("./TeamMemberSlice/index.vue")
   ),
   text_slice: defineAsyncComponent(() => import("./TextSlice/index.vue")),
-  text_with_image_slice: defineAsyncComponent(
-    () => import("./TextWithImageSlice/index.vue")
-  ),
-  text_with_logo_slice: defineAsyncComponent(
-    () => import("./TextWithLogoSlice/index.vue")
-  ),
   thanks_slice: defineAsyncComponent(() => import("./ThanksSlice/index.vue")),
 });
