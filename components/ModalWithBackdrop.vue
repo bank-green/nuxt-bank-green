@@ -15,7 +15,6 @@
         ref="modalContainer"
         tabindex="-1"
         class="relative flex items-center justify-center h-screen max-h-4/5 w-full overflow-auto"
-        @click.stop.prevent="closeModal"
       >
         <div
           v-clickaway="closeModal"

@@ -45,7 +45,7 @@ try {
     usePrismicSEO(embrace.value.data)
   }
 } catch (e) {
-  console.log(e)
+  console.error(e)
   throw (e)
 }
 const embraceForm = ref()
