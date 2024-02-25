@@ -676,8 +676,7 @@ interface EcobankspageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice> /**
    * Slice Zone field in *EcoBanksPage*
    *
    * - **Field Type**: Slice Zone
@@ -773,8 +772,7 @@ interface EmbracepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField
-  /**
+  seo_description: prismic.KeyTextField /**
    * Preview Title field in *EmbracePage*
    *
    * - **Field Type**: Text
@@ -871,8 +869,7 @@ interface EmbracepageDocumentData {
    * - **Tab**: Preview
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  bcc_email: prismic.KeyTextField
-  /**
+  bcc_email: prismic.KeyTextField /**
    * Form Title field in *EmbracePage*
    *
    * - **Field Type**: Text
@@ -1314,6 +1311,17 @@ interface GreenpolicyevaluatorpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
+   * SEO image field in *GreenPolicyEvaluatorPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: greenpolicyevaluatorpage.seo_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  seo_image: prismic.ImageField<never>;
+
+  /**
    * Key Points Items field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Group
@@ -1357,8 +1365,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlicesSlice> /**
    * Title_as_featured_in field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1378,8 +1385,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: As Featured In
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice>
-  /**
+  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice> /**
    * Title_Features field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1423,8 +1429,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: Features
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description_features_2: prismic.KeyTextField
-  /**
+  description_features_2: prismic.KeyTextField /**
    * Title_USP field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1446,8 +1451,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    */
   usp_items: prismic.GroupField<
     Simplify<GreenpolicyevaluatorpageDocumentDataUspItemsItem>
-  >
-  /**
+  > /**
    * Title_CTA field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1467,8 +1471,7 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: CTA
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description_cta: prismic.KeyTextField
-  /**
+  description_cta: prismic.KeyTextField /**
    * Title_FAQ field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1577,8 +1580,7 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField
-  /**
+  seo_description: prismic.KeyTextField /**
    * Slice Zone field in *HomePage*
    *
    * - **Field Type**: Slice Zone
@@ -2256,8 +2258,7 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField
-  /**
+  seo_description: prismic.KeyTextField /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2266,8 +2267,7 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Pressure
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice>
-  /**
+  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice> /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2276,8 +2276,7 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Switch
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice>
-  /**
+  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice> /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2286,8 +2285,7 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Share
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice>
-  /**
+  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice> /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2354,8 +2352,7 @@ interface TeampageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<TeampageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<TeampageDocumentDataSlicesSlice> /**
    * Slice Zone field in *TeamPage*
    *
    * - **Field Type**: Slice Zone
@@ -3249,6 +3246,17 @@ export interface ThanksSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * show explore section field in *ThanksSlice → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: thanks_slice.primary.show_explore_section
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  show_explore_section: prismic.BooleanField;
 }
 
 /**
@@ -3285,7 +3293,7 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig
+      options?: prismic.ClientConfig,
     ): prismic.Client<AllDocumentTypes>;
   }
 
@@ -3293,38 +3301,56 @@ declare module "@prismicio/client" {
     export type {
       AccordionitemDocument,
       AccordionitemDocumentData,
+      AccordionitemDocumentDataSlicesSlice,
       BankpageDocument,
       BankpageDocumentData,
+      BankpageDocumentDataSlicesSlice,
       BlogpostDocument,
       BlogpostDocumentData,
+      BlogpostDocumentDataSlicesSlice,
       CalltoactionDocument,
       CalltoactionDocumentData,
       CertificationpageDocument,
       CertificationpageDocumentData,
+      CertificationpageDocumentDataSlicesSlice,
       ContactpageDocument,
       ContactpageDocumentData,
       DisclaimerpageDocument,
       DisclaimerpageDocumentData,
+      DisclaimerpageDocumentDataSlicesSlice,
       DonationpageDocument,
       DonationpageDocumentData,
       EcobankspageDocument,
       EcobankspageDocumentData,
+      EcobankspageDocumentDataSlicesSlice,
+      EcobankspageDocumentDataSlices1Slice,
       EmbracepageDocument,
       EmbracepageDocumentData,
       FaqpageDocument,
       FaqpageDocumentData,
+      FaqpageDocumentDataSlicesSlice,
       GreenpolicyevaluatorpageDocument,
       GreenpolicyevaluatorpageDocumentData,
+      GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem,
+      GreenpolicyevaluatorpageDocumentDataSlicesSlice,
+      GreenpolicyevaluatorpageDocumentDataSlices1Slice,
+      GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem,
+      GreenpolicyevaluatorpageDocumentDataUspItemsItem,
+      GreenpolicyevaluatorpageDocumentDataSlices5Slice,
       HomepageDocument,
       HomepageDocumentData,
+      HomepageDocumentDataSlices1Slice,
       PledgepageDocument,
       PledgepageDocumentData,
       PresspageDocument,
       PresspageDocumentData,
+      PresspageDocumentDataSlicesSlice,
       PresspostDocument,
       PresspostDocumentData,
+      PresspostDocumentDataSlicesSlice,
       PrivacypageDocument,
       PrivacypageDocumentData,
+      PrivacypageDocumentDataSlicesSlice,
       SfiPageDocument,
       SfiPageDocumentData,
       SfipageDocument,
@@ -3333,47 +3359,67 @@ declare module "@prismicio/client" {
       SwitchsurveyexitDocumentData,
       TakeactionpageDocument,
       TakeactionpageDocumentData,
+      TakeactionpageDocumentDataSlices1Slice,
+      TakeactionpageDocumentDataSlices2Slice,
+      TakeactionpageDocumentDataSlices3Slice,
+      TakeactionpageDocumentDataSlices4Slice,
       TeampageDocument,
       TeampageDocumentData,
+      TeampageDocumentDataSlicesSlice,
+      TeampageDocumentDataSlices1Slice,
       TextonlypagesDocument,
       TextonlypagesDocumentData,
       ThankspagesDocument,
       ThankspagesDocumentData,
+      ThankspagesDocumentDataSlicesSlice,
       ThankspledgeDocument,
       ThankspledgeDocumentData,
+      ThankspledgeDocumentDataSlicesSlice,
       VolunteerspageDocument,
       VolunteerspageDocumentData,
+      VolunteerspageDocumentDataSlicesSlice,
       AllDocumentTypes,
       AccordionSliceSlice,
+      AccordionSliceSliceRichTextPrimary,
+      AccordionSliceSliceRichTextWithStepPrimary,
+      AccordionSliceSliceDefaultPrimary,
       AccordionSliceSliceVariation,
       AccordionSliceSliceRichText,
       AccordionSliceSliceRichTextWithStep,
       AccordionSliceSliceDefault,
       ButtonSliceSlice,
+      ButtonSliceSliceDefaultPrimary,
       ButtonSliceSliceVariation,
       ButtonSliceSliceDefault,
       EmbedSliceSlice,
+      EmbedSliceSliceDefaultPrimary,
       EmbedSliceSliceVariation,
       EmbedSliceSliceDefault,
       FeaturedInSliceSlice,
+      FeaturedInSliceSliceDefaultPrimary,
       FeaturedInSliceSliceVariation,
       FeaturedInSliceSliceDefault,
       ImageSliceSlice,
+      ImageSliceSliceDefaultPrimary,
       ImageSliceSliceVariation,
       ImageSliceSliceDefault,
       SharePicGallerySliceSlice,
       SharePicGallerySliceSliceVariation,
       SharePicGallerySliceSliceDefault,
       SocialSharerSliceSlice,
+      SocialSharerSliceSliceDefaultPrimary,
       SocialSharerSliceSliceVariation,
       SocialSharerSliceSliceDefault,
       TeamMemberSliceSlice,
+      TeamMemberSliceSliceDefaultPrimary,
       TeamMemberSliceSliceVariation,
       TeamMemberSliceSliceDefault,
       TextSliceSlice,
+      TextSliceSliceDefaultPrimary,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
       ThanksSliceSlice,
+      ThanksSliceSliceDefaultPrimary,
       ThanksSliceSliceVariation,
       ThanksSliceSliceDefault,
     };

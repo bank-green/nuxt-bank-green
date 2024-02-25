@@ -1,38 +1,46 @@
 {
-    "id": "thanks_slice",
-    "type": "SharedSlice",
-    "name": "ThanksSlice",
-    "description": "ThanksSlice",
-    "variations": [
-      {
-        "id": "default",
-        "name": "Default",
-        "docURL": "...",
-        "version": "initial",
-        "description": "Default",
-        "imageUrl": "",
-        "primary": {
-          "title": {
-            "type": "StructuredText",
-            "config": {
-              "label": "title",
-              "placeholder": "",
-              "allowTargetBlank": true,
-              "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-            }
-          },
-          "description": {
-            "type": "StructuredText",
-            "config": {
-              "label": "description",
-              "placeholder": "",
-              "allowTargetBlank": true,
-              "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-            }
+  "id": "thanks_slice",
+  "type": "SharedSlice",
+  "name": "ThanksSlice",
+  "description": "ThanksSlice",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "items": {}
-      }
-    ]
-  }
-  
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "show_explore_section": {
+          "type": "Boolean",
+          "config": {
+            "label": "show explore section",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
