@@ -16,7 +16,7 @@
 			},
 			"department": {
 				"__TYPE__": "FieldContent",
-				"value": "Other",
+				"value": "People Ops",
 				"type": "Select"
 			},
 			"description": {

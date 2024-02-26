@@ -819,6 +819,17 @@ interface EmbracepageDocumentData {
   copy_text_button_label: prismic.KeyTextField;
 
   /**
+   * Copied Text Button Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.copied_text_button_label
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copied_text_button_label: prismic.KeyTextField;
+
+  /**
    * Preview Footnote field in *EmbracePage*
    *
    * - **Field Type**: Rich Text
@@ -849,7 +860,18 @@ interface EmbracepageDocumentData {
    * - **Tab**: Preview
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  proceed_button_label: prismic.KeyTextField
+  proceed_button_label: prismic.KeyTextField;
+
+  /**
+   * BCC email field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bcc_email
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  bcc_email: prismic.KeyTextField
   /**
    * Form Title field in *EmbracePage*
    *
@@ -3105,7 +3127,8 @@ export interface TeamMemberSliceSliceDefaultPrimary {
     | "Data"
     | "People Ops"
     | "Research"
-    | "Alumni",
+    | "Alumni"
+    | "Development",
     "filled"
   >;
 
@@ -3238,6 +3261,17 @@ export interface ThanksSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * show explore section field in *ThanksSlice → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: thanks_slice.primary.show_explore_section
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  show_explore_section: prismic.BooleanField;
 }
 
 /**

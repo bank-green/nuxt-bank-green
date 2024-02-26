@@ -24,6 +24,10 @@
 						}
 					}
 				]
+			},
+			"show_explore_section": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []
