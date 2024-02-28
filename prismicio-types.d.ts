@@ -3121,7 +3121,7 @@ export interface TeamMemberSliceSliceDefaultPrimary {
    */
   department: prismic.SelectField<
     | "Other"
-    | "Founders"
+    | "Directors"
     | "Product & Engineering"
     | "Content"
     | "Data"
