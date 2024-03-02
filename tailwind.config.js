@@ -8,9 +8,9 @@ module.exports = {
       maxHeight: {
         '3/2': '150%'
       },
-      screens: { 
-        'lg': '1028px', // The lg breakpoint at 1280px will be overridden.
-        'custom': '1124px', // Define your custom breakpoint
+      screens: {
+        lg: '1028px', // The lg breakpoint at 1280px will be overridden.
+        custom: '1124px' // Define your custom breakpoint
       },
       colors: {
         'primary-dark': '#293145',

@@ -1,4 +1,4 @@
-export default function convertToSlug (string) {
+export default function convertToSlug (string:string) {
   if (!string || typeof string !== 'string') {
     return string
   }

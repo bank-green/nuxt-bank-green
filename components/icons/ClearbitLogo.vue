@@ -22,7 +22,7 @@ function handleError () {
 const props = withDefaults(
   defineProps<{
     url: string;
-    imgClass: string;
+    imgClass?: string;
     size?: number;
   }>(),
   {

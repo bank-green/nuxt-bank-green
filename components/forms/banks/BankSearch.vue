@@ -155,7 +155,7 @@ function hideList () {
   isShowing.value = false
 }
 
-async function onSelectBank (item) {
+async function onSelectBank (item:any) {
   emit('update:modelValue', null)
   await nextTick()
   search.value = item.name
