@@ -6,12 +6,16 @@
       :value="modelValue"
       :placeholder="placeholder"
       type="text"
-      class="relative w-full appearance-none border bg-white rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-sushi-500 focus:border-sushi-500 sm:text-sm truncate"
+      class="relative w-full appearance-none border bg-white rounded-2xl shadow-soft pl-12 pr-10 py-4 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-sushi-500 focus:border-sushi-500 sm:text-sm truncate 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'"
       :class="{
         'border-white': !modelValue,
         'border-sushi-100': modelValue,
+        'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red': !!warning,
+        'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400': disabled,
       }"
       autocomplete="chrome-off"
+      :aria-invalid="!!warning"
+      :disabled="disabled"
       @input="onInput"
       @keydown="onKeyDown"
       @focus="onFocus"
@@ -21,7 +25,6 @@
 
     <!-- icon on the left -->
     <slot name="icon" />
-
     <div
       v-if="modelValue"
       class="absolute right-0 p-5 text-red-700 hover:text-red-500 cursor-pointer"
@@ -95,9 +98,15 @@ withDefaults(
     modelValue: string;
     placeholder: string;
     usePencil?: boolean;
+    warning?: string | boolean;
+    dark?: boolean,
+    disabled?: boolean
   }>(),
   {
-    usePencil: false
+    usePencil: false,
+    warning: false,
+    dark: false,
+    disabled: false
   }
 )
 

@@ -4,10 +4,10 @@
     :description="description"
     :name="name"
     :show-warning="warning"
-    :right-label="rightLabel"
     :currency-label="currencyLabel"
     :type-label="typeLabel"
     :dark="dark"
+    :info-tooltip="infoTooltip"
   >
     <textarea
       v-if="rows"
@@ -55,7 +55,6 @@ const props = withDefaults(
     description?: string;
     name?: string;
     placeholder?: string;
-    rightLabel?: string | object;
     currencyLabel?: string;
     typeLabel?: string;
     type?: string;
@@ -66,13 +65,13 @@ const props = withDefaults(
     disabled?: boolean;
     warning?: string | boolean;
     dark?: boolean;
+    infoTooltip?: string;
   }>(),
   {
     title: '',
     description: '',
     name: '',
     placeholder: '',
-    rightLabel: '',
     currencyLabel: '',
     typeLabel: '',
     type: 'text',
@@ -81,7 +80,8 @@ const props = withDefaults(
     required: false,
     disabled: false,
     warning: false,
-    dark: false
+    dark: false,
+    infoTooltip: ''
   }
 )
 
@@ -89,7 +89,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const inputClasses = computed(() => {
   if (props.disabled) {
-    return 'bg-gray-100 border-gray-200 text-gray-500 placeholder-gray-300'
+    return 'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400'
   }
   if (props.warning) {
     return 'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'

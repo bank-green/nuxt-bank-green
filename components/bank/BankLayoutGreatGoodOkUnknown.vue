@@ -87,6 +87,7 @@
 <script setup lang="ts">
 import SignupBox from '../forms/SignupBox.vue'
 import Swoosh from '@/components/Swoosh.vue'
+
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',

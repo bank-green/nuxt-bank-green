@@ -9,21 +9,19 @@
     appear
   >
     <div
-      class="fixed inset-0 flex justify-center items-center backdrop-brightness-[0.35] p-0 z-50 w-full"
+      class="fixed inset-0 flex justify-center items-center backdrop-brightness-[0.35] p-0 w-full z-50"
+      @click="closeModal"
     >
       <div
         ref="modalContainer"
         tabindex="-1"
-        class="flex items-center justify-center h-screen max-h-4/5 w-full overflow-auto"
-        @click.stop.prevent="closeModal"
+        class="relative flex items-center justify-center h-screen max-h-4/5 w-full overflow-auto"
       >
         <div
           class="absolute top-0 flex flex-col items-center justify-center md:mt-28 mb-20 sm:px-6 md:px-8 lg:px-10 text-gray-50 text-center bg-sushi-100 md:rounded-2xl max-md:px-5 w-full h-full md:w-3/4 md:h-3/4"
-          @click.prevent.stop=""
         >
           <div class="flex flex-row items-center justify-center text-black w-full">
             <div
-
               class="relative w-full justify-between items-stretch self-stretch flex gap-5 mt-5 md:mt-10 max-md:max-w-full max-md:flex-wrap"
             >
               <div
@@ -56,12 +54,15 @@
 </template>
 
 <script setup lang="ts">
+
 defineProps<{
-    modelValue: boolean;
-    title?: string
-  }>()
+  modelValue: boolean;
+  title?: string
+}>()
+
 const emits = defineEmits(['update:modelValue'])
 const escapePressed = useKeyPress('Escape')
+
 watch(escapePressed, (val, prev) => {
   if (val && !prev) {
     closeModal()
