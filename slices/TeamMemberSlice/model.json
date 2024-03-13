@@ -28,13 +28,14 @@
             "placeholder": "Select the team name",
             "options": [
               "Other",
-              "Founders",
+              "Directors",
               "Product & Engineering",
               "Content",
               "Data",
               "People Ops",
               "Research",
-              "Alumni"
+              "Alumni",
+              "Development"
             ],
             "default_value": "Other"
           }

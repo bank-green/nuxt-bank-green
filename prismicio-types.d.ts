@@ -869,6 +869,16 @@ interface EmbracepageDocumentData {
    * - **Tab**: Preview
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
+  bcc_email: prismic.KeyTextField
+  /**
+   * BCC email field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bcc_email
+   * - **Tab**: Preview
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
   bcc_email: prismic.KeyTextField /**
    * Form Title field in *EmbracePage*
    *
@@ -1311,7 +1321,7 @@ interface GreenpolicyevaluatorpageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
-   * SEO image field in *GreenPolicyEvaluatorPage*
+   * SEO Image field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -3107,13 +3117,14 @@ export interface TeamMemberSliceSliceDefaultPrimary {
    */
   department: prismic.SelectField<
     | "Other"
-    | "Founders"
+    | "Directors"
     | "Product & Engineering"
     | "Content"
     | "Data"
     | "People Ops"
     | "Research"
-    | "Alumni",
+    | "Alumni"
+    | "Development",
     "filled"
   >;
 

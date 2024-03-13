@@ -39,9 +39,9 @@
             </p>
           </div>
         </div>
-        <TeamSection v-if="foundersTeam && foundersTeam[0]" :department-name="foundersTeam && foundersTeam[0]?.primary.department ? 'Our ' + foundersTeam[0]?.primary.department : 'Our Founders'">
+        <TeamSection v-if="directorsTeam && directorsTeam[0]" :department-name="directorsTeam && directorsTeam[0]?.primary.department ? 'Our ' + directorsTeam[0]?.primary.department : 'Our Directors'">
           <TeamMember
-            v-for="(member, key) in foundersTeam"
+            v-for="(member, key) in directorsTeam"
             :key="key"
             :name="asText(member.primary.name)!"
             :href="asLink(member?.primary.link)!"
@@ -98,7 +98,7 @@ usePrismicSEO(team?.value?.data)
 const departments = team.value?.data.slices1[0]?.primary.department
 const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: typeof departments, members: TeamMemberSliceSlice[]}[], member) => {
   const department = member.primary.department
-  if (department !== 'Founders' && department !== 'Alumni') {
+  if (department !== 'Directors' && department !== 'Alumni') {
     const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)
     if (existingTeamIndex >= 0) {
       accumulator[existingTeamIndex].members.push(member)
@@ -109,5 +109,5 @@ const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName:
   return accumulator
 }, []).sort((a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0).sort((a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0)
 
-const foundersTeam = team?.value?.data.slices1.filter(team => team.primary.department === 'Founders')
+const directorsTeam = team?.value?.data.slices1.filter(team => team.primary.department === 'Directors')
 </script>
