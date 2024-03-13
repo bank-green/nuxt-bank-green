@@ -250,7 +250,7 @@ async function getGeneratedMessage () {
 
   try {
     const response = await $fetch('message', {
-      baseURL: 'http://localhost:5000',
+      baseURL: useRuntimeConfig().public.EMBRACE_URL,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
