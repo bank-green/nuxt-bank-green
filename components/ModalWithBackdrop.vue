@@ -10,6 +10,7 @@
   >
     <div
       class="fixed inset-0 flex justify-center items-center backdrop-brightness-[0.35] p-0 w-full z-50"
+      @click="closeModal"
     >
       <div
         ref="modalContainer"
@@ -17,12 +18,10 @@
         class="relative flex items-center justify-center h-screen max-h-4/5 w-full overflow-auto"
       >
         <div
-          v-clickaway="closeModal"
           class="absolute top-0 flex flex-col items-center justify-center md:mt-28 mb-20 sm:px-6 md:px-8 lg:px-10 text-gray-50 text-center bg-sushi-100 md:rounded-2xl max-md:px-5 w-full h-full md:w-3/4 md:h-3/4"
         >
           <div class="flex flex-row items-center justify-center text-black w-full">
             <div
-
               class="relative w-full justify-between items-stretch self-stretch flex gap-5 mt-5 md:mt-10 max-md:max-w-full max-md:flex-wrap"
             >
               <div
