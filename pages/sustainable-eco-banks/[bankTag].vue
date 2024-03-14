@@ -47,7 +47,7 @@ const route = useRoute()
 const bankTag = route.params.bankTag as string
 if (!bankTag) {
   throw new Error(
-    'no banktag supplied: ' + JSON.stringify(router.currentRoute.value)
+    'no banktag supplied: ' + JSON.stringify(route)
   )
 } else {
   const { client } = usePrismic()

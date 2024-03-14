@@ -9,7 +9,11 @@
     <li
       v-for="(item, index) in items"
       :key="index"
-      :ref="(el) => (itemArrRef[index] = el)"
+      :ref="(el) => {
+        if (el !== null) {
+          itemArrRef[index] = el as HTMLLIElement;
+        }
+      }"
       role="option"
       tabindex="0"
       class="text-gray-900 cursor-default relative py-3 pl-4 pr-9 mx-2 rounded-md"

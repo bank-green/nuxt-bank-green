@@ -33,7 +33,7 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    url: string;
+    url?: string;
     hashtags?: string[];
     text?: string;
     large?: boolean;

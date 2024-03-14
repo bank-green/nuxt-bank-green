@@ -9,7 +9,9 @@
             v-if="donatecancelled?.data.text1"
             :field="donatecancelled?.data.text1"
           />
-          <h1 v-else>Your donation was cancelled.</h1>
+          <h1 v-else>
+            Your donation was cancelled.
+          </h1>
         </div>
       </div>
     </div>

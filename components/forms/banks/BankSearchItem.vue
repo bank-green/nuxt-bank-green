@@ -2,7 +2,7 @@
   <div class="flex items-center">
     <div class="relative w-6 h-6 mr-3">
       <ClearbitLogo
-        :url="website"
+        :url="website.valueOf()"
         :size="24"
         img-class="absolute inset-0 z-20"
       />

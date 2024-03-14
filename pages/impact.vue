@@ -17,7 +17,9 @@
             class="mt-0"
             :field="impact?.data.text2"
           />
-          <h2 v-else class="mt-0">Maximise your impact by letting us know.</h2>
+          <h2 v-else class="mt-0">
+            Maximise your impact by letting us know.
+          </h2>
           <PrismicRichText
             :field="impact?.data.text3"
             fallback="Taking this survey helps advocate for change. Bank.Green uses your

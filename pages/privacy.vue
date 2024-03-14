@@ -10,7 +10,9 @@
             :slices="privacy?.data.slices ?? []"
             :components="sliceComps"
           />
-          <h3 v-else class="flex justify-center">Error loading content.</h3>
+          <h3 v-else class="flex justify-center">
+            Error loading content.
+          </h3>
         </article>
       </div>
     </div>
