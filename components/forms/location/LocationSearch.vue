@@ -1,9 +1,17 @@
 <template>
-  <div v-clickaway="hideList" class="relative">
+  <BaseField
+    v-clickaway="hideList"
+    class="relative col-span-2"
+    name="locationSearch"
+    :dark="dark"
+    :title="title"
+    :show-warning="warning"
+  >
     <SearchInput
       v-model="search"
       :aria-expanded="isShowing"
       :use-pencil="true"
+      :warning="warning"
       :placeholder="'Search country...'"
       @keydown.down="(event) => $refs['listPicker'].incrementFocus(event)"
       @keydown.up="(event) => $refs['listPicker'].decrementFocus(event)"
@@ -51,11 +59,12 @@
         </ListPicker>
       </div>
     </transition>
-  </div>
+  </BaseField>
 </template>
 
 <script setup>
 import en from '../../../lang/en.json'
+import BaseField from '../BaseField.vue'
 import LocationSearchItem from './LocationSearchItem.vue'
 import PinIcon from './PinIcon.vue'
 import { findCountries } from './countries'
@@ -63,7 +72,11 @@ import SearchInput from '@/components/forms/input/SearchInput'
 import ListPicker from '@/components/forms/ListPicker'
 
 const props = defineProps({
-  modelValue: String
+  modelValue: String,
+  disabled: Boolean,
+  warning: String,
+  dark: Boolean,
+  title: String
 })
 
 const emit = defineEmits(['update:modelValue'])
