@@ -56,6 +56,23 @@
       <h2 class="text-neutral-800 text-5xl font-semibold max-md:text-4xl ">
         Meet the Team
       </h2>
+      <div class="flex flex-col mr-auto">
+        <label for="department-filter" class="block text-neutral-600 font-semibold">Department:</label>
+        <select
+          id="department-filter"
+          class="
+            block w-full px-4 py-2 mt-2 mx-4 rounded-lg border border-neutral-300 focus:outline-none focus:ring-1 focus:ri ng-neutral-600 focus:border-neutral-600
+          "
+          @change="($event) => filterTeam(($event.target as HTMLSelectElement).value)"
+        >
+          <option value="">
+            All
+          </option>
+          <option v-for="(subTeam, mainKey) in allDepartments" :key="mainKey" :value="subTeam">
+            {{ subTeam }}
+          </option>
+        </select>
+      </div>
       <TeamSection v-for="(subTeam, mainKey) in teamStructure" :key="mainKey" :department-name="subTeam.teamName">
         <TeamMember
           v-for="(member, key) in subTeam.members"
@@ -81,6 +98,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { asText, asLink } from '@prismicio/helpers'
 import { TeamMemberSliceSlice } from 'prismicio-types'
@@ -96,7 +114,14 @@ const { data: team } = await useAsyncData('team', () =>
 usePrismicSEO(team?.value?.data)
 
 const departments = team.value?.data.slices1[0]?.primary.department
-const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: typeof departments, members: TeamMemberSliceSlice[]}[], member) => {
+const allDepartments = team.value?.data.slices1.filter(
+  member => member.primary.department !== 'Alumni' && member.primary.department !== 'Directors'
+).map(
+  member => member.primary.department
+).filter(
+  (value, index, self) => self.indexOf(value) === index
+)
+const originalTeamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: typeof departments, members: TeamMemberSliceSlice[]}[], member) => {
   const department = member.primary.department
   if (department !== 'Directors' && department !== 'Alumni') {
     const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)
@@ -107,7 +132,16 @@ const teamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName:
     }
   }
   return accumulator
-}, []).sort((a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0).sort((a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0)
+}, []).sort(
+  (a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0
+).sort(
+  (a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0
+)
+
+const teamStructure = ref(originalTeamStructure)
+const filterTeam = (filteredDepartment: string) => {
+  teamStructure.value = filteredDepartment ? originalTeamStructure?.filter(team => team.teamName === filteredDepartment) : originalTeamStructure
+}
 
 const directorsTeam = team?.value?.data.slices1.filter(team => team.primary.department === 'Directors')
 </script>
