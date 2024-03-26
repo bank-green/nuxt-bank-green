@@ -1,17 +1,46 @@
 <template>
   <ModalWithBackdrop v-model="showModal">
-    <form class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
+    <form v-if="!completionMarked" class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
       <div class="self-stretch text-left text-xl tracking-wide mt-10 max-md:max-w-full max-md:mt-6">
-        <PrismicRichText
-          :field="embracePage?.data.preview_description"
-          class="text-md mb-4 whitespace-pre-wrap text-gray-800"
-          fallback="If you agree with the information below, click on 'Go To Your Mail App'. You may also edit the message body beforehand."
-        />
+        <p class="text-md mb-4 text-primary-dark font-bold">
+          Read the Following Instructions
+        </p>
+        <ol class="list-decimal pl-6 text-md mb-4 text-primary-dark space-y-1">
+          <li>Review the information presented in the email preview, edit if needed.</li>
+          <li>Copy the text.</li>
+          <li>Click on “Go To Your Mail App” to take you to your mailbox.</li>
+          <li>Paste text into your message.</li>
+          <li>Keep us in the BCC (some_email@bank.green) field to monitor the message.</li>
+          <li>Click send and you’re done!</li>
+        </ol>
       </div>
-      <div class="items-center self-stretch flex w-full justify-between gap-5 mt-6 max-md:max-w-full max-md:flex-wrap">
-        <div class="text-left text-xl font-medium leading-6 grow shrink basis-auto my-auto max-md:max-w-full">
+      <div class="flex items-center justify-between gap-5 mt-6">
+        <div class="text-left text-xl font-medium leading-6">
           {{ embracePage?.data.preview_area_label || 'Generated message' }}
         </div>
+        <button
+          class="flex items-center justify-center gap-1 py-2 px-4 bg-white text-lime-800 font-medium capitalize rounded-lg border border-gray-800 border-solid whitespace-nowrap"
+          @click.prevent.stop="copyText"
+        >
+          <img
+            v-if="!messageCopied"
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0e54027-9f1e-4d75-9014-63e737747321?"
+            class="aspect-square object-contain object-center w-6 overflow-hidden shrink-0 max-w-full"
+          >
+          <span v-if="!messageCopied">
+            {{ embracePage?.data.copy_text_button_label || 'Copy Text' }}
+          </span>
+          <img
+            v-if="messageCopied"
+            class="bg-sushi-100 w-6 h-6 p-1 mt-0.5 mr-1 rounded-full"
+            src="/img/icons/check.svg"
+            alt=""
+          >
+          <span v-if="messageCopied">
+            {{ embracePage?.data.copied_text_button_label || "Copied!" }}
+          </span>
+        </button>
       </div>
       <div
         id="previewBox"
@@ -53,35 +82,22 @@
           dark
         />
       </div>
-      <button
-        class="button-white text-lime-800 font-medium capitalize whitespace-nowrap justify-center items-center mt-4 bg-white self-stretch flex gap-1 py-2 rounded-lg border border-gray-800 border-solid max-md:px-5"
-        @click.prevent.stop="copyText"
+      <NuxtLink
+        :to="emailLink"
+        target="_blank"
+        class="button-white border-sushi-500 mt-5"
+        :class="{'pointer-events-none opacity-75': busy}"
       >
-        <img
-          v-if="!messageCopied"
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0e54027-9f1e-4d75-9014-63e737747321?"
-          class="aspect-square object-contain object-center w-6 overflow-hidden shrink-0 max-w-full"
-        >
-        <span v-if="!messageCopied">
-          {{ embracePage?.data.copy_text_button_label || 'Copy Text' }}
+        <span class="font-semibold text-leaf-400 ">
+          Go To your Mail App
         </span>
-        <img
-          v-if="messageCopied"
-          class="bg-sushi-100 w-6 h-6 p-1 mt-0.5 mr-1 rounded-full"
-          src="/img/icons/check.svg"
-          alt=""
-        >
-        <span v-if="messageCopied">
-          {{ embracePage?.data.copied_text_button_label || "Copied!" }}
-        </span>
-      </button>
+      </NuxtLink>
       <div
         class="self-stretch text-left text-slate-800 text-sm font-medium leading-6 tracking-wide mt-6 max-md:max-w-full"
       >
         <PrismicRichText
           :field="embracePage?.data.preview_footnote"
-          fallback="'Please keep us (embrace@bank.green) in the BCC field of your email to help us keep track of messages sent.'"
+          fallback="Don’t forget, keep us in the BCC (some_email@bank.green) field to help us monitor the message."
         />
       </div>
       <div class="items-center self-center flex w-full gap-5 mt-6 mb-6 max-md:max-w-full max-md:flex-wrap max-md:mt-8 max-md:mb-8">
@@ -92,32 +108,59 @@
         >
           {{ embracePage?.data.cancel_button_label || 'Back to Form' }}
         </button>
-        <NuxtLink
-          :to="emailLink"
-          target="_blank"
+        <button
           class="button-green"
           :class="{'pointer-events-none opacity-75': busy}"
-          @click.stop="emit('success')"
+          @click="markAsComplete"
         >
           <span class="font-semibold">
-            {{ embracePage?.data.proceed_button_label || 'Go To Your Mail App' }}
+            {{ embracePage?.data.proceed_button_label || 'Mark as Complete' }}
           </span>
-        </NuxtLink>
+        </button>
       </div>
     </form>
+    <div v-else class="w-full h-full overflow-y-auto p-2 text-left text-primary-dark">
+      <p class="text-xl mb-4 text-primary-dark font-bold">
+        Thank you for your Email!
+      </p>
+      <div class="h-5/6 bg-white border border-sushi-500 rounded-lg flex flex-col justify-center items-center text-center" @click.stop>
+        <ThanksSection
+          :title="'Thank you!'"
+          :subtitle="'Your email has been sent.'"
+          :description="'Thank you for taking the time to send a breakup letter to your old bank. Your actions are making a difference in creating a more sustainable future. Help us keep this service going by donating today. Every contribution helps!'"
+          :show-explore-section="false"
+        />
+        <NuxtLink
+          to="/donate"
+          class="button-green flex flex-col items-center justify-center h-12 w-48 rounded-xl"
+        >
+          <PrismicText
+            class="text-sm"
+            wrapper="span"
+            :field="donationData?.data['donation_button']"
+            fallback="Donate Now"
+          />
+        </NuxtLink>
+      </div>
+    </div>
   </ModalWithBackdrop>
 </template>
 
 <script setup lang="ts">
 import { PrismicDocument } from '@prismicio/types'
+import { ref } from 'vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmailPreviewField from '@/components/forms/EmailPreviewField.vue'
 
 const { client } = usePrismic()
+const completionMarked = ref(false)
 
 // TODO: maybe pass embracepage as a prop instead of requesting it again ??
 const { data: embracePage } = await useAsyncData('embrace', () =>
   client.getSingle('embracepage')
+)
+const { data: donationData } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage')
 )
 
 const props = defineProps<{
@@ -148,7 +191,12 @@ const emit = defineEmits([
 
 const showModal = computed({
   get: () => props.modelValue,
-  set: val => emit('update:modelValue', val)
+  set: (val) => {
+    if (!val) {
+      completionMarked.value = false
+    }
+    emit('update:modelValue', val)
+  }
 })
 
 const messageBody = computed({
@@ -178,6 +226,10 @@ function copyText () {
   // Copy the text to clipboard
   navigator.clipboard.writeText(textField.value)
   messageCopied.value = true
+}
+
+function markAsComplete () {
+  completionMarked.value = true
 }
 
 function getEmailURI () {

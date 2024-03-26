@@ -24,14 +24,13 @@
         />
       </svg>
 
-      <h1
-        v-if="title"
-        class="mt-8 text-4xl font-semibold whitespace-pre-line mb-8"
-      >
+      <h1 v-if="title" class="mt-8 text-lg lg:text-2xl font-semibold whitespace-pre-line mb-2">
         {{ title }}
       </h1>
-
-      <p v-if="description" class="text-gray-700 px-4 max-w-lg mx-auto text-xl">
+      <h2 v-if="subtitle" class="sm:text-md md:text-lg lg:text-xl font-semibold whitespace-pre-line mb-2">
+        {{ subtitle }}
+      </h2>
+      <p v-if="description" class="text-gray-700 text-base lg:text-lg ">
         {{ description }}
       </p>
     </div>
@@ -58,6 +57,7 @@ import { getSliceBoolean } from '@/utils/prismic/conversions'
 
 withDefaults(defineProps<{
     title: string,
+    subtitle?:string,
     description: string,
     showExploreSection?: boolean | null
   }>(),

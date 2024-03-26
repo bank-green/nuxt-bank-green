@@ -15,7 +15,7 @@
       ref="input"
       :rows="rows"
       :name="name"
-      class="block appearance-none w-full text-sm leading-5 border-gray-50 rounded-2xl focus:border-sushi-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 bg-white shadow-soft"
+      class="block appearance-none w-full text-sm leading-5 border rounded-2xl focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 bg-white shadow-soft"
       :class="inputClasses"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
@@ -30,7 +30,7 @@
       :id="name"
       ref="input"
       :name="name"
-      class="block appearance-none w-full text-sm leading-5 border-gray-50 rounded-2xl focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 bg-white shadow-soft"
+      class="block appearance-none w-full text-sm leading-5 border rounded-2xl focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 bg-white shadow-soft"
       :class="inputClasses"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
@@ -66,6 +66,7 @@ const props = withDefaults(
     warning?: string | boolean;
     dark?: boolean;
     infoTooltip?: string;
+    borderColor?: string;
   }>(),
   {
     title: '',
@@ -81,7 +82,8 @@ const props = withDefaults(
     disabled: false,
     warning: false,
     dark: false,
-    infoTooltip: ''
+    infoTooltip: '',
+    borderColor: 'border-gray-50'
   }
 )
 
@@ -97,7 +99,7 @@ const inputClasses = computed(() => {
   if (props.currencyLabel && props.typeLabel) {
     return 'pl-7 pr-12'
   }
-  return 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'
+  return `px-5 py-4 ${props.borderColor} text-gray-900 placeholder-cool-gray-800`
 })
 
 const onInput = ($event: Event) => {
