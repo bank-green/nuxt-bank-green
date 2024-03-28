@@ -227,20 +227,11 @@ const form = ref({
 // const emit = defineEmits(['success'])
 
 function searchInputChange (event: HTMLInputElement) {
-  // When bank is selected we need to fetch/update bank contact email
+  // When bank is selected fetch/update bank contact email
   if (event && form.value?.bank?.name) {
-    getBankEmail(form.value?.bank)
+    // For now we are getting the contact info from
+    // the message end point on message generation
   }
-}
-
-// TODO: connect to api to retrieve email or list of bank emails
-//       May want to use 'busy' if we retrieve individually rather than loading
-//       a full list at page load
-function getBankEmail (bank: {name: string}) {
-  console.log(`getBankEmail(${bank?.name})`)
-  bankEmail.value = 'fakeBank@example.com'
-  // TODO: Get subject line from Prismic? -- we may want to also vary this
-  subject.value = 'Fake subject line'
 }
 
 // Connect to api to generate message body.
@@ -260,17 +251,16 @@ async function getGeneratedMessage () {
         email: email.value,
         hometown: hometown.value,
         background: background.value,
-        bank_name: extras.value.bankDisplayName,
-        // TODO: use actual bank contacts
-        // BUT we may not need to include in message generation
-        contact_emails: 'contact1@example.com,contact2@example.com'
+        bank_name: extras.value.bankDisplayName
       },
       parseResponse: JSON.parse
     })
 
     if (response?.text) {
       generatedMessage.value = response.text
+      subject.value = response.subject
       uniqueUrl.value = response.unique_url || ''
+      bankEmail.value = response.contact_emails || ''
     }
   } catch (e) {
     console.error('Error fetching or generating message.', e)
