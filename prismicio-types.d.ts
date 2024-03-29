@@ -676,7 +676,8 @@ interface EcobankspageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<EcobankspageDocumentDataSlicesSlice>
+  /**
    * Slice Zone field in *EcoBanksPage*
    *
    * - **Field Type**: Slice Zone
@@ -772,7 +773,8 @@ interface EmbracepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField /**
+  seo_description: prismic.KeyTextField
+  /**
    * Preview Title field in *EmbracePage*
    *
    * - **Field Type**: Text
@@ -871,15 +873,6 @@ interface EmbracepageDocumentData {
    */
   bcc_email: prismic.KeyTextField
   /**
-   * BCC email field in *EmbracePage*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: embracepage.bcc_email
-   * - **Tab**: Preview
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  bcc_email: prismic.KeyTextField /**
    * Form Title field in *EmbracePage*
    *
    * - **Field Type**: Text
@@ -1375,7 +1368,8 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlicesSlice>
+  /**
    * Title_as_featured_in field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1395,7 +1389,8 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: As Featured In
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice> /**
+  slices1: prismic.SliceZone<GreenpolicyevaluatorpageDocumentDataSlices1Slice>
+  /**
    * Title_Features field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1439,7 +1434,8 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: Features
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description_features_2: prismic.KeyTextField /**
+  description_features_2: prismic.KeyTextField
+  /**
    * Title_USP field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1461,7 +1457,8 @@ interface GreenpolicyevaluatorpageDocumentData {
    */
   usp_items: prismic.GroupField<
     Simplify<GreenpolicyevaluatorpageDocumentDataUspItemsItem>
-  > /**
+  >
+  /**
    * Title_CTA field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1481,7 +1478,8 @@ interface GreenpolicyevaluatorpageDocumentData {
    * - **Tab**: CTA
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description_cta: prismic.KeyTextField /**
+  description_cta: prismic.KeyTextField
+  /**
    * Title_FAQ field in *GreenPolicyEvaluatorPage*
    *
    * - **Field Type**: Text
@@ -1590,7 +1588,8 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField /**
+  seo_description: prismic.KeyTextField
+  /**
    * Slice Zone field in *HomePage*
    *
    * - **Field Type**: Slice Zone
@@ -1615,6 +1614,365 @@ export type HomepageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
     Simplify<HomepageDocumentData>,
     "homepage",
+    Lang
+  >;
+
+type MethodologyDocumentDataSlices2Slice =
+  | ButtonSliceSlice
+  | AccordionSliceSlice
+  | EmbedSliceSlice
+  | ImageSliceSlice
+  | TextSliceSlice;
+
+type MethodologyDocumentDataSlices3Slice =
+  | ButtonSliceSlice
+  | ImageSliceSlice
+  | AccordionSliceSlice
+  | TextSliceSlice
+  | EmbedSliceSlice;
+
+type MethodologyDocumentDataSlices4Slice =
+  | ButtonSliceSlice
+  | ImageSliceSlice
+  | AccordionSliceSlice
+  | TextSliceSlice
+  | EmbedSliceSlice;
+
+/**
+ * Item in *MethodologyPage → Sustainable Bullets*
+ */
+export interface MethodologyDocumentDataSustainableBulletsItem {
+  /**
+   * icon field in *MethodologyPage → Sustainable Bullets*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_bullets[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Description field in *MethodologyPage → Sustainable Bullets*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_bullets[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Content for MethodologyPage documents
+ */
+interface MethodologyDocumentData {
+  /**
+   * SEO Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO Description field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+
+  /**
+   * Hero Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.hero_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hero_title: prismic.KeyTextField;
+
+  /**
+   * Hero Description field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.hero_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  hero_description: prismic.RichTextField;
+
+  /**
+   * Hero Image field in *MethodologyPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.hero_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  hero_image: prismic.ImageField<never>
+  /**
+   * Target Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.target_title
+   * - **Tab**: Target
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  target_title: prismic.KeyTextField;
+
+  /**
+   * Target Description field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.target_description
+   * - **Tab**: Target
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  target_description: prismic.RichTextField;
+
+  /**
+   * Target Image field in *MethodologyPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.target_image
+   * - **Tab**: Target
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  target_image: prismic.ImageField<never>
+  /**
+   * Factors Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.factors_title
+   * - **Tab**: Factors - Lending
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  factors_title: prismic.KeyTextField;
+
+  /**
+   * Factors Description field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.factors_description
+   * - **Tab**: Factors - Lending
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  factors_description: prismic.RichTextField;
+
+  /**
+   * Factors Lending Tab Name field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.lending_tab_name
+   * - **Tab**: Factors - Lending
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  lending_tab_name: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *MethodologyPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.slices2[]
+   * - **Tab**: Factors - Lending
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices2: prismic.SliceZone<MethodologyDocumentDataSlices2Slice>
+  /**
+   * Factors Emissions Tab Name field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.emissions_tab_name
+   * - **Tab**: Factors - Financed emissions
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  emissions_tab_name: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *MethodologyPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.slices3[]
+   * - **Tab**: Factors - Financed emissions
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices3: prismic.SliceZone<MethodologyDocumentDataSlices3Slice>
+  /**
+   * Factors Policy Tab Name field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.policy_tab_name
+   * - **Tab**: Factors - Policy
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  policy_tab_name: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *MethodologyPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.slices4[]
+   * - **Tab**: Factors - Policy
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices4: prismic.SliceZone<MethodologyDocumentDataSlices4Slice>
+  /**
+   * Sustainable Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_title
+   * - **Tab**: Sustainable Banks
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  sustainable_title: prismic.KeyTextField;
+
+  /**
+   * Sustainable description field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_description
+   * - **Tab**: Sustainable Banks
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  sustainable_description: prismic.RichTextField;
+
+  /**
+   * Sustainable Bullets field in *MethodologyPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_bullets[]
+   * - **Tab**: Sustainable Banks
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  sustainable_bullets: prismic.GroupField<
+    Simplify<MethodologyDocumentDataSustainableBulletsItem>
+  >;
+
+  /**
+   * Sustainable Call out field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_call_out
+   * - **Tab**: Sustainable Banks
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  sustainable_call_out: prismic.RichTextField;
+
+  /**
+   * Sustainable Call Out Image field in *MethodologyPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sustainable_call_out_image
+   * - **Tab**: Sustainable Banks
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  sustainable_call_out_image: prismic.ImageField<never>
+  /**
+   * Sources Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sources_title
+   * - **Tab**: Data Sources
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  sources_title: prismic.KeyTextField;
+
+  /**
+   * Sources Description field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sources_description
+   * - **Tab**: Data Sources
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  sources_description: prismic.RichTextField;
+
+  /**
+   * Sources Image field in *MethodologyPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.sources_image
+   * - **Tab**: Data Sources
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  sources_image: prismic.ImageField<never>
+  /**
+   * Questions Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.questions_title
+   * - **Tab**: Questions
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  questions_title: prismic.KeyTextField;
+
+  /**
+   * Questions Description field in *MethodologyPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.questions_description
+   * - **Tab**: Questions
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  questions_description: prismic.RichTextField;
+
+  /**
+   * Questions Button Title field in *MethodologyPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: methodology.questions_button_title
+   * - **Tab**: Questions
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  questions_button_title: prismic.KeyTextField;
+}
+
+/**
+ * MethodologyPage document from Prismic
+ *
+ * - **API ID**: `methodology`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MethodologyDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<MethodologyDocumentData>,
+    "methodology",
     Lang
   >;
 
@@ -2268,7 +2626,8 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField /**
+  seo_description: prismic.KeyTextField
+  /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2277,7 +2636,8 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Pressure
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice> /**
+  slices1: prismic.SliceZone<TakeactionpageDocumentDataSlices1Slice>
+  /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2286,7 +2646,8 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Switch
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice> /**
+  slices2: prismic.SliceZone<TakeactionpageDocumentDataSlices2Slice>
+  /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2295,7 +2656,8 @@ interface TakeactionpageDocumentData {
    * - **Tab**: Share
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice> /**
+  slices3: prismic.SliceZone<TakeactionpageDocumentDataSlices3Slice>
+  /**
    * Slice Zone field in *TakeActionPage*
    *
    * - **Field Type**: Slice Zone
@@ -2362,7 +2724,8 @@ interface TeampageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<TeampageDocumentDataSlicesSlice> /**
+  slices: prismic.SliceZone<TeampageDocumentDataSlicesSlice>
+  /**
    * Slice Zone field in *TeamPage*
    *
    * - **Field Type**: Slice Zone
@@ -2659,6 +3022,7 @@ export type AllDocumentTypes =
   | FaqpageDocument
   | GreenpolicyevaluatorpageDocument
   | HomepageDocument
+  | MethodologyDocument
   | PledgepageDocument
   | PresspageDocument
   | PresspostDocument
@@ -3304,7 +3668,7 @@ declare module "@prismicio/client" {
   interface CreateClient {
     (
       repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
+      options?: prismic.ClientConfig
     ): prismic.Client<AllDocumentTypes>;
   }
 
@@ -3312,56 +3676,40 @@ declare module "@prismicio/client" {
     export type {
       AccordionitemDocument,
       AccordionitemDocumentData,
-      AccordionitemDocumentDataSlicesSlice,
       BankpageDocument,
       BankpageDocumentData,
-      BankpageDocumentDataSlicesSlice,
       BlogpostDocument,
       BlogpostDocumentData,
-      BlogpostDocumentDataSlicesSlice,
       CalltoactionDocument,
       CalltoactionDocumentData,
       CertificationpageDocument,
       CertificationpageDocumentData,
-      CertificationpageDocumentDataSlicesSlice,
       ContactpageDocument,
       ContactpageDocumentData,
       DisclaimerpageDocument,
       DisclaimerpageDocumentData,
-      DisclaimerpageDocumentDataSlicesSlice,
       DonationpageDocument,
       DonationpageDocumentData,
       EcobankspageDocument,
       EcobankspageDocumentData,
-      EcobankspageDocumentDataSlicesSlice,
-      EcobankspageDocumentDataSlices1Slice,
       EmbracepageDocument,
       EmbracepageDocumentData,
       FaqpageDocument,
       FaqpageDocumentData,
-      FaqpageDocumentDataSlicesSlice,
       GreenpolicyevaluatorpageDocument,
       GreenpolicyevaluatorpageDocumentData,
-      GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem,
-      GreenpolicyevaluatorpageDocumentDataSlicesSlice,
-      GreenpolicyevaluatorpageDocumentDataSlices1Slice,
-      GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem,
-      GreenpolicyevaluatorpageDocumentDataUspItemsItem,
-      GreenpolicyevaluatorpageDocumentDataSlices5Slice,
       HomepageDocument,
       HomepageDocumentData,
-      HomepageDocumentDataSlices1Slice,
+      MethodologyDocument,
+      MethodologyDocumentData,
       PledgepageDocument,
       PledgepageDocumentData,
       PresspageDocument,
       PresspageDocumentData,
-      PresspageDocumentDataSlicesSlice,
       PresspostDocument,
       PresspostDocumentData,
-      PresspostDocumentDataSlicesSlice,
       PrivacypageDocument,
       PrivacypageDocumentData,
-      PrivacypageDocumentDataSlicesSlice,
       SfiPageDocument,
       SfiPageDocumentData,
       SfipageDocument,
@@ -3370,67 +3718,47 @@ declare module "@prismicio/client" {
       SwitchsurveyexitDocumentData,
       TakeactionpageDocument,
       TakeactionpageDocumentData,
-      TakeactionpageDocumentDataSlices1Slice,
-      TakeactionpageDocumentDataSlices2Slice,
-      TakeactionpageDocumentDataSlices3Slice,
-      TakeactionpageDocumentDataSlices4Slice,
       TeampageDocument,
       TeampageDocumentData,
-      TeampageDocumentDataSlicesSlice,
-      TeampageDocumentDataSlices1Slice,
       TextonlypagesDocument,
       TextonlypagesDocumentData,
       ThankspagesDocument,
       ThankspagesDocumentData,
-      ThankspagesDocumentDataSlicesSlice,
       ThankspledgeDocument,
       ThankspledgeDocumentData,
-      ThankspledgeDocumentDataSlicesSlice,
       VolunteerspageDocument,
       VolunteerspageDocumentData,
-      VolunteerspageDocumentDataSlicesSlice,
       AllDocumentTypes,
       AccordionSliceSlice,
-      AccordionSliceSliceRichTextPrimary,
-      AccordionSliceSliceRichTextWithStepPrimary,
-      AccordionSliceSliceDefaultPrimary,
       AccordionSliceSliceVariation,
       AccordionSliceSliceRichText,
       AccordionSliceSliceRichTextWithStep,
       AccordionSliceSliceDefault,
       ButtonSliceSlice,
-      ButtonSliceSliceDefaultPrimary,
       ButtonSliceSliceVariation,
       ButtonSliceSliceDefault,
       EmbedSliceSlice,
-      EmbedSliceSliceDefaultPrimary,
       EmbedSliceSliceVariation,
       EmbedSliceSliceDefault,
       FeaturedInSliceSlice,
-      FeaturedInSliceSliceDefaultPrimary,
       FeaturedInSliceSliceVariation,
       FeaturedInSliceSliceDefault,
       ImageSliceSlice,
-      ImageSliceSliceDefaultPrimary,
       ImageSliceSliceVariation,
       ImageSliceSliceDefault,
       SharePicGallerySliceSlice,
       SharePicGallerySliceSliceVariation,
       SharePicGallerySliceSliceDefault,
       SocialSharerSliceSlice,
-      SocialSharerSliceSliceDefaultPrimary,
       SocialSharerSliceSliceVariation,
       SocialSharerSliceSliceDefault,
       TeamMemberSliceSlice,
-      TeamMemberSliceSliceDefaultPrimary,
       TeamMemberSliceSliceVariation,
       TeamMemberSliceSliceDefault,
       TextSliceSlice,
-      TextSliceSliceDefaultPrimary,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
       ThanksSliceSlice,
-      ThanksSliceSliceDefaultPrimary,
       ThanksSliceSliceVariation,
       ThanksSliceSliceDefault,
     };
