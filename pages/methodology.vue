@@ -176,7 +176,7 @@ That doesn’t mean that these banks have no fossil fuel lending at all, instead
         </h2>
         <PrismicRichText
           :field="methodology?.data.questions_description"
-          class="max-w-4xl text-center text-xl"
+          class="max-w-4xl text-center text-xl underlineLink"
           fallback="Our bank ratings fall into five categories: 'Great,' 'Good','OK','Bad” and 'Worst,' depending on the number of overall points scored according to our scorecard."
         />
         <NuxtLink

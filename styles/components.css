@@ -68,6 +68,10 @@ a.link {
   @apply font-medium text-sushi-500  hover:underline hover:text-sushi-600 focus:underline !important;
 }
 
+.underlineLink a {
+  @apply hover:underline
+}
+
 b {
   font-weight: 600;
 }
