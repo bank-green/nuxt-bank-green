@@ -1765,17 +1765,6 @@ interface MethodologyDocumentData {
   factors_title: prismic.KeyTextField;
 
   /**
-   * Factors Description field in *MethodologyPage*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: methodology.factors_description
-   * - **Tab**: Factors - Lending
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  factors_description: prismic.RichTextField;
-
-  /**
    * Factors Lending Tab Name field in *MethodologyPage*
    *
    * - **Field Type**: Text
