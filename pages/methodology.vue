@@ -116,7 +116,7 @@
     </section>
     <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 max-w-screen">
       <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl pt-28 pb-20  lg:pt-12 gap-10">
-        <h2 class="text-3xl font-bold sm:text-4xl">
+        <h2 class="text-3xl font-semibold text-left sm:text-4xl text-center">
           {{ methodology?.data.sustainable_title || "Sustainable Banks" }}
         </h2>
         <PrismicRichText
