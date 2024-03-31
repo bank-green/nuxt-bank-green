@@ -1,7 +1,7 @@
 /**
  * An util function to check for empty Prismic field, regardless of types
  */
-import { RTEmbedNode, RTImageNode, RTNode, RTTextNode, RichTextNodeType } from '@prismicio/types';
+import { RTEmbedNode, RTImageNode, RTNode, RTTextNode, RichTextNodeType } from '@prismicio/types'
 
 function isRTNode (nodeObj: any): nodeObj is RTNode {
   return 'type' in nodeObj
@@ -20,8 +20,8 @@ export default function (fieldData: any): boolean {
   const isRichTextField = Array.isArray(fieldData) && fieldData.every(isRTNode)
   if (isRichTextField) {
     return (
-      fieldData.length > 0 && fieldData.some(node => !isEmptyRTNode(node))
+      fieldData.length === 0 || fieldData.every(node => !isEmptyRTNode(node))
     )
   }
-  return false
+  return true
 }
