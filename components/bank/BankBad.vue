@@ -34,7 +34,7 @@
     <template #section2>
       <PrismicRichText
         v-if="
-          bankPage?.data?.description2 && bankPage.data.description2.length > 0
+          bankPage?.data?.description2 && isEmptyPrismicField(bankPage?.data.description2)
         "
         class="text-lg md:text-2xl whitespace-pre-line text-gray-900 prose"
         :field="bankPage.data.description2"
@@ -50,6 +50,7 @@
 
 <script setup lang="ts">
 import { PrismicDocument } from '@prismicio/types'
+import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
 const props = defineProps<{
   name: string;
