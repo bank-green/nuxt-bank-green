@@ -1,0 +1,210 @@
+{
+  "id": "methodology",
+  "label": "MethodologyPage",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "seo_title": {
+        "type": "Text",
+        "config": { "label": "SEO Title", "placeholder": "" }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "SEO Description", "placeholder": "" }
+      },
+      "hero_title": {
+        "type": "Text",
+        "config": { "label": "Hero Title", "placeholder": "" }
+      },
+      "hero_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Hero Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "hero_image": {
+        "type": "Image",
+        "config": { "label": "Hero Image", "constraint": {}, "thumbnails": [] }
+      }
+    },
+    "Target": {
+      "target_title": {
+        "type": "Text",
+        "config": { "label": "Target Title", "placeholder": "" }
+      },
+      "target_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Target Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "target_image": {
+        "type": "Image",
+        "config": {
+          "label": "Target Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    },
+    "Factors - Lending": {
+      "factors_title": {
+        "type": "Text",
+        "config": { "label": "Factors Title", "placeholder": "" }
+      },
+      "lending_tab_name": {
+        "type": "Text",
+        "config": { "label": "Factors Lending Tab Name", "placeholder": "" }
+      },
+      "slices2": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "button_slice": { "type": "SharedSlice" },
+            "accordion_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" },
+            "image_slice": { "type": "SharedSlice" },
+            "text_slice": { "type": "SharedSlice" }
+          }
+        }
+      }
+    },
+    "Factors - Financed emissions": {
+      "emissions_tab_name": {
+        "type": "Text",
+        "config": { "label": "Factors Emissions Tab Name", "placeholder": "" }
+      },
+      "slices3": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "button_slice": { "type": "SharedSlice" },
+            "image_slice": { "type": "SharedSlice" },
+            "accordion_slice": { "type": "SharedSlice" },
+            "text_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" }
+          }
+        }
+      }
+    },
+    "Factors - Policy": {
+      "policy_tab_name": {
+        "type": "Text",
+        "config": { "label": "Factors Policy Tab Name", "placeholder": "" }
+      },
+      "slices4": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "button_slice": { "type": "SharedSlice" },
+            "image_slice": { "type": "SharedSlice" },
+            "accordion_slice": { "type": "SharedSlice" },
+            "text_slice": { "type": "SharedSlice" },
+            "embed_slice": { "type": "SharedSlice" }
+          }
+        }
+      }
+    },
+    "Sustainable Banks": {
+      "sustainable_title": {
+        "type": "Text",
+        "config": { "label": "Sustainable Title", "placeholder": "" }
+      },
+      "sustainable_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Sustainable description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "sustainable_bullets": {
+        "type": "Group",
+        "config": {
+          "label": "Sustainable Bullets",
+          "fields": {
+            "icon": {
+              "type": "Image",
+              "config": { "label": "icon", "constraint": {}, "thumbnails": [] }
+            },
+            "description": {
+              "type": "Text",
+              "config": { "label": "Description", "placeholder": "" }
+            }
+          }
+        }
+      },
+      "sustainable_call_out": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Sustainable Call out",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "sustainable_call_out_image": {
+        "type": "Image",
+        "config": {
+          "label": "Sustainable Call Out Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    },
+    "Data Sources": {
+      "sources_title": {
+        "type": "Text",
+        "config": { "label": "Sources Title", "placeholder": "" }
+      },
+      "sources_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Sources Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "sources_image": {
+        "type": "Image",
+        "config": {
+          "label": "Sources Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      }
+    },
+    "Questions": {
+      "questions_title": {
+        "type": "Text",
+        "config": { "label": "Questions Title", "placeholder": "" }
+      },
+      "questions_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Questions Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "questions_button_title": {
+        "type": "Text",
+        "config": { "label": "Questions Button Title", "placeholder": "" }
+      }
+    }
+  }
+}

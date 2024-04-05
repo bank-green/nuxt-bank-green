@@ -3,7 +3,7 @@ img {
 }
 
 .textlink a{
-  @apply font-bold text-sushi-500  hover:underline hover:text-sushi-600 focus:underline;
+  @apply text-sushi-700  hover:underline hover:text-sushi-800 focus:underline !important;
 }
 
 .constrain-images img {
@@ -65,7 +65,11 @@ a {
   text-decoration: none;
 }
 a.link {
-  @apply font-medium text-sushi-500  hover:underline hover:text-sushi-600 focus:underline;
+  @apply font-medium text-sushi-500  hover:underline hover:text-sushi-600 focus:underline !important;
+}
+
+.underlineLink a {
+  @apply hover:underline
 }
 
 b {
