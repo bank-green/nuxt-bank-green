@@ -152,7 +152,7 @@ const emojiForRating = computed(() => {
       emoji = 'Happy'
       break
     case 'ok':
-      emoji = 'Happy'
+      emoji = 'Meh'
       break
     case 'bad':
       emoji = 'Sad_Tear'
