@@ -15,7 +15,7 @@
       <div
         ref="modalContainer"
         tabindex="-1"
-        class="relative flex items-center justify-center w-full m-4 overflow-auto rounded-md h-4/5 md:h-full lg:h-full"
+        class="relative flex items-center justify-center max-w-7xl w-5/6 m-4 overflow-auto rounded-md h-4/5 md:h-full lg:h-full"
         @click.stop
       >
         <div

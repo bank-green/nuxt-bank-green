@@ -4,6 +4,7 @@
       <div class="flex flex-row items-center">
         <img
           src="/img/icons/left-arrow.svg"
+          class="cursor-pointer"
           @click="closeModal"
         >
         <p class="text-md ml-5 text-primary-dark font-medium">
@@ -14,7 +15,7 @@
         <p class="text-md mb-4 text-primary-dark font-bold">
           Read the Following Instructions
         </p>
-        <ol class="list-decimal pl-6 text-md mb-4 text-primary-dark space-y-1">
+        <ol class="list-decimal pl-6 text-base mb-4 text-primary-dark space-y-1">
           <li>Review the information presented in the email preview, edit if needed.</li>
           <li>Copy the text.</li>
           <li>Click on “Go To Your Mail App” to take you to your mailbox.</li>
@@ -113,7 +114,7 @@
         <button
           class="text-slate-800 text-center text-md font-medium leading-6 capitalize hover:text-red-400 w-full"
           :class="{'pointer-events-none opacity-75': busy}"
-          @click="closeModal"
+          @click.prevent="closeModal"
         >
           {{ embracePage?.data.cancel_button_label || 'Cancel' }}
         </button>
