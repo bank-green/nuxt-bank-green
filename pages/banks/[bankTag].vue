@@ -19,7 +19,7 @@ const route = useRoute()
 const bankTag = route.params.bankTag
 const details = ref(await getBankDetail(bankTag))
 
-const { bankPage } = await useBankPage(bankTag, details)
+const { bankPage } = await useBankPage(bankTag as string, details)
 
 useHeadHelper(
   details.value?.name
