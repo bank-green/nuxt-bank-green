@@ -1,142 +1,141 @@
 <template>
-  <div
-    class="w-full flex items-center justify-center bg-leaf-700 rounded-2xl px-8 py-8 text-gray-50 text-center"
-  >
-    <form
-      class="flex flex-col items-center"
-      @submit.prevent.stop="checkAndDisplayPreview"
+  <div class="w-full flex bg-white rounded-2xl px-8 py-8">
+    <div
+      class="w-full flex items-center justify-center bg-white rounded-2xl px-8 py-8 text-gray-50 text-center border-2 border-sushi"
     >
-      <p class="text-xl md:text-2xl mb-6 font-semibold whitespace-pre-wrap">
-        {{ embracePage?.data.form_title || 'Share your thoughts' }}
-      </p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-        <TextField
-          v-model="fullName"
-          class="col-span-2"
-          name="fullName"
-          type="text"
-          :title="embracePage?.data.full_name_label || 'Your full name'"
-          :placeholder="embracePage?.data.full_name_placeholder || 'Write your full name'"
-          :warning="fullNameWarning ? fullNameWarning : false"
-          dark
-        />
-        <TextField
-          v-model="form.email"
-          class="col-span-2"
-          type="email"
-          name="email"
-          :title="embracePage?.data.email_label || 'Email'"
-          :placeholder="embracePage?.data.email_placeholder || 'email@example.com'"
-          :warning="warningsMap['email']"
-          dark
-        />
-        <BankLocationSearch
-          v-model="form.bank"
-          :bank-search-classes="bankSearchClasses"
-          :warning="warningsMap['bank']"
-          :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
-          dark
-          class="col-span-2"
-          :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
-          :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
-          @search-input-change="searchValue = $event"
-          @update:model-value="searchInputChange"
-        >
-          <template #not-listed>
-            <PrismicRichText
-              :field="embracePage?.data.bank_not_found"
-              fallback="We couldn't find your bank. <br>
-                For now, we are only considering certain banks for this campaign. We may add more eventually."
-            />
-          </template>
-        </BankLocationSearch>
-        <TextField
-          v-model="form.hometown"
-          class="col-span-full"
-          name="hometown"
-          type="text"
-          :title="embracePage?.data.hometown_label || 'Your hometown'"
-          :placeholder="embracePage?.data.hometown_placeholder || 'Hometown'"
-          dark
-        />
-        <TextField
-          v-model="form.background"
-          class="col-span-full"
-          rows="5"
-          name="backgound"
-          type="text"
-          :title="embracePage?.data.background_label || 'Your background'"
-          :placeholder="embracePage?.data.background_placeholder || 'Your background'"
-          dark
-        />
-        <CheckboxSection
-          v-model="isAgreeMarketing"
-          class="col-span-full"
-          name="isAgreeMarketing"
-          dark
-        >
-          <PrismicRichText
-            :field="embracePage?.data.marketing_checkbox_label"
-            fallback="I wish to receive more information via email from Bank.Green."
-          />
-        </CheckboxSection>
-        <CheckboxSection
-          v-model="isAgreeTerms"
-          class="col-span-full"
-          name="isAgreeTerms"
-          :warning="warningsMap['isAgreeTerms']"
-          dark
-        >
-          <PrismicText
-            :field="embracePage?.data.privacy_checkbox_label"
-            wrapper="span"
-            fallback="I have read and understood the Bank.Green "
-          />
-          <!--<p v-else>I have read and understood Bank.Green</p>-->
-          <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
-            {{
-              ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
-            }}
-          </NuxtLink>
-          <NuxtLink v-else to="/privacy" class="link">
-            privacy policy
-          </NuxtLink>
-          <vue-hcaptcha
-            v-if="!isLocal"
-            :sitekey="hcaptchaSitekey"
-            class="col-span-full mt-4"
-          />
-        </CheckboxSection>
-      </div>
-      <button
-        type="submit"
-        class="button-green w-full md:w-auto mt-6 flex justify-center"
-        :class="{'pointer-events-none opacity-75': busy}"
-        style="min-width: 20rem;"
+      <form
+        class="flex flex-col items-center"
+        @submit.prevent.stop="checkAndDisplayPreview"
       >
-        <span v-if="!busy"> Generate Email Preview </span>
-        <span v-else>
-          <svg
-            width="24"
-            height="24"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 561 553"
-            style="animation: ring 2s linear infinite"
+        <p class="text-xl md:text-2xl text-primary-dark mb-6 font-semibold whitespace-pre-wrap">
+          {{ embracePage?.data.form_title || 'Send Your Break-Up Email' }}
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+          <TextField
+            v-model="fullName"
+            class="col-span-2"
+            name="fullName"
+            type="text"
+            border-color="border-sushi-500"
+            :title="embracePage?.data.full_name_label || 'Your full name'"
+            :placeholder="embracePage?.data.full_name_placeholder || 'Write your full name'"
+            :warning="fullNameWarning ? fullNameWarning : false"
+          />
+          <TextField
+            v-model="form.email"
+            class="col-span-2"
+            type="email"
+            name="email"
+            border-color="border-sushi-500"
+            :title="embracePage?.data.email_label || 'Email'"
+            :placeholder="embracePage?.data.email_placeholder || 'email@example.com'"
+            :warning="warningsMap['email']"
+          />
+          <BankLocationSearch
+            v-model="form.bank"
+            :bank-search-classes="bankSearchClasses"
+            :warning="warningsMap['bank']"
+            :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
+            class="col-span-2"
+            :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
+            :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
+            @search-input-change="searchValue = $event"
+            @update:model-value="searchInputChange"
           >
-            <path
-              d="M478 0A481 481 0 0 0 0 485v76h75c264 0 478-217 478-485V0h-75z"
-              fill="#6C9039"
+            <template #not-listed>
+              <PrismicRichText
+                :field="embracePage?.data.bank_not_found"
+                fallback="We couldn't find your bank. <br>
+                   For now, we are only considering certain banks for this campaign. We may add more eventually."
+              />
+            </template>
+          </BankLocationSearch>
+          <TextField
+            v-model="form.hometown"
+            class="col-span-full"
+            border-color="border-sushi-500"
+            name="hometown"
+            type="text"
+            :title="embracePage?.data.hometown_label || 'Where do you live'"
+            :placeholder="embracePage?.data.hometown_placeholder || 'Enter your city'"
+          />
+          <TextField
+            v-model="form.background"
+            class="col-span-full"
+            rows="5"
+            border-color="border-sushi-500"
+            name="backgound"
+            type="text"
+            :title="embracePage?.data.background_label || 'Tell us more about you'"
+            :placeholder="embracePage?.data.background_placeholder || 'Why is this issue important to you?'"
+          />
+          <CheckboxSection
+            v-model="isAgreeMarketing"
+            class="col-span-full"
+            name="isAgreeMarketing"
+          >
+            <PrismicRichText
+              :field="embracePage?.data.marketing_checkbox_label"
+              fallback="I wish to receive more information via email from Bank.Green."
             />
-          </svg>
-        </span>
-      </button>
-    </form>
+          </CheckboxSection>
+          <CheckboxSection
+            v-model="isAgreeTerms"
+            class="col-span-full"
+            name="isAgreeTerms"
+            :warning="warningsMap['isAgreeTerms']"
+          >
+            <PrismicText
+              :field="embracePage?.data.privacy_checkbox_label"
+              wrapper="span"
+              fallback="I have read and understood the Bank.Green "
+            />
+            <!--<p v-else>I have read and understood Bank.Green</p>-->
+            <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
+              {{
+                ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
+              }}
+            </NuxtLink>
+            <NuxtLink v-else to="/privacy" class="link">
+              privacy policy
+            </NuxtLink>
+            <vue-hcaptcha
+              v-if="!isLocal"
+              :sitekey="hcaptchaSitekey"
+              class="col-span-full mt-4"
+            />
+          </CheckboxSection>
+        </div>
+        <button
+          type="submit"
+          class="button-green w-full md:w-auto mt-6 flex justify-center"
+          :class="{'pointer-events-none opacity-75': busy}"
+          style="min-width: 20rem;"
+        >
+          <span v-if="!busy"> Generate Email Preview </span>
+          <span v-else>
+            <svg
+              width="24"
+              height="24"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 561 553"
+              style="animation: ring 2s linear infinite"
+            >
+              <path
+                d="M478 0A481 481 0 0 0 0 485v76h75c264 0 478-217 478-485V0h-75z"
+                fill="#6C9039"
+              />
+            </svg>
+          </span>
+        </button>
+      </form>
+    </div>
   </div>
+
   <EmbraceModal
     v-show="showModal"
     v-model="showModal"
     v-model:message="generatedMessage"
-    :title="embracePage?.data.preview_title || 'Email Preview'"
     tag="popup"
     :form="form"
     @success="successRedirect()"

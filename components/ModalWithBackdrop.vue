@@ -15,7 +15,8 @@
       <div
         ref="modalContainer"
         tabindex="-1"
-        class="relative flex items-center justify-center h-screen max-h-4/5 w-full overflow-auto"
+        class="relative flex items-center justify-center max-w-7xl w-5/6 m-4 overflow-auto rounded-md h-4/5 md:h-full lg:h-full"
+        @click.stop
       >
         <div
           class="absolute top-0 flex flex-col items-center justify-center md:mt-28 mb-20 sm:px-6 md:px-8 lg:px-10 text-gray-50 text-center bg-sushi-100 md:rounded-2xl max-md:px-5 w-full h-full md:w-3/4 md:h-3/4"
