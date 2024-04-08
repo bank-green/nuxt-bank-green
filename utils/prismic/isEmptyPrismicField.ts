@@ -13,8 +13,8 @@ function isEmptyRTNode (nodeObj: RTNode): boolean {
 }
 
 export default function (fieldData: any): boolean {
-  const isTextField = typeof fieldData === 'string'
-  if (isTextField) {
+  const isKeyTextField = typeof fieldData === 'string'
+  if (isKeyTextField) {
     return fieldData.length === 0
   }
   const isRichTextField = Array.isArray(fieldData) && fieldData.every(isRTNode)
