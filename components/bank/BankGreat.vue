@@ -53,6 +53,9 @@
           >
             <div class="md:w-1/2 max-w-sm">
               <PrismicRichText
+                v-if="
+                  bankPage?.data?.description2 && !isEmptyPrismicField(bankPage?.data.description2)
+                "
                 class="text-lg md:text-2xl tracking-wide mb-4 prose"
                 :field="bankPage?.data.description2"
               />
@@ -92,6 +95,7 @@
 <script setup lang="ts">
 import { PrismicDocument } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 defineProps<{
   name: string;
   website: string;
