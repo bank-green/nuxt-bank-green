@@ -70,7 +70,18 @@ export async function useBankPage (
       if (!isEmptyPrismicField(custom.data.seo_description)) { bankPage.data.seo_description = custom.data.seo_description }
     }
 
-    return { bankPage }
+    return {
+      bankPage
+      // validate: {
+      //   headline: isEmptyPrismicField(bankPage?.data.headline),
+      //   subtitle: isEmptyPrismicField(bankPage?.data.subtitle),
+      //   description1: isEmptyPrismicField(bankPage?.data.description1),
+      //   description2: isEmptyPrismicField(bankPage?.data.description2),
+      //   description3: isEmptyPrismicField(bankPage?.data.description3),
+      //   seo_title: isEmptyPrismicField(bankPage?.data.seo_title),
+      //   seo_description: isEmptyPrismicField(bankPage?.data.seo_description)
+      // }
+    }
   } catch (e) {
     console.log(e)
     return { bankPage: null }
