@@ -16,6 +16,9 @@
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
           />
+          <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+            {{ bankPage?.data.link_copy_methodology_page }}
+          </NuxtLink>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -90,8 +93,8 @@
 </template>
 
 <script setup lang="ts">
-import { PrismicDocument } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import { BankpageDocument } from 'prismicio-types'
 defineProps<{
   name: string;
   website: string;
@@ -100,6 +103,6 @@ defineProps<{
     name: string;
   };
   fossilFreeAlliance: boolean;
-  bankPage: PrismicDocument<Record<string, any>, string, string> | null;
+  bankPage: BankpageDocument
 }>()
 </script>

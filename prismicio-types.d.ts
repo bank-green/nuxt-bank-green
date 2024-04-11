@@ -137,6 +137,17 @@ interface BankpageDocumentData {
   subtitle: prismic.RichTextField;
 
   /**
+   * Link copy methodology page field in *BankPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bankpage.link_copy_methodology_page
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_copy_methodology_page: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *BankPage*
    *
    * - **Field Type**: Slice Zone
