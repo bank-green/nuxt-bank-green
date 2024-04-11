@@ -77,6 +77,10 @@
           "thumbnails": [],
           "label": "institution_credentials-b impact"
         }
+      },
+      "link_copy_methodology_page": {
+        "type": "Text",
+        "config": { "label": "link copy methodology page", "placeholder": "" }
       }
     }
   }

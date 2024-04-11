@@ -2380,6 +2380,17 @@ interface SfiPageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   "institution_credentials-b_impact": prismic.ImageField<never>;
+
+  /**
+   * link copy methodology page field in *SFIDefaults*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfi-page.link_copy_methodology_page
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_copy_methodology_page: prismic.KeyTextField;
 }
 
 /**
