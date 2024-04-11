@@ -120,7 +120,7 @@
           {{ methodology?.data.sustainable_title || "Sustainable Banks" }}
         </h2>
         <PrismicRichText
-          :field="methodology?.data.sources_description"
+          :field="methodology?.data.sustainable_description"
           class="text-center text-lg"
           fallback="Banks that are rated Great or Good are added to our Sustainable Banks webpage.
 That doesn’t mean that these banks have no fossil fuel lending at all, instead it can signify:"
