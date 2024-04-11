@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <component
-      :is="componentName"
-      v-if="details"
-      :name="details.name"
-      :website="details.website"
-      :inherit-brand-rating="details.inheritBrandRating"
-      :fossil-free-alliance="details.fossilFreeAlliance"
-      :bank-page="bankPage"
-      :amount-financed-since2016="details.amountFinancedSince2016"
-    />
-  </div>
+  <component
+    :is="componentName"
+    v-if="details"
+    :name="details.name"
+    :website="details.website"
+    :inherit-brand-rating="details.inheritBrandRating"
+    :fossil-free-alliance="details.fossilFreeAlliance"
+    :bank-page="bankPage"
+    :amount-financed-since2016="details.amountFinancedSince2016"
+  />
 </template>
 
 <script setup lang="ts">
