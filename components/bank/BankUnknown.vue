@@ -51,14 +51,10 @@
             class="text-lg md:text-2xl tracking-wide mb-4 prose"
             :field="bankPage?.data.description2"
           />
-          <p
+          <PrismicRichText
             class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
-          >
-            Our mission is to encourage as many people as possible to take a
-            stand - to refuse to let their money fuel environmental destruction
-            any longer. Considering who you bank with, we think you probably
-            agree. This is your chance to spread the word with us.
-          </p>
+            :field="bankPage?.data.description3"
+          />
           <div class="flex justify-center mt-12">
             <a href="#call-to-action">
               <ArrowDownBounce class="w-10" />

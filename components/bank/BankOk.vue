@@ -50,6 +50,10 @@
             class="text-lg md:text-2xl tracking-wide mb-4 prose"
             :field="bankPage?.data.description2"
           />
+          <PrismicRichText
+            class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
+            :field="bankPage?.data.description3"
+          />
           <div class="flex justify-center mt-12">
             <ArrowDownBounce class="inline-block w-10" />
           </div>
