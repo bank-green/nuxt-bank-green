@@ -53,7 +53,7 @@ export async function useBankPage (
         throw new Error(`could not get bankPage for ${bankTag}: ${JSON.stringify(bankRatingResponse.error)}`)
       }
       bankPage = bankRatingResponse
-      return { bankPage: bankPage.data }
+      return { bankPage: bankPage.data.value }
     }
 
     // override default fields if available
@@ -71,16 +71,16 @@ export async function useBankPage (
     }
 
     return {
-      bankPage
-      // validate: {
-      //   headline: isEmptyPrismicField(bankPage?.data.headline),
-      //   subtitle: isEmptyPrismicField(bankPage?.data.subtitle),
-      //   description1: isEmptyPrismicField(bankPage?.data.description1),
-      //   description2: isEmptyPrismicField(bankPage?.data.description2),
-      //   description3: isEmptyPrismicField(bankPage?.data.description3),
-      //   seo_title: isEmptyPrismicField(bankPage?.data.seo_title),
-      //   seo_description: isEmptyPrismicField(bankPage?.data.seo_description)
-      // }
+      bankPage,
+      validate: {
+        headline: isEmptyPrismicField(bankPage?.data.headline),
+        subtitle: isEmptyPrismicField(bankPage?.data.subtitle),
+        description1: isEmptyPrismicField(bankPage?.data.description1),
+        description2: isEmptyPrismicField(bankPage?.data.description2),
+        description3: isEmptyPrismicField(bankPage?.data.description3),
+        seo_title: isEmptyPrismicField(bankPage?.data.seo_title),
+        seo_description: isEmptyPrismicField(bankPage?.data.seo_description)
+      }
     }
   } catch (e) {
     console.log(e)
