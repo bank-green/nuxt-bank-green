@@ -5,10 +5,17 @@ export default defineVitestConfig({
   // any custom Vitest config you require
   test: {
     include: ['**/*.spec.ts'],
+    exclude: [
+      '**/e2e'
+    ],
     globals: true,
-    environment: 'nuxt'
-    // environmentOptions: {
-
-    // }
+    environment: 'nuxt',
+    environmentOptions: {
+      nuxt: {
+        mock: {
+          intersectionObserver: true
+        }
+      }
+    }
   }
 })
