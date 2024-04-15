@@ -18,7 +18,7 @@ export default defineNuxtConfig({
       DATA_URL: process.env.PUBLIC_DATA_URL,
       EMBRACE_URL: process.env.PUBLIC_EMBRACE_URL,
       GPE_URL: process.env.PUBLIC_GPE_URL,
-      HAPTCHA_SITEKEY: process.env.NUXT_PUBLIC_HCAPTCHA_SITEKEY,
+      HAPTCHA_SITEKEY: process.env.NUXT_PUBLIC_HCAPTCHA_SITEKEY
     },
     STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
     STRIPE_SUBSCRIPTION_PRICE_1:
@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     STRIPE_SUBSCRIPTION_PRICE_5:
       process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
     STRIPE_SUBSCRIPTION_PRICE_6:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
+      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6
   },
   vue: {
     compilerOptions: {
@@ -175,6 +175,8 @@ export default defineNuxtConfig({
     preset: 'cloudflare'
   },
   vite: {
-    plugins: [eslintPlugin()]
+    plugins: [
+      process.env.NODE_ENV !== 'test' && eslintPlugin()
+    ]
   }
 })
