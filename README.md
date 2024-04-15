@@ -30,6 +30,15 @@ Publish to `test.bank.green` (run after building)
 Publish to `bank.green`
 `npm run publish`
 
+# Tests
+## Unit Tests/Integration Tests
+All test cases are located at directory [__tests __](__tests__)
+
+To run tests
+`npm run test`
+
+## e2e Tests: WIP
+
 # CMS with Prismic
 
 **:warning: IMPORTANT :warning:**

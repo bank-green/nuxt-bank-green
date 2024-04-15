@@ -14,7 +14,7 @@
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:js && npm run lint:prettier",
     "lintfix": "prettier --write --list-different . && npm run lint:js --fix",
-    "test:unit": "vitest"
+    "test": "vitest --run"
   },
   "devDependencies": {
     "@gtm-support/vue-gtm": "^2.0.0",
