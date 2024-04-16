@@ -130,7 +130,7 @@ const rotation = computed(() => {
     case 'good':
       return 75
     case 'ok':
-      return 45
+      return 0
     case 'bad':
       return -45
     case 'worst':

@@ -3,6 +3,7 @@
   "label": "BankPage",
   "repeatable": true,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "headline": {
@@ -59,12 +60,15 @@
           "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
+      "link_copy_methodology_page": {
+        "type": "Text",
+        "config": { "label": "Link copy methodology page", "placeholder": "" }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": { "choices": {} }
       }
     }
-  },
-  "format": "custom"
+  }
 }

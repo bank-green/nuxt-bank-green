@@ -16,6 +16,9 @@
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
           />
+          <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+            {{ bankPage?.data.link_copy_methodology_page }}
+          </NuxtLink>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -34,15 +37,19 @@
     <template #section2>
       <PrismicRichText
         v-if="
-          bankPage?.data?.description2 && isEmptyPrismicField(bankPage?.data.description2)
+          bankPage?.data?.description2 && !isEmptyPrismicField(bankPage?.data.description2)
         "
-        class="text-lg md:text-2xl whitespace-pre-line text-gray-900 prose"
+        class="text-lg md:text-2xl whitespace-pre-line text-gray-900 mb-6 prose"
         :field="bankPage.data.description2"
       />
       <p
         v-else
         class="text-lg md:text-2xl whitespace-pre-line text-gray-900"
         v-text="piggyText"
+      />
+      <PrismicRichText
+        class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
+        :field="bankPage?.data.description3"
       />
     </template>
   </BankLayoutBadWorst>
