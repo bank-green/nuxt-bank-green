@@ -14,7 +14,7 @@
             <h1>Volunteering with Bank.Green</h1>
             <p>
               Although we are beginning to fundraise, we are still currently led by volunteers!
-              If you would you like to extend your climate impact beyond talking to your bank or
+              If you would like to extend your climate impact beyond talking to your bank or
               switching to a greener alternative, we would love for you to join our team!
             </p>
             <p>
