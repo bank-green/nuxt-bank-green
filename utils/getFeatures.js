@@ -14,7 +14,7 @@ export default function getFeatures (bankFeatures) {
     checking: isBE() ? 'Current Accounts' : 'Checking Accounts',
     saving: 'Savings Accounts',
     'Interest rates': 'Interest Rates',
-    'Business current accounts': 'Business current accounts',
+    'Business Current Accounts': 'Business Current Accounts',
     'Small business lending': 'Small Business Lending',
     'Credit cards': 'Credit Cards',
     'Mortgage or loans': 'Mortgage or Loan Options',

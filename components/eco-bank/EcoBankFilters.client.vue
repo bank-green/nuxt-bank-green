@@ -132,7 +132,7 @@
         Business current accounts
       </CheckboxSection>
       <CheckboxSection
-        v-model="filterPayload.bankAccounts['Business Savings Accounts']"
+        v-model="filterPayload.bankAccounts['Business savings accounts']"
         class="col-span-full"
         name="Business Savings Accounts"
       >
@@ -146,7 +146,7 @@
         Small business lending
       </CheckboxSection>
       <CheckboxSection
-        v-model="filterPayload.bankAccounts['Small business lending']"
+        v-model="filterPayload.bankAccounts['Corporate lending']"
         class="col-span-full"
         name="Corporate Lending"
       >
