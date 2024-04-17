@@ -125,9 +125,9 @@
         Interest rates
       </CheckboxSection>
       <CheckboxSection
-        v-model="filterPayload.bankAccounts['Business current accounts']"
+        v-model="filterPayload.bankAccounts['Business accounts']"
         class="col-span-full"
-        name="Business current accounts"
+        name="Business accounts"
       >
         Business current accounts
       </CheckboxSection>
@@ -222,7 +222,7 @@ const getDefaultFilter = () => ({
     checking: false,
     saving: false,
     'Interest rates': false,
-    'Business current accounts': false,
+    'Business accounts': false,
     'Business savings accounts': false,
     'Small business lending': false,
     'Corporate lending': false,
