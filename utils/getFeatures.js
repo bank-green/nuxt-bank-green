@@ -18,7 +18,9 @@ export default function getFeatures (bankFeatures) {
     'Small business lending': 'Small Business Lending',
     'Credit cards': 'Credit Cards',
     'Mortgage or loans': 'Mortgage or Loan Options',
-    'Deposit protection': 'Deposit Protection'
+    'Deposit protection': 'Deposit Protection',
+    'Corporate Lending': 'Corporate Lending',
+    'Business Savings Accounts': 'Business Savings Accounts'
   }
 
   // initialize result object with all false

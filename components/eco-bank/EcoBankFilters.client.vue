@@ -132,11 +132,25 @@
         Business current accounts
       </CheckboxSection>
       <CheckboxSection
+        v-model="filterPayload.bankAccounts['Business Savings Accounts']"
+        class="col-span-full"
+        name="Business Savings Accounts"
+      >
+        Business savings accounts
+      </CheckboxSection>
+      <CheckboxSection
         v-model="filterPayload.bankAccounts['Small business lending']"
         class="col-span-full"
         name="Small business lending"
       >
         Small business lending
+      </CheckboxSection>
+      <CheckboxSection
+        v-model="filterPayload.bankAccounts['Small business lending']"
+        class="col-span-full"
+        name="Corporate Lending"
+      >
+        Corporate Lending
       </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Credit cards']"
@@ -209,7 +223,9 @@ const getDefaultFilter = () => ({
     saving: false,
     'Interest rates': false,
     'Business current accounts': false,
+    'Business savings accounts': false,
     'Small business lending': false,
+    'Corporate lending': false,
     'Credit cards': false,
     'Mortgage or loans': false
   },
