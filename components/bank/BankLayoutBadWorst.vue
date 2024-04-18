@@ -15,7 +15,7 @@
           <slot name="section1" />
         </div>
         <div
-          class="w-full flex gap-8 items-center justify-center bg-blue-100 rounded-2xl px-6 py-8 text-gray-50 text-center font-semibold"
+          class="w-full flex gap-8 my-6 items-center justify-center bg-blue-100 rounded-2xl px-6 py-8 text-gray-50 text-center font-semibold"
         >
           <div class="flex flex-col text-left max-w-xl">
             <h3

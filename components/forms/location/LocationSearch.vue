@@ -68,15 +68,16 @@ import BaseField from '../BaseField.vue'
 import LocationSearchItem from './LocationSearchItem.vue'
 import PinIcon from './PinIcon.vue'
 import { findCountries } from './countries'
-import SearchInput from '@/components/forms/input/SearchInput'
-import ListPicker from '@/components/forms/ListPicker'
+import ListPicker from '@/components/forms/ListPicker.vue'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
 
 const props = defineProps({
   modelValue: String,
   disabled: Boolean,
   warning: String,
   dark: Boolean,
-  title: String
+  title: String,
+  isEmbrace: Boolean
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -88,7 +89,8 @@ if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
   search.value = en[`COUNTRY_${props.modelValue}`]
 }
 
-const filteredCountries = computed(() => findCountries(search.value))
+const filteredCountries = computed(() => props.isEmbrace ? ['GB'] : findCountries(search.value))
+console.log(filteredCountries)
 
 function showList () {
   isShowing.value = true

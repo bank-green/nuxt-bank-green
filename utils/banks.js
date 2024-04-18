@@ -45,7 +45,8 @@ export async function getBanksList ({
   country,
   topOnly = false,
   recommendedOnly = true,
-  first = 3
+  first = 3,
+  isEmbrace = false
 }) {
   const brandsQuery = `
         query BrandsQuery($country: String, $recommendedOnly: Boolean, $rating: [String], $first: Int, $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -62,6 +63,14 @@ export async function getBanksList ({
                 }
             }
         }`
+  const embraceBrandsQuery = `
+      query EmbraceBrandQuery {
+          brandsFilteredByEmbraceCampaign(id: 1){
+            name
+            website
+        }
+      }`
+  const query = isEmbrace ? embraceBrandsQuery : brandsQuery
 
   const variables = { country }
   if (topOnly) {
@@ -71,8 +80,8 @@ export async function getBanksList ({
     variables.first = first // due to data entry errors in the backend, we cannot rely on there only being three
   }
 
-  const json = await callBackend(brandsQuery, variables)
-  let banks = json.data.brands.edges.map(o => o.node)
+  const json = await callBackend(query, variables)
+  let banks = !isEmbrace ? json.data.brands.edges.map(o => o.node) : json.data.brandsFilteredByEmbraceCampaign
   if (topOnly) {
     banks = banks.map((b) => {
       return {

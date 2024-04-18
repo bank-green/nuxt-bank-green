@@ -39,6 +39,7 @@
             class="col-span-2"
             :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
             :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
+            :is-embrace="true"
             @search-input-change="searchValue = $event"
             @update:model-value="searchInputChange"
           >
