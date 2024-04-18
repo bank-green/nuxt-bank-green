@@ -90,7 +90,6 @@ if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
 }
 
 const filteredCountries = computed(() => props.isEmbrace ? ['GB'] : findCountries(search.value))
-console.log(filteredCountries)
 
 function showList () {
   isShowing.value = true
