@@ -68,6 +68,7 @@ export async function getBanksList ({
           brandsFilteredByEmbraceCampaign(id: 1){
             name
             website
+            tag
         }
       }`
   const query = isEmbrace ? embraceBrandsQuery : brandsQuery
@@ -81,7 +82,7 @@ export async function getBanksList ({
   }
 
   const json = await callBackend(query, variables)
-  let banks = !isEmbrace ? json.data.brands.edges.map(o => o.node) : json.data.brandsFilteredByEmbraceCampaign
+  let banks = isEmbrace ? json.data.brandsFilteredByEmbraceCampaign : json.data.brands.edges.map(o => o.node)
   if (topOnly) {
     banks = banks.map((b) => {
       return {
