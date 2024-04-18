@@ -90,7 +90,6 @@
               wrapper="span"
               fallback="I have read and understood the Bank.Green "
             />
-            <!--<p v-else>I have read and understood Bank.Green</p>-->
             <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
               {{
                 ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
@@ -150,6 +149,13 @@ import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmbraceModal from '@/components/EmbraceModal.vue'
 
+type Response = {
+  text: string,
+  subject: string,
+  unique_url: string,
+  contact_emails: string
+}
+
 const { client } = usePrismic()
 
 // TODO: Maybe update this to pass embracepage as a prop
@@ -183,13 +189,13 @@ const bankEmail = ref<string>('')
 const subject = ref<string>('')
 const generatedMessage = ref<string>('') // pass to preview component as v-model??
 const uniqueUrl = ref<string>('')
+const body = ref<string>('')
 
 const extras = computed(() => {
   return {
     fullName: fullName.value || '',
     country: country.value || '',
-    bankDisplayName: bank.value?.name || '',
-    rating: bank.value?.rating || '',
+    bankDisplayName: bank.value || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     hometown: hometown.value || '',
     background: background.value || ''
@@ -220,14 +226,15 @@ const form = ref({
   searchValue,
   country,
   hometown,
-  background
+  background,
+  body
 })
 
 // const emit = defineEmits(['success'])
 
 function searchInputChange (event: HTMLInputElement) {
   // When bank is selected fetch/update bank contact email
-  if (event && form.value?.bank?.name) {
+  if (event && form.value?.bank) {
     // For now we are getting the contact info from
     // the message end point on message generation
   }
@@ -239,7 +246,7 @@ async function getGeneratedMessage () {
   busy.value = true
 
   try {
-    const response = await $fetch('message', {
+    const response: Response = await $fetch('message', {
       baseURL: useRuntimeConfig().public.EMBRACE_URL,
       method: 'POST',
       headers: {

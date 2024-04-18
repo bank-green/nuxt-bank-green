@@ -939,15 +939,26 @@ interface EmbracepageDocumentData {
   bank_select_label: prismic.KeyTextField;
 
   /**
-   * Bank Select Info field in *EmbracePage*
+   * Bank Select Tooltip field in *EmbracePage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: embracepage.bank_select_info
+   * - **API ID Path**: embracepage.bank_select_tooltip
    * - **Tab**: Form
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  bank_select_info: prismic.KeyTextField;
+  bank_select_tooltip: prismic.KeyTextField;
+
+  /**
+   * Country Select Label field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.country_select_label
+   * - **Tab**: Form
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  country_select_label: prismic.KeyTextField;
 
   /**
    * Bank Not Found field in *EmbracePage*

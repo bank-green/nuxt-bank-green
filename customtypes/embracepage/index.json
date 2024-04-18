@@ -94,9 +94,13 @@
         "type": "Text",
         "config": { "label": "Bank Select_label" }
       },
-      "bank_select_info": {
+      "bank_select_tooltip": {
         "type": "Text",
-        "config": { "label": "Bank Select Info" }
+        "config": { "label": "Bank Select Tooltip", "placeholder": "" }
+      },
+      "country_select_label": {
+        "type": "Text",
+        "config": { "label": "Country Select Label", "placeholder": "" }
       },
       "bank_not_found": {
         "type": "StructuredText",

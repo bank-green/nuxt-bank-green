@@ -227,8 +227,7 @@ watch(messageBody, (val, prev) => {
 })
 
 function copyText () {
-  const textField = document.getElementById('embraceText')
-
+  const textField = document.getElementById('embraceText') as HTMLInputElement
   // Select the message body field
   textField.select()
   textField.setSelectionRange(0, 99999) // For mobile devices
@@ -250,7 +249,7 @@ function getEmailURI () {
     `subject=${encodeURI(props.form?.subject.trim() || 'missing_subjectline')}`,
     `bcc=${embracePage?.value?.data?.bcc_email ? encodeURI(embracePage?.value?.data?.bcc_email.trim()) : 'missing_bcc_address'}`,
     `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
-    `body=${encodeURI(props.message.trim() || 'missing message body')}`
+    `body=${encodeURI(props?.message?.trim() || 'missing message body')}`
   ]
   emailURI += fields.join('&')
   return emailURI
