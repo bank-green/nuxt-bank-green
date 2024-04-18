@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full flex bg-white rounded-2xl px-8 py-8">
+  <div class="w-full flex px-10 py-8">
     <div
-      class="w-full flex items-center justify-center bg-white rounded-2xl px-8 py-8 text-gray-50 text-center border-2 border-sushi"
+      class="w-full flex items-center justify-center bg-white rounded-2xl px-8 py-8 text-gray-50 text-center border border-sushi"
     >
       <form
         class="flex flex-col items-center"

@@ -1,16 +1,14 @@
 <template>
   <ModalWithBackdrop v-model="showModal">
     <form v-if="!completionMarked" class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
-      <div class="flex flex-row items-center">
+      <button class="flex flex-row items-center cursor-pointer hover:opacity-80" @click="closeModal">
         <img
           src="/img/icons/left-arrow.svg"
-          class="cursor-pointer"
-          @click="closeModal"
         >
         <p class="text-md ml-5 text-primary-dark font-medium">
           Back to form
         </p>
-      </div>
+      </button>
       <div class="self-stretch text-left text-xl tracking-wide mt-10 max-md:max-w-full max-md:mt-6">
         <p class="text-md mb-4 text-primary-dark font-bold">
           Read the Following Instructions

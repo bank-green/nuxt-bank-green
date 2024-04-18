@@ -161,6 +161,9 @@ export async function getBankDetail (bankTag) {
           website,
           commentary ${commentaryFields},
           bankFeatures ${bankFeaturesFields}
+          countries {
+            code
+          }
         }
       }
     `

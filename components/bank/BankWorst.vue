@@ -1,5 +1,5 @@
 <template>
-  <BankLayoutBadWorst>
+  <BankLayoutBadWorst :show-embrace-breakup="showEmbraceBreakup">
     <template #section1>
       <BankHeadline
         :name="name"
@@ -73,6 +73,7 @@ const props = defineProps<{
   };
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
   amountFinancedSince2016: string;
+  showEmbraceBreakup: boolean;
 }>()
 
 const piggyText = `While you’ve been stashing away money for a house or a weekend get-away, ${
