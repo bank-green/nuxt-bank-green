@@ -5,44 +5,11 @@
       id="section-one"
       class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
     >
-      <div
-        v-if="isEmbraceBreakup"
-        class="flex flex-col gap-10 items-center relative page-fade-in contain max-w-5xl"
-      >
-        <div
-          class="grid grid-cols-2 gap-8 md:gap-10 z-10"
-        >
+      <BankEmbraceHero v-if="isEmbraceBreakup">
+        <template #section1>
           <slot name="section1" />
-        </div>
-        <div
-          class="w-full flex gap-8 my-6 items-center justify-center bg-blue-100 rounded-2xl px-6 py-8 text-gray-50 text-center font-semibold"
-        >
-          <div class="flex flex-col text-left max-w-xl">
-            <h3
-              class="text-gray-800 text-lg md:text-2xl tracking-wider font-bold mb-4"
-            >
-              Moved your money to this bank?
-            </h3>
-            <p class="text-gray-700 leading-loose text-lg font-bold">
-              Write a breakup letter to your old bank.
-            </p>
-            <p class="text-gray-700  text-lg font-medium">
-              Use our custom template and tell them why you switched to a sustainably conscious bank!
-            </p>
-          </div>
-          <NuxtLink
-            to="#section-breakup"
-            class="button-green w-auto"
-          >
-            Send your break-up email
-          </NuxtLink>
-        </div>
-        <div class="relative flex-grow md:flex-none">
-          <a href="#section-two">
-            <ArrowDownBounce class="inline-block w-10" />
-          </a>
-        </div>
-      </div>
+        </template>
+      </BankEmbraceHero>
       <div
         v-else
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
@@ -66,42 +33,11 @@
     <div id="section-three">
       <slot name="section3" />
     </div>
-
-    <div v-if="isEmbraceBreakup" id="section-breakup" class="relative bg-blue-100">
-      <Swoosh direction="down" />
-      <div
-        class="flex flex-col justify-center items-center rounded-xl py-6 md:py-12 px-6 md:px-16 gap-8"
-      >
-        <h2
-          class=" text-gray-800 'w-full text-center font-semibold text-xl md:text-3xl tracking-wider mb-8 md:mb-4 max-w-xl"
-        >
-          Break Up with Your Bank:<br>
-          Say No to Funding Climate Change
-        </h2>
-        <div
-          class="flex flex-col ga md:flex-row items-center justify-center md:space-x-8"
-        >
-          <div class="md:w-1/2 max-w-md">
-            <p class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4 ttext-gray-800 ">
-              Let your old bank know you've switching to an institution that aligns with your values and supports a sustainable future.
-            </p>
-          </div>
-          <CheckList
-            class="md:w-1/2 my-6 md:text-xl"
-            :list="[
-              'Combat Climate Change: Switch to a bank that doesn\'t fund fossil fuels to help combat climate change.',
-              'Protect the Environment: Choose a bank that prioritizes clean energy and environmental protection.',
-              'Voice Your Concerns: Send a clear message to your old bank that their lending practices matter to you.',
-            ]"
-          />
-        </div>
-        <div ref="embraceForm" class="relative z-10 max-w-7xl flex flex-col-reverse lg:flex-row items-center bg-sushi-50 rounded-2xl">
-          <Embrace />
-        </div>
-      </div>
-      <slot name="footer-image" />
-    </div>
-
+    <BankEmbraceBreakupSection v-if="isEmbraceBreakup">
+      <template #footer-image>
+        <slot name="footer-image" />
+      </template>
+    </BankEmbraceBreakupSection>
     <!-- CALL TO ACTION -->
     <div v-else id="call-to-action" class="bg-blue-100 text-gray-800">
       <Swoosh direction="down" />
