@@ -258,7 +258,7 @@ async function getGeneratedMessage () {
         email: email.value,
         hometown: hometown.value,
         background: background.value,
-        bank_name: extras.value.bankDisplayName
+        brandName: extras.value.bankDisplayName
       },
       parseResponse: JSON.parse
     })
