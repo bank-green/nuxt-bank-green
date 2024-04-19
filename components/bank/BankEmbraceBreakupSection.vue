@@ -27,7 +27,7 @@
           ]"
         />
       </div>
-      <div ref="embraceForm" class="relative z-10 max-w-7xl flex flex-col-reverse lg:flex-row items-center bg-sushi-50 rounded-2xl">
+      <div ref="embraceForm" class="relative z-10 w-full md:w-2/3 lg:w-1/2 flex flex-col-reverse lg:flex-row items-center bg-sushi-50 rounded-2xl">
         <Embrace />
       </div>
       <slot name="footer-image" />

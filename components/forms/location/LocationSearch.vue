@@ -76,8 +76,7 @@ const props = defineProps({
   disabled: Boolean,
   warning: String,
   dark: Boolean,
-  title: String,
-  isEmbrace: Boolean
+  title: String
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -89,7 +88,7 @@ if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
   search.value = en[`COUNTRY_${props.modelValue}`]
 }
 
-const filteredCountries = computed(() => props.isEmbrace ? ['GB'] : findCountries(search.value))
+const filteredCountries = computed(() => findCountries(search.value))
 
 function showList () {
   isShowing.value = true

@@ -1,11 +1,11 @@
 <template>
   <LocationSearch
+    v-if="!isEmbrace"
     v-model="country"
     :dark="dark"
     class="col-span-2"
     :title="locationTitle"
     :class="locationSearchClasses"
-    :is-embrace="isEmbrace"
   />
   <BankSearch
     ref="bankSearch"
@@ -16,7 +16,7 @@
     :dark="dark"
     :country="country"
     :warning="warningText"
-    :class="bankSearchClasses"
+    :class="bankSearchClasses + `${isEmbrace ? ' col-span-full' : ''}`"
     :info-tooltip="infoTooltipBank"
     :is-embrace="isEmbrace"
     @search-input-change="onSearchInputChange"

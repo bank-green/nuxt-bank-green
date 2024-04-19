@@ -37,7 +37,7 @@
             :warning="warningsMap['bank']"
             :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
             class="col-span-2"
-            :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
+            :bank-title="embracePage?.data.bank_select_label || 'Choose the bank you broke up with'"
             :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
             :is-embrace="true"
             @search-input-change="searchValue = $event"
