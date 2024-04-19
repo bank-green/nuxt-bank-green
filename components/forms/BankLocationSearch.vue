@@ -16,7 +16,7 @@
     :dark="dark"
     :country="country"
     :warning="warningText"
-    :class="bankSearchClasses + `${isEmbrace ? ' col-span-full' : ''}`"
+    :class="bankSearchClasses"
     :info-tooltip="infoTooltipBank"
     :is-embrace="isEmbrace"
     @search-input-change="onSearchInputChange"

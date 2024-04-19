@@ -4,13 +4,13 @@
       class="w-full flex items-center justify-center bg-white rounded-2xl px-8 py-8 text-gray-50 text-center border border-sushi"
     >
       <form
-        class="flex flex-col items-center"
+        class="flex flex-col items-center w-full"
         @submit.prevent.stop="checkAndDisplayPreview"
       >
         <p class="text-xl md:text-2xl text-primary-dark mb-6 font-semibold whitespace-pre-wrap">
           {{ embracePage?.data.form_title || 'Send Your Break-Up Email' }}
         </p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+        <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
           <TextField
             v-model="fullName"
             class="col-span-2"
@@ -53,7 +53,7 @@
           </BankLocationSearch>
           <TextField
             v-model="form.hometown"
-            class="col-span-full"
+            class="col-span-2 flex flex-col justify-between"
             border-color="border-sushi-500"
             name="hometown"
             type="text"
