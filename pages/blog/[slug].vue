@@ -141,7 +141,8 @@ const url = computed(() => {
 })
 
 // TODO: move to Prismic
-const displayLeagueTable = computed(() => slug === 'eight-simple-steps-to-switching-your-bank')
+// const displayLeagueTable = computed(() => slug === 'eight-simple-steps-to-switching-your-bank')
+const displayLeagueTable = computed(() => true)
 
 useHead({
   title,
