@@ -5,7 +5,12 @@
       id="section-one"
       class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
     >
-      <BankEmbraceHero v-if="isEmbraceBreakup">
+      <BankEmbraceHero
+        v-if="isEmbraceBreakup"
+        :button-title="embrace?.data.bank_breakup_hero_button_text"
+        :description="embrace?.data.bank_breakup_hero_description"
+        :title="embrace?.data.bank_breakup_hero_title"
+      >
         <template #section1>
           <slot name="section1" />
         </template>
@@ -33,7 +38,12 @@
     <div id="section-three">
       <slot name="section3" />
     </div>
-    <BankEmbraceBreakupSection v-if="isEmbraceBreakup">
+    <BankEmbraceBreakupSection
+      v-if="isEmbraceBreakup"
+      :title="embrace?.data.bank_breakup_section_title"
+      :description="embrace?.data.bank_breakup_section_description"
+      :checklist-items="[embrace?.data.bank_breakup_section_checklist1, embrace?.data.bank_breakup_section_checklist2, embrace?.data.bank_breakup_section_checklist3 ]"
+    >
       <template #footer-image>
         <slot name="footer-image" />
       </template>
@@ -104,6 +114,11 @@ const checkList = [
   'Join our campaigns to take action against fossil finance',
   'Discover other ways to divest from fossil fuels'
 ]
+
+const { client } = usePrismic()
+const { data: embrace } = await useAsyncData('embrace', () =>
+  client.getSingle('embracepage')
+)
 
 withDefaults(defineProps<{
   isEmbraceBreakup: boolean;

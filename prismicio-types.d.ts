@@ -1090,7 +1090,94 @@ interface EmbracepageDocumentData {
    * - **Tab**: Form
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  privacy_policy_link_text: prismic.KeyTextField;
+  privacy_policy_link_text: prismic.KeyTextField
+  /**
+   * Bank Breakup Hero Title field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_hero_title
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  bank_breakup_hero_title: prismic.KeyTextField;
+
+  /**
+   * Bank Breakup Hero Description field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_hero_description
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bank_breakup_hero_description: prismic.RichTextField;
+
+  /**
+   * Bank Breakup Hero Button Text field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_hero_button_text
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  bank_breakup_hero_button_text: prismic.KeyTextField;
+
+  /**
+   * Bank Breakup Section Title field in *EmbracePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_section_title
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  bank_breakup_section_title: prismic.KeyTextField;
+
+  /**
+   * Bank Breakup Section Description field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_section_description
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bank_breakup_section_description: prismic.RichTextField;
+
+  /**
+   * Bank Breakup Section Checklist1 field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_section_checklist1
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bank_breakup_section_checklist1: prismic.RichTextField;
+
+  /**
+   * Bank Breakup Section Checklist2 field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_section_checklist2
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bank_breakup_section_checklist2: prismic.RichTextField;
+
+  /**
+   * Bank Breakup Section Checklist3 field in *EmbracePage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: embracepage.bank_breakup_section_checklist3
+   * - **Tab**: Breakup on BankPage
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bank_breakup_section_checklist3: prismic.RichTextField;
 }
 
 /**
