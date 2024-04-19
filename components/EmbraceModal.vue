@@ -178,7 +178,6 @@ const props = defineProps<{
     fullName: string;
     email: string;
     subject: string;
-    bank: string | null;
     bankEmail: string;
     searchValue: string;
     country: string;

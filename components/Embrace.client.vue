@@ -196,7 +196,8 @@ const extras = computed(() => {
   return {
     fullName: fullName.value || '',
     country: country.value || '',
-    bankDisplayName: bank.value || '',
+    bankDisplayName: bank.value?.name || '',
+    brandTag: bank.value?.tag,
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     hometown: hometown.value || '',
     background: background.value || ''
@@ -258,7 +259,8 @@ async function getGeneratedMessage () {
         email: email.value,
         hometown: hometown.value,
         background: background.value,
-        brandName: extras.value.bankDisplayName
+        brandName: extras.value.bankDisplayName,
+        brandTag: extras.value.brandTag
       },
       parseResponse: JSON.parse
     })
