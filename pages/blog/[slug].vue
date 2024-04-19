@@ -17,6 +17,7 @@
           </span>
         </div>
         <div class="flex flex-col justify-center items-center">
+          <BlogLeagueTable v-if="displayLeagueTable" />
           <div
             style="width: 100%"
             class="prose sm:prose-lg xl:prose-xl break-words"
@@ -138,6 +139,9 @@ const description = getDescription(post)
 const url = computed(() => {
   return `https://bank.green/blog/${slug}`
 })
+
+// TODO: move to Prismic
+const displayLeagueTable = computed(() => slug === 'eight-simple-steps-to-switching-your-bank')
 
 useHead({
   title,
