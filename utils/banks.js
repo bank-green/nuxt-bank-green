@@ -68,6 +68,7 @@ export async function getBanksList ({
           brandsFilteredByEmbraceCampaign(id: 1){
             name
             website
+            tag
         }
       }`
   const query = isEmbrace ? embraceBrandsQuery : brandsQuery
