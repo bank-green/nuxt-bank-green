@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { asText } from '@prismicio/helpers'
 import BlogCard from '@/components/blog/BlogCard.vue'
 
@@ -42,7 +42,7 @@ const { data: posts } = await useAsyncData('blogposts', () =>
 
 const getImageSrc = post =>
   post.data.cardimage?.url ||
-  post.data.slices.find(s => s.slice_type === 'image_slice').primary.image
+  post.data.slices.find(s => s.slice_type === 'image_slice')?.primary?.image
     .url ||
   ''
 
