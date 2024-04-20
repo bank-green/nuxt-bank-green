@@ -18,8 +18,10 @@
           :key="index"
           :class="(index %2) ? 'bg-sushi-50' : 'bg-white'"
         >
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold">
-            {{ row.institution }}
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold flex gap-2 items-center">
+            <img v-if="row.imageURL" class="w-10 h-10" :src="row.imageURL" alt="">
+            <div v-else class="w-10" />
+            <span>{{ row.institution }}</span>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
             {{ row.rating }}
@@ -36,6 +38,7 @@ interface IGoogleSheetResponse {
     values: string[][]
 }
 interface ITableRow {
+    imageURL: string | null;
     institution: string;
     rating: string;
 }
@@ -46,6 +49,7 @@ const { data } = useAsyncData<IGoogleSheetResponse>(() => $fetch('/api/league-ta
 //   { field: 'rating', label: 'Rating' }
 // ]
 const tableRows = computed<ITableRow[]>(() => data.value?.values.map(sheetRow => ({
+  imageURL: sheetRow[0] || null,
   institution: sheetRow[1],
   rating: sheetRow[4]
 }) || []))
