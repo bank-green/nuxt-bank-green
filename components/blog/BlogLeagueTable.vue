@@ -4,13 +4,7 @@
       <thead>
         <tr class="bg-sushi-200 text-primary-dark">
           <th class="px-6  align-middle border border-solid  py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            No
-          </th>
-          <th class="px-6  align-middle border border-solid  py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
             Institution Name
-          </th>
-          <th class="px-6  align-middle border border-solid  py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-            Score
           </th>
           <th class="px-6  align-middle border border-solid  py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
             Rating
@@ -24,14 +18,8 @@
           :key="index"
           :class="(index %2) ? 'bg-sushi-50' : 'bg-white'"
         >
-          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 text-left font-normal">
-            {{ index + 1 }}
-          </th>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold">
             {{ row.institution }}
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 ">
-            {{ row.score }}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
             {{ row.rating }}
@@ -49,7 +37,6 @@ interface IGoogleSheetResponse {
 }
 interface ITableRow {
     institution: string;
-    score: number;
     rating: string;
 }
 const { data } = useAsyncData<IGoogleSheetResponse>(() => $fetch('/api/league-table'))
@@ -59,8 +46,7 @@ const { data } = useAsyncData<IGoogleSheetResponse>(() => $fetch('/api/league-ta
 //   { field: 'rating', label: 'Rating' }
 // ]
 const tableRows = computed<ITableRow[]>(() => data.value?.values.map(sheetRow => ({
-  institution: sheetRow[0],
-  score: Number.parseInt(sheetRow[1]),
-  rating: sheetRow[2]
+  institution: sheetRow[1],
+  rating: sheetRow[4]
 }) || []))
 </script>
