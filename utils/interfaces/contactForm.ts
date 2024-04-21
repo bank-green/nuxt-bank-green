@@ -4,7 +4,7 @@ export interface ContactFormPrefill {
   email: string;
   subject: string;
   message: string;
-  bank: string;
+  bank: { name: string, tag?: string, rating?: string };
   isAgreeTerms: boolean;
 }
 

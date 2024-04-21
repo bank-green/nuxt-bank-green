@@ -101,12 +101,14 @@ const props = withDefaults(defineProps<{
   infoTooltip?: string;
   dark?: boolean;
   title?: string;
+  isEmbrace?: boolean;
 }>(), {
   disabled: false,
   warning: false,
   infoTooltip: undefined,
   dark: false,
-  title: ''
+  title: '',
+  isEmbrace: false
 })
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
@@ -151,7 +153,7 @@ async function loadBanks () {
   if (props.disabled) { return }
   loaded.value = false
   search.value = ''
-  banks.value = await getBanksList({ country: props.country })
+  banks.value = await getBanksList({ country: props.country, isEmbrace: props.isEmbrace })
   loaded.value = true
 }
 
