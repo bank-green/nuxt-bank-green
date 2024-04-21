@@ -153,7 +153,8 @@ type Response = {
   text: string,
   subject: string,
   uniqueUrl: string,
-  contactEmail: string
+  contactEmail: string,
+  bccEmail: string
 }
 
 const { client } = usePrismic()
@@ -186,6 +187,7 @@ const hometown = ref<string>('')
 const background = ref<string>('')
 const showModal = ref<boolean>(false)
 const bankEmail = ref<string>('')
+const bcc = ref<string>('public@bank.green')
 const subject = ref<string>('')
 const generatedMessage = ref<string>('') // pass to preview component as v-model??
 const uniqueUrl = ref<string>('')
@@ -228,7 +230,8 @@ const form = ref({
   country,
   hometown,
   background,
-  body
+  body,
+  bcc
 })
 
 // const emit = defineEmits(['success'])
@@ -269,6 +272,7 @@ async function getGeneratedMessage () {
       subject.value = response.subject
       uniqueUrl.value = response.uniqueUrl || ''
       bankEmail.value = response.contactEmail || ''
+      bcc.value = response.bccEmail || ''
     }
   } catch (e) {
     console.error('Error fetching or generating message.', e)

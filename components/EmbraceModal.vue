@@ -184,6 +184,7 @@ const props = defineProps<{
     hometown: string;
     background: string;
     body: string;
+    bcc: string;
 };
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
 }>()
@@ -244,7 +245,7 @@ function getEmailURI () {
 
   const fields = [
     `subject=${encodeURI(props.form?.subject.trim() || 'missing_subject_line')}`,
-    `bcc=${embracePage?.value?.data?.bcc_email ? encodeURI(embracePage?.value?.data?.bcc_email.trim()) : 'missing_bcc_address'}`,
+    `bcc=${props.form?.bcc.trim() ? encodeURI(props.form?.bcc.trim()) : 'missing_bcc_address'}`,
     `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
     `body=${encodeURI(props?.message?.trim() || 'missing message body')}`
   ]
