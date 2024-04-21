@@ -94,13 +94,9 @@
         "type": "Text",
         "config": { "label": "Bank Select_label" }
       },
-      "bank_select_tooltip": {
+      "bank_select_info": {
         "type": "Text",
-        "config": { "label": "Bank Select Tooltip", "placeholder": "" }
-      },
-      "country_select_label": {
-        "type": "Text",
-        "config": { "label": "Country Select Label", "placeholder": "" }
+        "config": { "label": "Bank Select Info" }
       },
       "bank_not_found": {
         "type": "StructuredText",
@@ -158,68 +154,6 @@
       "privacy_policy_link_text": {
         "type": "Text",
         "config": { "label": "Privacy Policy Link Text" }
-      }
-    },
-    "Breakup on BankPage": {
-      "bank_breakup_hero_title": {
-        "type": "Text",
-        "config": { "label": "Bank Breakup Hero Title", "placeholder": "" }
-      },
-      "bank_breakup_hero_description": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Bank Breakup Hero Description",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "bank_breakup_hero_button_text": {
-        "type": "Text",
-        "config": {
-          "label": "Bank Breakup Hero Button Text",
-          "placeholder": ""
-        }
-      },
-      "bank_breakup_section_title": {
-        "type": "Text",
-        "config": { "label": "Bank Breakup Section Title", "placeholder": "" }
-      },
-      "bank_breakup_section_description": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Bank Breakup Section Description",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "bank_breakup_section_checklist1": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Bank Breakup Section Checklist1",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "bank_breakup_section_checklist2": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Bank Breakup Section Checklist2",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "bank_breakup_section_checklist3": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Bank Breakup Section Checklist3",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
       }
     }
   }

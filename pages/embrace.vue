@@ -22,8 +22,10 @@
 
 (Please note that some resources were not reachable and this is a simplified version of this page.)"
           />
-          <div ref="embraceForm" class="relative z-10 max-w-6xl flex flex-col-reverse lg:flex-row items-center bg-white rounded-2xl">
-            <Embrace />
+          <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
+            <div ref="embraceForm" class="w-full relative z-10">
+              <Embrace />
+            </div>
           </div>
         </div>
       </div>

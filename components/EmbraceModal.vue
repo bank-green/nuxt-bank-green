@@ -1,14 +1,16 @@
 <template>
   <ModalWithBackdrop v-model="showModal">
     <form v-if="!completionMarked" class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
-      <button class="flex flex-row items-center cursor-pointer hover:opacity-80" @click.prevent.stop="closeModal">
+      <div class="flex flex-row items-center">
         <img
           src="/img/icons/left-arrow.svg"
+          class="cursor-pointer"
+          @click="closeModal"
         >
         <p class="text-md ml-5 text-primary-dark font-medium">
           Back to form
         </p>
-      </button>
+      </div>
       <div class="self-stretch text-left text-xl tracking-wide mt-10 max-md:max-w-full max-md:mt-6">
         <p class="text-md mb-4 text-primary-dark font-bold">
           Read the Following Instructions
@@ -17,7 +19,8 @@
           <li>Review the information presented in the email preview, edit if needed.</li>
           <li>Copy the text.</li>
           <li>Click on “Go To Your Mail App” to take you to your mailbox.</li>
-          <li>Paste text into your message, keeping us in bcc.</li>
+          <li>Paste text into your message.</li>
+          <li>Keep us in the BCC (some_email@bank.green) field to monitor the message.</li>
           <li>Click send and you’re done!</li>
         </ol>
       </div>
@@ -177,13 +180,13 @@ const props = defineProps<{
     fullName: string;
     email: string;
     subject: string;
+    bank: string | null;
     bankEmail: string;
     searchValue: string;
     country: string;
     hometown: string;
     background: string;
     body: string;
-    bcc: string;
 };
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
 }>()
@@ -224,7 +227,8 @@ watch(messageBody, (val, prev) => {
 })
 
 function copyText () {
-  const textField = document.getElementById('embraceText') as HTMLInputElement
+  const textField = document.getElementById('embraceText')
+
   // Select the message body field
   textField.select()
   textField.setSelectionRange(0, 99999) // For mobile devices
@@ -243,10 +247,10 @@ function getEmailURI () {
   let emailURI = `mailto:${bankEmail}?`
 
   const fields = [
-    `subject=${encodeURI(props.form?.subject.trim() || 'missing_subject_line')}`,
-    `bcc=${props.form?.bcc.trim() ? encodeURI(props.form?.bcc.trim()) : 'missing_bcc_address'}`,
+    `subject=${encodeURI(props.form?.subject.trim() || 'missing_subjectline')}`,
+    `bcc=${embracePage?.value?.data?.bcc_email ? encodeURI(embracePage?.value?.data?.bcc_email.trim()) : 'missing_bcc_address'}`,
     `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
-    `body=${encodeURI(props?.message?.trim() || 'missing message body')}`
+    `body=${encodeURI(props.message.trim() || 'missing message body')}`
   ]
   emailURI += fields.join('&')
   return emailURI

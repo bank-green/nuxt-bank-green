@@ -1,16 +1,16 @@
 <template>
-  <div class="w-full flex px-10 py-8">
+  <div class="w-full flex bg-white rounded-2xl px-8 py-8">
     <div
-      class="w-full flex items-center justify-center bg-white rounded-2xl px-8 py-8 text-gray-50 text-center border border-sushi"
+      class="w-full flex items-center justify-center bg-white rounded-2xl px-8 py-8 text-gray-50 text-center border-2 border-sushi"
     >
       <form
-        class="flex flex-col items-center w-full"
+        class="flex flex-col items-center"
         @submit.prevent.stop="checkAndDisplayPreview"
       >
         <p class="text-xl md:text-2xl text-primary-dark mb-6 font-semibold whitespace-pre-wrap">
           {{ embracePage?.data.form_title || 'Send Your Break-Up Email' }}
         </p>
-        <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
           <TextField
             v-model="fullName"
             class="col-span-2"
@@ -37,9 +37,8 @@
             :warning="warningsMap['bank']"
             :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
             class="col-span-2"
-            :bank-title="embracePage?.data.bank_select_label || 'Choose the bank you broke up with'"
+            :bank-title="embracePage?.data.bank_select_label || 'Choose your current bank'"
             :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
-            :is-embrace="true"
             @search-input-change="searchValue = $event"
             @update:model-value="searchInputChange"
           >
@@ -53,7 +52,7 @@
           </BankLocationSearch>
           <TextField
             v-model="form.hometown"
-            class="col-span-2 flex flex-col justify-between"
+            class="col-span-full"
             border-color="border-sushi-500"
             name="hometown"
             type="text"
@@ -91,6 +90,7 @@
               wrapper="span"
               fallback="I have read and understood the Bank.Green "
             />
+            <!--<p v-else>I have read and understood Bank.Green</p>-->
             <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
               {{
                 ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
@@ -108,8 +108,9 @@
         </div>
         <button
           type="submit"
-          class="button-green w-full mt-6 flex justify-center"
+          class="button-green w-full md:w-auto mt-6 flex justify-center"
           :class="{'pointer-events-none opacity-75': busy}"
+          style="min-width: 20rem;"
         >
           <span v-if="!busy"> Generate Email Preview </span>
           <span v-else>
@@ -149,14 +150,6 @@ import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmbraceModal from '@/components/EmbraceModal.vue'
 
-type Response = {
-  text: string,
-  subject: string,
-  uniqueUrl: string,
-  contactEmail: string,
-  bccEmail: string
-}
-
 const { client } = usePrismic()
 
 // TODO: Maybe update this to pass embracepage as a prop
@@ -187,18 +180,16 @@ const hometown = ref<string>('')
 const background = ref<string>('')
 const showModal = ref<boolean>(false)
 const bankEmail = ref<string>('')
-const bcc = ref<string>('public@bank.green')
 const subject = ref<string>('')
 const generatedMessage = ref<string>('') // pass to preview component as v-model??
 const uniqueUrl = ref<string>('')
-const body = ref<string>('')
 
 const extras = computed(() => {
   return {
     fullName: fullName.value || '',
     country: country.value || '',
     bankDisplayName: bank.value?.name || '',
-    brandTag: bank.value?.tag,
+    rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     hometown: hometown.value || '',
     background: background.value || ''
@@ -229,16 +220,14 @@ const form = ref({
   searchValue,
   country,
   hometown,
-  background,
-  body,
-  bcc
+  background
 })
 
 // const emit = defineEmits(['success'])
 
 function searchInputChange (event: HTMLInputElement) {
   // When bank is selected fetch/update bank contact email
-  if (event && form.value?.bank) {
+  if (event && form.value?.bank?.name) {
     // For now we are getting the contact info from
     // the message end point on message generation
   }
@@ -250,7 +239,7 @@ async function getGeneratedMessage () {
   busy.value = true
 
   try {
-    const response: Response = await $fetch('message', {
+    const response = await $fetch('message', {
       baseURL: useRuntimeConfig().public.EMBRACE_URL,
       method: 'POST',
       headers: {
@@ -261,8 +250,7 @@ async function getGeneratedMessage () {
         email: email.value,
         hometown: hometown.value,
         background: background.value,
-        brandName: extras.value.bankDisplayName,
-        brandTag: extras.value.brandTag
+        bank_name: extras.value.bankDisplayName
       },
       parseResponse: JSON.parse
     })
@@ -270,9 +258,8 @@ async function getGeneratedMessage () {
     if (response?.text) {
       generatedMessage.value = response.text
       subject.value = response.subject
-      uniqueUrl.value = response.uniqueUrl || ''
-      bankEmail.value = response.contactEmail || ''
-      bcc.value = response.bccEmail || ''
+      uniqueUrl.value = response.unique_url || ''
+      bankEmail.value = response.contact_emails || ''
     }
   } catch (e) {
     console.error('Error fetching or generating message.', e)

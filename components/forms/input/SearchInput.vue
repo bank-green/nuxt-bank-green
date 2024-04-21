@@ -6,10 +6,10 @@
       :value="modelValue"
       :placeholder="placeholder"
       type="text"
-      class="relative w-full appearance-none border bg-white rounded-2xl shadow-soft pl-12 pr-10 py-4 text-left cursor-default focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate 'px-5 py-4 text-gray-900 placeholder-cool-gray-800'"
+      class="relative w-full appearance-none border bg-white rounded-2xl shadow-soft pl-12 pr-10 py-4 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-sushi-500 focus:border-sushi-500 sm:text-sm truncate 'px-5 py-4 border-gray-50 text-gray-900 placeholder-cool-gray-800'"
       :class="{
-        'border-gray-200': !modelValue,
-        'border-sushi-500': modelValue,
+        'border-white': !modelValue,
+        'border-sushi-100': modelValue,
         'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red': !!warning,
         'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400': disabled,
       }"
