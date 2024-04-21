@@ -8,6 +8,7 @@
     :fossil-free-alliance="details.fossilFreeAlliance"
     :bank-page="bankPage"
     :amount-financed-since2016="details.amountFinancedSince2016"
+    :show-embrace-breakup="!!details.countries.find((c: any) => c.code === 'GB')"
   />
 </template>
 
@@ -58,4 +59,5 @@ const componentName = computed(() => {
       return BankUnknown
   }
 })
+
 </script>

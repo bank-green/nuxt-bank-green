@@ -68,8 +68,8 @@ import BaseField from '../BaseField.vue'
 import LocationSearchItem from './LocationSearchItem.vue'
 import PinIcon from './PinIcon.vue'
 import { findCountries } from './countries'
-import SearchInput from '@/components/forms/input/SearchInput'
-import ListPicker from '@/components/forms/ListPicker'
+import ListPicker from '@/components/forms/ListPicker.vue'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
 
 const props = defineProps({
   modelValue: String,

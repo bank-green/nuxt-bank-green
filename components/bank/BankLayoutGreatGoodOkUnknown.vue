@@ -5,10 +5,24 @@
       id="section-one"
       class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
     >
+      <BankEmbraceHero
+        v-if="isEmbraceBreakup"
+        :button-title="embrace?.data.bank_breakup_hero_button_text"
+        :description="embrace?.data.bank_breakup_hero_description"
+        :title="embrace?.data.bank_breakup_hero_title"
+      >
+        <template #section1>
+          <slot name="section1" />
+        </template>
+      </BankEmbraceHero>
       <div
+        v-else
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
         <slot name="section1" />
+        <div class="relative flex-grow md:flex-none text-center flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+          <ArrowDownBounce class="inline-block mt-8 w-10" />
+        </div>
       </div>
       <Swoosh />
     </div>
@@ -24,9 +38,18 @@
     <div id="section-three">
       <slot name="section3" />
     </div>
-
+    <BankEmbraceBreakupSection
+      v-if="isEmbraceBreakup"
+      :title="embrace?.data.bank_breakup_section_title"
+      :description="embrace?.data.bank_breakup_section_description"
+      :checklist-items="[embrace?.data.bank_breakup_section_checklist1, embrace?.data.bank_breakup_section_checklist2, embrace?.data.bank_breakup_section_checklist3 ]"
+    >
+      <template #footer-image>
+        <slot name="footer-image" />
+      </template>
+    </BankEmbraceBreakupSection>
     <!-- CALL TO ACTION -->
-    <div id="call-to-action" class="bg-blue-100 text-gray-800">
+    <div v-else id="call-to-action" class="bg-blue-100 text-gray-800">
       <Swoosh direction="down" />
       <div class="contain pt-8">
         <slot name="call-to-action">
@@ -71,10 +94,7 @@
             How do we derive our results?
           </h2>
           <NuxtLink
-            :to="{
-              path: '/faq',
-              hash: '#how-do-you-know-what-my-bank-funds',
-            }"
+            to="/methodology"
             class="button-green inline-block w-max"
           >
             Find out more
@@ -87,11 +107,23 @@
 <script setup lang="ts">
 import SignupBox from '../forms/SignupBox.vue'
 import Swoosh from '@/components/Swoosh.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',
   'Discover other ways to divest from fossil fuels'
 ]
+
+const { client } = usePrismic()
+const { data: embrace } = await useAsyncData('embrace', () =>
+  client.getSingle('embracepage')
+)
+
+withDefaults(defineProps<{
+  isEmbraceBreakup: boolean;
+}>(), {
+  isEmbraceBreakup: false
+})
 
 </script>
