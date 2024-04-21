@@ -1,5 +1,5 @@
 <template>
-  <BankLayoutGreatGoodOkUnknown :is-embrace-breakup="showEmbraceBreakup">
+  <BankLayoutGreatGoodOkUnknown>
     <template #section1>
       <BankHeadline
         :name="name"
@@ -30,6 +30,13 @@
         </div>
         <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
           <PrismicRichText :field="bankPage?.data.description1" />
+        </div>
+      </div>
+      <div
+        class="flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center"
+      >
+        <div class="relative flex-grow md:flex-none text-center">
+          <ArrowDownBounce class="inline-block mt-8 w-10" />
         </div>
       </div>
     </template>
@@ -81,6 +88,5 @@ defineProps<{
     name: string;
   };
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
-  showEmbraceBreakup: boolean;
 }>()
 </script>

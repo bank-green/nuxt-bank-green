@@ -1,12 +1,5 @@
 <template>
-  <LocationSearch
-    v-if="!isEmbrace"
-    v-model="country"
-    :dark="dark"
-    class="col-span-2"
-    :title="locationTitle"
-    :class="locationSearchClasses"
-  />
+  <LocationSearch v-model="country" :dark="dark" class="col-span-2" :title="locationTitle" :class="locationSearchClasses" />
   <BankSearch
     ref="bankSearch"
     v-model="bank"
@@ -18,7 +11,6 @@
     :warning="warningText"
     :class="bankSearchClasses"
     :info-tooltip="infoTooltipBank"
-    :is-embrace="isEmbrace"
     @search-input-change="onSearchInputChange"
     @update:model-value="onUpdateModel"
   >
@@ -38,13 +30,11 @@ const props = withDefaults(defineProps<{
     bankSearchClasses?: string;
     locationSearchClasses?: string;
     dark?: boolean;
-    isEmbrace?: boolean
   }>(), {
   warning: false,
   dark: false,
   bankTitle: '',
-  locationTitle: '',
-  isEmbrace: false
+  locationTitle: ''
 })
 
 const { country } = useCountry()

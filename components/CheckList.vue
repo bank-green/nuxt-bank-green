@@ -12,21 +12,14 @@
         src="/img/icons/check.svg"
         alt=""
       >
-      <p v-if="typeof item === 'string'">
-        {{ item }}
-      </p>
-      <PrismicRichText v-else :field="item" class="text-lg" />
+      <p>{{ item }}</p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-
-withDefaults(defineProps<{
-  list:(string | RichTextField)[],
-  dark: boolean
-}>(), {
-  dark: false
+<script setup>
+defineProps({
+  list: { type: Array, default: () => [] },
+  dark: { type: Boolean, default: false }
 })
-
 </script>

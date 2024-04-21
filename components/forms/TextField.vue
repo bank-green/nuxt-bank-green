@@ -19,7 +19,7 @@
       :class="inputClasses"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
-      :value="modelValue || ''"
+      :value="modelValue"
       :aria-invalid="!!warning"
       :required="required"
       :disabled="disabled"
@@ -35,7 +35,7 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :type="type"
-      :value="modelValue || ''"
+      :value="modelValue"
       :step="step"
       :aria-invalid="!!warning"
       :required="required"
@@ -50,7 +50,7 @@ import BaseField from './BaseField.vue'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string | number | null;
+    modelValue: string | number;
     title?: string;
     description?: string;
     name?: string;
