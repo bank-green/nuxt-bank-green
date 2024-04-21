@@ -1,5 +1,5 @@
 <template>
-  <BankLayoutGreatGoodOkUnknown :is-embrace-breakup="showEmbraceBreakup">
+  <BankLayoutGreatGoodOkUnknown>
     <template #section1>
       <BankHeadline
         :name="name"
@@ -81,6 +81,5 @@ defineProps<{
     name: string;
   };
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
-  showEmbraceBreakup: boolean;
 }>()
 </script>
