@@ -152,8 +152,8 @@ import EmbraceModal from '@/components/EmbraceModal.vue'
 type Response = {
   text: string,
   subject: string,
-  unique_url: string,
-  contact_emails: string
+  uniqueUrl: string,
+  contactEmail: string
 }
 
 const { client } = usePrismic()
@@ -267,8 +267,8 @@ async function getGeneratedMessage () {
     if (response?.text) {
       generatedMessage.value = response.text
       subject.value = response.subject
-      uniqueUrl.value = response.unique_url || ''
-      bankEmail.value = response.contact_emails || ''
+      uniqueUrl.value = response.uniqueUrl || ''
+      bankEmail.value = response.contactEmail || ''
     }
   } catch (e) {
     console.error('Error fetching or generating message.', e)

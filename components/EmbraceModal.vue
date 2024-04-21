@@ -1,7 +1,7 @@
 <template>
   <ModalWithBackdrop v-model="showModal">
     <form v-if="!completionMarked" class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
-      <button class="flex flex-row items-center cursor-pointer hover:opacity-80" @click="closeModal">
+      <button class="flex flex-row items-center cursor-pointer hover:opacity-80" @click.prevent.stop="closeModal">
         <img
           src="/img/icons/left-arrow.svg"
         >
@@ -243,7 +243,7 @@ function getEmailURI () {
   let emailURI = `mailto:${bankEmail}?`
 
   const fields = [
-    `subject=${encodeURI(props.form?.subject.trim() || 'missing_subjectline')}`,
+    `subject=${encodeURI(props.form?.subject.trim() || 'missing_subject_line')}`,
     `bcc=${embracePage?.value?.data?.bcc_email ? encodeURI(embracePage?.value?.data?.bcc_email.trim()) : 'missing_bcc_address'}`,
     `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
     `body=${encodeURI(props?.message?.trim() || 'missing message body')}`
