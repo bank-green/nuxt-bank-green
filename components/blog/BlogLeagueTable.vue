@@ -1,5 +1,5 @@
 <template>
-  <div class="block w-full overflow-x-auto mb-8">
+  <div class="block w-full sm:w-4/5 overflow-x-auto mb-8">
     <table class="items-center bg-transparent w-full border-collapse bg-white">
       <thead>
         <tr class="bg-sushi-200 text-primary-dark">
@@ -51,6 +51,6 @@ const { data } = useAsyncData<IGoogleSheetResponse>(() => $fetch('/api/league-ta
 const tableRows = computed<ITableRow[]>(() => data.value?.values.map(sheetRow => ({
   imageURL: sheetRow[0] || null,
   institution: sheetRow[1],
-  rating: sheetRow[4]
+  rating: sheetRow[3]
 }) || []))
 </script>
