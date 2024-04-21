@@ -17,7 +17,6 @@
           </span>
         </div>
         <div class="flex flex-col justify-center items-center">
-          <BlogLeagueTable v-if="displayLeagueTable" />
           <div
             style="width: 100%"
             class="prose sm:prose-lg xl:prose-xl break-words"
@@ -28,6 +27,7 @@
               :context="{ takeaction: true }"
             />
           </div>
+          <BlogLeagueTable v-if="displayLeagueTable" />
         </div>
       </div>
     </div>
@@ -141,8 +141,7 @@ const url = computed(() => {
 })
 
 // TODO: move to Prismic
-// const displayLeagueTable = computed(() => slug === 'eight-simple-steps-to-switching-your-bank')
-const displayLeagueTable = computed(() => true)
+const displayLeagueTable = computed(() => slug === 'uk-banks-league-table')
 
 useHead({
   title,
