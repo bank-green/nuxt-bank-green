@@ -108,9 +108,8 @@
         </div>
         <button
           type="submit"
-          class="button-green w-full md:w-auto mt-6 flex justify-center"
+          class="button-green w-full mt-6 flex justify-center"
           :class="{'pointer-events-none opacity-75': busy}"
-          style="min-width: 20rem;"
         >
           <span v-if="!busy"> Generate Email Preview </span>
           <span v-else>
