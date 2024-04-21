@@ -17,8 +17,7 @@
           <li>Review the information presented in the email preview, edit if needed.</li>
           <li>Copy the text.</li>
           <li>Click on “Go To Your Mail App” to take you to your mailbox.</li>
-          <li>Paste text into your message.</li>
-          <li>Keep us in the BCC (some_email@bank.green) field to monitor the message.</li>
+          <li>Paste text into your message, keeping us in bcc.</li>
           <li>Click send and you’re done!</li>
         </ol>
       </div>
