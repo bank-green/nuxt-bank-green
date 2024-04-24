@@ -22,6 +22,7 @@ jobs:
       PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6: ${{ secrets.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6 }}
       NUXT_PUBLIC_HCAPTCHA_SITEKEY: ${{ secrets.HCAPTCHA_SITEKEY }}
       PUBLIC_EMBRACE_URL: https://embrace.bank.green
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js
