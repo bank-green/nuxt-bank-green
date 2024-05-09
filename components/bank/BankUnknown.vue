@@ -15,6 +15,9 @@
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
           />
+          <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+            {{ bankPage?.data.link_copy_methodology_page }}
+          </NuxtLink>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -26,15 +29,6 @@
         </div>
         <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
           <PrismicRichText :field="bankPage?.data.description1" />
-        </div>
-      </div>
-      <div
-        class="col-span-2 md:col-span-1 flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center"
-      >
-        <div class="relative flex-grow md:flex-none text-center">
-          <a href="#section-two">
-            <ArrowDownBounce class="w-10" />
-          </a>
         </div>
       </div>
     </template>
@@ -51,14 +45,10 @@
             class="text-lg md:text-2xl tracking-wide mb-4 prose"
             :field="bankPage?.data.description2"
           />
-          <p
+          <PrismicRichText
             class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
-          >
-            Our mission is to encourage as many people as possible to take a
-            stand - to refuse to let their money fuel environmental destruction
-            any longer. Considering who you bank with, we think you probably
-            agree. This is your chance to spread the word with us.
-          </p>
+            :field="bankPage?.data.description3"
+          />
           <div class="flex justify-center mt-12">
             <a href="#call-to-action">
               <ArrowDownBounce class="w-10" />

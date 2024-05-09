@@ -23,6 +23,9 @@
               class="text-sushi-500"
               :hashtags="['climatecrisis', 'fossilbanks']"
             />
+            <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+              {{ prismicDefaultPageData?.link_copy_methodology_page }}
+            </NuxtLink>
           </div>
         </div>
         <div class="col-span-2 md:col-span-1">

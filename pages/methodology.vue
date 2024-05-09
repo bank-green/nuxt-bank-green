@@ -24,7 +24,7 @@
       <h2 class="text-2xl font-semibold text-left sm:text-3xl max-w-5xl">
         {{ methodology?.data.target_title || "Our Rating Methodology Caters for Different Types of Financial Institutions" }}
       </h2>
-      <div class="flex-col md:flex-row flex gap-6 items-center">
+      <div class="flex-col lg:flex-row flex gap-6 items-center">
         <div class="prose sm:prose-lg xl:prose-xl mx-auto">
           <PrismicRichText
             v-if="methodology?.data.target_description"
@@ -47,7 +47,7 @@
     </section>
     <section class="bg-blue-50 max-w-screen">
       <Swoosh direction="down" />
-      <div class="page-fade-in contain max-w-4xl xl:max-w-6xl pt-20 pb-16">
+      <div class="page-fade-in contain max-w-4xl xl:max-w-6xl py-10 lg:py-16">
         <h2 class="text-2xl font-semibold text-left sm:text-3xl text-center">
           {{ methodology?.data.factors_title || "What Factors Affect a Bank’s Rating?" }}
         </h2>
@@ -115,12 +115,12 @@
       <Swoosh color="text-sushi-50" />
     </section>
     <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 max-w-screen">
-      <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl pt-28 pb-20  lg:pt-12 gap-10">
+      <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl py-10 lg:py-16 gap-10">
         <h2 class="text-3xl font-semibold text-left sm:text-4xl text-center">
           {{ methodology?.data.sustainable_title || "Sustainable Banks" }}
         </h2>
         <PrismicRichText
-          :field="methodology?.data.sources_description"
+          :field="methodology?.data.sustainable_description"
           class="text-center text-lg"
           fallback="Banks that are rated Great or Good are added to our Sustainable Banks webpage.
 That doesn’t mean that these banks have no fossil fuel lending at all, instead it can signify:"
