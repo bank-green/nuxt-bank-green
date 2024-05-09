@@ -155,12 +155,18 @@
           >
             <div class="md:w-1/2 max-w-sm">
               <PrismicRichText
+                v-if="
+                  home?.data?.description3 && !isEmptyPrismicField(home?.data.description3)
+                "
                 class="text-lg md:text-2xl tracking-wide mb-4"
                 :field="home?.data.description3"
                 fallback="We have the power to change our banking system because it will not change itself.
                 Mass pressure from customers will force our banks to  defund fossil fuels."
               />
               <PrismicRichText
+                v-if="
+                  home?.data?.description4 && !isEmptyPrismicField(home?.data.description4)
+                "
                 class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
                 :field="home?.data.description4"
                 fallback="Bank.Green and our partners are leading a global reckoning with the world’s
@@ -198,6 +204,8 @@ import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 import { components } from '~~/slices'
 import { usePrismicSEO } from '~~/composables/useHeadHelpers'
+import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const {
