@@ -18,8 +18,7 @@
         </div>
         <div class="flex flex-col justify-center items-center">
           <div
-            style="width: 100%"
-            class="prose sm:prose-lg xl:prose-xl break-words"
+            class="prose sm:prose-lg xl:prose-xl break-words w-full"
           >
             <SliceZone
               :slices="post?.data.slices ?? []"

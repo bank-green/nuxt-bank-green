@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isDefaultVariant" class="not-prose block w-full overflow-x-auto mb-8 ">
+  <div v-if="!isDefaultVariant" class="not-prose block w-full overflow-x-auto mb-8" style="width: calc(100% + 4rem); margin-left: -2rem;">
     <table class="items-center bg-transparent w-full border-collapse bg-white">
       <thead>
         <tr class="bg-sushi-200 text-primary-dark">
