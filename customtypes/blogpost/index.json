@@ -3,6 +3,7 @@
   "label": "BlogPost",
   "repeatable": true,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": {
@@ -46,11 +47,11 @@
             "text_slice": { "type": "SharedSlice" },
             "embed_slice": { "type": "SharedSlice" },
             "image_slice": { "type": "SharedSlice" },
-            "accordion_slice": { "type": "SharedSlice" }
+            "accordion_slice": { "type": "SharedSlice" },
+            "table_slice": { "type": "SharedSlice" }
           }
         }
       }
     }
-  },
-  "format": "custom"
+  }
 }
