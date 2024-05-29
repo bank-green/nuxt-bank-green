@@ -27,7 +27,6 @@
               :context="{ takeaction: true }"
             />
           </div>
-          <BlogLeagueTable v-if="displayLeagueTable" />
         </div>
       </div>
     </div>
@@ -139,9 +138,6 @@ const description = getDescription(post)
 const url = computed(() => {
   return `https://bank.green/blog/${slug}`
 })
-
-// TODO: move to Prismic
-const displayLeagueTable = computed(() => slug === 'uk-banks-league-table')
 
 useHead({
   title,
