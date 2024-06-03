@@ -18,8 +18,7 @@
         </div>
         <div class="flex flex-col justify-center items-center">
           <div
-            style="width: 100%"
-            class="prose sm:prose-lg xl:prose-xl break-words"
+            class="prose sm:prose-lg xl:prose-xl break-words w-full"
           >
             <SliceZone
               :slices="post?.data.slices ?? []"
@@ -27,7 +26,6 @@
               :context="{ takeaction: true }"
             />
           </div>
-          <BlogLeagueTable v-if="displayLeagueTable" />
         </div>
       </div>
     </div>
@@ -139,9 +137,6 @@ const description = getDescription(post)
 const url = computed(() => {
   return `https://bank.green/blog/${slug}`
 })
-
-// TODO: move to Prismic
-const displayLeagueTable = computed(() => slug === 'uk-banks-league-table')
 
 useHead({
   title,

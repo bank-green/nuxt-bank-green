@@ -179,7 +179,8 @@ type BlogpostDocumentDataSlicesSlice =
   | TextSliceSlice
   | EmbedSliceSlice
   | ImageSliceSlice
-  | AccordionSliceSlice;
+  | AccordionSliceSlice
+  | TableSliceSlice;
 
 /**
  * Content for BlogPost documents
@@ -3566,6 +3567,111 @@ export type SocialSharerSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Default variation for TableSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TableSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Primary content in *TableSlice → Primary*
+ */
+export interface TableSliceSlice2ColumnsWithIconPrimary {
+  /**
+   * Column 1 Header field in *TableSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.primary.column_1_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_1_header: prismic.KeyTextField;
+
+  /**
+   * Column 2 Header field in *TableSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.primary.column_2_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_2_header: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *TableSlice → Items*
+ */
+export interface TableSliceSlice2ColumnsWithIconItem {
+  /**
+   * Icon field in *TableSlice → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Column 1 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_1
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_1: prismic.RichTextField;
+
+  /**
+   * Column 2 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_2
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_2: prismic.RichTextField;
+}
+
+/**
+ * 2 Columns with Icon variation for TableSlice Slice
+ *
+ * - **API ID**: `2ColumnsWithIcon`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TableSliceSlice2ColumnsWithIcon = prismic.SharedSliceVariation<
+  "2ColumnsWithIcon",
+  Simplify<TableSliceSlice2ColumnsWithIconPrimary>,
+  Simplify<TableSliceSlice2ColumnsWithIconItem>
+>;
+
+/**
+ * Slice variation for *TableSlice*
+ */
+type TableSliceSliceVariation =
+  | TableSliceSliceDefault
+  | TableSliceSlice2ColumnsWithIcon;
+
+/**
+ * TableSlice Shared Slice
+ *
+ * - **API ID**: `table_slice`
+ * - **Description**: TableSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TableSliceSlice = prismic.SharedSlice<
+  "table_slice",
+  TableSliceSliceVariation
+>;
+
+/**
  * Primary content in *TeamMemberSlice → Primary*
  */
 export interface TeamMemberSliceSliceDefaultPrimary {
@@ -3861,6 +3967,10 @@ declare module "@prismicio/client" {
       SocialSharerSliceSlice,
       SocialSharerSliceSliceVariation,
       SocialSharerSliceSliceDefault,
+      TableSliceSlice,
+      TableSliceSliceVariation,
+      TableSliceSliceDefault,
+      TableSliceSlice2ColumnsWithIcon,
       TeamMemberSliceSlice,
       TeamMemberSliceSliceVariation,
       TeamMemberSliceSliceDefault,
