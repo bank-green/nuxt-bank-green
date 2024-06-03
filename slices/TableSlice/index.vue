@@ -20,7 +20,7 @@
           <td v-if="row.column_1" class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold flex gap-2 items-center">
             <PrismicImage
               v-if="row.icon.url"
-              class="h-10 w-10"
+              class="h-auto w-10"
               :alt="row.icon.name"
               :title="row.icon.name"
               :field="row.icon"
