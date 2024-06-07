@@ -13,10 +13,10 @@
             v-for="post in posts"
             :key="post?.uid"
             :to="`/blog/${post.uid}`"
-            :date="post.data.publicationdate"
+            :date="String(post.data.publicationdate)"
             :description="asText(post.data.description)"
             :image="getImageSrc(post)"
-            :title="post.data.title"
+            :title="String(post.data.title)"
           />
         </div>
         <h3 v-else>
@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import { asText } from '@prismicio/helpers'
 import BlogCard from '@/components/blog/BlogCard.vue'
+import { BlogpostDocument } from 'prismicio-types'
 
 const { client } = usePrismic()
 
@@ -40,7 +41,7 @@ const { data: posts } = await useAsyncData('blogposts', () =>
   })
 )
 
-const getImageSrc = post =>
+const getImageSrc = (post: BlogpostDocument) =>
   post.data.cardimage?.url ||
   post.data.slices.find(s => s.slice_type === 'image_slice')?.primary?.image
     .url ||

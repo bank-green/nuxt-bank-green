@@ -85,6 +85,10 @@
       </div>
     </div>
 
+    <div id="section-three">
+      <slot name="section3" />
+    </div>
+
     <!-- SECTION THREE -->
     <div id="section-three" class="relative bg-blue-100">
       <Swoosh direction="down" />
@@ -146,10 +150,7 @@
             How do we derive our results?
           </h2>
           <NuxtLink
-            :to="{
-              path: '/faq',
-              hash: '#how-do-you-know-what-my-bank-funds',
-            }"
+            to="/methodology"
             class="button-green inline-block w-max"
           >
             Find out more

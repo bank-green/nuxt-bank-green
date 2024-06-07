@@ -1,8 +1,5 @@
 <template>
   <div class="bg-sushi-50">
-    <!-- <pre>
-            {{ JSON.stringify(ecobanks, null, 2) }}
-        </pre> -->
     <div class="page-fade-in contain pt-28 pb-16">
       <div
         v-if="ecobanks?.data?.slices"
