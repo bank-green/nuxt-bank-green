@@ -85,10 +85,6 @@
       </div>
     </div>
 
-    <div id="section-three">
-      <slot name="section3" />
-    </div>
-
     <!-- SECTION THREE -->
     <div id="section-three" class="relative bg-blue-100">
       <Swoosh direction="down" />
