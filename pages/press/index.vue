@@ -20,22 +20,22 @@
         </article>
 
         <div
+          v-if="posts?.length"
           class="-mx-4 mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12"
         >
-          <div v-if="posts?.length">
-            <BlogCard
-              v-for="post in posts ?? []"
-              :key="post.uid"
-              :to="`/press/${post.uid}`"
-              :date="String(post.data.releasedate)"
-              :description="asText(post.data.description)"
-              :title="String(post.data.title)"
-            />
-          </div>
-          <h3 v-else>
-            Error loading content.
-          </h3>
+          <BlogCard
+            v-for="post in posts ?? []"
+
+            :key="post.uid"
+            :to="`/press/${post.uid}`"
+            :date="String(post.data.releasedate)"
+            :description="asText(post.data.description)"
+            :title="String(post.data.title)"
+          />
         </div>
+        <h3 v-else class="mx-4 mt-6">
+          Error loading content.
+        </h3>
       </div>
     </div>
   </div>

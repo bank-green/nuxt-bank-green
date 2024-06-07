@@ -58,7 +58,7 @@ import { getSliceBoolean } from '@/utils/prismic/conversions'
 withDefaults(defineProps<{
     title: string,
     subtitle?:string,
-    description: string,
+    description?: string,
     showExploreSection?: boolean | null
   }>(),
 {
