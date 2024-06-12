@@ -81,6 +81,11 @@
                 privacy policy
               </NuxtLink>.
             </CheckboxSection>
+            <vue-hcaptcha
+              v-if="!isLocal"
+              :sitekey="hcaptchaSitekey"
+              class="col-span-full"
+            />
           </div>
           <button
             type="submit"
@@ -112,6 +117,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
 import CheckboxSection from '../components/forms/CheckboxSection.vue'
 import TextField from '../components/forms/TextField.vue'
 
@@ -124,6 +130,15 @@ const { data: contact } = await useAsyncData('contact', () =>
 usePrismicSEO(contact.value?.data)
 
 const extras = ref({ isAgreeMarketing: false })
+
+const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
+
+const isLocal = computed(() => {
+  if (process.env.NODE_ENV === 'development') {
+    return true
+  }
+  return false
+})
 
 const {
   firstName,
