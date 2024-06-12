@@ -38,7 +38,6 @@
     </div>
     <div class="block sm:hidden md:hidden space-y-4">
       <!-- MOBILE DISPLAY -->
-      <p>Mobile Display</p>
       <div
         v-for="(row, index) in slice.items"
         :key="index"
