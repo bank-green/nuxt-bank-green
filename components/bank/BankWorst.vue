@@ -58,6 +58,19 @@
         :field="bankPage?.data.description3"
       />
     </template>
+    <template #section3>
+      <PrismicRichText
+        v-if="
+          bankPage?.data?.description4 && !isEmptyPrismicField(bankPage?.data.description4)
+        "
+        class="text-center text-blue-900 text-lg md:text-2xl tracking-wider font-semibold mb-4"
+        :field="bankPage.data.description4"
+      />
+      <PrismicRichText
+        class="text-blue-900 leading-loose text-lg"
+        :field="bankPage.data.description5"
+      />
+    </template>
   </BankLayoutBadWorst>
 </template>
 <script setup lang="ts">
