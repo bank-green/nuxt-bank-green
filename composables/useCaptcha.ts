@@ -19,9 +19,10 @@ export default function useCaptcha () {
     response.success ? captchaVerified.value = true : captchaVerified.value = false
   }
 
+  watch(captchaToken, () => updateCaptchaToken(captchaToken.value))
+
   return {
     captchaSitekey,
-    updateCaptchaToken,
     captchaVerified,
     isLocal,
     captchaToken

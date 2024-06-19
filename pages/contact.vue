@@ -135,8 +135,7 @@ usePrismicSEO(contact.value?.data)
 const extras = ref({ isAgreeMarketing: false })
 
 // Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, updateCaptchaToken, captchaSitekey, captchaToken } = useCaptcha()
-watch(captchaToken, () => updateCaptchaToken(captchaToken.value))
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
 
 const {
   firstName,

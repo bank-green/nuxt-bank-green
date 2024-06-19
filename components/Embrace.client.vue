@@ -324,7 +324,6 @@ const bankSearchClasses = computed(() => {
 })
 
 // Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, updateCaptchaToken, captchaSitekey, captchaToken } = useCaptcha()
-watch(captchaToken, () => updateCaptchaToken(captchaToken.value))
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
 
 </script>
