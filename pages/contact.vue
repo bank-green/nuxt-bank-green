@@ -81,9 +81,11 @@
                 privacy policy
               </NuxtLink>.
             </CheckboxSection>
-            <vue-hcaptcha
+            <vue-turnstile
               v-if="!isLocal"
-              :sitekey="hcaptchaSitekey"
+              v-model="captchaToken"
+              :site-key="captchaSitekey"
+              theme="light"
               class="col-span-full"
             />
           </div>
@@ -91,7 +93,8 @@
             type="submit"
             class="button-green mt-6 md:w-48 flex justify-center"
             :class="{
-              'pointer-events-none opacity-75': busy,
+              'pointer-events-none opacity-75': busy || !captchaVerified,
+
             }"
           >
             <span v-if="!busy"> Send message </span>
@@ -117,7 +120,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
+import VueTurnstile from 'vue-turnstile'
 import CheckboxSection from '../components/forms/CheckboxSection.vue'
 import TextField from '../components/forms/TextField.vue'
 
@@ -131,14 +134,9 @@ usePrismicSEO(contact.value?.data)
 
 const extras = ref({ isAgreeMarketing: false })
 
-const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
-
-const isLocal = computed(() => {
-  if (process.env.NODE_ENV === 'development') {
-    return true
-  }
-  return false
-})
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, updateCaptchaToken, captchaSitekey, captchaToken } = useCaptcha()
+watch(captchaToken, () => updateCaptchaToken(captchaToken.value))
 
 const {
   firstName,

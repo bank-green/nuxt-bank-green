@@ -99,9 +99,11 @@
             <NuxtLink v-else to="/privacy" class="link">
               privacy policy
             </NuxtLink>
-            <vue-hcaptcha
+            <vue-turnstile
               v-if="!isLocal"
-              :sitekey="hcaptchaSitekey"
+              v-model="captchaToken"
+              :site-key="captchaSitekey"
+              theme="light"
               class="col-span-full mt-4"
             />
           </CheckboxSection>
@@ -109,7 +111,7 @@
         <button
           type="submit"
           class="button-green w-full mt-6 flex justify-center"
-          :class="{'pointer-events-none opacity-75': busy}"
+          :class="{'pointer-events-none opacity-75': busy || !captchaVerified}"
         >
           <span v-if="!busy"> Generate Email Preview </span>
           <span v-else>
@@ -142,12 +144,13 @@
 </template>
 
 <script setup lang="ts">
-import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
+import VueTurnstile from 'vue-turnstile'
 import { PrismicDocument } from '@prismicio/types'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmbraceModal from '@/components/EmbraceModal.vue'
+import useCaptcha from '@/composables/useCaptcha'
 
 type Response = {
   text: string,
@@ -168,8 +171,6 @@ const { data: embracePage } = await useAsyncData('embrace', () =>
 if (!embracePage?.value) {
   console.log('Warning: Unable to retrieve embracepage')
 }
-
-const hcaptchaSitekey = useRuntimeConfig().public.HAPTCHA_SITEKEY
 
 const props = withDefaults(defineProps<{
   name?: String;
@@ -301,6 +302,9 @@ async function checkAndDisplayPreview () {
     busy.value = false
     return false
   }
+  if (!captchaVerified) {
+    return false
+  }
   // TODO: Call function or use some other trigger
   // to get generated message body and message subject
   // and store it in the values passed to modal
@@ -319,11 +323,8 @@ const bankSearchClasses = computed(() => {
   return 'text-gray-700'
 })
 
-const isLocal = computed(() => {
-  if (process.env.NODE_ENV === 'development') {
-    return true
-  }
-  return false
-})
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, updateCaptchaToken, captchaSitekey, captchaToken } = useCaptcha()
+watch(captchaToken, () => updateCaptchaToken(captchaToken.value))
 
 </script>
