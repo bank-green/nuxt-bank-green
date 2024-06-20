@@ -111,7 +111,7 @@
         <button
           type="submit"
           class="button-green w-full mt-6 flex justify-center"
-          :class="{'pointer-events-none opacity-75': busy || !captchaVerified}"
+          :class="{'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal)}"
         >
           <span v-if="!busy"> Generate Email Preview </span>
           <span v-else>
@@ -155,7 +155,6 @@ import useCaptcha from '@/composables/useCaptcha'
 type Response = {
   text: string,
   subject: string,
-  uniqueUrl: string,
   contactEmail: string,
   bccEmail: string
 }
@@ -191,7 +190,6 @@ const bankEmail = ref<string>('')
 const bcc = ref<string>('public@bank.green')
 const subject = ref<string>('')
 const generatedMessage = ref<string>('') // pass to preview component as v-model??
-const uniqueUrl = ref<string>('')
 const body = ref<string>('')
 
 const extras = computed(() => {
@@ -251,7 +249,7 @@ async function getGeneratedMessage () {
   busy.value = true
 
   try {
-    const response: Response = await $fetch('message', {
+    const response: Response = await $fetch('message?tone=%22POLITE%22&campaign_id=1', {
       baseURL: useRuntimeConfig().public.EMBRACE_URL,
       method: 'POST',
       headers: {
@@ -271,7 +269,6 @@ async function getGeneratedMessage () {
     if (response?.text) {
       generatedMessage.value = response.text
       subject.value = response.subject
-      uniqueUrl.value = response.uniqueUrl || ''
       bankEmail.value = response.contactEmail || ''
       bcc.value = response.bccEmail || ''
     }
@@ -302,7 +299,7 @@ async function checkAndDisplayPreview () {
     busy.value = false
     return false
   }
-  if (!captchaVerified) {
+  if (!captchaVerified && !isLocal) {
     return false
   }
   // TODO: Call function or use some other trigger
