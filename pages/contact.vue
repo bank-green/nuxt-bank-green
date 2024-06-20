@@ -81,12 +81,20 @@
                 privacy policy
               </NuxtLink>.
             </CheckboxSection>
+            <vue-turnstile
+              v-if="!isLocal"
+              v-model="captchaToken"
+              :site-key="captchaSitekey"
+              theme="light"
+              class="col-span-full"
+            />
           </div>
           <button
             type="submit"
             class="button-green mt-6 md:w-48 flex justify-center"
             :class="{
-              'pointer-events-none opacity-75': busy,
+              'pointer-events-none opacity-75': busy || !captchaVerified,
+
             }"
           >
             <span v-if="!busy"> Send message </span>
@@ -112,6 +120,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import VueTurnstile from 'vue-turnstile'
 import CheckboxSection from '../components/forms/CheckboxSection.vue'
 import TextField from '../components/forms/TextField.vue'
 
@@ -124,6 +133,9 @@ const { data: contact } = await useAsyncData('contact', () =>
 usePrismicSEO(contact.value?.data)
 
 const extras = ref({ isAgreeMarketing: false })
+
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
 
 const {
   firstName,

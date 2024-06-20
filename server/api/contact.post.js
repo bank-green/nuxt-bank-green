@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
 async function sendZapierContact (message) {
   const hookUrl =
     message && message.tag === 'contact page form'
-      ? 'https://hooks.zapier.com/hooks/catch/9709339/ojsks1l'
-      : 'https://hooks.zapier.com/hooks/catch/9709339/ojskliq'
+      ? useRuntimeConfig().public.ZAPIER_UNSUBSCRIBE
+      : useRuntimeConfig().public.ZAPIER_SEND
   await $fetch(hookUrl, { method: 'POST', body: message })
 }
