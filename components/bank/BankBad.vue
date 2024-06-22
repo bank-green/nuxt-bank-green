@@ -57,12 +57,8 @@
         v-if="
           bankPage?.data?.description4 && !isEmptyPrismicField(bankPage?.data.description4)
         "
-        class="text-center text-blue-900 text-lg md:text-2xl tracking-wider font-semibold mb-4"
-        :field="bankPage.data.description4"
-      />
-      <PrismicRichText
         class="text-blue-900 leading-loose text-lg"
-        :field="bankPage.data.description5"
+        :field="bankPage.data.description4"
       />
     </template>
   </BankLayoutBadWorst>

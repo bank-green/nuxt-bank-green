@@ -96,14 +96,6 @@
       <div class="relative z-10 contain max-w-2xl">
         <slot name="section3" />
       </div>
-      <div
-        class="w-full -mt-24 sm:-mt-16 lg:-mt-32 pointer-events-none overflow-hidden"
-      >
-        <LottiePlayer
-          class="-mx-5/6 sm:mx-0 sm:w-full"
-          path="/anim/fishes.json"
-        />
-      </div>
     </div>
 
     <!-- CALL TO ACTION -->
@@ -115,8 +107,14 @@
 
     <!-- FOOTER IMAGE -->
     <div class="bg-blue-100 overflow-hidden w-full pointer-events-none">
-      <div class="-mx-1/4 sm:mx-0 sm:w-full">
-        <img class="w-full" src="/img/illustrations/landscape.svg" alt="">
+      <!-- <div class="-mx-1/4 sm:mx-0 sm:w-full"> -->
+      <div
+        class="w-full -mt-24 sm:-mt-16 lg:-mt-32 pointer-events-none overflow-hidden"
+      >
+        <LottiePlayer
+          class="-mx-5/6 sm:mx-0 sm:w-full"
+          path="/anim/fishes.json"
+        />
       </div>
     </div>
 
