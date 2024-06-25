@@ -249,7 +249,7 @@ async function getGeneratedMessage () {
   busy.value = true
 
   try {
-    const response: Response = await $fetch('message?tone=%22POLITE%22&campaign_id=1', {
+    const response: Response = await $fetch('message', {
       baseURL: useRuntimeConfig().public.EMBRACE_URL,
       method: 'POST',
       headers: {
@@ -261,7 +261,9 @@ async function getGeneratedMessage () {
         hometown: hometown.value,
         background: background.value,
         brandName: extras.value.bankDisplayName,
-        brandTag: extras.value.brandTag
+        brand_tag: extras.value.brandTag,
+        campaign_id: 1,
+        tone: 'POLITE'
       },
       parseResponse: JSON.parse
     })
