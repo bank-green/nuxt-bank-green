@@ -63,7 +63,7 @@
         v-if="
           bankPage?.data?.description4 && !isEmptyPrismicField(bankPage?.data.description4)
         "
-        class="text-blue-900 leading-loose text-lg description4"
+        class="text-blue-900 leading-loose text-lg prose sm:prose-md xl:prose-l break-words text-center"
         :field="bankPage.data.description4"
       />
     </template>
@@ -90,9 +90,3 @@ const piggyText = `While you’ve been stashing away money for a house or a week
   props.amountFinancedSince2016 ?? 'large amounts'
 } in the 7 years since 197 countries agreed to drastically reduce their greenhouse gas emissions in the Paris Agreement.`
 </script>
-
-<style>
-  .description4 > h3 {
-    text-align: center;
-  }
-</style>
