@@ -1,21 +1,17 @@
 <template>
   <div
-    class="flex flex-row rounded-xl gap-24 py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
+    class="flex flex-col lg:flex-row gap-12 md:gap-24 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
   >
-    <div
-      class="flex flex-col md:flex-row  md:space-x-8"
-    >
-      <div class="flex flex-col gap-24">
-        <h2
-          class="w-full font-bold text-xl md:text-4xl tracking-wider text-gray-50"
-        >
-          {{ content?.title || "Curious about switching to a green bank?" }}
-        </h2>
-        <CheckList
-          class="md:text-xl font-medium"
-          :list="slice.items.map((i: any) => asText(i.bullet_text))"
-        />
-      </div>
+    <div class="flex flex-col gap-12 md:gap-24">
+      <h2
+        class="w-full font-bold text-xl md:text-4xl tracking-wider text-gray-50"
+      >
+        {{ content?.title || "Curious about switching to a green bank?" }}
+      </h2>
+      <CheckList
+        class="md:text-xl font-medium"
+        :list="slice.items.map((i: any) => asText(i.bullet_text))"
+      />
     </div>
     <div class="flex flex-col gap-6 text-left">
       <BankLocationSearch
@@ -36,7 +32,6 @@
       </BankLocationSearch>
       <TextField
         v-model="firstName"
-        class="col-span-2"
         name="firstName"
         type="text"
         :title="content.form_name_label || 'First name'"
@@ -45,7 +40,6 @@
       />
       <TextField
         v-model="email"
-        class="col-span-2"
         type="email"
         name="email"
         :title="content.form_email_label || 'Email address'"
@@ -55,7 +49,6 @@
       />
       <CheckboxSection
         v-model="isAgreeMarketing"
-        class="col-span-full"
         name="isAgreeMarketing"
         :warning="warningsMap['isAgreeMarketing']"
         dark
@@ -65,7 +58,6 @@
       </CheckboxSection>
       <CheckboxSection
         v-model="isAgreeTerms"
-        class="col-span-full"
         name="isAgreeTerms"
         :warning="warningsMap['isAgreeTerms']"
         dark
