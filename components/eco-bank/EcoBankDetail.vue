@@ -213,10 +213,16 @@
         </p>
       </div>
     </div>
+    <SliceZone
+      :slices="prismicSlices ?? []"
+      :components="prismicSliceComponents"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { SliceZoneComponents, SliceLike } from '@prismicio/vue'
+
 interface BankFeature {
   offered: string;
   feature: {
@@ -235,6 +241,7 @@ const props = defineProps<{
   tag: string;
   prismicPageData: Record<string, any> | null;
   prismicDefaultPageData: Record<string, any> | null;
+  prismicSliceComponents: SliceZoneComponents<SliceLike<string>, unknown>
 }>()
 
 const tabIds = computed(() =>
@@ -245,6 +252,8 @@ const tabIds = computed(() =>
       props.prismicPageData[tabId].length > 0
   )
 )
+
+const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
 
 function getBankFeature (featureName: string, defaultValue: string = 'No') {
   const feature = props.bankFeatures.find(

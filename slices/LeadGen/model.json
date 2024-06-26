@@ -1,0 +1,53 @@
+{
+  "id": "lead_gen",
+  "type": "SharedSlice",
+  "name": "LeadGen",
+  "description": "LeadGen",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": { "label": "Title", "placeholder": "" }
+        },
+        "form_bank_label": {
+          "type": "Text",
+          "config": { "label": "Form Bank Label", "placeholder": "" }
+        },
+        "form_name_label": {
+          "type": "Text",
+          "config": { "label": "Form Name Label", "placeholder": "" }
+        },
+        "form_email_label": {
+          "type": "Text",
+          "config": { "label": "Form Email Label", "placeholder": "" }
+        },
+        "form_status_label": {
+          "type": "Text",
+          "config": { "label": "Form Status Label", "placeholder": "" }
+        },
+        "button_label": {
+          "type": "Text",
+          "config": { "label": "Button Label", "placeholder": "" }
+        }
+      },
+      "items": {
+        "bullet_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Bullet Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -58,6 +58,11 @@
       "serving": {
         "type": "StructuredText",
         "config": { "single": "paragraph", "label": "serving" }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "lead_gen": { "type": "SharedSlice" } } }
       }
     }
   }

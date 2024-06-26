@@ -1,6 +1,6 @@
 <template>
   <LocationSearch
-    v-if="!isEmbrace"
+    v-if="!isEmbrace && !hideLocation"
     v-model="country"
     :dark="dark"
     class="col-span-2"
@@ -38,13 +38,15 @@ const props = withDefaults(defineProps<{
     bankSearchClasses?: string;
     locationSearchClasses?: string;
     dark?: boolean;
-    isEmbrace?: boolean
+    isEmbrace?: boolean;
+    hideLocation?: boolean
   }>(), {
   warning: false,
   dark: false,
   bankTitle: '',
   locationTitle: '',
-  isEmbrace: false
+  isEmbrace: false,
+  hideLocation: false
 })
 
 const { country } = useCountry()

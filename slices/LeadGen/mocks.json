@@ -1,0 +1,59 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "modern",
+				"type": "Text"
+			},
+			"form_bank_label": {
+				"__TYPE__": "FieldContent",
+				"value": "sad",
+				"type": "Text"
+			},
+			"form_name_label": {
+				"__TYPE__": "FieldContent",
+				"value": "pitch",
+				"type": "Text"
+			},
+			"form_email_label": {
+				"__TYPE__": "FieldContent",
+				"value": "scene",
+				"type": "Text"
+			},
+			"form_status_label": {
+				"__TYPE__": "FieldContent",
+				"value": "tie",
+				"type": "Text"
+			},
+			"button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "outer",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"bullet_text",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Laborum duis incididunt est consectetur et ipsum quis eu pariatur consectetur enim proident esse elit officia. Laborum quis incididunt ex anim et officia nisi dolor exercitation in labore eiusmod."
+									}
+								}
+							]
+						}
+					]
+				]
+			}
+		]
+	}
+]

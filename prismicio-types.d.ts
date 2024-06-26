@@ -104,7 +104,7 @@ interface BankpageDocumentData {
   description3: prismic.RichTextField;
 
   /**
-   * Description 4 field in *BankPage*
+   * Description4 field in *BankPage*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -2388,6 +2388,8 @@ export type PrivacypageDocument<Lang extends string = string> =
     Lang
   >;
 
+type SfiPageDocumentDataSlicesSlice = LeadGenSlice;
+
 /**
  * Content for SFIDefaults documents
  */
@@ -2501,6 +2503,17 @@ interface SfiPageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   link_copy_methodology_page: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *SFIDefaults*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfi-page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SfiPageDocumentDataSlicesSlice>;
 }
 
 /**
@@ -2518,6 +2531,8 @@ export type SfiPageDocument<Lang extends string = string> =
     "sfi-page",
     Lang
   >;
+
+type SfipageDocumentDataSlicesSlice = LeadGenSlice;
 
 /**
  * Content for SFIPage documents
@@ -2599,6 +2614,17 @@ interface SfipageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   serving: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *SFIPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sfipage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<SfipageDocumentDataSlicesSlice>;
 }
 
 /**
@@ -3503,6 +3529,116 @@ export type ImageSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *LeadGen → Primary*
+ */
+export interface LeadGenSliceDefaultPrimary {
+  /**
+   * Title field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Form Bank Label field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.primary.form_bank_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  form_bank_label: prismic.KeyTextField;
+
+  /**
+   * Form Name Label field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.primary.form_name_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  form_name_label: prismic.KeyTextField;
+
+  /**
+   * Form Email Label field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.primary.form_email_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  form_email_label: prismic.KeyTextField;
+
+  /**
+   * Form Status Label field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.primary.form_status_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  form_status_label: prismic.KeyTextField;
+
+  /**
+   * Button Label field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *LeadGen → Items*
+ */
+export interface LeadGenSliceDefaultItem {
+  /**
+   * Bullet Text field in *LeadGen → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.items[].bullet_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  bullet_text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for LeadGen Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LeadGenSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LeadGenSliceDefaultPrimary>,
+  Simplify<LeadGenSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *LeadGen*
+ */
+type LeadGenSliceVariation = LeadGenSliceDefault;
+
+/**
+ * LeadGen Shared Slice
+ *
+ * - **API ID**: `lead_gen`
+ * - **Description**: LeadGen
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LeadGenSlice = prismic.SharedSlice<
+  "lead_gen",
+  LeadGenSliceVariation
+>;
+
+/**
  * Default variation for SharePicGallerySlice Slice
  *
  * - **API ID**: `default`
@@ -3972,6 +4108,9 @@ declare module "@prismicio/client" {
       ImageSliceSlice,
       ImageSliceSliceVariation,
       ImageSliceSliceDefault,
+      LeadGenSlice,
+      LeadGenSliceVariation,
+      LeadGenSliceDefault,
       SharePicGallerySliceSlice,
       SharePicGallerySliceSliceVariation,
       SharePicGallerySliceSliceDefault,
