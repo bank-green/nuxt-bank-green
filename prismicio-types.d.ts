@@ -104,6 +104,17 @@ interface BankpageDocumentData {
   description3: prismic.RichTextField;
 
   /**
+   * Description 4 field in *BankPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bankpage.description4
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description4: prismic.RichTextField;
+
+  /**
    * SEO Title field in *BankPage*
    *
    * - **Field Type**: Text
