@@ -213,10 +213,10 @@
         </p>
       </div>
     </div>
-    <SliceZone
+    <!-- <SliceZone
       :slices="prismicSlices ?? []"
       :components="prismicSliceComponents"
-    />
+    /> -->
   </div>
 </template>
 
@@ -253,8 +253,8 @@ const tabIds = computed(() =>
   )
 )
 
-const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
-
+/* const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
+ */
 function getBankFeature (featureName: string, defaultValue: string = 'No') {
   const feature = props.bankFeatures.find(
     feature => feature.feature.name === featureName

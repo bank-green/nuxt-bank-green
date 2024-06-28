@@ -30,6 +30,11 @@
       :prismic-default-page-data="prismicDefaultPageData"
       :prismic-slice-components="prismicComponents?.value"
     />
+    <EcoBankSwitchSurvey
+      :bank-name="details.name"
+      :prismic-default-page-data="prismicDefaultPageData"
+      :website="details.website"
+    />
   </div>
 </template>
 
