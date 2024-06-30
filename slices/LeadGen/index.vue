@@ -68,11 +68,17 @@
           privacy policy
         </NuxtLink>.
       </CheckboxSection>
+      <vue-turnstile
+        v-if="!isLocal"
+        v-model="captchaToken"
+        :site-key="captchaSitekey"
+        theme="light"
+      />
       <button
         type="submit"
-        class="button-green w-full md:w-auto mt-6 flex justify-center"
+        class="button-green w-full md:w-auto mt-2 flex justify-center"
         :class="{
-          'pointer-events-none opacity-75': busy,
+          'pointer-events-none opacity-75': busy || !captchaVerified,
         }"
       >
         <span v-if="!busy"> {{ content.button_label || 'Complete Sign Up' }} </span>
@@ -98,6 +104,7 @@
 <script setup lang="ts">
 import { asText } from '@prismicio/helpers'
 import { getSliceComponentProps } from '@prismicio/vue'
+import VueTurnstile from 'vue-turnstile'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import TextField from '@/components/forms/TextField.vue'
@@ -120,6 +127,9 @@ const extras = computed(() => {
     bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
   }
 })
+
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
 
 const {
   firstName,
