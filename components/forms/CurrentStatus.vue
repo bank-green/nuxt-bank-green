@@ -74,7 +74,7 @@ import BaseField from '@/components/forms/BaseField.vue'
 import ListPicker from '@/components/forms/ListPicker.vue'
 import SearchInput from '@/components/forms/input/SearchInput.vue'
 
-const props = defineProps<{
+defineProps<{
   modelValue: string,
   disabled: boolean,
   warning: string,
@@ -84,12 +84,9 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue'])
 
-const isShowing = ref(false)
+const isShowing = ref<boolean>(false)
 
-const search = ref('')
-if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
-  search.value = en[`COUNTRY_${props.modelValue}`]
-}
+const search = ref<string>('')
 
 const status = computed(() => ['I’m actively planning to switch banks', 'I’m considering switching banks'])
 
@@ -98,12 +95,6 @@ function showList () {
 }
 function hideList () {
   isShowing.value = false
-  // if clicking away, go back to originally selected country
-  if (search.value === '') {
-    emit('update:modelValue', '')
-  } else if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
-    search.value = en[`COUNTRY_${props.modelValue}`]
-  }
 }
 
 function onSelectStatus (status) {
