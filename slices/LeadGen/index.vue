@@ -47,6 +47,7 @@
         :warning="warningsMap['email']"
         dark
       />
+      <CurrentStatus v-model="currentStatus" dark :title="content.form_status_label || 'Which option best describes your current status?'" />
       <CheckboxSection
         v-model="isAgreeMarketing"
         name="isAgreeMarketing"
@@ -100,8 +101,10 @@ import { getSliceComponentProps } from '@prismicio/vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import TextField from '@/components/forms/TextField.vue'
+import CurrentStatus from '@/components/forms/CurrentStatus.vue'
 
 const searchValue = ref(null)
+const currentStatus = ref<string>('')
 const props = defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
 
 const content = computed(() => props.slice.primary)

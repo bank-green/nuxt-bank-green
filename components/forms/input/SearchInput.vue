@@ -6,12 +6,15 @@
       :value="modelValue"
       :placeholder="placeholder"
       type="text"
-      class="relative w-full appearance-none border bg-white rounded-2xl shadow-soft pl-12 pr-10 py-4 text-left cursor-default focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate 'px-5 py-4 text-gray-900 placeholder-cool-gray-800'"
+      :readonly="readOnly"
+      class="relative w-full appearance-none border bg-white rounded-2xl shadow-soft pr-10 py-4 text-left cursor-default focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate 'px-5 py-4 text-gray-900 placeholder-cool-gray-800'"
       :class="{
         'border-gray-200': !modelValue,
         'border-sushi-500': modelValue,
         'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red': !!warning,
         'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400': disabled,
+        'pl-12': hasExtaIconSpacing,
+        'pl-5': !hasExtaIconSpacing,
       }"
       autocomplete="chrome-off"
       :aria-invalid="!!warning"
@@ -89,6 +92,9 @@
         />
       </svg>
     </div>
+    <div v-else class="absolute right-0 p-5 text-red-700 hover:text-red-500 cursor-pointer">
+      <slot name="endIcon" />
+    </div>
   </div>
 </template>
 
@@ -101,12 +107,16 @@ withDefaults(
     warning?: string | boolean;
     dark?: boolean,
     disabled?: boolean
+    hasExtaIconSpacing?: boolean;
+    readOnly?: boolean;
   }>(),
   {
     usePencil: false,
     warning: false,
     dark: false,
-    disabled: false
+    disabled: false,
+    hasExtaIconSpacing: true,
+    readOnly: false
   }
 )
 
