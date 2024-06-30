@@ -81,6 +81,11 @@
       "link_copy_methodology_page": {
         "type": "Text",
         "config": { "label": "link copy methodology page", "placeholder": "" }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "lead_gen": { "type": "SharedSlice" } } }
       }
     }
   }

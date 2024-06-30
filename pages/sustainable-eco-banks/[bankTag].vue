@@ -28,8 +28,8 @@
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
       :prismic-default-page-data="prismicDefaultPageData"
+      :prismic-slice-components="prismicComponents?.value"
     />
-
     <EcoBankSwitchSurvey
       :bank-name="details.name"
       :prismic-default-page-data="prismicDefaultPageData"
@@ -39,10 +39,13 @@
 </template>
 
 <script setup lang="ts">
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
+
 const details: Ref<any | null> = ref(null)
 const prismicPageData: Ref<Record<string, any> | null> = ref(null)
 const prismicDefaultPageData: Ref<Record<string, any> | null> = ref(null)
-
+const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 const route = useRoute()
 const bankTag = route.params.bankTag as string
 if (!bankTag) {
@@ -67,6 +70,8 @@ if (!bankTag) {
   useHeadHelper(
     `${details.value.name} Review and Service Offering - Bank.Green`
   )
+
+  prismicComponents.value = ref(defineSliceZoneComponents(components))
 }
 
 const institutionType: ComputedRef<string | undefined> = computed(() => {
