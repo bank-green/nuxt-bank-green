@@ -13,7 +13,7 @@
         :list="slice.items.map((i: any) => asText(i.bullet_text))"
       />
     </div>
-    <div class="flex flex-col gap-6 text-left">
+    <form class="flex flex-col gap-6 text-left" @submit.prevent.stop="submitForm">
       <BankLocationSearch
         v-model="bank"
         :warning="warningsMap['bank']"
@@ -78,7 +78,7 @@
         type="submit"
         class="button-green w-full md:w-auto mt-2 flex justify-center"
         :class="{
-          'pointer-events-none opacity-75': busy || !captchaVerified,
+          'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
         }"
       >
         <span v-if="!busy"> {{ content.button_label || 'Complete Sign Up' }} </span>
@@ -97,7 +97,7 @@
           </svg>
         </span>
       </button>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -137,14 +137,49 @@ const {
   isAgreeTerms,
   isAgreeMarketing,
   warningsMap,
+  hasWarnings,
+  showWarnings,
   bank,
   /*  validate, */
   busy
 } = useContactForm(
   'leadGen',
-  ['firstName', 'email', 'isAgreeTerms', 'bank'],
+  ['firstName', 'email', 'isAgreeTerms'],
   extras
 )
+
+const formSubmitted = ref<boolean>(false)
+const submitForm = async () => {
+  showWarnings.value = true
+  if (hasWarnings.value) {
+    busy.value = false
+    return false
+  }
+
+  if (busy.value) {
+    return // already busy, prevent double requests
+  }
+  busy.value = true
+  const formFields = [
+    { key: 'firstname', value: firstName.value },
+    { key: 'email', value: email.value },
+    { key: 'field[2]', value: bank.value?.name },
+    { key: 'field[18]', value: currentStatus.value },
+    { key: 'field[19][]', value: isAgreeMarketing.value }
+  ]
+
+  const response = await $fetch('/api/lead-gen-active-campaign', {
+    method: 'POST',
+    body: {
+      formFields
+    }
+  })
+  formSubmitted.value = response.success
+
+  if (response.success) {
+    navigateTo('thanks')
+  }
+}
 
 /* async function checkAndSend () {
   validate()
