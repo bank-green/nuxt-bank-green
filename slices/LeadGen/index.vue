@@ -97,6 +97,7 @@
           </svg>
         </span>
       </button>
+      <span v-if="formError" class="text-red-300 font-semibold text-center">Something went wrong, try again!</span>
     </form>
   </div>
 </template>
@@ -148,7 +149,7 @@ const {
   extras
 )
 
-const formSubmitted = ref<boolean>(false)
+const formError = ref<boolean>(false)
 const submitForm = async () => {
   showWarnings.value = true
   if (hasWarnings.value) {
@@ -174,10 +175,13 @@ const submitForm = async () => {
       formFields
     }
   })
-  formSubmitted.value = response.success
 
   if (response.success) {
+    formError.value = false
     navigateTo('thanks')
+  } else {
+    formError.value = true
+    busy.value = false
   }
 }
 
