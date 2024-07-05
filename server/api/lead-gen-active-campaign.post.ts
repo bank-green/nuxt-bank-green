@@ -13,7 +13,7 @@ export default defineEventHandler(
       if (body instanceof Uint8Array) {
         body = JSON.parse(new TextDecoder().decode(body))
       }
-      const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_SECRET
+      const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_KEY
       const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
 
       const reqBody = {

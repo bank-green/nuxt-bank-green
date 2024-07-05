@@ -25,7 +25,8 @@ jobs:
       PUBLIC_EMBRACE_URL: https://embrace-django.bank.green/api
       ZAPIER_UNSUBSCRIBE: ${{ secrets.ZAPIER_UNSUBSCRIBE }}
       ZAPIER_SEND_CONTACT: ${{ secrets.ZAPIER_SEND_CONTACT }}
-      NUXT_PUBLIC_ACTIVE_CAMPAIGN_SECRET: ${{ secrets.ACTIVE_CAMPAIGN_SECRET }}
+      NUXT_PUBLIC_ACTIVE_CAMPAIGN_API_KEY: ${{ secrets.ACTIVE_CAMPAIGN_KEY }}
+      NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL: ${{ secrets.ACTIVE_CAMPAIGN_URL }}
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js
