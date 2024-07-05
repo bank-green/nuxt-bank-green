@@ -1,5 +1,7 @@
 <template>
   <div
+    id="lead-gen"
+    style="scroll-margin-top: 80px"
     class="flex flex-col lg:flex-row gap-24 md:gap-24 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
   >
     <div class="flex flex-col gap-12 md:gap-24">
@@ -164,9 +166,9 @@ const submitForm = async () => {
   const formFields = {
     firstName: firstName.value,
     email: email.value,
-    2: bank.value?.name,
-    18: currentStatus.value,
-    19: isAgreeMarketing.value ? 'Yes' : 'No'
+    bankName: bank.value?.name,
+    status: currentStatus.value,
+    marketing: isAgreeMarketing.value ? 'Yes' : 'No'
   }
 
   const response = await $fetch('/api/lead-gen-active-campaign', {

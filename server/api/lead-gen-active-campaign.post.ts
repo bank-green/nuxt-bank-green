@@ -1,9 +1,9 @@
 type FormFields = {
   firstName: string,
   email: string,
-  2: string,
-  18: string,
-  19: boolean
+  bankName: string,
+  status: string,
+  marketing: string
 }
 
 export default defineEventHandler(
@@ -23,15 +23,15 @@ export default defineEventHandler(
           fieldValues: [
             {
               field: '2',
-              value: body.formFields[2]
+              value: body.formFields.bankName
             },
             {
               field: '18',
-              value: body.formFields[18]
+              value: body.formFields.status
             },
             {
               field: '19',
-              value: body.formFields[19]
+              value: body.formFields.marketing
             }
           ]
         }

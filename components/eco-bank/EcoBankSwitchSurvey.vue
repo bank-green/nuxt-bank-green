@@ -1,8 +1,8 @@
 <template>
   <div class="contain grid grid-cols-1 md:grid-cols-5 gap-8">
     <div class="col-span-1 md:col-span-2">
-      <NuxtLink :to="website" target="_blank" class="button-green w-full">
-        <span class="font-semibold">{{ `Visit ${bankName}` }}</span>
+      <NuxtLink to="#lead-gen" class="button-green w-full">
+        <span class="font-semibold">Get more information</span>
       </NuxtLink>
     </div>
     <div class="col-span-1 md:col-span-3 pt-1">
