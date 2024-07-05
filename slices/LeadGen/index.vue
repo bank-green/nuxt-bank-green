@@ -2,9 +2,9 @@
   <div
     id="lead-gen"
     style="scroll-margin-top: 80px"
-    class="flex flex-col lg:flex-row gap-24 md:gap-24 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
+    class="flex flex-col lg:flex-row gap-12 md:gap-24 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
   >
-    <div class="flex flex-col gap-12 md:gap-24">
+    <div class="flex flex-col gap-12">
       <h2
         class="w-full font-bold text-xl md:text-4xl tracking-wider text-gray-50"
       >
