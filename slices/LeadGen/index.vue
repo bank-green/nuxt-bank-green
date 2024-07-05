@@ -141,7 +141,6 @@ const {
   hasWarnings,
   showWarnings,
   bank,
-  /*  validate, */
   busy
 } = useContactForm(
   'leadGen',
@@ -161,13 +160,14 @@ const submitForm = async () => {
     return // already busy, prevent double requests
   }
   busy.value = true
-  const formFields = [
-    { key: 'firstname', value: firstName.value },
-    { key: 'email', value: email.value },
-    { key: 'field[2]', value: bank.value?.name },
-    { key: 'field[18]', value: currentStatus.value },
-    { key: 'field[19][]', value: isAgreeMarketing.value }
-  ]
+
+  const formFields = {
+    firstName: firstName.value,
+    email: email.value,
+    2: bank.value?.name,
+    18: currentStatus.value,
+    19: isAgreeMarketing.value ? 'Yes' : 'No'
+  }
 
   const response = await $fetch('/api/lead-gen-active-campaign', {
     method: 'POST',
@@ -178,19 +178,11 @@ const submitForm = async () => {
 
   if (response.success) {
     formError.value = false
-    navigateTo('thanks')
+    busy.value = false
+    navigateTo('/thanks')
   } else {
     formError.value = true
     busy.value = false
   }
 }
-
-/* async function checkAndSend () {
-  validate()
-  reminderWarning.value = null
-  if (await send()) {
-    navigateTo(props.successRedirectURL)
-  }
-} */
-
 </script>

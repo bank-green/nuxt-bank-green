@@ -1,40 +1,90 @@
-export default defineEventHandler(async (event) => {
-  let body = await readBody(event)
-  if (body instanceof Uint8Array) {
-    body = JSON.parse(new TextDecoder().decode(body))
-  }
-  const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_SECRET
-  const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
-  const formData = new FormData()
-  body.formFields.forEach((r: {key: string, value: string}) => formData.append(r.key, r.value))
+type FormFields = {
+  firstName: string,
+  email: string,
+  2: string,
+  18: string,
+  19: boolean
+}
 
-  try {
-    const sendActiveCampaignForm = await fetch(
-      baseUrl + '/proc.php?jsonp=true',
-      {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + secret
-        },
+export default defineEventHandler(
+  async (event) => {
+    try {
+      let body: {formFields: FormFields} = await readBody(event)
+      if (body instanceof Uint8Array) {
+        body = JSON.parse(new TextDecoder().decode(body))
+      }
+      const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_SECRET
+      const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
+
+      const reqBody = {
+        contact: {
+          email: body.formFields.email,
+          firstName: body.formFields.firstName,
+          fieldValues: [
+            {
+              field: '2',
+              value: body.formFields[2]
+            },
+            {
+              field: '18',
+              value: body.formFields[18]
+            },
+            {
+              field: '19',
+              value: body.formFields[19]
+            }
+          ]
+        }
+      }
+
+      // Create contact with the incoming fields
+      const sendActiveCampaignForm: any = await $fetch(baseUrl + '/contacts', {
         method: 'POST',
-        body: formData
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          'Api-Token': secret
+        },
+        body: reqBody
       }
-    )
+      )
 
-    const sendActiveCampaignFormBody = await sendActiveCampaignForm.json()
+      if (sendActiveCampaignForm?.contact?.id?.length > 0) {
+        // If we have a created contact, add contact to the Bank Leads list (27)
+        const addContactToList: any = await $fetch(
+          baseUrl + '/contactLists',
+          {
+            headers: {
+              accept: 'application/json',
+              'content-type': 'application/json',
+              'Api-Token': secret
+            },
+            method: 'POST',
+            body: {
+              contactList: {
+                list: 27,
+                contact: sendActiveCampaignForm?.contact?.id,
+                status: 1
+              }
+            }
+          }
+        )
 
-    if (sendActiveCampaignFormBody.success) {
-      return {
-        success: true
+        if (addContactToList?.contactList?.id) {
+          return { success: true }
+        }
+      } else {
+        return {
+          success: false
+        }
       }
-    } else {
+    } catch (e: any) {
+      const _e: Error = e
+      console.error(e)
+      setResponseStatus(400)
       return {
-        success: false
+        success: false,
+        error: _e.message
       }
     }
-  } catch {
-    return {
-      success: false
-    }
-  }
-})
+  })
