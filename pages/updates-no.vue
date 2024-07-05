@@ -9,8 +9,8 @@
         />
         <ThanksSection
           v-else
-          title="Thank you for your continuing support."
-          description="We're happy you'd like to stay in touch!"
+          title="Your response has been recorded."
+          description="We're sorry to see you go, but you'll no longer receive updates from us!"
           :show-explore-section="false"
         />
       </div>
