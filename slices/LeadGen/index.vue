@@ -13,7 +13,7 @@
         :list="slice.items.map((i: any) => asText(i.bullet_text))"
       />
     </div>
-    <div class="flex flex-col gap-6 text-left">
+    <form class="flex flex-col gap-6 text-left" @submit.prevent.stop="submitForm">
       <BankLocationSearch
         v-model="bank"
         :warning="warningsMap['bank']"
@@ -78,7 +78,7 @@
         type="submit"
         class="button-green w-full md:w-auto mt-2 flex justify-center"
         :class="{
-          'pointer-events-none opacity-75': busy || !captchaVerified,
+          'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
         }"
       >
         <span v-if="!busy"> {{ content.button_label || 'Complete Sign Up' }} </span>
@@ -97,7 +97,8 @@
           </svg>
         </span>
       </button>
-    </div>
+      <span v-if="formError" class="text-red-300 font-semibold text-center">Something went wrong, try again!</span>
+    </form>
   </div>
 </template>
 
@@ -137,21 +138,51 @@ const {
   isAgreeTerms,
   isAgreeMarketing,
   warningsMap,
+  hasWarnings,
+  showWarnings,
   bank,
-  /*  validate, */
   busy
 } = useContactForm(
   'leadGen',
-  ['firstName', 'email', 'isAgreeTerms', 'bank'],
+  ['firstName', 'email', 'isAgreeTerms'],
   extras
 )
 
-/* async function checkAndSend () {
-  validate()
-  reminderWarning.value = null
-  if (await send()) {
-    navigateTo(props.successRedirectURL)
+const formError = ref<boolean>(false)
+const submitForm = async () => {
+  showWarnings.value = true
+  if (hasWarnings.value) {
+    busy.value = false
+    return false
   }
-} */
 
+  if (busy.value) {
+    return // already busy, prevent double requests
+  }
+  busy.value = true
+
+  const formFields = {
+    firstName: firstName.value,
+    email: email.value,
+    2: bank.value?.name,
+    18: currentStatus.value,
+    19: isAgreeMarketing.value ? 'Yes' : 'No'
+  }
+
+  const response = await $fetch('/api/lead-gen-active-campaign', {
+    method: 'POST',
+    body: {
+      formFields
+    }
+  })
+
+  if (response.success) {
+    formError.value = false
+    busy.value = false
+    navigateTo('/thanks')
+  } else {
+    formError.value = true
+    busy.value = false
+  }
+}
 </script>

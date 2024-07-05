@@ -15,8 +15,8 @@
     </div>
     <div
       v-if="warning"
-      class="absolute top-full left-0 text-xs ml-8"
-      :class="dark ? 'text-white font-semibold' : 'text-red-600'"
+      class="absolute top-full left-0 text-xs ml-8 mt-1"
+      :class="dark ? 'text-red-300 font-semibold' : 'text-red-600'"
     >
       {{ warning }}
     </div>

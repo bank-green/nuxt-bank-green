@@ -8,7 +8,7 @@
     :show-warning="warning"
   >
     <SearchInput
-      v-model="search"
+      v-model="selected"
       role="combobox"
       title="title"
       :aria-expanded="isShowing"
@@ -55,10 +55,10 @@
           @select-item="onSelectStatus"
         >
           <div
-            class="font-normal block truncate cursor-pointer"
+            class="block truncate cursor-pointer"
             :class="{
-              'font-semibold': isSelected,
-              'font-normal': !isSelected,
+              'font-semibold': selected === item,
+              'font-normal': selected !== item,
             }"
           >
             {{ item }}
@@ -76,17 +76,17 @@ import SearchInput from '@/components/forms/input/SearchInput.vue'
 
 defineProps<{
   modelValue: string,
-  disabled: boolean,
-  warning: string,
-  dark: boolean,
-  title: String
+  disabled?: boolean,
+  warning?: string,
+  dark?: boolean,
+  title: string
 }>()
 
 const emit = defineEmits(['update:modelValue'])
 
 const isShowing = ref<boolean>(false)
 
-const search = ref<string>('')
+const selected = ref<string>('')
 
 const status = computed(() => ['I’m actively planning to switch banks', 'I’m considering switching banks'])
 
@@ -97,15 +97,15 @@ function hideList () {
   isShowing.value = false
 }
 
-function onSelectStatus (status) {
+function onSelectStatus (status: string) {
   console.log(status)
-  search.value = status
+  selected.value = status
   emit('update:modelValue', status)
   isShowing.value = false
 }
 
 function onCloseClick () {
-  search.value = ''
+  selected.value = ''
   emit('update:modelValue', '')
 }
 </script>
