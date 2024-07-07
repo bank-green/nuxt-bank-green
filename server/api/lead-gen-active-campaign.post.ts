@@ -30,7 +30,7 @@ export default defineEventHandler(
               value: body.formFields.status
             },
             {
-              field: '19',
+              field: '11',
               value: body.formFields.marketing
             }
           ]
