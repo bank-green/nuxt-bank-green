@@ -98,7 +98,6 @@ function hideList () {
 }
 
 function onSelectStatus (status: string) {
-  console.log(status)
   selected.value = status
   emit('update:modelValue', status)
   isShowing.value = false
