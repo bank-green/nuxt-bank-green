@@ -38,7 +38,7 @@ export default defineEventHandler(
       }
 
       // Create contact with the incoming fields
-      const sendActiveCampaignForm: any = await $fetch(baseUrl + '/contacts', {
+      const sendActiveCampaignForm: any = await $fetch(baseUrl + '/contact/sync', {
         method: 'POST',
         headers: {
           accept: 'application/json',
