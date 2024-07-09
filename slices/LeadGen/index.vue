@@ -2,16 +2,17 @@
   <div
     id="lead-gen"
     style="scroll-margin-top: 80px"
-    class="flex flex-col lg:flex-row gap-12 md:gap-24 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
+    class="flex flex-col lg:flex-row gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark"
   >
     <div class="flex flex-col gap-12">
       <h2
-        class="w-full font-bold text-xl md:text-4xl tracking-wider text-gray-50"
+        class="w-full text-xl md:text-4xl tracking-wider text-gray-50"
+        style="font-weight: 900; line-height: 3rem;"
       >
         {{ content?.title || "Curious about switching to a green bank?" }}
       </h2>
       <CheckList
-        class="md:text-xl font-medium"
+        class="md:text-xl"
         :list="slice.items.map((i: any) => asText(i.bullet_text))"
       />
     </div>

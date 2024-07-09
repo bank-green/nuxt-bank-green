@@ -2,7 +2,7 @@
   <div
     :class="`${
       dark ? 'text-white' : 'bg-white text-gray-700 md:shadow-md'
-    } rounded-2xl px-8 py-10 space-y-4`"
+    } rounded-2xl px-8 py-10 space-y-6`"
   >
     <div v-for="(item, i) in list" :key="i" class="flex items-start">
       <img

@@ -219,6 +219,10 @@
         </NuxtLink>
       </div>
     </div>
+    <!-- For whatever reason I need the following gap commented in so that gap works in Slice -->
+    <!-- <div
+      class="flex flex-col lg:flex-row gap-12 lg:gap-20"
+    />-->
     <SliceZone
       :slices="prismicSlices ?? []"
       :components="prismicSliceComponents"
