@@ -118,7 +118,7 @@
             :field="prismicPageData?.impact"
           />
           <div
-            class="order-first lg:order-last flex items-center justify-center"
+            class="order-first lg:order-last flex items-center justify-center flex-col"
           >
             <PrismicImage
               v-if="
@@ -128,6 +128,9 @@
               alt="impact-image"
               :field="prismicDefaultPageData['impact-image']"
             />
+            <NuxtLink :to="website" target="_blank" class="button-green-outline w-auto">
+              <span class="font-semibold">{{ `Visit ${name}` }}</span>
+            </NuxtLink>
           </div>
         </div>
       </template>
@@ -196,7 +199,7 @@
       </template>
     </Tab>
     <div
-      v-else
+      v-else-if="tabIds.length === 0 && !!fromTheWebsite"
       :class="[
         'w-full block relative bg-white rounded-xl shadow-soft border py-12 px-8 md:px-16',
         'contain sm:text-center',
@@ -211,12 +214,19 @@
         <p class="whitespace-pre-line text-gray-500 sm:text-xl">
           {{ fromTheWebsite }}
         </p>
+        <NuxtLink :to="website" target="_blank" class="button-green-outline w-auto mt-8 mx-auto" style="width: max-content;">
+          <span class="font-semibold">{{ `Visit ${name}` }}</span>
+        </NuxtLink>
       </div>
     </div>
-    <!--  <SliceZone
+    <!-- For whatever reason I need the following gap commented in so that gap works in Slice -->
+    <!-- <div
+      class="flex flex-col lg:flex-row gap-12 lg:gap-20"
+    />-->
+    <SliceZone
       :slices="prismicSlices ?? []"
       :components="prismicSliceComponents"
-    /> -->
+    />
   </div>
 </template>
 
@@ -253,8 +263,8 @@ const tabIds = computed(() =>
   )
 )
 
-/* const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
- */
+const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
+
 function getBankFeature (featureName: string, defaultValue: string = 'No') {
   const feature = props.bankFeatures.find(
     feature => feature.feature.name === featureName
