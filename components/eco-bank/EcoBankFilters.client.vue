@@ -160,9 +160,9 @@
         Credit cards
       </CheckboxSection>
       <CheckboxSection
-        v-model="filterPayload.bankAccounts['Mortgage or loans']"
+        v-model="filterPayload.bankAccounts['Mortgages or loans']"
         class="col-span-full"
-        name="Mortgage or loans"
+        name="Mortgages or Loans"
       >
         Mortgage or loan options
       </CheckboxSection>
@@ -227,7 +227,7 @@ const getDefaultFilter = () => ({
     'Small business lending': false,
     'Corporate lending': false,
     'Credit cards': false,
-    'Mortgage or loans': false
+    'Mortgages or Loans': false
   },
   security: {
     'Deposit protection': false
