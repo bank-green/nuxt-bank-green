@@ -160,7 +160,7 @@
         Credit cards
       </CheckboxSection>
       <CheckboxSection
-        v-model="filterPayload.bankAccounts['Mortgages or loans']"
+        v-model="filterPayload.bankAccounts['Mortgages or Loans']"
         class="col-span-full"
         name="Mortgages or Loans"
       >
