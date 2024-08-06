@@ -17,7 +17,7 @@ export default function getFeatures (bankFeatures) {
     'Business accounts': 'Business Current Accounts',
     'Small business lending': 'Small Business Lending',
     'Credit cards': 'Credit Cards',
-    'Mortgage or loans': 'Mortgage or Loan Options',
+    'Mortgages or Loans': 'Mortgage or Loan Options',
     'Deposit protection': 'Deposit Protection',
     'Corporate Lending': 'Corporate Lending',
     'Business Savings Accounts': 'Business Savings Accounts'
