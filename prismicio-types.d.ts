@@ -1646,6 +1646,17 @@ type HomepageDocumentDataSlices1Slice = FeaturedInSliceSlice;
  */
 interface HomepageDocumentData {
   /**
+   * Title field in *HomePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
    * Description1 field in *HomePage*
    *
    * - **Field Type**: Rich Text

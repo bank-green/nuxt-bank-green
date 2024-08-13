@@ -9,7 +9,7 @@
           <h1
             class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl"
           >
-            Is your money being used to fund climate chaos?
+            {{ home?.data.title || "Is your money being used to fund climate chaos?" }}
           </h1>
           <div
             class="flex flex-col md:flex-row items-stretch md:items-center space-y-2 md:space-y-0 md:space-x-4 mt-8 md:mt-10 md:mb-10"
