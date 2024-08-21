@@ -1,0 +1,31 @@
+{
+  "id": "partner_slice",
+  "type": "SharedSlice",
+  "name": "PartnerSlice",
+  "description": "PartnerSlice",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "name": {
+          "type": "Text",
+          "config": { "label": "name", "placeholder": "" }
+        },
+        "url": {
+          "type": "Link",
+          "config": { "label": "url", "placeholder": "", "select": null }
+        },
+        "image": {
+          "type": "Image",
+          "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
