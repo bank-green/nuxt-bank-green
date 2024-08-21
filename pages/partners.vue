@@ -49,11 +49,6 @@ const { data: partners } = await useAsyncData('partners', () =>
 )
 usePrismicSEO(partners?.value?.data)
 
-useHeadHelper(
-  'Our Partners - Bank.Green',
-  'Our amazing partners at Bank.Green, together with whom we are reshaping finance.'
-)
-
 const partnersList = partners?.value?.data.slices1
 
 </script>
