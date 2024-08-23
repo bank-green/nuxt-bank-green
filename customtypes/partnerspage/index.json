@@ -6,6 +6,14 @@
   "status": true,
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": { "label": "title", "placeholder": "" }
+      },
+      "description": {
+        "type": "Text",
+        "config": { "label": "description", "placeholder": "" }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
@@ -13,19 +21,6 @@
       }
     },
     "PartnerSlice": {
-      "title": {
-        "type": "Text",
-        "config": { "label": "title", "placeholder": "" }
-      },
-      "description": {
-        "type": "StructuredText",
-        "config": {
-          "label": "description",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
       "slices1": {
         "type": "Slices",
         "fieldset": "Slice Zone",

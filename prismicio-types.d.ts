@@ -2095,6 +2095,28 @@ type PartnerspageDocumentDataSlices1Slice = PartnerSliceSlice;
  */
 interface PartnerspageDocumentData {
   /**
+   * title field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *PartnersPage*
    *
    * - **Field Type**: Slice Zone
@@ -2105,28 +2127,6 @@ interface PartnerspageDocumentData {
    */
   slices: prismic.SliceZone<PartnerspageDocumentDataSlicesSlice>
   /**
-   * title field in *PartnersPage*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.title
-   * - **Tab**: PartnerSlice
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */;
-  title: prismic.KeyTextField;
-
-  /**
-   * description field in *PartnersPage*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.description
-   * - **Tab**: PartnerSlice
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
-
-  /**
    * Slice Zone field in *PartnersPage*
    *
    * - **Field Type**: Slice Zone
@@ -2134,7 +2134,7 @@ interface PartnerspageDocumentData {
    * - **API ID Path**: partnerspage.slices1[]
    * - **Tab**: PartnerSlice
    * - **Documentation**: https://prismic.io/docs/field#slices
-   */
+   */;
   slices1: prismic.SliceZone<PartnerspageDocumentDataSlices1Slice>;
 }
 
