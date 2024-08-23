@@ -2095,26 +2095,26 @@ type PartnerspageDocumentDataSlices1Slice = PartnerSliceSlice;
  */
 interface PartnerspageDocumentData {
   /**
-   * title field in *PartnersPage*
+   * SEO title field in *PartnersPage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.title
+   * - **API ID Path**: partnerspage.seo_title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title: prismic.KeyTextField;
+  seo_title: prismic.KeyTextField;
 
   /**
-   * description field in *PartnersPage*
+   * SEO description field in *PartnersPage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.description
+   * - **API ID Path**: partnerspage.seo_description
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description: prismic.KeyTextField;
+  seo_description: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *PartnersPage*

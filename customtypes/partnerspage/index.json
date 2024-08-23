@@ -6,13 +6,13 @@
   "status": true,
   "json": {
     "Main": {
-      "title": {
+      "seo_title": {
         "type": "Text",
-        "config": { "label": "title", "placeholder": "" }
+        "config": { "label": "SEO title", "placeholder": "" }
       },
-      "description": {
+      "seo_description": {
         "type": "Text",
-        "config": { "label": "description", "placeholder": "" }
+        "config": { "label": "SEO description", "placeholder": "" }
       },
       "slices": {
         "type": "Slices",
