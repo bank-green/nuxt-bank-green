@@ -3729,71 +3729,6 @@ export type LeadGenSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *PartnerSlice → Primary*
- */
-export interface PartnerSliceSliceDefaultPrimary {
-  /**
-   * name field in *PartnerSlice → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: partner_slice.primary.name
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  name: prismic.KeyTextField;
-
-  /**
-   * url field in *PartnerSlice → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: partner_slice.primary.url
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  url: prismic.LinkField;
-
-  /**
-   * image field in *PartnerSlice → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: partner_slice.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Default variation for PartnerSlice Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type PartnerSliceSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<PartnerSliceSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *PartnerSlice*
- */
-type PartnerSliceSliceVariation = PartnerSliceSliceDefault;
-
-/**
- * PartnerSlice Shared Slice
- *
- * - **API ID**: `partner_slice`
- * - **Description**: PartnerSlice
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type PartnerSliceSlice = prismic.SharedSlice<
-  "partner_slice",
-  PartnerSliceSliceVariation
->;
-
-/**
  * Default variation for SharePicGallerySlice Slice
  *
  * - **API ID**: `default`
@@ -4268,9 +4203,6 @@ declare module "@prismicio/client" {
       LeadGenSlice,
       LeadGenSliceVariation,
       LeadGenSliceDefault,
-      PartnerSliceSlice,
-      PartnerSliceSliceVariation,
-      PartnerSliceSliceDefault,
       SharePicGallerySliceSlice,
       SharePicGallerySliceSliceVariation,
       SharePicGallerySliceSliceDefault,
