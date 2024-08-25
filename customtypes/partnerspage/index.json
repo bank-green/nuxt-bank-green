@@ -6,6 +6,14 @@
   "status": true,
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": { "label": "Title", "placeholder": "" }
+      },
+      "description": {
+        "type": "Text",
+        "config": { "label": "Description", "placeholder": "" }
+      },
       "seo_title": {
         "type": "Text",
         "config": { "label": "SEO title", "placeholder": "" }

@@ -5,10 +5,10 @@
         <h1
           class="text-2xl font-semibold whitespace-pre-line mb-4 md:text-center"
         >
-         {{ partnersData.seo_title }}
+         {{ partnersData.title }}
         </h1>
         <h2 class="text-gray-600 md:text-center">
-          {{ partnersData.seo_description }}
+          {{ partnersData.description }}
         </h2>
         <div class="max-w-4xl mx-auto py-16 grid grid-cols-6 gap-4 lg:gap-10">
           <a

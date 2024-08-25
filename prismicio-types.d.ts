@@ -2137,6 +2137,28 @@ export interface PartnerspageDocumentDataPartnersItem {
  */
 interface PartnerspageDocumentData {
   /**
+   * Title field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
    * SEO title field in *PartnersPage*
    *
    * - **Field Type**: Text
