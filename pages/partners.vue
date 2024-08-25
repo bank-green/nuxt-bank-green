@@ -5,30 +5,29 @@
         <h1
           class="text-2xl font-semibold whitespace-pre-line mb-4 md:text-center"
         >
-          Our Partners
+         {{ partnersData.seo_title }}
         </h1>
         <h2 class="text-gray-600 md:text-center">
-          Below is a list of our amazing partners, together with whom we are
-          reshaping finance.
+          {{ partnersData.seo_description }}
         </h2>
         <div class="max-w-4xl mx-auto py-16 grid grid-cols-6 gap-4 lg:gap-10">
           <a
-            v-for="partner in partners"
+            v-for="partner in partnersList"
             :key="partner.name"
-            :href="partner.url"
+            :href="asLink(partner.url)"
             class="block col-span-6 sm:col-span-3 md:col-span-2 w-full h-40 bg-white rounded-3xl px-8 py-6 hover:shadow-xl transition-all duration-500 ease-in-out filter-grayscale hover:filter-none"
             rel="noopener"
             target="_blank"
           >
             <NuxtImg
-              :src="`/img/logos/partner/${partner.img}`"
+              v-if="asLink(partner?.img)"
+              :src="asLink(partner?.img)"
               class="object-center object-contain w-full h-full"
               loading="lazy"
               provider="none"
             />
           </a>
         </div>
-
         <div
           class="mx-auto max-w-4xl flex flex-row justify-center items-center pb-12"
         >
@@ -41,8 +40,26 @@
 
 <script setup lang="ts">
 import SignupBox from '@/components/forms/SignupBox.vue'
+import { asLink } from '@prismicio/helpers'
 
-const partners = [
+const { client } = usePrismic()
+const { data: partners } = await useAsyncData('partner', () =>
+  client.getSingle('partnerspage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
+usePrismicSEO(partners?.value?.data)
+
+console.log(partners)
+
+const partnersData = partners?.value?.data
+const partnersList = partners?.value?.data?.partner
+true
+
+</script>
+
+/*
+[
   {
     name: 'banktrack',
     url: 'https://banktrack.org',
@@ -134,8 +151,4 @@ const partners = [
     img: 'thecarbonalmanac.png'
   }
 ]
-useHeadHelper(
-  'Our Partners - Bank.Green',
-  'Our amazing partners at Bank.Green, together with whom we are reshaping finance.'
-)
-</script>
+
