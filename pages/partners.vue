@@ -5,7 +5,7 @@
         <h1
           class="text-2xl font-semibold whitespace-pre-line mb-4 md:text-center"
         >
-         {{ partnersData?.title || 'Our Partners' }}
+          {{ partnersData?.title || 'Our Partners' }}
         </h1>
         <h2 class="text-gray-600 md:text-center">
           {{ partnersData?.description || 'We are proud to work with the following organizations.' }}
@@ -39,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import SignupBox from '@/components/forms/SignupBox.vue'
 import { asLink, asImageSrc } from '@prismicio/helpers'
+import SignupBox from '@/components/forms/SignupBox.vue'
 
 const { client } = usePrismic()
 const { data: partners } = await useAsyncData('partner', () => client.getSingle('partnerspage'))
@@ -144,4 +144,3 @@ const partnersList = partners?.value?.data?.partners
     img: 'thecarbonalmanac.png'
   }
 ]
-
