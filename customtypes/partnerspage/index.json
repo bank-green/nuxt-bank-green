@@ -14,17 +14,25 @@
         "type": "Text",
         "config": { "label": "SEO description", "placeholder": "" }
       },
-      "slices": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": { "choices": { "partner_slice": { "type": "SharedSlice" } } }
-      }
-    },
-    "PartnerSlice": {
-      "slices1": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": { "choices": { "partner_slice": { "type": "SharedSlice" } } }
+      "partner": {
+        "type": "Group",
+        "config": {
+          "label": "Partner",
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": { "label": "name", "placeholder": "" }
+            },
+            "url": {
+              "type": "Link",
+              "config": { "label": "url", "placeholder": "", "select": null }
+            },
+            "img": {
+              "type": "Image",
+              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+            }
+          }
+        }
       }
     }
   }

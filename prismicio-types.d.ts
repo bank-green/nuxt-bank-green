@@ -2086,9 +2086,40 @@ export type MethodologyDocument<Lang extends string = string> =
     Lang
   >;
 
-type PartnerspageDocumentDataSlicesSlice = PartnerSliceSlice;
+/**
+ * Item in *PartnersPage → Partner*
+ */
+export interface PartnerspageDocumentDataPartnerItem {
+  /**
+   * name field in *PartnersPage → Partner*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partner[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
 
-type PartnerspageDocumentDataSlices1Slice = PartnerSliceSlice;
+  /**
+   * url field in *PartnersPage → Partner*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partner[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField;
+
+  /**
+   * image field in *PartnersPage → Partner*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partner[].img
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img: prismic.ImageField<never>;
+}
 
 /**
  * Content for PartnersPage documents
@@ -2117,25 +2148,15 @@ interface PartnerspageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
-   * Slice Zone field in *PartnersPage*
+   * Partner field in *PartnersPage*
    *
-   * - **Field Type**: Slice Zone
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.slices[]
+   * - **API ID Path**: partnerspage.partner[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  slices: prismic.SliceZone<PartnerspageDocumentDataSlicesSlice>
-  /**
-   * Slice Zone field in *PartnersPage*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.slices1[]
-   * - **Tab**: PartnerSlice
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
-  slices1: prismic.SliceZone<PartnerspageDocumentDataSlices1Slice>;
+  partner: prismic.GroupField<Simplify<PartnerspageDocumentDataPartnerItem>>;
 }
 
 /**
