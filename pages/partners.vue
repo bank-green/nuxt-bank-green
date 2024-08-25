@@ -5,10 +5,10 @@
         <h1
           class="text-2xl font-semibold whitespace-pre-line mb-4 md:text-center"
         >
-         {{ partnersData.title }}
+         {{ partnersData?.title || 'Our Partners' }}
         </h1>
         <h2 class="text-gray-600 md:text-center">
-          {{ partnersData.description }}
+          {{ partnersData?.description || 'We are proud to work with the following organizations.' }}
         </h2>
         <div class="max-w-4xl mx-auto py-16 grid grid-cols-6 gap-4 lg:gap-10">
           <a
@@ -20,8 +20,8 @@
             target="_blank"
           >
             <NuxtImg
-              v-if="asLink(partner?.img)"
-              :src="asLink(partner?.img)"
+              v-if="asImageSrc(partner?.img)"
+              :src="asImageSrc(partner?.img)"
               class="object-center object-contain w-full h-full"
               loading="lazy"
               provider="none"
@@ -40,14 +40,10 @@
 
 <script setup lang="ts">
 import SignupBox from '@/components/forms/SignupBox.vue'
-import { asLink } from '@prismicio/helpers'
+import { asLink, asImageSrc } from '@prismicio/helpers'
 
 const { client } = usePrismic()
-const { data: partners } = await useAsyncData('partner', () =>
-  client.getSingle('partnerspage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
-)
+const { data: partners } = await useAsyncData('partner', () => client.getSingle('partnerspage'))
 usePrismicSEO(partners?.value?.data)
 
 const partnersData = partners?.value?.data
