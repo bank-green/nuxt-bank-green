@@ -14,10 +14,10 @@
         "type": "Text",
         "config": { "label": "SEO description", "placeholder": "" }
       },
-      "partner": {
+      "partners": {
         "type": "Group",
         "config": {
-          "label": "Partner",
+          "label": "Partners",
           "fields": {
             "name": {
               "type": "Text",

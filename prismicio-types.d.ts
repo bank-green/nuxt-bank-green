@@ -2098,35 +2098,35 @@ export type MethodologyDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *PartnersPage → Partner*
+ * Item in *PartnersPage → Partners*
  */
-export interface PartnerspageDocumentDataPartnerItem {
+export interface PartnerspageDocumentDataPartnersItem {
   /**
-   * name field in *PartnersPage → Partner*
+   * name field in *PartnersPage → Partners*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.partner[].name
+   * - **API ID Path**: partnerspage.partners[].name
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   name: prismic.KeyTextField;
 
   /**
-   * url field in *PartnersPage → Partner*
+   * url field in *PartnersPage → Partners*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.partner[].url
+   * - **API ID Path**: partnerspage.partners[].url
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   url: prismic.LinkField;
 
   /**
-   * image field in *PartnersPage → Partner*
+   * image field in *PartnersPage → Partners*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.partner[].img
+   * - **API ID Path**: partnerspage.partners[].img
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   img: prismic.ImageField<never>;
@@ -2159,15 +2159,15 @@ interface PartnerspageDocumentData {
   seo_description: prismic.KeyTextField;
 
   /**
-   * Partner field in *PartnersPage*
+   * Partners field in *PartnersPage*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: partnerspage.partner[]
+   * - **API ID Path**: partnerspage.partners[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  partner: prismic.GroupField<Simplify<PartnerspageDocumentDataPartnerItem>>;
+  partners: prismic.GroupField<Simplify<PartnerspageDocumentDataPartnersItem>>;
 }
 
 /**
