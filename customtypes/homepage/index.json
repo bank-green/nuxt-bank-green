@@ -3,8 +3,13 @@
   "label": "HomePage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": { "label": "Title", "placeholder": "" }
+      },
       "description1": {
         "type": "StructuredText",
         "config": {
@@ -59,6 +64,5 @@
         }
       }
     }
-  },
-  "format": "custom"
+  }
 }
