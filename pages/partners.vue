@@ -50,11 +50,8 @@ const { data: partners } = await useAsyncData('partner', () =>
 )
 usePrismicSEO(partners?.value?.data)
 
-console.log(partners)
-
 const partnersData = partners?.value?.data
-const partnersList = partners?.value?.data?.partner
-true
+const partnersList = partners?.value?.data?.partners
 
 </script>
 
