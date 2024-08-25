@@ -13,8 +13,8 @@
         <div class="max-w-4xl mx-auto py-16 grid grid-cols-6 gap-4 lg:gap-10">
           <a
             v-for="partner in partnersList"
-            :key="partner.name"
-            :href="asLink(partner.url)"
+            :key="partner?.name"
+            :href="asLink(partner?.url)"
             class="block col-span-6 sm:col-span-3 md:col-span-2 w-full h-40 bg-white rounded-3xl px-8 py-6 hover:shadow-xl transition-all duration-500 ease-in-out filter-grayscale hover:filter-none"
             rel="noopener"
             target="_blank"
