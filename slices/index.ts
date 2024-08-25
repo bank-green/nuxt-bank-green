@@ -14,7 +14,6 @@ export const components = defineSliceZoneComponents({
   ),
   image_slice: defineAsyncComponent(() => import('./ImageSlice/index.vue')),
   lead_gen: defineAsyncComponent(() => import('./LeadGen/index.vue')),
-  partner_slice: defineAsyncComponent(() => import('./PartnerSlice/index.vue')),
   share_pic_gallery_slice: defineAsyncComponent(
     () => import('./SharePicGallerySlice/index.vue')
   ),
