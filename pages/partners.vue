@@ -8,7 +8,7 @@
           {{ partnersData?.title || 'Our Partners' }}
         </h1>
         <h2 class="text-gray-600 md:text-center">
-          {{ partnersData?.description || 'We are proud to work with the following organizations.' }}
+          {{ partnersData?.description || 'Below is a list of our amazing partners, together with whom we are reshaping finance.' }}
         </h2>
         <div class="max-w-4xl mx-auto py-16 grid grid-cols-6 gap-4 lg:gap-10">
           <a
