@@ -2,8 +2,8 @@
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
+  { ignores: ['prismicio-types.d.ts', './slices/index.ts'] },
   {
-    ignores: ['prismicio-types.d.ts', './slices/index.ts'],
     rules: {
       'no-console': 'off',
       'vue/multi-word-component-names': 'off',
