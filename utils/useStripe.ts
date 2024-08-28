@@ -1,15 +1,16 @@
-import {
+import type {
   Appearance,
   Stripe,
-  StripeElements,
-  loadStripe
+  StripeElements } from '@stripe/stripe-js'
+import {
+  loadStripe,
 } from '@stripe/stripe-js'
-import { CreatePaymentIntentResponse } from './interfaces/donate'
+import type { CreatePaymentIntentResponse } from './interfaces/donate'
 
-export default function useStripe (
+export default function useStripe(
   publishableKey: string,
   elementId: string,
-  authenticationElementId?: string
+  authenticationElementId?: string,
 ) {
   const isStripeLoaded = ref(false)
   const stripeMessages = ref<string[]>([])
@@ -25,9 +26,9 @@ export default function useStripe (
       {
         method: 'POST',
         body: {
-          amount
-        }
-      }
+          amount,
+        },
+      },
     )
     console.info(stripePaymentIntent)
     if (stripePaymentIntent?.clientSecret == null) { return }
@@ -38,11 +39,11 @@ export default function useStripe (
 
     if (stripe) {
       const appearance: Appearance = {
-        theme: 'flat'
+        theme: 'flat',
       }
       elements = stripe.elements({
         clientSecret: stripePaymentIntent.clientSecret,
-        appearance
+        appearance,
       })
       const paymentElement = elements.create('payment')
       paymentElement.mount(`#${elementId}`)
@@ -68,17 +69,17 @@ export default function useStripe (
           body: {
             email,
             id: customerId,
-            consent
-          }
-        }
+            consent,
+          },
+        },
       )
     }
 
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${window.location.origin}/donate-complete`
-      }
+        return_url: `${window.location.origin}/donate-complete`,
+      },
     })
 
     if (error.type === 'card_error' || error.type === 'validation_error') {
@@ -92,6 +93,6 @@ export default function useStripe (
     isStripeLoaded,
     stripeMessages,
     initOneTimePayment,
-    handleSubmit
+    handleSubmit,
   }
 }

@@ -1,6 +1,10 @@
 <template>
   <div class="flex appearance-none w-full text-sm leading-5 shadow-soft">
-    <label name="name" class="w-20" :class="labelClasses">
+    <label
+      name="name"
+      class="w-20"
+      :class="labelClasses"
+    >
       {{ title || name }}
     </label>
     <span class="text-gray-800">
@@ -11,10 +15,10 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  value: string;
-  title?: string;
-  name: string;
-  dark?: boolean;
+  value: string
+  title?: string
+  name: string
+  dark?: boolean
 }>()
 
 const labelClasses = computed(() => {
@@ -23,5 +27,4 @@ const labelClasses = computed(() => {
   }
   return 'text-gray-500 font-semibold'
 })
-
 </script>

@@ -26,7 +26,10 @@
       class="flex flex-col justify-center items-center bg-sushi-100 rounded-xl py-6 md:py-12 px-6 md:px-16"
     >
       <div class="w-full flex justify-center my-12">
-        <button class="button-green max-w-md md:w-max" @click="$router.push('/team')">
+        <button
+          class="button-green max-w-md md:w-max"
+          @click="$router.push('/team')"
+        >
           Back to Current Contributors
         </button>
       </div>
@@ -40,8 +43,8 @@ import { asText, asLink } from '@prismicio/helpers'
 const { client } = usePrismic()
 const { data: team } = await useAsyncData('team', () =>
   client.getSingle('teampage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(team?.value?.data)
 

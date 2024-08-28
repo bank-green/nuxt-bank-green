@@ -5,10 +5,10 @@
  * @param {string} src /img/features/1-home.jpg
  * @param {string} newExtension webp
  */
-export default function getSrcSet (
+export default function getSrcSet(
   srcset?: string,
   src?: string,
-  newExtension?: string
+  newExtension?: string,
 ) {
   if (!srcset || !src) {
     return ''
@@ -27,7 +27,7 @@ export default function getSrcSet (
   return srcsetOptions.join(',')
 }
 
-function getExtension (filename?: string) {
+function getExtension(filename?: string) {
   if (!filename || typeof filename !== 'string') {
     return '' // bad argument
   }
@@ -37,6 +37,6 @@ function getExtension (filename?: string) {
   return filename.split('.').pop()
 }
 
-function getFileName (filename: string) {
+function getFileName(filename: string) {
   return filename.split('.').slice(0, -1).join('.')
 }

@@ -30,41 +30,41 @@
 
 <script setup lang="ts">
 import { asText } from '@prismicio/helpers'
+import type { BlogpostDocument } from 'prismicio-types'
 import BlogCard from '@/components/blog/BlogCard.vue'
-import { BlogpostDocument } from 'prismicio-types'
 
 const { client } = usePrismic()
 
 const { data: posts } = await useAsyncData('blogposts', () =>
   client.getAllByType('blogpost', {
-    orderings: { field: 'my.blogpost.publicationdate', direction: 'desc' }
-  })
+    orderings: { field: 'my.blogpost.publicationdate', direction: 'desc' },
+  }),
 )
 
 const getImageSrc = (post: BlogpostDocument) =>
-  post.data.cardimage?.url ||
-  post.data.slices.find(s => s.slice_type === 'image_slice')?.primary?.image
-    .url ||
-  ''
+  post.data.cardimage?.url
+  || post.data.slices.find(s => s.slice_type === 'image_slice')?.primary?.image
+    .url
+    || ''
 
 useHead({
   title: 'Bank Green Blog: Learn How to Divest From Fossil Fuels',
   htmlAttrs: {
-    lang: 'en'
+    lang: 'en',
   },
   link: [
     {
       hid: 'canonical',
       rel: 'canonical',
-      href: 'https://bank.green/blog'
-    }
+      href: 'https://bank.green/blog',
+    },
   ],
   meta: [
     { property: 'og:locale', content: 'en_US' },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'Bank Green' },
     { property: 'og:url', content: 'https://bank.green/blog' },
-    { name: 'description', content: 'Read the Bank.Green blog for stories and tips about divesting from fossil fuels.' }
-  ]
+    { name: 'description', content: 'Read the Bank.Green blog for stories and tips about divesting from fossil fuels.' },
+  ],
 })
 </script>

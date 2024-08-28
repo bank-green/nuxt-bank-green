@@ -2,7 +2,7 @@
   <div
     class="fixed z-50 inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:px-6 sm:py-12 sm:items-start sm:justify-end"
   >
-    <!-- Notification panel, show/hide based on alert state.-->
+    <!-- Notification panel, show/hide based on alert state. -->
     <transition-group
       enter-active-class="transform ease-out duration-300 transition"
       enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
@@ -23,7 +23,10 @@
         >
           <div class="p-4">
             <div class="flex items-start">
-              <div v-if="notif.icon" class="flex-shrink-0">
+              <div
+                v-if="notif.icon"
+                class="flex-shrink-0"
+              >
                 <svg
                   v-if="notif.icon === 'check'"
                   class="h-6 w-6 text-green-400"
@@ -83,7 +86,11 @@
                   class="inline-flex text-gray-400 focus:outline-none focus:text-gray-500 transition150"
                   @click="closeNotification(notif)"
                 >
-                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
                     <path
                       fill-rule="evenodd"
                       d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -101,7 +108,7 @@
 </template>
 
 <script setup lang="ts">
-import { NotificationInterface } from '~~/utils/notifications'
+import type { NotificationInterface } from '~~/utils/notifications'
 
 const computedNotifications = computed(() => notifications.state.notifications)
 

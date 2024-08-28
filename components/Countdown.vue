@@ -23,13 +23,13 @@ import {
   isValid,
   isFuture,
   formatDistanceToNowStrict,
-  formatRelative
+  formatRelative,
 } from 'date-fns'
 
 const props = defineProps<{
-  eventStart: Date;
-  eventIsPastMessage: String;
-  showTooltip: Boolean;
+  eventStart: Date
+  eventIsPastMessage: string
+  showTooltip: boolean
 }>()
 
 const isUpcoming = ref(false)
@@ -37,11 +37,11 @@ const interval: Ref<NodeJS.Timer | null> = ref(null)
 const tooltipText = ref('')
 const durationString = ref('')
 
-function timerCount () {
+function timerCount() {
   if (isFuture(props.eventStart)) {
     durationString.value = formatDistanceToNowStrict(props.eventStart, {
       addSuffix: false,
-      unit: 'day'
+      unit: 'day',
     })
   } else {
     isUpcoming.value = false

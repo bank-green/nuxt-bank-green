@@ -9,7 +9,10 @@
       }"
     >
     <figcaption>
-      <PrismicRichText class="text-center" :field="slice.primary.caption" />
+      <PrismicRichText
+        class="text-center"
+        :field="slice.primary.caption"
+      />
     </figcaption>
   </figure>
 </template>

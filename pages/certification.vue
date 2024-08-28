@@ -49,8 +49,8 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: certification } = await useAsyncData('certification', () =>
   client.getSingle('certificationpage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(certification.value?.data)
 </script>

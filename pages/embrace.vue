@@ -22,7 +22,10 @@
 
 (Please note that some resources were not reachable and this is a simplified version of this page.)"
           />
-          <div ref="embraceForm" class="relative z-10 max-w-6xl flex flex-col-reverse lg:flex-row items-center bg-white rounded-2xl">
+          <div
+            ref="embraceForm"
+            class="relative z-10 max-w-6xl flex flex-col-reverse lg:flex-row items-center bg-white rounded-2xl"
+          >
             <Embrace />
           </div>
         </div>
@@ -36,7 +39,7 @@ import { ref } from 'vue'
 
 const { client } = usePrismic()
 const { data: embrace } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage')
+  client.getSingle('embracepage'),
 )
 try {
   if (embrace?.value) {

@@ -3,8 +3,15 @@
     class="bg-white rounded-xl shadow-soft border hover:bg-gray-50 transition duration-150 ease-in-out hover:border-sushi-500 overflow-hidden"
     :to="to"
   >
-    <div v-if="image" class="relative w-full minimal h-52 sm:h-64">
-      <NuxtImg :src="image" class="w-full h-full object-cover" loading="lazy" />
+    <div
+      v-if="image"
+      class="relative w-full minimal h-52 sm:h-64"
+    >
+      <NuxtImg
+        :src="image"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
     </div>
     <div class="p-4">
       <p class="text-sm text-gray-500">
@@ -35,6 +42,6 @@ defineProps({
   title: String,
   description: String,
   image: String,
-  to: String
+  to: String,
 })
 </script>

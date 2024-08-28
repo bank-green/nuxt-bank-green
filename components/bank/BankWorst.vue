@@ -11,12 +11,18 @@
         class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8"
       >
         <div class="flex flex-col items-center justify-start w-full">
-          <BankCircle class="max-w-sm" :rating="'worst'" />
+          <BankCircle
+            class="max-w-sm"
+            :rating="'worst'"
+          />
           <SocialSharer
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
           />
-          <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+          <NuxtLink
+            class="underline hover:text-sushi-500 mt-6"
+            to="/methodology"
+          >
             {{ bankPage?.data.link_copy_methodology_page }}
           </NuxtLink>
         </div>
@@ -69,19 +75,20 @@
     </template>
   </BankLayoutBadWorst>
 </template>
+
 <script setup lang="ts">
-import { PrismicDocument } from '@prismicio/types'
+import type { PrismicDocument } from '@prismicio/types'
 import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
 const props = defineProps<{
-  name: string;
-  website: string;
+  name: string
+  website: string
   inheritBrandRating: {
-    name: string;
-    tag: string;
-  };
-  bankPage: PrismicDocument<Record<string, any>, string, string> | null;
-  amountFinancedSince2016: string;
+    name: string
+    tag: string
+  }
+  bankPage: PrismicDocument<Record<string, any>, string, string> | null
+  amountFinancedSince2016: string
 }>()
 
 const piggyText = `While you’ve been stashing away money for a house or a weekend get-away, ${

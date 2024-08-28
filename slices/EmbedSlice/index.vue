@@ -18,14 +18,14 @@
 <script setup>
 import { getSliceComponentProps } from '@prismicio/vue'
 
-function fixYoutube (html) {
+function fixYoutube(html) {
   const widthRe = /width="\d+"/
   const heightRe = /height="\d+"/
   return html.replace(widthRe, 'width=100%').replace(heightRe, 'height=100%')
 }
 
 defineProps(
-  getSliceComponentProps(['slice', 'index', 'slices', 'context'])
+  getSliceComponentProps(['slice', 'index', 'slices', 'context']),
 )
 </script>
 

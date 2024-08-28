@@ -6,12 +6,12 @@ const baseURL = 'https://europe-west1-bank-green.cloudfunctions.net'
 export const instance = axios.create({
   baseURL,
   timeout: 120000, // timeout if no response in 2min
-  withCredentials: true
+  withCredentials: true,
 })
 httpErrorHandling.setInterceptors(instance)
 axios.defaults.headers.post['X-TLC'] = '1'
 
-function parseError (e) {
+function parseError(e) {
   const errors = e?.response?.data?.errors
   if (!errors) {
     return e
@@ -24,11 +24,11 @@ function parseError (e) {
   return e
 }
 
-export async function get (url, config) {
+export async function get(url, config) {
   try {
     const params = window.__PRERENDER_INJECTED?.prerender
       ? {
-          params: { ...config?.params, prerender: true }
+          params: { ...config?.params, prerender: true },
         }
       : config
 
@@ -39,7 +39,7 @@ export async function get (url, config) {
   }
 }
 
-export async function post (url, data, config) {
+export async function post(url, data, config) {
   try {
     const res = await instance.post(url, data, config)
     return res.data

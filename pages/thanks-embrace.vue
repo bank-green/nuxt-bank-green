@@ -13,7 +13,10 @@
           description="Your submission has been received."
           :show-explore-section="false"
         />
-        <Swoosh direction="up" color="text-sushi-50" />
+        <Swoosh
+          direction="up"
+          color="text-sushi-50"
+        />
         <Donation class="bg-sushi-50" />
       </div>
     </div>
@@ -29,6 +32,6 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 useHeadHelper('Thank you')
 const { client } = usePrismic()
 const { data: thanksembrace } = await useAsyncData('thanksembrace', () =>
-  client.getByUID('thankspages', 'thanks_embrace')
+  client.getByUID('thankspages', 'thanks_embrace'),
 )
 </script>

@@ -50,23 +50,23 @@ import BaseField from './BaseField.vue'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string | number | null;
-    title?: string;
-    description?: string;
-    name?: string;
-    placeholder?: string;
-    currencyLabel?: string;
-    typeLabel?: string;
-    type?: string;
-    step?: string;
-    autocomplete?: string | undefined;
-    rows?: string | number;
-    required?: boolean;
-    disabled?: boolean;
-    warning?: string | boolean;
-    dark?: boolean;
-    infoTooltip?: string;
-    borderColor?: string;
+    modelValue: string | number | null
+    title?: string
+    description?: string
+    name?: string
+    placeholder?: string
+    currencyLabel?: string
+    typeLabel?: string
+    type?: string
+    step?: string
+    autocomplete?: string | undefined
+    rows?: string | number
+    required?: boolean
+    disabled?: boolean
+    warning?: string | boolean
+    dark?: boolean
+    infoTooltip?: string
+    borderColor?: string
   }>(),
   {
     title: '',
@@ -83,8 +83,8 @@ const props = withDefaults(
     warning: false,
     dark: false,
     infoTooltip: '',
-    borderColor: 'border-gray-50'
-  }
+    borderColor: 'border-gray-50',
+  },
 )
 
 const emit = defineEmits(['update:modelValue'])

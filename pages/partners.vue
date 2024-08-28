@@ -32,7 +32,10 @@
         <div
           class="mx-auto max-w-4xl flex flex-row justify-center items-center pb-12"
         >
-          <SignupBox tag="partners bottom" class="w-full mt-8" />
+          <SignupBox
+            tag="partners bottom"
+            class="w-full mt-8"
+          />
         </div>
       </div>
     </div>
@@ -46,96 +49,96 @@ const partners = [
   {
     name: 'banktrack',
     url: 'https://banktrack.org',
-    img: 'banktrack.org.png'
+    img: 'banktrack.org.png',
   },
   {
     name: 'reclaimfinance',
     url: 'https://reclaimfinance.org',
-    img: 'reclaimfinance.org.png'
+    img: 'reclaimfinance.org.png',
   },
   {
     name: 'xr',
     url: 'https://rebellion.global',
-    img: 'rebellion.global.png'
+    img: 'rebellion.global.png',
   },
   {
     name: 'xryouth',
     url: 'https://xryouth.org',
-    img: 'xryouth.org.png'
+    img: 'xryouth.org.png',
   },
   {
     name: 'urgewald',
     url: 'https://urgewald.org',
-    img: 'urgewald.org.png'
+    img: 'urgewald.org.png',
   },
   {
     name: 'tni',
     url: 'https://tni.org',
-    img: 'tni.org.png'
+    img: 'tni.org.png',
   },
   {
     name: 'portfolio',
     url: 'https://portfolio.earth',
-    img: 'portfolio.earth.png'
+    img: 'portfolio.earth.png',
   },
   {
     name: 'greenpeace',
     url: 'https://www.greenpeace.org.uk',
-    img: 'www.greenpeace.org.uk.png'
+    img: 'www.greenpeace.org.uk.png',
   },
   {
     name: 'bankonourfuture',
     url: 'https://bankonourfuture.uk',
-    img: 'bankonourfuture.uk.png'
+    img: 'bankonourfuture.uk.png',
   },
   {
     name: 'foecanada',
     url: 'https://foecanada.org',
-    img: 'foecanada.org.png'
+    img: 'foecanada.org.png',
   },
   {
     name: 'theclimateapp',
     url: 'https://theclimateapp.earth',
-    img: 'theclimateapp.earth.png'
+    img: 'theclimateapp.earth.png',
   },
   {
     name: 'koalakollektiv',
     url: 'https://koalakollektiv.de',
-    img: 'koala.png'
+    img: 'koala.png',
   },
   {
     name: 'earthhero',
     url: 'https://www.earthhero.org/',
-    img: 'earthhero.png'
+    img: 'earthhero.png',
   },
   {
     name: 'climatepledgecollective',
     url: 'https://www.climatepledgecollective.org/',
-    img: 'climatepledgecollective.org.png'
+    img: 'climatepledgecollective.org.png',
   },
   {
     name: 'sunriseboston',
     url: 'https://twitter.com/sunriseboston/',
-    img: 'sunriseboston.png'
+    img: 'sunriseboston.png',
   },
   {
     name: 'below2c',
     url: 'https://below2c.org/',
-    img: 'below2c.png'
+    img: 'below2c.png',
   },
   {
     name: 'compendia',
     url: 'https://www.compendia.studio',
-    img: 'compendia.png'
+    img: 'compendia.png',
   },
   {
     name: 'thecarbonalmanac',
     url: 'https://thecarbonalmanac.org/',
-    img: 'thecarbonalmanac.png'
-  }
+    img: 'thecarbonalmanac.png',
+  },
 ]
 useHeadHelper(
   'Our Partners - Bank.Green',
-  'Our amazing partners at Bank.Green, together with whom we are reshaping finance.'
+  'Our amazing partners at Bank.Green, together with whom we are reshaping finance.',
 )
 </script>

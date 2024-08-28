@@ -89,7 +89,10 @@
                 target="_blank"
               >
                 <div class="bg-white rounded-xl p-5">
-                  <img class="w-36" src="/img/logos/banktrack.svg">
+                  <img
+                    class="w-36"
+                    src="/img/logos/banktrack.svg"
+                  >
                 </div>
               </a>
             </div>
@@ -182,7 +185,10 @@
             >
           </div>
         </div>
-        <div id="join" class="contain max-w-5xl">
+        <div
+          id="join"
+          class="contain max-w-5xl"
+        >
           <CallToAction />
         </div>
       </div>
@@ -209,15 +215,15 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 
 const {
   bank,
-  warningsMap
+  warningsMap,
 } = useContactForm(
   'homepage',
-  ['bank']
+  ['bank'],
 )
 
 const { client } = usePrismic()
 const { data: home } = await useAsyncData('home', () =>
-  client.getSingle('homepage')
+  client.getSingle('homepage'),
 )
 
 usePrismicSEO(home.value?.data)

@@ -10,7 +10,10 @@
             :slices="privacy?.data.slices ?? []"
             :components="sliceComps"
           />
-          <h3 v-else class="flex justify-center">
+          <h3
+            v-else
+            class="flex justify-center"
+          >
             Error loading content.
           </h3>
         </article>
@@ -28,8 +31,8 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: privacy } = await useAsyncData('privacy', () =>
   client.getSingle('privacypage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(privacy.value?.data)
 </script>

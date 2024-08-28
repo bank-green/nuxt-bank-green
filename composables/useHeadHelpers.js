@@ -7,17 +7,17 @@ export const useHeadHelper = (title, description, imageUrl) => {
       meta: [
         {
           property: 'og:title',
-          content: title
+          content: title,
         },
         {
           name: 'apple-mobile-web-app-title',
-          content: title
+          content: title,
         },
         {
           name: 'twitter:title',
-          content: title
-        }
-      ]
+          content: title,
+        },
+      ],
     })
   }
 
@@ -26,14 +26,14 @@ export const useHeadHelper = (title, description, imageUrl) => {
       meta: [
         {
           name: 'twitter:description',
-          content: description
+          content: description,
         },
         { property: 'og:description', content: description },
         {
           name: 'description',
-          content: description
-        }
-      ]
+          content: description,
+        },
+      ],
     })
   }
 
@@ -42,21 +42,21 @@ export const useHeadHelper = (title, description, imageUrl) => {
       meta: [
         {
           property: 'og:image',
-          content: imageUrl
+          content: imageUrl,
         },
         {
           property: 'og:image:width',
-          content: '1200'
+          content: '1200',
         },
         {
           property: 'og:image:height',
-          content: '630'
+          content: '630',
         },
         {
           property: 'twitter:image',
-          content: imageUrl
-        }
-      ]
+          content: imageUrl,
+        },
+      ],
     })
   }
 }
@@ -70,57 +70,57 @@ export const useHeadRating = (rating) => {
     meta: [
       {
         property: 'og:image',
-        content: imageUrl
+        content: imageUrl,
       },
       {
         property: 'og:image:width',
-        content: width
+        content: width,
       },
       {
         property: 'og:image:height',
-        content: height
+        content: height,
       },
       {
         property: 'twitter:image',
-        content: imageUrl
+        content: imageUrl,
       },
       {
         property: 'og:video',
-        content: videoUrl
+        content: videoUrl,
       },
       {
         property: 'og:video:url',
-        content: videoUrl
+        content: videoUrl,
       },
       {
         property: 'og:video:secure_url',
-        content: videoUrl
+        content: videoUrl,
       },
       {
         property: 'og:video:type',
-        content: 'video/mp4'
+        content: 'video/mp4',
       },
       {
         name: 'twitter:player',
-        content: videoUrl
+        content: videoUrl,
       },
       {
         property: 'og:video:width',
-        content: width
+        content: width,
       },
       {
         property: 'og:video:height',
-        content: height
+        content: height,
       },
       {
         name: 'twitter:player:width',
-        content: width
+        content: width,
       },
       {
         name: 'twitter:player:height',
-        content: height
-      }
-    ]
+        content: height,
+      },
+    ],
   })
 }
 

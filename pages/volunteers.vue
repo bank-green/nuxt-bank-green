@@ -37,7 +37,7 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { client } = usePrismic()
 const { data: volunteers } = await useAsyncData('volunteers', () =>
-  client.getSingle('volunteerspage')
+  client.getSingle('volunteerspage'),
 )
 usePrismicSEO(volunteers.value?.data)
 </script>

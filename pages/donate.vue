@@ -23,7 +23,10 @@
               :field="donation?.data.description"
               class="prose sm:prose-lg xl:prose-xl prose-blurb"
             />
-            <div v-else class="prose sm:prose-lg xl:prose-xl prose-blurb">
+            <div
+              v-else
+              class="prose sm:prose-lg xl:prose-xl prose-blurb"
+            >
               <p>
                 By supporting Bank.Green’s mission, you'll empower individuals and businesses to make
                 responsible financial decisions, channeling their deposits towards green financial institutions.
@@ -114,7 +117,10 @@
                   </label>
                 </div>
               </div>
-              <div class="flex flex-col gap-4 mt-12 px-4" :class="!isStripeLoaded && 'hidden'">
+              <div
+                class="flex flex-col gap-4 mt-12 px-4"
+                :class="!isStripeLoaded && 'hidden'"
+              >
                 <TextField
                   v-model="email"
                   name="email"
@@ -157,18 +163,19 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import TextField from '@/components/forms/TextField.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 
 interface DonationOption<T> {
-  label: string;
-  value: T;
+  label: string
+  value: T
 }
 
 const methodOptions: DonationOption<string>[] = [
   { label: 'One-time Donation', value: 'one-time' },
-  { label: 'Recurring Donation', value: 'recurring' }
+  { label: 'Recurring Donation', value: 'recurring' },
 ]
 
 const donationOptions: DonationOption<number>[] = [
@@ -177,7 +184,7 @@ const donationOptions: DonationOption<number>[] = [
   { label: '$100', value: 100 },
   { label: '$200', value: 200 },
   { label: '$500', value: 500 },
-  { label: '$1000', value: 1000 }
+  { label: '$1000', value: 1000 },
 ]
 
 const selectedMethod = ref<string>('one-time')
@@ -186,20 +193,20 @@ const {
   email,
   warningsMap,
   isAgreeMarketing,
-  send
+  send,
 } = useContactForm('', ['email'], ref({}))
 
 const isOneTimePayment = computed(
-  () => selectedMethod.value === 'one-time' && selectedAmount.value != null
+  () => selectedMethod.value === 'one-time' && selectedAmount.value != null,
 )
 
 const isRecurring = computed(
-  () => selectedMethod.value === 'recurring' && selectedAmount.value != null
+  () => selectedMethod.value === 'recurring' && selectedAmount.value != null,
 )
 
 const { client } = usePrismic()
 const { data: donation } = await useAsyncData('donation', () =>
-  client.getSingle('donationpage')
+  client.getSingle('donationpage'),
 )
 console.log('data', donation.value?.data)
 usePrismicSEO(donation.value?.data)
@@ -208,7 +215,7 @@ const stripePublishableKey = useRuntimeConfig().public.STRIPE_PUBLISHABLE_KEY
 
 const { isStripeLoaded, initOneTimePayment, handleSubmit } = useStripe(
   stripePublishableKey,
-  'stripe-payment-element'
+  'stripe-payment-element',
 )
 
 watch(
@@ -218,7 +225,7 @@ watch(
       isStripeLoaded.value = false
       initOneTimePayment(newVal)
     }
-  }
+  },
 )
 
 watch(
@@ -230,14 +237,14 @@ watch(
     if (_isRecurringPayment && isStripeLoaded.value) { isStripeLoaded.value = false }
 
     if (
-      _isOneTimePayment &&
-      selectedAmount.value != null &&
-      isStripeLoaded.value
+      _isOneTimePayment
+      && selectedAmount.value != null
+      && isStripeLoaded.value
     ) {
       isStripeLoaded.value = false
       initOneTimePayment(selectedAmount.value)
     }
-  }
+  },
 )
 
 const handleOneTimePayment = async () => {
@@ -250,8 +257,8 @@ const handleRecurringPayment = async () => {
   const response = await $fetch('/api/create-checkout-session', {
     method: 'POST',
     body: {
-      amount: selectedAmount.value
-    }
+      amount: selectedAmount.value,
+    },
   })
   if (response.redirectURL) { window.location.href = response.redirectURL }
 }

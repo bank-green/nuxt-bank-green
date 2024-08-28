@@ -82,7 +82,10 @@
           dark
         >
           I have read and understood Bank.Green’s
-          <NuxtLink to="/privacy" class="link">
+          <NuxtLink
+            to="/privacy"
+            class="link"
+          >
             privacy policy
           </NuxtLink>.
         </CheckboxSection>
@@ -122,7 +125,7 @@ import DateField from '@/components/forms/DateField.vue'
 
 const props = defineProps({
   title: String,
-  successRedirectURL: { type: String, default: '/thanks-pledge' }
+  successRedirectURL: { type: String, default: '/thanks-pledge' },
 })
 
 const reminderDate = ref(null)
@@ -138,7 +141,7 @@ const extras = computed(() => {
     bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
-    bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
+    bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
   }
 })
 
@@ -152,16 +155,16 @@ const {
   bank,
   send,
   validate,
-  busy
+  busy,
 } = useContactForm(
   'pledge',
   ['firstName', 'lastName', 'email', 'isAgreeTerms', 'bank'],
-  extras
+  extras,
 )
 
 const emit = defineEmits(['success'])
 
-async function checkAndSend () {
+async function checkAndSend() {
   validate()
   if (!extras.value.reminder) {
     reminderWarning.value = 'Please enter a date.'

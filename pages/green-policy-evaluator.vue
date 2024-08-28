@@ -2,8 +2,14 @@
   <div class="page">
     <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 md:pt-28 max-w-screen ">
       <div class="page-fade-in contain flex flex-col justify-center items-center max-w-8xl pt-28 pb-20 md:pb-0 lg:pt-12 gap-10">
-        <div class="text-center prose sm:prose-lg xl:prose-xl" style="max-width: unset">
-          <h1 class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl" style="line-height: 1.2;">
+        <div
+          class="text-center prose sm:prose-lg xl:prose-xl"
+          style="max-width: unset"
+        >
+          <h1
+            class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl"
+            style="line-height: 1.2;"
+          >
             {{ gpe?.data.title || "Reveal data-backed insights from sustainability reports faster than ever" }}
           </h1>
           <PrismicRichText
@@ -20,7 +26,10 @@
             class="rounded-xl w-full h-auto relative max-w-2xl mx-auto"
           />
         </div>
-        <button :class="ctaButtonClass" @click="() => showModal = true">
+        <button
+          :class="ctaButtonClass"
+          @click="() => showModal = true"
+        >
           {{ gpe?.data.button_title || "Book a demo" }}
         </button>
         <div
@@ -39,12 +48,18 @@
               :slices="gpe?.data.slices1 ?? []"
               :components="sliceComps"
             />
-            <h3 v-else style="text-align:center">
+            <h3
+              v-else
+              style="text-align:center"
+            >
               Error Loading Content.
             </h3>
           </div>
         </div>
-        <div v-if="!!gpe?.data.key_points_items" class="z-10 w-full lg:h-28 md:h-60 static md:relative h-full">
+        <div
+          v-if="!!gpe?.data.key_points_items"
+          class="z-10 w-full lg:h-28 md:h-60 static md:relative h-full"
+        >
           <div class="grid grid-cols-1 md:grid-cols-3 z-10 gap-8 static md:absolute md:top-0 inset-x-0 w-full h-full">
             <LeafSlice
               v-for="feature in gpe?.data.key_points_items"
@@ -58,14 +73,20 @@
       </div>
       <Swoosh />
     </section>
-    <section id="features" class="page-fade-in contain items-center max-w-6xl py-16 lg:pt-56 lg:pb-20 flex flex-col gap-10">
+    <section
+      id="features"
+      class="page-fade-in contain items-center max-w-6xl py-16 lg:pt-56 lg:pb-20 flex flex-col gap-10"
+    >
       <div class="prose sm:prose-lg xl:prose-xl md:contain text-center">
         <h2 class="text-center">
           {{ gpe?.data.title_features || "What can you do with the Green Policy Evaluator?" }}
         </h2>
         <p>{{ gpe?.data.description_features || "Elevate your advocacy efforts with a transformative approach to policy analysis. By allowing long and messy sustainability reports to be standardised, our tool enables:" }}</p>
       </div>
-      <div v-if="!!gpe?.data.features_items" class=" grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div
+        v-if="!!gpe?.data.features_items"
+        class=" grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         <TextWithImage
           v-for="feature in gpe?.data.features_items"
           :key="feature.title!"
@@ -78,11 +99,17 @@
       <p class="max-w-3xl text-center mt-8 text-xl text-opacity-80 text-ocean-800">
         {{ gpe?.data.description_features_2 || "Leverage The Green Policy Evaluator to revolutionise how company sustainability policies are understood and influenced." }}
       </p>
-      <button :class="ctaButtonClass + ' -mt-4'" @click="() => showModal = true">
+      <button
+        :class="ctaButtonClass + ' -mt-4'"
+        @click="() => showModal = true"
+      >
         {{ gpe?.data.button_title || "Book a demo" }}
       </button>
     </section>
-    <section id="usp" class="bg-gradient-to-b from-sushi-50 to-sushi-100 max-w-screen py-16 lg:py-20">
+    <section
+      id="usp"
+      class="bg-gradient-to-b from-sushi-50 to-sushi-100 max-w-screen py-16 lg:py-20"
+    >
       <div class="flex flex-col md:flex-row page-fade-in contain justify-center items-center max-w-8xl  md:gap-8 gap-10">
         <div class="prose sm:prose-xl xl:prose-2xl md:text-left text-center flex flex-col items-center md:items-start gap-4 md:gap-8 md:-mt-12">
           <svg
@@ -93,13 +120,20 @@
             fill="none"
             class="w-20 h-auto md:w-32 w-auto"
           >
-            <path d="M145 1.35555C145 126.794 49.9866 137.638 0 126.794C0 53.4741 36.0434 -10.1654 145 1.35555Z" fill="#7BB122" fill-opacity="0.5" />
+            <path
+              d="M145 1.35555C145 126.794 49.9866 137.638 0 126.794C0 53.4741 36.0434 -10.1654 145 1.35555Z"
+              fill="#7BB122"
+              fill-opacity="0.5"
+            />
           </svg>
           <h2 class="!mt-0 max-w-lg">
             {{ gpe?.data.title_usp || "What Sets the Green Policy Evaluator Apart?" }}
           </h2>
         </div>
-        <div v-if="!!gpe?.data.usp_items" class="flex flex-col gap-4 md:max-w-2xl">
+        <div
+          v-if="!!gpe?.data.usp_items"
+          class="flex flex-col gap-4 md:max-w-2xl"
+        >
           <TextWithImage
             v-for="usp in gpe?.data.usp_items"
             :key="usp.title!"
@@ -112,18 +146,27 @@
         </div>
       </div>
     </section>
-    <section id="cta" class="page-fade-in contain items-center max-w-6xl py-16 md:py-24 flex flex-col gap-12">
+    <section
+      id="cta"
+      class="page-fade-in contain items-center max-w-6xl py-16 md:py-24 flex flex-col gap-12"
+    >
       <div class="prose sm:prose-lg xl:prose-xl contain text-center flex flex-col gap-4">
         <h2 class="!mb-0">
           {{ gpe?.data.title_cta || "Discover a faster, more efficient way to gain actionable insights from complex sustainability reports" }}
         </h2>
         <p>{{ gpe?.data.description_cta || "Accelerate your impact, save time, and make informed decisions effortlessly." }}</p>
       </div>
-      <button :class="ctaButtonClass" @click="() => showModal = true">
+      <button
+        :class="ctaButtonClass"
+        @click="() => showModal = true"
+      >
         {{ gpe?.data.button_title || "Book a demo" }}
       </button>
     </section>
-    <section id="faq" class="bg-blue-100 overflow-hidden">
+    <section
+      id="faq"
+      class="bg-blue-100 overflow-hidden"
+    >
       <Swoosh direction="down" />
       <div class="prose sm:prose-lg xl:prose-xl contain text-center bg-max-w-screen py-16 lg:py-20">
         <h2 class="!mb-12">
@@ -145,7 +188,10 @@
             :slices="gpe?.data.slices5 ?? []"
             :components="sliceComps"
           />
-          <h3 v-else style="text-align:center">
+          <h3
+            v-else
+            style="text-align:center"
+          >
             Error Loading Content.
           </h3>
         </div>
@@ -162,6 +208,7 @@
 import { asImageSrc } from '@prismicio/helpers'
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 const showModal = ref<boolean>(false)
 const { client } = usePrismic()
@@ -183,9 +230,8 @@ useHead({
             elementOrSelector:"#gpe-demo",
             calLink: "zakgottlieb/gpe-demo",
             });
-            Cal.ns["gpe-demo"]("ui", {"styles":{"branding":{"brandColor":"#7BB122"}},"hideEventTypeDetails":false, "theme": "light"});`
-    }
-  ]
+            Cal.ns["gpe-demo"]("ui", {"styles":{"branding":{"brandColor":"#7BB122"}},"hideEventTypeDetails":false, "theme": "light"});`,
+    },
+  ],
 })
-
 </script>

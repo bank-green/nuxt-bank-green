@@ -42,9 +42,9 @@ export default defineEventHandler(async (event) => {
       city: headers['cf-ipcity'] || '',
       cityLatLng: [
         headers['cf-iplatitude'] || '',
-        headers['cf-iplongitude'] || ''
-      ]
-    }
+        headers['cf-iplongitude'] || '',
+      ],
+    },
   }
 
   await sendZapierContact(message)
@@ -57,9 +57,9 @@ export default defineEventHandler(async (event) => {
   return 'OK'
 })
 
-async function sendZapierContact (message) {
-  const hookUrl =
-    message && message.tag === 'contact page form'
+async function sendZapierContact(message) {
+  const hookUrl
+    = message && message.tag === 'contact page form'
       ? useRuntimeConfig().public.ZAPIER_UNSUBSCRIBE
       : useRuntimeConfig().public.ZAPIER_SEND
   await $fetch(hookUrl, { method: 'POST', body: message })

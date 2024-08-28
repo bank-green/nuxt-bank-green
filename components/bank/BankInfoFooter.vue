@@ -31,8 +31,8 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
 
+<script setup lang="ts">
 const router = useRouter()
 const bankTag = router.currentRoute.value.params.bankTag
 </script>

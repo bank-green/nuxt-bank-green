@@ -38,8 +38,8 @@
 import Flag from '../../Flag.vue'
 
 defineProps<{
-  id: string;
-  title: string;
-  isSelected: boolean;
+  id: string
+  title: string
+  isSelected: boolean
 }>()
 </script>

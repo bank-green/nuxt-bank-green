@@ -1,7 +1,13 @@
 <template>
   <ModalWithBackdrop v-model="showModal">
-    <form v-if="!completionMarked" class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left">
-      <button class="flex flex-row items-center cursor-pointer hover:opacity-80" @click.prevent.stop="closeModal">
+    <form
+      v-if="!completionMarked"
+      class="w-full h-full overflow-y-auto p-4 md:p-6 mb-2 md:mb-6 mt-6 text-slate-800 text-left"
+    >
+      <button
+        class="flex flex-row items-center cursor-pointer hover:opacity-80"
+        @click.prevent.stop="closeModal"
+      >
         <img
           src="/img/icons/left-arrow.svg"
         >
@@ -93,7 +99,7 @@
         :to="emailLink"
         target="_blank"
         class="button-white border-sushi-500 mt-5"
-        :class="{'pointer-events-none opacity-75': busy}"
+        :class="{ 'pointer-events-none opacity-75': busy }"
       >
         <span class="font-semibold text-leaf-400 ">
           Go To your Mail App
@@ -110,14 +116,14 @@
       <div class="items-center self-center flex w-full gap-5 mt-6 mb-6 max-md:max-w-full max-md:flex-wrap max-md:mt-8 max-md:mb-8">
         <button
           class="text-slate-800 text-center text-md font-medium leading-6 capitalize hover:text-red-400 w-full"
-          :class="{'pointer-events-none opacity-75': busy}"
+          :class="{ 'pointer-events-none opacity-75': busy }"
           @click.prevent="closeModal"
         >
           {{ embracePage?.data.cancel_button_label || 'Cancel' }}
         </button>
         <button
           class="button-green"
-          :class="{'pointer-events-none opacity-75': busy}"
+          :class="{ 'pointer-events-none opacity-75': busy }"
           @click="markAsComplete"
         >
           <span class="font-semibold">
@@ -126,11 +132,17 @@
         </button>
       </div>
     </form>
-    <div v-else class="w-full h-full overflow-y-auto p-2 text-left text-primary-dark">
+    <div
+      v-else
+      class="w-full h-full overflow-y-auto p-2 text-left text-primary-dark"
+    >
       <p class="text-xl mb-4 text-primary-dark font-bold">
         Thank you for your Email!
       </p>
-      <div class="h-5/6 bg-white border border-sushi-500 rounded-lg flex flex-col justify-center items-center text-center" @click.stop>
+      <div
+        class="h-5/6 bg-white border border-sushi-500 rounded-lg flex flex-col justify-center items-center text-center"
+        @click.stop
+      >
         <ThanksSection
           :title="'Thank you!'"
           :subtitle="'Your email has been sent.'"
@@ -154,7 +166,7 @@
 </template>
 
 <script setup lang="ts">
-import { PrismicDocument } from '@prismicio/types'
+import type { PrismicDocument } from '@prismicio/types'
 import { ref } from 'vue'
 import TextField from '@/components/forms/TextField.vue'
 import EmailPreviewField from '@/components/forms/EmailPreviewField.vue'
@@ -164,27 +176,27 @@ const completionMarked = ref(false)
 
 // TODO: maybe pass embracepage as a prop instead of requesting it again ??
 const { data: embracePage } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage')
+  client.getSingle('embracepage'),
 )
 const { data: donationData } = await useAsyncData('donation', () =>
-  client.getSingle('donationpage')
+  client.getSingle('donationpage'),
 )
 
 const props = defineProps<{
-  modelValue: boolean;
-  message: string | null;
+  modelValue: boolean
+  message: string | null
   form: {
-    fullName: string;
-    email: string;
-    subject: string;
-    bankEmail: string;
-    searchValue: string;
-    country: string;
-    hometown: string;
-    background: string;
-    body: string;
-    bcc: string;
-};
+    fullName: string
+    email: string
+    subject: string
+    bankEmail: string
+    searchValue: string
+    country: string
+    hometown: string
+    background: string
+    body: string
+    bcc: string
+  }
   embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
 }>()
 
@@ -193,7 +205,7 @@ const busy = false
 const emit = defineEmits([
   'update:modelValue',
   'update:message',
-  'success'
+  'success',
 ])
 
 const showModal = computed({
@@ -203,16 +215,16 @@ const showModal = computed({
       completionMarked.value = false
     }
     emit('update:modelValue', val)
-  }
+  },
 })
 
 const messageBody = computed({
   get: () => props.message,
-  set: val => emit('update:message', val)
+  set: val => emit('update:message', val),
 })
 
 const emailLink = computed(() =>
-  getEmailURI()
+  getEmailURI(),
 )
 
 const messageCopied = ref(false)
@@ -223,7 +235,7 @@ watch(messageBody, (val, prev) => {
   }
 })
 
-function copyText () {
+function copyText() {
   const textField = document.getElementById('embraceText') as HTMLInputElement
   // Select the message body field
   textField.select()
@@ -234,11 +246,11 @@ function copyText () {
   messageCopied.value = true
 }
 
-function markAsComplete () {
+function markAsComplete() {
   completionMarked.value = true
 }
 
-function getEmailURI () {
+function getEmailURI() {
   const bankEmail = encodeURI(props.form?.bankEmail.trim() || 'missing_bank_email')
   let emailURI = `mailto:${bankEmail}?`
 
@@ -246,13 +258,13 @@ function getEmailURI () {
     `subject=${encodeURI(props.form?.subject.trim() || 'missing_subject_line')}`,
     `bcc=${props.form?.bcc.trim() ? encodeURI(props.form?.bcc.trim()) : 'missing_bcc_address'}`,
     `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
-    `body=${encodeURI(props?.message?.trim() || 'missing message body')}`
+    `body=${encodeURI(props?.message?.trim() || 'missing message body')}`,
   ]
   emailURI += fields.join('&')
   return emailURI
 }
 
-function closeModal () {
+function closeModal() {
   emit('update:modelValue', false)
 }
 </script>

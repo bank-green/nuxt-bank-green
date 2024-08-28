@@ -33,7 +33,10 @@
           </div>
 
           <div class="relative w-full md:ml-6">
-            <LocationSearch v-model="country" class="z-30 mb-8" />
+            <LocationSearch
+              v-model="country"
+              class="z-30 mb-8"
+            />
 
             <div v-if="!country">
               <h2
@@ -53,10 +56,16 @@
                 :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                 class="transition"
               >
-                <EcoBankCards :list="banks" :is-no-credit="isNoCredit" />
+                <EcoBankCards
+                  :list="banks"
+                  :is-no-credit="isNoCredit"
+                />
               </div>
 
-              <div v-else-if="!loading" class="mt-20">
+              <div
+                v-else-if="!loading"
+                class="mt-20"
+              >
                 <h2
                   v-if="errorMessage"
                   class="text-xl font-semibold mb-4 md:text-center"
@@ -95,6 +104,7 @@ import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 
 import { components } from '~~/slices'
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
@@ -103,8 +113,8 @@ const { client } = usePrismic()
 
 const { data: ecobanks } = await useAsyncData('ecobanks', () =>
   client.getSingle('ecobankspage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(ecobanks?.value?.data)
 
@@ -118,7 +128,7 @@ const loadBanks = async ({
   subregions,
   fossilFreeAlliance,
   topPick,
-  features
+  features,
 }) => {
   loading.value = true
   if (!country.value) {
@@ -130,7 +140,7 @@ const loadBanks = async ({
     subregions,
     topPick,
     fossilFreeAlliance,
-    features
+    features,
   })
   banks.value = result
     // filter show_on_sustainable_banks_page
@@ -138,14 +148,14 @@ const loadBanks = async ({
     // sort by top_pick first, then fossil_free_alliance_rating, then by name
     .sort(
       (a, b) =>
-        b.topPick - a.topPick ||
-        b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
-        a.name - b.name
+        b.topPick - a.topPick
+        || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
+        || a.name - b.name,
     )
   loading.value = false
   if (banks.value.length === 0) {
-    errorMessage.value =
-      "Sorry, we don't have any banks that meet the required filter."
+    errorMessage.value
+      = "Sorry, we don't have any banks that meet the required filter."
   } // TODO: should put this string in Prismic
 }
 watch(country, () => {

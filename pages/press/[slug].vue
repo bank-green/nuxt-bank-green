@@ -35,7 +35,10 @@
           style="width: 100%"
           class="prose sm:prose-lg xl:prose-xl break-words"
         >
-          <SliceZone :slices="post?.data.slices ?? []" :components="sliceComps" />
+          <SliceZone
+            :slices="post?.data.slices ?? []"
+            :components="sliceComps"
+          />
         </div>
       </div>
     </div>
@@ -52,14 +55,14 @@ const route = useRoute()
 const { client } = usePrismic()
 const slug = route.path.split('/').at(-1)
 const { data: post } = await useAsyncData(slug, () =>
-  client.getByUID('presspost', slug)
+  client.getByUID('presspost', slug),
 )
 
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 useHeadHelper(
   post?.value?.data?.title ?? 'Press Post',
-  post?.value?.data?.description
+  post?.value?.data?.description,
 )
 </script>
 

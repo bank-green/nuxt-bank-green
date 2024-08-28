@@ -43,10 +43,10 @@
 import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
 defineProps<{
-  id: String;
-  name: String;
-  website: String;
-  isSelected: Boolean;
-  isFocused?: Boolean;
+  id: string
+  name: string
+  website: string
+  isSelected: boolean
+  isFocused?: boolean
 }>()
 </script>

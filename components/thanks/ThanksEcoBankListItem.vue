@@ -12,7 +12,10 @@
       leave-to-class="opacity-0 scale-y-95"
       mode="out-in"
     >
-      <div v-if="name" class="flex items-center truncate">
+      <div
+        v-if="name"
+        class="flex items-center truncate"
+      >
         <div class="relative w-12 h-12">
           <ClearbitLogo
             :url="website"
@@ -25,7 +28,10 @@
         </div>
       </div>
 
-      <div v-else class="w-full flex items-center truncate">
+      <div
+        v-else
+        class="w-full flex items-center truncate"
+      >
         <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse" />
         <div class="ml-3 flex-1 font-semibold text-gray-200 block truncate">
           loading...
@@ -56,8 +62,8 @@
 import ClearbitLogo from '../icons/ClearbitLogo.vue'
 
 defineProps<{
-  tag: string;
-  website: string;
-  name: string;
+  tag: string
+  website: string
+  name: string
 }>()
 </script>

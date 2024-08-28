@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: donatecomplete } = await useAsyncData('donatecomplete', () =>

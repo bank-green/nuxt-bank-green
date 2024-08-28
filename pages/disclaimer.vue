@@ -46,8 +46,8 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: disclaimer } = await useAsyncData('disclaimer', () =>
   client.getSingle('disclaimerpage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 useHeadHelper(disclaimer.value?.data.head_helper_title)
 </script>

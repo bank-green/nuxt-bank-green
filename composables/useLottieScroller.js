@@ -1,4 +1,4 @@
-export default function useLottieScroller ({ path, actions }) {
+export default function useLottieScroller({ path, actions }) {
   const container = ref(null)
   const animData = ref(null)
   const totalFrames = ref(1)
@@ -17,23 +17,23 @@ export default function useLottieScroller ({ path, actions }) {
 
     // Find the first action that satisfies the current position conditions
     const action = actions.find(
-      ({ visibility }) => pct >= visibility[0] && pct <= visibility[1]
+      ({ visibility }) => pct >= visibility[0] && pct <= visibility[1],
     )
 
     if (!action) {
       return
     }
 
-    const pctInSegment =
-      (pct - action.visibility[0]) /
-      (action.visibility[1] - action.visibility[0])
+    const pctInSegment
+      = (pct - action.visibility[0])
+      / (action.visibility[1] - action.visibility[0])
 
-    const frame =
-      pctInSegment * (action.frames[1] - action.frames[0]) + action.frames[0]
+    const frame
+      = pctInSegment * (action.frames[1] - action.frames[0]) + action.frames[0]
 
     animData.value.goToAndStop(
       Math.ceil(Math.min(totalFrames.value, Math.max(0, frame))),
-      true
+      true,
     )
   }
 
@@ -51,7 +51,7 @@ export default function useLottieScroller ({ path, actions }) {
       loop: false,
       prerender: true,
       autoplay: false,
-      path: path ?? '' // the path to the animation json
+      path: path ?? '', // the path to the animation json
     })
 
     animData.value.addEventListener('DOMLoaded', onReady)
@@ -64,6 +64,6 @@ export default function useLottieScroller ({ path, actions }) {
   return {
     container,
     animData,
-    totalFrames
+    totalFrames,
   }
 }

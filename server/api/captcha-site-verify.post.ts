@@ -13,18 +13,18 @@ export default defineEventHandler(async (event) => {
     'https://challenges.cloudflare.com/turnstile/v0/siteverify',
     {
       method: 'POST',
-      body: formData
-    }
+      body: formData,
+    },
   )
   const validateCaptchaResponseBody = await validateCaptchaResponse.json()
 
   if (validateCaptchaResponseBody.success) {
     return {
-      success: true
+      success: true,
     }
   } else {
     return {
-      success: false
+      success: false,
     }
   }
 })

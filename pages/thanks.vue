@@ -25,6 +25,6 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 useHeadHelper('Thank you')
 const { client } = usePrismic()
 const { data: thanks } = await useAsyncData('thanks', () =>
-  client.getByUID('thankspages', 'thanks')
+  client.getByUID('thankspages', 'thanks'),
 )
 </script>

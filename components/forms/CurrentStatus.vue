@@ -32,7 +32,13 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M5 7.5L10 12.5L15 7.5" stroke="#293145" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path
+            d="M5 7.5L10 12.5L15 7.5"
+            stroke="#293145"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </template>
     </SearchInput>
@@ -75,10 +81,10 @@ import ListPicker from '@/components/forms/ListPicker.vue'
 import SearchInput from '@/components/forms/input/SearchInput.vue'
 
 defineProps<{
-  modelValue: string,
-  disabled?: boolean,
-  warning?: string,
-  dark?: boolean,
+  modelValue: string
+  disabled?: boolean
+  warning?: string
+  dark?: boolean
   title: string
 }>()
 
@@ -90,20 +96,20 @@ const selected = ref<string>('')
 
 const status = computed(() => ['I’m actively planning to switch banks', 'I’m considering switching banks'])
 
-function showList () {
+function showList() {
   isShowing.value = true
 }
-function hideList () {
+function hideList() {
   isShowing.value = false
 }
 
-function onSelectStatus (status: string) {
+function onSelectStatus(status: string) {
   selected.value = status
   emit('update:modelValue', status)
   isShowing.value = false
 }
 
-function onCloseClick () {
+function onCloseClick() {
   selected.value = ''
   emit('update:modelValue', '')
 }

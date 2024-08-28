@@ -128,7 +128,11 @@
               alt="impact-image"
               :field="prismicDefaultPageData['impact-image']"
             />
-            <NuxtLink :to="website" target="_blank" class="button-green-outline w-auto">
+            <NuxtLink
+              :to="website"
+              target="_blank"
+              class="button-green-outline w-auto"
+            >
               <span class="font-semibold">{{ `Visit ${name}` }}</span>
             </NuxtLink>
           </div>
@@ -145,8 +149,8 @@
           >
             <PrismicImage
               v-if="
-                prismicDefaultPageData &&
-                  prismicDefaultPageData['security-image']
+                prismicDefaultPageData
+                  && prismicDefaultPageData['security-image']
               "
               class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="security-image"
@@ -166,8 +170,8 @@
           >
             <PrismicImage
               v-if="
-                prismicDefaultPageData &&
-                  prismicDefaultPageData['service-image']
+                prismicDefaultPageData
+                  && prismicDefaultPageData['service-image']
               "
               class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="service-image"
@@ -187,8 +191,8 @@
           >
             <PrismicImage
               v-if="
-                prismicDefaultPageData &&
-                  prismicDefaultPageData['convenience-image']
+                prismicDefaultPageData
+                  && prismicDefaultPageData['convenience-image']
               "
               class="w-full md:w-3/4 mx-auto object-contain object-top"
               alt="convenience-image"
@@ -214,7 +218,12 @@
         <p class="whitespace-pre-line text-gray-500 sm:text-xl">
           {{ fromTheWebsite }}
         </p>
-        <NuxtLink :to="website" target="_blank" class="button-green-outline w-auto mt-8 mx-auto" style="width: max-content;">
+        <NuxtLink
+          :to="website"
+          target="_blank"
+          class="button-green-outline w-auto mt-8 mx-auto"
+          style="width: max-content;"
+        >
           <span class="font-semibold">{{ `Visit ${name}` }}</span>
         </NuxtLink>
       </div>
@@ -222,7 +231,7 @@
     <!-- For whatever reason I need the following gap commented in so that gap works in Slice -->
     <!-- <div
       class="flex flex-col lg:flex-row gap-12 lg:gap-20"
-    />-->
+    /> -->
     <SliceZone
       :slices="prismicSlices ?? []"
       :components="prismicSliceComponents"
@@ -231,54 +240,54 @@
 </template>
 
 <script setup lang="ts">
-import { SliceZoneComponents, SliceLike } from '@prismicio/vue'
+import type { SliceZoneComponents, SliceLike } from '@prismicio/vue'
 
 interface BankFeature {
-  offered: string;
+  offered: string
   feature: {
-    name: string;
-  };
-  details: string | null;
+    name: string
+  }
+  details: string | null
 }
 
 const props = defineProps<{
-  institutionType: string | undefined;
-  fromTheWebsite: string;
-  name: string;
-  website: string;
-  rating: string;
-  bankFeatures: BankFeature[];
-  tag: string;
-  prismicPageData: Record<string, any> | null;
-  prismicDefaultPageData: Record<string, any> | null;
+  institutionType: string | undefined
+  fromTheWebsite: string
+  name: string
+  website: string
+  rating: string
+  bankFeatures: BankFeature[]
+  tag: string
+  prismicPageData: Record<string, any> | null
+  prismicDefaultPageData: Record<string, any> | null
   prismicSliceComponents: SliceZoneComponents<SliceLike<string>, unknown>
 }>()
 
 const tabIds = computed(() =>
   ['impact', 'security', 'services', 'convenience'].filter(
     tabId =>
-      props?.prismicPageData &&
-      props.prismicPageData[tabId] &&
-      props.prismicPageData[tabId].length > 0
-  )
+      props?.prismicPageData
+      && props.prismicPageData[tabId]
+      && props.prismicPageData[tabId].length > 0,
+  ),
 )
 
 const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
 
-function getBankFeature (featureName: string, defaultValue: string = 'No') {
+function getBankFeature(featureName: string, defaultValue: string = 'No') {
   const feature = props.bankFeatures.find(
-    feature => feature.feature.name === featureName
+    feature => feature.feature.name === featureName,
   )
   if (feature) { return feature.details || feature.offered }
   return defaultValue
 }
 
-function getInvertedBankFeature (
+function getInvertedBankFeature(
   featureName: string,
-  defaultValue: string = 'No'
+  defaultValue: string = 'No',
 ) {
   const feature = props.bankFeatures.find(
-    feature => feature.feature.name === featureName
+    feature => feature.feature.name === featureName,
   )
   if (feature) { return feature.details || (feature.offered === 'Yes' ? 'No' : 'Yes') }
   return defaultValue

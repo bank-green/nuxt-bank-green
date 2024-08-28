@@ -6,16 +6,16 @@ export default defineVitestConfig({
   test: {
     include: ['**/*.spec.ts'],
     exclude: [
-      '**/e2e'
+      '**/e2e',
     ],
     globals: true,
     environment: 'nuxt',
     environmentOptions: {
       nuxt: {
         mock: {
-          intersectionObserver: true
-        }
-      }
-    }
-  }
+          intersectionObserver: true,
+        },
+      },
+    },
+  },
 })

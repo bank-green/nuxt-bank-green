@@ -8,7 +8,10 @@
     leave-to-class="opacity-0 scale-95"
     appear
   >
-    <div ref="observer" :style="styles">
+    <div
+      ref="observer"
+      :style="styles"
+    >
       <slot v-if="hasBeenInViewport" />
     </div>
   </transition>
@@ -21,13 +24,13 @@
  */
 const props = withDefaults(
   defineProps<{
-    placeholderWidth?: number;
-    placeholderHeight?: number;
-    options?: any;
+    placeholderWidth?: number
+    placeholderHeight?: number
+    options?: any
   }>(),
   {
-    options: () => ({})
-  }
+    options: () => ({}),
+  },
 )
 
 const intersectionObserver = ref<IntersectionObserver | null>(null)
@@ -40,7 +43,7 @@ const styles = computed(() => {
   return {
     width: props.placeholderWidth,
     height: props.placeholderHeight,
-    opacity: 0
+    opacity: 0,
   }
 })
 
@@ -68,8 +71,8 @@ onMounted(() => {
         root: null,
         rootMargin: '0px 0px 0px 0px',
         threshold: 0,
-        ...props.options
-      }
+        ...props.options,
+      },
     )
 
     intersectionObserver.value.observe(observer.value)

@@ -62,7 +62,10 @@
             :warning="warningsMap['isAgreeTerms']"
           >
             I have read and understood Bank.Green’s
-            <NuxtLink to="/privacy" class="link">
+            <NuxtLink
+              to="/privacy"
+              class="link"
+            >
               privacy policy
             </NuxtLink>.
           </CheckboxSection>
@@ -101,11 +104,11 @@ import TextField from '@/components/forms/TextField.vue'
 
 const props = withDefaults(
   defineProps<{
-    tag: string;
+    tag: string
   }>(),
   {
-    tag: 'submitbank'
-  }
+    tag: 'submitbank',
+  },
 )
 
 const {
@@ -117,6 +120,6 @@ const {
   isSent,
   warningsMap,
   send,
-  busy
+  busy,
 } = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}))
 </script>

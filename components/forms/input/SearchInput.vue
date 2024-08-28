@@ -1,5 +1,8 @@
 <template>
-  <div aria-haspopup="listbox" class="flex items-center">
+  <div
+    aria-haspopup="listbox"
+    class="flex items-center"
+  >
     <!-- input form -->
     <input
       ref="input"
@@ -42,7 +45,12 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle cx="8" cy="8.5" r="8" fill="currentColor" />
+        <circle
+          cx="8"
+          cy="8.5"
+          r="8"
+          fill="currentColor"
+        />
         <path
           d="M5.17157 5.67157L10.8284 11.3284"
           stroke="white"
@@ -65,7 +73,12 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle cx="8" cy="8.5" r="8" fill="currentColor" />
+        <circle
+          cx="8"
+          cy="8.5"
+          r="8"
+          fill="currentColor"
+        />
         <path
           d="M5.17157 5.67157L10.8284 11.3284"
           stroke="white"
@@ -92,7 +105,10 @@
         />
       </svg>
     </div>
-    <div v-else class="absolute right-0 p-5 text-red-700 hover:text-red-500 cursor-pointer">
+    <div
+      v-else
+      class="absolute right-0 p-5 text-red-700 hover:text-red-500 cursor-pointer"
+    >
       <slot name="endIcon" />
     </div>
   </div>
@@ -101,14 +117,14 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    modelValue: string;
-    placeholder: string;
-    usePencil?: boolean;
-    warning?: string | boolean;
-    dark?: boolean,
+    modelValue: string
+    placeholder: string
+    usePencil?: boolean
+    warning?: string | boolean
+    dark?: boolean
     disabled?: boolean
-    hasExtaIconSpacing?: boolean;
-    readOnly?: boolean;
+    hasExtaIconSpacing?: boolean
+    readOnly?: boolean
   }>(),
   {
     usePencil: false,
@@ -116,8 +132,8 @@ withDefaults(
     dark: false,
     disabled: false,
     hasExtaIconSpacing: true,
-    readOnly: false
-  }
+    readOnly: false,
+  },
 )
 
 const emit = defineEmits([
@@ -126,7 +142,7 @@ const emit = defineEmits([
   'onFocus',
   'onBlur',
   'onClick',
-  'onCloseClick'
+  'onCloseClick',
 ])
 
 const onInput = ($event: Event) => {

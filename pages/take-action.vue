@@ -8,7 +8,10 @@
           class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
           fallback="Error Loading Content"
         />
-        <div v-else class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl">
+        <div
+          v-else
+          class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl"
+        >
           <h2>Take action</h2>
           <p>
             Do you watch or read climate crisis news and think: "Ok, this is bad, but what now? What can I do about this?"
@@ -25,7 +28,11 @@
             <div
               class="flex flex-row w-full bg-sushi-400 divide-x-2 divide-sushi-600"
             >
-              <div v-for="(tab, index) in tabs" :key="index" class="flex-grow">
+              <div
+                v-for="(tab, index) in tabs"
+                :key="index"
+                class="flex-grow"
+              >
                 <input
                   :id="index.toString()"
                   v-model="selectedTabIndex"
@@ -102,13 +109,14 @@
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { client } = usePrismic()
 const { data: action } = await useAsyncData('takeaction', () =>
   client.getSingle('takeactionpage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(action.value?.data)
 

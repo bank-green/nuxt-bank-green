@@ -14,7 +14,12 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle cx="62.5" cy="25.0222" r="25" fill="#87B448" />
+        <circle
+          cx="62.5"
+          cy="25.0222"
+          r="25"
+          fill="#87B448"
+        />
         <path
           d="M53.5 24.3603L59.9413 30.8015L71.5 19.2428"
           stroke="white"
@@ -24,19 +29,35 @@
         />
       </svg>
 
-      <h1 v-if="title" class="mt-8 text-lg lg:text-2xl font-semibold whitespace-pre-line mb-2">
+      <h1
+        v-if="title"
+        class="mt-8 text-lg lg:text-2xl font-semibold whitespace-pre-line mb-2"
+      >
         {{ title }}
       </h1>
-      <h2 v-if="subtitle" class="sm:text-md md:text-lg lg:text-xl font-semibold whitespace-pre-line mb-2">
+      <h2
+        v-if="subtitle"
+        class="sm:text-md md:text-lg lg:text-xl font-semibold whitespace-pre-line mb-2"
+      >
         {{ subtitle }}
       </h2>
-      <p v-if="description" class="text-gray-700 text-base lg:text-lg ">
+      <p
+        v-if="description"
+        class="text-gray-700 text-base lg:text-lg "
+      >
         {{ description }}
       </p>
     </div>
   </div>
-  <Swoosh v-if="getSliceBoolean(showExploreSection)" direction="up" color="text-sushi-100" />
-  <div v-if="getSliceBoolean(showExploreSection)" class="relative py-8 sm:py-16 bg-sushi-100">
+  <Swoosh
+    v-if="getSliceBoolean(showExploreSection)"
+    direction="up"
+    color="text-sushi-100"
+  />
+  <div
+    v-if="getSliceBoolean(showExploreSection)"
+    class="relative py-8 sm:py-16 bg-sushi-100"
+  >
     <div class="contain sm:text-center">
       <h4
         class="font-semibold text-xl text-gray-800 mb-6 sm:text-2xl tracking-wide"
@@ -56,13 +77,13 @@
 import { getSliceBoolean } from '@/utils/prismic/conversions'
 
 withDefaults(defineProps<{
-    title: string,
-    subtitle?:string,
-    description?: string,
-    showExploreSection?: boolean | null
-  }>(),
+  title: string
+  subtitle?: string
+  description?: string
+  showExploreSection?: boolean | null
+}>(),
 {
-  showExploreSection: true
-}
+  showExploreSection: true,
+},
 )
 </script>

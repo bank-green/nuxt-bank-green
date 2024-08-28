@@ -11,10 +11,19 @@
         loading="lazy"
       />
     </span>
-    <a v-if="href" ref="noopener" :href="href" target="_blank" class="text-xl leading-6 font-semibold hover:underline">{{
+    <a
+      v-if="href"
+      ref="noopener"
+      :href="href"
+      target="_blank"
+      class="text-xl leading-6 font-semibold hover:underline"
+    >{{
       name
     }}</a>
-    <h3 v-else class="text-xl leading-6 font-semibold">
+    <h3
+      v-else
+      class="text-xl leading-6 font-semibold"
+    >
       {{ name }}
     </h3>
     <p class="text-lg font-normal">
@@ -28,6 +37,6 @@ defineProps({
   name: String,
   href: String,
   img: String,
-  description: String
+  description: String,
 })
 </script>

@@ -188,7 +188,7 @@ import RegionSearch from '@/components/forms/RegionSearch.vue'
 const { isBE } = useCountry()
 const emit = defineEmits(['filter'])
 const props = defineProps({
-  location: String
+  location: String,
 })
 const searchByLocation = ref(false)
 const onSelectLocation = (payload) => {
@@ -208,7 +208,7 @@ const getDefaultFilter = () => ({
   region: null,
   subregion: null,
   location: {
-    'Mobile banking': false
+    'Mobile banking': false,
   },
   topPick: false,
   fossilFreeAlliance: false,
@@ -216,29 +216,29 @@ const getDefaultFilter = () => ({
     'Mobile banking': false,
     'Free ATM network': false,
     'No overdraft fee': false,
-    'No account maintenance fee': false
+    'No account maintenance fee': false,
   },
   bankAccounts: {
-    checking: false,
-    saving: false,
+    'checking': false,
+    'saving': false,
     'Interest rates': false,
     'Business accounts': false,
     'Business savings accounts': false,
     'Small business lending': false,
     'Corporate lending': false,
     'Credit cards': false,
-    'Mortgages or Loans': false
+    'Mortgages or Loans': false,
   },
   security: {
-    'Deposit protection': false
-  }
+    'Deposit protection': false,
+  },
 })
 
 const filterPayload = ref(getDefaultFilter())
 
 const isFilterDirty = computed(
   () =>
-    JSON.stringify(filterPayload.value) !== JSON.stringify(getDefaultFilter())
+    JSON.stringify(filterPayload.value) !== JSON.stringify(getDefaultFilter()),
 )
 
 const parsedFilterPayload = computed(() => {
@@ -257,18 +257,18 @@ const parsedFilterPayload = computed(() => {
       : undefined,
     features: [
       ...Object.keys(filterPayload.value.location).filter(
-        key => filterPayload.value.location[key]
+        key => filterPayload.value.location[key],
       ),
       ...Object.keys(filterPayload.value.convenience).filter(
-        key => filterPayload.value.convenience[key]
+        key => filterPayload.value.convenience[key],
       ),
       ...Object.keys(filterPayload.value.bankAccounts).filter(
-        key => filterPayload.value.bankAccounts[key]
+        key => filterPayload.value.bankAccounts[key],
       ),
       ...Object.keys(filterPayload.value.security).filter(
-        key => filterPayload.value.security[key]
-      )
-    ]
+        key => filterPayload.value.security[key],
+      ),
+    ],
   }
 })
 
@@ -277,7 +277,7 @@ watch(
   () => {
     emit('filter', parsedFilterPayload.value)
   },
-  { deep: true }
+  { deep: true },
 )
 
 watch(searchByLocation, () => {
@@ -294,7 +294,7 @@ watch(
   () => props.location,
   () => {
     setDefaultFilter()
-  }
+  },
 )
 
 const forceShowMobile = ref(false)
