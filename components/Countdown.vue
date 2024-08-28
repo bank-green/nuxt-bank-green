@@ -45,7 +45,7 @@ function timerCount() {
     })
   } else {
     isUpcoming.value = false
-    interval.value && clearInterval(interval.value)
+    if (interval.value) clearInterval(interval.value)
   }
 }
 

@@ -29,7 +29,7 @@ const getPriceId = (amount: number): string | null => {
 }
 
 export default defineEventHandler(
-  async (event): Promise<CreateSubscriptionResponse | void> => {
+  async (event): Promise<CreateSubscriptionResponse> => {
     try {
       let body = await readBody(event)
       if (body instanceof Uint8Array) {
@@ -65,7 +65,7 @@ export default defineEventHandler(
         error: null,
       }
 
-      // return sendRedirect(event, session.url || '', 303);
+    // return sendRedirect(event, session.url || '', 303);
     } catch (e) {
       const _e: Error = e
       console.error(e)

@@ -1,5 +1,9 @@
 import Fuse from 'fuse.js'
 
+// TODO: change assert to with and search how to this eslint error
+// assert has changed to with and it is in stage 3 so eslint doesn't include it
+// https://github.com/eslint/eslint/discussions/15305
+// https://github.com/tc39/proposal-import-attributes?tab=readme-ov-file#synopsis
 import locales from '~~/lang/en.json' assert { type: 'json' }
 const get = k => locales[`COUNTRY_${k}`]
 
