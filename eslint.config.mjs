@@ -12,7 +12,7 @@ export default withNuxt(
       'vue/require-toggle-inside-transition': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
-      '@stylistic/max-statements-per-line': 'warn',
+      '@stylistic/max-statements-per-line': ['error', { max: 2 }],
       '@stylistic/quotes': ['warn', 'single', { avoidEscape: true }],
     },
   },
