@@ -14,6 +14,7 @@ export default withNuxt(
       '@typescript-eslint/no-unused-vars': 'warn',
       '@stylistic/max-statements-per-line': ['error', { max: 2 }],
       '@stylistic/quotes': ['warn', 'single', { avoidEscape: true }],
+      '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
     },
   },
 )
