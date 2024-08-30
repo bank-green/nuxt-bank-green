@@ -41,6 +41,9 @@
               src="/img/certification/TopPick.svg"
               alt="Top Pick"
             >
+            <div class="ml-4 text-xs text-gray-500">
+            {{ item.interest_rates }}
+            </div>
           </div>
         </div>
 
@@ -78,6 +81,7 @@
       leave-from-class="opacity-100 scale-100"
       leave-to-class="opacity-0 scale-95"
     >
+      
       <div v-if="Object.keys(features).length" class="py-4 px-7 flex flex-wrap">
         <EcoBankFeaturesList :features="features" />
       </div>
@@ -95,7 +99,7 @@ const props = defineProps<{
 
 const features = computed(() => {
   // filter our credit card
-  const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
+  const features = getFeatures(props.item?.other_features) as Record<string, any>
   const allFeatures: Record<string, any> = {}
   for (const [featKey, featValue] of Object.entries(features)) {
     if (

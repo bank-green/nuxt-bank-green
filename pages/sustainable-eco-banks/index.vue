@@ -20,6 +20,7 @@
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
+      <div v-if="true">
         <div class="flex flex-col md:flex-row">
           <div
             class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
@@ -72,6 +73,7 @@
             </div>
           </div>
         </div>
+      </div>
       </transition>
       <div
         class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
@@ -141,7 +143,17 @@ const loadBanks = async ({
         b.topPick - a.topPick ||
         b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
         a.name - b.name
-    )
+      )
+      .map(bank => {
+        console.log(bank)
+        return {
+          ...bank,
+          account_types: bank.bankFeatures.filter(a => ['checking', 'saving', 'credit cards'].includes(a.feature.name?.toLowerCase())),
+          interest_rates: bank.bankFeatures.find(a => a.feature.name?.toLowerCase().includes('interest rates'))?.details ?? '',
+          fdic: bank.bankFeatures.find(a => a.feature.name?.toLowerCase().includes('fdic'))?.details ?? '',
+          other_features: bank.bankFeatures.filter(a => !['checking', 'saving', 'credit cards', 'interest rates', 'business', 'mobile'].filter(x => a.feature.name?.toLowerCase().includes(x)).length > 0)
+        }
+      })  
   loading.value = false
   if (banks.value.length === 0) {
     errorMessage.value =

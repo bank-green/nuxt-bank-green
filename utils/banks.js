@@ -108,6 +108,9 @@ export async function getBanksListWithFilter ({
           brands(country: $country, first: $first, topPick: $topPick, fossilFreeAlliance: $fossilFreeAlliance, features: $features, regions: $regions, subregions: $subregions) {
               edges {
                   node {
+                      countries {
+                        code
+                      }
                       name
                       tag
                       website,
