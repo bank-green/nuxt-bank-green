@@ -20,6 +20,10 @@
             {{ institutionType || "Bank" }}
           </p>
           <p>
+            <strong>Countries:</strong>
+            {{ $props.countries.map(x => x.code).join(", ") }}
+          </p>
+          <p>
             <strong>Mobile Banking:</strong>
             {{ getBankFeature("Mobile banking") }}
           </p>
@@ -52,7 +56,7 @@
       <template #products>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-24">
           <p>
-            <strong>Current Accounts:</strong>
+            <strong>{{ props.countries.find(x => x.code == 'US') ? 'Checking' : 'Current' }} Accounts:</strong>
             {{ getBankFeature("checking") }}
           </p>
           <p>
@@ -248,6 +252,7 @@ const props = defineProps<{
   website: string;
   rating: string;
   bankFeatures: BankFeature[];
+  countries: { code: string; }[];
   tag: string;
   prismicPageData: Record<string, any> | null;
   prismicDefaultPageData: Record<string, any> | null;
