@@ -20,10 +20,6 @@
             {{ institutionType || "Bank" }}
           </p>
           <p>
-            <strong>Countries:</strong>
-            {{ $props.countries.map(x => x.code).join(", ") }}
-          </p>
-          <p>
             <strong>Mobile Banking:</strong>
             {{ getBankFeature("Mobile banking") }}
           </p>
