@@ -2098,6 +2098,117 @@ export type MethodologyDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *PartnersPage → Partners*
+ */
+export interface PartnerspageDocumentDataPartnersItem {
+  /**
+   * name field in *PartnersPage → Partners*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * url field in *PartnersPage → Partners*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField;
+
+  /**
+   * image field in *PartnersPage → Partners*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[].img
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img: prismic.ImageField<never>;
+}
+
+/**
+ * Content for PartnersPage documents
+ */
+interface PartnerspageDocumentData {
+  /**
+   * Title field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * SEO title field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO description field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+
+  /**
+   * Partners field in *PartnersPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  partners: prismic.GroupField<Simplify<PartnerspageDocumentDataPartnersItem>>;
+}
+
+/**
+ * PartnersPage document from Prismic
+ *
+ * - **API ID**: `partnerspage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PartnerspageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<PartnerspageDocumentData>,
+    "partnerspage",
+    Lang
+  >;
+
+/**
  * Content for PledgePage documents
  */
 interface PledgepageDocumentData {
@@ -3181,6 +3292,7 @@ export type AllDocumentTypes =
   | GreenpolicyevaluatorpageDocument
   | HomepageDocument
   | MethodologyDocument
+  | PartnerspageDocument
   | PledgepageDocument
   | PresspageDocument
   | PresspostDocument
@@ -4075,6 +4187,8 @@ declare module "@prismicio/client" {
       HomepageDocumentData,
       MethodologyDocument,
       MethodologyDocumentData,
+      PartnerspageDocument,
+      PartnerspageDocumentData,
       PledgepageDocument,
       PledgepageDocumentData,
       PresspageDocument,
