@@ -54,7 +54,7 @@
                 :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                 class="transition"
               >
-                <EcoBankCards :list="banks" :is-no-credit="isNoCredit" />
+                <EcoBankCards :list="banks" />
               </div>
 
               <div v-else-if="!loading" class="mt-20">
@@ -146,9 +146,18 @@ const loadBanks = async ({
       )
       .map(bank => {
         console.log(bank)
+        var account_types = ['checking', 'saving', 'credit cards']
+        var checking_name = 'Current'
+
+        if (country.value === 'US') {
+          checking_name = 'Checking'
+        } 
+        if (country.value === 'FR' || country.value === 'DE') {
+          account_types = ['checking', 'saving']
+        }
         return {
           ...bank,
-          account_types: bank.bankFeatures.filter(a => ['checking', 'saving', 'credit cards'].includes(a.feature.name?.toLowerCase())),
+          account_types: bank.bankFeatures.filter(a => account_types.includes(a.feature.name?.toLowerCase()))?.map(x => x.feature.name.replace('checking', checking_name).replace('saving', 'Savings')),
           interest_rates: bank.bankFeatures.find(a => a.feature.name?.toLowerCase().includes('interest rates'))?.details ?? '',
           fdic: bank.bankFeatures.find(a => a.feature.name?.toLowerCase().includes('fdic'))?.details ?? '',
           other_features: bank.bankFeatures.filter(a => !['checking', 'saving', 'credit cards', 'interest rates', 'business', 'mobile'].filter(x => a.feature.name?.toLowerCase().includes(x)).length > 0)
@@ -164,9 +173,6 @@ watch(country, () => {
   banks.value = []
 })
 
-const isNoCredit = computed(() => {
-  return country.value === 'FR' || country.value === 'DE'
-})
 
 const applyFilter = (payload) => {
   loadBanks(payload)

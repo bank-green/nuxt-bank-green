@@ -8,7 +8,7 @@
     leave-to-class="opacity-0"
   >
     <li v-for="i in list.length" :key="i" class="list-none">
-      <EcoBankCard :item="list[i - 1]" :is-no-credit="isNoCredit" />
+      <EcoBankCard :item="list[i - 1]"/>
     </li>
   </transition-group>
 </template>
@@ -16,6 +16,5 @@
 <script setup>
 defineProps({
   list: Array,
-  isNoCredit: Boolean
 })
 </script>
