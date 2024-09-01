@@ -248,11 +248,7 @@ watch(
 )
 
 const handleOneTimePayment = async () => {
-  if (selectedAmount.value == null) {
-    /* empty */
-  } else if (isStripeLoaded.value) {
-    handleSubmit(isAgreeMarketing.value, email.value)
-  } else {
+  if (selectedAmount.value == null) { /* empty */ } else if (isStripeLoaded.value) { handleSubmit(isAgreeMarketing.value, email.value) } else {
     await initOneTimePayment(selectedAmount.value)
   }
 }
