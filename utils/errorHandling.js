@@ -2,7 +2,7 @@ const httpErrorHandling = {
   /**
    * Show toast with error message
    */
-  handleBadRequest(error) {
+  handleBadRequest (error) {
     console.log(error.response)
     const title = error.response?.data?.message || error.message
     notifications.addNotification({ icon: 'x-circle', color: 'red', title })
@@ -11,7 +11,7 @@ const httpErrorHandling = {
   /**
    * Log out user on 401 requests
    */
-  handleBadAuth(error) {
+  handleBadAuth (error) {
     console.log(error.response)
     const title = 'Authentication failed'
     const description = error.response?.data || error.message
@@ -19,7 +19,7 @@ const httpErrorHandling = {
       icon: 'x-circle',
       color: 'red',
       title,
-      description,
+      description
     })
   },
 
@@ -27,18 +27,18 @@ const httpErrorHandling = {
    *
    * @param { import('axios').AxiosInstance } instance
    */
-  setInterceptors(instance) {
+  setInterceptors (instance) {
     instance.interceptors.request.use(
       (config) => {
         // add timestamp so we never cache requests
-        config.url
-          += (config.url.indexOf('?') > 0 ? '&' : '?')
-          + `t=${new Date().getTime()}`
+        config.url +=
+          (config.url.indexOf('?') > 0 ? '&' : '?') +
+          `t=${new Date().getTime()}`
         return config
       },
       (error) => {
         return Promise.reject(error)
-      },
+      }
     )
 
     // Add a response interceptor
@@ -59,9 +59,9 @@ const httpErrorHandling = {
           console.error('some other response threw an error', { error })
         }
         return Promise.reject(error)
-      },
+      }
     )
-  },
+  }
 }
 
 export default httpErrorHandling

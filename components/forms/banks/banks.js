@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js'
 
-export function findBanks(banks, searchName) {
+export function findBanks (banks, searchName) {
   if (!searchName.trim()) {
     return banks
   }

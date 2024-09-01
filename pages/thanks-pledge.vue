@@ -17,12 +17,7 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle
-                cx="62.5"
-                cy="25.0222"
-                r="25"
-                fill="#87B448"
-              />
+              <circle cx="62.5" cy="25.0222" r="25" fill="#87B448" />
               <path
                 d="M53.5 24.3603L59.9413 30.8015L71.5 19.2428"
                 stroke="white"
@@ -36,10 +31,7 @@
               class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
               :field="thankspledge?.data.title"
             />
-            <h1
-              v-else
-              class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8"
-            >
+            <h1 v-else class="mt-8 text-2xl font-semibold whitespace-pre-line mb-8">
               Thank you for your pledge!
             </h1>
 
@@ -53,19 +45,13 @@
               :field="thankspledge?.data.content2"
               fallback="Why not encourage your friends to do the same..."
             />
-            <div
-              v-if="thankspledge?.data.slices"
-              class="flex justify-center"
-            >
+            <div v-if="thankspledge?.data.slices" class="flex justify-center">
               <SliceZone
                 :slices="thankspledge?.data.slices ?? []"
                 :components="sliceComps"
               />
             </div>
-            <div
-              v-else
-              class="flex justify-center"
-            >
+            <div v-else class="flex justify-center">
               <SocialSharer
                 class="text-sushi-500"
                 url="https://bank.green"
@@ -84,11 +70,10 @@
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
-
 useHeadHelper('Thank you')
 const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: thankspledge } = await useAsyncData('thankspledge', () =>
-  client.getSingle('thankspledge'),
+  client.getSingle('thankspledge')
 )
 </script>

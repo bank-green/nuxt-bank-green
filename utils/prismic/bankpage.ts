@@ -1,8 +1,8 @@
-import type { _AsyncData } from 'nuxt/dist/app/composables/asyncData'
-import type { BankpageDocument } from 'prismicio-types'
+import { type _AsyncData } from 'nuxt/dist/app/composables/asyncData'
 import isEmptyPrismicField from './isEmptyPrismicField'
+import { BankpageDocument } from 'prismicio-types'
 
-function getBankRating(bankDetails: any) {
+function getBankRating (bankDetails: any) {
   const hasDetails = bankDetails && bankDetails.rating
   if (!hasDetails) { return undefined }
   const rating = bankDetails && bankDetails.rating ? bankDetails.rating : ''
@@ -24,13 +24,13 @@ function getBankRating(bankDetails: any) {
   }
 }
 
-function isValidResponse(response: _AsyncData<BankpageDocument | null, Error | null>) {
+function isValidResponse (response : _AsyncData<BankpageDocument | null, Error | null>) {
   return !response?.error?.value && response?.data?.value
 }
 
-export async function useBankPage(
+export async function useBankPage (
   bankTag: string,
-  bankDetails: Ref<any>,
+  bankDetails: Ref<any>
 ) {
   const { client } = usePrismic()
   const type = 'bankpage'
@@ -44,7 +44,7 @@ export async function useBankPage(
       }),
       useAsyncData(() => {
         return client.getByUID(type, rating || '')
-      }),
+      })
     ])
 
     // check if we get responses at all
@@ -79,8 +79,8 @@ export async function useBankPage(
         description2: isEmptyPrismicField(bankPage?.data.description2),
         description3: isEmptyPrismicField(bankPage?.data.description3),
         seo_title: isEmptyPrismicField(bankPage?.data.seo_title),
-        seo_description: isEmptyPrismicField(bankPage?.data.seo_description),
-      },
+        seo_description: isEmptyPrismicField(bankPage?.data.seo_description)
+      }
     }
   } catch (e) {
     console.log(e)

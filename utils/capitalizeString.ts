@@ -1,4 +1,4 @@
-export default function capitalizeString(string: string): string {
+export default function capitalizeString (string: string): string {
   if (!string || typeof string !== 'string') {
     return string
   }

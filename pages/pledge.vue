@@ -11,10 +11,7 @@
             {{ pledge?.data.introduction || "Let's send a message to the climate crisis funders that we won't tolerate their behavior" }}
           </h1>
           <div class="max-w-6xl flex flex-col-reverse lg:flex-row items-center">
-            <div
-              ref="signUpForm"
-              class="w-full lg:w-3/5 relative z-10"
-            >
+            <div ref="signUpForm" class="w-full lg:w-3/5 relative z-10">
               <PledgeSignup />
             </div>
             <div class="w-full lg:w-2/5 mt-8 lg:mt-0 lg:ml-8">
@@ -25,10 +22,7 @@
               unsustainable financing activities are unacceptable and my money will not be a part of it.
               By pledging to move your money away, you will:"
               />
-              <CheckList
-                class="my-6 md:text-lg"
-                :list="checkList"
-              />
+              <CheckList class="my-6 md:text-lg" :list="checkList" />
             </div>
           </div>
         </div>
@@ -47,10 +41,7 @@
           fallback="We believe that tackling the climate crisis demands people power, so we’re building a movement. Together, our combined pressure can change banking. The more names we have behind our pledge, the more likely we’ll  succeed in getting banks to divest from fossil fuels. Our pledge includes a reminder function, so you can decide when we next  contact you about sustainable banking options. Currently stuck in a complicated mortgage? Want to talk to your current bank before you move your money? Too young to open a bank account? Just let us know when you want a nudge from Bank.Green."
         />
         <div class="w-full flex justify-center mt-12">
-          <button
-            class="button-green max-w-md md:w-max"
-            @click="scrollToForm"
-          >
+          <button class="button-green max-w-md md:w-max" @click="scrollToForm">
             {{ pledge?.data.button || "Take the Pledge" }}
           </button>
         </div>
@@ -75,11 +66,11 @@ import CheckList from '@/components/CheckList.vue'
 const checkList = [
   'Send a message to your bank that it must defund fossil fuels',
   'Join a fast-growing movement of consumers standing up for their future',
-  'Take a critical climate action with profound effects',
+  'Take a critical climate action with profound effects'
 ]
 const { client } = usePrismic()
 const { data: pledge } = await useAsyncData('pledge', () =>
-  client.getSingle('pledgepage'),
+  client.getSingle('pledgepage')
 )
 usePrismicSEO(pledge.value?.data)
 
@@ -88,7 +79,7 @@ const scrollToForm = () => {
   if (!signUpForm.value) { return }
   window.scrollTo({
     top: signUpForm.value.offsetTop - 100,
-    behavior: 'smooth',
+    behavior: 'smooth'
   })
 }
 </script>

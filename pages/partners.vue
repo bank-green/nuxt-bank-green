@@ -31,10 +31,7 @@
         <div
           class="mx-auto max-w-4xl flex flex-row justify-center items-center pb-12"
         >
-          <SignupBox
-            tag="partners bottom"
-            class="w-full mt-8"
-          />
+          <SignupBox tag="partners bottom" class="w-full mt-8" />
         </div>
       </div>
     </div>

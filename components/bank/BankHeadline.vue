@@ -20,10 +20,7 @@
         >
           <PrismicRichText :field="prismicFieldSubtitle" />
         </div>
-        <div
-          v-if="inheritBrandRating"
-          class="text-xs text-gray-500"
-        >
+        <div v-if="inheritBrandRating" class="text-xs text-gray-500">
           Deposits or policies controlled by
           <NuxtLink
             class="underline"
@@ -44,6 +41,6 @@ defineProps({
   name: String,
   website: String,
   inheritBrandRating: Object,
-  prismicFieldSubtitle: undefined,
+  prismicFieldSubtitle: undefined
 })
 </script>

@@ -25,29 +25,28 @@
     <slot name="bank-not-listed" />
   </BankSearch>
 </template>
-
 <script setup lang="ts">
 import BankSearch from './banks/BankSearch.vue'
 import LocationSearch from './location/LocationSearch.vue'
 
 const props = withDefaults(defineProps<{
-  bankTitle?: string
-  locationTitle?: string
-  modelValue: object | null
-  warning?: string | boolean
-  infoTooltipBank?: string
-  bankSearchClasses?: string
-  locationSearchClasses?: string
-  dark?: boolean
-  isEmbrace?: boolean
-  hideLocation?: boolean
-}>(), {
+    bankTitle?: string;
+    locationTitle?: string;
+    modelValue: Object | null;
+    warning?: string | boolean;
+    infoTooltipBank?: string;
+    bankSearchClasses?: string;
+    locationSearchClasses?: string;
+    dark?: boolean;
+    isEmbrace?: boolean;
+    hideLocation?: boolean
+  }>(), {
   warning: false,
   dark: false,
   bankTitle: '',
   locationTitle: '',
   isEmbrace: false,
-  hideLocation: false,
+  hideLocation: false
 })
 
 const { country } = useCountry()
@@ -80,4 +79,5 @@ watch(bank, (newVal) => {
 
   bank.value = newVal
 })
+
 </script>

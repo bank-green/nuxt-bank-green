@@ -76,7 +76,7 @@ const props = defineProps({
   disabled: Boolean,
   warning: String,
   dark: Boolean,
-  title: String,
+  title: String
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -90,10 +90,10 @@ if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
 
 const filteredCountries = computed(() => findCountries(search.value))
 
-function showList() {
+function showList () {
   isShowing.value = true
 }
-function hideList() {
+function hideList () {
   isShowing.value = false
   // if clicking away, go back to originally selected country
   if (search.value === '') {
@@ -103,13 +103,13 @@ function hideList() {
   }
 }
 
-function onSelectCountry(code) {
+function onSelectCountry (code) {
   search.value = en[`COUNTRY_${code}`]
   emit('update:modelValue', code)
   isShowing.value = false
 }
 
-function onCloseClick() {
+function onCloseClick () {
   search.value = ''
   emit('update:modelValue', '')
 }

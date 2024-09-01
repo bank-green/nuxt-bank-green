@@ -3,7 +3,7 @@ import { get } from './backend'
 const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
 
-async function callBackend(query, variables) {
+async function callBackend (query, variables) {
   const queryParam = encodeURIComponent(query)
   const variablesParam = encodeURIComponent(JSON.stringify(variables))
   const url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
@@ -41,12 +41,12 @@ const bankFeaturesFields = `{
     details
 }`
 
-export async function getBanksList({
+export async function getBanksList ({
   country,
   topOnly = false,
   recommendedOnly = true,
   first = 3,
-  isEmbrace = false,
+  isEmbrace = false
 }) {
   const brandsQuery = `
         query BrandsQuery($country: String, $recommendedOnly: Boolean, $rating: [String], $first: Int, $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -88,20 +88,20 @@ export async function getBanksList({
       return {
         ...b,
         ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
+        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0
       }
     })
   }
   return banks
 }
 
-export async function getBanksListWithFilter({
+export async function getBanksListWithFilter ({
   country,
   regions,
   subregions,
   topPick,
   fossilFreeAlliance,
-  features,
+  features
 }) {
   const brandsQuery = `
       query BrandsQuery($country: String, $first: Int, $topPick: Boolean, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -133,7 +133,7 @@ export async function getBanksListWithFilter({
     features,
     first: 300,
     withCommentary: true,
-    withFeatures: true,
+    withFeatures: true
   }
 
   const json = await callBackend(brandsQuery, variables)
@@ -142,15 +142,15 @@ export async function getBanksListWithFilter({
     return {
       ...b,
       ...b.commentary,
-      rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
+      rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0
     }
   })
   return banks
 }
 
-export async function getCountry() {
+export async function getCountry () {
   const cachedCountry = useCookie('bg.country.suggested', {
-    default: () => '',
+    default: () => ''
   })
 
   if (!cachedCountry.value) {
@@ -162,7 +162,7 @@ export async function getCountry() {
   return cachedCountry
 }
 
-export async function getBankDetail(bankTag) {
+export async function getBankDetail (bankTag) {
   const brandQuery = `
     query BrandByTagQuery($tag: String!) {
         brand(tag: $tag) {
@@ -178,7 +178,7 @@ export async function getBankDetail(bankTag) {
       }
     `
   const variables = {
-    tag: bankTag,
+    tag: bankTag
   }
 
   const json = await callBackend(brandQuery, variables)
@@ -186,7 +186,7 @@ export async function getBankDetail(bankTag) {
   const bank = {
     ...json.data.brand,
     ...json.data.brand.commentary,
-    bankFatures: json.data.brand.bankFeatures,
+    bankFatures: json.data.brand.bankFeatures
   }
   bank.rating = bank.ratingInherited?.toLowerCase()
   return bank

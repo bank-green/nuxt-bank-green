@@ -14,6 +14,6 @@ import RenderWhenVisibleInViewPort from './func/RenderWhenVisibleInViewPort.clie
 defineProps({
   placeholderWidth: Number,
   placeholderHeight: Number,
-  path: String,
+  path: String
 })
 </script>

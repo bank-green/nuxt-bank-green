@@ -1,4 +1,4 @@
-import type { CreatePaymentIntentResponse } from '~~/utils/interfaces/donate'
+import { CreatePaymentIntentResponse } from '~~/utils/interfaces/donate'
 
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string
 
@@ -23,7 +23,7 @@ export default defineEventHandler(
           success: false,
           clientSecret: null,
           customerId: null,
-          error: 'Invalid amount',
+          error: 'Invalid amount'
         }
       };
 
@@ -32,36 +32,36 @@ export default defineEventHandler(
         method: 'POST',
         headers: {
           authorization: `Basic ${Buffer.from(stripeSecretKey + ':').toString(
-            'base64',
-          )}`,
+            'base64'
+          )}`
         },
-        parseResponse: JSON.parse,
+        parseResponse: JSON.parse
       })
 
       // we have to build the request ourself because the Stripe SDK does not play well with Cloudflare
       const reqBody = {
-        'amount': `${body.amount * DEFAULT_MULTIPLIER}`,
-        'currency': DEFAULT_CURRENCY,
+        amount: `${body.amount * DEFAULT_MULTIPLIER}`,
+        currency: DEFAULT_CURRENCY,
         'automatic_payment_methods[enabled]': 'true',
-        'customer': customer.id,
+        customer: customer.id
       }
 
       const res = await $fetch('https://api.stripe.com/v1/payment_intents', {
         method: 'POST',
         headers: {
           authorization: `Basic ${Buffer.from(stripeSecretKey + ':').toString(
-            'base64',
-          )}`,
+            'base64'
+          )}`
         },
         body: new URLSearchParams(reqBody),
-        parseResponse: JSON.parse,
+        parseResponse: JSON.parse
       })
 
       return {
         success: true,
         clientSecret: res.client_secret,
         customerId: customer.id,
-        error: null,
+        error: null
       }
     } catch (e) {
       const _e: Error = e
@@ -70,8 +70,8 @@ export default defineEventHandler(
         success: false,
         clientSecret: null,
         customerId: null,
-        error: _e.message,
+        error: _e.message
       }
     }
-  },
+  }
 )

@@ -1,4 +1,4 @@
-export default function useCaptcha() {
+export default function useCaptcha () {
   const isLocal = computed(() => {
     if (process.env.NODE_ENV === 'development') {
       return true
@@ -13,8 +13,8 @@ export default function useCaptcha() {
     const response = await $fetch('/api/captcha-site-verify', {
       method: 'POST',
       body: {
-        token,
-      },
+        token
+      }
     })
     response.success ? captchaVerified.value = true : captchaVerified.value = false
   }
@@ -25,6 +25,6 @@ export default function useCaptcha() {
     captchaSitekey,
     captchaVerified,
     isLocal,
-    captchaToken,
+    captchaToken
   }
 }

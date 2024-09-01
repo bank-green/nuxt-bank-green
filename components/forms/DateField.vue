@@ -29,21 +29,21 @@ import BaseField from './BaseField.vue'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string | null
-    title?: string
-    description?: string
-    name: string
-    rows?: string | number
-    required?: boolean
-    disabled?: boolean
-    warning?: boolean | string
-    dark?: boolean
-    placeholder?: string
-    currencyLabel?: string
-    typeLabel?: string
-    step?: string
+    modelValue: string | null;
+    title?: string;
+    description?: string;
+    name: string;
+    rows?: string | number;
+    required?: boolean;
+    disabled?: boolean;
+    warning?: boolean | string;
+    dark?: boolean;
+    placeholder?: string;
+    currencyLabel?: string;
+    typeLabel?: string;
+    step?: string;
   }>(),
-  {},
+  {}
 )
 
 const emit = defineEmits(['update:modelValue'])
@@ -68,7 +68,7 @@ const inputIsEmptyClass = computed(() => {
   }
 })
 
-function onUpdate(ev: Event) {
+function onUpdate (ev: Event) {
   emit('update:modelValue', (ev.target as HTMLInputElement).value)
 }
 </script>

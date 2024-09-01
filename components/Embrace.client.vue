@@ -91,20 +91,12 @@
               wrapper="span"
               fallback="I have read and understood the Bank.Green "
             />
-            <NuxtLink
-              v-if="embracePage?.data"
-              to="/privacy"
-              class="link"
-            >
+            <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
               {{
                 ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
               }}
             </NuxtLink>
-            <NuxtLink
-              v-else
-              to="/privacy"
-              class="link"
-            >
+            <NuxtLink v-else to="/privacy" class="link">
               privacy policy
             </NuxtLink>
             <vue-turnstile
@@ -119,7 +111,7 @@
         <button
           type="submit"
           class="button-green w-full mt-6 flex justify-center"
-          :class="{ 'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal) }"
+          :class="{'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal)}"
         >
           <span v-if="!busy"> Generate Email Preview </span>
           <span v-else>
@@ -153,7 +145,7 @@
 
 <script setup lang="ts">
 import VueTurnstile from 'vue-turnstile'
-import type { PrismicDocument } from '@prismicio/types'
+import { PrismicDocument } from '@prismicio/types'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
@@ -161,9 +153,9 @@ import EmbraceModal from '@/components/EmbraceModal.vue'
 import useCaptcha from '@/composables/useCaptcha'
 
 type Response = {
-  text: string
-  subject: string
-  contactEmail: string
+  text: string,
+  subject: string,
+  contactEmail: string,
   bccEmail: string
 }
 
@@ -172,7 +164,7 @@ const { client } = usePrismic()
 // TODO: Maybe update this to pass embracepage as a prop
 //       instead of requesting it again
 const { data: embracePage } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage'),
+  client.getSingle('embracepage')
 )
 
 if (!embracePage?.value) {
@@ -180,11 +172,11 @@ if (!embracePage?.value) {
 }
 
 const props = withDefaults(defineProps<{
-  name?: string
-  successRedirectURL: string
-  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
+  name?: String;
+  successRedirectURL: string;
+  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null;
 }>(), {
-  successRedirectURL: '/thanks-embrace',
+  successRedirectURL: '/thanks-embrace'
 })
 
 const fullName = ref<string>('')
@@ -208,7 +200,7 @@ const extras = computed(() => {
     brandTag: bank.value?.tag,
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     hometown: hometown.value || '',
-    background: background.value || '',
+    background: background.value || ''
   }
 })
 
@@ -220,11 +212,11 @@ const {
   hasWarnings,
   warningsMap,
   validate,
-  busy,
+  busy
 } = useContactForm(
   'embrace',
   ['email', 'isAgreeTerms', 'bank'],
-  extras,
+  extras
 )
 
 const form = ref({
@@ -238,12 +230,12 @@ const form = ref({
   hometown,
   background,
   body,
-  bcc,
+  bcc
 })
 
 // const emit = defineEmits(['success'])
 
-function searchInputChange(event: HTMLInputElement) {
+function searchInputChange (event: HTMLInputElement) {
   // When bank is selected fetch/update bank contact email
   if (event && form.value?.bank) {
     // For now we are getting the contact info from
@@ -253,7 +245,7 @@ function searchInputChange(event: HTMLInputElement) {
 
 // Connect to api to generate message body.
 // Wait for message before showing modal.
-async function getGeneratedMessage() {
+async function getGeneratedMessage () {
   busy.value = true
 
   try {
@@ -261,7 +253,7 @@ async function getGeneratedMessage() {
       baseURL: useRuntimeConfig().public.EMBRACE_URL,
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: {
         name: fullName.value,
@@ -271,9 +263,9 @@ async function getGeneratedMessage() {
         brandName: extras.value.bankDisplayName,
         brand_tag: extras.value.brandTag,
         campaign_id: 1,
-        tone: 'POLITE',
+        tone: 'POLITE'
       },
-      parseResponse: JSON.parse,
+      parseResponse: JSON.parse
     })
 
     if (response?.text) {
@@ -292,7 +284,7 @@ async function getGeneratedMessage() {
   }
 }
 
-async function checkAndDisplayPreview() {
+async function checkAndDisplayPreview () {
   validate()
   if (!extras.value.fullName) {
     if (embracePage?.value) {
@@ -302,7 +294,7 @@ async function checkAndDisplayPreview() {
     }
     return
   }
-  if (fullNameWarning.value) {
+  if (fullNameWarning) {
     fullNameWarning.value = null
   }
   if (hasWarnings?.value) {
@@ -319,7 +311,7 @@ async function checkAndDisplayPreview() {
   showModal.value = true
 }
 
-function successRedirect() {
+function successRedirect () {
   navigateTo(props.successRedirectURL)
 }
 
@@ -332,4 +324,5 @@ const bankSearchClasses = computed(() => {
 
 // Cloudflare Turnstile Captcha
 const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
+
 </script>

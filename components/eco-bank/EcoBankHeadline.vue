@@ -2,10 +2,7 @@
   <div class="relative col-span-2 md:col-span-1 flex items-center md:-mt-8">
     <div class="flex-1 flex items-center">
       <div class="relative w-14 h-14 mr-4 rounded-lg">
-        <ClearbitLogo
-          :url="website"
-          :size="56"
-        />
+        <ClearbitLogo :url="website" :size="56" />
       </div>
       <div>
         <h1
@@ -13,10 +10,7 @@
         >
           {{ name }}
         </h1>
-        <div
-          v-if="inheritBrandRating"
-          class="text-xs text-gray-500"
-        >
+        <div v-if="inheritBrandRating" class="text-xs text-gray-500">
           Deposits or policies controlled by
           <NuxtLink
             class="underline"
@@ -34,11 +28,11 @@
 import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 
 defineProps<{
-  website: string
-  name: string
+  website: string;
+  name: string;
   inheritBrandRating?: {
-    tag: string
-    name: string
-  }
+    tag: string;
+    name: string;
+  };
 }>()
 </script>

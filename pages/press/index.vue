@@ -33,10 +33,7 @@
             :title="String(post.data.title)"
           />
         </div>
-        <h3
-          v-else
-          class="mx-4 mt-6"
-        >
+        <h3 v-else class="mx-4 mt-6">
           Error loading content.
         </h3>
       </div>
@@ -52,10 +49,10 @@ import { components } from '~~/slices'
 
 const { client } = usePrismic()
 const { data: posts } = await useAsyncData('pressposts', () =>
-  client.getAllByType('presspost'),
+  client.getAllByType('presspost')
 )
 const { data: press } = await useAsyncData('press', () =>
-  client.getSingle('presspage'),
+  client.getSingle('presspage')
 )
 const sliceComps = ref(defineSliceZoneComponents(components))
 

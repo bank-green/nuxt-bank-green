@@ -16,10 +16,7 @@
         :list="slice.items.map((i: any) => asText(i.bullet_text))"
       />
     </div>
-    <form
-      class="flex flex-col gap-6 text-left"
-      @submit.prevent.stop="submitForm"
-    >
+    <form class="flex flex-col gap-6 text-left" @submit.prevent.stop="submitForm">
       <BankLocationSearch
         v-model="bank"
         :warning="warningsMap['bank']"
@@ -53,11 +50,7 @@
         :warning="warningsMap['email']"
         dark
       />
-      <CurrentStatus
-        v-model="currentStatus"
-        dark
-        :title="content.form_status_label || 'Which option best describes your current status?'"
-      />
+      <CurrentStatus v-model="currentStatus" dark :title="content.form_status_label || 'Which option best describes your current status?'" />
       <CheckboxSection
         v-model="isAgreeMarketing"
         name="isAgreeMarketing"
@@ -74,10 +67,7 @@
         dark
       >
         I have read and understood Bank.Green’s
-        <NuxtLink
-          to="/privacy"
-          class="link"
-        >
+        <NuxtLink to="/privacy" class="link">
           privacy policy
         </NuxtLink>.
       </CheckboxSection>
@@ -110,10 +100,7 @@
           </svg>
         </span>
       </button>
-      <span
-        v-if="formError"
-        class="text-red-300 font-semibold text-center"
-      >Something went wrong, try again!</span>
+      <span v-if="formError" class="text-red-300 font-semibold text-center">Something went wrong, try again!</span>
     </form>
   </div>
 </template>
@@ -141,7 +128,7 @@ const extras = computed(() => {
     bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
-    bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
+    bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
   }
 })
 
@@ -157,11 +144,11 @@ const {
   hasWarnings,
   showWarnings,
   bank,
-  busy,
+  busy
 } = useContactForm(
   'leadGen',
   ['firstName', 'email', 'isAgreeTerms'],
-  extras,
+  extras
 )
 
 const formError = ref<boolean>(false)
@@ -182,14 +169,14 @@ const submitForm = async () => {
     email: email.value,
     bankName: bank.value?.name,
     status: currentStatus.value,
-    marketing: isAgreeMarketing.value ? 'Yes' : 'No',
+    marketing: isAgreeMarketing.value ? 'Yes' : 'No'
   }
 
   const response = await $fetch('/api/lead-gen-active-campaign', {
     method: 'POST',
     body: {
-      formFields,
-    },
+      formFields
+    }
   })
 
   if (response.success) {

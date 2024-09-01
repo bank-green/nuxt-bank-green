@@ -4,10 +4,7 @@
     class="min-h-screen flex flex-col"
     @mouseleave="onExitIntent"
   >
-    <NuxtLoadingIndicator
-      :color="'#7BB123'"
-      :height="6"
-    />
+    <NuxtLoadingIndicator :color="'#7BB123'" :height="6" />
     <ClientOnly>
       <CookieBanner />
     </ClientOnly>
@@ -34,12 +31,12 @@
 const openPledgeModal = ref(false)
 const openSwitchSurveyModal = ref(false)
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
-  default: () => false,
+  default: () => false
 })
 
 const route = useRoute()
 
-function onExitIntent() {
+function onExitIntent () {
   if (hasUserSeenExitIntentModal.value) { return }
   if (openSwitchSurveyModal.value) { return }
   if (route.path.includes('/impact')) { return }
@@ -47,7 +44,6 @@ function onExitIntent() {
   hasUserSeenExitIntentModal.value = true
 }
 </script>
-
 <style>
 body {
   background: #f9fafb;

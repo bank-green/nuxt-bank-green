@@ -6,10 +6,7 @@
           <h1 class="text-2xl sm:text-5xl font-extrabold text-sushi-900 mb-4">
             {{ post?.data.title }}
           </h1>
-          <span
-            v-if="isUpdated"
-            class="text-base text-gray-700 font-semibold"
-          >
+          <span v-if="isUpdated" class="text-base text-gray-700 font-semibold">
             Updated {{ modifiedDateDisplay }} by {{ post?.data.author }}
           </span>
           <span
@@ -36,10 +33,7 @@
       <Swoosh direction="down" />
       <div class="contain">
         <div class="flex justify-center">
-          <CallToAction
-            class="max-w-5xl"
-            :light="true"
-          />
+          <CallToAction class="max-w-5xl" :light="true" />
         </div>
       </div>
       <div class="flex items-end justify-end pointer-events-none">
@@ -63,10 +57,7 @@
       Go back to Blogs
     </NuxtLink>
   </div>
-  <div
-    v-else
-    class="w-full h-screen flex items-center justify-center"
-  >
+  <div v-else class="w-full h-screen flex items-center justify-center">
     <span>
       <svg
         width="32"
@@ -94,7 +85,7 @@ const error = ref(false)
 const { client } = usePrismic()
 const slug = route.path.split('/').at(-1) ?? ''
 const { data: post } = await useAsyncData(slug, () =>
-  client.getByUID('blogpost', slug),
+  client.getByUID('blogpost', slug)
 )
 
 const comps = ref(defineSliceZoneComponents(components))
@@ -107,7 +98,7 @@ const publishedDateDisplay = computed(() => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
+    day: 'numeric'
   })
 })
 
@@ -119,14 +110,14 @@ const modifiedDateDisplay = computed(() => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
+    day: 'numeric'
   })
 })
 
 const isUpdated = computed(() => {
   return (
-    post.value?.first_publication_date
-    !== post.value?.last_publication_date
+    post.value?.first_publication_date !==
+    post.value?.last_publication_date
   )
 })
 
@@ -150,14 +141,14 @@ const url = computed(() => {
 useHead({
   title,
   htmlAttrs: {
-    lang: 'en',
+    lang: 'en'
   },
   link: [
     {
       hid: 'canonical',
       rel: 'canonical',
-      href: url.value,
-    },
+      href: url.value
+    }
   ],
   meta: [
     { property: 'og:locale', content: 'en_US' },
@@ -183,21 +174,21 @@ useHead({
     { name: 'twitter:data2', content: publishedDateDisplay.value },
     { property: 'og:description', content: description },
     { name: 'description', content: description },
-    { name: 'robots', content: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large' },
-  ],
+    { name: 'robots', content: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large' }
+  ]
 })
 
 useJsonld({
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
-  'mainEntityOfPage': {
+  mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': url.value,
+    '@id': url.value
   },
-  'headline': title,
-  'image': post.value?.data.cardimage.url ?? '',
-  'datePublished': post.value?.first_publication_date ?? '',
-  'dateModified': post.value?.last_publication_date ?? '',
+  headline: title,
+  image: post.value?.data.cardimage.url ?? '',
+  datePublished: post.value?.first_publication_date ?? '',
+  dateModified: post.value?.last_publication_date ?? ''
 })
 </script>
 

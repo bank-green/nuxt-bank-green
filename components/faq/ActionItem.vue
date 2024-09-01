@@ -26,14 +26,14 @@ import AccordionItem from '../AccordionItem.vue'
 
 withDefaults(
   defineProps<{
-    step: number
-    title: string
-    description: string
-    subcontent?: any[]
-    caratClass: string
+    step: number;
+    title: string;
+    description: string;
+    subcontent?: any[];
+    caratClass: string;
   }>(),
   {
-    subcontent: () => [],
-  },
+    subcontent: () => []
+  }
 )
 </script>

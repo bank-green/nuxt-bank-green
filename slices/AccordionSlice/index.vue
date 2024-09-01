@@ -33,9 +33,9 @@
 
       <svg
         :class="
-          'flex-none transform-gpu transition-transform h-3 text-sushi-500 '
-            + caratClass
-            + (isOpen ? ' rotate-180' : ' rotate-0')
+          'flex-none transform-gpu transition-transform h-3 text-sushi-500 ' +
+            caratClass +
+            (isOpen ? ' rotate-180' : ' rotate-0')
         "
         viewBox="0 0 12 8"
         fill="none"
@@ -78,18 +78,17 @@
 <script setup>
 import {
   getSliceComponentProps,
-  defineSliceZoneComponents,
+  defineSliceZoneComponents
 } from '@prismicio/vue'
 import { components } from '~~/slices'
-
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const props = defineProps({
   caratClass: {
     type: String,
-    default: 'text-ocean-400',
+    default: 'text-ocean-400'
   },
-  ...getSliceComponentProps(['slice', 'index', 'slices', 'context']),
+  ...getSliceComponentProps(['slice', 'index', 'slices', 'context'])
 })
 
 const isOpen = ref(false)

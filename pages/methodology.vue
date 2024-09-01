@@ -2,10 +2,7 @@
   <div class="page">
     <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 md:pt-28 max-w-screen">
       <div class="page-fade-in contain flex flex-col justify-center items-center max-w-6xl pt-28 pb-20 lg:pt-12 gap-10">
-        <h1
-          class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl"
-          style="line-height: 1.2;"
-        >
+        <h1 class="text-center text-3xl font-semibold text-gray-800 sm:text-5xl" style="line-height: 1.2;">
           {{ methodology?.data.hero_title || "How We Rate Banks" }}
         </h1>
         <PrismicRichText
@@ -23,10 +20,7 @@
 
       <Swoosh />
     </section>
-    <section
-      id="target"
-      class="page-fade-in contain py-16 flex flex-col gap-12 max-w-6xl"
-    >
+    <section id="target" class="page-fade-in contain py-16 flex flex-col gap-12 max-w-6xl">
       <h2 class="text-2xl font-semibold text-left sm:text-3xl max-w-5xl">
         {{ methodology?.data.target_title || "Our Rating Methodology Caters for Different Types of Financial Institutions" }}
       </h2>
@@ -65,11 +59,7 @@
             <div
               class="flex flex-row w-full bg-sushi-400 divide-x-2 divide-sushi-600"
             >
-              <div
-                v-for="(tab, index) in tabs"
-                :key="index"
-                class="flex-grow"
-              >
+              <div v-for="(tab, index) in tabs" :key="index" class="flex-grow">
                 <input
                   :id="index.toString()"
                   v-model="selectedTabIndex"
@@ -135,10 +125,7 @@
           fallback="Banks that are rated Great or Good are added to our Sustainable Banks webpage.
 That doesn’t mean that these banks have no fossil fuel lending at all, instead it can signify:"
         />
-        <div
-          v-if="!!methodology?.data.sustainable_bullets"
-          class="flex-col flex md:flex-row gap-4"
-        >
+        <div v-if="!!methodology?.data.sustainable_bullets" class="flex-col flex md:flex-row gap-4">
           <TextWithImage
             v-for="bullets in methodology?.data.sustainable_bullets"
             :key="bullets.description!"
@@ -164,10 +151,7 @@ That doesn’t mean that these banks have no fossil fuel lending at all, instead
         </div>
       </div>
     </section>
-    <section
-      id="sources"
-      class="page-fade-in contain py-16 flex flex-col gap-12 max-w-6xl"
-    >
+    <section id="sources" class="page-fade-in contain py-16 flex flex-col gap-12 max-w-6xl">
       <h2 class="text-2xl font-semibold text-left sm:text-3xl ">
         {{ methodology?.data.sources_title || "Data sources we use" }}
       </h2>
@@ -210,14 +194,13 @@ That doesn’t mean that these banks have no fossil fuel lending at all, instead
 import { asImageSrc } from '@prismicio/helpers'
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
-
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { client } = usePrismic()
 const { data: methodology } = await useAsyncData('methodology', () =>
   client.getSingle('methodology', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
-  }),
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
 )
 usePrismicSEO(methodology.value?.data)
 

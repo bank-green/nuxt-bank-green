@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="relative z-0"
-    :class="paddingClasses"
-  >
+  <div class="relative z-0" :class="paddingClasses">
     <svg
       class="absolute inset-x-0 w-full max-h-3/2 min-h-full"
       :class="[
@@ -20,20 +17,19 @@
     </svg>
   </div>
 </template>
-
 <script setup>
 defineProps({
   direction: {
     type: String,
-    default: 'up',
+    default: 'up'
   },
   color: {
     type: String,
-    default: 'text-gray-50',
+    default: 'text-gray-50'
   },
   paddingClasses: {
     type: String,
-    default: 'py-8 sm:py-10 md:py-12',
-  },
+    default: 'py-8 sm:py-10 md:py-12'
+  }
 })
 </script>

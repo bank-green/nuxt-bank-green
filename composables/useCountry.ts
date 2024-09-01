@@ -5,7 +5,7 @@ const isValidCode = (code: string): boolean =>
 
 const defaultCountry = () => {
   try {
-    if (import.meta.client) {
+    if (process?.client) {
       // client-side we try to read country from browser settings
       const navLang = navigator.language
       if (navLang) {

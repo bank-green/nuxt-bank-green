@@ -19,7 +19,7 @@
 defineProps({
   departmentName: {
     type: String,
-    default: 'Other team',
-  },
+    default: 'Other team'
+  }
 })
 </script>

@@ -26,7 +26,7 @@ useHeadHelper(
   details.value?.name
     ? `${details.value.name}'s Climate Score - Bank.Green`
     : '',
-  'Find and compare the service offerings of ethical and sustainable banks.',
+  'Find and compare the service offerings of ethical and sustainable banks.'
 )
 
 const { rating } = details.value
@@ -59,4 +59,5 @@ const componentName = computed(() => {
       return BankUnknown
   }
 })
+
 </script>

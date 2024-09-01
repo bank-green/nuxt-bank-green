@@ -16,11 +16,7 @@
         >
           {{ title || "Moved your money to this bank?" }}
         </h3>
-        <PrismicRichText
-          v-if="!!description && description.length > 0"
-          :field="description"
-          class="text-lg text-gray-700"
-        />
+        <PrismicRichText v-if="!!description && description.length > 0" :field="description" class="text-lg text-gray-700" />
         <div v-else>
           <p class="text-gray-700 leading-loose text-lg font-bold">
             Write a breakup letter to your old bank.
@@ -42,14 +38,14 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import type { KeyTextField, RichTextField } from '@prismicio/types'
+import { KeyTextField, RichTextField } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
 defineProps<{
-  title?: KeyTextField
-  description?: RichTextField
+  title?: KeyTextField,
+  description?: RichTextField,
   buttonTitle?: KeyTextField
 }>()
+
 </script>

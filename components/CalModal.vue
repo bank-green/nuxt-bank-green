@@ -7,18 +7,18 @@
     />
   </ModalWithBackdrop>
 </template>
-
 <script setup lang="ts">
+
 const props = defineProps<{
-  modelValue: boolean
+  modelValue: boolean;
 }>()
 
 const emit = defineEmits([
-  'update:modelValue',
+  'update:modelValue'
 
 ])
 const showModal = computed({
   get: () => props.modelValue,
-  set: val => emit('update:modelValue', val),
+  set: val => emit('update:modelValue', val)
 })
 </script>

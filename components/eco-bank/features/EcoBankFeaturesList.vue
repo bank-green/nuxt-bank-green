@@ -35,26 +35,17 @@
       />
     </svg>
     <div class="flex-1">
-      <span
-        v-if="item.isChecked && item.text"
-        class="text-gray-900"
-      >{{
+      <span v-if="item.isChecked && item.text" class="text-gray-900">{{
         `${key}: ${item.text}`
       }}</span>
-      <span
-        v-else-if="item.isChecked"
-        class="text-gray-700"
-      >{{ key }}</span>
-      <span
-        v-else
-        class="text-gray-400"
-      >{{ key }}</span>
+      <span v-else-if="item.isChecked" class="text-gray-700">{{ key }}</span>
+      <span v-else class="text-gray-400">{{ key }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
 defineProps({
-  features: Object,
+  features: Object
 })
 </script>

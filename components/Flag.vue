@@ -11,6 +11,6 @@
 
 <script setup>
 defineProps({
-  country: String,
+  country: String
 })
 </script>

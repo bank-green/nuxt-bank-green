@@ -28,10 +28,7 @@
     </div>
 
     <!-- SECTION TWO -->
-    <div
-      id="section-two"
-      class="text-gray-800 overflow-hidden py-16"
-    >
+    <div id="section-two" class="text-gray-800 overflow-hidden py-16">
       <div class="contain">
         <slot name="section2" />
       </div>
@@ -45,18 +42,14 @@
       v-if="isEmbraceBreakup"
       :title="embrace?.data.bank_breakup_section_title"
       :description="embrace?.data.bank_breakup_section_description"
-      :checklist-items="[embrace?.data.bank_breakup_section_checklist1, embrace?.data.bank_breakup_section_checklist2, embrace?.data.bank_breakup_section_checklist3]"
+      :checklist-items="[embrace?.data.bank_breakup_section_checklist1, embrace?.data.bank_breakup_section_checklist2, embrace?.data.bank_breakup_section_checklist3 ]"
     >
       <template #footer-image>
         <slot name="footer-image" />
       </template>
     </BankEmbraceBreakupSection>
     <!-- CALL TO ACTION -->
-    <div
-      v-else
-      id="call-to-action"
-      class="bg-blue-100 text-gray-800"
-    >
+    <div v-else id="call-to-action" class="bg-blue-100 text-gray-800">
       <Swoosh direction="down" />
       <div class="contain pt-8">
         <slot name="call-to-action">
@@ -75,10 +68,7 @@
                 But don’t wait for the fire department to turn up – join us!
               </p>
             </div>
-            <CheckList
-              class="lg:w-1/2 w-full my-8"
-              :list="checkList"
-            />
+            <CheckList class="lg:w-1/2 w-full my-8" :list="checkList" />
           </div>
           <div class="flex flex-row justify-center items-center">
             <SignupBox
@@ -114,7 +104,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import SignupBox from '../forms/SignupBox.vue'
 import Swoosh from '@/components/Swoosh.vue'
@@ -123,17 +112,18 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',
-  'Discover other ways to divest from fossil fuels',
+  'Discover other ways to divest from fossil fuels'
 ]
 
 const { client } = usePrismic()
 const { data: embrace } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage'),
+  client.getSingle('embracepage')
 )
 
 withDefaults(defineProps<{
-  isEmbraceBreakup: boolean
+  isEmbraceBreakup: boolean;
 }>(), {
-  isEmbraceBreakup: false,
+  isEmbraceBreakup: false
 })
+
 </script>

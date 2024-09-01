@@ -1,4 +1,4 @@
-import type { CreateSubscriptionResponse } from '~~/utils/interfaces/donate'
+import { CreateSubscriptionResponse } from '~~/utils/interfaces/donate'
 
 const domainURL = useRuntimeConfig().public.DOMAIN_URL as string
 const stripeSecretKey = useRuntimeConfig().STRIPE_SECRET_KEY as string
@@ -41,28 +41,28 @@ export default defineEventHandler(
 
       // we have to build the request ourself because the Stripe SDK does not play well with Cloudflare
       const reqBody = {
-        'mode': 'subscription',
+        mode: 'subscription',
         'line_items[0][price]': priceId,
         'line_items[0][quantity]': '1',
-        'success_url': `${domainURL}/donate-complete?session_id={CHECKOUT_SESSION_ID}`,
-        'cancel_url': `${domainURL}/donate-cancelled`,
+        success_url: `${domainURL}/donate-complete?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${domainURL}/donate-cancelled`
       }
 
       const res = await $fetch('https://api.stripe.com/v1/checkout/sessions', {
         method: 'POST',
         headers: {
           authorization: `Basic ${Buffer.from(stripeSecretKey + ':').toString(
-            'base64',
-          )}`,
+            'base64'
+          )}`
         },
         body: new URLSearchParams(reqBody),
-        parseResponse: JSON.parse,
+        parseResponse: JSON.parse
       })
 
       return {
         success: true,
         redirectURL: res.url,
-        error: null,
+        error: null
       }
 
       // return sendRedirect(event, session.url || '', 303);
@@ -73,8 +73,8 @@ export default defineEventHandler(
       return {
         success: false,
         redirectURL: null,
-        error: _e.message,
+        error: _e.message
       }
     }
-  },
+  }
 )

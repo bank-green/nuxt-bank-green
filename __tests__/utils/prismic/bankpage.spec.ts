@@ -1,40 +1,39 @@
 // @vitest-environment nuxt
 
 // import { RichTextNodeType } from '@prismicio/types'
-import type { RTTextNode, RichTextField } from '@prismicio/types'
-import { RichTextNodeType } from '@prismicio/types'
+import { RTTextNode, RichTextField, RichTextNodeType } from '@prismicio/types'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { useBankPage } from '~/utils/prismic/bankpage'
 
 const mockedGetByUID = vi.fn()
 const spiedClient = {
-  getByUID: mockedGetByUID,
+  getByUID: mockedGetByUID
 }
 
-function mockRichTextField(content?: string | null): RichTextField {
+function mockRichTextField (content?: string | null) : RichTextField {
   if (content) {
     return [
       {
         type: RichTextNodeType.heading1,
         spans: [],
-        text: content,
-      },
+        text: content
+      }
     ]
   }
   return []
 }
 
 interface IMockBankPageData {
-  headline?: string | null
-  subtitle?: string | null
-  description1?: string | null
-  description2?: string | null
-  description3?: string | null
-  seo_title?: string | null
+  headline?: string | null,
+  subtitle?: string | null,
+  description1?: string | null,
+  description2?: string | null,
+  description3?: string | null,
+  seo_title?: string | null,
   seo_description?: string | null
 }
 
-function mockBankPageData(mockData: IMockBankPageData) {
+function mockBankPageData (mockData: IMockBankPageData) {
   return ref({
     headline: mockRichTextField(mockData.headline),
     subtitle: mockRichTextField(mockData.subtitle),
@@ -42,13 +41,13 @@ function mockBankPageData(mockData: IMockBankPageData) {
     description2: mockRichTextField(mockData.description2),
     description3: mockRichTextField(mockData.description3),
     seo_title: mockData.seo_title,
-    seo_description: mockData.seo_description,
+    seo_description: mockData.seo_description
   })
 }
 
 vi.mock('@prismicio/vue', () => {
   const usePrismic = () => ({
-    client: spiedClient,
+    client: spiedClient
   })
   return { usePrismic }
 })
@@ -57,9 +56,9 @@ describe('useBankPage', () => {
   const invalidBankDetails = ref(null)
   const invalidResponse = {
     error: {
-      value: 'Has error',
+      value: 'Has error'
     },
-    data: null,
+    data: null
   }
   afterEach(() => {
     vi.clearAllMocks()
@@ -85,7 +84,7 @@ describe('useBankPage', () => {
     mockedGetByUID
       .mockResolvedValue({
         error: null,
-        data: mockBankPageData({ headline: 'Sample headline' }),
+        data: mockBankPageData({ headline: 'Sample headline' })
       })
     const { bankPage } = await useBankPage('invalid bank tag', invalidBankDetails)
     expect(bankPage).not.toBe(null)
@@ -120,11 +119,11 @@ describe('useBankPage', () => {
     mockedGetByUID
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ headline: customBankHeadline }),
+        data: mockBankPageData({ headline: customBankHeadline })
       })
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ headline: ratingHeadline }),
+        data: mockBankPageData({ headline: ratingHeadline })
       })
     const { bankPage } = await useBankPage('invalid bank tag', invalidBankDetails)
     expect(bankPage).not.toBe(null)
@@ -146,11 +145,11 @@ describe('useBankPage', () => {
     mockedGetByUID
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ description1: customDescription1 }),
+        data: mockBankPageData({ description1: customDescription1 })
       })
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ description1: ratingDescription1 }),
+        data: mockBankPageData({ description1: ratingDescription1 })
       })
     const { bankPage } = await useBankPage('invalid bank tag', invalidBankDetails)
     expect(bankPage).not.toBe(null)
@@ -171,11 +170,11 @@ describe('useBankPage', () => {
     mockedGetByUID
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({}),
+        data: mockBankPageData({})
       })
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ description1: ratingDescription1 }),
+        data: mockBankPageData({ description1: ratingDescription1 })
       })
     const { bankPage } = await useBankPage('invalid bank tag', invalidBankDetails)
     expect(bankPage).not.toBe(null)
@@ -196,11 +195,11 @@ describe('useBankPage', () => {
     mockedGetByUID
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ description1: '' }),
+        data: mockBankPageData({ description1: '' })
       })
       .mockResolvedValueOnce({
         error: null,
-        data: mockBankPageData({ description1: ratingDescription1 }),
+        data: mockBankPageData({ description1: ratingDescription1 })
       })
     const { bankPage } = await useBankPage('invalid bank tag', invalidBankDetails)
     expect(bankPage).not.toBe(null)

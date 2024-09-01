@@ -14,14 +14,14 @@ export default defineNuxtPlugin((nuxtApp) => {
         loadScript: true, // Whether or not to load the GTM Script (Helpful if you are including GTM manually, but need the dataLayer functionality in your components) (optional)
         vueRouter: router, // Pass the router instance to automatically sync with router (optional)
         ignoredViews: [], // Don't trigger events for specified router names (case insensitive) (optional)
-        trackOnNextTick: false, // Whether or not call trackView in Vue.nextTick
-      }),
+        trackOnNextTick: false // Whether or not call trackView in Vue.nextTick
+      })
     )
 
     // only enable after another delay
     setTimeout(() => {
       const allowCookies = useCookie('bg.allowcookies', {
-        default: () => false,
+        default: () => false
       })
       if (!allowCookies.value) { return }
       const gtm = useGtm()

@@ -58,7 +58,7 @@ import CheckList from '@/components/CheckList.vue'
 
 const { client } = usePrismic()
 const { data: call } = await useAsyncData('calltoaction', () =>
-  client.getSingle('calltoaction'),
+  client.getSingle('calltoaction')
 )
 defineProps({
   title: String,
@@ -66,6 +66,6 @@ defineProps({
   checkListItems: Array,
   buttonText: String,
   light: Boolean,
-  spaced: Boolean,
+  spaced: Boolean
 })
 </script>

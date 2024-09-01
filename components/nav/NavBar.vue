@@ -4,16 +4,8 @@
       <div
         class="relative z-50 bg-primary-dark rounded-xl flex items-center justify-between pr-4"
       >
-        <NuxtLink
-          to="/"
-          class="py-4 px-6"
-          @click="isOpen = false"
-        >
-          <img
-            class="mt-1 h-5"
-            src="/img/logo.svg"
-            alt="Bank.Green"
-          >
+        <NuxtLink to="/" class="py-4 px-6" @click="isOpen = false">
+          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green">
         </NuxtLink>
 
         <button
@@ -140,7 +132,7 @@ const headerLinks = computed(() => {
   return links({ isHeader: true })
 })
 
-function closePopup() {
+function closePopup () {
   isOpen.value = false
 }
 </script>

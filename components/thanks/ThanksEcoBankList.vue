@@ -19,11 +19,11 @@
 <script setup lang="ts">
 const props = defineProps<{
   list: {
-    name: string
-    website: string
-    tag: string
-  }[]
-  loaded: boolean
+    name: string;
+    website: string;
+    tag: string;
+  }[];
+  loaded: Boolean;
 }>()
 
 const cardsCount = computed(() => (props.loaded ? props.list.length : 3))
