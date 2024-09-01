@@ -2,7 +2,7 @@
   <div
     id="lead-gen"
     style="scroll-margin-top: 80px; background-image: url('/img/backgrounds/circle-quarter.svg'); background-position: left bottom;"
-    class="flex flex-col lg:flex-row gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
+    class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
   >
     <div class="flex flex-col gap-12">
       <h2
