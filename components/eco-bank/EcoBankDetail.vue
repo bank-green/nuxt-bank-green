@@ -52,7 +52,7 @@
       <template #products>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-24">
           <p>
-            <strong>{{ props.countries.find(x => x.code == 'US') ? 'Checking' : 'Current' }} Accounts:</strong>
+            <strong>{{ isBE() ? 'Checking' : 'Current' }} Accounts:</strong>
             {{ getBankFeature("checking") }}
           </p>
           <p>
@@ -231,7 +231,9 @@
 </template>
 
 <script setup lang="ts">
+
 import { SliceZoneComponents, SliceLike } from '@prismicio/vue'
+const { isBE } = useCountry()
 
 interface BankFeature {
   offered: string;
