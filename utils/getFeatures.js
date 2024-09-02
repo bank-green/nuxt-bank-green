@@ -16,14 +16,13 @@ export default function getFeatures (bankFeatures, summary = false) {
   const featureDict = {
     checking: checkingName + ' Accounts',
     saving: 'Savings Accounts',
-    'Interest rates': 'Interest Rates',
     'Business accounts': 'Business ' + checkingName + ' Accounts',
     'Small business lending': 'Small Business Lending',
-    'Credit cards': 'Credit Cards',
     'Mortgages or Loans': 'Mortgage or Loan Options',
     'Deposit protection': 'Deposit Protection',
     'Corporate Lending': 'Corporate Lending',
-    'Business Savings Accounts': 'Business Savings Accounts'
+    'Business Savings Accounts': 'Business Savings Accounts',
+    'Credit cards': 'Credit Cards'
   }
 
   // initialize result object with all false

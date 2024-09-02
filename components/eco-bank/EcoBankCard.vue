@@ -108,20 +108,21 @@ const props = defineProps<{
 }>()
 
 const bankInfo = computed(() => {
-  const features = getFeatures(props.item?.bankFeatures, true) as Record<
+  const allFeatures = getFeatures(props.item?.bankFeatures, true) as Record<
     string,
     any
   >
-  const allFeatures: Record<string, any> = {}
+  const features: Record<string, any> = {}
   const accounts: string[] = []
 
-  for (const [featKey, featValue] of Object.entries(features)) {
+  for (const [featKey, featValue] of Object.entries(allFeatures)) {
     // Check if the feature is an account and process it
-    if (featKey?.toLowerCase().includes('accounts')) {
+    const accountKeys = ['accounts', 'credit card']
+    if (accountKeys.find(x => featKey?.toLowerCase().includes(x))) {
       accounts.push(featKey.replace('Accounts', '').trim())
     } else if (!featValue?.hide || featValue?.checked) {
       // Only add feature if it's not hidden or if it's checked
-      allFeatures[featKey] = featValue ?? features[featKey]
+      features[featKey] = featValue ?? allFeatures[featKey]
     }
   }
 
