@@ -118,11 +118,13 @@ const bankInfo = computed(() => {
   for (const [featKey, featValue] of Object.entries(allFeatures)) {
     // Check if the feature is an account and process it
     const accountKeys = ['accounts', 'credit card']
-    if (accountKeys.find(x => featKey?.toLowerCase().includes(x))) {
-      accounts.push(featKey.replace('Accounts', '').trim())
-    } else if (!featValue?.hide || featValue?.checked) {
-      // Only add feature if it's not hidden or if it's checked
-      features[featKey] = featValue ?? allFeatures[featKey]
+    if (!featValue?.hide || featValue?.checked) {
+      if (accountKeys.find(x => featKey?.toLowerCase().includes(x))) {
+        accounts.push(featKey.replace('Accounts', '').trim())
+      } else {
+        // Only add feature if it's not hidden or if it's checked
+        features[featKey] = featValue ?? allFeatures[featKey]
+      }
     }
   }
 
