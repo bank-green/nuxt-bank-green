@@ -80,7 +80,7 @@
         leave-from-class="opacity-100 scale-100"
         leave-to-class="opacity-0 scale-95"
       >
-        <div>
+        <div v-if="item">
           <div
             class="flex flex-col md:flex-row text-xs ml-12 mt-4 justify-between"
           >
@@ -128,7 +128,7 @@ const accounts = computed(() => {
     string,
     any
   >
-  for (const [featKey, featValue] of Object.entries(features)) {
+  for (const [featKey, _] of Object.entries(features)) {
     if (featKey?.toLowerCase().includes('accounts')) {
       relevantAccounts.push(featKey.replace('Accounts', '').trim())
     }
