@@ -145,45 +145,12 @@ const loadBanks = async ({
         a.name - b.name
     )
     .map((bank) => {
-      console.log(bank)
-      let accountTypes = ['checking', 'saving', 'credit cards']
-      let checkingName = 'Current'
-
-      if (country.value === 'US') {
-        checkingName = 'Checking'
-      }
-      if (country.value === 'FR' || country.value === 'DE') {
-        accountTypes = ['checking', 'saving']
-      }
       return {
         ...bank,
-        account_types: bank.bankFeatures
-          .filter(a => accountTypes.includes(a.feature.name?.toLowerCase()))
-          ?.map(x =>
-            x.feature.name
-              .replace('checking', checkingName)
-              .replace('saving', 'Savings')
-          ),
         interest_rates:
           bank.bankFeatures.find(a =>
             a.feature.name?.toLowerCase().includes('interest rates')
-          )?.details ?? '',
-        fdic:
-          bank.bankFeatures.find(a =>
-            a.feature.name?.toLowerCase().includes('fdic')
-          )?.details ?? '',
-        other_features: bank.bankFeatures.filter(
-          a =>
-            ![
-              'checking',
-              'saving',
-              'credit cards',
-              'interest rates',
-              'business',
-              'mobile'
-            ].filter(x => a.feature.name?.toLowerCase().includes(x)).length >
-            0
-        )
+          )?.details ?? ''
       }
     })
   loading.value = false

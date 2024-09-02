@@ -20,7 +20,7 @@
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
-        <h2 class="font-semibold md:!text-lg text-gray-700 mr-4">
+        <h2 v-if="true" class="font-semibold md:!text-lg text-gray-700 mr-4">
           <span v-if="slice.variation === 'default'">{{
             slice.primary?.contentlink?.data.title
           }}</span>

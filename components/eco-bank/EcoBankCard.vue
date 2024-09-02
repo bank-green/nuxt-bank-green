@@ -84,15 +84,15 @@
           <div
             class="flex flex-col md:flex-row text-xs ml-12 mt-4 justify-between"
           >
-            <span>{{ accounts.join(" | ") }}</span>
+            <span>{{ bankInfo.accounts.join(" | ") }}</span>
             <span class="mr-6 mt-2 md:mt-0">Rating: {{ item.rating }}</span>
           </div>
 
           <div
-            v-if="Object.keys(features).length"
+            v-if="Object.keys(bankInfo.features).length"
             class="py-4 px-7 flex flex-wrap"
           >
-            <EcoBankFeaturesList :features="features" />
+            <EcoBankFeaturesList :features="bankInfo.features" />
           </div>
         </div>
       </transition>
@@ -107,33 +107,25 @@ const props = defineProps<{
   item: any;
 }>()
 
-const features = computed(() => {
-  // filter our credit card
-  const features = getFeatures(props.item?.other_features, true) as Record<
+const bankInfo = computed(() => {
+  const features = getFeatures(props.item?.bankFeatures, true) as Record<
     string,
     any
   >
   const allFeatures: Record<string, any> = {}
-  for (const [featKey, featValue] of Object.entries(features)) {
-    if (!featValue?.hide || featValue?.checked) {
-      allFeatures[featKey] = features[featValue] ?? features[featKey]
-    }
-  }
-  return allFeatures
-})
+  const accounts: string[] = []
 
-const accounts = computed(() => {
-  const relevantAccounts = []
-  const features = getFeatures(props.item?.other_features) as Record<
-    string,
-    any
-  >
-  for (const [featKey, _] of Object.entries(features)) {
+  for (const [featKey, featValue] of Object.entries(features)) {
+    // Check if the feature is an account and process it
     if (featKey?.toLowerCase().includes('accounts')) {
-      relevantAccounts.push(featKey.replace('Accounts', '').trim())
+      accounts.push(featKey.replace('Accounts', '').trim())
+    } else if (!featValue?.hide || featValue?.checked) {
+      // Only add feature if it's not hidden or if it's checked
+      allFeatures[featKey] = featValue ?? features[featKey]
     }
   }
-  return relevantAccounts
+
+  return { features, accounts }
 })
 </script>
 
