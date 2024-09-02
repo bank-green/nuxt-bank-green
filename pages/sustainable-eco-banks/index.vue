@@ -20,60 +20,60 @@
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
-      <div v-if="true">
-        <div class="flex flex-col md:flex-row">
-          <div
-            class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
-            style="height: fit-content"
-          >
-            <EcoBankFilters
-              v-if="country"
-              :location="country"
-              @filter="applyFilter"
-            />
-          </div>
-
-          <div class="relative w-full md:ml-6">
-            <LocationSearch v-model="country" class="z-30 mb-8" />
-
-            <div v-if="!country">
-              <h2
-                class="w-full px-5 py-4 bg-gray-100 border border-gray-300 rounded-2xl text-sm"
-              >
-                <div class="font-medium text-gray-600">
-                  No country selected
-                </div>
-                <div class="text-sm text-gray-500">
-                  To continue, please select a country.
-                </div>
-              </h2>
+        <div v-if="true">
+          <div class="flex flex-col md:flex-row">
+            <div
+              class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
+              style="height: fit-content"
+            >
+              <EcoBankFilters
+                v-if="country"
+                :location="country"
+                @filter="applyFilter"
+              />
             </div>
-            <div v-else>
-              <div
-                v-if="banks.length"
-                :class="[loading ? 'opacity-50 pointer-events-none' : '']"
-                class="transition"
-              >
-                <EcoBankCards :list="banks" />
-              </div>
 
-              <div v-else-if="!loading" class="mt-20">
+            <div class="relative w-full md:ml-6">
+              <LocationSearch v-model="country" class="z-30 mb-8" />
+
+              <div v-if="!country">
                 <h2
-                  v-if="errorMessage"
-                  class="text-xl font-semibold mb-4 md:text-center"
+                  class="w-full px-5 py-4 bg-gray-100 border border-gray-300 rounded-2xl text-sm"
                 >
-                  {{ errorMessage }}
+                  <div class="font-medium text-gray-600">
+                    No country selected
+                  </div>
+                  <div class="text-sm text-gray-500">
+                    To continue, please select a country.
+                  </div>
                 </h2>
-                <p class="text-gray-600 mb-8 md:text-center max-w-lg mx-auto">
-                  We’re working hard to increase the number of banks we provide
-                  data on. If you tell us your bank’s name, we’ll email you as
-                  soon as we have a score for it.
-                </p>
+              </div>
+              <div v-else>
+                <div
+                  v-if="banks.length"
+                  :class="[loading ? 'opacity-50 pointer-events-none' : '']"
+                  class="transition"
+                >
+                  <EcoBankCards :list="banks" />
+                </div>
+
+                <div v-else-if="!loading" class="mt-20">
+                  <h2
+                    v-if="errorMessage"
+                    class="text-xl font-semibold mb-4 md:text-center"
+                  >
+                    {{ errorMessage }}
+                  </h2>
+                  <p class="text-gray-600 mb-8 md:text-center max-w-lg mx-auto">
+                    We’re working hard to increase the number of banks we
+                    provide data on. If you tell us your bank’s name, we’ll
+                    email you as soon as we have a score for it.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </transition>
       <div
         class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
@@ -93,38 +93,38 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import LocationSearch from '@/components/forms/location/LocationSearch.vue'
+import { defineSliceZoneComponents } from "@prismicio/vue";
+import LocationSearch from "@/components/forms/location/LocationSearch.vue";
 
-import { components } from '~~/slices'
-const sliceComps = ref(defineSliceZoneComponents(components))
+import { components } from "~~/slices";
+const sliceComps = ref(defineSliceZoneComponents(components));
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 
-const { data: ecobanks } = await useAsyncData('ecobanks', () =>
-  client.getSingle('ecobankspage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
-)
-usePrismicSEO(ecobanks?.value?.data)
+const { data: ecobanks } = await useAsyncData("ecobanks", () =>
+  client.getSingle("ecobankspage", {
+    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
+  }),
+);
+usePrismicSEO(ecobanks?.value?.data);
 
-const { country } = useCountry()
+const { country } = useCountry();
 
-const banks = ref([])
-const loading = ref(false)
-const errorMessage = ref(null)
+const banks = ref([]);
+const loading = ref(false);
+const errorMessage = ref(null);
 const loadBanks = async ({
   regions,
   subregions,
   fossilFreeAlliance,
   topPick,
-  features
+  features,
 }) => {
-  loading.value = true
+  loading.value = true;
   if (!country.value) {
-    return
+    return;
   }
   const result = await getBanksListWithFilter({
     country: country.value,
@@ -132,49 +132,71 @@ const loadBanks = async ({
     subregions,
     topPick,
     fossilFreeAlliance,
-    features
-  })
+    features,
+  });
   banks.value = result
     // filter show_on_sustainable_banks_page
-    .filter(a => a.showOnSustainableBanksPage)
+    .filter((a) => a.showOnSustainableBanksPage)
     // sort by top_pick first, then fossil_free_alliance_rating, then by name
     .sort(
       (a, b) =>
         b.topPick - a.topPick ||
         b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
-        a.name - b.name
-      )
-      .map(bank => {
-        console.log(bank)
-        var account_types = ['checking', 'saving', 'credit cards']
-        var checking_name = 'Current'
+        a.name - b.name,
+    )
+    .map((bank) => {
+      console.log(bank);
+      let account_types = ["checking", "saving", "credit cards"];
+      let checking_name = "Current";
 
-        if (country.value === 'US') {
-          checking_name = 'Checking'
-        } 
-        if (country.value === 'FR' || country.value === 'DE') {
-          account_types = ['checking', 'saving']
-        }
-        return {
-          ...bank,
-          account_types: bank.bankFeatures.filter(a => account_types.includes(a.feature.name?.toLowerCase()))?.map(x => x.feature.name.replace('checking', checking_name).replace('saving', 'Savings')),
-          interest_rates: bank.bankFeatures.find(a => a.feature.name?.toLowerCase().includes('interest rates'))?.details ?? '',
-          fdic: bank.bankFeatures.find(a => a.feature.name?.toLowerCase().includes('fdic'))?.details ?? '',
-          other_features: bank.bankFeatures.filter(a => !['checking', 'saving', 'credit cards', 'interest rates', 'business', 'mobile'].filter(x => a.feature.name?.toLowerCase().includes(x)).length > 0)
-        }
-      })  
-  loading.value = false
+      if (country.value === "US") {
+        checking_name = "Checking";
+      }
+      if (country.value === "FR" || country.value === "DE") {
+        account_types = ["checking", "saving"];
+      }
+      return {
+        ...bank,
+        account_types: bank.bankFeatures
+          .filter((a) => account_types.includes(a.feature.name?.toLowerCase()))
+          ?.map((x) =>
+            x.feature.name
+              .replace("checking", checking_name)
+              .replace("saving", "Savings"),
+          ),
+        interest_rates:
+          bank.bankFeatures.find((a) =>
+            a.feature.name?.toLowerCase().includes("interest rates"),
+          )?.details ?? "",
+        fdic:
+          bank.bankFeatures.find((a) =>
+            a.feature.name?.toLowerCase().includes("fdic"),
+          )?.details ?? "",
+        other_features: bank.bankFeatures.filter(
+          (a) =>
+            ![
+              "checking",
+              "saving",
+              "credit cards",
+              "interest rates",
+              "business",
+              "mobile",
+            ].filter((x) => a.feature.name?.toLowerCase().includes(x)).length >
+            0,
+        ),
+      };
+    });
+  loading.value = false;
   if (banks.value.length === 0) {
     errorMessage.value =
-      "Sorry, we don't have any banks that meet the required filter."
+      "Sorry, we don't have any banks that meet the required filter.";
   } // TODO: should put this string in Prismic
-}
+};
 watch(country, () => {
-  banks.value = []
-})
-
+  banks.value = [];
+});
 
 const applyFilter = (payload) => {
-  loadBanks(payload)
-}
+  loadBanks(payload);
+};
 </script>

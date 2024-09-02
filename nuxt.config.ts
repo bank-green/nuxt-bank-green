@@ -181,7 +181,7 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [
-      // process.env.NODE_ENV !== 'test' && eslintPlugin()
+      process.env.NODE_ENV !== 'test' && eslintPlugin()
     ]
   }
 })
