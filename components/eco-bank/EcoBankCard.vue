@@ -117,7 +117,7 @@ const bankInfo = computed(() => {
 
   for (const [featKey, featValue] of Object.entries(allFeatures)) {
     // Check if the feature is an account and process it
-    const accountKeys = ['accounts', 'credit card']
+    const accountKeys = ['accounts', 'credit card', 'mortgage', 'lending']
     if (!featValue?.hide || featValue?.checked) {
       if (accountKeys.find(x => featKey?.toLowerCase().includes(x))) {
         accounts.push(featKey.replace('Accounts', '').trim())
