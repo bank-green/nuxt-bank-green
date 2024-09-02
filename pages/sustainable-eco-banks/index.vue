@@ -93,38 +93,38 @@
 </template>
 
 <script setup>
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import LocationSearch from "@/components/forms/location/LocationSearch.vue";
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 
-import { components } from "~~/slices";
-const sliceComps = ref(defineSliceZoneComponents(components));
+import { components } from '~~/slices'
+const sliceComps = ref(defineSliceZoneComponents(components))
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
-const { client } = usePrismic();
+const { client } = usePrismic()
 
-const { data: ecobanks } = await useAsyncData("ecobanks", () =>
-  client.getSingle("ecobankspage", {
-    fetchLinks: ["accordionitem.title", "accordionitem.slices"],
-  }),
-);
-usePrismicSEO(ecobanks?.value?.data);
+const { data: ecobanks } = await useAsyncData('ecobanks', () =>
+  client.getSingle('ecobankspage', {
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
+  })
+)
+usePrismicSEO(ecobanks?.value?.data)
 
-const { country } = useCountry();
+const { country } = useCountry()
 
-const banks = ref([]);
-const loading = ref(false);
-const errorMessage = ref(null);
+const banks = ref([])
+const loading = ref(false)
+const errorMessage = ref(null)
 const loadBanks = async ({
   regions,
   subregions,
   fossilFreeAlliance,
   topPick,
-  features,
+  features
 }) => {
-  loading.value = true;
+  loading.value = true
   if (!country.value) {
-    return;
+    return
   }
   const result = await getBanksListWithFilter({
     country: country.value,
@@ -132,71 +132,71 @@ const loadBanks = async ({
     subregions,
     topPick,
     fossilFreeAlliance,
-    features,
-  });
+    features
+  })
   banks.value = result
     // filter show_on_sustainable_banks_page
-    .filter((a) => a.showOnSustainableBanksPage)
+    .filter(a => a.showOnSustainableBanksPage)
     // sort by top_pick first, then fossil_free_alliance_rating, then by name
     .sort(
       (a, b) =>
         b.topPick - a.topPick ||
         b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
-        a.name - b.name,
+        a.name - b.name
     )
     .map((bank) => {
-      console.log(bank);
-      let account_types = ["checking", "saving", "credit cards"];
-      let checking_name = "Current";
+      console.log(bank)
+      let accountTypes = ['checking', 'saving', 'credit cards']
+      let checkingName = 'Current'
 
-      if (country.value === "US") {
-        checking_name = "Checking";
+      if (country.value === 'US') {
+        checkingName = 'Checking'
       }
-      if (country.value === "FR" || country.value === "DE") {
-        account_types = ["checking", "saving"];
+      if (country.value === 'FR' || country.value === 'DE') {
+        accountTypes = ['checking', 'saving']
       }
       return {
         ...bank,
         account_types: bank.bankFeatures
-          .filter((a) => account_types.includes(a.feature.name?.toLowerCase()))
-          ?.map((x) =>
+          .filter(a => accountTypes.includes(a.feature.name?.toLowerCase()))
+          ?.map(x =>
             x.feature.name
-              .replace("checking", checking_name)
-              .replace("saving", "Savings"),
+              .replace('checking', checkingName)
+              .replace('saving', 'Savings')
           ),
         interest_rates:
-          bank.bankFeatures.find((a) =>
-            a.feature.name?.toLowerCase().includes("interest rates"),
-          )?.details ?? "",
+          bank.bankFeatures.find(a =>
+            a.feature.name?.toLowerCase().includes('interest rates')
+          )?.details ?? '',
         fdic:
-          bank.bankFeatures.find((a) =>
-            a.feature.name?.toLowerCase().includes("fdic"),
-          )?.details ?? "",
+          bank.bankFeatures.find(a =>
+            a.feature.name?.toLowerCase().includes('fdic')
+          )?.details ?? '',
         other_features: bank.bankFeatures.filter(
-          (a) =>
+          a =>
             ![
-              "checking",
-              "saving",
-              "credit cards",
-              "interest rates",
-              "business",
-              "mobile",
-            ].filter((x) => a.feature.name?.toLowerCase().includes(x)).length >
-            0,
-        ),
-      };
-    });
-  loading.value = false;
+              'checking',
+              'saving',
+              'credit cards',
+              'interest rates',
+              'business',
+              'mobile'
+            ].filter(x => a.feature.name?.toLowerCase().includes(x)).length >
+            0
+        )
+      }
+    })
+  loading.value = false
   if (banks.value.length === 0) {
     errorMessage.value =
-      "Sorry, we don't have any banks that meet the required filter.";
+      "Sorry, we don't have any banks that meet the required filter."
   } // TODO: should put this string in Prismic
-};
+}
 watch(country, () => {
-  banks.value = [];
-});
+  banks.value = []
+})
 
 const applyFilter = (payload) => {
-  loadBanks(payload);
-};
+  loadBanks(payload)
+}
 </script>
