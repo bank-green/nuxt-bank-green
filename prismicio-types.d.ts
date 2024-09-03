@@ -96,6 +96,16 @@ export interface AccreditationpageDocumentDataProjectsItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   project_link: prismic.KeyTextField;
+
+  /**
+   * Description field in *AccreditationPage → Projects*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
 }
 
 /**
