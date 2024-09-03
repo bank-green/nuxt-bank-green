@@ -49,7 +49,6 @@ export default function getFeatures (bankFeatures, summary = false) {
       result[bankFeature.feature.name] = displayFeature
     }
   }
-  console.log(result)
   return result
 }
 
