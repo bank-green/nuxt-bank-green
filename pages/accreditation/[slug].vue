@@ -18,9 +18,9 @@ const route = useRoute()
 /* const error = ref(false) */
 
 const { client } = usePrismic()
-const slug = route.path.split('/').at(-1) ?? ''
-const { data: accred } = await useAsyncData(slug, () =>
-  client.getByUID('accreditationpage', slug)
+const slug = route.params.slug ?? ''
+const { data: accred } = await useAsyncData(slug[0], () =>
+  client.getByUID('accreditationpage', slug[0])
 )
 
 /*
