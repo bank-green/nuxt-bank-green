@@ -65,6 +65,6 @@ Always use the Slice Machine tool from your local for creating and editing custo
 
 `npm run slicemachine`
 
-When pushing changes from Slice Machine, make sure only items that you are working on will get updated. If the changes shown in Slice Machine include deleting items, verify with the team to see if these items are safe to delete. Deleting a custom type may delete the associated content which will not be recoverable.  You may need to pull the latest from main to prevent these changes.
+When pushing changes from Slice Machine, make sure only items that you are working on will get updated. If the changes shown in Slice Machine include deleting items, verify with the team to see if these items are safe to delete. Deleting a custom type may delete the associated content which will not be recoverable.  You may need to pull the latest from main to prevent unintended changes (if someone else has also modified a type).
 
 Read the [Prismic & Nuxt docs](https://prismic.io/docs/nuxt) to understand how to use Prismic with Nuxt.
