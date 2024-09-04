@@ -9,6 +9,16 @@ Install dependencies:
 
 `npm run dev`
 
+# Fixing lint errors
+
+Running in development mode will show any lint errors, use the following to fix (most of) these
+
+Mac/Linux
+`npm run lintfix`
+
+Windows
+`npm run lintfixwin`
+
 # Deployment
 
 We need `wrangler`, the Cloudflare worker CLI.
@@ -31,8 +41,10 @@ Publish to `bank.green`
 `npm run publish`
 
 # Tests
+
 ## Unit Tests/Integration Tests
-All test cases are located at directory [__tests __](__tests__)
+
+All test cases are located at directory [**tests **](__tests__)
 
 To run tests
 `npm run test`
