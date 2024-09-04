@@ -9,15 +9,19 @@ Install dependencies:
 
 `npm run dev`
 
-# Fixing lint errors
+## Fixing lint errors
 
-Running in development mode will show any lint errors, use the following to fix (most of) these
+Running in development mode will show any lint errors introduced. Use the following to fix (most of) these
 
 Mac/Linux
 `npm run lintfix`
 
 Windows
 `npm run lintfixwin`
+
+To temporarily disable linting, comment out the following line in `config.nuxt.js`:
+
+`process.env.NODE_ENV !== 'test' && eslintPlugin()`
 
 # Deployment
 
@@ -61,6 +65,6 @@ Always use the Slice Machine tool from your local for creating and editing custo
 
 `npm run slicemachine`
 
-When pushing changes from Slice Machine, make sure only items that you are working on will get updated. If the changes shown in Slice Machine include deleting items, verify with the team to see if these items are safe to delete. Deleting a custom type may delete the associated content which will not be recoverable.
+When pushing changes from Slice Machine, make sure only items that you are working on will get updated. If the changes shown in Slice Machine include deleting items, verify with the team to see if these items are safe to delete. Deleting a custom type may delete the associated content which will not be recoverable.  You may need to pull the latest from main to prevent these changes.
 
 Read the [Prismic & Nuxt docs](https://prismic.io/docs/nuxt) to understand how to use Prismic with Nuxt.
