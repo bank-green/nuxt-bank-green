@@ -21,15 +21,6 @@
             >
               Move Your Money
             </NuxtLink>
-            <div class="text-xs text-gray-500 mx-4 uppercase">
-              Or
-            </div>
-            <NuxtLink
-              to="/pledge"
-              class="underline"
-            >
-              Pledge to Move it
-            </NuxtLink>
           </div>
           <div class="relative flex-grow md:flex-none">
             <a href="#section-two">
@@ -65,15 +56,6 @@
               class="button-green w-auto"
             >
               Move Your Money
-            </NuxtLink>
-            <div class="text-xs text-gray-500 mx-4 uppercase">
-              Or
-            </div>
-            <NuxtLink
-              to="/pledge"
-              class="underline"
-            >
-              Pledge to Move it
             </NuxtLink>
           </div>
           <div class="flex md:hidden flex-grow justify-center">
