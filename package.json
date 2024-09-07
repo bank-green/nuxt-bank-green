@@ -42,12 +42,12 @@
     "playwright-core": "^1.43.0",
     "slice-machine-ui": "^1.6.0",
     "stripe": "^12.8.0",
+    "typescript": "^5.5.4",
     "vite-plugin-eslint2": "^4.4.0",
     "vitest": "^1.4.0"
   },
   "dependencies": {
     "nuxt-jsonld": "^2.0.8",
-    "typescript": "^5.5.4",
     "vue-turnstile": "^1.0.9"
   }
 }
