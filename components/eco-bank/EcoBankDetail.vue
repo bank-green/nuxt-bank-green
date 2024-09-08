@@ -250,7 +250,6 @@ const props = defineProps<{
   website: string;
   rating: string;
   bankFeatures: BankFeature[];
-  countries: { code: string; }[];
   tag: string;
   prismicPageData: Record<string, any> | null;
   prismicDefaultPageData: Record<string, any> | null;

@@ -25,7 +25,6 @@
       :website="details.website"
       :rating="details.rating"
       :bank-features="details.bankFeatures"
-      :countries="details.countries"
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
       :prismic-default-page-data="prismicDefaultPageData"
