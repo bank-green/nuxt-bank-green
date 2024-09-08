@@ -52,7 +52,7 @@
       <template #products>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:-mr-24">
           <p>
-            <strong>{{ isBE() ? 'Checking' : 'Current' }} Accounts:</strong>
+            <strong>{{ isBE() ? 'Current' : 'Checking' }} Accounts:</strong>
             {{ getBankFeature("checking") }}
           </p>
           <p>
