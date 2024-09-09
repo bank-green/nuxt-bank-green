@@ -23,7 +23,7 @@ const commentaryFields = `{
     topPick,
     fossilFreeAlliance,
     fossilFreeAllianceRating,
-    showOnSustainableBanksPage
+    showOnSustainableBanksPage,
     institutionType {
         name
     }
@@ -96,16 +96,17 @@ export async function getBanksList ({
 }
 
 export async function getBanksListWithFilter ({
-  country,
-  regions,
-  subregions,
-  topPick,
-  fossilFreeAlliance,
-  features
+  country = '',
+  regions = [],
+  subregions = [],
+  topPick = null,
+  fossilFreeAlliance = null,
+  features = null,
+  sustainableOnly = true
 }) {
   const brandsQuery = `
-      query BrandsQuery($country: String, $first: Int, $topPick: Boolean, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
-          brands(country: $country, first: $first, topPick: $topPick, fossilFreeAlliance: $fossilFreeAlliance, features: $features, regions: $regions, subregions: $subregions) {
+      query BrandsQuery($country: String, $first: Int, $topPick: Boolean, $sustainableOnly: Boolean, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
+          brands(country: $country, first: $first, topPick: $topPick, recommendedOnly: $sustainableOnly, fossilFreeAlliance: $fossilFreeAlliance, features: $features, regions: $regions, subregions: $subregions) {
               edges {
                   node {
                       name
@@ -131,9 +132,10 @@ export async function getBanksListWithFilter ({
     topPick,
     fossilFreeAlliance,
     features,
-    first: 300,
+    first: 500,
     withCommentary: true,
-    withFeatures: true
+    withFeatures: true,
+    sustainableOnly: sustainableOnly
   }
 
   const json = await callBackend(brandsQuery, variables)
