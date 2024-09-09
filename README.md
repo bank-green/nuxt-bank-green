@@ -9,6 +9,21 @@ Install dependencies:
 
 `npm run dev`
 
+## Fixing lint errors
+
+Running in development mode will show any lint errors introduced. Use the following to fix these
+
+`npm run lint:fix`
+
+To fix only files you have modified in the branch:
+
+Mac/linux
+`npm runlint:fix-changed`
+Windows
+`npm run lint:fix-changed-win`
+
+Lint configuration is based on https://eslint.nuxt.com/packages/module#quick-setup
+
 # Deployment
 
 We need `wrangler`, the Cloudflare worker CLI.
