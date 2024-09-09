@@ -53,6 +53,247 @@ export type AccordionitemDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *AccreditationPage → Projects*
+ */
+export interface AccreditationpageDocumentDataProjectsItem {
+  /**
+   * Location field in *AccreditationPage → Projects*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[].location
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  location: prismic.KeyTextField;
+
+  /**
+   * Title field in *AccreditationPage → Projects*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Image field in *AccreditationPage → Projects*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Project Link field in *AccreditationPage → Projects*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[].project_link
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  project_link: prismic.KeyTextField;
+
+  /**
+   * Description field in *AccreditationPage → Projects*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Content for AccreditationPage documents
+ */
+interface AccreditationpageDocumentData {
+  /**
+   * Hero Title field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.hero_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hero_title: prismic.KeyTextField;
+
+  /**
+   * Hero Description field in *AccreditationPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.hero_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  hero_description: prismic.RichTextField;
+
+  /**
+   * Hero Logo field in *AccreditationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.hero_logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  hero_logo: prismic.ImageField<never>;
+
+  /**
+   * Projects field in *AccreditationPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.projects[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  projects: prismic.GroupField<
+    Simplify<AccreditationpageDocumentDataProjectsItem>
+  >
+  /**
+   * Sharing Title field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.sharing_title
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  sharing_title: prismic.KeyTextField;
+
+  /**
+   * Step 1 Title field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.step1_title
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  step1_title: prismic.KeyTextField;
+
+  /**
+   * Step 1 Description field in *AccreditationPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.step1_description
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  step1_description: prismic.RichTextField;
+
+  /**
+   * FB Link field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.fb_link
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  fb_link: prismic.KeyTextField;
+
+  /**
+   * IG Link field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.ig_link
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  ig_link: prismic.KeyTextField;
+
+  /**
+   * X Link field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.x_link
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  x_link: prismic.KeyTextField;
+
+  /**
+   * Step 2 Title field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.step2_title
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  step2_title: prismic.KeyTextField;
+
+  /**
+   * Step 2 Description field in *AccreditationPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.step2_description
+   * - **Tab**: sharing
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  step2_description: prismic.RichTextField
+  /**
+   * About Logo field in *AccreditationPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.aboutlogo
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */;
+  aboutlogo: prismic.ImageField<never>;
+
+  /**
+   * About Title field in *AccreditationPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.about_title
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  about_title: prismic.KeyTextField;
+
+  /**
+   * About Description field in *AccreditationPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accreditationpage.about_description
+   * - **Tab**: about
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  about_description: prismic.RichTextField;
+}
+
+/**
+ * AccreditationPage document from Prismic
+ *
+ * - **API ID**: `accreditationpage`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AccreditationpageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<AccreditationpageDocumentData>,
+    "accreditationpage",
+    Lang
+  >;
+
 type BankpageDocumentDataSlicesSlice = never;
 
 /**
@@ -1646,6 +1887,17 @@ type HomepageDocumentDataSlices1Slice = FeaturedInSliceSlice;
  */
 interface HomepageDocumentData {
   /**
+   * Title field in *HomePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
    * Description1 field in *HomePage*
    *
    * - **Field Type**: Rich Text
@@ -2083,6 +2335,117 @@ export type MethodologyDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
     Simplify<MethodologyDocumentData>,
     "methodology",
+    Lang
+  >;
+
+/**
+ * Item in *PartnersPage → Partners*
+ */
+export interface PartnerspageDocumentDataPartnersItem {
+  /**
+   * name field in *PartnersPage → Partners*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * url field in *PartnersPage → Partners*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[].url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url: prismic.LinkField;
+
+  /**
+   * image field in *PartnersPage → Partners*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[].img
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  img: prismic.ImageField<never>;
+}
+
+/**
+ * Content for PartnersPage documents
+ */
+interface PartnerspageDocumentData {
+  /**
+   * Title field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * SEO title field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO description field in *PartnersPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+
+  /**
+   * Partners field in *PartnersPage*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partnerspage.partners[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  partners: prismic.GroupField<Simplify<PartnerspageDocumentDataPartnersItem>>;
+}
+
+/**
+ * PartnersPage document from Prismic
+ *
+ * - **API ID**: `partnerspage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PartnerspageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<PartnerspageDocumentData>,
+    "partnerspage",
     Lang
   >;
 
@@ -3157,6 +3520,7 @@ export type VolunteerspageDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | AccordionitemDocument
+  | AccreditationpageDocument
   | BankpageDocument
   | BlogpostDocument
   | CalltoactionDocument
@@ -3170,6 +3534,7 @@ export type AllDocumentTypes =
   | GreenpolicyevaluatorpageDocument
   | HomepageDocument
   | MethodologyDocument
+  | PartnerspageDocument
   | PledgepageDocument
   | PresspageDocument
   | PresspostDocument
@@ -4038,6 +4403,8 @@ declare module "@prismicio/client" {
     export type {
       AccordionitemDocument,
       AccordionitemDocumentData,
+      AccreditationpageDocument,
+      AccreditationpageDocumentData,
       BankpageDocument,
       BankpageDocumentData,
       BlogpostDocument,
@@ -4064,6 +4431,8 @@ declare module "@prismicio/client" {
       HomepageDocumentData,
       MethodologyDocument,
       MethodologyDocumentData,
+      PartnerspageDocument,
+      PartnerspageDocumentData,
       PledgepageDocument,
       PledgepageDocumentData,
       PresspageDocument,

@@ -5,16 +5,17 @@ export default function getFeatures (bankFeatures) {
     return {}
   }
 
+  const checkingName = isBE() ? 'Current' : 'Checking'
   // features in this dict will show an x if they are not available for a bank
   const featureDict = {
     'Mobile banking': 'Mobile Banking',
     'Free ATM network': 'Free ATM Network',
     'No overdraft fee': 'No Overdraft Fee',
     'No account maintenance fee': 'No Account Maintenance Fees',
-    checking: isBE() ? 'Current Accounts' : 'Checking Accounts',
+    checking: checkingName + ' Accounts',
     saving: 'Savings Accounts',
     'Interest rates': 'Interest Rates',
-    'Business accounts': 'Business Current Accounts',
+    'Business accounts': 'Business ' + checkingName + ' Accounts',
     'Small business lending': 'Small Business Lending',
     'Credit cards': 'Credit Cards',
     'Mortgages or Loans': 'Mortgage or Loan Options',

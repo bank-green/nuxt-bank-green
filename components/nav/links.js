@@ -1,10 +1,6 @@
 export default function getLinks ({ isHeader = false }) {
   const links = [
     {
-      href: '/pledge',
-      title: 'Pledge'
-    },
-    {
       href: '/sustainable-eco-banks',
       title: 'Sustainable banks'
     },
