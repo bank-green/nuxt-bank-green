@@ -96,12 +96,12 @@ export async function getBanksList ({
 }
 
 export async function getBanksListWithFilter ({
-  country = '',
-  regions = [],
-  subregions = [],
-  topPick = null,
-  fossilFreeAlliance = null,
-  features = null,
+  country,
+  regions,
+  subregions,
+  topPick,
+  fossilFreeAlliance,
+  features,
   sustainableOnly = true
 }) {
   const brandsQuery = `
