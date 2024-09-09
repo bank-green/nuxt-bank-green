@@ -132,7 +132,7 @@ export async function getBanksListWithFilter ({
     topPick,
     fossilFreeAlliance,
     features,
-    first: 500,
+    first: 300,
     withCommentary: true,
     withFeatures: true,
     sustainableOnly: sustainableOnly
