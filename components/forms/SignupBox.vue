@@ -54,12 +54,19 @@
               privacy policy
             </NuxtLink>.
           </CheckboxSection>
+          <vue-turnstile
+            v-if="!isLocal"
+            v-model="captchaToken"
+            :site-key="captchaSitekey"
+            theme="light"
+            class="col-span-full"
+          />
         </div>
         <button
           type="submit"
           class="button-green w-full md:w-72 mt-6 md:text-lg flex justify-center"
           :class="{
-            'pointer-events-none opacity-75': busy,
+            'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
           }"
         >
           <span v-if="!busy"> Join the Money Movement </span>
@@ -84,9 +91,12 @@
 </template>
 
 <script setup lang="ts">
+import VueTurnstile from 'vue-turnstile'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
 import { ContactFormPrefill } from '@/utils/interfaces/contactForm'
+
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
 
 // TODO: manage in separate file
 interface DetailsInterface {
