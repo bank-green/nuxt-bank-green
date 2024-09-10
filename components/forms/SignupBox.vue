@@ -91,6 +91,7 @@
 </template>
 
 <script setup lang="ts">
+
 import VueTurnstile from 'vue-turnstile'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import TextField from '@/components/forms/TextField.vue'
