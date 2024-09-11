@@ -1,9 +1,14 @@
 <template>
   <ul class="grid lg:flex place-content-center gap-8 pb-32 lg:pb-0">
     <li v-for="project in filterProjects" :key="project.project_link">
-      <a v-if="project.project_link" style="grid-area: 1/1" :href="project.project_link">
-        <AccreditationProjectCard :title="project.title" :location="project.location" :image="project.image" />
-      </a>
+      <AccreditationProjectCard
+        v-if="project.project_link"
+        style="grid-area: 1/1"
+        :title="project.title"
+        :location="project.location"
+        :image="project.image"
+        :link="project.project_link"
+      />
     </li>
   </ul>
 </template>

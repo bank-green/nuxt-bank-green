@@ -1,22 +1,17 @@
-<script lang="ts" setup>
-import { asImageSrc } from '@prismicio/helpers'
-import PinIcon from '~/components/forms/location/PinIcon.vue'
-import { AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
-
-defineProps<Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location' | 'image'>>()
-</script>
-
 <template>
-  <article class="relative flex flex-col justify-end items-start p-6 gap-2 rounded-xl w-[347.12px] h-[240px] overflow-hidden">
-    <h3 class="z-10 flex items-center gap-1 rounded-full w-fit pl-2 pr-3 py-1.5 bg-[#F6E9BA] ">
+  <a
+    :href="link"
+    class="relative flex flex-col justify-end items-start p-6 gap-2 rounded-xl w-[347.12px] h-[240px] overflow-hidden"
+  >
+    <p class="z-10 flex items-center gap-1 rounded-full w-fit pl-2 pr-3 py-1.5 bg-[#F6E9BA] ">
       <PinIcon class="w-4 h-4" />
       <span class="text-sm text-gray-700">
         {{ location }}
       </span>
-    </h3>
-    <h2 class="text-2xl font-bold text-white z-10">
+    </p>
+    <p class="text-2xl font-bold text-white z-10">
       {{ title }}
-    </h2>
+    </p>
     <NuxtImg
       v-if="image.url"
       alt=""
@@ -25,5 +20,16 @@ defineProps<Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location'
       :src="title?.includes('Project Default') ? image.url : asImageSrc(image)"
       :provider="title?.includes('Project Default') ? 'none' : ''"
     />
-  </article>
+  </a>
 </template>
+
+<script lang="ts" setup>
+import { asImageSrc } from '@prismicio/helpers'
+import PinIcon from '~/components/forms/location/PinIcon.vue'
+import { AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
+
+interface Props extends Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location' | 'image'> {
+  link: string
+}
+defineProps<Props>()
+</script>
