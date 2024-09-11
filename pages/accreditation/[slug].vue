@@ -34,7 +34,7 @@
           <img
             class="absolute bottom-0 lg:left-36 w-32 h-32 translate-y-16 lg:translate-y-10"
             src="/img/certification/fossil-free-certified.png"
-            alt="Fossil Free Certification"
+            alt="Accreditation Logo"
           >
         </article>
       </div>
