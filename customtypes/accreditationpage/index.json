@@ -1,0 +1,125 @@
+{
+  "id": "accreditationpage",
+  "label": "AccreditationPage",
+  "format": "custom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": { "config": { "label": "UID" }, "type": "UID" },
+      "hero_title": {
+        "type": "Text",
+        "config": { "label": "Hero Title", "placeholder": "" }
+      },
+      "hero_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Hero Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "hero_logo": {
+        "type": "Image",
+        "config": { "label": "Hero Logo", "constraint": {}, "thumbnails": [] }
+      },
+      "projects": {
+        "type": "Group",
+        "config": {
+          "label": "Projects",
+          "fields": {
+            "location": {
+              "type": "Text",
+              "config": { "label": "Location", "placeholder": "" }
+            },
+            "title": {
+              "type": "Text",
+              "config": { "label": "Title", "placeholder": "" }
+            },
+            "image": {
+              "type": "Image",
+              "config": { "label": "Image", "constraint": {}, "thumbnails": [] }
+            },
+            "project_link": {
+              "type": "Text",
+              "config": { "label": "Project Link", "placeholder": "" }
+            },
+            "description": {
+              "type": "StructuredText",
+              "config": {
+                "label": "Description",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+              }
+            }
+          }
+        }
+      }
+    },
+    "sharing": {
+      "sharing_title": {
+        "type": "Text",
+        "config": { "label": "Sharing Title", "placeholder": "" }
+      },
+      "step1_title": {
+        "type": "Text",
+        "config": { "label": "Step 1 Title", "placeholder": "" }
+      },
+      "step1_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Step 1 Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "fb_link": {
+        "type": "Text",
+        "config": { "label": "FB Link", "placeholder": "" }
+      },
+      "ig_link": {
+        "type": "Text",
+        "config": { "label": "IG Link", "placeholder": "" }
+      },
+      "x_link": {
+        "type": "Text",
+        "config": { "label": "X Link", "placeholder": "" }
+      },
+      "step2_title": {
+        "type": "Text",
+        "config": { "label": "Step 2 Title", "placeholder": "" }
+      },
+      "step2_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Step 2 Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      }
+    },
+    "about": {
+      "aboutlogo": {
+        "type": "Image",
+        "config": { "label": "About Logo", "constraint": {}, "thumbnails": [] }
+      },
+      "about_title": {
+        "type": "Text",
+        "config": { "label": "About Title", "placeholder": "" }
+      },
+      "about_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "About Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      }
+    }
+  }
+}

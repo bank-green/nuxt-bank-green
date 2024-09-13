@@ -1,0 +1,47 @@
+{
+  "id": "partnerspage",
+  "label": "PartnersPage",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": { "label": "Title", "placeholder": "" }
+      },
+      "description": {
+        "type": "Text",
+        "config": { "label": "Description", "placeholder": "" }
+      },
+      "seo_title": {
+        "type": "Text",
+        "config": { "label": "SEO title", "placeholder": "" }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "SEO description", "placeholder": "" }
+      },
+      "partners": {
+        "type": "Group",
+        "config": {
+          "label": "Partners",
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": { "label": "name", "placeholder": "" }
+            },
+            "url": {
+              "type": "Link",
+              "config": { "label": "url", "placeholder": "", "select": null }
+            },
+            "img": {
+              "type": "Image",
+              "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+            }
+          }
+        }
+      }
+    }
+  }
+}
