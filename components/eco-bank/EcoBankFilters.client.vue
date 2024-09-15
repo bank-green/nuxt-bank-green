@@ -129,7 +129,7 @@
         class="col-span-full"
         name="Business accounts"
       >
-        Business current accounts
+        {{ isBE() ? "Business current accounts" : "Business checking accounts" }}
       </CheckboxSection>
       <CheckboxSection
         v-model="filterPayload.bankAccounts['Business savings accounts']"

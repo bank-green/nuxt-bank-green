@@ -1,12 +1,11 @@
-import eslintPlugin from 'vite-plugin-eslint'
-
 export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/prismic',
     'nuxt-jsonld',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    '@nuxt/eslint'
   ],
   prismic: {
     endpoint: 'bankgreen'
@@ -179,9 +178,10 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare'
   },
-  vite: {
-    plugins: [
-      process.env.NODE_ENV !== 'test' && eslintPlugin()
-    ]
-  }
-})
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: true
+    }
+  },
+});

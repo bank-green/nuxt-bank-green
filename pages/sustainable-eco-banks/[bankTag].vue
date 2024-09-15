@@ -51,7 +51,6 @@ if (!bankTag) {
   const { client } = usePrismic()
 
   details.value = await getBankDetail(bankTag)
-
   const prismicResponse = await useAsyncData('sfipage', () =>
     client.getByUID('sfipage', bankTag)
   )

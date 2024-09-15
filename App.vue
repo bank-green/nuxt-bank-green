@@ -12,13 +12,6 @@
     <NuxtPage />
     <NavFooter />
   </div>
-  <Modal v-model="openPledgeModal">
-    <PledgeSignup
-      :title="'Not ready to switch banks today?\nTake our pledge to move your money when you’re ready.'"
-      tag="pledge popup"
-      @success="openPledgeModal = false"
-    />
-  </Modal>
   <SwitchSurveyExit
     v-model="openSwitchSurveyModal"
     tag="popup"
@@ -28,7 +21,7 @@
 </template>
 
 <script setup>
-const openPledgeModal = ref(false)
+
 const openSwitchSurveyModal = ref(false)
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false
