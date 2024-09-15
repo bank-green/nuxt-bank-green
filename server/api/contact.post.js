@@ -62,11 +62,12 @@ const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
 
 async function sendZapierOrACContact (message) {
   if(message && message.tag === 'contact page form') {
+    // Zapier api for just the contact form (for now)
     const hookUrl = useRuntimeConfig().public.ZAPIER_CONTACT;
     await $fetch(hookUrl, { method: 'POST', body: message })
   }
   else {
-
+    // ActiveCampaign api for rest of forms
     const tag = () => {
       switch(message.tag) {
         case "FAQ bottom": return 124;
