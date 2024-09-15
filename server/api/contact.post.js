@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  await sendZapierContact(message)
+  await sendZapierOrACContact(message)
 
   // return {
   //   message,
@@ -57,10 +57,80 @@ export default defineEventHandler(async (event) => {
   return 'OK'
 })
 
-async function sendZapierContact (message) {
-  const hookUrl =
-    message && message.tag === 'contact page form'
-      ? useRuntimeConfig().public.ZAPIER_UNSUBSCRIBE
-      : useRuntimeConfig().public.ZAPIER_SEND
-  await $fetch(hookUrl, { method: 'POST', body: message })
+const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_KEY
+const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
+
+async function sendZapierOrACContact (message) {
+  if(message && message.tag === 'contact page form') {
+    const hookUrl = useRuntimeConfig().public.ZAPIER_CONTACT;
+    await $fetch(hookUrl, { method: 'POST', body: message })
+  }
+  else {
+
+    const tag = () => {
+      switch(message.tag) {
+        case "FAQ bottom": return 124;
+        case "partners bottom": return 24;
+        case "bank ok bottom": return 101;
+        case "join form": return 201;
+        default: return 14 // contact page form
+      }
+    }
+
+    const reqBody = {
+      contact: {
+        email: message.email,
+        firstName: message.first_name,
+        fieldValues: [
+          {
+            field: '2',
+            value: message.bank_display_name
+          },
+          {
+            field: '11',
+            value: message.is_agree_marketing
+          }
+        ]
+      }
+    }
+
+    const sendActiveCampaignForm = await $fetch(baseUrl + '/contact/sync', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'Api-Token': secret
+      },
+      body: reqBody
+    }
+    )
+    if (sendActiveCampaignForm?.contact?.id?.length > 0) {
+      // If we have a created contact, add contact to the Bank Leads list (27)
+      const addContactToList = await $fetch(
+        baseUrl + '/contactTags',
+        {
+          headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            'Api-Token': secret
+          },
+          method: 'POST',
+          body: {
+            contactTag: {
+              contact: sendActiveCampaignForm?.contact?.id,
+              tag: tag()
+            }
+          }
+        }
+      )
+
+      if (addContactToList?.contactList?.id) {
+        return { success: true }
+      }
+    } else {
+      return {
+        success: false
+      }
+    }
+  }
 }
