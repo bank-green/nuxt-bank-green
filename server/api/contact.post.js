@@ -105,7 +105,7 @@ async function sendZapierOrACContact (message) {
     }
     )
     if (sendActiveCampaignForm?.contact?.id?.length > 0) {
-      // If we have a created contact, add contact to the Bank Leads list (27)
+      // If we have a created contact, add to contact the correct tag
       const addContactToList = await $fetch(
         baseUrl + '/contactTags',
         {
