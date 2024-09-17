@@ -4,19 +4,15 @@
     class="sm:text-center relative z-40 -mt-2 pt-3 pr-12 pl-4 pb-2 text-xs sm:text-sm flex-grow font-medium bg-sushi-500 hover:bg-sushi-600 focus:outline-none border border-transparent text-white w-full rounded-b-2xl shadow-green"
   >
     <NuxtLink
-      to="/blog/cop-26-success-is-the-only-option"
+      to="https://form.typeform.com/to/xnqg3l7X"
       class="block"
+      target="_blank"
       @click="close"
     >
       <span>
-        <Countdown
-          :event-start="new Date(Date.UTC(2021, 9, 31, 0))"
-          event-is-past-message="(event already finished, we'll see you at the next one!)"
-          :show-tooltip="false"
-        />
-        to go until the most important climate summit in history. Learn more
-        about COP26 in Glasgow
-        <span class="underline">on our blog.</span>
+        Are You A Business Owner? Receive 1 Year Of Free Accreditation For
+        Banking Green By Taking
+        <span class="underline">Our 5-Minute Survey.</span>
       </span>
     </NuxtLink>
     <button
@@ -35,12 +31,11 @@
 </template>
 
 <script setup>
+const showBanner = useCookie("bg.showAnnouncementSurveySeptember2024", {
+  default: () => true,
+});
 
-// if we use this component again, this will have to be adapted with useCookie
-
-// we're not reading storage atm so this doesn't do anything
-// function close() {
-//     storage.setItem(`bg.hide-announcement-${this.bannerName}`, 'yes')
-//     this.showBanner = false
-// }
+function close() {
+  showBanner.value = false;
+}
 </script>

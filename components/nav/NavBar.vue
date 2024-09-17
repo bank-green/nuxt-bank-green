@@ -5,7 +5,7 @@
         class="relative z-50 bg-primary-dark rounded-xl flex items-center justify-between pr-4"
       >
         <NuxtLink to="/" class="py-4 px-6" @click="isOpen = false">
-          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green">
+          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green" />
         </NuxtLink>
 
         <button
@@ -74,9 +74,7 @@
             class="px-4 py-2 text-base text-white font-medium rounded-xl"
             @click="isOpen = false"
           >
-            {{
-              link.short_title || link.title
-            }}
+            {{ link.short_title || link.title }}
           </NuxtLink>
           <NuxtLink
             to="/donate"
@@ -87,6 +85,7 @@
           </NuxtLink>
         </div>
       </div>
+      <AnnouncementBanner />
     </nav>
 
     <transition
@@ -125,14 +124,14 @@
 </template>
 
 <script setup>
-import links from './links'
+import links from "./links";
 
-const isOpen = ref(false)
+const isOpen = ref(false);
 const headerLinks = computed(() => {
-  return links({ isHeader: true })
-})
+  return links({ isHeader: true });
+});
 
-function closePopup () {
-  isOpen.value = false
+function closePopup() {
+  isOpen.value = false;
 }
 </script>
