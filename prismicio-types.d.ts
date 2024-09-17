@@ -1880,6 +1880,8 @@ export type GreenpolicyevaluatorpageDocument<Lang extends string = string> =
     Lang
   >;
 
+type HomepageDocumentDataSlicesSlice = LeadGenSlice;
+
 type HomepageDocumentDataSlices1Slice = FeaturedInSliceSlice;
 
 /**
@@ -1961,7 +1963,18 @@ interface HomepageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  seo_description: prismic.KeyTextField
+  seo_description: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *HomePage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<HomepageDocumentDataSlicesSlice>
   /**
    * Slice Zone field in *HomePage*
    *
@@ -3956,6 +3969,39 @@ export interface LeadGenSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   button_label: prismic.KeyTextField;
+
+  /**
+   * Show Bank Field field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: lead_gen.primary.show_bank_field
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  show_bank_field: prismic.BooleanField;
+
+  /**
+   * Show Status Field field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: lead_gen.primary.show_status_field
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  show_status_field: prismic.BooleanField;
+
+  /**
+   * Bank Leads AC List field in *LeadGen → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: lead_gen.primary.bank_leads_ac_list
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  bank_leads_ac_list: prismic.BooleanField;
 }
 
 /**
@@ -3971,6 +4017,22 @@ export interface LeadGenSliceDefaultItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   bullet_text: prismic.RichTextField;
+
+  /**
+   * Dropdown status option field in *LeadGen → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: lead_gen.items[].dropdown_status_option
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  dropdown_status_option: prismic.SelectField<
+    | "I’m actively planning to switch banks"
+    | "I’m considering switching banks"
+    | "I've already switched banks"
+    | "No plans to switch banks, but would love to stay updated"
+    | "Select none (default)"
+  >;
 }
 
 /**

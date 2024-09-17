@@ -9,7 +9,7 @@ type FormFields = {
 export default defineEventHandler(
   async (event) => {
     try {
-      let body: {formFields: FormFields} = await readBody(event)
+      let body: {formFields: FormFields, bankLeadList: boolean} = await readBody(event)
       if (body instanceof Uint8Array) {
         body = JSON.parse(new TextDecoder().decode(body))
       }
@@ -49,7 +49,7 @@ export default defineEventHandler(
       }
       )
 
-      if (sendActiveCampaignForm?.contact?.id?.length > 0) {
+      if (sendActiveCampaignForm?.contact?.id?.length > 0 && body.bankLeadList) {
         // If we have a created contact, add contact to the Bank Leads list (27)
         const addContactToList: any = await $fetch(
           baseUrl + '/contactLists',
@@ -74,9 +74,17 @@ export default defineEventHandler(
           return { success: true }
         }
       } else {
-        return {
-          success: false
+        if (sendActiveCampaignForm?.contact?.id?.length > 0) {
+          return {
+            success: true
+          }
         }
+        else {
+          return {
+            success: false
+          }
+        }
+        
       }
     } catch (e: any) {
       const _e: Error = e

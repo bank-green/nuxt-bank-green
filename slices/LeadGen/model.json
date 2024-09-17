@@ -35,6 +35,33 @@
         "button_label": {
           "type": "Text",
           "config": { "label": "Button Label", "placeholder": "" }
+        },
+        "show_bank_field": {
+          "type": "Boolean",
+          "config": {
+            "label": "Show Bank Field",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "show_status_field": {
+          "type": "Boolean",
+          "config": {
+            "label": "Show Status Field",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "bank_leads_ac_list": {
+          "type": "Boolean",
+          "config": {
+            "label": "Bank Leads AC List",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {
@@ -45,6 +72,20 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "dropdown_status_option": {
+          "type": "Select",
+          "config": {
+            "label": "Dropdown status option",
+            "placeholder": "",
+            "options": [
+              "I’m actively planning to switch banks",
+              "I’m considering switching banks",
+              "I've already switched banks",
+              "No plans to switch banks, but would love to stay updated",
+              "Select none (default)"
+            ]
           }
         }
       }

@@ -32,6 +32,18 @@
 				"__TYPE__": "FieldContent",
 				"value": "outer",
 				"type": "Text"
+			},
+			"show_bank_field": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"show_status_field": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"bank_leads_ac_list": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [
@@ -50,6 +62,14 @@
 									}
 								}
 							]
+						}
+					],
+					[
+						"dropdown_status_option",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "I've already switched banks",
+							"type": "Select"
 						}
 					]
 				]

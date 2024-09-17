@@ -74,12 +74,13 @@ import BaseField from '@/components/forms/BaseField.vue'
 import ListPicker from '@/components/forms/ListPicker.vue'
 import SearchInput from '@/components/forms/input/SearchInput.vue'
 
-defineProps<{
+const props = defineProps<{
   modelValue: string,
   disabled?: boolean,
   warning?: string,
   dark?: boolean,
-  title: string
+  title: string,
+  options?: (string | null)[],
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -88,7 +89,7 @@ const isShowing = ref<boolean>(false)
 
 const selected = ref<string>('')
 
-const status = computed(() => ['I’m actively planning to switch banks', 'I’m considering switching banks'])
+const status = computed(() => props.options ?? ['I’m actively planning to switch banks', 'I’m considering switching banks'])
 
 function showList () {
   isShowing.value = true

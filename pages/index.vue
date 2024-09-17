@@ -184,8 +184,12 @@
             />
           </div>
         </div>
-        <div id="join" class="contain max-w-5xl">
-          <CallToAction />
+        <div id="join" class="contain max-w-6xl">
+         <!--  <CallToAction /> -->
+          <SliceZone
+            :slices="home?.data.slices ?? []"
+            :components="sliceComps"
+    />
         </div>
       </div>
       <div class="flex flex-row items-center justify-center">
