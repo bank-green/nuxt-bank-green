@@ -1,14 +1,14 @@
 import { useGtm } from '@gtm-support/vue-gtm'
-import {
+import type {
   ContactFormPrefill,
-  ContactFormWarningsMap
+  ContactFormWarningsMap,
 } from '~~/utils/interfaces/contactForm'
 
-export default function useContactForm (
+export default function useContactForm(
   tag = 'unknown',
   required = ['email', 'isAgreeTerms'],
   extra = ref({}),
-  prefill = ref<ContactFormPrefill | undefined>()
+  prefill = ref<ContactFormPrefill | undefined>(),
 ) {
   const firstName = ref(prefill.value?.firstName || '')
   const lastName = ref(prefill.value?.lastName || '')
@@ -18,6 +18,7 @@ export default function useContactForm (
   const bank = ref(prefill.value?.bank || null)
   const isAgreeTerms = ref(prefill.value?.isAgreeTerms || false)
   const isAgreeMarketing = ref(prefill.value?.isAgreeTerms || false)
+  const currentStatus = ref(prefill.value?.currentStatus || '')
   const busy = ref(false)
   const isSent = useCookie(`contact.${tag}.sent`, { default: () => false })
   const showWarnings = ref(false)
@@ -34,11 +35,14 @@ export default function useContactForm (
       warningsMap.isAgreeTerms = 'You need to agree to the terms.'
     }
     if (!isAgreeMarketing.value && required.includes('isAgreeMarketing')) {
-      warningsMap.isAgreeMarketing =
-        'You need to agree to receive marketing from Bank.Green'
+      warningsMap.isAgreeMarketing
+        = 'You need to agree to receive marketing from Bank.Green'
     }
     if (!bank.value && required.includes('bank')) {
       warningsMap.bank = 'Please tell us the name of your bank'
+    }
+    if (!currentStatus.value && required.includes('currentStatus')) {
+      warningsMap.currentStatus = 'Please select an option'
     }
     return warningsMap
   })
@@ -76,7 +80,7 @@ export default function useContactForm (
       tag,
       bank: bank.value,
       isAgreeMarketing: isAgreeMarketing.value,
-      ...(extra ? extra.value : {})
+      ...(extra ? extra.value : {}),
     })
     isSent.value = true
 
@@ -112,12 +116,13 @@ export default function useContactForm (
     isAgreeTerms,
     isAgreeMarketing,
     isSent,
+    currentStatus,
     showWarnings,
     warningsMap,
     hasWarnings,
     send,
     validate,
     reset,
-    busy
+    busy,
   }
 }

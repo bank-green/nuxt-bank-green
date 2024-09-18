@@ -10,8 +10,8 @@
             class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl"
           >
             {{
-              home?.data.title ||
-              "Is your money being used to fund climate chaos?"
+              home?.data.title
+                || "Is your money being used to fund climate chaos?"
             }}
           </h1>
           <div
@@ -29,7 +29,7 @@
                   <input
                     disabled
                     class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate"
-                  />
+                  >
                   <LoadingJumper
                     class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
                   />
@@ -38,7 +38,7 @@
                   <input
                     disabled
                     class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate"
-                  />
+                  >
                   <LoadingJumper
                     class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
                   />
@@ -92,11 +92,17 @@
                 target="_blank"
               >
                 <div class="bg-white rounded-xl p-5">
-                  <img class="w-36" src="/img/logos/banktrack.svg" />
+                  <img
+                    class="w-36"
+                    src="/img/logos/banktrack.svg"
+                  >
                 </div>
               </a>
             </div>
-            <NuxtLink to="/partners" class="underline mt-2 text-sm">
+            <NuxtLink
+              to="/partners"
+              class="underline mt-2 text-sm"
+            >
               See our partners
             </NuxtLink>
           </div>
@@ -107,7 +113,7 @@
                 class="inline-block h-5 px-0.5"
                 src="/img/trim-hor-light.svg"
                 alt="Bank.Green"
-              />
+              >
               ?
             </div>
             <ArrowDownBounce class="mx-auto mt-4 w-10" />
@@ -155,8 +161,8 @@
             <div class="md:w-1/2 max-w-sm">
               <PrismicRichText
                 v-if="
-                  home?.data?.description3 &&
-                  !isEmptyPrismicField(home?.data.description3)
+                  home?.data?.description3
+                    && !isEmptyPrismicField(home?.data.description3)
                 "
                 class="text-lg md:text-2xl tracking-wide mb-4"
                 :field="home?.data.description3"
@@ -165,8 +171,8 @@
               />
               <PrismicRichText
                 v-if="
-                  home?.data?.description4 &&
-                  !isEmptyPrismicField(home?.data.description4)
+                  home?.data?.description4
+                    && !isEmptyPrismicField(home?.data.description4)
                 "
                 class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
                 :field="home?.data.description4"
@@ -181,11 +187,18 @@
               alt=""
               width="450"
               height="450"
-            />
+            >
           </div>
         </div>
-        <div id="join" class="contain max-w-5xl">
-          <CallToAction />
+        <div
+          id="join"
+          class="contain max-w-6xl"
+        >
+          <!--  <CallToAction /> -->
+          <SliceZone
+            :slices="home?.data.slices ?? []"
+            :components="sliceComps"
+          />
         </div>
       </div>
       <div class="flex flex-row items-center justify-center">
@@ -199,38 +212,38 @@
 </template>
 
 <script setup lang="ts">
-import { useGtm } from "@gtm-support/vue-gtm";
-import { defineSliceZoneComponents } from "@prismicio/vue";
-import BankLocationSearch from "@/components/forms/BankLocationSearch.vue";
-import ArrowDownBounce from "@/components/icons/ArrowDownBounce.vue";
-import { components } from "~~/slices";
-import { usePrismicSEO } from "~~/composables/useHeadHelpers";
-import isEmptyPrismicField from "~/utils/prismic/isEmptyPrismicField";
+import { useGtm } from '@gtm-support/vue-gtm'
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import { components } from '~~/slices'
+import { usePrismicSEO } from '~~/composables/useHeadHelpers'
+import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
-const sliceComps = ref(defineSliceZoneComponents(components));
+const sliceComps = ref(defineSliceZoneComponents(components))
 
-const { bank, warningsMap } = useContactForm("homepage", ["bank"]);
+const { bank, warningsMap } = useContactForm('homepage', ['bank'])
 
-const { client } = usePrismic();
-const { data: home } = await useAsyncData("home", () =>
-  client.getSingle("homepage")
-);
+const { client } = usePrismic()
+const { data: home } = await useAsyncData('home', () =>
+  client.getSingle('homepage'),
+)
 
-usePrismicSEO(home.value?.data);
+usePrismicSEO(home.value?.data)
 
 const onCheckBankClick = () => {
-  const allowCookies = useCookie("bg.allowcookies", { default: () => false });
+  const allowCookies = useCookie('bg.allowcookies', { default: () => false })
   if (!allowCookies.value) {
-    return;
+    return
   }
-  const gtm = useGtm();
-  gtm?.enable(true);
-  gtm?.trackEvent({ event: "onBankCheckClick" });
-};
+  const gtm = useGtm()
+  gtm?.enable(true)
+  gtm?.trackEvent({ event: 'onBankCheckClick' })
+}
 
-const { country } = useCountry();
+const { country } = useCountry()
 
 watch(country, (_) => {
-  bank.value = null;
-});
+  bank.value = null
+})
 </script>

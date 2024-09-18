@@ -8,7 +8,6 @@
     :fossil-free-alliance="details.fossilFreeAlliance"
     :bank-page="bankPage"
     :amount-financed-since2016="details.amountFinancedSince2016"
-    :show-embrace-breakup="!!details.countries.find((c: any) => c.code === 'GB')"
   />
 </template>
 
@@ -26,7 +25,7 @@ useHeadHelper(
   details.value?.name
     ? `${details.value.name}'s Climate Score - Bank.Green`
     : '',
-  'Find and compare the service offerings of ethical and sustainable banks.'
+  'Find and compare the service offerings of ethical and sustainable banks.',
 )
 
 const { rating } = details.value
@@ -59,5 +58,4 @@ const componentName = computed(() => {
       return BankUnknown
   }
 })
-
 </script>

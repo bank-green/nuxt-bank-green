@@ -53,6 +53,11 @@
       "seo_description": {
         "type": "Text",
         "config": { "label": "SEO Description", "placeholder": "" }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "lead_gen": { "type": "SharedSlice" } } }
       }
     },
     "As Featured In": {
