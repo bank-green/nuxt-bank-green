@@ -171,7 +171,7 @@ const {
   busy,
 } = useContactForm(
   'leadGen',
-  ['firstName', 'email', 'isAgreeTerms', 'currentStatus'],
+  ['firstName', 'email', 'isAgreeTerms', getSliceBoolean(content.value.show_status_field) ? 'currentStatus' : ''],
   extras,
 )
 

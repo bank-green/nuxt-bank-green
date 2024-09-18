@@ -294,7 +294,7 @@ export type AccreditationpageDocument<Lang extends string = string> =
     Lang
   >;
 
-type BankpageDocumentDataSlicesSlice = never;
+type BankpageDocumentDataSlicesSlice = LeadGenSlice;
 
 /**
  * Content for BankPage documents

@@ -1,5 +1,9 @@
 <template>
-  <BankLayoutGreatGoodOkUnknown :is-embrace-breakup="showEmbraceBreakup">
+  <BankLayoutGreatGoodOkUnknown
+    :is-embrace-breakup="showEmbraceBreakup"
+    show-lead-gen-slice
+    :prismic-slice-data="bankPage.data.slices"
+  >
     <template #section1>
       <BankHeadline
         :name="name"
@@ -11,12 +15,18 @@
         class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8"
       >
         <div class="flex flex-col items-center justify-start w-full">
-          <BankCircle class="max-w-sm" :rating="'good'" />
+          <BankCircle
+            class="max-w-sm"
+            :rating="'good'"
+          />
           <SocialSharer
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
           />
-          <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+          <NuxtLink
+            class="underline hover:text-sushi-500 mt-6"
+            to="/methodology"
+          >
             {{ bankPage?.data.link_copy_methodology_page }}
           </NuxtLink>
         </div>
@@ -81,17 +91,18 @@
 </template>
 
 <script setup lang="ts">
+import type { BankpageDocument } from 'prismicio-types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import { BankpageDocument } from 'prismicio-types'
+
 defineProps<{
-  name: string;
-  website: string;
+  name: string
+  website: string
   inheritBrandRating: {
-    tag: string;
-    name: string;
-  };
-  fossilFreeAlliance: boolean;
-  bankPage: BankpageDocument;
-  showEmbraceBreakup: boolean;
+    tag: string
+    name: string
+  }
+  fossilFreeAlliance: boolean
+  bankPage: BankpageDocument
+  showEmbraceBreakup: boolean
 }>()
 </script>

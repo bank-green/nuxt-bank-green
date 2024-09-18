@@ -5,7 +5,7 @@
       id="section-one"
       class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
     >
-      <BankEmbraceHero
+      <!-- <BankEmbraceHero
         v-if="isEmbraceBreakup"
         :button-title="embrace?.data.bank_breakup_hero_button_text"
         :description="embrace?.data.bank_breakup_hero_description"
@@ -14,9 +14,8 @@
         <template #section1>
           <slot name="section1" />
         </template>
-      </BankEmbraceHero>
+      </BankEmbraceHero> -->
       <div
-        v-else
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
         <slot name="section1" />
@@ -28,7 +27,10 @@
     </div>
 
     <!-- SECTION TWO -->
-    <div id="section-two" class="text-gray-800 overflow-hidden py-16">
+    <div
+      id="section-two"
+      class="text-gray-800 overflow-hidden py-16"
+    >
       <div class="contain">
         <slot name="section2" />
       </div>
@@ -38,21 +40,32 @@
     <div id="section-three">
       <slot name="section3" />
     </div>
-    <BankEmbraceBreakupSection
+    <!-- <BankEmbraceBreakupSection
       v-if="isEmbraceBreakup"
       :title="embrace?.data.bank_breakup_section_title"
       :description="embrace?.data.bank_breakup_section_description"
-      :checklist-items="[embrace?.data.bank_breakup_section_checklist1, embrace?.data.bank_breakup_section_checklist2, embrace?.data.bank_breakup_section_checklist3 ]"
+      :checklist-items="[embrace?.data.bank_breakup_section_checklist1, embrace?.data.bank_breakup_section_checklist2, embrace?.data.bank_breakup_section_checklist3]"
     >
       <template #footer-image>
         <slot name="footer-image" />
       </template>
-    </BankEmbraceBreakupSection>
+    </BankEmbraceBreakupSection> -->
     <!-- CALL TO ACTION -->
-    <div v-else id="call-to-action" class="bg-blue-100 text-gray-800">
+    <div
+      id="call-to-action"
+      class="bg-blue-100 text-gray-800"
+    >
       <Swoosh direction="down" />
-      <div class="contain pt-8">
-        <slot name="call-to-action">
+      <div class="contain pt-32">
+        <SliceZone
+          v-if="showLeadGenSlice"
+          :slices="prismicSliceData ?? []"
+          :components="sliceComps"
+        />
+        <slot
+          v-else
+          name="call-to-action"
+        >
           <h2
             class="text-center text-gray-800 font-semibold text-lg md:text-2xl tracking-wider mb-4"
           >
@@ -68,7 +81,10 @@
                 But don’t wait for the fire department to turn up – join us!
               </p>
             </div>
-            <CheckList class="lg:w-1/2 w-full my-8" :list="checkList" />
+            <CheckList
+              class="lg:w-1/2 w-full my-8"
+              :list="checkList"
+            />
           </div>
           <div class="flex flex-row justify-center items-center">
             <SignupBox
@@ -79,6 +95,7 @@
           </div>
         </slot>
       </div>
+
       <slot name="footer-image" />
     </div>
 
@@ -104,26 +121,32 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import SignupBox from '../forms/SignupBox.vue'
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 import Swoosh from '@/components/Swoosh.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',
-  'Discover other ways to divest from fossil fuels'
+  'Discover other ways to divest from fossil fuels',
 ]
 
-const { client } = usePrismic()
+const sliceComps = ref(defineSliceZoneComponents(components))
+
+/* const { client } = usePrismic()
 const { data: embrace } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage')
-)
+  client.getSingle('embracepage'),
+) */
 
 withDefaults(defineProps<{
-  isEmbraceBreakup: boolean;
+  isEmbraceBreakup: boolean
+  showLeadGenSlice?: boolean
+  prismicSliceData?: any
 }>(), {
-  isEmbraceBreakup: false
+  showLeadGenSlice: false,
+  isEmbraceBreakup: false,
 })
-
 </script>
