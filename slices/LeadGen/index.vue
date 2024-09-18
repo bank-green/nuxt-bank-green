@@ -13,7 +13,7 @@
       </h2>
       <CheckList
         class="md:text-xl"
-        :list="slice.items.map((i: any) => asText(i.bullet_text))"
+        :list="slice.items.map((i: any) => asText(i.bullet_text)).filter((i: string) => i.length > 0)"
       />
     </div>
     <form
