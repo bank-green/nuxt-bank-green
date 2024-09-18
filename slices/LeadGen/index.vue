@@ -16,7 +16,10 @@
         :list="slice.items.map((i: any) => asText(i.bullet_text))"
       />
     </div>
-    <form class="flex flex-col gap-6 text-left" @submit.prevent.stop="submitForm">
+    <form
+      class="flex flex-col gap-6 text-left"
+      @submit.prevent.stop="submitForm"
+    >
       <BankLocationSearch
         v-if="getSliceBoolean(content.show_bank_field) ?? true"
         v-model="bank"
@@ -51,7 +54,14 @@
         :warning="warningsMap['email']"
         dark
       />
-      <CurrentStatus v-if="getSliceBoolean(content.show_status_field) ?? true" v-model="currentStatus" :options="statusOptions" dark :title="content.form_status_label || 'Which option best describes your current status?'" />
+      <CurrentStatus
+        v-if="getSliceBoolean(content.show_status_field) ?? true"
+        v-model="currentStatus"
+        :options="statusOptions"
+        dark
+        :warning="warningsMap['currentStatus']"
+        :title="content.form_status_label || 'Which option best describes your current status?'"
+      />
       <CheckboxSection
         v-model="isAgreeMarketing"
         name="isAgreeMarketing"
@@ -68,7 +78,10 @@
         dark
       >
         I have read and understood Bank.Green’s
-        <NuxtLink to="/privacy" class="link">
+        <NuxtLink
+          to="/privacy"
+          class="link"
+        >
           privacy policy
         </NuxtLink>.
       </CheckboxSection>
@@ -101,28 +114,30 @@
           </svg>
         </span>
       </button>
-      <span v-if="formError" class="text-red-300 font-semibold text-center">Something went wrong, try again!</span>
+      <span
+        v-if="formError"
+        class="text-red-300 font-semibold text-center"
+      >Something went wrong, try again!</span>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
 import { asText } from '@prismicio/helpers'
-import { getSliceBoolean } from '@/utils/prismic/conversions'
 import { getSliceComponentProps } from '@prismicio/vue'
 import VueTurnstile from 'vue-turnstile'
+import { getSliceBoolean } from '@/utils/prismic/conversions'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
 import TextField from '@/components/forms/TextField.vue'
 import CurrentStatus from '@/components/forms/CurrentStatus.vue'
 
 const searchValue = ref(null)
-const currentStatus = ref<string>('')
 const props = defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
 
 const statusOptions = computed(() => {
   const options = props.slice.items.map((i: any) => i.dropdown_status_option)
-  const filteredOptions = options.filter((opt: null | string) => opt !== "Select none (default)" && typeof(opt) === "string")  
+  const filteredOptions = options.filter((opt: null | string) => opt !== 'Select none (default)' && typeof (opt) === 'string')
   return filteredOptions.length > 0 ? filteredOptions : undefined
 })
 
@@ -136,7 +151,7 @@ const extras = computed(() => {
     bank: bank.value?.tag || '',
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
-    bankNameWhenNotFound: (!bank.value && searchValue.value) || ''
+    bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
   }
 })
 
@@ -149,14 +164,15 @@ const {
   isAgreeTerms,
   isAgreeMarketing,
   warningsMap,
+  currentStatus,
   hasWarnings,
   showWarnings,
   bank,
-  busy
+  busy,
 } = useContactForm(
   'leadGen',
-  ['firstName', 'email', 'isAgreeTerms'],
-  extras
+  ['firstName', 'email', 'isAgreeTerms', 'currentStatus'],
+  extras,
 )
 
 const formError = ref<boolean>(false)
@@ -184,8 +200,8 @@ const submitForm = async () => {
     method: 'POST',
     body: {
       formFields,
-      bankLeadList: getSliceBoolean(content?.value?.bank_leads_ac_list)
-    }
+      bankLeadList: getSliceBoolean(content?.value?.bank_leads_ac_list),
+    },
   })
 
   if (response.success) {

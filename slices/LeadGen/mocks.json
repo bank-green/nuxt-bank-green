@@ -68,7 +68,7 @@
 						"dropdown_status_option",
 						{
 							"__TYPE__": "FieldContent",
-							"value": "I've already switched banks",
+							"value": "I’m considering switching banks",
 							"type": "Select"
 						}
 					]

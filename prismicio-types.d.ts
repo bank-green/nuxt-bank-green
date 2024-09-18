@@ -4030,7 +4030,7 @@ export interface LeadGenSliceDefaultItem {
     | "I’m actively planning to switch banks"
     | "I’m considering switching banks"
     | "I've already switched banks"
-    | "No plans to switch banks, but would love to stay updated"
+    | "No plans to switch, but would love to stay updated"
     | "Select none (default)"
   >;
 }
