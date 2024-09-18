@@ -1,6 +1,5 @@
 <template>
   <BankLayoutGreatGoodOkUnknown
-    :is-embrace-breakup="showEmbraceBreakup"
     :prismic-slice-data="bankPage?.data.slices"
     show-lead-gen-slice
   >
@@ -107,6 +106,5 @@ defineProps<{
   }
   fossilFreeAlliance: boolean
   bankPage: PrismicDocument<Record<string, any>, string, string> | null
-  showEmbraceBreakup: boolean
 }>()
 </script>
