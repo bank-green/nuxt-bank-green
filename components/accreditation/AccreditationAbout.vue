@@ -9,7 +9,7 @@
         :field="description"
         fallback="This certification is part of the Bank.Green Accrediation Program to certified businesses that have committed to banking with environmentally responsible financial institutions, actively reducing their carbon footprint and building a healthier planet for generations to come."
       />
-      <p class="">
+      <p>
         Are you a business?
         <NuxtLink
           class="underline font-medium inline-block"
