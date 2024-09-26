@@ -16,9 +16,7 @@
         />
       </div>
 
-      <div>
-        <slot />
-      </div>
+      <slot />
     </div>
   </li>
 </template>
