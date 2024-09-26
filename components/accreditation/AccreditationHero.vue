@@ -26,7 +26,7 @@
       </template>
     </div>
     <AccreditationProjectCarousel
-      class="lg:absolute lg:bottom-0 lg:left-80 lg:translate-y-16"
+      class="lg:absolute lg:bottom-0 lg:pl-80 lg:translate-y-16"
       :projects="projects"
     />
     <NuxtImg
@@ -37,20 +37,22 @@
     />
   </div>
 </template>
+
 <script lang="ts" setup>
 import { asImageSrc } from '@prismicio/helpers'
 import type { AccreditationpageDocumentData, AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
 
 const props = defineProps<{
-    title?: AccreditationpageDocumentData['hero_title'],
-    description?: AccreditationpageDocumentData['hero_description'],
-    logo?: AccreditationpageDocumentData['hero_logo'],
-    projects?: AccreditationpageDocumentDataProjectsItem[],
+  title?: AccreditationpageDocumentData['hero_title']
+  description?: AccreditationpageDocumentData['hero_description']
+  logo?: AccreditationpageDocumentData['hero_logo']
+  projects?: AccreditationpageDocumentDataProjectsItem[]
 }>()
 
 const heroLogo = asImageSrc(props.logo) ?? '/img/certification/fossil-free-certified.png'
 const heroLogoProvider = props.logo ? '' : 'none'
 </script>
+
 <style>
 .green-line {
   padding-bottom: 20px;
