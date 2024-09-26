@@ -1,41 +1,48 @@
 <template>
-  <div
-    class="relative flex flex-col items-center gap-10 border rounded-2xl w-full max-w-7xl min-h-[504px] px-4 py-10 bg-white text-center"
-  >
-    <h1 class="text-3xl lg:text-5xl font-semibold text-gray-800">
-      <template v-if="title">
-        {{ title }}
-      </template>
-      <template v-else>
-        Your money is building a <span class="green-line">greener future</span>
-      </template>
-    </h1>
-    <div class="lg:px-16 text-base lg:text-xl text-gray-700 max-w-4xl">
-      <template v-if="description">
-        {{ description }}
-      </template>
-      <template v-else>
-        <p class="pb-6">
-          By choosing to spend your money with this business, you are ensuring your financial support
-          contributes
-          to a sustainable, liveable future.
-        </p>
-        <p>
-          Wich means your money is supporting projects like:
-        </p>
-      </template>
+  <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 max-w-screen">
+    <div class="page-fade-in relative contain pb-20 lg:pt-12 z-10">
+      <div
+        class="relative flex flex-col items-center gap-10 border rounded-2xl w-full max-w-7xl min-h-[504px] px-4 py-10 bg-white text-center"
+      >
+        <h1 class="text-3xl lg:text-5xl font-semibold text-gray-800">
+          <template v-if="title">
+            {{ title }}
+          </template>
+          <template v-else>
+            Your money is building a <span class="green-line">greener future</span>
+          </template>
+        </h1>
+        <div class="lg:px-16 text-base lg:text-xl text-gray-700 max-w-4xl">
+          <PrismicRichText
+            v-if="description"
+            class="text-white font-medium"
+            :field="description"
+          />
+          <template v-else>
+            <p class="pb-6">
+              By choosing to spend your money with this business, you are ensuring your financial support
+              contributes
+              to a sustainable, liveable future.
+            </p>
+            <p>
+              Wich means your money is supporting projects like:
+            </p>
+          </template>
+        </div>
+        <AccreditationProjectCarousel
+          class="lg:absolute lg:bottom-0 lg:left-80 lg:translate-y-16"
+          :projects="projects"
+        />
+        <NuxtImg
+          class="absolute bottom-0 lg:left-36 w-32 h-32 translate-y-16 lg:translate-y-10"
+          :src="heroLogo"
+          :provider="heroLogoProvider"
+          alt="Accreditation Logo"
+        />
+      </div>
     </div>
-    <AccreditationProjectCarousel
-      class="lg:absolute lg:bottom-0 lg:pl-80 lg:translate-y-16"
-      :projects="projects"
-    />
-    <NuxtImg
-      class="absolute bottom-0 lg:left-36 w-32 h-32 translate-y-16 lg:translate-y-10"
-      :src="heroLogo"
-      :provider="heroLogoProvider"
-      alt="Accreditation Logo"
-    />
-  </div>
+    <Swoosh />
+  </section>
 </template>
 
 <script lang="ts" setup>
