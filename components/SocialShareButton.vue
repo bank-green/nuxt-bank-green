@@ -1,7 +1,7 @@
 <template>
   <SocialShare
     v-bind="props"
-    class="w-full rounded-full border border-gray-500 text-gray-700 px-6 py-2 bg-white shadow"
+    class="w-full rounded-full border border-gray-500 text-gray-700 px-6 py-2 bg-sky-100 hover:bg-white shadow"
   >
     <template #icon>
       <svg

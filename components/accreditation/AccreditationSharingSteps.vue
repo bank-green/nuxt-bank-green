@@ -12,7 +12,6 @@
         />
 
         <SocialShareButton
-          class="bg-sky-100"
           network="twitter"
           :url="step1.links.fb"
         />
