@@ -30,7 +30,7 @@
           </template>
         </div>
         <AccreditationProjectCarousel
-          class="lg:absolute lg:bottom-0 lg:left-80 lg:translate-y-16"
+          class="lg:absolute lg:bottom-0 lg:pl-80 lg:translate-y-16"
           :projects="projects"
         />
         <NuxtImg
