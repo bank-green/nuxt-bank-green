@@ -1,20 +1,21 @@
 <template>
-  <div class="page">
+  <div class="page text-gray-700">
     <AccreditationHero
-      :title="accred?.data.hero_title"
-      :logo="accred?.data.hero_logo"
-      :description="accred?.data.hero_description"
-      :projects="accred?.data.projects"
+      :title="accredData?.hero_title"
+      :logo="accredData?.hero_logo"
+      :description="accredData?.hero_description"
+      :projects="accredData?.projects"
     />
 
-    <section>
-      <!-- Sharing section -->
-    </section>
+    <AccreditationSharing
+      :title="accredData?.sharing_title"
+      :steps="sharingSteps"
+    />
 
     <AccreditationAbout
-      :title="accred?.data.about_title"
-      :description="accred?.data.about_description"
-      :logo="accred?.data.aboutlogo"
+      :title="accredData?.about_title"
+      :description="accredData?.about_description"
+      :logo="accredData?.aboutlogo"
     />
   </div>
 </template>
@@ -27,6 +28,24 @@ const slug = route.params.slug ?? ''
 const { data: accred } = await useAsyncData(slug[0], () =>
   client.getByUID('accreditationpage', slug[0]),
 )
+
+const accredData = accred.value?.data
+
+const sharingSteps = {
+  step1: {
+    title: accredData?.step1_title,
+    description: accredData?.step1_description,
+    links: {
+      fb: accredData?.fb_link,
+      ig: accredData?.ig_link,
+      x: accredData?.x_link,
+    },
+  },
+  step2: {
+    title: accredData?.step2_title,
+    description: accredData?.step2_description,
+  },
+}
 
 /*
 usePrismicSEO(gpe.value?.data) */
