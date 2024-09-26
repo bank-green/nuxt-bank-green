@@ -6,9 +6,9 @@
         background-repeat: no-repeat;
         background-size: contain;
     "
-    class="flex flex-col gap-20 items-center min-h-[1400px] px-6 lg:px-28 py-16 lg:py-20 bg-white"
+    class="flex flex-col gap-10 lg:gap-20 items-center min-h-[1400px] px-6 lg:px-28 py-16 lg:py-20 bg-white"
   >
-    <h1 class="text-2xl lg:text-4xl font-bold text-gray-800">
+    <h1 class="text-2xl lg:text-4xl text-center font-bold text-gray-800">
       {{ title }}
     </h1>
 

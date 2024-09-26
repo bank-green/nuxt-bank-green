@@ -6,7 +6,10 @@
       <span class="text-2xl lg:text-5xl">{{ num }}</span>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 px-6 lg:px-16 pt-6 pb-10 lg:py-10">
+    <div
+      class="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 px-6 lg:px-16 pt-6 pb-10 lg:py-10 arrow"
+      :class="[{ 'arrow-right': num % 2 !== 0 }]"
+    >
       <div>
         <h2 class="mb-4 text-2xl lg:text-3xl font-bold text-gray-800">
           {{ step.title }}
@@ -37,6 +40,34 @@ defineProps<Props>()
 </script>
 
 <style scoped>
+.arrow::before {
+  content: '';
+  position: absolute;
+  right: 13px;
+  width: 35px;
+  height: 37px;
+  background-image: url('/img/icons/arrow-step.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateY(-100%) scaleX(-1) rotate(30deg);
+}
+
+@media screen and (min-width: 1028px) {
+  .arrow::before {
+    left: 8%;
+    right: auto;
+    width: 64px;
+    height: 67px;
+    transform: translateY(-75%);
+  }
+  .arrow-right::before {
+    right: 20%;
+    left: auto;
+    transform: translateY(-90%) scaleX(-1) rotate(30deg);
+  }
+}
+
 .leaf {
   position: absolute;
   transform: translateX(-25%) translateY(-25%);
