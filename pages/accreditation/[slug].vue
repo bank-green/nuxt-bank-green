@@ -35,6 +35,11 @@ const sharingSteps = {
   step1: {
     title: accredData?.step1_title,
     description: accredData?.step1_description,
+    links: {
+      fb: accredData?.fb_link,
+      ig: accredData?.ig_link,
+      x: accredData?.x_link,
+    },
   },
   step2: {
     title: accredData?.step2_title,

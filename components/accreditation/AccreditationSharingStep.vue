@@ -1,6 +1,6 @@
 <template>
   <li
-    class="border border-gray-200 rounded-2xl lg:rounded-3xl bg-gray-light shadow-soft"
+    class="border border-gray-200 rounded-2xl lg:rounded-3xl max-w-[1020px] bg-gray-light shadow-soft"
   >
     <div class="flex justify-center items-center w-10 lg:w-20 h-10 lg:h-20 text-white font-bold leaf">
       <span class="text-2xl lg:text-5xl">{{ num }}</span>
@@ -30,6 +30,11 @@ import type { AccreditationpageDocumentData } from 'prismicio-types'
 export interface Step {
   title?: AccreditationpageDocumentData['step1_title'] | AccreditationpageDocumentData['step2_title']
   description?: AccreditationpageDocumentData['step1_description'] | AccreditationpageDocumentData['step2_description']
+  links?: {
+    fb?: AccreditationpageDocumentData['fb_link']
+    ig?: AccreditationpageDocumentData['ig_link']
+    x?: AccreditationpageDocumentData['x_link']
+  }
 }
 export interface Props {
   step: Step

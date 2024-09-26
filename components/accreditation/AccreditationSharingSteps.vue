@@ -3,7 +3,21 @@
     <AccreditationSharingStep
       :num="1"
       :step="step1"
-    />
+    >
+      <div class="flex flex-col gap-4 text-xl">
+        <SocialShareButton
+          class="w-fit"
+          network="facebook"
+          :url="step1.links.fb"
+        />
+
+        <SocialShareButton
+          class="bg-sky-100"
+          network="twitter"
+          :url="step1.links.fb"
+        />
+      </div>
+    </AccreditationSharingStep>
 
     <AccreditationSharingStep
       :num="2"
@@ -49,6 +63,11 @@ const step1 = {
       type: 'strong',
     }],
   }],
+  links: {
+    fb: props.steps.step1.links?.fb,
+    ig: props.steps.step1.links?.ig,
+    x: props.steps.step1.links?.x,
+  },
 }
 
 const step2 = {
