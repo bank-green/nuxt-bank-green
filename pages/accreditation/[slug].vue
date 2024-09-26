@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page text-gray-700">
     <AccreditationHero
       :title="accredData?.hero_title"
       :logo="accredData?.hero_logo"

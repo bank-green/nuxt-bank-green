@@ -12,7 +12,7 @@
             Your money is building a <span class="green-line">greener future</span>
           </template>
         </h1>
-        <div class="lg:px-16 text-base lg:text-xl text-gray-700 max-w-4xl">
+        <div class="lg:px-16 text-base lg:text-xl max-w-4xl">
           <PrismicRichText
             v-if="description"
             class="text-white font-medium"
