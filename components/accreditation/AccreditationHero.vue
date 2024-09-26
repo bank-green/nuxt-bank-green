@@ -41,7 +41,7 @@
         />
       </div>
     </div>
-    <Swoosh />
+    <Swoosh color="text-white" />
   </section>
 </template>
 
