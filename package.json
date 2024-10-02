@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --fix",
     "lint:fix-changed": "git diff --name-only main | grep '\\.\\(ts\\|js\\|vue\\)$' | xargs eslint --fix",
     "lint:fix-changed-win": "powershell -Command \"git diff --name-only main | Where-Object {$_ -match '\\.(ts|js|vue)$'} | ForEach-Object {eslint --fix $_}\"",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@gtm-support/vue-gtm": "^2.0.0",
@@ -37,6 +38,8 @@
     "fuse.js": "^6.6.2",
     "geonames.js": "^3.0.6",
     "happy-dom": "^13.10.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "lottie-web": "^5.10.0",
     "nuxt": "^3.6.5",
     "playwright-core": "^1.43.0",
@@ -49,5 +52,8 @@
   "dependencies": {
     "nuxt-jsonld": "^2.0.8",
     "vue-turnstile": "^1.0.9"
+  },
+  "lint-staged": {
+    "*": "eslint"
   }
 }
