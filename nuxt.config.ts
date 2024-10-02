@@ -179,7 +179,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare',
   },
   eslint: {
-    checker: true,
+    checker: false,
     config: {
       stylistic: true,
     },
