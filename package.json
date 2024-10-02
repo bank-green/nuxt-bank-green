@@ -12,7 +12,7 @@
     "stage": "npx wrangler publish --env staging",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:fix-changed": "git diff --name-only main | grep '\\.\\(ts\\|js\\|vue\\)$' | xargs eslint --fix",
+    "lint-staged": "npx lint-staged",
     "lint:fix-changed-win": "powershell -Command \"git diff --name-only main | Where-Object {$_ -match '\\.(ts|js|vue)$'} | ForEach-Object {eslint --fix $_}\"",
     "test": "vitest --run",
     "prepare": "husky"
