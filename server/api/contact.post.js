@@ -61,12 +61,12 @@ const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_KEY
 const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
 
 async function sendZapierOrACContact (message) {
-  if(message && message.tag === 'contact page form') {
-    // Zapier api for just the contact form (for now)
-    const hookUrl = useRuntimeConfig().public.ZAPIER_CONTACT;
-    await $fetch(hookUrl, { method: 'POST', body: message })
-  }
-  else {
+  // if(message && message.tag === 'contact page form') {
+  //   // Zapier api for just the contact form (for now)
+  //   const hookUrl = useRuntimeConfig().public.ZAPIER_CONTACT;
+  //   await $fetch(hookUrl, { method: 'POST', body: message })
+  // }
+  // else {
     // ActiveCampaign api for rest of forms
     const tag = () => {
       switch(message.tag) {
@@ -133,5 +133,21 @@ async function sendZapierOrACContact (message) {
         success: false
       }
     }
+    const userId = sendActiveCampaignForm.contact.id;
+    await $fetch(baseUrl + '/accounts/${userId}/notes', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'Api-Token': secret
+      },
+      body: {
+        "note": {
+          "note": "Subject: " + message.subject + "\n Message: " + message.message
+        }
+      }
+    }
+    )
+
   }
-}
+// }
