@@ -134,7 +134,7 @@ async function sendZapierOrACContact (message) {
       }
     }
     const userId = sendActiveCampaignForm.contact.id;
-    await $fetch(baseUrl + '/accounts/${userId}/notes', {
+    await $fetch(baseUrl + '/accounts/'+ userId +'/notes', {
       method: 'POST',
       headers: {
         accept: 'application/json',
