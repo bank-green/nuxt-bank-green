@@ -1,3 +1,4 @@
+<!-- TODO in claudia/groot-302-update-page-layout-desktop-mobile -->
 <template>
   <div class="bg-sushi-50">
     <div class="page-fade-in contain pt-28 pb-16">
@@ -10,7 +11,6 @@
           :components="sliceComps"
         />
       </div>
-
       <transition
         enter-active-class="duration-200 transform-gpu origin-top ease-out"
         enter-from-class="opacity-0 scale-y-95"
