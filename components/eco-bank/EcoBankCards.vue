@@ -1,3 +1,4 @@
+<!-- TODO: in claudia/groot-300-update-card-views-mobile-and-desktop -->
 <template>
   <transition-group
     enter-active-class="transform-gpu ease-out duration-300 transition"

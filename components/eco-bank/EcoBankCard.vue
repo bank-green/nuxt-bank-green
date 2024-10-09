@@ -1,3 +1,4 @@
+<!-- TODO: in claudia/groot-300-update-card-views-mobile-and-desktop -->
 <template>
   <NuxtLink
     :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
