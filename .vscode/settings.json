@@ -1,0 +1,11 @@
+{
+    // Required in vscode-eslint < v3.0.10 only
+    "eslint.useFlatConfig": true,
+    // Enable eslint as a default formatter
+    "prettier.enable": false,
+    "eslint.format.enable": true,
+    // Auto fix
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+    }
+}
