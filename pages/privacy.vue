@@ -32,16 +32,4 @@ const { data: privacy } = await useAsyncData('privacy', () =>
   })
 )
 usePrismicSEO(privacy.value?.data)
-
-useHead({
-  script: [
-    {
-    id: 'CookieDeclaration',
-    src: 'https://consent.cookiebot.com/6d3d0d12-cdf0-41be-804b-8ec7e804701c/cd.js',
-    type: 'text/javascript',
-    async: true,
-    body: true
-    }
-  ]
-})
 </script>
