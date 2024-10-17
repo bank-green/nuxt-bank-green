@@ -12,3 +12,11 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const { client } = usePrismic()
+const { data: cookie } = await useAsyncData('cookie', () =>
+    client.getSingle('cookiepage')
+)
+usePrismicSEO(cookie.value?.data)
+</script>

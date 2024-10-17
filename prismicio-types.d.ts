@@ -2764,6 +2764,49 @@ export type PrivacypageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for CookiePage documents
+ */
+interface CookiepageDocumentData {
+  /**
+   * SEO Title field in *CookiePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cookiepage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO Description field in *CookiePage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cookiepage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+}
+
+/**
+ * CookiePage document from Prismic
+ *
+ * - **API ID**: `cookiepage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CookiepageDocument<Lang extends string = string> =
+    prismic.PrismicDocumentWithoutUID<
+        Simplify<CookiepageDocumentData>,
+        "cookiepage",
+        Lang
+    >;
+
 type SfiPageDocumentDataSlicesSlice = LeadGenSlice;
 
 /**
@@ -3552,6 +3595,7 @@ export type AllDocumentTypes =
   | PresspageDocument
   | PresspostDocument
   | PrivacypageDocument
+  | CookiepageDocument
   | SfiPageDocument
   | SfipageDocument
   | SwitchsurveyexitDocument
@@ -4503,6 +4547,8 @@ declare module "@prismicio/client" {
       PresspostDocumentData,
       PrivacypageDocument,
       PrivacypageDocumentData,
+      CookiepageDocument,
+      CookiepageDocumentData,
       SfiPageDocument,
       SfiPageDocumentData,
       SfipageDocument,

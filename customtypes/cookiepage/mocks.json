@@ -1,0 +1,14 @@
+[
+  {
+    "seo_title": {
+      "__TYPE__": "FieldContent",
+      "value": "forth",
+      "type": "Text"
+    },
+    "seo_description": {
+      "__TYPE__": "FieldContent",
+      "value": "soldier",
+      "type": "Text"
+    }
+  }
+]
