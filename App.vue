@@ -5,9 +5,6 @@
     @mouseleave="onExitIntent"
   >
     <NuxtLoadingIndicator :color="'#7BB123'" :height="6" />
-    <ClientOnly>
-      <CookieBanner />
-    </ClientOnly>
     <NavBar />
     <NuxtPage />
     <NavFooter />
