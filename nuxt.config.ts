@@ -159,15 +159,6 @@ export default defineNuxtConfig({
           color: '#12141D'
         }
       ],
-      script: [
-        {
-          id: 'Cookiebot',
-          src: 'https://consent.cookiebot.com/uc.js',
-          type: 'text/javascript',
-          'data-cbid': '6d3d0d12-cdf0-41be-804b-8ec7e804701c',
-          'data-blockingmode': 'auto',
-        },
-      ],
       noscript: [
         {
           children:
