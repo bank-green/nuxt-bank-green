@@ -45,6 +45,13 @@
         >
           Privacy policy
         </NuxtLink>
+        <NuxtLink
+          to="/cookies"
+          class="hover:underline"
+          active-class="text-gray-900"
+        >
+          Cookie Declaration
+        </NuxtLink>
       </div>
     </div>
   </div>

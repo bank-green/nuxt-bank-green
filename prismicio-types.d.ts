@@ -2764,6 +2764,62 @@ export type PrivacypageDocument<Lang extends string = string> =
     Lang
   >;
 
+type CookiespageDocumentDataSlicesSlice = TextSliceSlice;
+
+/**
+ * Content for CookiesPage documents
+ */
+interface CookiespageDocumentData {
+  /**
+   * SEO Title field in *CookiesPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cookiespage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO Description field in *CookiesPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cookiespage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *CookiesPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cookiespage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CookiespageDocumentDataSlicesSlice>;
+}
+
+/**
+ * CookiesPage document from Prismic
+ *
+ * - **API ID**: `cookiespage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CookiespageDocument<Lang extends string = string> =
+    prismic.PrismicDocumentWithoutUID<
+        Simplify<CookiespageDocumentData>,
+        "cookiespage",
+        Lang
+    >;
+
 type SfiPageDocumentDataSlicesSlice = LeadGenSlice;
 
 /**
@@ -3552,6 +3608,7 @@ export type AllDocumentTypes =
   | PresspageDocument
   | PresspostDocument
   | PrivacypageDocument
+  | CookiespageDocument
   | SfiPageDocument
   | SfipageDocument
   | SwitchsurveyexitDocument
@@ -4503,6 +4560,8 @@ declare module "@prismicio/client" {
       PresspostDocumentData,
       PrivacypageDocument,
       PrivacypageDocumentData,
+      CookiespageDocument,
+      CookiespageDocumentData,
       SfiPageDocument,
       SfiPageDocumentData,
       SfipageDocument,
