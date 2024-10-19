@@ -2764,46 +2764,59 @@ export type PrivacypageDocument<Lang extends string = string> =
     Lang
   >;
 
+type CookiespageDocumentDataSlicesSlice = TextSliceSlice;
+
 /**
- * Content for CookiePage documents
+ * Content for CookiesPage documents
  */
-interface CookiepageDocumentData {
+interface CookiespageDocumentData {
   /**
-   * SEO Title field in *CookiePage*
+   * SEO Title field in *CookiesPage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: cookiepage.seo_title
+   * - **API ID Path**: cookiespage.seo_title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   seo_title: prismic.KeyTextField;
 
   /**
-   * SEO Description field in *CookiePage*
+   * SEO Description field in *CookiesPage*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: cookiepage.seo_description
+   * - **API ID Path**: cookiespage.seo_description
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   seo_description: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *CookiesPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cookiespage.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CookiespageDocumentDataSlicesSlice>;
 }
 
 /**
- * CookiePage document from Prismic
+ * CookiesPage document from Prismic
  *
- * - **API ID**: `cookiepage`
+ * - **API ID**: `cookiespage`
  * - **Repeatable**: `false`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type CookiepageDocument<Lang extends string = string> =
+export type CookiespageDocument<Lang extends string = string> =
     prismic.PrismicDocumentWithoutUID<
-        Simplify<CookiepageDocumentData>,
-        "cookiepage",
+        Simplify<CookiespageDocumentData>,
+        "cookiespage",
         Lang
     >;
 
@@ -3595,7 +3608,7 @@ export type AllDocumentTypes =
   | PresspageDocument
   | PresspostDocument
   | PrivacypageDocument
-  | CookiepageDocument
+  | CookiespageDocument
   | SfiPageDocument
   | SfipageDocument
   | SwitchsurveyexitDocument
@@ -4547,8 +4560,8 @@ declare module "@prismicio/client" {
       PresspostDocumentData,
       PrivacypageDocument,
       PrivacypageDocumentData,
-      CookiepageDocument,
-      CookiepageDocumentData,
+      CookiespageDocument,
+      CookiespageDocumentData,
       SfiPageDocument,
       SfiPageDocumentData,
       SfipageDocument,

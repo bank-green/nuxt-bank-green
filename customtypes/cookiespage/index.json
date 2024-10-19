@@ -1,6 +1,6 @@
 {
-  "id": "cookiepage",
-  "label": "CookiePage",
+  "id": "cookiespage",
+  "label": "CookiesPage",
   "repeatable": false,
   "status": true,
   "json": {
@@ -12,6 +12,11 @@
       "seo_description": {
         "type": "Text",
         "config": { "label": "SEO Description", "placeholder": "" }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": { "choices": { "text_slice": { "type": "SharedSlice" } } }
       }
     }
   },
