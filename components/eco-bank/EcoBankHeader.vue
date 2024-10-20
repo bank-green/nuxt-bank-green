@@ -89,7 +89,6 @@
 </template>
 
 <script setup lang="ts">
-import { RichTextField } from '@prismicio/types'
 
 const props = withDefaults(
   defineProps<{
