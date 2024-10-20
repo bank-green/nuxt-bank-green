@@ -83,7 +83,6 @@ export async function useBankPage (
       }
     }
   } catch (e) {
-    console.log(e)
     return { bankPage: null }
   }
 }

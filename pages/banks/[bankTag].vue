@@ -1,36 +1,43 @@
 <template>
   <Bank
-    v-if="details"
-    :name="details.name"
-    :website="details.website"
-    :inherit-brand-rating="details.inheritBrandRating"
-    :fossil-free-alliance="details.fossilFreeAlliance"
-    :bank-page="bankPage"
-    :rating="details.rating"
-    :show-embrace-breakup="!!details.countries.find((c: any) => c.code === 'GB')"
+    v-if="bankData"
+    :name="bankData.name"
+    :website="bankData.website"
+    :inherit-brand-rating="bankData.inheritBrandRating"
+    :fossil-free-alliance="bankData.fossilFreeAlliance"
+    :rating="bankData.rating"
+    :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
+    :style="bankData.style"  
+    :headline="bankData.header ? bankData.header : defaultFields?.header"
+    :subtitle="bankData.subtitle ? bankData.subtitle : defaultFields?.subtitle"
+    :description1="bankData.summary ? bankData.summary : defaultFields?.summary"
+    :description2="bankData.details ? bankData.details : defaultFields?.details"
+    :description3="bankData.fromTheWebsite ? bankData.fromTheWebsite : defaultFields?.fromTheWebsite"
+    :description4="defaultFields?.description4 ?? ''"
   />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useBankPage } from '../../utils/prismic/bankpage';
 import Bank from '@/components/bank/Bank.vue'; // Import the new Bank component
+import { getDefaultFields } from '@/utils/banks';
 
 const route = useRoute();
 const bankTag = route.params.bankTag;
 const details = ref(await getBankDetail(bankTag));
-
-const { bankPage } = await useBankPage(bankTag as string, details);
+const bankData = details.value;
 
 useHeadHelper(
-  details.value?.name
-    ? `${details.value.name}'s Climate Score - Bank.Green`
+  bankData?.name
+    ? `${bankData.name}'s Climate Score - Bank.Green`
     : '',
   'Find and compare the service offerings of ethical and sustainable banks.'
 );
 
-const { rating } = details.value;
-if (rating) {
-  useHeadRating(rating);
+if (bankData.rating) {
+  useHeadRating(bankData.rating);
 }
+
+const defaultFields = getDefaultFields(bankData.rating, bankData.name)
+
 </script>

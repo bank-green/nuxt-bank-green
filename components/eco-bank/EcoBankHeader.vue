@@ -35,10 +35,7 @@
             {{ `Our take on ${name}` }}
           </div>
           <div class="text-lg md:text-xl text-gray-500 prose">
-            <PrismicRichText
-              v-if="prismicOurTake && prismicOurTake.length > 0"
-              :field="prismicOurTake"
-            />
+            <div v-if="ourTake">{{ ourTake }}</div>
             <span v-else-if="rating === 'ok'">This bank is ok</span>
             <span v-else-if="rating === 'great'">This bank is great</span>
           </div>
@@ -93,7 +90,7 @@ const props = withDefaults(
     rating: string;
     institutionCredentials: any[];
     prismicDefaultPageData: Record<string, any> | null;
-    prismicOurTake?: RichTextField;
+    ourTake: string;
     fossilFreeAlliance?: boolean;
     topPick?: boolean;
   }>(),
@@ -102,6 +99,8 @@ const props = withDefaults(
     topPick: false
   }
 )
+
+console.log('props', props)
 
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
   () => props.institutionCredentials && props.institutionCredentials.length > 0
