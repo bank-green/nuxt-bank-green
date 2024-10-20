@@ -76,7 +76,7 @@
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
-        "config": { "choices": {} }
+        "config": { "choices": { "lead_gen": { "type": "SharedSlice" } } }
       }
     }
   }

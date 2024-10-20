@@ -5,11 +5,14 @@
         class="page-fade-in contain flex flex-col justify-center items-center"
       >
         <a id="top" />
-        <div class="max-w-4xl pt-28 lg:pt-12">
+        <div class="max-w-4xl pt-36 lg:pt-16">
           <h1
             class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl"
           >
-            {{ home?.data.title || "Is your money being used to fund climate chaos?" }}
+            {{
+              home?.data.title
+                || "Is your money being used to fund climate chaos?"
+            }}
           </h1>
           <div
             class="flex flex-col md:flex-row items-stretch md:items-center space-y-2 md:space-y-0 md:space-x-4 mt-8 md:mt-10 md:mb-10"
@@ -89,7 +92,10 @@
                 target="_blank"
               >
                 <div class="bg-white rounded-xl p-5">
-                  <img class="w-36" src="/img/logos/banktrack.svg">
+                  <img
+                    class="w-36"
+                    src="/img/logos/banktrack.svg"
+                  >
                 </div>
               </a>
             </div>
@@ -155,7 +161,8 @@
             <div class="md:w-1/2 max-w-sm">
               <PrismicRichText
                 v-if="
-                  home?.data?.description3 && !isEmptyPrismicField(home?.data.description3)
+                  home?.data?.description3
+                    && !isEmptyPrismicField(home?.data.description3)
                 "
                 class="text-lg md:text-2xl tracking-wide mb-4"
                 :field="home?.data.description3"
@@ -164,7 +171,8 @@
               />
               <PrismicRichText
                 v-if="
-                  home?.data?.description4 && !isEmptyPrismicField(home?.data.description4)
+                  home?.data?.description4
+                    && !isEmptyPrismicField(home?.data.description4)
                 "
                 class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
                 :field="home?.data.description4"
@@ -182,8 +190,15 @@
             >
           </div>
         </div>
-        <div id="join" class="contain max-w-5xl">
-          <CallToAction />
+        <div
+          id="join"
+          class="contain max-w-6xl"
+        >
+          <!--  <CallToAction /> -->
+          <SliceZone
+            :slices="home?.data.slices ?? []"
+            :components="sliceComps"
+          />
         </div>
       </div>
       <div class="flex flex-row items-center justify-center">
@@ -207,24 +222,16 @@ import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
 const sliceComps = ref(defineSliceZoneComponents(components))
 
-const {
-  bank,
-  warningsMap
-} = useContactForm(
-  'homepage',
-  ['bank']
-)
+const { bank, warningsMap } = useContactForm('homepage', ['bank'])
 
 const { client } = usePrismic()
 const { data: home } = await useAsyncData('home', () =>
-  client.getSingle('homepage')
+  client.getSingle('homepage'),
 )
 
 usePrismicSEO(home.value?.data)
 
 const onCheckBankClick = () => {
-  const allowCookies = useCookie('bg.allowcookies', { default: () => false })
-  if (!allowCookies.value) { return }
   const gtm = useGtm()
   gtm?.enable(true)
   gtm?.trackEvent({ event: 'onBankCheckClick' })
