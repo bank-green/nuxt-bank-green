@@ -84,14 +84,17 @@ export default function useContactForm(
     })
     isSent.value = true
 
-    let gtmEvent = 'emailform'
-    if (tag === 'contact page form') {
-      gtmEvent = 'contactpage'
-    }
-    const gtm = useGtm()
-    if (gtm) {
-      gtm.enable(true)
-      gtm.trackEvent({ event: gtmEvent })
+    const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+    if (allowCookies.value) {
+      let gtmEvent = 'emailform'
+      if (tag === 'contact page form') {
+        gtmEvent = 'contactpage'
+      }
+      const gtm = useGtm()
+      if (gtm) {
+        gtm.enable(true)
+        gtm.trackEvent({ event: gtmEvent })
+      }
     }
 
     setTimeout(() => {
