@@ -18,11 +18,14 @@
           v-if="subtitle"
           class="text-lg md:text-xl text-gray-500"
         >
+          <div
+            v-html="subtitle"
+          />
+        </div>
         <div
-          v-html="subtitle"
-        />
-      </div>
-        <div v-if="inheritBrandRating" class="text-xs text-gray-500">
+          v-if="inheritBrandRating"
+          class="text-xs text-gray-500"
+        >
           Deposits or policies controlled by
           <NuxtLink
             class="underline"
@@ -43,6 +46,6 @@ defineProps({
   name: String,
   website: String,
   inheritBrandRating: Object,
-  subtitle: String
+  subtitle: String,
 })
 </script>

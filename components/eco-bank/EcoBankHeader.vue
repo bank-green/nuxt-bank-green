@@ -89,7 +89,6 @@
 </template>
 
 <script setup lang="ts">
-
 const props = withDefaults(
   defineProps<{
     website: string
