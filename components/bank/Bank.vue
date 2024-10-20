@@ -5,7 +5,7 @@
         :name="name"
         :website="website"
         :inherit-brand-rating="inheritBrandRating"
-        :prismic-field-subtitle="subtitle"
+        :subtitle="subtitle"
       />
       <div
         class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8"

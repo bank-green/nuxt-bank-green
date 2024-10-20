@@ -4,7 +4,6 @@ const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
 
 async function callBackend(query, variables) {
-  console.log(query)
   const queryParam = encodeURIComponent(query)
   const variablesParam = encodeURIComponent(JSON.stringify(variables))
   const url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
