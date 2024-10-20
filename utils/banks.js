@@ -3,8 +3,8 @@ import { get } from './backend'
 const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
 
-async function callBackend (query, variables) {
-  console.log(query);
+async function callBackend(query, variables) {
+  console.log(query)
   const queryParam = encodeURIComponent(query)
   const variablesParam = encodeURIComponent(JSON.stringify(variables))
   const url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
@@ -42,12 +42,12 @@ const bankFeaturesFields = `{
     details
 }`
 
-export async function getBanksList ({
+export async function getBanksList({
   country,
   topOnly = false,
   recommendedOnly = true,
   first = 3,
-  isEmbrace = false
+  isEmbrace = false,
 }) {
   const brandsQuery = `
         query BrandsQuery($country: String, $recommendedOnly: Boolean, $rating: [String], $first: Int, $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -89,21 +89,21 @@ export async function getBanksList ({
       return {
         ...b,
         ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0
+        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
       }
     })
   }
   return banks
 }
 
-export async function getBanksListWithFilter ({
+export async function getBanksListWithFilter({
   country,
   regions,
   subregions,
   topPick,
   fossilFreeAlliance,
   features,
-  sustainableOnly = true
+  sustainableOnly = true,
 }) {
   const brandsQuery = `
       query BrandsQuery($country: String, $first: Int, $topPick: Boolean, $sustainableOnly: Boolean, $fossilFreeAlliance: Boolean, $features: [String], $regions: [String], $subregions: [String], $withCommentary: Boolean = false, $withFeatures: Boolean = false) {
@@ -136,7 +136,7 @@ export async function getBanksListWithFilter ({
     first: 300,
     withCommentary: true,
     withFeatures: true,
-    sustainableOnly: sustainableOnly
+    sustainableOnly: sustainableOnly,
   }
 
   const json = await callBackend(brandsQuery, variables)
@@ -145,15 +145,15 @@ export async function getBanksListWithFilter ({
     return {
       ...b,
       ...b.commentary,
-      rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0
+      rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
     }
   })
   return banks
 }
 
-export async function getCountry () {
+export async function getCountry() {
   const cachedCountry = useCookie('bg.country.suggested', {
-    default: () => ''
+    default: () => '',
   })
 
   if (!cachedCountry.value) {
@@ -165,7 +165,7 @@ export async function getCountry () {
   return cachedCountry
 }
 
-export async function getBankDetail (bankTag) {
+export async function getBankDetail(bankTag) {
   const brandQuery = `
     query BrandByTagQuery($tag: String!) {
         brand(tag: $tag) {
@@ -206,7 +206,7 @@ export async function getBankDetail (bankTag) {
       }
     `
   const variables = {
-    tag: bankTag
+    tag: bankTag,
   }
 
   const json = await callBackend(brandQuery, variables)
@@ -214,77 +214,77 @@ export async function getBankDetail (bankTag) {
   const bank = {
     ...json.data.brand,
     ...json.data.brand.commentary,
-    bankFatures: json.data.brand.bankFeatures
+    bankFatures: json.data.brand.bankFeatures,
   }
   bank.rating = bank.ratingInherited?.toLowerCase()
   return bank
 }
 
-export function getDefaultFields (rating, bankname) {
+export function getDefaultFields(rating, bankname) {
   if (!bankname) {
     bankname = 'this bank'
   }
   const descriptions = [
     {
-        "ID": "ZNDHCBIAACcAUMN6",
-        "rating": "good",
-        "header": `<p>Your bank is good.</p>`,
-        "subtitle": "",
-        "summary": `<p>Good news - ${bankname} is entirely or almost entirely divested from fossil fuels. What's more, we have found positive evidence that they care about the environment. Fossil finance makes up less than 1% of their total financing and over 80% of their energy financing going towards low-carbon technologies including renewables. This is in line with the Paris agreement. Banks like yours are either part of the Global Alliance on Banking Values or may have fossil fuels as legacy investments that they cannot responsibly sell.</p>`,
-        "details": `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. </p>`,
-        "fromTheWebsite": `<p>Our mission is to encourage as many people as possible to take a stand -  to refuse to let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree. This is your chance to spread the word with us.</p>`,
-        "description4": ""
+      ID: 'ZNDHCBIAACcAUMN6',
+      rating: 'good',
+      header: '<p>Your bank is good.</p>',
+      subtitle: '',
+      summary: `<p>Good news - ${bankname} is entirely or almost entirely divested from fossil fuels. What's more, we have found positive evidence that they care about the environment. Fossil finance makes up less than 1% of their total financing and over 80% of their energy financing going towards low-carbon technologies including renewables. This is in line with the Paris agreement. Banks like yours are either part of the Global Alliance on Banking Values or may have fossil fuels as legacy investments that they cannot responsibly sell.</p>`,
+      details: '<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. </p>',
+      fromTheWebsite: '<p>Our mission is to encourage as many people as possible to take a stand -  to refuse to let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree. This is your chance to spread the word with us.</p>',
+      description4: '',
     },
     {
-        "ID": "Y5x8gBEAACMAaPiM",
-        "rating": "great",
-        "header": `<p> Your bank is great. </p>`,
-        "subtitle": "",
-        "summary": `<p>Your money is definitely not funding the fossil fuel industry. We can’t be sure of everything that ${bankname} is doing, but at least your money is not enabling gas, oil, or coal extraction.</p><p>We hope this makes you feel tremendous (boasting is encouraged), but don’t put your feet up just yet – scroll down to discover the next step!</p>`,
-        "details": `<p>Bank.Green was founded on the belief that banks have had an easy time  from their customers for too long. </p>`,
-        "fromTheWebsite": `<p>Our mission is to encourage as many people as possible to take a stand -  to refuse to let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree. This is  your chance to spread the word with us.</p>`,
-        "description4": ""
+      ID: 'Y5x8gBEAACMAaPiM',
+      rating: 'great',
+      header: '<p> Your bank is great. </p>',
+      subtitle: '',
+      summary: `<p>Your money is definitely not funding the fossil fuel industry. We can’t be sure of everything that ${bankname} is doing, but at least your money is not enabling gas, oil, or coal extraction.</p><p>We hope this makes you feel tremendous (boasting is encouraged), but don’t put your feet up just yet – scroll down to discover the next step!</p>`,
+      details: '<p>Bank.Green was founded on the belief that banks have had an easy time  from their customers for too long. </p>',
+      fromTheWebsite: '<p>Our mission is to encourage as many people as possible to take a stand -  to refuse to let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree. This is  your chance to spread the word with us.</p>',
+      description4: '',
     },
     {
-        "ID": "Y_xUahAAACkAIoTj",
-        "rating": "worst",
-        "header": `<p>Your money is likely funding the climate crisis at an alarming rate.</p>`,
-        "subtitle": "",
-        "summary": `<p>In the 7 years since the Paris Agreement, banks like ${bankname} have funneled $5.5 trillion into coal, oil, and gas, rapidly accelerating the climate crisis.</p><p>Details here</p>`,
-        "details": `<p>While you’ve been saving money for a home or a weekend get-away, ${bankname} has likely been using your savings to lend to some very questionable fossil fuel friends.</p><p>Banks like this one have demonstrated that they're not interested in fighting in the climate crisis. While banks don't publish all of their lending information, we can see that this bank has positioned itself well to fund fossil fuels. We can also see its lack of interest in doing climate-positive things like measuring and disclosing its total emissions or stating that it doesn't fund fossil fuels. We've therefore given it our lowest rating.</p>`,
-        "fromTheWebsite": "",
-        "description4": `<p>Your bank may be ignoring the Paris Agreement.</p>`
+      ID: 'Y_xUahAAACkAIoTj',
+      rating: 'worst',
+      header: '<p>Your money is likely funding the climate crisis at an alarming rate.</p>',
+      subtitle: '',
+      summary: `<p>In the 7 years since the Paris Agreement, banks like ${bankname} have funneled $5.5 trillion into coal, oil, and gas, rapidly accelerating the climate crisis.</p><p>Details here</p>`,
+      details: `<p>While you’ve been saving money for a home or a weekend get-away, ${bankname} has likely been using your savings to lend to some very questionable fossil fuel friends.</p><p>Banks like this one have demonstrated that they're not interested in fighting in the climate crisis. While banks don't publish all of their lending information, we can see that this bank has positioned itself well to fund fossil fuels. We can also see its lack of interest in doing climate-positive things like measuring and disclosing its total emissions or stating that it doesn't fund fossil fuels. We've therefore given it our lowest rating.</p>`,
+      fromTheWebsite: '',
+      description4: '<p>Your bank may be ignoring the Paris Agreement.</p>',
     },
     {
-        "ID": "Y8BTNhEAACQActyj",
-        "rating": "unknown",
-        "header": `<p>Sorry, we don't know enough about ${bankname} yet.</p>`,
-        "subtitle": "",
-        "summary": `<p>Unfortunately, we don’t yet have enough information on ${bankname} to know what it’s funding. What we do know however, is that contacting ${bankname} to ask them yourself will send a powerful message – banks will have no choice but to reassess socially irresponsible funding activities if they realize their customers are concerned. To take positive action, keep on scrolling…</p>`,
-        "details": `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. Mass movements will pull us out of  the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
-        "fromTheWebsite": `<p>test</p>`,
-        "description4": ""
+      ID: 'Y8BTNhEAACQActyj',
+      rating: 'unknown',
+      header: `<p>Sorry, we don't know enough about ${bankname} yet.</p>`,
+      subtitle: '',
+      summary: `<p>Unfortunately, we don’t yet have enough information on ${bankname} to know what it’s funding. What we do know however, is that contacting ${bankname} to ask them yourself will send a powerful message – banks will have no choice but to reassess socially irresponsible funding activities if they realize their customers are concerned. To take positive action, keep on scrolling…</p>`,
+      details: `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. Mass movements will pull us out of  the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
+      fromTheWebsite: '<p>test</p>',
+      description4: '',
     },
     {
-        "ID": "Y_xXdhAAACYAIpLM",
-        "rating": "bad",
-        "header": `<p>Your money is most likely funding the climate crisis.</p>`,
-        "subtitle": "",
-        "summary": `<p>Your bank doesn't top the charts, but we suspect it’s still using your money to lend to fossil fuel companies and projects that are rapidly accelerating the climate crisis.</p>`,
-        "details": `<p>Financial institutions in this category have shown a weak commitment to environmental sustainability and transparency.</p>`,
-        "fromTheWebsite": `<p>If they engage in energy financing, they are likely to lend far more to fossil fuels than renewable sources. They may have limited or no effective policies to improve their climate impact and may lack meaningful targets for reducing the emissions they are responsible for. While they might show some engagement in sustainable practices or offer certain green lending products, these efforts are insufficiently developed or prominently displayed to make a significant impact.</p>`,
-        "description4": `<p>Your bank may be ignoring the Paris Agreement.</p>`
+      ID: 'Y_xXdhAAACYAIpLM',
+      rating: 'bad',
+      header: '<p>Your money is most likely funding the climate crisis.</p>',
+      subtitle: '',
+      summary: `<p>Your bank doesn't top the charts, but we suspect it’s still using your money to lend to fossil fuel companies and projects that are rapidly accelerating the climate crisis.</p>`,
+      details: '<p>Financial institutions in this category have shown a weak commitment to environmental sustainability and transparency.</p>',
+      fromTheWebsite: '<p>If they engage in energy financing, they are likely to lend far more to fossil fuels than renewable sources. They may have limited or no effective policies to improve their climate impact and may lack meaningful targets for reducing the emissions they are responsible for. While they might show some engagement in sustainable practices or offer certain green lending products, these efforts are insufficiently developed or prominently displayed to make a significant impact.</p>',
+      description4: '<p>Your bank may be ignoring the Paris Agreement.</p>',
     },
     {
-        "ID": "Y8BSdBEAACYActk2",
-        "rating": "ok",
-        "header": `<p>Your bank is doing OK.</p>`,
-        "subtitle": "",
-        "summary": `<p>The good news is that ${bankname} is not a leading fossil fuel funder and we have found positive evidence that they care about the environment. The bad news is that either a) we haven’t yet been able to confirm for certain that it does not fund fossil fuels or b) it funds at least four times more renewables than fossil fuels, but it still funds fossil fuels.</p>`,
-        "details": `<p>Bank.Green believes that mass movements will pull us out of the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
-        "fromTheWebsite": `<p>We were founded on the belief that banks have had an easy time from their customers for too long. Our mission is to encourage as many people as possible to take a stand - to refuse to let their money fuel environmental destruction any longer. Join us in building this movement by pressuring ${bankname} to do better, or by taking your money to somewhere that cares about our planet's future.</p>`,
-        "description4": ""
-    }
+      ID: 'Y8BSdBEAACYActk2',
+      rating: 'ok',
+      header: '<p>Your bank is doing OK.</p>',
+      subtitle: '',
+      summary: `<p>The good news is that ${bankname} is not a leading fossil fuel funder and we have found positive evidence that they care about the environment. The bad news is that either a) we haven’t yet been able to confirm for certain that it does not fund fossil fuels or b) it funds at least four times more renewables than fossil fuels, but it still funds fossil fuels.</p>`,
+      details: `<p>Bank.Green believes that mass movements will pull us out of the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
+      fromTheWebsite: `<p>We were founded on the belief that banks have had an easy time from their customers for too long. Our mission is to encourage as many people as possible to take a stand - to refuse to let their money fuel environmental destruction any longer. Join us in building this movement by pressuring ${bankname} to do better, or by taking your money to somewhere that cares about our planet's future.</p>`,
+      description4: '',
+    },
   ]
-  return descriptions.find(bank => bank.rating.toLowerCase() === rating.toLowerCase()) || null;
+  return descriptions.find(bank => bank.rating.toLowerCase() === rating.toLowerCase()) || null
 }
