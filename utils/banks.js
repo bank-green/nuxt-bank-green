@@ -225,7 +225,6 @@ export function getDefaultFields(rating, bankname) {
   }
   const descriptions = [
     {
-      ID: 'ZNDHCBIAACcAUMN6',
       rating: 'good',
       header: '<p>Your bank is good.</p>',
       subtitle: '',
@@ -235,7 +234,6 @@ export function getDefaultFields(rating, bankname) {
       description4: '',
     },
     {
-      ID: 'Y5x8gBEAACMAaPiM',
       rating: 'great',
       header: '<p> Your bank is great. </p>',
       subtitle: '',
@@ -245,7 +243,6 @@ export function getDefaultFields(rating, bankname) {
       description4: '',
     },
     {
-      ID: 'Y_xUahAAACkAIoTj',
       rating: 'worst',
       header: '<p>Your money is likely funding the climate crisis at an alarming rate.</p>',
       subtitle: '',
@@ -255,7 +252,6 @@ export function getDefaultFields(rating, bankname) {
       description4: '<p>Your bank may be ignoring the Paris Agreement.</p>',
     },
     {
-      ID: 'Y8BTNhEAACQActyj',
       rating: 'unknown',
       header: `<p>Sorry, we don't know enough about ${bankname} yet.</p>`,
       subtitle: '',
@@ -265,7 +261,6 @@ export function getDefaultFields(rating, bankname) {
       description4: '',
     },
     {
-      ID: 'Y_xXdhAAACYAIpLM',
       rating: 'bad',
       header: '<p>Your money is most likely funding the climate crisis.</p>',
       subtitle: '',
@@ -275,7 +270,6 @@ export function getDefaultFields(rating, bankname) {
       description4: '<p>Your bank may be ignoring the Paris Agreement.</p>',
     },
     {
-      ID: 'Y8BSdBEAACYActk2',
       rating: 'ok',
       header: '<p>Your bank is doing OK.</p>',
       subtitle: '',
