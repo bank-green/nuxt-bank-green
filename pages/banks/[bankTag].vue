@@ -1,63 +1,42 @@
 <template>
-  <component
-    :is="componentName"
-    v-if="details"
-    :name="details.name"
-    :website="details.website"
-    :inherit-brand-rating="details.inheritBrandRating"
-    :fossil-free-alliance="details.fossilFreeAlliance"
-    :bank-page="bankPage"
-    :amount-financed-since2016="details.amountFinancedSince2016"
-    :show-embrace-breakup="!!details.countries.find((c: any) => c.code === 'GB')"
+  <Bank
+    v-if="bankData"
+    :name="bankData.name"
+    :website="bankData.website"
+    :inherit-brand-rating="bankData.inheritBrandRating"
+    :fossil-free-alliance="bankData.fossilFreeAlliance"
+    :rating="bankData.rating"
+    :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
+    :style="bankData.style"
+    :headline="bankData.header ? bankData.header : defaultFields?.header"
+    :subtitle="bankData.subtitle ? bankData.subtitle : defaultFields?.subtitle"
+    :description1="bankData.summary ? bankData.summary : defaultFields?.summary"
+    :description2="bankData.details ? bankData.details : defaultFields?.details"
+    :description3="bankData.fromTheWebsite ? bankData.fromTheWebsite : defaultFields?.fromTheWebsite"
+    :description4="defaultFields?.description4 ?? ''"
   />
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useBankPage } from '../../utils/prismic/bankpage'
+import { ref } from 'vue'
+import Bank from '@/components/bank/Bank.vue' // Import the new Bank component
+import { getDefaultFields } from '@/utils/banks'
 
 const route = useRoute()
 const bankTag = route.params.bankTag
 const details = ref(await getBankDetail(bankTag))
-
-const { bankPage } = await useBankPage(bankTag as string, details)
+const bankData = details.value
 
 useHeadHelper(
-  details.value?.name
-    ? `${details.value.name}'s Climate Score - Bank.Green`
+  bankData?.name
+    ? `${bankData.name}'s Climate Score - Bank.Green`
     : '',
-  'Find and compare the service offerings of ethical and sustainable banks.'
+  'Find and compare the service offerings of ethical and sustainable banks.',
 )
 
-const { rating } = details.value
-if (rating) { useHeadRating(rating) }
+if (bankData.rating) {
+  useHeadRating(bankData.rating)
+}
 
-const BankUnknown = resolveComponent('BankUnknown')
-const BankWorst = resolveComponent('BankWorst')
-const BankBad = resolveComponent('BankBad')
-const BankOk = resolveComponent('BankOk')
-const BankGood = resolveComponent('BankGood')
-const BankGreat = resolveComponent('BankGreat')
-
-const componentName = computed(() => {
-  const hasDetails = details.value && details.value.rating
-  if (!hasDetails) { return undefined }
-
-  switch (details.value.rating) {
-    case 'worst':
-      return BankWorst
-    case 'bad':
-      return BankBad
-    case 'ok':
-      return BankOk
-    case 'good':
-      return BankGood
-    case 'great':
-      return BankGreat
-    case 'unknown':
-    default:
-      return BankUnknown
-  }
-})
-
+const defaultFields = getDefaultFields(bankData.rating, bankData.name)
 </script>
