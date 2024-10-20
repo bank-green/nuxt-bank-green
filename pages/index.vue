@@ -232,6 +232,10 @@ const { data: home } = await useAsyncData('home', () =>
 usePrismicSEO(home.value?.data)
 
 const onCheckBankClick = () => {
+  const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+  if (!allowCookies.value) {
+    return
+  }
   const gtm = useGtm()
   gtm?.enable(true)
   gtm?.trackEvent({ event: 'onBankCheckClick' })
