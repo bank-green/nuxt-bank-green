@@ -1,11 +1,12 @@
 <template>
   <SocialShare
     v-bind="props"
-    class="w-full rounded-full border border-gray-500 text-gray-700 px-6 py-2 bg-sky-100 hover:bg-white shadow"
+    class="w-full rounded-full border border-gray-500 text-base lg:text-xl text-gray-700 px-4 lg:px-6 py-2 lg:py-2 bg-sky-100 hover:bg-white shadow"
   >
     <template #icon>
       <svg
         v-if="network === 'facebook'"
+        class="w-10 lg:w-12 h-10 lg:h-12"
         width="48"
         height="48"
         viewBox="0 0 48 48"
@@ -24,6 +25,7 @@
 
       <svg
         v-if="network === 'twitter'"
+        class="w-10 lg:w-12 h-10 lg:h-12"
         width="48"
         height="48"
         viewBox="0 0 48 48"

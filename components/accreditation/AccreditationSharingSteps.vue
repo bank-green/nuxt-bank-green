@@ -4,36 +4,32 @@
       :num="1"
       :step="step1"
     >
-      <div class="flex flex-col gap-4 text-xl">
-        <SocialShareButton
-          class="w-fit"
-          network="facebook"
-          :url="step1.links.fb"
-        />
+      <SocialShareButton
+        class="lg:w-fit"
+        network="facebook"
+        :url="step1.links.fb"
+      />
 
-        <SocialShareButton
-          network="twitter"
-          :url="step1.links.fb"
-        />
-      </div>
+      <SocialShareButton
+        network="twitter"
+        :url="step1.links.fb"
+      />
     </AccreditationSharingStep>
 
     <AccreditationSharingStep
       :num="2"
       :step="step2"
     >
-      <div class="flex flex-col gap-4">
-        <BankLocationSearch
-          v-model="bank"
-        />
-        <NuxtLink
-          :to="`/banks/${bank?.['tag']}`"
-          class="button-green"
-          :class="{ disabled: !bank }"
-        >
-          Check My Bank
-        </NuxtLink>
-      </div>
+      <BankLocationSearch
+        v-model="bank"
+      />
+      <NuxtLink
+        :to="`/banks/${bank?.['tag']}`"
+        class="button-green"
+        :class="{ disabled: !bank }"
+      >
+        Check My Bank
+      </NuxtLink>
     </AccreditationSharingStep>
   </ol>
 </template>

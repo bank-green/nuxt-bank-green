@@ -7,10 +7,10 @@
     </div>
 
     <div
-      class="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 px-6 lg:px-16 pt-6 pb-10 lg:py-10 arrow"
+      class="relative flex flex-col lg:flex-row gap-8 lg:gap-20 px-6 lg:px-16 pt-6 pb-10 lg:py-10 arrow"
       :class="[{ 'arrow-right': num % 2 !== 0 }]"
     >
-      <div>
+      <div class="basis-[51%]">
         <h2 class="mb-4 text-2xl lg:text-3xl font-bold text-gray-800">
           {{ step.title }}
         </h2>
@@ -19,7 +19,9 @@
         />
       </div>
 
-      <slot />
+      <div class="flex-auto flex flex-col gap-4">
+        <slot />
+      </div>
     </div>
   </li>
 </template>
@@ -55,7 +57,7 @@ defineProps<Props>()
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  transform: translateY(-100%) scaleX(-1) rotate(30deg);
+  transform: translateY(-60px) scaleX(-1) rotate(30deg);
 }
 
 @media screen and (min-width: 1028px) {
@@ -64,12 +66,12 @@ defineProps<Props>()
     right: auto;
     width: 64px;
     height: 67px;
-    transform: translateY(-75%);
+    transform: translateY(-90px);
   }
   .arrow-right::before {
     right: 20%;
     left: auto;
-    transform: translateY(-90%) scaleX(-1) rotate(30deg);
+    transform: translateY(-110px) scaleX(-1) rotate(30deg);
   }
 }
 
