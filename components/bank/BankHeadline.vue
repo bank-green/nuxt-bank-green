@@ -16,7 +16,7 @@
         </h1>
         <div
           v-if="subtitle"
-          class="text-lg md:text-xl text-gray-500"
+          class="text-lg md:text-xl text-gray-500 font-bold"
         >
           <div
             v-html="subtitle"
