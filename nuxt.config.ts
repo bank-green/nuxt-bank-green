@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     'nuxt-jsonld',
     '@nuxt/test-utils/module',
     '@nuxt/eslint',
+    '@stefanobartoletti/nuxt-social-share',
   ],
   prismic: {
     endpoint: 'bankgreen',
@@ -46,6 +47,7 @@ export default defineNuxtConfig({
           needRuntime: true,
         }),
       },
+      isCustomElement: tag => tag.startsWith('swiper-'),
     },
   },
   css: ['@/styles/style.css', '@typeform/embed/build/css/widget.css'],
@@ -183,5 +185,8 @@ export default defineNuxtConfig({
     config: {
       stylistic: true,
     },
+  },
+  socialShare: {
+    baseUrl: process.env.PUBLIC_DOMAIN_URL,
   },
 })
