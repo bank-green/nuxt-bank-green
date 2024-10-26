@@ -8,18 +8,18 @@
     :rating="bankData.rating"
     :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
     :style="bankData.style"
-    :headline="bankData.header ? bankData.header : defaultFields?.header"
-    :subtitle="bankData.subtitle ? bankData.subtitle : defaultFields?.subtitle"
-    :description1="bankData.summary ? bankData.summary : defaultFields?.summary"
-    :description2="bankData.details ? bankData.details : defaultFields?.details"
-    :description3="bankData.fromTheWebsite ? bankData.fromTheWebsite : defaultFields?.fromTheWebsite"
+    :headline="getFieldOrDefault('headline')"
+    :subtitle="getFieldOrDefault('subtitle')"
+    :description1="getFieldOrDefault('description1')"
+    :description2="getFieldOrDefault('description2')"
+    :description3="getFieldOrDefault('description3')"
     :description4="defaultFields?.description4 ?? ''"
   />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Bank from '@/components/bank/Bank.vue' // Import the new Bank component
+import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
 
 const route = useRoute()
@@ -39,4 +39,8 @@ if (bankData.rating) {
 }
 
 const defaultFields = getDefaultFields(bankData.rating, bankData.name)
+
+function getFieldOrDefault(fieldName: string) {
+  return bankData[fieldName] ? bankData[fieldName] : defaultFields[fieldName]
+}
 </script>
