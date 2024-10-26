@@ -41,7 +41,10 @@
             {{ `Our take on ${name}` }}
           </div>
           <div class="text-lg md:text-xl text-gray-500 prose">
-            <div v-if="ourTake" v-html="ourTake"></div>
+            <div
+              v-if="ourTake"
+              v-html="ourTake"
+            />
             <span v-else-if="rating === 'ok'">This bank is ok</span>
             <span v-else-if="rating === 'great'">This bank is great</span>
           </div>

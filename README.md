@@ -18,7 +18,7 @@ Running in development mode will show any lint errors introduced. Use the follow
 To fix only files you have modified in the branch:
 
 Mac/linux
-`npm runlint:fix-changed`
+`npm run lint:fix-changed`
 Windows
 `npm run lint:fix-changed-win`
 
