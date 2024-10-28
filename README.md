@@ -9,18 +9,32 @@ Install dependencies:
 
 `npm run dev`
 
-## Fixing lint errors
+## Linting
 
-Running in development mode will show any lint errors introduced. Use the following to fix these
+Linter automatically runs when saving a file, on pre-commit staged files and on a GitHub Action when pushing into a PR.
 
-`npm run lint:fix`
+You can manually check for linter errors in staged files using:
+```bash
+npm run lint-staged
+```
+And to fix the errors: 
+```bash
+npm run lint-staged:fix
+```
 
-To fix only files you have modified in the branch:
+To run the linter manually in all files, you can use:
+```bash
+npm run lint
+```
+To fix errors found, you can run: 
+```bash
+npm run lint:fix
+```
 
-Mac/linux
-`npm run lint:fix-changed`
-Windows
-`npm run lint:fix-changed-win`
+If you are in Windows and the above does not work, try using:
+```bash
+npm run lint:fix-changed-win
+```
 
 Lint configuration is based on https://eslint.nuxt.com/packages/module#quick-setup
 
