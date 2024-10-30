@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "nuxt-jsonld": "^2.0.8",
+    "@prismicio/helpers": "^2.0.0",
     "swiper": "^11.1.14",
     "vue-turnstile": "^1.0.9"
   },

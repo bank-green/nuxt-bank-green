@@ -38,7 +38,7 @@ if (bankData.rating) {
   useHeadRating(bankData.rating)
 }
 
-const defaultFields = getDefaultFields(bankData.rating, bankData.name)
+const defaultFields = await getDefaultFields(bankData.rating, bankData.name)
 
 function getFieldOrDefault(fieldName: string) {
   return bankData[fieldName] ? bankData[fieldName] : defaultFields[fieldName]
