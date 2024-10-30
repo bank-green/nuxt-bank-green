@@ -13,7 +13,6 @@ export async function useBankPage(
   let bankPage = null
 
   try {
-    console.log(rating)
     const [bankRatingResponse] = await Promise.all([
       useAsyncData(() => {
         return client.getByUID(type, rating)
