@@ -240,8 +240,8 @@ export async function getDefaultFields(rating, bankname) {
     const prismicDefaultFields = prismicData?.bankPage?.data
     if (prismicDefaultFields) {
       defaults = {
-        headline: prismicDefaultFields.headline,
-        subtitle: prismicDefaultFields.subtitle,
+        headline: prismicH.asHTML(prismicDefaultFields.headline),
+        subtitle: prismicH.asHTML(prismicDefaultFields.subtitle),
         description1: prismicH.asHTML(prismicDefaultFields.description1),
         description2: prismicH.asHTML(prismicDefaultFields.description2),
         description3: prismicH.asHTML(prismicDefaultFields.description3),
