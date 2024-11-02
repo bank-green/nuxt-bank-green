@@ -29,7 +29,7 @@
           <PrismicRichText :field="bankPage?.data.headline" />
         </div>
         <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
-          <PrismicRichText :field="bankPage?.data.description1" />
+          <PrismicRichText class="customStyle" :field="bankPage?.data.description1" />
         </div>
       </div>
     </template>
@@ -88,3 +88,8 @@ defineProps<{
   bankPage: PrismicDocument<Record<string, any>, string, string> | null;
 }>()
 </script>
+<style>
+  .customStyle p a {
+    font-size: 20px;
+  }
+</style>
