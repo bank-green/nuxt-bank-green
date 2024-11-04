@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  bankFeatures: any;
+  bankFeatures: BankFeature[]
 }>()
 
 const features = computed(() => getFeatures(props.bankFeatures))
