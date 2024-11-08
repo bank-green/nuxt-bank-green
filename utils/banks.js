@@ -232,7 +232,7 @@ export async function getDefaultFields(rating, bankname) {
     subtitle: '',
     description1: `<p>Unfortunately, we don’t yet have enough information on ${bankname} to know what it’s funding. What we do know however, is that contacting ${bankname} to ask them yourself will send a powerful message – banks will have no choice but to reassess socially irresponsible funding activities if they realize their customers are concerned. To take positive action, keep on scrolling…</p>`,
     description2: `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. Mass movements will pull us out of  the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
-    description3: '<p>test</p>',
+    description3: '',
     description4: '',
   }
   try {
@@ -240,8 +240,8 @@ export async function getDefaultFields(rating, bankname) {
     const prismicDefaultFields = prismicData?.bankPage?.data
     if (prismicDefaultFields) {
       defaults = {
-        headline: prismicDefaultFields.headline,
-        subtitle: prismicDefaultFields.subtitle,
+        headline: prismicH.asHTML(prismicDefaultFields.headline),
+        subtitle: prismicH.asHTML(prismicDefaultFields.subtitle),
         description1: prismicH.asHTML(prismicDefaultFields.description1),
         description2: prismicH.asHTML(prismicDefaultFields.description2),
         description3: prismicH.asHTML(prismicDefaultFields.description3),

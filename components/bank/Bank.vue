@@ -54,7 +54,7 @@
         <div class="contain">
           <div class="flex flex-col md:flex-row md:justify-between md:items-start pt-8 pb-16 w-full">
             <!-- Text Container -->
-            <div :class="layoutType === BankLayoutGreatGoodOkUnknown ? 'md:w-3/6' : 'w-full'">
+            <div :class="layoutType === BankLayoutGood ? 'md:w-3/6' : 'w-full'">
               <div
                 class="text-lg md:text-2xl tracking-wide mb-4 prose"
                 v-html="description2"
@@ -70,7 +70,7 @@
 
             <!-- Image Container -->
             <img
-              v-if="layoutType === BankLayoutGreatGoodOkUnknown"
+              v-if="layoutType === BankLayoutGood"
               class="md:order-first md:w-2/6 md:ml-4"
               src="/img/illustrations/dig.svg"
               alt=""
@@ -91,7 +91,7 @@
     </template>
 
     <template
-      v-if="layoutType === BankLayoutGreatGoodOkUnknown"
+      v-if="layoutType === BankLayoutGood"
       #footer-image
     >
       <div class="flex items-end justify-end pointer-events-none">
@@ -108,8 +108,8 @@ import { defineProps, computed } from 'vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
 // Import the layout components
-import BankLayoutBadWorst from '@/components/bank/BankLayoutBadWorst.vue'
-import BankLayoutGreatGoodOkUnknown from '@/components/bank/BankLayoutGreatGoodOkUnknown.vue'
+import BankLayoutBad from '@/components/bank/BankLayoutBad.vue'
+import BankLayoutGood from '@/components/bank/BankLayoutGood.vue'
 
 // Props definition
 const props = defineProps<{
@@ -135,12 +135,12 @@ const layoutType = computed(() => {
   switch (props.rating) {
     case 'worst':
     case 'bad':
-      return BankLayoutBadWorst
     case 'ok':
+      return BankLayoutBad
     case 'good':
     case 'great':
     default:
-      return BankLayoutGreatGoodOkUnknown
+      return BankLayoutGood
   }
 })
 </script>

@@ -68,7 +68,10 @@
     </div>
 
     <!-- SECTION THREE -->
-    <div id="section-three" class="relative bg-blue-100">
+    <div
+      id="section-three"
+      class="relative bg-blue-100"
+    >
       <Swoosh direction="down" />
       <img
         class="relative inline-block mb-4"
@@ -81,9 +84,15 @@
     </div>
 
     <!-- CALL TO ACTION -->
-    <div id="call-to-action" class="bg-blue-100 pb-8 pt-8">
+    <div
+      id="call-to-action"
+      class="bg-blue-100 pb-8 pt-8"
+    >
       <div class="contain flex flex-col justify-center items-center">
-        <CallToAction :light="true" :spaced="true" />
+        <CallToAction
+          :light="true"
+          :spaced="true"
+        />
       </div>
     </div>
 
@@ -128,5 +137,4 @@ import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInVi
 import Swoosh from '@/components/Swoosh.vue'
 import CallToAction from '@/components/CallToAction.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-
 </script>
