@@ -1517,6 +1517,85 @@ export type FaqpageDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *Glossary → Terms*
+ */
+export interface GlossarypageDocumentDataTermsItem {
+  /**
+   * Term field in *Glossary → Terms*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: glossarypage.terms[].term
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  term: prismic.KeyTextField;
+
+  /**
+   * Definition field in *Glossary → Terms*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: glossarypage.terms[].definition
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  definition: prismic.RichTextField;
+}
+
+/**
+ * Content for Glossary documents
+ */
+interface GlossarypageDocumentData {
+  /**
+   * Title field in *Glossary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: glossarypage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Introduction field in *Glossary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: glossarypage.introduction
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  introduction: prismic.RichTextField;
+
+  /**
+   * Terms field in *Glossary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: glossarypage.terms[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  terms: prismic.GroupField<Simplify<GlossarypageDocumentDataTermsItem>>;
+}
+
+/**
+ * Glossary document from Prismic
+ *
+ * - **API ID**: `glossarypage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type GlossarypageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<GlossarypageDocumentData>,
+    "glossarypage",
+    Lang
+  >;
+
+/**
  * Item in *GreenPolicyEvaluatorPage → Key Points Items*
  */
 export interface GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem {
@@ -3544,6 +3623,7 @@ export type AllDocumentTypes =
   | EcobankspageDocument
   | EmbracepageDocument
   | FaqpageDocument
+  | GlossarypageDocument
   | GreenpolicyevaluatorpageDocument
   | HomepageDocument
   | MethodologyDocument
@@ -4487,6 +4567,8 @@ declare module "@prismicio/client" {
       EmbracepageDocumentData,
       FaqpageDocument,
       FaqpageDocumentData,
+      GlossarypageDocument,
+      GlossarypageDocumentData,
       GreenpolicyevaluatorpageDocument,
       GreenpolicyevaluatorpageDocumentData,
       HomepageDocument,

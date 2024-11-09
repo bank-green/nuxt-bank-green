@@ -42,9 +42,8 @@
           class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6"
           v-html="headline"
         />
-        <div
-          class="prose sm:prose-lg xl:prose-xl prose-blurb"
-          v-html="description1"
+        <BankDescription
+          :text="description1"
         />
       </div>
     </template>
@@ -55,14 +54,12 @@
           <div class="flex flex-col md:flex-row md:justify-between md:items-start pt-8 pb-16 w-full">
             <!-- Text Container -->
             <div :class="layoutType === BankLayoutGood ? 'md:w-3/6' : 'w-full'">
-              <div
-                class="text-lg md:text-2xl tracking-wide mb-4 prose"
-                v-html="description2"
+              <BankDescription :text="description2" />
+              <BankDescription
+                class="md:text-xl"
+                :text="description3"
               />
-              <div
-                class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-6"
-                v-html="description3"
-              />
+
               <div class="flex justify-center mt-6">
                 <ArrowDownBounce class="inline-block w-10" />
               </div>
