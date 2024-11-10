@@ -6,26 +6,41 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { terms } from '../../utils/glossary.js'
+import { onMounted, watch, ref } from 'vue'
 
-// Define props for the component
-const props = defineProps<{
-  text: string
-}>()
+const props = defineProps<{ text: string }>()
+const processedText = ref(props.text) // Default to initial text
 
-// Computed property to process text and replace terms with tooltips
-const processedText = computed(() => {
-  let modifiedText = props.text
-  terms.forEach((term) => {
-    const regex = new RegExp(`\\b${term.name}\\b`, 'gi') // Create a regex to match the term case-insensitively
-    modifiedText = modifiedText.replace(regex, `<a href="/glossary" class="tooltip" data-tooltip="${term.tooltip}">${term.name}</a>`)
-  })
-  return modifiedText
+const { client } = usePrismic()
+const { data: glossarypage } = await useAsyncData('glossary', () => client.getSingle('glossarypage'))
+usePrismicSEO(glossarypage?.value?.data)
+
+onMounted(async () => {
+  const glossaryData = glossarypage?.value?.data
+  if (glossaryData?.terms) {
+    const terms = glossaryData.terms.map(term => ({
+      name: term.term,
+      tooltip: term.tooltip,
+    }))
+    updateText(props.text, terms)
+  }
 })
+
+watch(() => props.text, (newText) => {
+  updateText(newText, glossaryData?.terms)
+})
+
+function updateText(text, terms) {
+  let modifiedText = text
+  terms.forEach((term) => {
+    const regex = new RegExp(`\\b${term.name}\\b`, 'gi')
+    modifiedText = modifiedText.replace(regex, `<a href="/glossary#${term.name.toLowerCase()}" class="tooltip" data-tooltip="${term.tooltip}">${term.name}</a>`)
+  })
+  processedText.value = modifiedText
+}
 </script>
 
-<style scoped>
+<style>
 .tooltip {
   position: relative;
   cursor: pointer;
@@ -37,8 +52,8 @@ const processedText = computed(() => {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 20; /* Align the right edge of the tooltip with the right edge of the term */
+  transform: translateX(0%); /* No horizontal translation necessary */
   white-space: nowrap;
   background-color: rgba(0, 0, 0, 0.75);
   color: #fff;
@@ -48,6 +63,7 @@ const processedText = computed(() => {
   visibility: hidden;
   transition: opacity 0.2s;
   z-index: 100;
+  font-size: small;
 }
 
 .tooltip:hover::after {

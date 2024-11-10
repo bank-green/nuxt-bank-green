@@ -1539,6 +1539,16 @@ export interface GlossarypageDocumentDataTermsItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   definition: prismic.RichTextField;
+
+  /**
+   * tooltip field in *Glossary → Terms*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: glossarypage.terms[].tooltip
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tooltip: prismic.KeyTextField;
 }
 
 /**
