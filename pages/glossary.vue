@@ -36,7 +36,7 @@ const { data: glossarypage } = await useAsyncData('glossary', () => client.getSi
 usePrismicSEO(glossarypage?.value?.data)
 
 const glossaryData = glossarypage?.value?.data
-let glossaryTerms = terms
+let glossaryTerms = []
 if (glossaryData?.terms) {
   glossaryTerms = glossaryData.terms.map(term => ({
     name: term.term,

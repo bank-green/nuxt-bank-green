@@ -52,8 +52,7 @@ function updateText(text, terms) {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 100%;
-  right: 20; /* Align the right edge of the tooltip with the right edge of the term */
-  transform: translateX(0%); /* No horizontal translation necessary */
+  right: 0; /* Align the right edge of the tooltip with the right edge of the term */
   white-space: nowrap;
   background-color: rgba(0, 0, 0, 0.75);
   color: #fff;
