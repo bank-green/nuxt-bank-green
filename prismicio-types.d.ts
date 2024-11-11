@@ -899,7 +899,10 @@ export type DonationpageDocument<Lang extends string = string> =
     Lang
   >;
 
-type EcobankspageDocumentDataSlicesSlice = AccordionSliceSlice | TextSliceSlice;
+type EcobankspageDocumentDataSlicesSlice =
+  | AccordionSliceSlice
+  | TextSliceSlice
+  | ErrorFilterSliceSlice;
 
 type EcobankspageDocumentDataSlices1Slice =
   | AccordionSliceSlice
@@ -3797,6 +3800,51 @@ export type EmbedSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ErrorFilterSlice → Primary*
+ */
+export interface ErrorFilterSliceSliceDefaultPrimary {
+  /**
+   * Title field in *ErrorFilterSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: error_filter_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ErrorFilterSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ErrorFilterSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ErrorFilterSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ErrorFilterSlice*
+ */
+type ErrorFilterSliceSliceVariation = ErrorFilterSliceSliceDefault;
+
+/**
+ * ErrorFilterSlice Shared Slice
+ *
+ * - **API ID**: `error_filter_slice`
+ * - **Description**: ErrorFilterSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ErrorFilterSliceSlice = prismic.SharedSlice<
+  "error_filter_slice",
+  ErrorFilterSliceSliceVariation
+>;
+
+/**
  * Primary content in *FeaturedInSlice → Primary*
  */
 export interface FeaturedInSliceSliceDefaultPrimary {
@@ -4533,6 +4581,9 @@ declare module "@prismicio/client" {
       EmbedSliceSlice,
       EmbedSliceSliceVariation,
       EmbedSliceSliceDefault,
+      ErrorFilterSliceSlice,
+      ErrorFilterSliceSliceVariation,
+      ErrorFilterSliceSliceDefault,
       FeaturedInSliceSlice,
       FeaturedInSliceSliceVariation,
       FeaturedInSliceSliceDefault,

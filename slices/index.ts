@@ -9,6 +9,9 @@ export const components = defineSliceZoneComponents({
   ),
   button_slice: defineAsyncComponent(() => import('./ButtonSlice/index.vue')),
   embed_slice: defineAsyncComponent(() => import('./EmbedSlice/index.vue')),
+  error_filter_slice: defineAsyncComponent(
+    () => import('./ErrorFilterSlice/index.vue')
+  ),
   featured_in_slice: defineAsyncComponent(
     () => import('./FeaturedInSlice/index.vue')
   ),
