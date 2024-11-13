@@ -4266,6 +4266,26 @@ export interface TableSliceSlice2ColumnsWithIconPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   column_2_header: prismic.KeyTextField;
+
+  /**
+   * Column 3 Header field in *TableSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.primary.column_3_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_3_header: prismic.KeyTextField;
+
+  /**
+   * Column 4 Header field in *TableSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.primary.column_4_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_4_header: prismic.KeyTextField;
 }
 
 /**
@@ -4301,6 +4321,26 @@ export interface TableSliceSlice2ColumnsWithIconItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   column_2: prismic.RichTextField;
+
+  /**
+   * Column 3 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_3
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_3: prismic.RichTextField;
+
+  /**
+   * Column 4 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_4
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_4: prismic.RichTextField;
 }
 
 /**
