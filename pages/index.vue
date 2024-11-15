@@ -10,8 +10,7 @@
             class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl"
           >
             {{
-              home?.data.title
-                || "Is your money being used to fund climate chaos?"
+              "Frank.Green is here to save the day"
             }}
           </h1>
           <div
