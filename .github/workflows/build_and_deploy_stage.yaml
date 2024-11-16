@@ -2,7 +2,7 @@ name: Build and Deploy Stage
 
 on:
   push:
-    branches: [stage]
+    branches: [staging-test]
 
 jobs:
   build:
