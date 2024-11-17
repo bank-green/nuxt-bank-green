@@ -21,3 +21,4 @@ name = "website-staging"
 main = "./.output/server/index.mjs"
 workers_dev = true
 account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
+route = "pr-*.website-staging.bank-green.workers.dev"
