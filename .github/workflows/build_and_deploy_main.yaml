@@ -42,8 +42,11 @@ jobs:
         with:
           # git-branch input
           git-branch: ${{ github.ref_name }}
-
-      - name: Build Main Alias
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+      - name: Build Main Alias with Hugo
         # branch-alias output
         run: |
           hugo \
