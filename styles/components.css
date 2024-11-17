@@ -168,7 +168,7 @@ a.button-green {
 }
 
 .prose-blurb a {
-  @apply text-sm font-normal no-underline text-sushi-500 hover:text-sushi-600;
+  @apply text-sm md:text-lg font-normal no-underline text-sushi-500 hover:text-sushi-600;
 }
 
 .filter-grayscale {

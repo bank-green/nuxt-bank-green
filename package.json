@@ -52,6 +52,8 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
+    "@prismicio/helpers": "^2.0.0",
+    "lock": "^1.1.0",
     "nuxt-jsonld": "^2.0.8",
     "swiper": "^11.1.14",
     "vue-turnstile": "^1.0.9"
