@@ -43,15 +43,12 @@ jobs:
       - name: Deploy PR Preview
         if: github.event.action != 'closed'
         run: |
-          wrangler pages deploy ./dist --project-name=website-staging \
-          --branch=${{ steps.branch-alias.outputs.branch-alias }}
-          --env preview
+          wrangler publish --env preview --route ${{ steps.branch-alias.outputs.branch-alias }}.website-staging.bank-green.workers.dev
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Cleanup on PR Close
         if: github.event.action == 'closed'
         run: |
-          wrangler pages deployment delete --project-name=website-staging \
-          --branch=${{ steps.branch-alias.outputs.branch-alias }}
+          wrangler route delete ${{ steps.branch-alias.outputs.branch-alias }}.website-staging.bank-green.workers.dev
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
