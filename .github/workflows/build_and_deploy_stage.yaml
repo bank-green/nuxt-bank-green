@@ -1,8 +1,6 @@
 name: Build and Deploy Stage
 
-on:
-  push:
-    branches: [stage]
+on: pull_request
 
 jobs:
   build:
@@ -42,7 +40,10 @@ jobs:
         with:
           # git-branch input
           git-branch: ${{ github.ref_name }}
-
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
       - name: Build Stage Alias
         # branch-alias output
         run: |
