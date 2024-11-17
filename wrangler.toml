@@ -9,11 +9,11 @@ route = { pattern = "bank.green", custom_domain = true }
 bucket = ".output/public"
 
 name = "website-staging"
-main = "./.output/server/index.mjs"
 account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
 
 [env.staging]
 workers_dev = false
+main = "./.output/server/index.mjs"
 compatibility_date = "2022-09-10"
 route = { pattern = "test.bank.green", custom_domain = true }
 
