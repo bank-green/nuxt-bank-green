@@ -16,4 +16,8 @@ compatibility_date = "2022-09-10"
 account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
 route = { pattern = "test.bank.green", custom_domain = true }
 
+[env.staging]
+name = "website-staging"
+workers_dev = true
+account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
 pages_build_output_dir = "dist"
