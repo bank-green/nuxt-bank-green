@@ -10,9 +10,9 @@ bucket = ".output/public"
 
 [env.staging]
 name = "website-staging"
-account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
-workers_dev = false
 main = "./.output/server/index.mjs"
+workers_dev = false
+account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
 compatibility_date = "2022-09-10"
 route = { pattern = "test.bank.green", custom_domain = true }
 
