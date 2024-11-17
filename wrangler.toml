@@ -15,3 +15,5 @@ workers_dev = false
 compatibility_date = "2022-09-10"
 account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
 route = { pattern = "test.bank.green", custom_domain = true }
+
+pages_build_output_dir = "dist"

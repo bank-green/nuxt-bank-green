@@ -43,7 +43,7 @@ jobs:
       - name: Deploy PR Preview
         if: github.event.action != 'closed'
         run: |
-          wrangler pages deploy ./ --project-name=website-staging \
+          wrangler pages deploy ./dist --project-name=website-staging \
           --branch=${{ steps.branch-alias.outputs.branch-alias }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
