@@ -18,6 +18,6 @@ route = { pattern = "test.bank.green", custom_domain = true }
 
 [env.preview]
 name = "website-staging"
-account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
+main = "./.output/server/index.mjs"
 workers_dev = true
-pages_build_output_dir = "dist"
+account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
