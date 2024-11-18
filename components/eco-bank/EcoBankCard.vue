@@ -2,10 +2,10 @@
 <template>
   <NuxtLink
     :to="link"
-    class="block mb-6 rounded-2xl bg-white border border-gray-200 hover:border-sushi-500 shadow-sm transition duration-150 ease-in-out"
+    class="block p-6 pb-4 mb-6 rounded-2xl bg-white border border-gray-200 hover:border-sushi-500 shadow-sm transition duration-150 ease-in-out"
   >
     <div
-      class="flex items-center justify-between py-3 pl-4 pr-5"
+      class="flex items-center justify-between mb-6"
     >
       <div
         v-if="item"
@@ -29,6 +29,29 @@
       </div>
     </div>
 
+    <!-- TODO use backend data -->
+    <dl class="grid grid-cols-3">
+      <div class="flex flex-col gap-1">
+        <dt class="text-gray-600 text-xs">
+          Interest Rate
+        </dt>
+        <dd class="text-base text-primary-dark font-semibold truncate">
+          {{ item.interestRate || 'No information' }}
+        </dd>
+      </div>
+
+      <div class="col-span-2 flex flex-col gap-1">
+        <dt class="text-gray-600 text-xs">
+          Deposit Protection
+        </dt>
+        <dd class="text-base text-primary-dark font-semibold">
+          {{ item.depositProtection || 'No information' }}
+        </dd>
+      </div>
+    </dl>
+
+    <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200">
+
     <div
       v-if="Object.keys(features).length"
       class="py-4 px-7 flex flex-wrap"
@@ -49,6 +72,10 @@ interface Item {
   topPick: boolean
   website: string
   bankFeatures: BankFeature[]
+
+  // TODO: possibly new backend data
+  interestRate: string
+  depositProtection: string
 }
 
 const props = defineProps<{
