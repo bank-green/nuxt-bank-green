@@ -1,7 +1,6 @@
 <!-- TODO: in claudia/groot-300-update-card-views-mobile-and-desktop -->
 <template>
-  <NuxtLink
-    :to="link"
+  <div
     class="block p-6 pb-4 mb-6 rounded-2xl bg-white border border-gray-200 hover:border-sushi-500 shadow-sm transition duration-150 ease-in-out"
   >
     <div
@@ -44,7 +43,7 @@
         <dt class="text-gray-600 text-xs">
           Deposit Protection
         </dt>
-        <dd class="text-base text-primary-dark font-semibold">
+        <dd class="text-base text-primary-dark font-semibold truncate">
           {{ item.depositProtection || 'No information' }}
         </dd>
       </div>
@@ -59,7 +58,32 @@
       <EcoBankFeaturesList :features="features" />
     </div>
 
-  </NuxtLink>
+    <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200">
+
+    <NuxtLink
+      :to="link"
+      class="w-fit ml-auto mr-0 flex gap-2 items-center"
+    >
+      <span class="text-sm text-primary-dark font-medium">Learn more</span>
+
+      <svg
+        width="27"
+        height="27"
+        viewBox="0 0 27 27"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.2993 20.041L16.9794 13.361L10.2993 6.68094"
+          stroke="currentColor"
+          stroke-width="1.78134"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+    </NuxtLink>
+  </div>
 </template>
 
 <script setup lang="ts">
