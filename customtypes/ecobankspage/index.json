@@ -3,7 +3,6 @@
   "label": "EcoBanksPage",
   "repeatable": false,
   "status": true,
-  "format": "custom",
   "json": {
     "Main": {
       "seo_title": {
@@ -20,8 +19,7 @@
         "config": {
           "choices": {
             "accordion_slice": { "type": "SharedSlice" },
-            "text_slice": { "type": "SharedSlice" },
-            "error_filter_slice": { "type": "SharedSlice" }
+            "text_slice": { "type": "SharedSlice" }
           }
         }
       }
@@ -38,5 +36,6 @@
         }
       }
     }
-  }
+  },
+  "format": "custom"
 }
