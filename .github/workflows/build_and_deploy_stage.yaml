@@ -1,8 +1,6 @@
 name: Build and Deploy Stage
 
-on:
-  push:
-    branches: [stage]
+on: pull_request
 
 jobs:
   build:
@@ -34,18 +32,19 @@ jobs:
         with:
           node-version: "18.x"
       - run: npm ci
-      - run: npm i -g wrangler
-      - run: npm run build
-      - run: npm run publish
-      - uses: schnerring/cloudflare-pages-branch-alias-action@v1
-        id: pages-branch-alias
-        with:
-          # git-branch input
-          git-branch: ${{ github.ref_name }}
-
-      - name: Build Stage Alias
-        # branch-alias output
+      - name: Install Wrangler
+        run: npm i -g wrangler
+      - name: Build
+        run: npm run build
+      - name: Deploy PR Preview
+        if: github.event.action != 'closed'
         run: |
-          hugo \
-            --minify \
-            --baseURL "https://${{ steps.pages-branch-alias.outputs.branch-alias }}.website-staging.bank-green.workers.dev"
+          wrangler deploy --env preview --route pr-${{ github.event.pull_request.number }}.website-staging.bank-green.workers.dev
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Cleanup on PR Close
+        if: github.event.action == 'closed'
+        run: |
+          wrangler route delete ${{ github.event.pull_request.number }}.website-staging.bank-green.workers.dev
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
