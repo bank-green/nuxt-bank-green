@@ -222,7 +222,7 @@ export async function getBankDetail(bankTag) {
   return bank
 }
 
-export async function getDefaultFields(rating, bankname) {
+export async function getDefaultFields(rating, bankname, institutionType) {
   if (!bankname) {
     bankname = 'this bank'
   }
@@ -236,7 +236,12 @@ export async function getDefaultFields(rating, bankname) {
     description4: '',
   }
   try {
-    const prismicData = await useBankPage(rating + 'bank')
+    var prismicData = await useBankPage(rating + 'bank')
+    if (rating === 'unknown' && (institutionType === 'Building Society' || institutionType === 'CDFI')) {
+      prismicData = await useBankPage('SFIDefaults')
+    } else {
+      prismicData = await useBankPage(rating + 'bank')
+    }
     const prismicDefaultFields = prismicData?.bankPage?.data
     if (prismicDefaultFields) {
       defaults = {
