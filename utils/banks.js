@@ -237,8 +237,8 @@ export async function getDefaultFields(rating, bankname, institutionType) {
   }
   try {
     var prismicData = await useBankPage(rating + 'bank')
-    if (rating === 'unknown' && (institutionType === 'Building Society' || institutionType === 'CDFI')) {
-      prismicData = await useBankPage('SFIDefaults')
+    if (rating === 'unknown') {
+      prismicData = await useBankPage('unknownbank' + institutionType.toLowerCase().replace(' ', ''))
     } else {
       prismicData = await useBankPage(rating + 'bank')
     }
