@@ -238,7 +238,7 @@ export async function getDefaultFields(rating, bankname, institutionType) {
   try {
     var prismicData = await useBankPage(rating + 'bank')
     if (rating === 'unknown') {
-      prismicData = await useBankPage('unknownbank' + institutionType.toLowerCase().replace(' ', ''))
+      prismicData = await useBankPage('unknownbank-' + institutionType.toLowerCase().replace(' ', ''))
     } else {
       prismicData = await useBankPage(rating + 'bank')
     }
