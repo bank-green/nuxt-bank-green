@@ -61,10 +61,10 @@
                   :is-no-credit="isNoCredit"
                 />
               </div>
-              <PrismicRichText
+              <SliceZone
                 v-else-if="!loading&&errorMessage"
-                class="mt-20"
-                :field="filterError"
+                :slices="ecobanks?.data?.slices2 ?? []"
+                :components="sliceComps"
               />
             </div>
           </div>
@@ -90,7 +90,6 @@
 <script setup>
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-
 import { components } from '~~/slices'
 
 const sliceComps = ref(defineSliceZoneComponents(components))
@@ -106,8 +105,6 @@ const { data: ecobanks } = await useAsyncData('ecobanks', () =>
 )
 
 usePrismicSEO(ecobanks?.value?.data)
-
-const filterError = ecobanks?.value?.data?.slices.find(value => value.slice_type === 'error_filter_slice')?.primary?.title
 
 const { country } = useCountry()
 
