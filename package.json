@@ -48,6 +48,7 @@
     "slice-machine-ui": "^2.10.2",
     "stripe": "^12.8.0",
     "typescript": "^5.5.4",
+    "vite": "^6.0.0",
     "vite-plugin-eslint2": "^4.4.0",
     "vitest": "^1.4.0"
   },
