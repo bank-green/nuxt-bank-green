@@ -93,7 +93,7 @@
       />
       <button
         type="submit"
-        class="button-green w-full md:w-auto mt-2 flex justify-center"
+        class="button-green w-full md:w-auto mt-2 flex justify-center text-primary-dark"
         :class="{
           'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
         }"

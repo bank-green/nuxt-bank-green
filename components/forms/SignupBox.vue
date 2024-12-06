@@ -64,7 +64,7 @@
         </div>
         <button
           type="submit"
-          class="button-green w-full md:w-72 mt-6 md:text-lg flex justify-center"
+          class="button-green w-full md:w-72 mt-6 md:text-lg flex justify-center text-primary-dark"
           :class="{
             'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
           }"
