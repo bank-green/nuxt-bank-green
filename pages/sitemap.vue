@@ -19,11 +19,9 @@
   </div>
 </template>
 
-<script>
-export default {
-  async asyncData({ $axios }) {
-    const banks = await $axios.$get('https://example.com/api/banks')
-    return { banks }
-  },
-}
+<script setup lang="ts">
+import { useAsyncData } from 'nuxt/app'
+import { getAllBanksList } from '../utils/banks.js'
+
+const { data: banks } = useAsyncData('banks', getAllBanksList)
 </script>
