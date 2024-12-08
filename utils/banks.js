@@ -8,8 +8,13 @@ const options = {}
 
 async function callBackend(query, variables) {
   const queryParam = encodeURIComponent(query)
-  const variablesParam = encodeURIComponent(JSON.stringify(variables))
-  const url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
+  var url = ''
+  if (variables) {
+    const variablesParam = encodeURIComponent(JSON.stringify(variables))
+    url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
+  } else {
+    url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}`
+  }
   const res = await $fetch(url, options)
   return res
 }
@@ -43,6 +48,26 @@ const bankFeaturesFields = `{
     }
     details
 }`
+
+export async function getAllBanksList() {
+  const query = `
+    query BrandsQuery {
+      brands {
+        edges {
+          node {
+            name
+            tag
+          }
+        }
+      }
+    }`
+
+  // Execute the GraphQL query
+  const json = await callBackend(query)
+
+  // Extract and return the name and tag from the response
+  return json.data.brands.edges.map(o => ({ name: o.node.name, tag: o.node.tag }))
+}
 
 export async function getBanksList({
   country,
