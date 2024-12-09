@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@prismicio/helpers": "^2.0.0",
+    "esbuild": "^0.24.0",
     "lock": "^1.1.0",
     "nuxt-jsonld": "^2.0.8",
     "rollup": "^4.28.1",
