@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="bg-white">
-      <div class="page-fade-in pt-28 ml-28 mt-8">
+      <div class="page-fade-in pt-28 ml-28 mt-16">
         <ul>
           <li
             v-for="bank in banks"
