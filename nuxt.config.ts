@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     '/sustainable-ethical-banks': { redirect: '/sustainable-eco-banks' },
     '/': { prerender: true },
     '/faq': { prerender: true },
+    '/sitemap': { prerender: true },
   },
   app: {
     head: {
