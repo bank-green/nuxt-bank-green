@@ -141,11 +141,11 @@
               </div>
               <button
                 type="submit"
-                class="button-green w-full md:w-auto mt-12 flex justify-center"
+                class="button-green w-full md:w-auto mt-12 flex justify-center "
               >
                 <PrismicText
                   wrapper="span"
-                  class="text-2xl font-semibold"
+                  class="text-2xl font-semibold text-primary-dark"
                   :field="donation?.data.donation_button"
                   fallback="Donate Now"
                 />

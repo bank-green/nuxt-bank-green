@@ -91,7 +91,7 @@
           </div>
           <button
             type="submit"
-            class="button-green mt-6 md:w-48 flex justify-center"
+            class="button-green mt-6 md:w-48 flex justify-center text-primary-dark"
             :class="{
               'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
 

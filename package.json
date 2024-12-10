@@ -56,6 +56,7 @@
     "axios": "^1.7.9",
     "lock": "^1.1.0",
     "nuxt-jsonld": "^2.0.8",
+    "rollup": "^4.28.1",
     "swiper": "^11.1.14",
     "vue-turnstile": "^1.0.9"
   },

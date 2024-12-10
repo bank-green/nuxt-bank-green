@@ -35,7 +35,7 @@
     >
       <NuxtLink
         to="/sustainable-eco-banks"
-        class="button-green w-auto"
+        class="button-green w-auto text-primary-dark"
       >
         Move Your Money Today
       </NuxtLink>
