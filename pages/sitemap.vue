@@ -7,9 +7,7 @@
             v-for="bank in banks"
             :key="bank.tag"
           >
-            <a
-              href="`/banks/${bank.tag}`"
-            >{{ bank.name }}</a>
+            <a :href="`/banks/${bank.tag}`">{{ bank.name }}</a>
           </li>
         </ul>
       </div>
