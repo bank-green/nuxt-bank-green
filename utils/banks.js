@@ -6,7 +6,7 @@ import { useBankPage } from './prismic/bankpage'
 const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
 
-async function callBackend(query, variables) {
+export async function callBackend(query, variables) {
   const queryParam = encodeURIComponent(query)
   var url = ''
   if (variables) {

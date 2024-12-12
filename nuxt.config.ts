@@ -7,7 +7,17 @@ export default defineNuxtConfig({
     '@nuxt/test-utils/module',
     '@nuxt/eslint',
     '@stefanobartoletti/nuxt-social-share',
+    '@nuxtjs/sitemap',
   ],
+  site: { url: 'https://bank.green' },
+  sitemap: {
+    sources: ['/api/site-pages'],
+    defaults: {
+      lastmod: new Date().toISOString(),
+      priority: 0.5,
+      changefreq: 'weekly',
+    },
+  },
   prismic: {
     endpoint: 'bankgreen',
   },
@@ -53,9 +63,10 @@ export default defineNuxtConfig({
   css: ['@/styles/style.css', '@typeform/embed/build/css/widget.css'],
   routeRules: {
     '/sustainable-ethical-banks': { redirect: '/sustainable-eco-banks' },
-    '/': { prerender: true },
-    '/faq': { prerender: true },
-    '/sitemap': { prerender: true },
+  },
+  ssr: true,
+  generate: {
+    routes: ['/', '/faq', '/sitemap', '/sitemap.xml', '/api/site-pages'],
   },
   app: {
     head: {
@@ -190,4 +201,5 @@ export default defineNuxtConfig({
   socialShare: {
     baseUrl: process.env.PUBLIC_DOMAIN_URL,
   },
+
 })
