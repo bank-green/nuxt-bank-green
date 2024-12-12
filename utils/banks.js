@@ -57,16 +57,16 @@ export async function getAllBanksList() {
           node {
             name
             tag
+            commentary {
+              showOnSustainableBanksPage
+            }
           }
         }
       }
     }`
 
-  // Execute the GraphQL query
   const json = await callBackend(query)
-
-  // Extract and return the name and tag from the response
-  return json.data.brands.edges.map(o => ({ name: o.node.name, tag: o.node.tag }))
+  return json.data.brands.edges.map(o => ({ name: o.node.name, tag: o.node.tag, sustainable: o.node?.commentary?.showOnSustainableBanksPage }))
 }
 
 export async function getBanksList({
