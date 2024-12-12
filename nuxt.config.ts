@@ -64,10 +64,6 @@ export default defineNuxtConfig({
   routeRules: {
     '/sustainable-ethical-banks': { redirect: '/sustainable-eco-banks' },
   },
-  ssr: true,
-  generate: {
-    routes: ['/', '/faq', '/sitemap', '/sitemap.xml', '/api/site-pages'],
-  },
   app: {
     head: {
       meta: [
@@ -189,8 +185,14 @@ export default defineNuxtConfig({
     none: {},
     prismic: {},
   },
+  ssr: true,
   nitro: {
     preset: 'cloudflare',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/sitemap', '/sitemap.xml'],
+      ignore: ['/team', '/team/*', '/banks/undefined'],
+    },
   },
   eslint: {
     checker: false,
