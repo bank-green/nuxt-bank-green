@@ -6,10 +6,15 @@ import { useBankPage } from './prismic/bankpage'
 const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
 
-async function callBackend(query, variables) {
+export async function callBackend(query, variables) {
   const queryParam = encodeURIComponent(query)
-  const variablesParam = encodeURIComponent(JSON.stringify(variables))
-  const url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
+  var url = ''
+  if (variables) {
+    const variablesParam = encodeURIComponent(JSON.stringify(variables))
+    url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}&variables=${variablesParam}`
+  } else {
+    url = `${useRuntimeConfig().public.DATA_URL || gqlUrl}?query=${queryParam}`
+  }
   const res = await $fetch(url, options)
   return res
 }
@@ -43,6 +48,26 @@ const bankFeaturesFields = `{
     }
     details
 }`
+
+export async function getAllBanksList() {
+  const query = `
+    query BrandsQuery {
+      brands {
+        edges {
+          node {
+            name
+            tag
+            commentary {
+              showOnSustainableBanksPage
+            }
+          }
+        }
+      }
+    }`
+
+  const json = await callBackend(query)
+  return json.data.brands.edges.map(o => ({ name: o.node.name, tag: o.node.tag, sustainable: o.node?.commentary?.showOnSustainableBanksPage }))
+}
 
 export async function getBanksList({
   country,

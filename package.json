@@ -52,6 +52,7 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
+    "@nuxtjs/sitemap": "^7.0.0",
     "@prismicio/helpers": "^2.0.0",
     "axios": "^1.7.9",
     "lock": "^1.1.0",
