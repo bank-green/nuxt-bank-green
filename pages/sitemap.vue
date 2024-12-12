@@ -8,9 +8,7 @@
             :key="bank.tag"
           >
             <a
-              :href="`/banks/${bank.tag}`"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="`/banks/${bank.tag}`"
             >{{ bank.name }}</a>
           </li>
         </ul>
