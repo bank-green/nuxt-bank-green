@@ -23,7 +23,7 @@ import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
 
 const route = useRoute()
-const bankTag = route.params.bankTag?.toLowerCase()
+const bankTag = (route.params.bankTag as string)?.toLowerCase()
 const details = ref(await getBankDetail(bankTag))
 const bankData = details.value
 
