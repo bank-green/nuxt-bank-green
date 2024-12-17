@@ -4,8 +4,8 @@
       <div class="page-fade-in pt-28 ml-28 mt-16">
         <ul>
           <li v-for="bank in banks" :key="bank.tag">
-            <a :href="`/banks/${bank.tag}`">{{ bank.name }}</a>
-            <a v-if="bank.sustainable" :href="`/sustainable-eco-banks/${bank.tag}`">{{ bank.name }}</a>
+            <p><a :href="`/banks/${bank.tag}`">{{ bank.name }}</a></p>
+            <p><a v-if="bank.sustainablenksPage" :href="`/sustainable-eco-banks/${bank.tag}`">{{ bank.name }}</a></p>
           </li>
         </ul>
       </div>
