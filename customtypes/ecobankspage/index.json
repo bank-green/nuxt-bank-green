@@ -3,23 +3,34 @@
   "label": "EcoBanksPage",
   "repeatable": false,
   "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "seo_title": {
         "type": "Text",
-        "config": { "label": "SEO Title", "placeholder": "" }
+        "config": {
+          "label": "SEO Title",
+          "placeholder": ""
+        }
       },
       "seo_description": {
         "type": "Text",
-        "config": { "label": "SEO Description", "placeholder": "" }
+        "config": {
+          "label": "SEO Description",
+          "placeholder": ""
+        }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "accordion_slice": { "type": "SharedSlice" },
-            "text_slice": { "type": "SharedSlice" }
+            "accordion_slice": {
+              "type": "SharedSlice"
+            },
+            "text_slice": {
+              "type": "SharedSlice"
+            }
           }
         }
       }
@@ -30,12 +41,28 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "accordion_slice": { "type": "SharedSlice" },
-            "text_slice": { "type": "SharedSlice" }
+            "accordion_slice": {
+              "type": "SharedSlice"
+            },
+            "text_slice": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "ErrorNotFound": {
+      "slices2": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "error_message": {
+              "type": "SharedSlice"
+            }
           }
         }
       }
     }
-  },
-  "format": "custom"
+  }
 }
