@@ -7,7 +7,7 @@
       :inherit-brand-rating="bankData.inheritBrandRating ?? undefined"
       :fossil-free-alliance="!!bankData.fossilFreeAlliance"
       :rating="bankData.rating"
-      :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
+      :show-embrace-breakup="!!bankData.countries?.find(c => c?.code === 'GB')"
       :last-reviewed="bankData.lastReviewed"
       :style="bankData.style"
       :headline="getFieldOrDefault('headline')"
@@ -31,9 +31,12 @@ const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
 const defaultFields = ref()
 const { client } = usePrismic()
 
-const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
+const getRating = ({
+  commentary,
+}: NonNullable<BrandByTagQueryQuery['brand']>): string => {
   const inheritedRating = commentary?.ratingInherited?.toLocaleLowerCase()
-  const isCreditUnion = commentary?.institutionType?.[0]?.name === 'Credit Union'
+  const isCreditUnion =
+    commentary?.institutionType?.[0]?.name === 'Credit Union'
   const isRatingUnknown = commentary?.rating === 'unknown'
 
   // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
@@ -43,35 +46,47 @@ const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): 
   return inheritedRating || ''
 }
 
-const { data: bankData } = await useAsyncGql('BrandByTagQuery',
+const { data: bankData } = await useAsyncGql(
+  'BrandByTagQuery',
   { tag: bankTag.value },
-  { transform: ({ brand }) => brand
-    ? ({
-        ...brand,
-        ...brand.commentary,
-        bankFatures: brand.bankFeatures,
-        inheritBrandRating: brand.commentary?.inheritBrandRating,
-        rating: getRating(brand),
-        // FIXME: where is 'style' suppose to come from?
-        style: undefined,
-      })
-    : undefined,
-  },
+  {
+    transform: ({ brand }) =>
+      brand
+        ? {
+            ...brand,
+            ...brand.commentary,
+            bankFatures: brand.bankFeatures,
+            inheritBrandRating: brand.commentary?.inheritBrandRating,
+            rating: getRating(brand),
+            // FIXME: where is 'style' suppose to come from?
+            style: undefined,
+          }
+        : undefined,
+  }
 )
 
 useHeadHelper(
-  bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
-  'Find and compare the service offerings of ethical and sustainable banks.',
+  bankData.value?.name
+    ? `${bankData.value.name}'s Climate Score - Bank.Green`
+    : '',
+  'Find and compare the service offerings of ethical and sustainable banks.'
 )
 
 if (bankData.value) {
   useHeadRating(bankData.value.rating)
   const institutionType = bankData.value.institutionType?.[0]?.name || ''
-  defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
+  defaultFields.value = await getDefaultFields(
+    client,
+    bankData.value.rating,
+    bankData.value.name,
+    institutionType
+  )
 }
 
 const getFieldOrDefault = (fieldName: string) => {
-  const trimmedText = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  const trimmedText = bankData.value[fieldName]
+    ?.replace(/<\/?[^>]+(>|$)/g, '')
+    .trim()
   if (trimmedText) {
     return bankData.value[fieldName] || defaultFields.value[fieldName]
   } else {
