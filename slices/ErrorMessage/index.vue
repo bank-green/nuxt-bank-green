@@ -18,7 +18,9 @@ defineProps(
     :data-slice-type="slice.slice_type"
     :data-slice-variation="slice.variation"
   >
-    {{ slice.primary.title }}
+    <h3 class="font-semibold md:!text-lg text-black-700 mr-4">
+      {{ slice.primary.title }}
+    </h3>
     <PrismicRichText :field="slice.primary.content" />
   </section>
 </template>
