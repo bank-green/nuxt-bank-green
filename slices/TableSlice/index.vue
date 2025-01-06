@@ -64,6 +64,18 @@
             >
               <PrismicRichText :field="row.column_2" />
             </td>
+            <td
+              v-if="row.column_3"
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+            >
+              <PrismicRichText :field="row.column_3" />
+            </td>
+            <td
+              v-if="row.column_4"
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4"
+            >
+              <PrismicRichText :field="row.column_4" />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -105,6 +117,28 @@
               <PrismicRichText
                 class="font-semibold"
                 :field="row.column_2"
+              />
+            </dd>
+          </div>
+          <div>
+            <dt class="text-sm text-gray-700">
+              {{ slice.primary.column_3_header }}
+            </dt>
+            <dd>
+              <PrismicRichText
+                class="font-semibold"
+                :field="row.column_3"
+              />
+            </dd>
+          </div>
+          <div>
+            <dt class="text-sm text-gray-700">
+              {{ slice.primary.column_4_header }}
+            </dt>
+            <dd>
+              <PrismicRichText
+                class="font-semibold"
+                :field="row.column_4"
               />
             </dd>
           </div>
