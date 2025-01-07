@@ -3637,7 +3637,8 @@ export type AllDocumentTypes =
   | TextonlypagesDocument
   | ThankspagesDocument
   | ThankspledgeDocument
-  | VolunteerspageDocument;
+  | VolunteerspageDocument
+  | OnepagerDocument;
 
 /**
  * Primary content in *AccordionSlice → Rich Text → Primary*
@@ -4569,6 +4570,102 @@ export type ThanksSliceSlice = prismic.SharedSlice<
   ThanksSliceSliceVariation
 >;
 
+/**
+ * Content for OnepagerPage documents
+ */
+interface OnepagerDocumentData {
+  /**
+   * Title field in *OnepagerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * button_1 field in *OnepagerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.button_1
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_1: prismic.KeyTextField;
+
+  /**
+   * url_1 field in *OnepagerPage*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.url_1
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url_1: prismic.LinkField;
+
+  /**
+   * button_2 field in *OnepagerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.button_2
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_2: prismic.KeyTextField;
+
+  /**
+   * url_2 field in *OnepagerPage*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.url_2
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  url_2: prismic.LinkField;
+
+  /**
+   * SEO Title field in *OnepagerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.seo_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_title: prismic.KeyTextField;
+
+  /**
+   * SEO Description field in *OnepagerPage*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.seo_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  seo_description: prismic.KeyTextField;
+}
+
+/**
+ * OnepagerPage document from Prismic
+ *
+ * - **API ID**: `onepagerpage`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type OnepagerDocument<Lang extends string = string> =
+    prismic.PrismicDocumentWithoutUID<
+        Simplify<OnepagerDocumentData>,
+        "onepagerpage",
+        Lang
+    >;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -4650,6 +4747,8 @@ declare module "@prismicio/client" {
       ThankspledgeDocumentData,
       VolunteerspageDocument,
       VolunteerspageDocumentData,
+      OnepagerDocument,
+      OnepagerDocumentData,
       AllDocumentTypes,
       AccordionSliceSlice,
       AccordionSliceSliceVariation,

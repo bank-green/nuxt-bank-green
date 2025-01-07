@@ -1,0 +1,24 @@
+{
+  "id": "onepagerpage",
+  "label": "OnepagerPage",
+  "repeatable": false,
+  "status": true,
+  "format": "custom",
+  "json": {
+    "Main": {
+      "title": { "type": "Text", "config": { "label": "Title" } },
+      "button_1": { "type": "Text", "config": { "label": "Button 1" } },
+      "url_1": { "type": "Link", "config": { "label": "Url 1", "select": null } },
+      "button_2": { "type": "Text", "config": { "label": "Button 2" } },
+      "url_2": { "type": "Link", "config": { "label": "Url 2", "select": null } },
+      "seo_title": {
+        "type": "Text",
+        "config": { "label": "SEO Title", "placeholder": "" }
+      },
+      "seo_description": {
+        "type": "Text",
+        "config": { "label": "SEO Description", "placeholder": "" }
+      }
+    }
+  }
+}
