@@ -4681,6 +4681,7 @@ interface OnepagersimpleDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
   /**
    * Title field in *OnepagersimplePage*
    *
