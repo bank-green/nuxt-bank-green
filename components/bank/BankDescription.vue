@@ -63,10 +63,19 @@ function updateText(text, terms) {
   transition: opacity 0.2s;
   z-index: 100;
   font-size: small;
+  max-width: 392px;
+  min-width: 350px;
+  white-space: normal;
 }
 
 .tooltip:hover::after {
   opacity: 1;
   visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .tooltip::after {
+    display: none; /* Disable tooltips on mobile */
+  }
 }
 </style>
