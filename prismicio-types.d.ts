@@ -157,6 +157,7 @@ interface AccreditationpageDocumentData {
   projects: prismic.GroupField<
     Simplify<AccreditationpageDocumentDataProjectsItem>
   > /**
+  > /**
    * Sharing Title field in *AccreditationPage*
    *
    * - **Field Type**: Text
@@ -4294,6 +4295,26 @@ export interface TableSliceSlice2ColumnsWithIconPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   column_2_header: prismic.KeyTextField;
+
+  /**
+   * Column 3 Header field in *TableSlice → 2 Columns with Icon → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.2ColumnsWithIcon.primary.column_3_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_3_header: prismic.KeyTextField;
+
+  /**
+   * Column 4 Header field in *TableSlice → 2 Columns with Icon → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.2ColumnsWithIcon.primary.column_4_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_4_header: prismic.KeyTextField;
 }
 
 /**
@@ -4329,6 +4350,26 @@ export interface TableSliceSlice2ColumnsWithIconItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   column_2: prismic.RichTextField;
+
+  /**
+   * Column 3 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_3
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_3: prismic.RichTextField;
+
+  /**
+   * Column 4 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_4
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_4: prismic.RichTextField;
 }
 
 /**
@@ -4345,11 +4386,125 @@ export type TableSliceSlice2ColumnsWithIcon = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *TableSlice → 4 Columns with Icon → Primary*
+ */
+export interface TableSliceSlice4ColumnsWithIconPrimary {
+  /**
+   * Column 1 Header field in *TableSlice → 4 Columns with Icon → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.4ColumnsWithIcon.primary.column_1_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_1_header: prismic.KeyTextField;
+
+  /**
+   * Column 2 Header field in *TableSlice → 4 Columns with Icon → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.4ColumnsWithIcon.primary.column_2_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_2_header: prismic.KeyTextField;
+
+  /**
+   * Column 3 Header field in *TableSlice → 4 Columns with Icon → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.4ColumnsWithIcon.primary.column_3_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_3_header: prismic.KeyTextField;
+
+  /**
+   * Column 4 Header field in *TableSlice → 4 Columns with Icon → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.4ColumnsWithIcon.primary.column_4_header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  column_4_header: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *TableSlice → Items*
+ */
+export interface TableSliceSlice4ColumnsWithIconItem {
+  /**
+   * Icon field in *TableSlice → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Column 1 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_1
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_1: prismic.RichTextField;
+
+  /**
+   * Column 2 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_2
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_2: prismic.RichTextField;
+
+  /**
+   * Column 3 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_3
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_3: prismic.RichTextField;
+
+  /**
+   * Column 4 field in *TableSlice → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table_slice.items[].column_4
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  column_4: prismic.RichTextField;
+}
+
+/**
+ * 4 Columns with Icon variation for TableSlice Slice
+ *
+ * - **API ID**: `4ColumnsWithIcon`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TableSliceSlice4ColumnsWithIcon = prismic.SharedSliceVariation<
+  "4ColumnsWithIcon",
+  Simplify<TableSliceSlice4ColumnsWithIconPrimary>,
+  Simplify<TableSliceSlice4ColumnsWithIconItem>
+>;
+
+/**
  * Slice variation for *TableSlice*
  */
 type TableSliceSliceVariation =
   | TableSliceSliceDefault
-  | TableSliceSlice2ColumnsWithIcon;
+  | TableSliceSlice2ColumnsWithIcon
+  | TableSliceSlice4ColumnsWithIcon;
 
 /**
  * TableSlice Shared Slice
@@ -4776,107 +4931,162 @@ declare module "@prismicio/client" {
     export type {
       AccordionitemDocument,
       AccordionitemDocumentData,
+      AccordionitemDocumentDataSlicesSlice,
       AccreditationpageDocument,
       AccreditationpageDocumentData,
+      AccreditationpageDocumentDataProjectsItem,
       BankpageDocument,
       BankpageDocumentData,
+      BankpageDocumentDataSlicesSlice,
       BlogpostDocument,
       BlogpostDocumentData,
+      BlogpostDocumentDataSlicesSlice,
       CalltoactionDocument,
       CalltoactionDocumentData,
       CertificationpageDocument,
       CertificationpageDocumentData,
+      CertificationpageDocumentDataSlicesSlice,
       ContactpageDocument,
       ContactpageDocumentData,
       DisclaimerpageDocument,
       DisclaimerpageDocumentData,
+      DisclaimerpageDocumentDataSlicesSlice,
       DonationpageDocument,
       DonationpageDocumentData,
       EcobankspageDocument,
       EcobankspageDocumentData,
+      EcobankspageDocumentDataSlicesSlice,
+      EcobankspageDocumentDataSlices1Slice,
       EmbracepageDocument,
       EmbracepageDocumentData,
       FaqpageDocument,
       FaqpageDocumentData,
+      FaqpageDocumentDataSlicesSlice,
       GlossarypageDocument,
       GlossarypageDocumentData,
+      GlossarypageDocumentDataTermsItem,
       GreenpolicyevaluatorpageDocument,
       GreenpolicyevaluatorpageDocumentData,
+      GreenpolicyevaluatorpageDocumentDataKeyPointsItemsItem,
+      GreenpolicyevaluatorpageDocumentDataSlicesSlice,
+      GreenpolicyevaluatorpageDocumentDataSlices1Slice,
+      GreenpolicyevaluatorpageDocumentDataFeaturesItemsItem,
+      GreenpolicyevaluatorpageDocumentDataUspItemsItem,
+      GreenpolicyevaluatorpageDocumentDataSlices5Slice,
       HomepageDocument,
       HomepageDocumentData,
+      HomepageDocumentDataSlicesSlice,
+      HomepageDocumentDataSlices1Slice,
       MethodologyDocument,
       MethodologyDocumentData,
+      MethodologyDocumentDataSlices2Slice,
+      MethodologyDocumentDataSlices3Slice,
+      MethodologyDocumentDataSlices4Slice,
+      MethodologyDocumentDataSustainableBulletsItem,
       PartnerspageDocument,
       PartnerspageDocumentData,
+      PartnerspageDocumentDataPartnersItem,
       PledgepageDocument,
       PledgepageDocumentData,
       PresspageDocument,
       PresspageDocumentData,
+      PresspageDocumentDataSlicesSlice,
       PresspostDocument,
       PresspostDocumentData,
+      PresspostDocumentDataSlicesSlice,
       PrivacypageDocument,
       PrivacypageDocumentData,
+      PrivacypageDocumentDataSlicesSlice,
       SfiPageDocument,
       SfiPageDocumentData,
+      SfiPageDocumentDataSlicesSlice,
       SfipageDocument,
       SfipageDocumentData,
+      SfipageDocumentDataSlicesSlice,
       SwitchsurveyexitDocument,
       SwitchsurveyexitDocumentData,
       TakeactionpageDocument,
       TakeactionpageDocumentData,
+      TakeactionpageDocumentDataSlices1Slice,
+      TakeactionpageDocumentDataSlices2Slice,
+      TakeactionpageDocumentDataSlices3Slice,
+      TakeactionpageDocumentDataSlices4Slice,
       TeampageDocument,
       TeampageDocumentData,
+      TeampageDocumentDataSlicesSlice,
+      TeampageDocumentDataSlices1Slice,
       TextonlypagesDocument,
       TextonlypagesDocumentData,
       ThankspagesDocument,
       ThankspagesDocumentData,
+      ThankspagesDocumentDataSlicesSlice,
       ThankspledgeDocument,
       ThankspledgeDocumentData,
+      ThankspledgeDocumentDataSlicesSlice,
       VolunteerspageDocument,
       VolunteerspageDocumentData,
       OnepagerDocument,
       OnepagerDocumentData,
       OnepagersimpleDocument,
       OnepagersimpleDocumentData,
+      VolunteerspageDocumentDataSlicesSlice,
       AllDocumentTypes,
       AccordionSliceSlice,
+      AccordionSliceSliceRichTextPrimary,
+      AccordionSliceSliceRichTextWithStepPrimary,
+      AccordionSliceSliceDefaultPrimary,
       AccordionSliceSliceVariation,
       AccordionSliceSliceRichText,
       AccordionSliceSliceRichTextWithStep,
       AccordionSliceSliceDefault,
       ButtonSliceSlice,
+      ButtonSliceSliceDefaultPrimary,
       ButtonSliceSliceVariation,
       ButtonSliceSliceDefault,
       EmbedSliceSlice,
+      EmbedSliceSliceDefaultPrimary,
       EmbedSliceSliceVariation,
       EmbedSliceSliceDefault,
       ErrorMessageSlice,
       FeaturedInSliceSlice,
+      FeaturedInSliceSliceDefaultPrimary,
       FeaturedInSliceSliceVariation,
       FeaturedInSliceSliceDefault,
       ImageSliceSlice,
+      ImageSliceSliceDefaultPrimary,
       ImageSliceSliceVariation,
       ImageSliceSliceDefault,
       LeadGenSlice,
+      LeadGenSliceDefaultPrimary,
+      LeadGenSliceDefaultItem,
       LeadGenSliceVariation,
       LeadGenSliceDefault,
       SharePicGallerySliceSlice,
       SharePicGallerySliceSliceVariation,
       SharePicGallerySliceSliceDefault,
       SocialSharerSliceSlice,
+      SocialSharerSliceSliceDefaultPrimary,
       SocialSharerSliceSliceVariation,
       SocialSharerSliceSliceDefault,
       TableSliceSlice,
+      TableSliceSlice2ColumnsWithIconPrimary,
+      TableSliceSlice2ColumnsWithIconItem,
+      TableSliceSlice4ColumnsWithIconPrimary,
+      TableSliceSlice4ColumnsWithIconItem,
       TableSliceSliceVariation,
       TableSliceSliceDefault,
       TableSliceSlice2ColumnsWithIcon,
+      TableSliceSlice4ColumnsWithIcon,
       TeamMemberSliceSlice,
+      TeamMemberSliceSliceDefaultPrimary,
       TeamMemberSliceSliceVariation,
       TeamMemberSliceSliceDefault,
       TextSliceSlice,
+      TextSliceSliceDefaultPrimary,
       TextSliceSliceVariation,
       TextSliceSliceDefault,
       ThanksSliceSlice,
+      ThanksSliceSliceDefaultPrimary,
       ThanksSliceSliceVariation,
       ThanksSliceSliceDefault,
     };
