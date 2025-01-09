@@ -1,0 +1,25 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Do occaecat eiusmod magna est aute est aute sit irure exercitation commodo quis. Cupidatat est pariatur officia est labore labore veniam irure id tempor. Incididunt sunt eiusmod incididunt consectetur Lorem cillum id aliqua aliquip ea velit."
+						}
+					}
+				]
+			},
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "star",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

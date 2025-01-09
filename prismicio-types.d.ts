@@ -157,6 +157,7 @@ interface AccreditationpageDocumentData {
   projects: prismic.GroupField<
     Simplify<AccreditationpageDocumentDataProjectsItem>
   > /**
+  > /**
    * Sharing Title field in *AccreditationPage*
    *
    * - **Field Type**: Text
@@ -903,6 +904,8 @@ type EcobankspageDocumentDataSlices1Slice =
   | AccordionSliceSlice
   | TextSliceSlice;
 
+type EcobankspageDocumentDataSlices2Slice = ErrorMessageSlice;
+
 /**
  * Content for EcoBanksPage documents
  */
@@ -947,7 +950,16 @@ interface EcobankspageDocumentData {
    * - **Tab**: FAQ
    * - **Documentation**: https://prismic.io/docs/field#slices
    */;
-  slices1: prismic.SliceZone<EcobankspageDocumentDataSlices1Slice>;
+  slices1: prismic.SliceZone<EcobankspageDocumentDataSlices1Slice> /**
+   * Slice Zone field in *EcoBanksPage*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: ecobankspage.slices2[]
+   * - **Tab**: ErrorNotFound
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */;
+  slices2: prismic.SliceZone<EcobankspageDocumentDataSlices2Slice>;
 }
 
 /**
@@ -3863,6 +3875,45 @@ export type EmbedSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ErrorMessage → Default → Primary*
+ */
+export interface ErrorMessageSliceDefaultPrimary {
+  /**
+   * Title field in *ErrorMessage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: No Banks Found
+   * - **API ID Path**: error_message.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Content field in *ErrorMessage → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Sorry, we don't have any banks that meet the required filter.
+   * - **API ID Path**: error_message.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ErrorMessage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ErrorMessageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ErrorMessageSliceDefaultPrimary>,
+  never
+>;
+
+
+/**
  * Primary content in *FeaturedInSlice → Default → Primary*
  */
 export interface FeaturedInSliceSliceDefaultPrimary {
@@ -4808,6 +4859,7 @@ declare module "@prismicio/client" {
       EmbedSliceSliceDefaultPrimary,
       EmbedSliceSliceVariation,
       EmbedSliceSliceDefault,
+      ErrorMessageSlice,
       FeaturedInSliceSlice,
       FeaturedInSliceSliceDefaultPrimary,
       FeaturedInSliceSliceVariation,

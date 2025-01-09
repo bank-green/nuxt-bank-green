@@ -23,7 +23,7 @@ import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
 
 const route = useRoute()
-const bankTag = route.params.bankTag
+const bankTag = (route.params.bankTag as string).toLowerCase()
 const details = ref(await getBankDetail(bankTag))
 const bankData = details.value
 
@@ -37,8 +37,11 @@ useHeadHelper(
 if (bankData.rating) {
   useHeadRating(bankData.rating)
 }
-
-const defaultFields = await getDefaultFields(bankData.rating, bankData.name)
+let institutionType = ''
+if (bankData.institutionType && bankData.institutionType.length > 0) {
+  institutionType = bankData.institutionType[0].name
+}
+const defaultFields = await getDefaultFields(bankData.rating, bankData.name, institutionType)
 
 function getFieldOrDefault(fieldName: string) {
   return bankData[fieldName] ? bankData[fieldName] : defaultFields[fieldName]
