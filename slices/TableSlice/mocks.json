@@ -18,6 +18,16 @@
 				"__TYPE__": "FieldContent",
 				"value": "label",
 				"type": "Text"
+			},
+			"column_3_header": {
+				"__TYPE__": "FieldContent",
+				"value": "shown",
+				"type": "Text"
+			},
+			"column_4_header": {
+				"__TYPE__": "FieldContent",
+				"value": "riding",
+				"type": "Text"
 			}
 		},
 		"items": [
@@ -27,7 +37,6 @@
 					[
 						"icon",
 						{
-							"__TYPE__": "ImageContent",
 							"origin": {
 								"id": "main",
 								"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
@@ -45,6 +54,9 @@
 								},
 								"background": "transparent"
 							},
+							"credits": null,
+							"alt": null,
+							"__TYPE__": "ImageContent",
 							"thumbnails": {}
 						}
 					],
@@ -71,6 +83,34 @@
 									"type": "paragraph",
 									"content": {
 										"text": "Aliquip nulla occaecat qui magna eiusmod et et reprehenderit anim proident pariatur."
+									}
+								}
+							]
+						}
+					],
+					[
+						"column_3",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Id non excepteur elit est dolor."
+									}
+								}
+							]
+						}
+					],
+					[
+						"column_4",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Ipsum veniam dolor consequat et magna quis occaecat non nisi occaecat."
 									}
 								}
 							]

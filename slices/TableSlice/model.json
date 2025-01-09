@@ -29,6 +29,14 @@
         "column_2_header": {
           "type": "Text",
           "config": { "label": "Column 2 Header", "placeholder": "" }
+        },
+        "column_3_header": {
+          "type": "Text",
+          "config": { "label": "Column 3 Header", "placeholder": "" }
+        },
+        "column_4_header": {
+          "type": "Text",
+          "config": { "label": "Column 4 Header", "placeholder": "" }
         }
       },
       "items": {
@@ -49,6 +57,24 @@
           "type": "StructuredText",
           "config": {
             "label": "Column 2",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "column_3": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Column 3",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "column_4": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Column 4",
             "placeholder": "",
             "allowTargetBlank": true,
             "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
