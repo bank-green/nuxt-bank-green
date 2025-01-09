@@ -1,3 +1,4 @@
+<!-- TODO in claudia/groot-303-update-filter-component -->
 <template>
   <div
     class="bg-white hover:bg-gray-50 px-5 py-4 md:py-0 md:px-0 md:bg-transparent md:hover:bg-transparent cursor-pointer md:cursor-auto flex items-center"
