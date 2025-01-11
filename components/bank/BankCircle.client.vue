@@ -109,6 +109,7 @@
       >
       <LottieFile
           v-if="emojiForRating"
+          :key="emojiForRating"
           class="mx-auto w-16 h-16 md:w-28 md:h-28"
           :path="emojiForRating"
         />
