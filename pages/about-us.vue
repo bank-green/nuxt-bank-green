@@ -3,14 +3,14 @@
     <div class="page-fade-in max-w-screen">
       <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 flex flex-col justify-center items-center pt-32 pb-12 lg:pb-32 min-h-screen">
         <div class="contain max-w-5xl w-full">
-          <h1 class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl">
+          <h1 class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl font-secondary">
             {{ onepager?.data.title || 'Thank you for your interest in our work.' }}
           </h1>
           <div class="flex flex-col md:flex-row gap-6 lg:gap-24 mt-8 lg:mt-20 w-full">
             <a
               v-if="onepager?.data.url_1"
               :href="asLink(onepager?.data.url_1)!"
-              class="button-green w-full flex justify-center items-center text-xl lg:text-2xl text-primary-dark"
+              class="button-green w-full flex justify-center items-center text-xl lg:text-2xl text-primary-dark drop-shadow-lg"
               rel="noopener"
               target="_blank"
             >
@@ -21,7 +21,7 @@
             <a
               v-if="onepager?.data.url_2"
               :href="asLink(onepager?.data.url_2)!"
-              class="button-green w-full flex justify-center items-center text-xl lg:text-2xl text-primary-dark"
+              class="button-green w-full flex justify-center items-center text-xl lg:text-2xl text-primary-dark drop-shadow-lg"
               rel="noopener"
               target="_blank"
             >
