@@ -4,13 +4,13 @@
       <div
         class="relative z-50 bg-primary-dark custom:rounded-xl flex items-center justify-between pr-4"
       >
-        <NuxtLink to="/" class="py-4 px-6" @click="isOpen = false">
+        <NuxtLink to="/" class="custom:py-4 custom:px-6 p-4" @click="isOpen = false">
           <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green" />
         </NuxtLink>
 
         <button
           type="button"
-          class="custom:hidden bg-sushi-900 bg-opacity-0 rounded-md p-2 inline-flex items-center justify-center text-white hover:text-sushi-400 hover:bg-sushi-500 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500"
+          class="custom:hidden bg-sushi-900 bg-opacity-0 rounded-md p-2 inline-flex items-center justify-center text-white  background-color:inherit outline:none"
           @click.prevent.stop="isOpen = !isOpen"
         >
           <template v-if="!isOpen">
@@ -98,7 +98,7 @@
     >
       <div
         v-if="isOpen"
-        class="fixed z-50 top-0 mt-14 inset-x-0 contain md:p-4 p-0 transition transform-gpu origin-top-center bg-primary-dark"
+        class="fixed z-50 top-0 mt-14 inset-x-0 contain custom:p-4 p-0 transition transform-gpu origin-top-center bg-primary-dark custom:h-fit-content h-[768px]"
       >
         <NuxtLink
           v-for="link in headerLinks"
@@ -106,14 +106,14 @@
           :to="link.href"
           active-class="'bg-primary-light'"
           inactive-class="'hover:bg-primary-light'"
-          class="block py-2 px-6 md:py-4 md:px-6 md:mt-0.5 mt-0 md:mt-1 text-white text-base font-medium bg-primary-dark md:rounded-xl"
+          class="block custom:py-4 custom:px-6 custom:mt-0.5 mt-0 custom:mt-1 text-white text-base font-medium bg-primary-dark custom:rounded-xl p-4"
           @click="isOpen = false"
         >
           {{ link.title }}
         </NuxtLink>
         <NuxtLink
           to="/impact"
-          class="block md:w-full md:text-left text-center py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium md:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 md:mb-0 mb-6 md:ml-0 ml-5 md:mr-0 mr-5
+          class="block md:w-full md:text-left text-center py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium md:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 md:mb-0 mb-6 md:ml-0 ml-3 md:mr-0 mr-3
           "
           @click="isOpen = false"
         >
