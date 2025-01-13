@@ -18,12 +18,18 @@
           class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center items-center"
         >
           <div class="flex flex-col items-center justify-start w-full">
-            <BankCircle class="max-w-sm" :rating="rating" />
+            <BankCircle
+              class="max-w-sm"
+              :rating="rating"
+            />
             <SocialSharer
               class="text-sushi-500"
               :hashtags="['climatecrisis', 'fossilbanks']"
             />
-            <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+            <NuxtLink
+              class="underline hover:text-sushi-500 mt-6"
+              to="/methodology"
+            >
               {{ prismicDefaultPageData?.link_copy_methodology_page }}
             </NuxtLink>
           </div>
@@ -35,9 +41,9 @@
             {{ `Our take on ${name}` }}
           </div>
           <div class="text-lg md:text-xl text-gray-500 prose">
-            <PrismicRichText
-              v-if="prismicOurTake && prismicOurTake.length > 0"
-              :field="prismicOurTake"
+            <div
+              v-if="ourTake"
+              v-html="ourTake"
             />
             <span v-else-if="rating === 'ok'">This bank is ok</span>
             <span v-else-if="rating === 'great'">This bank is great</span>
@@ -60,12 +66,15 @@
               alt="Top Pick"
               title="Top Pick"
             >
-            <template v-for="cred in institutionCredentials" :key="cred">
+            <template
+              v-for="cred in institutionCredentials"
+              :key="cred"
+            >
               <PrismicImage
                 v-if="
-                  cred?.prismicApiId &&
-                    prismicDefaultPageData &&
-                    prismicDefaultPageData[cred.prismicApiId]
+                  cred?.prismicApiId
+                    && prismicDefaultPageData
+                    && prismicDefaultPageData[cred.prismicApiId]
                 "
                 class="h-16 md:h-12 w-auto"
                 :alt="cred?.name"
@@ -79,32 +88,32 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import { RichTextField } from '@prismicio/types'
 
+<script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    website: string;
-    name: string;
+    website: string
+    name: string
     inheritBrandRating?: {
-      tag: string;
-      name: string;
-    };
-    rating: string;
-    institutionCredentials: any[];
-    prismicDefaultPageData: Record<string, any> | null;
-    prismicOurTake?: RichTextField;
-    fossilFreeAlliance?: boolean;
-    topPick?: boolean;
+      tag: string
+      name: string
+    }
+    rating: string
+    institutionCredentials: any[]
+    prismicDefaultPageData: Record<string, any> | null
+    ourTake: string
+    fossilFreeAlliance?: boolean
+    topPick?: boolean
   }>(),
   {
     fossilFreeAlliance: false,
-    topPick: false
-  }
+    topPick: false,
+  },
 )
+
+console.log('props', props)
 
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
-  () => props.institutionCredentials && props.institutionCredentials.length > 0
+  () => props.institutionCredentials && props.institutionCredentials.length > 0,
 )
-
 </script>

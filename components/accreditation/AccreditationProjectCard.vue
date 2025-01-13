@@ -28,7 +28,7 @@ import { asImageSrc } from '@prismicio/helpers'
 import type { AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
 import PinIcon from '~/components/forms/location/PinIcon.vue'
 
-interface Props extends Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location' | 'image'> {
+interface Props extends /* @vue-ignore */ Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location' | 'image'> {
   link: string
 }
 defineProps<Props>()
