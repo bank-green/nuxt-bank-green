@@ -113,7 +113,7 @@
         </NuxtLink>
         <NuxtLink
           to="/impact"
-          class="block md:w-full md:text-left text-center py-2 px-6 md:py-4 md:px-6 mt-0.5 md:mt-1 text-sm font-medium md:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 md:mb-0 mb-6 md:ml-0 ml-3 md:mr-0 mr-3
+          class="block custom:w-full custom:text-left text-center py-2 px-6 custom:py-4 custom:px-6 mt-0.5 custom:mt-1 text-sm font-medium custom:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 custom:mb-0 mb-6 custom:ml-0 ml-3 custom:mr-0 mr-3
           "
           @click="isOpen = false"
         >
