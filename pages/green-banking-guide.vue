@@ -24,7 +24,7 @@
           <PrismicImage
             v-if="onepagersimple?.data.image"
             :field="onepagersimple?.data.image"
-            class="mx-auto mt-2 lg:mt-6 w-[360px] h-[360px]"
+            class="mx-auto mt-2 lg:mt-6 w-[360px] max-w-[100%]"
             :alt="onepagersimple?.data.image.alt"
           />
         </div>
