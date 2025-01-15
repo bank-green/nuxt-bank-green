@@ -134,6 +134,10 @@ a.button-green {
   font-family: 'Lora', serif;
 }
 
+.font-secondary a {
+  text-decoration: underline;
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: theme("colors.sushi.500") theme("colors.sushi.100");

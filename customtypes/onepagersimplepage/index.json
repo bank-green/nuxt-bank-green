@@ -18,6 +18,10 @@
       },
       "button_1": { "type": "Text", "config": { "label": "Button 1" } },
       "url_1": { "type": "Link", "config": { "label": "Url 1", "select": null } },
+      "image": {
+        "type": "Image",
+        "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+      },
       "seo_title": {
         "type": "Text",
         "config": { "label": "SEO Title", "placeholder": "" }
