@@ -46,8 +46,15 @@
           </template>
           <template v-else>
             <span class="sr-only">Close menu</span>
+            <NuxtLink
+              to="/donate"
+              active-class="bg-sushi-600"
+              class="whitespace-nowrap inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-black text-center md:w-full rounded-xl capitalize md:ml-0 mr-4"
+            >
+              Donate
+            </NuxtLink>
             <svg
-              class="h-4 w-4"
+              class="h-6 w-6 ml-2"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -110,14 +117,6 @@
           @click="isOpen = false"
         >
           {{ link.title }}
-        </NuxtLink>
-        <NuxtLink
-          to="/impact"
-          class="block custom:w-full custom:text-left text-center py-2 px-6 custom:py-4 custom:px-6 mt-4 custom:mt-1 text-sm font-medium custom:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 custom:mb-0 mb-6 custom:ml-0 ml-3 custom:mr-0 mr-3
-          "
-          @click="isOpen = false"
-        >
-          Donate
         </NuxtLink>
       </div>
     </transition>
