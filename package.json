@@ -38,7 +38,7 @@
     "date-fns": "^2.29.3",
     "eslint": "^9.9.1",
     "fuse.js": "^6.6.2",
-    "geonames.js": "^1.0.5",
+    "geonames.js": "^3.0.6",
     "happy-dom": "^15.11.7",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
@@ -52,6 +52,7 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
+    "@nuxtjs/sitemap": "^7.0.0",
     "@prismicio/helpers": "^2.0.0",
     "axios": "^1.7.9",
     "lock": "^1.1.0",
@@ -62,5 +63,8 @@
   },
   "lint-staged": {
     "*": "eslint"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.30.1"
   }
 }
