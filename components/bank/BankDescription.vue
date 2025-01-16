@@ -54,7 +54,7 @@ function updateText(text, terms) {
   bottom: 100%;
   right: 0; /* Align the right edge of the tooltip with the right edge of the term */
   white-space: nowrap;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: #1f2937;
   color: #fff;
   padding: 0.5em;
   border-radius: 4px;
@@ -63,10 +63,19 @@ function updateText(text, terms) {
   transition: opacity 0.2s;
   z-index: 100;
   font-size: small;
+  max-width: 392px;
+  min-width: 350px;
+  white-space: normal;
 }
 
 .tooltip:hover::after {
   opacity: 1;
   visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .tooltip::after {
+    display: none; /* Disable tooltips on mobile */
+  }
 }
 </style>
