@@ -45,6 +45,7 @@ function updateText(text, terms) {
   position: relative;
   cursor: pointer;
   color: rgb(19, 110, 9);
+  background-color: #1f2937;
   text-decoration: none !important;
 }
 
