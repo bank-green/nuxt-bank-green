@@ -4742,6 +4742,17 @@ interface OnepagerDocumentData {
   title: prismic.KeyTextField;
 
   /**
+   * Title field in *OnepagerPage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.RichTextField;
+
+  /**
    * button_1 field in *OnepagerPage*
    *
    * - **Field Type**: Text
@@ -4782,6 +4793,16 @@ interface OnepagerDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   url_2: prismic.LinkField;
+
+  /**
+   * Image field in *OnepagerPage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagerpage.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
 
   /**
    * SEO Title field in *OnepagerPage*
@@ -4868,6 +4889,16 @@ interface OnepagersimpleDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   url_1: prismic.LinkField;
+
+  /**
+   * Image field in *OnepagersimplePage*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: onepagersimplepage.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
 
   /**
    * SEO Title field in *OnepagersimplePage*

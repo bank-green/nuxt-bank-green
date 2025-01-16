@@ -3,10 +3,13 @@
     <div class="page-fade-in max-w-screen">
       <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 flex flex-col justify-center items-center pt-32 pb-12 lg:pb-32 min-h-screen">
         <div class="contain max-w-5xl w-full">
-          <h1 class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl font-secondary">
+          <h1 class="text-center text-2xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 font-secondary">
             {{ onepager?.data.title || 'Thank you for your interest in our work.' }}
           </h1>
-          <div class="flex flex-col md:flex-row gap-6 lg:gap-24 mt-8 lg:mt-20 w-full">
+          <h2 v-if="onepager?.data.description"
+              class="mt-2 lg:mt-4 text-center text-2xl sm:text-4xl lg:text-5xl font-normal text-gray-800 font-secondary"
+              v-html="asHTML(onepager?.data.description)" />
+          <div class="flex flex-col sm:flex-row gap-6 md:gap-24 mt-8 lg:mt-16 mx-auto max-w-3xl w-full">
             <a
               v-if="onepager?.data.url_1"
               :href="asLink(onepager?.data.url_1)!"
@@ -29,6 +32,12 @@
               {{ onepager?.data.button_2 || 'Organisational Deck' }}
             </a>
           </div>
+          <PrismicImage
+            v-if="onepager?.data.image"
+            :field="onepager?.data.image"
+            class="mx-auto mt-2 lg:mt-6 w-[360px] max-w-[100%]"
+            :alt="onepager?.data.image.alt"
+          />
         </div>
       </div>
     </div>
@@ -36,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { asLink } from '@prismicio/helpers'
+import { asLink, asHTML } from '@prismicio/helpers'
 
 const { client } = usePrismic()
 const { data: onepager } = await useAsyncData('onepager', () =>

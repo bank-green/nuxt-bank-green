@@ -7,10 +7,23 @@
   "json": {
     "Main": {
       "title": { "type": "Text", "config": { "label": "Title" } },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
       "button_1": { "type": "Text", "config": { "label": "Button 1" } },
       "url_1": { "type": "Link", "config": { "label": "Url 1", "select": null } },
       "button_2": { "type": "Text", "config": { "label": "Button 2" } },
       "url_2": { "type": "Link", "config": { "label": "Url 2", "select": null } },
+      "image": {
+        "type": "Image",
+        "config": { "label": "image", "constraint": {}, "thumbnails": [] }
+      },
       "seo_title": {
         "type": "Text",
         "config": { "label": "SEO Title", "placeholder": "" }
