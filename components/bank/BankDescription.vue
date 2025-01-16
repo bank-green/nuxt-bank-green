@@ -45,7 +45,6 @@ function updateText(text, terms) {
   position: relative;
   cursor: pointer;
   color: rgb(19, 110, 9);
-  background-color: #1f2937;
   text-decoration: none !important;
 }
 
@@ -55,7 +54,7 @@ function updateText(text, terms) {
   bottom: 100%;
   right: 0; /* Align the right edge of the tooltip with the right edge of the term */
   white-space: nowrap;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: #1f2937;
   color: #fff;
   padding: 0.5em;
   border-radius: 4px;
