@@ -124,7 +124,7 @@
     </div>
     <!-- <pre>
             {{ JSON.stringify(home, null, 2) }}
-        </pre> -->
+         </pre> -->
     <div
       class="flex flex-col md:flex-row items-center justify-center py-16 contain"
     >
