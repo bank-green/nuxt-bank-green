@@ -2,18 +2,18 @@
   <div class="page">
     <div class="page-fade-in max-w-screen">
       <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 flex flex-col justify-center items-center pt-32 pb-12 lg:pb-32 min-h-screen">
-        <div class="contain max-w-5xl w-full">
+        <div class="contain max-w-7xl w-full">
           <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800">
             {{ onepagersimple?.data.title || 'Thank you for your interest in our work.' }}
           </h1>
           <h2 v-if="onepagersimple?.data.description"
               class="text-center text-2xl lg:text-3xl font-normal text-gray-700 mt-4 lg:mt-8"
               v-html="asHTML(onepagersimple?.data.description)" />
-          <div class="flex flex-row justify-center gap-6 lg:gap-24 mt-8 lg:mt-12 w-full">
+          <div class="flex flex-row justify-center mt-8 lg:mt-16 w-full">
             <a
               v-if="onepagersimple?.data.url_1"
               :href="asLink(onepagersimple?.data.url_1)!"
-              class="button-green max-w-md text-xl lg:text-2xl text-primary-dark drop-shadow-lg"
+              class="button-green max-w-xs text-xl lg:text-2xl text-primary-dark drop-shadow-lg"
               rel="noopener"
               target="_blank"
             >

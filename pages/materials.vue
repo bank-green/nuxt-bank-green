@@ -9,7 +9,7 @@
           <h2 v-if="onepager?.data.description"
               class="mt-2 lg:mt-4 text-center text-2xl sm:text-4xl lg:text-5xl font-normal text-gray-800 font-secondary"
               v-html="asHTML(onepager?.data.description)" />
-          <div class="flex flex-col md:flex-row gap-6 lg:gap-24 mt-8 lg:mt-12 w-full">
+          <div class="flex flex-col sm:flex-row gap-6 md:gap-24 mt-8 lg:mt-16 mx-auto max-w-3xl w-full">
             <a
               v-if="onepager?.data.url_1"
               :href="asLink(onepager?.data.url_1)!"
