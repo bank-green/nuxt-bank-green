@@ -4,7 +4,7 @@
       <div
         class="relative z-50 bg-primary-dark custom:rounded-xl flex items-center justify-between pr-4"
       >
-        <NuxtLink to="/" class="custom:py-4 custom:px-6 p-4" @click="isOpen = false">
+        <NuxtLink to="/" class="custom:py-4 custom:px-6 p-4 ml-2 custom:ml-0" @click="isOpen = false">
           <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green" />
         </NuxtLink>
 
@@ -106,14 +106,14 @@
           :to="link.href"
           active-class="'bg-primary-light'"
           inactive-class="'hover:bg-primary-light'"
-          class="block custom:py-4 custom:px-6 custom:mt-0.5 mt-0 custom:mt-1 text-white text-base font-medium bg-primary-dark custom:rounded-xl p-4"
+          class="block custom:py-4 custom:px-6 custom:mt-0.5 mt-0 custom:mt-1 text-white text-base font-medium bg-primary-dark custom:rounded-xl p-4 ml-2 custom:ml-0 mb-2 custom:mb:0"
           @click="isOpen = false"
         >
           {{ link.title }}
         </NuxtLink>
         <NuxtLink
           to="/impact"
-          class="block custom:w-full custom:text-left text-center py-2 px-6 custom:py-4 custom:px-6 mt-0.5 custom:mt-1 text-sm font-medium custom:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 custom:mb-0 mb-6 custom:ml-0 ml-3 custom:mr-0 mr-3
+          class="block custom:w-full custom:text-left text-center py-2 px-6 custom:py-4 custom:px-6 mt-4 custom:mt-1 text-sm font-medium custom:text-white text-black rounded-xl bg-sushi-500 hover:bg-sushi-600 custom:mb-0 mb-6 custom:ml-0 ml-3 custom:mr-0 mr-3
           "
           @click="isOpen = false"
         >
