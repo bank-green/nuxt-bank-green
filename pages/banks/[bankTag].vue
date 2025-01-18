@@ -44,6 +44,8 @@ if (bankData.institutionType && bankData.institutionType.length > 0) {
 const defaultFields = await getDefaultFields(bankData.rating, bankData.name, institutionType)
 
 function getFieldOrDefault(fieldName: string) {
-  return bankData[fieldName] ? bankData[fieldName] : defaultFields[fieldName]
+  // Remove HTML tags and trim whitespace
+  const value = bankData[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  return value ? bankData[fieldName] : defaultFields[fieldName]
 }
 </script>
