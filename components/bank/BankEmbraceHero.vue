@@ -8,7 +8,7 @@
       <slot name="section1" />
     </div>
     <div
-      class="w-full flex flex-col lg:flex-row gap-8 my-6 items-center justify-center bg-blue-100 rounded-2xl px-6 py-8 text-gray-50 text-center font-semibold"
+      class="w-full flex flex-col lg:flex-row gap-8 my-6 items-center justify-center bg-arctic-blue rounded-2xl px-6 py-8 text-gray-50 text-center font-semibold"
     >
       <div class="flex flex-col text-left max-w-xl">
         <h3
@@ -16,7 +16,11 @@
         >
           {{ title || "Moved your money to this bank?" }}
         </h3>
-        <PrismicRichText v-if="!!description && description.length > 0" :field="description" class="text-lg text-gray-700" />
+        <PrismicRichText
+          v-if="!!description && description.length > 0"
+          :field="description"
+          class="text-lg text-gray-700"
+        />
         <div v-else>
           <p class="text-gray-700 leading-loose text-lg font-bold">
             Write a breakup letter to your old bank.
@@ -38,14 +42,14 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import { KeyTextField, RichTextField } from '@prismicio/types'
+import type { KeyTextField, RichTextField } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
 defineProps<{
-  title?: KeyTextField,
-  description?: RichTextField,
+  title?: KeyTextField
+  description?: RichTextField
   buttonTitle?: KeyTextField
 }>()
-
 </script>
