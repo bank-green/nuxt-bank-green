@@ -59,7 +59,10 @@
             'bg-gray-100': !filteredBanks.length,
           }"
         >
-          <slot v-if="filteredBanks.length === 0" name="not-listed">
+          <slot
+            v-if="filteredBanks.length === 0"
+            name="not-listed"
+          >
             <NuxtLink to="/not-listed">
               <div class="text-gray-500 text-center p-4 shadow-lg underline">
                 My bank isn't listed
@@ -85,6 +88,7 @@
     </BaseField>
   </div>
 </template>
+
 <script setup lang="ts">
 import LoadingJumper from '../../LoadingJumper.vue'
 import SearchInput from '../input/SearchInput.vue'
@@ -94,24 +98,25 @@ import BankSearchItem from './BankSearchItem.vue'
 import { findBanks } from './banks'
 
 const props = withDefaults(defineProps<{
-  disabled?: boolean;
-  country: String;
-  modelValue: Object | null;
-  warning?: string | boolean;
-  infoTooltip?: string;
-  dark?: boolean;
-  title?: string;
-  isEmbrace?: boolean;
+  disabled?: boolean
+  country: string
+  modelValue: object | null
+  warning?: string | boolean
+  infoTooltip?: string
+  dark?: boolean
+  title?: string
+  isEmbrace?: boolean
 }>(), {
   disabled: false,
   warning: false,
   infoTooltip: undefined,
   dark: false,
   title: '',
-  isEmbrace: false
+  isEmbrace: false,
 })
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
+const router = useRouter()
 
 const pageStart = new Date()
 const banks = ref([])
@@ -136,7 +141,7 @@ watch(
     if (input.value && +new Date() - +pageStart > 15000) {
       input.value.focus()
     }
-  }
+  },
 )
 
 watch(
@@ -146,10 +151,10 @@ watch(
       emit('update:modelValue', null)
     }
     emit('searchInputChange', newValue)
-  }
+  },
 )
 
-async function loadBanks () {
+async function loadBanks() {
   if (props.disabled) { return }
   loaded.value = false
   search.value = ''
@@ -157,24 +162,25 @@ async function loadBanks () {
   loaded.value = true
 }
 
-function showList () {
+function showList() {
   isShowing.value = true
 }
 
-function hideList () {
+function hideList() {
   isShowing.value = false
 }
 
-async function onSelectBank (item: {name: string}) {
+async function onSelectBank(item: { name: string, tag: string }) {
   emit('update:modelValue', null)
   await nextTick()
   search.value = item.name
   selectedItem.value = item.name
   emit('update:modelValue', item)
   isShowing.value = false
+  router.push(`banks/${item.tag}`)
 }
 
-function onCloseClick () {
+function onCloseClick() {
   search.value = ''
   emit('update:modelValue', null)
 }
