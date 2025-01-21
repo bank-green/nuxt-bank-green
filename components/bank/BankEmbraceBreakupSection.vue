@@ -1,5 +1,8 @@
 <template>
-  <div id="section-breakup" class="relative bg-blue-100">
+  <div
+    id="section-breakup"
+    class="relative bg-arctic-blue"
+  >
     <Swoosh direction="down" />
     <div
       class="flex flex-col justify-center items-center rounded-xl py-6 md:py-12 px-6 md:px-16 gap-8"
@@ -13,7 +16,10 @@
         class="flex flex-col lg:flex-row items-center justify-center lg:space-x-8"
       >
         <div class="lg:w-1/2 max-w-md text-lg md:text-2xl tracking-wide mb-1 md:mb-4 text-gray-800">
-          <PrismicRichText v-if="!!description && description.length > 0" :field="description" />
+          <PrismicRichText
+            v-if="!!description && description.length > 0"
+            :field="description"
+          />
           <p v-else>
             Let your old bank know you've switching to an institution that aligns with your values and supports a sustainable future.
           </p>
@@ -27,19 +33,23 @@
           ]"
         />
       </div>
-      <div ref="embraceForm" class="relative z-10 w-full lg:w-3/5  flex flex-col-reverse lg:flex-row items-center bg-sushi-50 rounded-2xl">
+      <div
+        ref="embraceForm"
+        class="relative z-10 w-full lg:w-3/5  flex flex-col-reverse lg:flex-row items-center bg-sushi-50 rounded-2xl"
+      >
         <Embrace />
       </div>
       <slot name="footer-image" />
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import { KeyTextField, RichTextField } from '@prismicio/types'
+import type { KeyTextField, RichTextField } from '@prismicio/types'
 
 defineProps<{
-  title?: KeyTextField,
-  description?: RichTextField,
-  checklistItems:(RichTextField | undefined)[]
+  title?: KeyTextField
+  description?: RichTextField
+  checklistItems: (RichTextField | undefined)[]
 }>()
 </script>

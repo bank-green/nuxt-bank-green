@@ -1,3 +1,51 @@
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
+import aspectRatio from '@tailwindcss/aspect-ratio'
+
+const colorPalette = {
+  sushi: {
+    DEFAULT: '#7BB123',
+    50: '#F2F7EB',
+    100: '#EDF5E5',
+    200: '#CEE1B4',
+    300: '#B7D290',
+    400: '#9FC46B',
+    500: '#7BB123',
+    600: '#6C9039',
+    700: '#506B2B',
+    800: '#35471C',
+    900: '#1A220E',
+  },
+  sunglow: {
+    DEFAULT: '#FCC135',
+    100: '#FFFFFE',
+    200: '#FEEFCC',
+    300: '#FDE09A',
+    400: '#FDD067',
+    500: '#FCC135',
+    600: '#FAB104',
+    700: '#C88E03',
+    800: '#966A02',
+    900: '#644601',
+  },
+  ocean: {
+    100: '#DCEDFF',
+    400: '#2563EB',
+  },
+  leaf: {
+    300: '#7BB123',
+    400: '#3A6028',
+    500: '#0D5D43',
+    700: '#123F30',
+  },
+  sky: {
+    50: '#F4F8FD',
+    100: '#D9E0F2',
+    600: '#434F6D',
+    800: '#282d46',
+  },
+}
+
 module.exports = {
   darkMode: 'class',
   theme: {
@@ -13,49 +61,15 @@ module.exports = {
         custom: '1124px', // Define your custom breakpoint
       },
       colors: {
-        'primary-dark': '#293145',
-        'primary-light': '#434F6D',
-        'gray-light': '#F4F8FD',
-        'latte': '#FFF8E7',
-        'sushi': {
-          DEFAULT: '#7BB123',
-          50: '#F2F7EB',
-          100: '#E6F0D8',
-          200: '#CEE1B4',
-          300: '#B7D290',
-          400: '#9FC46B',
-          500: '#7BB123',
-          600: '#6C9039',
-          700: '#506B2B',
-          800: '#35471C',
-          900: '#1A220E',
-        },
-        'sunglow': {
-          DEFAULT: '#FCC135',
-          100: '#FFFFFE',
-          200: '#FEEFCC',
-          300: '#FDE09A',
-          400: '#FDD067',
-          500: '#FCC135',
-          600: '#FAB104',
-          700: '#C88E03',
-          800: '#966A02',
-          900: '#644601',
-        },
-        'ocean': {
-          100: '#DBEAFE',
-          400: '#2563EB',
-          800: '#293145',
-        },
-        'leaf': {
-          300: '#7BB123',
-          400: '#3A6028',
-          500: '#0D5D43',
-          700: '#123F30',
-        },
-        'sky': {
-          100: '#D9E0F2',
-        },
+        ...colorPalette,
+        'primary-dark': colorPalette.sky[800],
+        'primary-light': colorPalette.sky[600],
+
+        // New color tokens https://www.figma.com/design/vrVSaJL54di7G3lWIhtelQ/01.-BG-%7C-GROOT-Mockups?node-id=9526-4644&t=ypRGktoKQ0O9WoLi-4
+        'ocean-blue': colorPalette.sky[800],
+        'woodland-green': '#1E4132',
+        'pistachio-green': colorPalette.sushi[100],
+        'arctic-blue': colorPalette.ocean[100],
       },
       boxShadow: {
         green: '0px 15px 30px rgba(122, 139, 85, 0.2)',
@@ -98,8 +112,8 @@ module.exports = {
     scale: ['responsive', 'hover', 'focus', 'group-hover'],
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
+    forms,
+    typography,
+    aspectRatio,
   ],
 }

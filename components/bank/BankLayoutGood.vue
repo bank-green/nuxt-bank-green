@@ -3,7 +3,7 @@
     <!-- SECTION ONE -->
     <div
       id="section-one"
-      class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
+      class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 md:mb-16"
     >
       <div
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
@@ -33,7 +33,7 @@
     <!-- CALL TO ACTION -->
     <div
       id="call-to-action"
-      class="bg-blue-100 text-gray-800"
+      class="bg-arctic-blue text-gray-800"
     >
       <Swoosh direction="down" />
       <div class="contain pt-32">

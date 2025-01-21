@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page-fade-in max-w-screen">
-      <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 flex flex-col justify-center items-center pt-32 pb-12 lg:pb-32 min-h-screen">
+      <div class="bg-gradient-to-b from-sushi-50 to-pistachio-green flex flex-col justify-center items-center pt-32 pb-12 lg:pb-32 min-h-screen">
         <div class="contain max-w-5xl w-full">
           <h1 class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl">
             {{ onepager?.data.title || 'Thank you for your interest in our work.' }}

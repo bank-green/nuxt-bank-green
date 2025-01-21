@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 max-w-screen">
+  <section class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 max-w-screen">
     <div class="page-fade-in relative contain pb-20 lg:pt-12 z-10">
       <div
         class="relative flex flex-col items-center gap-10 border rounded-2xl w-full max-w-7xl min-h-[504px] px-4 py-10 bg-white text-center"

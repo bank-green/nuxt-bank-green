@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 md:pt-20">
+    <div class="bg-gradient-to-b from-sushi-50 to-pistachio-green md:pt-20">
       <div
         class="page-fade-in contain flex flex-col justify-center items-center"
       >
@@ -151,7 +151,7 @@
         alt=""
       />
     </div>
-    <div class="bg-blue-100 text-gray-800">
+    <div class="bg-arctic-blue text-gray-800">
       <div class="overflow-hidden">
         <Swoosh direction="down" />
         <div class="contain">

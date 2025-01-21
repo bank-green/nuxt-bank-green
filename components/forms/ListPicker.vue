@@ -17,7 +17,7 @@
       role="option"
       tabindex="0"
       class="text-gray-900 cursor-pointer relative py-3 pl-4 pr-9 mx-2 rounded-md hover:bg-sushi-50"
-      :class="focusedItemIndex === index ? 'bg-sushi-100' : ''"
+      :class="focusedItemIndex === index ? 'bg-pistachio-green' : ''"
       @click="onSelectItem(index)"
       @keydown.down="(event) => incrementFocus(event)"
       @keydown.up="(event) => decrementFocus(event)"
