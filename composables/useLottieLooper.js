@@ -1,8 +1,10 @@
-export default function useLottieLooper ({ path }) {
+export default function useLottieLooper({ path }) {
   const container = ref(null)
   const animData = ref(null)
 
   const loadAnimation = async () => {
+    if (!path.value) return
+
     if (animData.value) {
       animData.value.destroy()
     }
@@ -14,15 +16,25 @@ export default function useLottieLooper ({ path }) {
       loop: true,
       prerender: true,
       autoplay: true,
-      path: path.value // the path to the animation json
+      path: path.value, // the path to the animation json
     })
   }
 
-  onUpdated(loadAnimation)
+  onMounted(() => {
+    nextTick(() => {
+      loadAnimation()
+    })
+  })
+
+  watch(path, (newPath) => {
+    if (newPath) {
+      loadAnimation()
+    }
+  })
 
   return {
     container,
     animData,
-    loadAnimation
+    loadAnimation,
   }
 }
