@@ -45,14 +45,14 @@
                 </div>
               </template>
             </ClientOnly>
-            <a
-              :href="`/banks/${bank?.['tag']}`"
+            <NuxtLink
+              :to="`/banks/${bank?.['tag']}`"
               class="flex-initial md:w-48 button-green text-primary-dark"
               :class="{ disabled: !bank }"
               @click="onCheckBankClick"
             >
               Check My Bank
-            </a>
+            </NuxtLink>
           </div>
 
           <div
