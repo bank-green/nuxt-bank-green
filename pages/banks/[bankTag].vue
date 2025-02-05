@@ -23,29 +23,38 @@ import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
 
 const route = useRoute()
-const bankTag = (route.params.bankTag as string).toLowerCase()
-const details = ref(await getBankDetail(bankTag))
-const bankData = details.value
+const bankTag = ref((route.params.bankTag as string).toLowerCase())
+const details = ref(await getBankDetail(bankTag.value))
+const bankData = ref(details.value)
 
-useHeadHelper(
-  bankData?.name
-    ? `${bankData.name}'s Climate Score - Bank.Green`
-    : '',
-  'Find and compare the service offerings of ethical and sustainable banks.',
-)
+watch(() => route.params.bankTag, async (newBankTag) => {
+  bankTag.value = (newBankTag as string).toLowerCase()
+  details.value = await getBankDetail(bankTag.value)
+  bankData.value = details.value
+  updateHead()
+})
 
-if (bankData.rating) {
-  useHeadRating(bankData.rating)
+function updateHead() {
+  useHeadHelper(
+    bankData.value?.name
+      ? `${bankData.value.name}'s Climate Score - Bank.Green`
+      : '',
+    'Find and compare the service offerings of ethical and sustainable banks.',
+  )
+
+  if (bankData.value.rating) {
+    useHeadRating(bankData.value.rating)
+  }
 }
 let institutionType = ''
-if (bankData.institutionType && bankData.institutionType.length > 0) {
-  institutionType = bankData.institutionType[0].name
+if (bankData.value.institutionType && bankData.value.institutionType.length > 0) {
+  institutionType = bankData.value.institutionType[0].name
 }
-const defaultFields = await getDefaultFields(bankData.rating, bankData.name, institutionType)
+const defaultFields = await getDefaultFields(bankData.value.rating, bankData.value.name, institutionType)
 
 function getFieldOrDefault(fieldName: string) {
   // Remove HTML tags and trim whitespace
-  const value = bankData[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
-  return value ? bankData[fieldName] : defaultFields[fieldName]
+  const value = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  return value ? bankData.value[fieldName] : defaultFields[fieldName]
 }
 </script>
