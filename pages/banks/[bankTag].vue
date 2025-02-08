@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
 
@@ -29,6 +29,13 @@ const bankData = ref(details.value)
 
 watch(() => route.params.bankTag, async (newBankTag) => {
   bankTag.value = (newBankTag as string).toLowerCase()
+  details.value = await getBankDetail(bankTag.value)
+  bankData.value = details.value
+  updateHead()
+})
+
+onMounted(async () => {
+  await nextTick()
   details.value = await getBankDetail(bankTag.value)
   bankData.value = details.value
   updateHead()
