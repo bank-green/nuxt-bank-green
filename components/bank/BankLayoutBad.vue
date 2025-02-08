@@ -3,7 +3,7 @@
     <!-- SECTION ONE -->
     <div
       id="section-one"
-      class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
+      class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 md:mb-16"
     >
       <div
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
@@ -70,7 +70,7 @@
     <!-- SECTION THREE -->
     <div
       id="section-three"
-      class="relative bg-blue-100"
+      class="relative bg-arctic-blue"
     >
       <Swoosh direction="down" />
       <img
@@ -86,7 +86,7 @@
     <!-- CALL TO ACTION -->
     <div
       id="call-to-action"
-      class="bg-blue-100 pb-8 pt-8"
+      class="bg-arctic-blue pb-8 pt-8"
     >
       <div class="contain flex flex-col justify-center items-center">
         <CallToAction
@@ -97,7 +97,7 @@
     </div>
 
     <!-- FOOTER IMAGE -->
-    <div class="bg-blue-100 overflow-hidden w-full pointer-events-none">
+    <div class="bg-arctic-blue overflow-hidden w-full pointer-events-none">
       <!-- <div class="-mx-1/4 sm:mx-0 sm:w-full"> -->
       <div
         class="w-full -mt-24 sm:-mt-16 lg:-mt-32 pointer-events-none overflow-hidden"

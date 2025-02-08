@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="bg-gradient-to-b from-sushi-50 to-sushi-100">
+    <div class="bg-gradient-to-b from-sushi-50 to-pistachio-green">
       <section class="page-fade-in contain py-24 sm:py-32 flex flex-col gap-8">
         <div class="prose sm:prose-lg xl:prose-xl max-w-none">
           <SliceZone
@@ -39,7 +39,10 @@
             </p>
           </div>
         </div>
-        <TeamSection v-if="directorsTeam && directorsTeam[0]" :department-name="directorsTeam && directorsTeam[0]?.primary.department ? 'Our ' + directorsTeam[0]?.primary.department : 'Our Directors'">
+        <TeamSection
+          v-if="directorsTeam && directorsTeam[0]"
+          :department-name="directorsTeam && directorsTeam[0]?.primary.department ? 'Our ' + directorsTeam[0]?.primary.department : 'Our Directors'"
+        >
           <TeamMember
             v-for="(member, key) in directorsTeam"
             :key="key"
@@ -57,7 +60,10 @@
         Meet the Team
       </h2>
       <div class="flex flex-col mr-auto">
-        <label for="department-filter" class="block text-neutral-600 font-semibold">Department:</label>
+        <label
+          for="department-filter"
+          class="block text-neutral-600 font-semibold"
+        >Department:</label>
         <select
           id="department-filter"
           class="
@@ -68,12 +74,20 @@
           <option value="">
             All
           </option>
-          <option v-for="(subTeam, mainKey) in allDepartments" :key="mainKey" :value="subTeam">
+          <option
+            v-for="(subTeam, mainKey) in allDepartments"
+            :key="mainKey"
+            :value="subTeam"
+          >
             {{ subTeam }}
           </option>
         </select>
       </div>
-      <TeamSection v-for="(subTeam, mainKey) in teamStructure" :key="mainKey" :department-name="subTeam.teamName">
+      <TeamSection
+        v-for="(subTeam, mainKey) in teamStructure"
+        :key="mainKey"
+        :department-name="subTeam.teamName"
+      >
         <TeamMember
           v-for="(member, key) in subTeam.members"
           :key="key"
@@ -86,10 +100,13 @@
       </TeamSection>
     </section>
     <div
-      class="flex flex-col justify-center items-center bg-sushi-100 rounded-xl py-6 md:py-12 px-6 md:px-16"
+      class="flex flex-col justify-center items-center bg-pistachio-green rounded-xl py-6 md:py-12 px-6 md:px-16"
     >
       <div class="w-full flex justify-center my-12">
-        <button class="button-green max-w-md md:w-max" @click="$router.push('/team/alumni')">
+        <button
+          class="button-green max-w-md md:w-max"
+          @click="$router.push('/team/alumni')"
+        >
           View Alumni
         </button>
       </div>
@@ -101,27 +118,28 @@
 import { ref } from 'vue'
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { asText, asLink } from '@prismicio/helpers'
-import { TeamMemberSliceSlice } from 'prismicio-types'
+import type { TeamMemberSliceSlice } from 'prismicio-types'
 import { components } from '~~/slices'
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { client } = usePrismic()
 const { data: team } = await useAsyncData('team', () =>
   client.getSingle('teampage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(team?.value?.data)
 
 const departments = team.value?.data.slices1[0]?.primary.department
 const allDepartments = team.value?.data.slices1.filter(
-  member => member.primary.department !== 'Alumni' && member.primary.department !== 'Directors'
+  member => member.primary.department !== 'Alumni' && member.primary.department !== 'Directors',
 ).map(
-  member => member.primary.department
+  member => member.primary.department,
 ).filter(
-  (value, index, self) => self.indexOf(value) === index
+  (value, index, self) => self.indexOf(value) === index,
 )
-const originalTeamStructure = team?.value?.data?.slices1.reduce((accumulator: {teamName: typeof departments, members: TeamMemberSliceSlice[]}[], member) => {
+const originalTeamStructure = team?.value?.data?.slices1.reduce((accumulator: { teamName: typeof departments, members: TeamMemberSliceSlice[] }[], member) => {
   const department = member.primary.department
   if (department !== 'Directors' && department !== 'Alumni') {
     const existingTeamIndex = accumulator.findIndex(team => team.teamName === department)
@@ -133,9 +151,9 @@ const originalTeamStructure = team?.value?.data?.slices1.reduce((accumulator: {t
   }
   return accumulator
 }, []).sort(
-  (a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0
+  (a, b) => a.teamName && b.teamName ? a.teamName?.localeCompare(b.teamName) : 0,
 ).sort(
-  (a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0
+  (a, b) => a.teamName === 'Other' ? 1 : b.teamName === 'Other' ? -1 : 0,
 )
 
 const teamStructure = ref(originalTeamStructure)

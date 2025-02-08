@@ -7,8 +7,8 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      stroke="#282d46"
       d="M19.4098 10.4098C19.4098 14.9231 12 22 12 22C12 22 4.59024 14.9231 4.59024 10.4098C4.59024 6.31747 7.90771 3 12 3C16.0923 3 19.4098 6.31747 19.4098 10.4098Z"
-      stroke="#293145"
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
