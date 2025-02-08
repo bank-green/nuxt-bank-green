@@ -1,20 +1,22 @@
 <template>
-  <Bank
-    v-if="bankData"
-    :name="bankData.name"
-    :website="bankData.website"
-    :inherit-brand-rating="bankData.inheritBrandRating"
-    :fossil-free-alliance="bankData.fossilFreeAlliance"
-    :rating="bankData.rating"
-    :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
-    :style="bankData.style"
-    :headline="getFieldOrDefault('headline')"
-    :subtitle="getFieldOrDefault('subtitle')"
-    :description1="getFieldOrDefault('description1')"
-    :description2="getFieldOrDefault('description2')"
-    :description3="getFieldOrDefault('description3')"
-    :description4="defaultFields?.description4 ?? ''"
-  />
+  <div :key="bankTag">
+    <Bank
+      v-if="bankData"
+      :name="bankData.name"
+      :website="bankData.website"
+      :inherit-brand-rating="bankData.inheritBrandRating"
+      :fossil-free-alliance="bankData.fossilFreeAlliance"
+      :rating="bankData.rating"
+      :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
+      :style="bankData.style"
+      :headline="getFieldOrDefault('headline')"
+      :subtitle="getFieldOrDefault('subtitle')"
+      :description1="getFieldOrDefault('description1')"
+      :description2="getFieldOrDefault('description2')"
+      :description3="getFieldOrDefault('description3')"
+      :description4="defaultFields?.description4 ?? ''"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
