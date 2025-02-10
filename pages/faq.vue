@@ -1,13 +1,16 @@
 <template>
   <div class="page">
-    <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
+    <div class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28">
       <div class="page-fade-in contain max-w-3xl pb-16">
         <PrismicRichText
           v-if="faq?.data.introduction"
           :field="faq?.data.introduction"
           class="prose"
         />
-        <div v-else class="prose">
+        <div
+          v-else
+          class="prose"
+        >
           <h1 class="text-center">
             Frequently asked questions
           </h1>
@@ -28,7 +31,10 @@
             :slices="faq?.data.slices ?? []"
             :components="sliceComps"
           />
-          <h3 v-else class="text-center">
+          <h3
+            v-else
+            class="text-center"
+          >
             Error Loading Content.
           </h3>
         </div>
@@ -38,7 +44,10 @@
         id="contact"
         class="contain max-w-3xl flex flex-row justify-center items-center"
       >
-        <SignupBox tag="FAQ bottom" class="w-full mt-8 mb-12" />
+        <SignupBox
+          tag="FAQ bottom"
+          class="w-full mt-8 mb-12"
+        />
       </div>
       <Swoosh />
       <Donation />
@@ -56,9 +65,8 @@ const sliceComps = ref(defineSliceZoneComponents(components))
 const { client } = usePrismic()
 const { data: faq } = await useAsyncData('faq', () =>
   client.getSingle('faqpage', {
-    fetchLinks: ['accordionitem.title', 'accordionitem.slices']
-  })
+    fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
+  }),
 )
 usePrismicSEO(faq.value?.data)
-
 </script>

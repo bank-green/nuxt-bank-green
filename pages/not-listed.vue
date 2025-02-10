@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28">
+    <div class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28">
       <div
         class="page-fade-in relative z-10 contain max-w-4xl flex flex-col justify-center items-center"
       >
@@ -14,7 +14,10 @@
           >
             <PrismicRichText :field="notlisted?.data.text1" />
           </h1>
-          <PrismicRichText class="textlink" :field="notlisted?.data.text2" />
+          <PrismicRichText
+            class="textlink"
+            :field="notlisted?.data.text2"
+          />
         </div>
         <div v-else>
           <h1
@@ -47,10 +50,16 @@
           class="flex flex-col md:flex-row items-center justify-center pt-8 pb-16"
         >
           <div class="md:w-1/2 max-w-sm">
-            <p v-if="notlisted?.data" class="text-lg md:text-2xl tracking-wide mb-4">
+            <p
+              v-if="notlisted?.data"
+              class="text-lg md:text-2xl tracking-wide mb-4"
+            >
               <b>{{ asText(notlisted?.data.text3) }} </b> {{ asText(notlisted?.data.text4) }}
             </p>
-            <p v-else class="text-lg md:text-2xl tracking-wide mb-4">
+            <p
+              v-else
+              class="text-lg md:text-2xl tracking-wide mb-4"
+            >
               <b>Bank.Green was founded on the belief that banks have had an
                 easy time from their customers for too long</b>. Mass movements will pull us out of the climate crisis – and
               they’ll pull your bank out, too.
@@ -60,7 +69,10 @@
               class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
               :field="notlisted?.data.text5"
             />
-            <p v-else class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0">
+            <p
+              v-else
+              class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
+            >
               Our mission is to encourage as many people as possible to take a stand - to refuse to
               let their money fuel environmental destruction any longer. Considering who you bank with, we think you probably agree.
               This is your chance to spread the word with us.
@@ -75,7 +87,7 @@
       </div>
     </div>
 
-    <div class="bg-blue-100 text-gray-800 overflow-hidden">
+    <div class="bg-arctic-blue text-gray-800 overflow-hidden">
       <Swoosh direction="down" />
       <div class="contain">
         <div class="flex justify-center text-left">
@@ -91,12 +103,18 @@
                 But don’t wait for the fire department to turn up – join us!"
               />
             </div>
-            <CheckList class="md:w-1/2 my-8" :list="checkList" />
+            <CheckList
+              class="md:w-1/2 my-8"
+              :list="checkList"
+            />
           </div>
         </div>
 
         <div class="flex flex-row justify-center items-center">
-          <SubmitBank tag="not listed bottom" class="max-w-4xl w-full" />
+          <SubmitBank
+            tag="not listed bottom"
+            class="max-w-4xl w-full"
+          />
         </div>
       </div>
 
@@ -109,9 +127,11 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { asText } from '@prismicio/helpers'
 import SubmitBank from '@/components/forms/SubmitBank.vue'
+
 const { client } = usePrismic()
 const { data: notlisted } = await useAsyncData('notlisted', () =>
   client.getByUID('textonlypages', 'notlisted'))
@@ -119,7 +139,7 @@ const { data: notlisted } = await useAsyncData('notlisted', () =>
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',
-  'Discover other ways to divest from fossil fuels'
+  'Discover other ways to divest from fossil fuels',
 ]
 useHeadHelper('Not listed')
 </script>
