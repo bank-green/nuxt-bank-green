@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, nextTick } from 'vue'
+import { ref, watch, onBeforeMount, onMounted, nextTick } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
 
@@ -28,20 +28,6 @@ const route = useRoute()
 const bankTag = ref((route.params.bankTag as string).toLowerCase())
 const details = ref(await getBankDetail(bankTag.value))
 const bankData = ref(details.value)
-
-watch(() => route.params.bankTag, async (newBankTag) => {
-  bankTag.value = (newBankTag as string).toLowerCase()
-  details.value = await getBankDetail(bankTag.value)
-  bankData.value = details.value
-  updateHead()
-})
-
-onMounted(async () => {
-  await nextTick()
-  details.value = await getBankDetail(bankTag.value)
-  bankData.value = details.value
-  updateHead()
-})
 
 function updateHead() {
   useHeadHelper(
@@ -55,6 +41,13 @@ function updateHead() {
     useHeadRating(bankData.value.rating)
   }
 }
+
+async function fetchBankDetails(tag: string) {
+  details.value = await getBankDetail(tag)
+  bankData.value = details.value
+  updateHead()
+}
+
 let institutionType = ''
 if (bankData.value.institutionType && bankData.value.institutionType.length > 0) {
   institutionType = bankData.value.institutionType[0].name
@@ -66,4 +59,18 @@ function getFieldOrDefault(fieldName: string) {
   const value = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
   return value ? bankData.value[fieldName] : defaultFields[fieldName]
 }
+
+watch(() => route.params.bankTag, async (newBankTag) => {
+  bankTag.value = (newBankTag as string).toLowerCase()
+  await fetchBankDetails(bankTag.value)
+})
+
+onBeforeMount(async () => {
+  await fetchBankDetails(bankTag.value)
+})
+
+onMounted(async () => {
+  await nextTick()
+  await fetchBankDetails(bankTag.value)
+})
 </script>
