@@ -58,14 +58,5 @@ const getFieldOrDefault = (fieldName: string) => {
   return value || defaultFields.value[fieldName]
 }
 
-watch(() => route.params.bankTag, (newBankTag) => {
-  bankTag.value = (newBankTag as string).toLowerCase()
-  fetchBankDetails(bankTag.value)
-})
-
 onBeforeMount(() => fetchBankDetails(bankTag.value))
-
-onMounted(() => {
-  nextTick().then(() => fetchBankDetails(bankTag.value))
-})
 </script>
