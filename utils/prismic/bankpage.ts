@@ -6,9 +6,9 @@ function isValidResponse(response: _AsyncData<BankpageDocument | null, Error | n
 }
 
 export async function useBankPage(
+  client: any,
   rating: string,
 ) {
-  const { client } = usePrismic()
   const type = 'bankpage'
   let bankPage = null
 
@@ -18,7 +18,6 @@ export async function useBankPage(
         return client.getByUID(type, rating)
       }),
     ])
-
     // check if we get responses at all
     if (!isValidResponse(bankRatingResponse)) {
       throw new Error(`could not get bankPage default descriptions: ${JSON.stringify(bankRatingResponse.error)}`)
