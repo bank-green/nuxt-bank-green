@@ -247,7 +247,7 @@ export async function getBankDetail(bankTag) {
   return bank
 }
 
-export async function getDefaultFields(rating, bankname, institutionType) {
+export async function getDefaultFields(prismicClient, rating, bankname, institutionType) {
   if (!bankname) {
     bankname = 'this bank'
   }
@@ -263,19 +263,19 @@ export async function getDefaultFields(rating, bankname, institutionType) {
   try {
     var prismicData = null
     if (rating === 'unknown') {
-      prismicData = await useBankPage('unknownbank-' + institutionType.toLowerCase().replace(' ', ''))
+      prismicData = await useBankPage(prismicClient, 'unknownbank-' + institutionType.toLowerCase().replace(' ', ''))
     } else {
-      prismicData = await useBankPage(rating + 'bank')
+      prismicData = await useBankPage(prismicClient, rating + 'bank')
     }
     const prismicDefaultFields = prismicData?.bankPage?.data
     if (prismicDefaultFields) {
       defaults = {
-        headline: prismicH.asHTML(prismicDefaultFields.headline),
-        subtitle: prismicH.asHTML(prismicDefaultFields.subtitle),
-        description1: prismicH.asHTML(prismicDefaultFields.description1),
-        description2: prismicH.asHTML(prismicDefaultFields.description2),
-        description3: prismicH.asHTML(prismicDefaultFields.description3),
-        description4: prismicH.asHTML(prismicDefaultFields.description4),
+        headline: prismicH.asHTML(prismicDefaultFields?.headline),
+        subtitle: prismicH.asHTML(prismicDefaultFields?.subtitle),
+        description1: prismicH.asHTML(prismicDefaultFields?.description1),
+        description2: prismicH.asHTML(prismicDefaultFields?.description2),
+        description3: prismicH.asHTML(prismicDefaultFields?.description3),
+        description4: prismicH.asHTML(prismicDefaultFields?.description4),
       }
     }
   } catch (e) {
