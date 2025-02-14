@@ -109,7 +109,7 @@
         Service
       </template>
       <template #convenience-nav>
-        Convenience
+        Accessibility
       </template>
       <template #impact>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
