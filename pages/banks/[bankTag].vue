@@ -6,7 +6,7 @@
       :website="bankData.website"
       :inherit-brand-rating="bankData.inheritBrandRating"
       :fossil-free-alliance="bankData.fossilFreeAlliance"
-      :rating="bankData.rating"
+      :rating="getRating()"
       :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
       :style="bankData.style"
       :headline="getFieldOrDefault('headline')"
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onBeforeMount, onMounted, nextTick } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields, getBankDetail } from '@/utils/banks'
 
@@ -49,8 +49,19 @@ const fetchBankDetails = async (tag: string) => {
   if (bankData?.value) {
     const institutionType = bankData.value.institutionType?.[0]?.name || ''
     defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
-    console.log(bankData.value.rating, bankData.value.name, institutionType)
   }
+}
+
+const getRating = (): string => {
+  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
+  // but after the text copy has been calculated
+  const isCreditUnion = bankData?.value?.institutionType?.[0]?.name === 'Credit Union'
+  const isRatingUnknown = bankData?.value?.rating === 'unknown'
+
+  if (isCreditUnion && isRatingUnknown) {
+    return 'good'
+  }
+  return bankData?.value?.rating
 }
 
 const getFieldOrDefault = (fieldName: string) => {
