@@ -50,9 +50,13 @@ const fetchBankDetails = async (tag: string) => {
     const institutionType = bankData.value.institutionType?.[0]?.name || ''
     defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
 
-    // in some edge cases we want to overwrite a brand's rating
+    // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
     // but after the text copy has been calculated
-    bankData.value.rating = handleRatingOverwrite(tag, bankData.value.rating)
+    const isCreditUnion = institutionType === 'Credit Union'
+    const isRatingUnknown = bankData.value.rating === 'unknown'
+    if (isCreditUnion && isRatingUnknown) {
+      bankData.value.rating = 'good'
+    }
   }
 }
 
