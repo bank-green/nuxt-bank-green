@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onBeforeMount, onMounted, nextTick } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields, getBankDetail } from '@/utils/banks'
 
@@ -49,7 +49,10 @@ const fetchBankDetails = async (tag: string) => {
   if (bankData?.value) {
     const institutionType = bankData.value.institutionType?.[0]?.name || ''
     defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
-    console.log(bankData.value.rating, bankData.value.name, institutionType)
+
+    // in some edge cases we want to overwrite a brand's rating
+    // but after the text copy has been calculated
+    bankData.value.rating = handleRatingOverwrite(tag, bankData.value.rating)
   }
 }
 
