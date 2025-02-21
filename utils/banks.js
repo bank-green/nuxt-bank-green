@@ -19,6 +19,7 @@ export async function callBackend(query, variables) {
   return res
 }
 
+
 const commentaryFields = `{
     rating,
     ratingInherited,
