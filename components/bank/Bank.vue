@@ -25,6 +25,7 @@
           >
             How Bank.Green rates institutions
           </NuxtLink>
+          <div>Last rated in {{ testText }}</div>
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -107,6 +108,8 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 // Import the layout components
 import BankLayoutBad from '@/components/bank/BankLayoutBad.vue'
 import BankLayoutGood from '@/components/bank/BankLayoutGood.vue'
+
+const testText: string = "test"
 
 // Props definition
 const props = defineProps<{
