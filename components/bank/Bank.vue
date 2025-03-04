@@ -56,7 +56,7 @@
             <div :class="layoutType === BankLayoutGood ? 'md:w-3/6' : 'w-full'">
               <BankDescription :text="description2" />
               <BankDescription
-                class="md:text-xl"
+                class="md:text-2xl font-semibold"
                 :text="description3"
               />
 
