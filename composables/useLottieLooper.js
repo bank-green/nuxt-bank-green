@@ -3,8 +3,6 @@ export default function useLottieLooper({ path }) {
   const animData = ref(null)
 
   const loadAnimation = async () => {
-    if (!path.value) return
-
     if (animData.value) {
       animData.value.destroy()
     }
@@ -20,17 +18,7 @@ export default function useLottieLooper({ path }) {
     })
   }
 
-  onMounted(() => {
-    nextTick(() => {
-      loadAnimation()
-    })
-  })
-
-  watch(path, (newPath) => {
-    if (newPath) {
-      loadAnimation()
-    }
-  })
+  onUpdated(loadAnimation)
 
   return {
     container,
