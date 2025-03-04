@@ -1,4 +1,4 @@
-export default function useLottieLooper({ path }) {
+export default function useLottieLooper ({ path }) {
   const container = ref(null)
   const animData = ref(null)
 
@@ -14,7 +14,7 @@ export default function useLottieLooper({ path }) {
       loop: true,
       prerender: true,
       autoplay: true,
-      path: path.value, // the path to the animation json
+      path: path.value // the path to the animation json
     })
   }
 
@@ -23,6 +23,6 @@ export default function useLottieLooper({ path }) {
   return {
     container,
     animData,
-    loadAnimation,
+    loadAnimation
   }
 }
