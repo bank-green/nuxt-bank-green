@@ -41,8 +41,12 @@
             {{ `Our take on ${name}` }}
           </div>
           <div class="text-lg md:text-xl text-gray-500 prose">
+            <PrismicRichText
+              v-if="prismicOurTake && prismicOurTake.length > 0"
+              :field="prismicOurTake"
+            />
             <div
-              v-if="ourTake"
+              v-else-if="ourTake"
               v-html="ourTake"
             />
             <span v-else-if="rating === 'ok'">This bank is ok</span>
@@ -90,6 +94,8 @@
 </template>
 
 <script setup lang="ts">
+import type { RichTextField } from '@prismicio/types'
+
 const props = withDefaults(
   defineProps<{
     website: string
@@ -101,6 +107,7 @@ const props = withDefaults(
     rating: string
     institutionCredentials: any[]
     prismicDefaultPageData: Record<string, any> | null
+    prismicOurTake?: RichTextField
     ourTake: string
     fossilFreeAlliance?: boolean
     topPick?: boolean
