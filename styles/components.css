@@ -130,6 +130,14 @@ a.button-green {
   @apply block font-medium bg-gray-100 hover:bg-gray-200 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-gray-100 text-primary-dark p-4 text-center w-full rounded-2xl capitalize;
 }
 
+.font-secondary {
+  font-family: 'Lora', serif;
+}
+
+.font-secondary a {
+  text-decoration: underline;
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: theme("colors.sushi.500") theme("colors.sushi.100");
