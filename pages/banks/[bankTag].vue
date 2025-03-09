@@ -65,7 +65,7 @@ const getRating = (): string => {
 }
 
 const getFieldOrDefault = (fieldName: string) => {
-  const value = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  const value = bankData.value[fieldName]?.trim()
   return value || defaultFields.value[fieldName]
 }
 
