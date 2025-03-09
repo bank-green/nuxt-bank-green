@@ -65,7 +65,6 @@ const getRating = (): string => {
 }
 
 function getFieldOrDefault(fieldName: string) {
-  // Remove HTML tags and trim whitespace
   const value = bankData[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
   // if trimmed text is blank, return the default field, otherwise return the original (since it may have valid html)
   return value ? bankData[fieldName] : defaultFields[fieldName]
