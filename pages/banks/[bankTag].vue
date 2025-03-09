@@ -64,10 +64,13 @@ const getRating = (): string => {
   return bankData?.value?.rating
 }
 
-function getFieldOrDefault(fieldName: string) {
-  const trimmedText = bankData[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
-  // if trimmed text is blank, return the default field, otherwise return the original (since it may have valid html)
-  return trimmedText ? bankData[fieldName] : defaultFields[fieldName]
+const getFieldOrDefault = (fieldName: string) => {
+  const trimmedText = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  if (trimmedText) {
+    return bankData.value[fieldName] || defaultFields.value[fieldName]
+  } else {
+    return defaultFields.value[fieldName]
+  }
 }
 
 onBeforeMount(() => fetchBankDetails(bankTag.value))
