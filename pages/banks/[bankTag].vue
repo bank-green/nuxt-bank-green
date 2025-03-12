@@ -65,8 +65,12 @@ const getRating = (): string => {
 }
 
 const getFieldOrDefault = (fieldName: string) => {
-  const value = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
-  return value || defaultFields.value[fieldName]
+  const trimmedText = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  if (trimmedText) {
+    return bankData.value[fieldName] || defaultFields.value[fieldName]
+  } else {
+    return defaultFields.value[fieldName]
+  }
 }
 
 onBeforeMount(() => fetchBankDetails(bankTag.value))
