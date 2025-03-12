@@ -92,6 +92,8 @@ import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import { components } from '~~/slices'
 
+const fetchGql = useGql()
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
@@ -122,6 +124,34 @@ const loadBanks = async ({
   if (!country.value) {
     return
   }
+
+  const result_gql = await fetchGql('FilteredBrandsQuery', {
+    country: country.value,
+    regions, subregions,
+    topPick,
+    fossilFreeAlliance,
+    features,
+    sustainableOnly: true,
+    first: 300,
+    withCommentary: true,
+    withFeatures: true,
+  }).then(data =>
+    data.brands.edges
+      .map(o => o.node)
+      .map(b => ({
+        ...b,
+        ...b.commentary,
+        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
+      }))
+    // filter show_on_sustainable_banks_page
+      .filter(a => a.showOnSustainableBanksPage)
+    // sort by top_pick first, then fossil_free_alliance_rating, then by name
+      .sort((a, b) =>
+        b.topPick - a.topPick
+        || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
+        || a.name - b.name),
+  )
+
   const result = await getBanksListWithFilter({
     country: country.value,
     regions,
@@ -130,7 +160,7 @@ const loadBanks = async ({
     fossilFreeAlliance,
     features,
   })
-  banks.value = result
+  const original_bank_values = result
     // filter show_on_sustainable_banks_page
     .filter(a => a.showOnSustainableBanksPage)
     // sort by top_pick first, then fossil_free_alliance_rating, then by name
@@ -138,8 +168,9 @@ const loadBanks = async ({
       (a, b) =>
         b.topPick - a.topPick
         || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
-        || a.name - b.name,
-    )
+        || a.name - b.name)
+
+  banks.value = result_gql
   loading.value = false
   if (banks.value.length === 0) {
     errorMessage.value = true

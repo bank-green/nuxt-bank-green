@@ -1,0 +1,184 @@
+query BrandsByCountryQuery($country: String){
+    brands(
+    country: $country
+    displayOnWebsite: true
+  ) {
+    edges {
+      node {
+        name
+        tag
+        website
+        aliases
+      }
+    }
+  }
+}
+
+query BrandsQuery(
+  $country: String
+  $recommendedOnly: Boolean
+  $rating: [String]
+  $first: Int
+  $withCommentary: Boolean = false
+  $withFeatures: Boolean = false
+) {
+  brands(
+    country: $country
+    recommendedOnly: $recommendedOnly
+    rating: $rating
+    first: $first
+    displayOnWebsite: true
+  ) {
+    edges {
+      node {
+        name
+        tag
+        website
+        aliases
+        commentary @include(if: $withCommentary) {
+          ...commentaryFields
+        }
+        bankFeatures @include(if: $withFeatures) {
+          ...bankFeaturesFields
+        }
+      }
+    }
+  }
+}
+
+query FilteredBrandsQuery(
+  $country: String
+  $first: Int
+  $topPick: Boolean
+  $sustainableOnly: Boolean
+  $fossilFreeAlliance: Boolean
+  $features: [String]
+  $regions: [String]
+  $subregions: [String]
+  $withCommentary: Boolean = false
+  $withFeatures: Boolean = false
+) {
+  brands(
+    country: $country
+    first: $first
+    topPick: $topPick
+    recommendedOnly: $sustainableOnly
+    fossilFreeAlliance: $fossilFreeAlliance
+    features: $features
+    regions: $regions
+    subregions: $subregions
+  ) {
+    edges {
+      node {
+        name
+        tag
+        website
+        aliases
+        regions {
+          id
+          name
+          slug
+        }
+        commentary @include(if: $withCommentary) {
+          ...commentaryFields
+        }
+        bankFeatures @include(if: $withFeatures) {
+          ...bankFeaturesFields
+        }
+      }
+    }
+  }
+}
+
+query BrandByTagQuery($tag: String!) {
+  brand(tag: $tag) {
+    tag
+    name
+    website
+    commentary {
+      rating
+      ratingInherited
+      inheritBrandRating {
+        tag
+        name
+      }
+      amountFinancedSince2016
+      topPick
+      fossilFreeAlliance
+      fossilFreeAllianceRating
+      headline
+      description1
+      description2
+      description3
+      subtitle
+      ourTake
+      showOnSustainableBanksPage
+      institutionType {
+        name
+      }
+      institutionCredentials {
+        name
+        prismicApiId
+      }
+    }
+    bankFeatures {
+      ...bankFeaturesFields
+    }
+    countries {
+      code
+    }
+  }
+}
+
+query EmbraceBrandQuery {
+  brandsFilteredByEmbraceCampaign(id: 1) {
+    name
+    website
+    tag
+  }
+}
+
+
+query AllBanksList {
+  brands {
+    edges {
+      node {
+        name
+        tag
+        commentary {
+          showOnSustainableBanksPage
+        }
+      }
+    }
+  }
+}
+
+fragment commentaryFields on Commentary {
+  rating
+  ratingInherited
+  inheritBrandRating {
+    tag
+    name
+  }
+  description3
+  amountFinancedSince2016
+  topPick
+  fossilFreeAlliance
+  fossilFreeAllianceRating
+  showOnSustainableBanksPage
+  institutionType {
+    name
+  }
+  institutionCredentials {
+    name
+    prismicApiId
+  }
+}
+
+fragment bankFeaturesFields on BrandFeature {
+  offered
+  feature {
+    name
+  }
+  details
+}

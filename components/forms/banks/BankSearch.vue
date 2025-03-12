@@ -14,7 +14,13 @@
         v-model="search"
         :disabled="disabled"
         :aria-expanded="isShowing"
-        :placeholder="disabled ? 'Set a country first' : !loaded ? 'Loading banks...' : !hasBanks ? 'No banks available in this country.' : 'Search bank...'"
+        :placeholder="disabled
+          ? 'Set a country first'
+          : loaded
+            ? 'Loading banks...'
+            : !banks.length
+              ? 'No banks available in this country.'
+              : 'Search bank...'"
         :warning="warning"
         :dark="dark"
         @keydown.down="
@@ -55,12 +61,12 @@
           v-if="isShowing"
           class="absolute z-10 mt-1 w-full rounded-md shadow-lg"
           :class="{
-            'bg-white': filteredBanks.length > 0,
+            'bg-white': filteredBanks.length,
             'bg-gray-100': !filteredBanks.length,
           }"
         >
           <slot
-            v-if="filteredBanks.length === 0"
+            v-if="!filteredBanks"
             name="not-listed"
           >
             <NuxtLink to="/not-listed">
@@ -119,26 +125,32 @@ const emit = defineEmits(['update:modelValue', 'searchInputChange'])
 const router = useRouter()
 
 const pageStart = new Date()
-const banks = ref([])
-const loaded = ref<boolean>(false)
 const search = ref<string>('')
 const isShowing = ref<boolean>(false)
+const loaded = ref<boolean>(false)
 const selectedItem = ref<string | null>(null)
 const input = ref<HTMLInputElement | null>(null)
+const banks = ref<{
+  name: string
+  tag: string
+  website?: string | null
+  aliases?: string | null
+}[]>([])
 
-const hasBanks = computed(() => banks.value.length > 0)
+const fetchGql = useGql()
 const filteredBanks = computed(() => findBanks(banks.value, search.value))
 
-onMounted(() => {
-  loadBanks()
-})
+onMounted(loadBanks)
 
 watch(
   () => props.country,
-  async function () {
+  async function (c, d) {
+    console.log('@@', { c, d })
     await loadBanks()
     await nextTick()
     if (input.value && +new Date() - +pageStart > 15000) {
+      console.log('idk wtf this is')
+      input.value.style.background = 'orange'
       input.value.focus()
     }
   },
@@ -154,20 +166,24 @@ watch(
   },
 )
 
-async function loadBanks() {
-  if (props.disabled) { return }
-  loaded.value = false
-  search.value = ''
-  banks.value = await getBanksList({ country: props.country, isEmbrace: props.isEmbrace })
-  loaded.value = true
-}
-
 function showList() {
   isShowing.value = true
 }
 
 function hideList() {
   isShowing.value = false
+}
+
+async function loadBanks() {
+  if (props.disabled) { return }
+  loaded.value = false
+  const data = props.isEmbrace
+    ? await fetchGql('EmbraceBrandQuery', undefined).then(data => data.brandsFilteredByEmbraceCampaign?.filter(isTruthy)) || []
+    : await fetchGql('BrandsByCountryQuery', { country: props.country }).then(data =>
+      data.brands?.edges.map(o => o?.node).filter(isTruthy),
+    ) || []
+  banks.value = data
+  loaded.value = true
 }
 
 async function onSelectBank(item: { name: string, tag: string }) {

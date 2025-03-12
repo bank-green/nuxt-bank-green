@@ -3,12 +3,12 @@
     <Bank
       v-if="bankData"
       :name="bankData.name"
-      :website="bankData.website"
-      :inherit-brand-rating="bankData.inheritBrandRating"
-      :fossil-free-alliance="bankData.fossilFreeAlliance"
+      :website="bankData.website ?? ''"
+      :inherit-brand-rating="bankData.inheritBrandRating ?? undefined"
+      :fossil-free-alliance="!!bankData.fossilFreeAlliance"
       :rating="getRating()"
-      :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
-      :style="bankData.style"
+      :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
+      :style="''"
       :headline="getFieldOrDefault('headline')"
       :subtitle="getFieldOrDefault('subtitle')"
       :description1="getFieldOrDefault('description1')"
@@ -20,36 +20,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
-import { getDefaultFields, getBankDetail } from '@/utils/banks'
+import { getDefaultFields } from '@/utils/banks'
 
 const route = useRoute()
 const bankTag = ref((route.params.bankTag as string).toLowerCase())
-const details = ref(null)
-const bankData = ref(null)
-const defaultFields = ref(null)
+const defaultFields = ref()
 const { client } = usePrismic()
 
-const updateHead = () => {
-  useHeadHelper(
-    bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
-    'Find and compare the service offerings of ethical and sustainable banks.',
-  )
+const { data: bankData } = await useAsyncGql('BrandByTagQuery',
+  { tag: bankTag.value },
+  { transform: data => data?.brand
+    ? ({
+        ...data.brand,
+        ...data.brand.commentary,
+        bankFatures: data.brand.bankFeatures,
+        inheritBrandRating: data.brand.commentary?.inheritBrandRating,
+        rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
+      })
+    : undefined,
+  },
+)
 
-  if (bankData?.value?.rating) {
-    useHeadRating(bankData.value.rating)
-  }
-}
+useHeadHelper(
+  bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
+  'Find and compare the service offerings of ethical and sustainable banks.',
+)
 
-const fetchBankDetails = async (tag: string) => {
-  details.value = await getBankDetail(tag)
-  bankData.value = details.value
-  updateHead()
-  if (bankData?.value) {
-    const institutionType = bankData.value.institutionType?.[0]?.name || ''
-    defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
-  }
+if (bankData.value) {
+  useHeadRating(bankData.value.rating)
+  const institutionType = bankData.value.institutionType?.[0]?.name || ''
+  defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
 }
 
 const getRating = (): string => {
@@ -61,13 +63,12 @@ const getRating = (): string => {
   if (isCreditUnion && isRatingUnknown) {
     return 'good'
   }
-  return bankData?.value?.rating
+  return bankData?.value?.rating || ''
 }
 
 const getFieldOrDefault = (fieldName: string) => {
-  const value = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  // @ts-expect-error - Indexing with a dynamic string key
+  const value = bankData.value?.[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
   return value || defaultFields.value[fieldName]
 }
-
-onBeforeMount(() => fetchBankDetails(bankTag.value))
 </script>

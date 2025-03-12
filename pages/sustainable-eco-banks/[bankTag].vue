@@ -1,29 +1,32 @@
 <template>
-  <div class="page bg-sushi-50 space-y-8 md:space-y-16 pt-32 pb-16">
+  <div
+    v-if="details"
+    class="page bg-sushi-50 space-y-8 md:space-y-16 pt-32 pb-16"
+  >
     <EcoBankHeader
       :name="details.name"
-      :rating="details.rating"
-      :website="details.website"
-      :inherit-brand-rating="details.inheritBrandRating"
-      :institution-credentials="institutionCredentials"
-      :our-take="details?.ourTake"
+      :rating="details.rating || ''"
+      :website="details.website || ''"
+      :inherit-brand-rating="details.inheritBrandRating || undefined"
+      :institution-credentials="details.institutionCredentials"
+      :our-take="details?.ourTake || ''"
       :prismic-default-page-data="prismicDefaultPageData"
       :fossil-free-alliance="details.fossilFreeAlliance"
-      :top-pick="details.topPick"
+      :top-pick="!!details.topPick "
     />
 
     <EcoBankSwitchSurvey
       :bank-name="details.name"
       :prismic-default-page-data="prismicDefaultPageData"
-      :website="details.website"
+      :website="details.website || ''"
     />
 
     <EcoBankDetail
-      :institution-type="institutionType"
+      :institution-type="details.institutionType"
       :from-the-website="details.fromTheWebsite"
       :name="details.name"
-      :website="details.website"
-      :rating="details.rating"
+      :website="details.website || ''"
+      :rating="details.rating || '' "
       :bank-features="details.bankFeatures"
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
@@ -35,45 +38,46 @@
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
+import type { BankFeature } from '~/components/eco-bank/EcoBankDetail.vue'
 import { components } from '~~/slices'
 
-const details: Ref<any | null> = ref(null)
-const prismicPageData: Ref<Record<string, any> | null> = ref(null)
-const prismicDefaultPageData: Ref<Record<string, any> | null> = ref(null)
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 const route = useRoute()
-const bankTag = route.params.bankTag as string
+const bankTag = ref(((route.params.bankTag as string).toLowerCase()))
 
 const { client } = usePrismic()
 
-details.value = await getBankDetail(bankTag)
+const { data: details } = await useAsyncGql('BrandByTagQuery',
+  { tag: bankTag.value },
+  { transform: data => data?.brand
+    ? ({
+        ...data.brand,
+        ...data.brand.commentary,
+        bankFatures: data.brand.bankFeatures as unknown as BankFeature,
+        inheritBrandRating: data.brand.commentary?.inheritBrandRating,
+        rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
+        website: data.brand?.website || '',
+        institutionCredentials: data.brand?.commentary?.institutionCredentials,
+        institutionType: data.brand?.commentary?.institutionType?.[0]?.name,
+        // TODO: what is this suppose to be?
+        fromTheWebsite: undefined,
+      })
+    : undefined,
+  },
+)
 
-const prismicResponse = await useAsyncData('sfipage', () =>
-  client.getByUID('sfipage', bankTag),
+const { data: prismicPageData } = await useAsyncData('sfipage', () =>
+  client.getByUID('sfipage', bankTag.value),
+{ transform: res => res?.data },
 )
-prismicPageData.value = prismicResponse.data.value?.data || null
-const prismicDefaultDataResponse = await useAsyncData('sfidefaults', () =>
+const { data: prismicDefaultPageData } = await useAsyncData('sfidefaults', () =>
   client.getByID('ZFpGfhEAACEAuFIf'),
+{ transform: res => res?.data },
 )
-prismicDefaultPageData.value
-  = prismicDefaultDataResponse.data.value?.data || null
 
 useHeadHelper(
-  `${details.value.name} Review and Service Offering - Bank.Green`,
+  `${details?.value?.name} Review and Service Offering - Bank.Green`,
 )
 
 prismicComponents.value = ref(defineSliceZoneComponents(components))
-
-const institutionType: ComputedRef<string | undefined> = computed(() => {
-  const result
-    = Array.isArray(details.value.commentary.institutionType)
-    && details.value.commentary.institutionType.length
-      ? details.value.commentary.institutionType[0].name
-      : undefined
-  return result
-})
-
-const institutionCredentials = computed(
-  () => details.value.commentary.institutionCredentials || [],
-)
 </script>

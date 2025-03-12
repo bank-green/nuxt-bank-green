@@ -1,29 +1,20 @@
-import type { _AsyncData } from 'nuxt/dist/app/composables/asyncData'
-import type { BankpageDocument } from 'prismicio-types'
-
-function isValidResponse(response: _AsyncData<BankpageDocument | null, Error | null>) {
-  return !response?.error?.value && response?.data?.value
-}
+import type { Client } from '@prismicio/client'
 
 export async function useBankPage(
-  client: any,
+  client: Client,
   rating: string,
 ) {
   const type = 'bankpage'
-  let bankPage = null
 
   try {
-    const [bankRatingResponse] = await Promise.all([
-      useAsyncData(() => {
-        return client.getByUID(type, rating)
-      }),
-    ])
+    const { data: bankRatingResponse } = await client.getByUID(type, rating)
+
     // check if we get responses at all
-    if (!isValidResponse(bankRatingResponse)) {
+    if (!bankRatingResponse.value) {
       throw new Error(`could not get bankPage default descriptions: ${JSON.stringify(bankRatingResponse.error)}`)
     }
-    bankPage = bankRatingResponse
-    return { bankPage: bankPage.data.value }
+
+    return { bankPage: bankRatingResponse.value }
   } catch (e) {
     console.log(e)
     return { bankPage: null }

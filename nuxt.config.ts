@@ -8,8 +8,12 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxtjs/sitemap',
+    'nuxt-graphql-client',
+
   ],
+
   site: { url: 'https://bank.green' },
+
   sitemap: {
     sources: ['/api/site-pages'],
     defaults: {
@@ -18,9 +22,11 @@ export default defineNuxtConfig({
       changefreq: 'weekly',
     },
   },
+
   prismic: {
     endpoint: 'bankgreen',
   },
+
   runtimeConfig: {
     public: {
       STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
@@ -34,6 +40,7 @@ export default defineNuxtConfig({
       ZAPIER_CONTACT: process.env.ZAPIER_CONTACT,
       ACTIVE_CAMPAIGN_KEY: process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_API_KEY,
       ACTIVE_CAMPAIGN_URL: process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL,
+      GQL_HOST: process.env.PUBLIC_DATA_URL || 'https://data.bank.green/graphql',
     },
     STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
     STRIPE_SUBSCRIPTION_PRICE_1:
@@ -49,6 +56,7 @@ export default defineNuxtConfig({
     STRIPE_SUBSCRIPTION_PRICE_6:
       process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
   },
+
   vue: {
     compilerOptions: {
       directiveTransforms: {
@@ -60,10 +68,13 @@ export default defineNuxtConfig({
       isCustomElement: tag => tag.startsWith('swiper-'),
     },
   },
+
   css: ['@/styles/style.css', '@typeform/embed/build/css/widget.css'],
+
   routeRules: {
     '/sustainable-ethical-banks': { redirect: '/sustainable-eco-banks' },
   },
+
   app: {
     head: {
       meta: [
@@ -177,15 +188,19 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   imports: {
     dirs: ['slices'],
   },
+
   image: {
     provider: 'prismic',
     none: {},
     prismic: {},
   },
+
   ssr: true,
+
   nitro: {
     preset: 'cloudflare',
     prerender: {
@@ -194,12 +209,14 @@ export default defineNuxtConfig({
       ignore: ['/team', '/team/*', '/banks/undefined'],
     },
   },
+
   eslint: {
     checker: false,
     config: {
       stylistic: true,
     },
   },
+
   socialShare: {
     baseUrl: process.env.PUBLIC_DOMAIN_URL,
   },

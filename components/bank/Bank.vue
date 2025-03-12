@@ -112,7 +112,7 @@ import BankLayoutGood from '@/components/bank/BankLayoutGood.vue'
 const props = defineProps<{
   name: string
   website: string
-  inheritBrandRating: {
+  inheritBrandRating?: {
     tag: string
     name: string
   }

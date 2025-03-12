@@ -99,7 +99,7 @@ const props = withDefaults(
       name: string
     }
     rating: string
-    institutionCredentials: any[]
+    institutionCredentials?: { name: string, prismicApiId: string }[]
     prismicDefaultPageData: Record<string, any> | null
     ourTake: string
     fossilFreeAlliance?: boolean
@@ -111,9 +111,5 @@ const props = withDefaults(
   },
 )
 
-console.log('props', props)
-
-const hasInstitutionCredentials: ComputedRef<boolean> = computed(
-  () => props.institutionCredentials && props.institutionCredentials.length > 0,
-)
+const hasInstitutionCredentials: ComputedRef<boolean> = computed(() => !!props.institutionCredentials && props.institutionCredentials.length > 0)
 </script>
