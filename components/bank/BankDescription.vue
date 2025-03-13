@@ -34,7 +34,7 @@ function updateText(text, terms) {
   let modifiedText = text
   terms.forEach((term) => {
     const regex = new RegExp(`\\b${term.name}\\b`, 'gi')
-    modifiedText = modifiedText.replace(regex, `<a href="/glossary#${term.name.toLowerCase()}" class="tooltip" data-tooltip="${term.tooltip}">${term.name}</a>`)
+    modifiedText = modifiedText.replace(regex, `<a href="/glossary#${term.name?.toLowerCase()}" class="tooltip" data-tooltip="${term.tooltip}">${term.name}</a>`)
   })
   processedText.value = modifiedText
 }
