@@ -260,26 +260,24 @@ export async function getDefaultFields(prismicClient, rating, bankname, institut
     description3: '',
     description4: '',
   }
-  try {
-    var prismicData = null
-    if (rating === 'unknown') {
-      prismicData = await useBankPage(prismicClient, 'unknownbank-' + institutionType.toLowerCase().replace(' ', ''))
-    } else {
-      prismicData = await useBankPage(prismicClient, rating + 'bank')
+  const queryKey
+    = rating === 'unknown'
+      ? 'unknownbank-' + institutionType.toLowerCase().replace(' ', '')
+      : rating + 'bank'
+
+  const prismicDefaultFields
+    = await useBankPage(prismicClient, queryKey)
+      .catch(console.error)
+
+  if (prismicDefaultFields) {
+    defaults = {
+      headline: prismicH.asHTML(prismicDefaultFields?.headline),
+      subtitle: prismicH.asHTML(prismicDefaultFields?.subtitle),
+      description1: prismicH.asHTML(prismicDefaultFields?.description1),
+      description2: prismicH.asHTML(prismicDefaultFields?.description2),
+      description3: prismicH.asHTML(prismicDefaultFields?.description3),
+      description4: prismicH.asHTML(prismicDefaultFields?.description4),
     }
-    const prismicDefaultFields = prismicData?.bankPage?.data
-    if (prismicDefaultFields) {
-      defaults = {
-        headline: prismicH.asHTML(prismicDefaultFields?.headline),
-        subtitle: prismicH.asHTML(prismicDefaultFields?.subtitle),
-        description1: prismicH.asHTML(prismicDefaultFields?.description1),
-        description2: prismicH.asHTML(prismicDefaultFields?.description2),
-        description3: prismicH.asHTML(prismicDefaultFields?.description3),
-        description4: prismicH.asHTML(prismicDefaultFields?.description4),
-      }
-    }
-  } catch (e) {
-    console.log(e)
   }
 
   return defaults

@@ -7,16 +7,16 @@ export async function useBankPage(
   const type = 'bankpage'
 
   try {
-    const { data: bankRatingResponse } = await client.getByUID(type, rating)
+    const { data: bankPage } = await client.getByUID(type, rating)
 
     // check if we get responses at all
-    if (!bankRatingResponse) {
-      throw new Error(`could not get bankPage default descriptions: ${JSON.stringify(bankRatingResponse)}`)
+    if (!bankPage) {
+      throw new Error(`could not get bankPage default descriptions: ${JSON.stringify(bankPage)}`)
     }
 
-    return { bankPage: bankRatingResponse.value }
+    return bankPage
   } catch (e) {
     console.error(e)
-    return { bankPage: null }
+    return null
   }
 }
