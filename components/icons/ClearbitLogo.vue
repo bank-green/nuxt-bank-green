@@ -7,28 +7,33 @@
       :style="`width: ${size}px; height: ${size}px`"
       @error="handleError"
     >
-    <img v-else src="/img/icons/bank-icon.svg" :style="`width: ${size}px; height: ${size}px`" :class="`object-contain`">
+    <img
+      v-else
+      src="/img/icons/bank-icon.svg"
+      :style="`width: ${size}px; height: ${size}px`"
+      :class="`object-contain`"
+    >
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
 const showClearbit = ref(true)
 
-function handleError () {
+function handleError() {
   console.log('handling error')
   showClearbit.value = false
 }
 
 const props = withDefaults(
   defineProps<{
-    url: string;
-    imgClass?: string;
-    size?: number;
+    url?: string
+    imgClass?: string
+    size?: number
   }>(),
   {
     size: 60,
-    src: 'doesnotexist' // added to trigger handleError, not ideal, but it works
-  }
+    src: 'doesnotexist', // added to trigger handleError, not ideal, but it works
+  },
 )
 
 const urlDomain = computed(() => {
@@ -64,7 +69,7 @@ const src = computed(() => {
     }
 
     return `https://logo.clearbit.com/${urlDomain.value}?size=${props.size * 2
-      }`
+    }`
   }
   return ''
 })

@@ -38,8 +38,7 @@ const loadBanks = async () => {
     return
   }
 
-  // TODO: Why are we fetching all this data ?
-  // only to filter it out and send it to a component that doesnt use it ?
+  // FIXME: Why are we fetching so much extra data ?
   banks.value = await fetchGql('BrandsQuery', {
     country: country.value,
     recommendedOnly: true,

@@ -21,16 +21,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { getRating } from './getRating'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
-import type { BrandByTagQueryQuery } from '#gql'
 
 const route = useRoute()
-const bankTag = ref((route.params.bankTag as string).toLowerCase())
+const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
 const defaultFields = ref()
 const { client } = usePrismic()
 
-const { data: bankData } = await useAsyncGql('BrandByTagQuery',
+const { data: bankData, error, status } = await useAsyncGql('BrandByTagQuery',
   { tag: bankTag.value },
   { transform: ({ brand }) => brand
     ? ({
@@ -39,8 +39,8 @@ const { data: bankData } = await useAsyncGql('BrandByTagQuery',
         bankFatures: brand.bankFeatures,
         inheritBrandRating: brand.commentary?.inheritBrandRating,
         rating: getRating(brand),
-        // TODO: what is this? where is style suppose to come from ?
-        style: '',
+        // FIXME: what even is this? where is style even suppose to come from?
+        style: undefined,
       })
     : undefined,
   },
@@ -55,19 +55,6 @@ if (bankData.value) {
   useHeadRating(bankData.value.rating)
   const institutionType = bankData.value.institutionType?.[0]?.name || ''
   defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
-}
-
-const getRating = (b: BrandByTagQueryQuery['brand']): string => {
-  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
-  // but after the text copy has been calculated
-  const inheritedRating = b?.commentary?.ratingInherited?.toLocaleLowerCase()
-  const isCreditUnion = b?.commentary?.institutionType?.[0]?.name === 'Credit Union'
-  const isRatingUnknown = b?.commentary?.rating === 'unknown'
-
-  if (isCreditUnion && isRatingUnknown) {
-    return 'good'
-  }
-  return inheritedRating || ''
 }
 
 const getFieldOrDefault = (fieldName: string) => {
