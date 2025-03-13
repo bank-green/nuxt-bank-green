@@ -144,13 +144,10 @@ onMounted(loadBanks)
 
 watch(
   () => props.country,
-  async function (c, d) {
-    console.log('@@', { c, d })
+  async function () {
     await loadBanks()
     await nextTick()
     if (input.value && +new Date() - +pageStart > 15000) {
-      console.log('idk wtf this is')
-      input.value.style.background = 'orange'
       input.value.focus()
     }
   },
