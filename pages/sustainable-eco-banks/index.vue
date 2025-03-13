@@ -20,7 +20,10 @@
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
-        <div class="flex flex-col md:flex-row">
+        <div
+          :key="country ? 'has-country' : 'no-country'"
+          class="flex flex-col md:flex-row"
+        >
           <div
             class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
             style="height: fit-content"
@@ -125,7 +128,7 @@ const loadBanks = async ({
     return
   }
 
-  const result_gql = await fetchGql('FilteredBrandsQuery', {
+  banks.value = await fetchGql('FilteredBrandsQuery', {
     country: country.value,
     regions, subregions,
     topPick,
@@ -152,26 +155,8 @@ const loadBanks = async ({
         || a.name - b.name),
   )
 
-  const result = await getBanksListWithFilter({
-    country: country.value,
-    regions,
-    subregions,
-    topPick,
-    fossilFreeAlliance,
-    features,
-  })
-  const original_bank_values = result
-    // filter show_on_sustainable_banks_page
-    .filter(a => a.showOnSustainableBanksPage)
-    // sort by top_pick first, then fossil_free_alliance_rating, then by name
-    .sort(
-      (a, b) =>
-        b.topPick - a.topPick
-        || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
-        || a.name - b.name)
-
-  banks.value = result_gql
   loading.value = false
+
   if (banks.value.length === 0) {
     errorMessage.value = true
     //  "Sorry, we don't have any banks that meet the required filter."
