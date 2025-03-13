@@ -244,7 +244,7 @@ import type { SliceZoneComponents, SliceLike } from '@prismicio/vue'
 
 const { isBE } = useCountry()
 
-export type BankFeature = {
+interface BankFeature {
   offered: string
   feature: {
     name: string
