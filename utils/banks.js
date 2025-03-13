@@ -263,7 +263,7 @@ export async function getDefaultFields(prismicClient, rating, bankname, institut
     ? 'unknownbank-' + institutionType.toLowerCase().replace(' ', '')
     : rating + 'bank'
 
-  const prismicDefaultFields = await prismicClient.getByUID('bankpage', queryKey)
+  const { data: prismicDefaultFields } = await prismicClient.getByUID('bankpage', queryKey)
     .catch(console.error)
 
   if (prismicDefaultFields) {
