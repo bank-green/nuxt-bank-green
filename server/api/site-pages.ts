@@ -1,4 +1,12 @@
-import { callBackend } from '~/utils/banks'
+import gqlClient from '../gqlServerClient'
+
+type QueryReturn = {
+  brands: {
+    edges: {
+      node: { tag: string }
+    }[]
+  }
+}
 
 export default async () => {
   const query = `
@@ -13,8 +21,9 @@ export default async () => {
       }`
 
   // Execute the GraphQL query
-  const json = await callBackend(query)
+  const json = (await gqlClient.request(query).catch(console.error) || []) as QueryReturn
 
   // Extract and return the name and tag from the response
-  return json.data.brands.edges.map(o => '/banks/' + o.node.tag)
+
+  return json?.brands?.edges?.map(o => '/banks/' + o.node.tag)
 }
