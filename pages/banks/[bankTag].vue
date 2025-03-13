@@ -6,9 +6,9 @@
       :website="bankData.website ?? ''"
       :inherit-brand-rating="bankData.inheritBrandRating ?? undefined"
       :fossil-free-alliance="!!bankData.fossilFreeAlliance"
-      :rating="getRating()"
+      :rating="bankData.rating"
       :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
-      :style="''"
+      :style="bankData.style"
       :headline="getFieldOrDefault('headline')"
       :subtitle="getFieldOrDefault('subtitle')"
       :description1="getFieldOrDefault('description1')"
@@ -23,6 +23,7 @@
 import { ref } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '@/utils/banks'
+import type { BrandByTagQueryQuery } from '#gql'
 
 const route = useRoute()
 const bankTag = ref((route.params.bankTag as string).toLowerCase())
@@ -31,13 +32,15 @@ const { client } = usePrismic()
 
 const { data: bankData } = await useAsyncGql('BrandByTagQuery',
   { tag: bankTag.value },
-  { transform: data => data?.brand
+  { transform: ({ brand }) => brand
     ? ({
-        ...data.brand,
-        ...data.brand.commentary,
-        bankFatures: data.brand.bankFeatures,
-        inheritBrandRating: data.brand.commentary?.inheritBrandRating,
-        rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
+        ...brand,
+        ...brand.commentary,
+        bankFatures: brand.bankFeatures,
+        inheritBrandRating: brand.commentary?.inheritBrandRating,
+        rating: getRating(brand),
+        // TODO: what is this? where is style suppose to come from ?
+        style: '',
       })
     : undefined,
   },
@@ -54,16 +57,17 @@ if (bankData.value) {
   defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
 }
 
-const getRating = (): string => {
+const getRating = (b: BrandByTagQueryQuery['brand']): string => {
   // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
   // but after the text copy has been calculated
-  const isCreditUnion = bankData?.value?.institutionType?.[0]?.name === 'Credit Union'
-  const isRatingUnknown = bankData?.value?.rating === 'unknown'
+  const inheritedRating = b?.commentary?.ratingInherited?.toLocaleLowerCase()
+  const isCreditUnion = b?.commentary?.institutionType?.[0]?.name === 'Credit Union'
+  const isRatingUnknown = b?.commentary?.rating === 'unknown'
 
   if (isCreditUnion && isRatingUnknown) {
     return 'good'
   }
-  return bankData?.value?.rating || ''
+  return inheritedRating || ''
 }
 
 const getFieldOrDefault = (fieldName: string) => {
