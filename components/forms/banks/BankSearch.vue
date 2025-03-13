@@ -16,7 +16,7 @@
         :aria-expanded="isShowing"
         :placeholder="disabled
           ? 'Set a country first'
-          : loaded
+          : !loaded
             ? 'Loading banks...'
             : !banks.length
               ? 'No banks available in this country.'
@@ -66,7 +66,7 @@
           }"
         >
           <slot
-            v-if="!filteredBanks"
+            v-if="!filteredBanks.length"
             name="not-listed"
           >
             <NuxtLink to="/not-listed">
