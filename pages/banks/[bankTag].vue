@@ -23,14 +23,14 @@
 import { ref } from 'vue'
 import { getRating } from './getRating'
 import Bank from '@/components/bank/Bank.vue'
-import { getDefaultFields } from '@/utils/banks'
+import { getDefaultFields } from '~/utils/banks'
 
 const route = useRoute()
 const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
 const defaultFields = ref()
 const { client } = usePrismic()
 
-const { data: bankData, error, status } = await useAsyncGql('BrandByTagQuery',
+const { data: bankData } = await useAsyncGql('BrandByTagQuery',
   { tag: bankTag.value },
   { transform: ({ brand }) => brand
     ? ({
