@@ -107,6 +107,7 @@ import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
 import Swoosh from '@/components/Swoosh.vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import SignupBox from '@/components/forms/SignupBox.vue'
 
 const checkList = [
   'Learn about the issues via our blog updates',
