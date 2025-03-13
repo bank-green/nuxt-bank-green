@@ -1,7 +1,6 @@
 import * as prismicH from '@prismicio/helpers'
 
 import { get } from './backend'
-import { useBankPage } from './prismic/bankpage'
 
 const gqlUrl = 'https://data.bank.green/graphql' // fallback, should be in env
 const options = {}
@@ -260,14 +259,12 @@ export async function getDefaultFields(prismicClient, rating, bankname, institut
     description3: '',
     description4: '',
   }
-  const queryKey
-    = rating === 'unknown'
-      ? 'unknownbank-' + institutionType.toLowerCase().replace(' ', '')
-      : rating + 'bank'
+  const queryKey = rating === 'unknown'
+    ? 'unknownbank-' + institutionType.toLowerCase().replace(' ', '')
+    : rating + 'bank'
 
-  const prismicDefaultFields
-    = await useBankPage(prismicClient, queryKey)
-      .catch(console.error)
+  const prismicDefaultFields = await prismicClient.getByUID('bankpage', queryKey)
+    .catch(console.error)
 
   if (prismicDefaultFields) {
     defaults = {
