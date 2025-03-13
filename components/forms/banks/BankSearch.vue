@@ -147,7 +147,7 @@ watch(
   async function () {
     await loadBanks()
     await nextTick()
-    if (input.value && +new Date() - +pageStart > 15000) {
+    if (input.value?.focus && +new Date() - +pageStart > 15000) {
       input.value.focus()
     }
   },
