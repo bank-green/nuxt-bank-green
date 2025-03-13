@@ -45,7 +45,7 @@ import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 defineProps<{
   id: string
   name: string
-  website: string
+  website?: string
   isSelected: boolean
   isFocused?: boolean
 }>()
