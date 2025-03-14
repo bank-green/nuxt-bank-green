@@ -15,7 +15,7 @@
     >
       <div class="md:w-1/2 max-w-md">
         <PrismicRichText
-          class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4 text-white"
+          class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4 text-black"
           :class="light ? 'text-blue-900' : 'text-white'"
           :field="call?.data?.text"
           fallback="Banks live and die on their reputations. Mass movements of money to fossil-free competitors puts those reputations at grave risk. By moving your money to a sustainable financial institution, you will:"
@@ -49,7 +49,7 @@ import CheckList from '@/components/CheckList.vue'
 
 const { client } = usePrismic()
 const { data: call } = await useAsyncData('calltoaction', () =>
-  client.getSingle('calltoaction')
+  client.getSingle('calltoaction'),
 )
 defineProps({
   title: String,
@@ -57,6 +57,6 @@ defineProps({
   checkListItems: Array,
   buttonText: String,
   light: Boolean,
-  spaced: Boolean
+  spaced: Boolean,
 })
 </script>
