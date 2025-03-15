@@ -32,6 +32,9 @@
             >
               {{ prismicDefaultPageData?.link_copy_methodology_page }}
             </NuxtLink>
+            <p v-if="formattedLastReviewed" class="mt-4 text-gray-600">
+              Last Reviewed in {{ formattedLastReviewed }}
+            </p>
           </div>
         </div>
         <div class="col-span-2 md:col-span-1">
@@ -99,7 +102,8 @@ const props = withDefaults(
       name: string
     }
     rating: string
-    institutionCredentials: any[]
+    lastReviewed: string | null
+    institutionCredentials: Array<{ prismicApiId: string, name: string }>
     prismicDefaultPageData: Record<string, any> | null
     ourTake: string
     fossilFreeAlliance?: boolean
@@ -108,11 +112,20 @@ const props = withDefaults(
   {
     fossilFreeAlliance: false,
     topPick: false,
+    lastReviewed: null,
   },
 )
 
 console.log('props', props)
-
+const formattedLastReviewed = computed(() => {
+  if (!props.lastReviewed) return null
+  const date = new Date(props.lastReviewed)
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+  })
+})
+console.log('formattedLastReviewed', formattedLastReviewed.value)
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
   () => props.institutionCredentials && props.institutionCredentials.length > 0,
 )

@@ -27,6 +27,7 @@ const commentaryFields = `{
         name
     }
     description3,
+    lastReviewed,
     amountFinancedSince2016,
     topPick,
     fossilFreeAlliance,
@@ -201,6 +202,7 @@ export async function getBankDetail(bankTag) {
           website,
           commentary {
               rating,
+              lastReviewed,
               ratingInherited,
               inheritBrandRating {
                   tag
