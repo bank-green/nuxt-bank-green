@@ -250,7 +250,7 @@ const props = defineProps<{
   name: string
   website: string
   rating: string
-  bankFeatures: NonNullable<BrandByTagQueryQuery['brand']>['bankFeatures'][]
+  bankFeatures: NonNullable<BrandByTagQueryQuery['brand']>['bankFeatures']
   tag: string
   prismicPageData: Record<string, any> | null
   prismicDefaultPageData: Record<string, any> | null
