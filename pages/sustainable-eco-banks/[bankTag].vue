@@ -58,7 +58,7 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
         website: data.brand?.website || '',
         institutionCredentials: data.brand?.commentary?.institutionCredentials,
         institutionType: data.brand?.commentary?.institutionType?.[0]?.name,
-        // TODO: what is this suppose to be?
+        // FIXME: what is this suppose to be?
         fromTheWebsite: undefined,
       })
     : undefined,

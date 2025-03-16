@@ -39,7 +39,7 @@ const { data: bankData } = await useAsyncGql('BrandByTagQuery',
         bankFatures: brand.bankFeatures,
         inheritBrandRating: brand.commentary?.inheritBrandRating,
         rating: getRating(brand),
-        // FIXME: what even is this? where is style even suppose to come from?
+        // FIXME: where is 'style' suppose to come from?
         style: undefined,
       })
     : undefined,
