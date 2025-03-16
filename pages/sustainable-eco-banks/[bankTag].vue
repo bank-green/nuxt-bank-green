@@ -38,7 +38,6 @@
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
-import type { BankFeature } from '~/components/eco-bank/EcoBankDetail.vue'
 import { components } from '~~/slices'
 
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
@@ -53,7 +52,7 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
     ? ({
         ...data.brand,
         ...data.brand.commentary,
-        bankFatures: data.brand.bankFeatures as unknown as BankFeature,
+        bankFatures: data.brand.bankFeatures,
         inheritBrandRating: data.brand.commentary?.inheritBrandRating,
         rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
         website: data.brand?.website || '',

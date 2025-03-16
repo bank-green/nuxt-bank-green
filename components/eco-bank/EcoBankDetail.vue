@@ -241,24 +241,16 @@
 
 <script setup lang="ts">
 import type { SliceZoneComponents, SliceLike } from '@prismicio/vue'
+import type { BrandByTagQueryQuery } from '#gql'
 
 const { isBE } = useCountry()
-
-interface BankFeature {
-  offered: string
-  feature: {
-    name: string
-  }
-  details?: string | null
-}
-
 const props = defineProps<{
   institutionType: string | undefined
   fromTheWebsite?: string
   name: string
   website: string
   rating: string
-  bankFeatures: BankFeature[]
+  bankFeatures: NonNullable<BrandByTagQueryQuery['brand']>['bankFeatures'][]
   tag: string
   prismicPageData: Record<string, any> | null
   prismicDefaultPageData: Record<string, any> | null
