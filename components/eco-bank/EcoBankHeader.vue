@@ -45,10 +45,6 @@
               v-if="prismicOurTake && prismicOurTake.length > 0"
               :field="prismicOurTake"
             />
-            <div
-              v-else-if="ourTake"
-              v-html="ourTake"
-            />
             <span v-else-if="rating === 'ok'">This bank is ok</span>
             <span v-else-if="rating === 'great'">This bank is great</span>
           </div>
@@ -108,7 +104,6 @@ const props = withDefaults(
     institutionCredentials: any[]
     prismicDefaultPageData: Record<string, any> | null
     prismicOurTake?: RichTextField
-    ourTake: string
     fossilFreeAlliance?: boolean
     topPick?: boolean
   }>(),
