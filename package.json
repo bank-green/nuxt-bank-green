@@ -44,6 +44,7 @@
     "lint-staged": "^15.2.10",
     "lottie-web": "^5.10.0",
     "nuxt": "^3.14.159",
+    "nuxt-graphql-client": "^0.2.43",
     "playwright-core": "^1.43.0",
     "slice-machine-ui": "^2.11.0",
     "stripe": "^12.8.0",

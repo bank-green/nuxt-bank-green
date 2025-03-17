@@ -3,11 +3,11 @@
     <Bank
       v-if="bankData"
       :name="bankData.name"
-      :website="bankData.website"
-      :inherit-brand-rating="bankData.inheritBrandRating"
-      :fossil-free-alliance="bankData.fossilFreeAlliance"
-      :rating="getRating()"
-      :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
+      :website="bankData.website ?? ''"
+      :inherit-brand-rating="bankData.inheritBrandRating ?? undefined"
+      :fossil-free-alliance="!!bankData.fossilFreeAlliance"
+      :rating="bankData.rating"
+      :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
       :style="bankData.style"
       :headline="getFieldOrDefault('headline')"
       :subtitle="getFieldOrDefault('subtitle')"
@@ -20,48 +20,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
-import { getDefaultFields, getBankDetail } from '@/utils/banks'
+import { getDefaultFields } from '~/utils/banks'
 
 const route = useRoute()
-const bankTag = ref((route.params.bankTag as string).toLowerCase())
-const details = ref(null)
-const bankData = ref(null)
-const defaultFields = ref(null)
+const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
+const defaultFields = ref()
 const { client } = usePrismic()
 
-const updateHead = () => {
-  useHeadHelper(
-    bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
-    'Find and compare the service offerings of ethical and sustainable banks.',
-  )
+const { data: bankData } = await useAsyncGql('BrandByTagQuery',
+  { tag: bankTag.value },
+  { transform: ({ brand }) => brand
+    ? ({
+        ...brand,
+        ...brand.commentary,
+        bankFatures: brand.bankFeatures,
+        inheritBrandRating: brand.commentary?.inheritBrandRating,
+        rating: getRating(brand),
+        // FIXME: where is 'style' suppose to come from?
+        style: undefined,
+      })
+    : undefined,
+  },
+)
 
-  if (bankData?.value?.rating) {
-    useHeadRating(bankData.value.rating)
-  }
-}
+useHeadHelper(
+  bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
+  'Find and compare the service offerings of ethical and sustainable banks.',
+)
 
-const fetchBankDetails = async (tag: string) => {
-  details.value = await getBankDetail(tag)
-  bankData.value = details.value
-  updateHead()
-  if (bankData?.value) {
-    const institutionType = bankData.value.institutionType?.[0]?.name || ''
-    defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
-  }
-}
-
-const getRating = (): string => {
-  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
-  // but after the text copy has been calculated
-  const isCreditUnion = bankData?.value?.institutionType?.[0]?.name === 'Credit Union'
-  const isRatingUnknown = bankData?.value?.rating === 'unknown'
-
-  if (isCreditUnion && isRatingUnknown) {
-    return 'good'
-  }
-  return bankData?.value?.rating
+if (bankData.value) {
+  useHeadRating(bankData.value.rating)
+  const institutionType = bankData.value.institutionType?.[0]?.name || ''
+  defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
 }
 
 const getFieldOrDefault = (fieldName: string) => {
@@ -73,5 +65,15 @@ const getFieldOrDefault = (fieldName: string) => {
   }
 }
 
-onBeforeMount(() => fetchBankDetails(bankTag.value))
+const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
+  const inheritedRating = commentary?.ratingInherited?.toLocaleLowerCase()
+  const isCreditUnion = commentary?.institutionType?.[0]?.name === 'Credit Union'
+  const isRatingUnknown = commentary?.rating === 'unknown'
+
+  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
+  if (isCreditUnion && isRatingUnknown) {
+    return 'good'
+  }
+  return inheritedRating || ''
+}
 </script>

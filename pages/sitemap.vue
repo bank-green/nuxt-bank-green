@@ -10,7 +10,7 @@
             <p><a :href="`/banks/${bank.tag}`">{{ bank.name }}</a></p>
             <p>
               <a
-                v-if="bank.sustainablenksPage"
+                v-if="bank.isSustainable"
                 :href="`/sustainable-eco-banks/${bank.tag}`"
               >{{ bank.name }}</a>
             </p>
@@ -22,8 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncData } from 'nuxt/app'
-import { getAllBanksList } from '../utils/banks.js'
-
-const { data: banks } = useAsyncData('banks', getAllBanksList)
+const { data: banks } = await useAsyncGql({
+  operation: 'AllBanksList',
+  options: {
+    transform: data =>
+      !data?.brands?.edges
+        ? []
+        : data.brands.edges
+          .map(o => o?.node && { name: o.node.name, tag: o.node.tag, isSustainable: o.node.commentary?.showOnSustainableBanksPage },
+          ).filter(isTruthy)
+    ,
+  },
+})
 </script>
