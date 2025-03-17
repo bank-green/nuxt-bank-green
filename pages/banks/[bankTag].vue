@@ -58,8 +58,11 @@ if (bankData.value) {
 }
 
 const getFieldOrDefault = (fieldName: string) => {
-  // @ts-expect-error - Indexing with a dynamic string key
-  const value = bankData.value?.[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
-  return value || defaultFields.value[fieldName]
+  const trimmedText = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
+  if (trimmedText) {
+    return bankData.value[fieldName] || defaultFields.value[fieldName]
+  } else {
+    return defaultFields.value[fieldName]
+  }
 }
 </script>
