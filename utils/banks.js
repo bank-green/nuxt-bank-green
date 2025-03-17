@@ -196,43 +196,43 @@ export async function getCountry() {
 export async function getBankDetail(bankTag) {
   const brandQuery = `
     query BrandByTagQuery($tag: String!) {
-        brand(tag: $tag) {
-          tag,
-          name,
-          website,
-          commentary {
-              rating,
-              lastReviewed,
-              ratingInherited,
-              inheritBrandRating {
-                  tag
-                  name
-              }
-              amountFinancedSince2016,
-              topPick,
-              fossilFreeAlliance,
-              fossilFreeAllianceRating,
-              headline,
-              description1,
-              description2,
-              description3,
-              subtitle,
-              ourTake,
-              showOnSustainableBanksPage,
-              institutionType {
-                  name
-              }
-              institutionCredentials {
-                  name
-                  prismicApiId
-              }
-            },
-          bankFeatures ${bankFeaturesFields}
-          countries {
-            code
-          }
+      brand(tag: $tag) {
+        tag,
+        name,
+        website,
+        commentary {
+            rating,
+            lastReviewed,
+            ratingInherited,
+            inheritBrandRating {
+                tag
+                name
+            }
+            amountFinancedSince2016,
+            topPick,
+            fossilFreeAlliance,
+            fossilFreeAllianceRating,
+            headline,
+            description1,
+            description2,
+            description3,
+            subtitle,
+            ourTake,
+            showOnSustainableBanksPage,
+            institutionType {
+                name
+            }
+            institutionCredentials {
+                name
+                prismicApiId
+            }
+          },
+        bankFeatures ${bankFeaturesFields}
+        countries {
+          code
         }
       }
+    }
     `
   const variables = {
     tag: bankTag,
