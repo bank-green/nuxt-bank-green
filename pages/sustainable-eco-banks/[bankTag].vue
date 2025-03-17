@@ -42,7 +42,7 @@ import { components } from '~~/slices'
 
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 const route = useRoute()
-const bankTag = ref(((route.params.bankTag as string).toLowerCase()))
+const bankTag = ref((route.params.bankTag as string).toLowerCase())
 
 const { client } = usePrismic()
 
@@ -58,8 +58,7 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
         website: data.brand?.website || '',
         institutionCredentials: data.brand?.commentary?.institutionCredentials,
         institutionType: data.brand?.commentary?.institutionType?.[0]?.name,
-        // FIXME: what is this suppose to be?
-        fromTheWebsite: undefined,
+        fromTheWebsite: data.brand?.commentary?.fromTheWebsite,
       })
     : undefined,
   },
