@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getRating } from './getRating'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '~/utils/banks'
 
