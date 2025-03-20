@@ -7,6 +7,7 @@
       :inherit-brand-rating="bankData.inheritBrandRating"
       :fossil-free-alliance="bankData.fossilFreeAlliance"
       :rating="getRating()"
+      :last-reviewed="bankData.lastReviewed"
       :show-embrace-breakup="!!bankData.countries.find((c: any) => c.code === 'GB')"
       :style="bankData.style"
       :headline="getFieldOrDefault('headline')"
