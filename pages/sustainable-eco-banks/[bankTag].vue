@@ -6,7 +6,7 @@
       :website="details.website"
       :inherit-brand-rating="details.inheritBrandRating"
       :institution-credentials="institutionCredentials"
-      :our-take="details?.ourTake"
+      :prismic-our-take="prismicPageData?.our_take"
       :prismic-default-page-data="prismicDefaultPageData"
       :last-reviewed="details.lastReviewed"
       :fossil-free-alliance="details.fossilFreeAlliance"
