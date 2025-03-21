@@ -40,4 +40,4 @@ jobs:
       - run: npm ci
       - run: npm i -g wrangler
       - run: npm run build
-      - run: npm run publish
+      - run: npm run deploy
