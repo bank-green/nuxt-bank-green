@@ -32,6 +32,7 @@
             >
               {{ prismicDefaultPageData?.link_copy_methodology_page }}
             </NuxtLink>
+            <LastReviewed :last-reviewed="lastReviewed" />
           </div>
         </div>
         <div class="col-span-2 md:col-span-1">
@@ -92,6 +93,8 @@
 <script setup lang="ts">
 import type { RichTextField } from '@prismicio/types'
 
+import LastReviewed from '@/components/lastRated.vue'
+
 const props = withDefaults(
   defineProps<{
     website: string
@@ -101,7 +104,8 @@ const props = withDefaults(
       name: string
     }
     rating: string
-    institutionCredentials: any[]
+    lastReviewed: string | null
+    institutionCredentials: Array<{ prismicApiId: string, name: string }>
     prismicDefaultPageData: Record<string, any> | null
     prismicOurTake?: RichTextField
     fossilFreeAlliance?: boolean
@@ -110,11 +114,11 @@ const props = withDefaults(
   {
     fossilFreeAlliance: false,
     topPick: false,
+    lastReviewed: null,
   },
 )
 
 console.log('props', props)
-
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
   () => props.institutionCredentials && props.institutionCredentials.length > 0,
 )

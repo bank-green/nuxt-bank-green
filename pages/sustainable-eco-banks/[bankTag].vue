@@ -8,6 +8,7 @@
       :institution-credentials="institutionCredentials"
       :prismic-our-take="prismicPageData?.our_take"
       :prismic-default-page-data="prismicDefaultPageData"
+      :last-reviewed="details.lastReviewed"
       :fossil-free-alliance="details.fossilFreeAlliance"
       :top-pick="details.topPick"
     />

@@ -25,6 +25,7 @@
           >
             How Bank.Green rates institutions
           </NuxtLink>
+          <LastReviewed :last-reviewed="lastReviewed" />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -108,6 +109,8 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 import BankLayoutBad from '@/components/bank/BankLayoutBad.vue'
 import BankLayoutGood from '@/components/bank/BankLayoutGood.vue'
 
+import LastReviewed from '@/components/lastRated.vue'
+
 // Props definition
 const props = defineProps<{
   name: string
@@ -116,6 +119,7 @@ const props = defineProps<{
     tag: string
     name: string
   }
+  lastReviewed: string | null
   fossilFreeAlliance: boolean
   headline: string
   subtitle: string
