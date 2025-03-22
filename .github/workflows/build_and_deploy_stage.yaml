@@ -36,7 +36,7 @@ jobs:
       - run: npm ci
       - run: npm i -g wrangler
       - run: npm run build
-      - run: npm run publish
+      - run: npm run deploy
       - uses: schnerring/cloudflare-pages-branch-alias-action@v1
         id: pages-branch-alias
         with:
