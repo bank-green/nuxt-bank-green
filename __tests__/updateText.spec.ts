@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { describe, test, expect } from 'vitest'
 import { addGlossaryToText } from '~/utils/addGlossaryToText'
 
@@ -42,6 +43,12 @@ describe('addGlossaryToolTip', () => {
     const expected = '<p><a href="/glossary#xyz" class="tooltip" data-tooltip="this is a tooltip for XYZ">XYZ</a><a href="https://www.google.com/" target="_blank">search XYZ engine</a> the quick brown fox jumps over the lazy dogs</p>'
 
     expect(addGlossaryToText(text, mockGlossary)).toEqual(expected)
+  })
+  test.each([undefined, null, 123, { test: 123 }])('should return text if terms are invalid', (terms) => {
+    const text = '<p>ABC</p>'
+
+    // @ts-expect-error
+    expect(addGlossaryToText(text, terms)).toEqual(text)
   })
   test('should work on real world example', () => {
     const text = '<p><a rel="noopener noreferrer" href="https://gabv.org" target="_blank">Global Alliance on Banking Values</a></p>'
