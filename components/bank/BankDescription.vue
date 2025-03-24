@@ -23,12 +23,12 @@ onMounted(async () => {
       name: term.term,
       tooltip: term.tooltip,
     }))
-    updateText(props.text, terms)
+    processedText.value = addGlossaryToText(props.text, terms)
   }
 })
 
 watch(() => props.text, (newText) => {
-  addGlossaryToText(newText, glossaryData?.terms)
+  processedText.value = addGlossaryToText(newText, glossaryData?.terms)
 })
 </script>
 
