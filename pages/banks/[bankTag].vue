@@ -23,11 +23,24 @@
 import { ref } from 'vue'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '~/utils/banks'
+import type { BrandByTagQueryQuery } from '#gql'
 
 const route = useRoute()
 const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
 const defaultFields = ref()
 const { client } = usePrismic()
+
+const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
+  const inheritedRating = commentary?.ratingInherited?.toLocaleLowerCase()
+  const isCreditUnion = commentary?.institutionType?.[0]?.name === 'Credit Union'
+  const isRatingUnknown = commentary?.rating === 'unknown'
+
+  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
+  if (isCreditUnion && isRatingUnknown) {
+    return 'good'
+  }
+  return inheritedRating || ''
+}
 
 const { data: bankData } = await useAsyncGql('BrandByTagQuery',
   { tag: bankTag.value },
@@ -63,17 +76,5 @@ const getFieldOrDefault = (fieldName: string) => {
   } else {
     return defaultFields.value[fieldName]
   }
-}
-
-const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
-  const inheritedRating = commentary?.ratingInherited?.toLocaleLowerCase()
-  const isCreditUnion = commentary?.institutionType?.[0]?.name === 'Credit Union'
-  const isRatingUnknown = commentary?.rating === 'unknown'
-
-  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
-  if (isCreditUnion && isRatingUnknown) {
-    return 'good'
-  }
-  return inheritedRating || ''
 }
 </script>
