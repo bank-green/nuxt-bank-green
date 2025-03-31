@@ -8,7 +8,7 @@
     "postinstall": "nuxt prepare",
     "clean": "nuxt clean",
     "slicemachine": "start-slicemachine",
-    "publish": "npx wrangler publish",
+    "deploy": "npx wrangler deploy",
     "stage": "npx wrangler publish --env staging",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

@@ -5,12 +5,13 @@
   >
     <EcoBankHeader
       :name="details.name"
-      :rating="details.rating || ''"
-      :website="details.website || ''"
-      :inherit-brand-rating="details.inheritBrandRating || undefined"
-      :institution-credentials="details.institutionCredentials"
-      :our-take="details?.ourTake || ''"
+      :rating="details.rating"
+      :website="details.website"
+      :inherit-brand-rating="details.inheritBrandRating"
+      :institution-credentials="institutionCredentials"
+      :prismic-our-take="prismicPageData?.our_take"
       :prismic-default-page-data="prismicDefaultPageData"
+      :last-reviewed="details.lastReviewed"
       :fossil-free-alliance="details.fossilFreeAlliance"
       :top-pick="!!details.topPick "
     />

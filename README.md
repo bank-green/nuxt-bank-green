@@ -57,7 +57,7 @@ Publish to `test.bank.green` (run after building)
 `npm run stage`
 
 Publish to `bank.green`
-`npm run publish`
+`npm run deploy`
 
 # Tests
 ## Unit Tests/Integration Tests

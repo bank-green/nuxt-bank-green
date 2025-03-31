@@ -8,6 +8,7 @@
       :fossil-free-alliance="!!bankData.fossilFreeAlliance"
       :rating="bankData.rating"
       :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
+      :last-reviewed="bankData.lastReviewed"
       :style="bankData.style"
       :headline="getFieldOrDefault('headline')"
       :subtitle="getFieldOrDefault('subtitle')"
