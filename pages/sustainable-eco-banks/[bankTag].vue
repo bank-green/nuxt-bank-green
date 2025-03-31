@@ -7,8 +7,8 @@
       :name="details.name"
       :rating="details.rating"
       :website="details.website"
-      :inherit-brand-rating="details.inheritBrandRating"
-      :institution-credentials="institutionCredentials"
+      :inherit-brand-rating="details?.inheritBrandRating || undefined"
+      :institution-credentials="details.institutionCredentials"
       :prismic-our-take="prismicPageData?.our_take"
       :prismic-default-page-data="prismicDefaultPageData"
       :last-reviewed="details.lastReviewed"
@@ -57,7 +57,7 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
         inheritBrandRating: data.brand.commentary?.inheritBrandRating,
         rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
         website: data.brand?.website || '',
-        institutionCredentials: data.brand?.commentary?.institutionCredentials,
+        institutionCredentials: data.brand?.commentary?.institutionCredentials || [],
         institutionType: data.brand?.commentary?.institutionType?.[0]?.name,
         fromTheWebsite: data.brand?.commentary?.fromTheWebsite,
       })
