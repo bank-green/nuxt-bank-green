@@ -2,7 +2,7 @@
   <div class="flex items-center">
     <div class="relative w-6 h-6 mr-3">
       <ClearbitLogo
-        :url="website?.valueOf()"
+        :url="website"
         :size="24"
         img-class="absolute inset-0 z-20"
       />
@@ -43,10 +43,10 @@
 import ClearbitLogo from '../../icons/ClearbitLogo.vue'
 
 defineProps<{
-  id: String;
-  name: String;
-  website: String;
-  isSelected: Boolean;
-  isFocused?: Boolean;
+  id: string
+  name: string
+  website?: string
+  isSelected: boolean
+  isFocused?: boolean
 }>()
 </script>
