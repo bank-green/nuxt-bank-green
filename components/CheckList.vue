@@ -35,5 +35,5 @@ const props = defineProps<{
   dark?: boolean
 }>()
 
-const dark = props.dark ?? false
+const dark = computed(() => props.dark ?? false)
 </script>
