@@ -220,6 +220,8 @@ import { components } from '~~/slices'
 import { usePrismicSEO } from '~~/composables/useHeadHelpers'
 import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
+const router = useRouter()
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { bank, warningsMap } = useContactForm('homepage', ['bank'])
@@ -245,5 +247,9 @@ const { country } = useCountry()
 
 watch(country, (_) => {
   bank.value = null
+})
+
+watch(bank, ({ tag }) => {
+  if (tag) router.push(`banks/${tag}`)
 })
 </script>
