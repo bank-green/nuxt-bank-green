@@ -50,7 +50,7 @@ query FilteredBrandsQuery(
   $country: String
   $first: Int
   $topPick: Boolean
-  $sustainableOnly: Boolean
+  $recommendedOnly: Boolean
   $fossilFreeAlliance: Boolean
   $features: [String]
   $regions: [String]
@@ -62,7 +62,7 @@ query FilteredBrandsQuery(
     country: $country
     first: $first
     topPick: $topPick
-    recommendedOnly: $sustainableOnly
+    recommendedOnly: $recommendedOnly
     fossilFreeAlliance: $fossilFreeAlliance
     features: $features
     regions: $regions

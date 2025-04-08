@@ -134,7 +134,7 @@ const loadBanks = async ({
     topPick,
     fossilFreeAlliance,
     features,
-    sustainableOnly: true,
+    recommendedOnly: true,
     first: 300,
     withCommentary: true,
     withFeatures: true,
