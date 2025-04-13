@@ -6,7 +6,7 @@
       :website="details.website"
       :inherit-brand-rating="details.inheritBrandRating"
       :institution-credentials="institutionCredentials"
-      :prismic-our-take="prismicPageData?.our_take"
+      :our-take="details?.ourTake"
       :prismic-default-page-data="prismicDefaultPageData"
       :fossil-free-alliance="details.fossilFreeAlliance"
       :top-pick="details.topPick"
@@ -43,41 +43,37 @@ const prismicDefaultPageData: Ref<Record<string, any> | null> = ref(null)
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 const route = useRoute()
 const bankTag = route.params.bankTag as string
-if (!bankTag) {
-  throw new Error(
-    'no banktag supplied: ' + JSON.stringify(route)
-  )
-} else {
-  const { client } = usePrismic()
 
-  details.value = await getBankDetail(bankTag)
-  const prismicResponse = await useAsyncData('sfipage', () =>
-    client.getByUID('sfipage', bankTag)
-  )
-  prismicPageData.value = prismicResponse.data.value?.data || null
-  const prismicDefaultDataResponse = await useAsyncData('sfidefaults', () =>
-    client.getByID('ZFpGfhEAACEAuFIf')
-  )
-  prismicDefaultPageData.value =
-    prismicDefaultDataResponse.data.value?.data || null
+const { client } = usePrismic()
 
-  useHeadHelper(
-    `${details.value.name} Review and Service Offering - Bank.Green`
-  )
+details.value = await getBankDetail(bankTag)
 
-  prismicComponents.value = ref(defineSliceZoneComponents(components))
-}
+const prismicResponse = await useAsyncData('sfipage', () =>
+  client.getByUID('sfipage', bankTag),
+)
+prismicPageData.value = prismicResponse.data.value?.data || null
+const prismicDefaultDataResponse = await useAsyncData('sfidefaults', () =>
+  client.getByID('ZFpGfhEAACEAuFIf'),
+)
+prismicDefaultPageData.value
+  = prismicDefaultDataResponse.data.value?.data || null
+
+useHeadHelper(
+  `${details.value.name} Review and Service Offering - Bank.Green`,
+)
+
+prismicComponents.value = ref(defineSliceZoneComponents(components))
 
 const institutionType: ComputedRef<string | undefined> = computed(() => {
-  const result =
-    Array.isArray(details.value.commentary.institutionType) &&
-    details.value.commentary.institutionType.length
+  const result
+    = Array.isArray(details.value.commentary.institutionType)
+    && details.value.commentary.institutionType.length
       ? details.value.commentary.institutionType[0].name
       : undefined
   return result
 })
 
 const institutionCredentials = computed(
-  () => details.value.commentary.institutionCredentials || []
+  () => details.value.commentary.institutionCredentials || [],
 )
 </script>

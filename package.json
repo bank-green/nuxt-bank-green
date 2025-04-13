@@ -43,15 +43,17 @@
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "lottie-web": "^5.10.0",
-    "nuxt": "^3.6.5",
+    "nuxt": "^3.14.159",
     "playwright-core": "^1.43.0",
-    "slice-machine-ui": "^1.6.0",
+    "slice-machine-ui": "^2.10.2",
     "stripe": "^12.8.0",
     "typescript": "^5.5.4",
     "vite-plugin-eslint2": "^4.4.0",
     "vitest": "^1.4.0"
   },
   "dependencies": {
+    "@prismicio/helpers": "^2.0.0",
+    "lock": "^1.1.0",
     "nuxt-jsonld": "^2.0.8",
     "swiper": "^11.1.14",
     "vue-turnstile": "^1.0.9"
