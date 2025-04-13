@@ -15,7 +15,7 @@
     />
     <NuxtLink
       to="/donate"
-      class="button-green mt-6 md:w-48 flex justify-center"
+      class="button-green mt-6 md:w-48 flex justify-center text-primary-dark"
     >
       <PrismicText
         wrapper="span"

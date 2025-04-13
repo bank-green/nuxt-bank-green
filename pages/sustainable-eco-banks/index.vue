@@ -90,7 +90,6 @@
 <script setup>
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-
 import { components } from '~~/slices'
 
 const sliceComps = ref(defineSliceZoneComponents(components))

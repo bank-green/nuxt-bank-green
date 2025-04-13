@@ -2,8 +2,8 @@ img {
   max-width: none;
 }
 
-.textlink a{
-  @apply text-sushi-700  hover:underline hover:text-sushi-800 focus:underline !important;
+.textlink a {
+  @apply text-sushi-700 hover:underline hover:text-sushi-800 focus:underline !important;
 }
 
 .constrain-images img {
@@ -12,7 +12,7 @@ img {
 
 html {
   font-family:
-    Inter,
+    Poppins,
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -32,7 +32,7 @@ html {
 @supports (font-variation-settings: normal) {
   html {
     font-family:
-      Inter var,
+      Poppins var,
       system-ui,
       -apple-system,
       BlinkMacSystemFont,
@@ -64,8 +64,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
 a.link {
-  @apply font-medium text-sushi-500  hover:underline hover:text-sushi-600 focus:underline !important;
+  @apply font-medium text-sushi-500 hover:underline hover:text-sushi-600 focus:underline !important;
 }
 
 .underlineLink a {
@@ -124,8 +125,9 @@ a.button-green {
   @apply opacity-50;
   pointer-events: none;
 }
+
 .button-white {
-  @apply block font-medium bg-gray-100 hover:bg-gray-200 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-gray-100 text-primary-dark p-4 text-center w-full rounded-2xl  capitalize;
+  @apply block font-medium bg-gray-100 hover:bg-gray-200 focus:outline-none border border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-gray-100 text-primary-dark p-4 text-center w-full rounded-2xl capitalize;
 }
 
 * {
@@ -156,9 +158,11 @@ a.button-green {
 .route-enter-active-class .page-fade-in {
   @apply duration-300 transform-gpu ease-out;
 }
+
 .route-enter-from-class .page-fade-in {
   @apply opacity-0 -translate-y-1;
 }
+
 .route-enter-to-class .page-fade-in {
   @apply opacity-100 translate-y-0;
 }
@@ -191,4 +195,3 @@ article img {
 .backdrop-blur {
   backdrop-filter: blur(3px);
 }
-
