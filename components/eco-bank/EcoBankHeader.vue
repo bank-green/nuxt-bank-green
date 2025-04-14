@@ -103,7 +103,7 @@ const props = withDefaults(
       tag: string
       name: string
     }
-    rating: string
+    rating?: string
     lastReviewed: string | null
     institutionCredentials: Array<{ prismicApiId: string, name: string }>
     prismicDefaultPageData: Record<string, any> | null
@@ -118,7 +118,6 @@ const props = withDefaults(
   },
 )
 
-console.log('props', props)
 const hasInstitutionCredentials: ComputedRef<boolean> = computed(
   () => props.institutionCredentials && props.institutionCredentials.length > 0,
 )

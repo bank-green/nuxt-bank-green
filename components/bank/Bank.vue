@@ -114,7 +114,7 @@ import LastReviewed from '@/components/lastRated.vue'
 const props = defineProps<{
   name: string
   website: string
-  inheritBrandRating: {
+  inheritBrandRating?: {
     tag: string
     name: string
   }

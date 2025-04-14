@@ -20,7 +20,10 @@
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
-        <div class="flex flex-col md:flex-row">
+        <div
+          :key="country ? 'has-country' : 'no-country'"
+          class="flex flex-col md:flex-row"
+        >
           <div
             class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
             style="height: fit-content"
@@ -92,6 +95,8 @@ import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import { components } from '~~/slices'
 
+const fetchGql = useGql()
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
@@ -122,25 +127,36 @@ const loadBanks = async ({
   if (!country.value) {
     return
   }
-  const result = await getBanksListWithFilter({
+
+  banks.value = await fetchGql('FilteredBrandsQuery', {
     country: country.value,
-    regions,
-    subregions,
+    regions, subregions,
     topPick,
     fossilFreeAlliance,
     features,
-  })
-  banks.value = result
+    recommendedOnly: true,
+    first: 300,
+    withCommentary: true,
+    withFeatures: true,
+  }).then(data =>
+    data.brands.edges
+      .map(o => o.node)
+      .map(b => ({
+        ...b,
+        ...b.commentary,
+        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
+      }))
     // filter show_on_sustainable_banks_page
-    .filter(a => a.showOnSustainableBanksPage)
+      .filter(a => a.showOnSustainableBanksPage)
     // sort by top_pick first, then fossil_free_alliance_rating, then by name
-    .sort(
-      (a, b) =>
+      .sort((a, b) =>
         b.topPick - a.topPick
         || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
-        || a.name - b.name,
-    )
+        || a.name - b.name),
+  )
+
   loading.value = false
+
   if (banks.value.length === 0) {
     errorMessage.value = true
     //  "Sorry, we don't have any banks that meet the required filter."

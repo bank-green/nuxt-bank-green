@@ -37,12 +37,14 @@
       id="section-two"
       class="contain flex flex-col-reverse md:flex-row justify-center items-center py-8 space-y-12 md:space-y-0 md:space-x-24"
     >
-      <RenderWhenVisibleInViewPort
-        :options="{ rootMargin: '0px 0px 100% 0px' }"
-        class="max-w-sm w-full md:w-1/2"
-      >
-        <LazyPiggybankAnimation />
-      </RenderWhenVisibleInViewPort>
+      <ClientOnly>
+        <RenderWhenVisibleInViewPort
+          :options="{ rootMargin: '0px 0px 100% 0px' }"
+          class="max-w-sm w-full md:w-1/2"
+        >
+          <LazyPiggybankAnimation />
+        </RenderWhenVisibleInViewPort>
+      </ClientOnly>
       <div class="md:w-1/2">
         <slot name="section2" />
         <div
