@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import { defineProps } from 'vue'
+import type { RichTextField } from '@prismicio/types'
+
+const props = defineProps<{
+  list: (string | RichTextField)[]
+  dark?: boolean
+}>()
+
+const dark = computed(() => props.dark ?? false)
+</script>
+
 <template>
   <div
     :class="`${dark ? 'text-white' : 'bg-white text-gray-700 md:shadow-md'
@@ -25,15 +37,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from 'vue'
-import type { RichTextField } from '@prismicio/types'
-
-const props = defineProps<{
-  list: (string | RichTextField)[]
-  dark?: boolean
-}>()
-
-const dark = computed(() => props.dark ?? false)
-</script>

@@ -1,12 +1,3 @@
-<template>
-  <p
-    v-if="formattedDate"
-    class="text-sm"
-  >
-    Last Rated in {{ formattedDate }}
-  </p>
-</template>
-
 <script setup lang="ts">
 const props = defineProps<{
   lastReviewed: string | null
@@ -21,3 +12,12 @@ const formattedDate = computed(() => {
   })
 })
 </script>
+
+<template>
+  <p
+    v-if="formattedDate"
+    class="text-sm"
+  >
+    Last Rated in {{ formattedDate }}
+  </p>
+</template>

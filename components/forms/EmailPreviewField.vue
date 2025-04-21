@@ -1,18 +1,3 @@
-<template>
-  <div class="flex appearance-none w-full text-sm leading-5 shadow-soft">
-    <label
-      name="name"
-      class="w-20"
-      :class="labelClasses"
-    >
-      {{ title || name }}
-    </label>
-    <span class="text-gray-800">
-      {{ value }}
-    </span>
-  </div>
-</template>
-
 <script setup lang="ts">
 const props = defineProps<{
   value: string
@@ -28,3 +13,18 @@ const labelClasses = computed(() => {
   return 'text-gray-500 font-semibold'
 })
 </script>
+
+<template>
+  <div class="flex appearance-none w-full text-sm leading-5 shadow-soft">
+    <label
+      name="name"
+      class="w-20"
+      :class="labelClasses"
+    >
+      {{ title || name }}
+    </label>
+    <span class="text-gray-800">
+      {{ value }}
+    </span>
+  </div>
+</template>

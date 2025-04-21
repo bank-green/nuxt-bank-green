@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import ClearbitLogo from '../../icons/ClearbitLogo.vue'
+
+defineProps<{
+  id: string
+  name: string
+  website?: string
+  isSelected: boolean
+  isFocused?: boolean
+}>()
+</script>
+
 <template>
   <div class="flex items-center">
     <div class="relative w-6 h-6 mr-3">
@@ -38,15 +50,3 @@
     </svg>
   </span>
 </template>
-
-<script setup lang="ts">
-import ClearbitLogo from '../../icons/ClearbitLogo.vue'
-
-defineProps<{
-  id: string
-  name: string
-  website?: string
-  isSelected: boolean
-  isFocused?: boolean
-}>()
-</script>

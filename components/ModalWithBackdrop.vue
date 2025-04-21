@@ -1,3 +1,22 @@
+<script setup lang="ts">
+defineProps<{
+  modelValue: boolean
+  title?: string
+}>()
+
+const emits = defineEmits(['update:modelValue'])
+const escapePressed = useKeyPress('Escape')
+
+watch(escapePressed, (val, prev) => {
+  if (val && !prev) {
+    closeModal()
+  }
+})
+function closeModal() {
+  emits('update:modelValue', false)
+}
+</script>
+
 <template>
   <transition
     enter-from-class="opacity-0"
@@ -57,22 +76,3 @@
     </div>
   </transition>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  modelValue: boolean
-  title?: string
-}>()
-
-const emits = defineEmits(['update:modelValue'])
-const escapePressed = useKeyPress('Escape')
-
-watch(escapePressed, (val, prev) => {
-  if (val && !prev) {
-    closeModal()
-  }
-})
-function closeModal() {
-  emits('update:modelValue', false)
-}
-</script>

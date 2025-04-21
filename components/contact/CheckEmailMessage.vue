@@ -17,10 +17,20 @@
         width="50"
         height="51"
       >
-        <circle cx="25" cy="25.0222" r="25" fill="#87B448" />
+        <circle
+          cx="25"
+          cy="25.0222"
+          r="25"
+          fill="#87B448"
+        />
       </mask>
       <g mask="url(#mask0)">
-        <circle cx="25" cy="25.0222" r="25" fill="#DFE9F1" />
+        <circle
+          cx="25"
+          cy="25.0222"
+          r="25"
+          fill="#DFE9F1"
+        />
         <path
           d="M-0.201904 38.0222H50V50.0222H-0.201904V38.0222Z"
           fill="#C8D9E7"

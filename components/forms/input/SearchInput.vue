@@ -1,3 +1,50 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const input = ref()
+withDefaults(
+  defineProps<{
+    modelValue: string
+    placeholder: string
+    usePencil?: boolean
+    warning?: string | boolean
+    dark?: boolean
+    disabled?: boolean
+    hasExtaIconSpacing?: boolean
+    readOnly?: boolean
+  }>(),
+  {
+    usePencil: false,
+    warning: false,
+    dark: false,
+    disabled: false,
+    hasExtaIconSpacing: true,
+    readOnly: false,
+  },
+)
+defineExpose({
+  focus: () => input.value?.focus(),
+})
+
+const emit = defineEmits([
+  'update:modelValue',
+  'onKeydown',
+  'onFocus',
+  'onBlur',
+  'onClick',
+  'onCloseClick',
+])
+
+const onInput = ($event: Event) => {
+  emit('update:modelValue', ($event.target as HTMLInputElement).value)
+}
+const onKeyDown = () => emit('onKeydown')
+const onFocus = () => emit('onFocus')
+const onBlur = () => emit('onBlur')
+const onClick = () => emit('onClick')
+const onCloseClick = () => emit('onCloseClick')
+</script>
+
 <template>
   <div
     aria-haspopup="listbox"
@@ -113,50 +160,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const input = ref()
-withDefaults(
-  defineProps<{
-    modelValue: string
-    placeholder: string
-    usePencil?: boolean
-    warning?: string | boolean
-    dark?: boolean
-    disabled?: boolean
-    hasExtaIconSpacing?: boolean
-    readOnly?: boolean
-  }>(),
-  {
-    usePencil: false,
-    warning: false,
-    dark: false,
-    disabled: false,
-    hasExtaIconSpacing: true,
-    readOnly: false,
-  },
-)
-defineExpose({
-  focus: () => input.value?.focus(),
-})
-
-const emit = defineEmits([
-  'update:modelValue',
-  'onKeydown',
-  'onFocus',
-  'onBlur',
-  'onClick',
-  'onCloseClick',
-])
-
-const onInput = ($event: Event) => {
-  emit('update:modelValue', ($event.target as HTMLInputElement).value)
-}
-const onKeyDown = () => emit('onKeydown')
-const onFocus = () => emit('onFocus')
-const onBlur = () => emit('onBlur')
-const onClick = () => emit('onClick')
-const onCloseClick = () => emit('onCloseClick')
-</script>

@@ -1,24 +1,3 @@
-<template>
-  <ClientOnly>
-    <transition
-      enter-active-class="transition transform-gpu duration-200 ease-out"
-      enter-from-class="opacity-0 scale-95"
-      enter-to-class="opacity-100 scale-100"
-      leave-active-class="transition transform-gpu duration-100 ease-in"
-      leave-from-class="opacity-100 scale-100"
-      leave-to-class="opacity-0 scale-95"
-      appear
-    >
-      <div
-        ref="observer"
-        :style="styles"
-      >
-        <slot v-if="hasBeenInViewport" />
-      </div>
-    </transition>
-  </ClientOnly>
-</template>
-
 <script setup lang="ts">
 /**
  * Mounts the slot when it is visible in viewport
@@ -89,3 +68,24 @@ onUnmounted(() => {
   }
 })
 </script>
+
+<template>
+  <ClientOnly>
+    <transition
+      enter-active-class="transition transform-gpu duration-200 ease-out"
+      enter-from-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition transform-gpu duration-100 ease-in"
+      leave-from-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-95"
+      appear
+    >
+      <div
+        ref="observer"
+        :style="styles"
+      >
+        <slot v-if="hasBeenInViewport" />
+      </div>
+    </transition>
+  </ClientOnly>
+</template>

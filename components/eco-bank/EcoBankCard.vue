@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
+
+const props = defineProps<{
+  item: any
+  isNoCredit: boolean
+}>()
+
+const features = computed(() => {
+  // filter our credit card
+  const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
+  const allFeatures: Record<string, any> = {}
+  for (const [featKey, featValue] of Object.entries(features)) {
+    if (
+      (props.isNoCredit && featKey === 'Credit Card')
+      || !featValue.isChecked
+    ) {
+      continue
+    }
+    allFeatures[featKey] = features[featKey]
+  }
+  return allFeatures
+})
+</script>
+
 <template>
   <NuxtLink
     :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
@@ -15,7 +40,10 @@
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
-        <div v-if="item" class="flex items-center truncate">
+        <div
+          v-if="item"
+          class="flex items-center truncate"
+        >
           <div class="relative w-12 h-12">
             <ClearbitLogo
               :url="item.website"
@@ -44,7 +72,10 @@
           </div>
         </div>
 
-        <div v-else class="w-full flex items-center truncate">
+        <div
+          v-else
+          class="w-full flex items-center truncate"
+        >
           <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse" />
           <div class="ml-3 flex-1 font-semibold text-gray-200 block truncate">
             loading...
@@ -78,34 +109,12 @@
       leave-from-class="opacity-100 scale-100"
       leave-to-class="opacity-0 scale-95"
     >
-      <div v-if="Object.keys(features).length" class="py-4 px-7 flex flex-wrap">
+      <div
+        v-if="Object.keys(features).length"
+        class="py-4 px-7 flex flex-wrap"
+      >
         <EcoBankFeaturesList :features="features" />
       </div>
     </transition>
   </NuxtLink>
 </template>
-
-<script setup lang="ts">
-import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
-
-const props = defineProps<{
-  item: any;
-  isNoCredit: Boolean;
-}>()
-
-const features = computed(() => {
-  // filter our credit card
-  const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
-  const allFeatures: Record<string, any> = {}
-  for (const [featKey, featValue] of Object.entries(features)) {
-    if (
-      (props.isNoCredit && featKey === 'Credit Card') ||
-      !featValue.isChecked
-    ) {
-      continue
-    }
-    allFeatures[featKey] = features[featKey]
-  }
-  return allFeatures
-})
-</script>

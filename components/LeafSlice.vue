@@ -1,3 +1,11 @@
+<script setup lang="ts">
+defineProps<{
+  title: string
+  img: string
+  description: string
+}>()
+</script>
+
 <template>
   <div
     class="flex flex-col p-6 md:p-4 lg:p-6 gap-4 bg-white rounded-tl-[80px] rounded-br-[80px] items-center"
@@ -17,11 +25,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  title: string
-  img: string
-  description: string
-}>()
-</script>

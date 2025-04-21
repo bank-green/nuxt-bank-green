@@ -1,3 +1,13 @@
+<script setup>
+import RenderWhenVisibleInViewPort from './func/RenderWhenVisibleInViewPort.client.vue'
+
+defineProps({
+  placeholderWidth: Number,
+  placeholderHeight: Number,
+  path: String,
+})
+</script>
+
 <template>
   <RenderWhenVisibleInViewPort
     :placeholder-width="placeholderWidth"
@@ -7,13 +17,3 @@
     <LazyLottieFile :path="path" />
   </RenderWhenVisibleInViewPort>
 </template>
-
-<script setup>
-import RenderWhenVisibleInViewPort from './func/RenderWhenVisibleInViewPort.client.vue'
-
-defineProps({
-  placeholderWidth: Number,
-  placeholderHeight: Number,
-  path: String
-})
-</script>

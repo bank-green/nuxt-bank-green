@@ -1,100 +1,3 @@
-<template>
-  <div class="col-span-2">
-    <BaseField
-      v-clickaway="hideList"
-      name="bankSearch"
-      class="w-full"
-      :dark="dark"
-      :title="title"
-      :show-warning="warning"
-      :info-tooltip="infoTooltip"
-    >
-      <SearchInput
-        ref="input"
-        v-model="search"
-        :disabled="disabled"
-        :aria-expanded="isShowing"
-        :placeholder="disabled
-          ? 'Set a country first'
-          : !loaded
-            ? 'Loading banks...'
-            : !banks.length
-              ? 'No banks available in this country.'
-              : 'Search bank...'"
-        :warning="warning"
-        :dark="dark"
-        @keydown.down="
-          (event: PointerEvent) =>
-            ($refs['listPicker'] as typeof ListPicker).incrementFocus(event)
-        "
-        @keydown.up="
-          (event: PointerEvent) =>
-            ($refs['listPicker'] as typeof ListPicker).decrementFocus(event)
-        "
-        @keydown.enter="
-          (_event: PointerEvent) =>
-            ($refs['listPicker'] as typeof ListPicker).selectCurrentItem()
-        "
-        @on-focus="showList"
-        @on-click="showList"
-        @on-close-click="onCloseClick"
-      >
-        <template #icon>
-          <LoadingJumper
-            v-if="!loaded && !disabled"
-            class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
-          />
-          <img
-            v-else
-            src="/img/icons/bank-icon.svg"
-            class="h-6 w-6 absolute inset-0 m-4"
-          >
-        </template>
-      </SearchInput>
-
-      <transition
-        leave-active-class="transition ease-in duration-100"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <div
-          v-if="isShowing"
-          class="absolute z-10 mt-1 w-full rounded-md shadow-lg"
-          :class="{
-            'bg-white': filteredBanks.length,
-            'bg-gray-100': !filteredBanks.length,
-          }"
-        >
-          <slot
-            v-if="!filteredBanks.length"
-            name="not-listed"
-          >
-            <NuxtLink to="/not-listed">
-              <div class="text-gray-500 text-center p-4 shadow-lg underline">
-                My bank isn't listed
-              </div>
-            </NuxtLink>
-          </slot>
-          <ListPicker
-            v-else
-            ref="listPicker"
-            v-slot="{ item }"
-            :items="filteredBanks"
-            @select-item="onSelectBank"
-          >
-            <BankSearchItem
-              :id="item.tag"
-              :name="item.name"
-              :website="item.website"
-              :is-selected="item === modelValue"
-            />
-          </ListPicker>
-        </div>
-      </transition>
-    </BaseField>
-  </div>
-</template>
-
 <script setup lang="ts">
 import LoadingJumper from '../../LoadingJumper.vue'
 import SearchInput from '../input/SearchInput.vue'
@@ -198,3 +101,100 @@ function onCloseClick() {
   emit('update:modelValue', null)
 }
 </script>
+
+<template>
+  <div class="col-span-2">
+    <BaseField
+      v-clickaway="hideList"
+      name="bankSearch"
+      class="w-full"
+      :dark="dark"
+      :title="title"
+      :show-warning="warning"
+      :info-tooltip="infoTooltip"
+    >
+      <SearchInput
+        ref="input"
+        v-model="search"
+        :disabled="disabled"
+        :aria-expanded="isShowing"
+        :placeholder="disabled
+          ? 'Set a country first'
+          : !loaded
+            ? 'Loading banks...'
+            : !banks.length
+              ? 'No banks available in this country.'
+              : 'Search bank...'"
+        :warning="warning"
+        :dark="dark"
+        @keydown.down="
+          (event: PointerEvent) =>
+            ($refs['listPicker'] as typeof ListPicker).incrementFocus(event)
+        "
+        @keydown.up="
+          (event: PointerEvent) =>
+            ($refs['listPicker'] as typeof ListPicker).decrementFocus(event)
+        "
+        @keydown.enter="
+          (_event: PointerEvent) =>
+            ($refs['listPicker'] as typeof ListPicker).selectCurrentItem()
+        "
+        @on-focus="showList"
+        @on-click="showList"
+        @on-close-click="onCloseClick"
+      >
+        <template #icon>
+          <LoadingJumper
+            v-if="!loaded && !disabled"
+            class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
+          />
+          <img
+            v-else
+            src="/img/icons/bank-icon.svg"
+            class="h-6 w-6 absolute inset-0 m-4"
+          >
+        </template>
+      </SearchInput>
+
+      <transition
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="isShowing"
+          class="absolute z-10 mt-1 w-full rounded-md shadow-lg"
+          :class="{
+            'bg-white': filteredBanks.length,
+            'bg-gray-100': !filteredBanks.length,
+          }"
+        >
+          <slot
+            v-if="!filteredBanks.length"
+            name="not-listed"
+          >
+            <NuxtLink to="/not-listed">
+              <div class="text-gray-500 text-center p-4 shadow-lg underline">
+                My bank isn't listed
+              </div>
+            </NuxtLink>
+          </slot>
+          <ListPicker
+            v-else
+            ref="listPicker"
+            v-slot="{ item }"
+            :items="filteredBanks"
+            @select-item="onSelectBank"
+          >
+            <BankSearchItem
+              :id="item.tag"
+              :name="item.name"
+              :website="item.website"
+              :is-selected="item === modelValue"
+            />
+          </ListPicker>
+        </div>
+      </transition>
+    </BaseField>
+  </div>
+</template>

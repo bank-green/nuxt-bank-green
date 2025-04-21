@@ -1,3 +1,19 @@
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    background?: 'light' | 'dark'
+  }>(),
+  {
+    background: 'light',
+  },
+)
+
+const { client } = usePrismic()
+const { data: donationData } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage'),
+)
+</script>
+
 <template>
   <div
     v-if="donationData"
@@ -25,19 +41,3 @@
     </NuxtLink>
   </div>
 </template>
-
-<script setup lang="ts">
-withDefaults(
-  defineProps<{
-    background?: 'light' | 'dark'
-  }>(),
-  {
-    background: 'light',
-  },
-)
-
-const { client } = usePrismic()
-const { data: donationData } = await useAsyncData('donation', () =>
-  client.getSingle('donationpage'),
-)
-</script>

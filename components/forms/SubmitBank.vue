@@ -1,3 +1,29 @@
+<script setup lang="ts">
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import TextField from '@/components/forms/TextField.vue'
+
+const props = withDefaults(
+  defineProps<{
+    tag: string
+  }>(),
+  {
+    tag: 'submitbank',
+  },
+)
+
+const {
+  firstName,
+  email,
+  bank,
+  isAgreeTerms,
+  isAgreeMarketing,
+  isSent,
+  warningsMap,
+  send,
+  busy,
+} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}))
+</script>
+
 <template>
   <div
     v-if="isSent"
@@ -62,7 +88,10 @@
             :warning="warningsMap['isAgreeTerms']"
           >
             I have read and understood Bank.Green’s
-            <NuxtLink to="/privacy" class="link">
+            <NuxtLink
+              to="/privacy"
+              class="link"
+            >
               privacy policy
             </NuxtLink>.
           </CheckboxSection>
@@ -94,29 +123,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import TextField from '@/components/forms/TextField.vue'
-
-const props = withDefaults(
-  defineProps<{
-    tag: string;
-  }>(),
-  {
-    tag: 'submitbank'
-  }
-)
-
-const {
-  firstName,
-  email,
-  bank,
-  isAgreeTerms,
-  isAgreeMarketing,
-  isSent,
-  warningsMap,
-  send,
-  busy
-} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}))
-</script>

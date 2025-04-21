@@ -1,3 +1,52 @@
+<script setup lang="ts">
+import type { SliceZoneComponents, SliceLike } from '@prismicio/vue'
+import type { BrandByTagQueryQuery } from '#gql'
+
+const { isBE } = useCountry()
+const props = defineProps<{
+  institutionType: string | undefined
+  fromTheWebsite?: string
+  name: string
+  website: string
+  rating: string
+  bankFeatures: NonNullable<BrandByTagQueryQuery['brand']>['bankFeatures']
+  tag: string
+  prismicPageData: Record<string, any> | null
+  prismicDefaultPageData: Record<string, any> | null
+  prismicSliceComponents: SliceZoneComponents<SliceLike<string>, unknown>
+}>()
+
+const tabIds = computed(() =>
+  ['impact', 'security', 'services', 'convenience'].filter(
+    tabId =>
+      props?.prismicPageData
+      && props.prismicPageData[tabId]
+      && props.prismicPageData[tabId].length > 0,
+  ),
+)
+
+const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
+
+function getBankFeature(featureName: string, defaultValue: string = 'No') {
+  const feature = props.bankFeatures.find(
+    feature => feature.feature.name === featureName,
+  )
+  if (feature) { return feature.details || feature.offered }
+  return defaultValue
+}
+
+function getInvertedBankFeature(
+  featureName: string,
+  defaultValue: string = 'No',
+) {
+  const feature = props.bankFeatures.find(
+    feature => feature.feature.name === featureName,
+  )
+  if (feature) { return feature.details || (feature.offered === 'Yes' ? 'No' : 'Yes') }
+  return defaultValue
+}
+</script>
+
 <template>
   <div class="contain space-y-8 md:space-y-16">
     <Tab
@@ -238,52 +287,3 @@
     />
   </div>
 </template>
-
-<script setup lang="ts">
-import type { SliceZoneComponents, SliceLike } from '@prismicio/vue'
-import type { BrandByTagQueryQuery } from '#gql'
-
-const { isBE } = useCountry()
-const props = defineProps<{
-  institutionType: string | undefined
-  fromTheWebsite?: string
-  name: string
-  website: string
-  rating: string
-  bankFeatures: NonNullable<BrandByTagQueryQuery['brand']>['bankFeatures']
-  tag: string
-  prismicPageData: Record<string, any> | null
-  prismicDefaultPageData: Record<string, any> | null
-  prismicSliceComponents: SliceZoneComponents<SliceLike<string>, unknown>
-}>()
-
-const tabIds = computed(() =>
-  ['impact', 'security', 'services', 'convenience'].filter(
-    tabId =>
-      props?.prismicPageData
-      && props.prismicPageData[tabId]
-      && props.prismicPageData[tabId].length > 0,
-  ),
-)
-
-const prismicSlices = props?.prismicPageData?.slices?.length > 0 ? props?.prismicPageData?.slices : props?.prismicDefaultPageData?.slices
-
-function getBankFeature(featureName: string, defaultValue: string = 'No') {
-  const feature = props.bankFeatures.find(
-    feature => feature.feature.name === featureName,
-  )
-  if (feature) { return feature.details || feature.offered }
-  return defaultValue
-}
-
-function getInvertedBankFeature(
-  featureName: string,
-  defaultValue: string = 'No',
-) {
-  const feature = props.bankFeatures.find(
-    feature => feature.feature.name === featureName,
-  )
-  if (feature) { return feature.details || (feature.offered === 'Yes' ? 'No' : 'Yes') }
-  return defaultValue
-}
-</script>

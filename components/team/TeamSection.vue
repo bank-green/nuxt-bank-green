@@ -1,3 +1,12 @@
+<script setup lang="ts">
+defineProps({
+  departmentName: {
+    type: String,
+    default: 'Other team',
+  },
+})
+</script>
+
 <template>
   <div
     class="flex flex-col gap-6 w-full"
@@ -14,12 +23,3 @@
     </ul>
   </div>
 </template>
-
-<script setup lang="ts">
-defineProps({
-  departmentName: {
-    type: String,
-    default: 'Other team'
-  }
-})
-</script>

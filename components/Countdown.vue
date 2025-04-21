@@ -1,3 +1,48 @@
+<script setup lang="ts">
+import { clearInterval } from 'timers'
+import {
+  isValid,
+  isFuture,
+  formatDistanceToNowStrict,
+  formatRelative,
+} from 'date-fns'
+
+const props = defineProps<{
+  eventStart: Date
+  eventIsPastMessage: string
+  showTooltip: boolean
+}>()
+
+const isUpcoming = ref(false)
+const interval: Ref<NodeJS.Timer | null> = ref(null)
+const tooltipText = ref('')
+const durationString = ref('')
+
+function timerCount() {
+  if (isFuture(props.eventStart)) {
+    durationString.value = formatDistanceToNowStrict(props.eventStart, {
+      addSuffix: false,
+      unit: 'day',
+    })
+  } else {
+    isUpcoming.value = false
+    if (interval.value) {
+      clearInterval(interval.value)
+    }
+  }
+}
+
+onMounted(() => {
+  if (isValid(props.eventStart)) {
+    timerCount()
+    interval.value = setInterval(() => {
+      timerCount()
+    }, 1000)
+    tooltipText.value = formatRelative(props.eventStart, new Date())
+  }
+})
+</script>
+
 <template>
   <span
     v-if="isUpcoming"
@@ -16,46 +61,3 @@
   </span>
   <span v-else-if="eventIsPastMessage">{{ eventIsPastMessage }}</span>
 </template>
-
-<script setup lang="ts">
-import { clearInterval } from 'timers'
-import {
-  isValid,
-  isFuture,
-  formatDistanceToNowStrict,
-  formatRelative
-} from 'date-fns'
-
-const props = defineProps<{
-  eventStart: Date;
-  eventIsPastMessage: String;
-  showTooltip: Boolean;
-}>()
-
-const isUpcoming = ref(false)
-const interval: Ref<NodeJS.Timer | null> = ref(null)
-const tooltipText = ref('')
-const durationString = ref('')
-
-function timerCount () {
-  if (isFuture(props.eventStart)) {
-    durationString.value = formatDistanceToNowStrict(props.eventStart, {
-      addSuffix: false,
-      unit: 'day'
-    })
-  } else {
-    isUpcoming.value = false
-    interval.value && clearInterval(interval.value)
-  }
-}
-
-onMounted(() => {
-  if (isValid(props.eventStart)) {
-    timerCount()
-    interval.value = setInterval(() => {
-      timerCount()
-    }, 1000)
-    tooltipText.value = formatRelative(props.eventStart, new Date())
-  }
-})
-</script>

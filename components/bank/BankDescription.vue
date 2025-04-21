@@ -1,10 +1,3 @@
-<template>
-  <div
-    class="md:text-2xl tracking-wide mb-4 prose"
-    v-html="processedText"
-  />
-</template>
-
 <script setup lang="ts">
 import { onMounted, watch, ref } from 'vue'
 import { addGlossaryToText } from '~/utils/addGlossaryToText'
@@ -31,6 +24,13 @@ watch(() => props.text, (newText) => {
   processedText.value = addGlossaryToText(newText, glossaryData?.terms)
 })
 </script>
+
+<template>
+  <div
+    class="md:text-2xl tracking-wide mb-4 prose"
+    v-html="processedText"
+  />
+</template>
 
 <style>
 .tooltip {
