@@ -3,10 +3,11 @@ name: Build and Deploy Main
 on:
   push:
     branches: [main]
+  # Disabling since this may be causing usage spikes
   # Trigger every hour
-  schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch:
+  # schedule:
+  #  - cron: "0 * * * *"
+  # workflow_dispatch:
 
 jobs:
   build:
