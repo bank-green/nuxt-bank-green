@@ -1,11 +1,32 @@
+<script setup>
+import links from './links'
+
+const isOpen = ref(false)
+const headerLinks = computed(() => {
+  return links({ isHeader: true })
+})
+
+function closePopup() {
+  isOpen.value = false
+}
+</script>
+
 <template>
   <div v-clickaway="closePopup">
     <nav class="fixed z-50 top-0 contain inset-x-0 custom:p-4 p-0">
       <div
         class="relative z-50 bg-primary-dark custom:rounded-xl flex items-center justify-between pr-4"
       >
-        <NuxtLink to="/" class="custom:py-4 custom:px-6 p-4 ml-2 custom:ml-0" @click="isOpen = false">
-          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green" />
+        <NuxtLink
+          to="/"
+          class="custom:py-4 custom:px-6 p-4 ml-2 custom:ml-0"
+          @click="isOpen = false"
+        >
+          <img
+            class="mt-1 h-5"
+            src="/img/logo.svg"
+            alt="Bank.Green"
+          >
         </NuxtLink>
 
         <button
@@ -122,16 +143,3 @@
     </transition>
   </div>
 </template>
-
-<script setup>
-import links from "./links"
-
-const isOpen = ref(false)
-const headerLinks = computed(() => {
-  return links({ isHeader: true })
-})
-
-function closePopup() {
-  isOpen.value = false
-}
-</script>

@@ -1,3 +1,13 @@
+<script setup>
+defineProps({
+  title: String,
+  description: String,
+  loaded: { type: Boolean, default: true },
+  caratClass: String,
+})
+const isOpen = ref(false)
+</script>
+
 <template>
   <div>
     <div
@@ -24,17 +34,23 @@
         >
           Loading...
         </div>
-        <h2 v-else class="font-semibold md:!text-lg text-gray-700 mr-4">
-          <a :href="'#' + convertToSlug(title)" aria-hidden="true" />
+        <h2
+          v-else
+          class="font-semibold md:!text-lg text-gray-700 mr-4"
+        >
+          <a
+            :href="'#' + convertToSlug(title)"
+            aria-hidden="true"
+          />
           {{ title }}
         </h2>
       </transition>
 
       <svg
         :class="
-          'flex-none transform-gpu transition-transform h-3 text-sushi-500 ' +
-            caratClass +
-            (isOpen ? ' rotate-180' : ' rotate-0')
+          'flex-none transform-gpu transition-transform h-3 text-sushi-500 '
+            + caratClass
+            + (isOpen ? ' rotate-180' : ' rotate-0')
         "
         viewBox="0 0 12 8"
         fill="none"
@@ -61,22 +77,15 @@
         v-if="isOpen"
         class="max-w-full prose md:prose-lg border-t border-gray-200 px-5 py-4 text-gray-600 rounded-b-xl bg-white"
       >
-        <span v-if="description" v-html="description" />
+        <span
+          v-if="description"
+          v-html="description"
+        />
         <slot />
       </div>
     </transition>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  title: String,
-  description: String,
-  loaded: { type: Boolean, default: true },
-  caratClass: String
-})
-const isOpen = ref(false)
-</script>
 
 <style scoped>
 /* Manually set style because prose cause h2 to be huge */

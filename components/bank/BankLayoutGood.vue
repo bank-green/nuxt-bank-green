@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
+import Swoosh from '@/components/Swoosh.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import SignupBox from '@/components/forms/SignupBox.vue'
+
+const checkList = [
+  'Learn about the issues via our blog updates',
+  'Join our campaigns to take action against fossil finance',
+  'Discover other ways to divest from fossil fuels',
+]
+
+const sliceComps = ref(defineSliceZoneComponents(components))
+
+withDefaults(defineProps<{
+  showLeadGenSlice?: boolean
+  prismicSliceData?: any
+}>(), {
+  showLeadGenSlice: false,
+})
+</script>
+
 <template>
   <div class="page">
     <!-- SECTION ONE -->
@@ -101,26 +124,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import { components } from '~~/slices'
-import Swoosh from '@/components/Swoosh.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import SignupBox from '@/components/forms/SignupBox.vue'
-
-const checkList = [
-  'Learn about the issues via our blog updates',
-  'Join our campaigns to take action against fossil finance',
-  'Discover other ways to divest from fossil fuels',
-]
-
-const sliceComps = ref(defineSliceZoneComponents(components))
-
-withDefaults(defineProps<{
-  showLeadGenSlice?: boolean
-  prismicSliceData?: any
-}>(), {
-  showLeadGenSlice: false,
-})
-</script>

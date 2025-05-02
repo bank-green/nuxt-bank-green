@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import type { KeyTextField, RichTextField } from '@prismicio/types'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+
+defineProps<{
+  title?: KeyTextField
+  description?: RichTextField
+  buttonTitle?: KeyTextField
+}>()
+</script>
+
 <template>
   <div
     class="flex flex-col gap-10 items-center relative page-fade-in contain max-w-5xl"
@@ -42,14 +53,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { KeyTextField, RichTextField } from '@prismicio/types'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-
-defineProps<{
-  title?: KeyTextField
-  description?: RichTextField
-  buttonTitle?: KeyTextField
-}>()
-</script>

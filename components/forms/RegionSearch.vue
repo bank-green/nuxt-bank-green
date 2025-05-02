@@ -1,5 +1,110 @@
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue'
+
+import Geonames from 'geonames.js'
+import Fuse from 'fuse.js'
+import PinIcon from './location/PinIcon.vue'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
+import ListPicker from '@/components/forms/ListPicker.vue'
+
+// custom type for responses from geonames API
+type Place = {
+  toponymName: string
+  fcode: string
+  adminName1: string
+}
+
+defineProps({
+  modelValue: String,
+})
+
+const emit = defineEmits(['update:modelValue', 'select'])
+const listPicker = ref()
+const onKeyDown = (event: Event) => {
+  listPicker.value.incrementFocus(event)
+}
+const onKeyUp = (event: Event) => {
+  listPicker.value.decrementFocus(event)
+}
+const onKeyEnter = () => listPicker.value.selectCurrentItem()
+
+const search = ref('')
+const isShowing = ref(false)
+const isLoading = ref(false)
+
+const { country } = useCountry()
+
+const options = ref<Place[]>([])
+const geonames = Geonames({
+  username: 'myusername',
+  encoding: 'JSON',
+})
+
+const searchRegion = async () => {
+  isLoading.value = true
+  const data = (await geonames.search({
+    country: country.value,
+    featureClass: 'A',
+    featureCode: ['ADM1', 'ADM2'],
+    maxRows: 1000,
+  })) as { geonames: Place[] }
+  options.value = data.geonames.sort((a, b) =>
+    a.toponymName.localeCompare(b.toponymName),
+  )
+  isLoading.value = false
+}
+
+const filteredOptions = computed(() => {
+  const fuse = new Fuse(options.value, {
+    includeScore: true,
+    keys: ['toponymName'],
+  })
+
+  if (!search.value.trim()) {
+    return options.value
+  }
+  const result = fuse.search(search.value)
+  return result.filter(x => x.score && x.score < 0.3).map(x => x.item)
+})
+
+watch(
+  country,
+  () => {
+    searchRegion()
+  },
+  { immediate: true },
+)
+
+function showList() {
+  isShowing.value = true
+}
+function hideList() {
+  isShowing.value = false
+}
+async function onSelectLocation(item: Place) {
+  emit('update:modelValue', '')
+  await nextTick()
+  search.value = item.toponymName
+  emit('update:modelValue', item.toponymName)
+  emit('select', {
+    type: item.fcode === 'ADM2' ? 'subregion' : 'region',
+    value: item.toponymName,
+  })
+
+  isShowing.value = false
+}
+function onCloseClick() {
+  search.value = ''
+  emit('update:modelValue', '')
+  emit('select', null)
+}
+</script>
+
 <template>
-  <div v-clickaway="hideList" class="relative">
+  <div
+    v-clickaway="hideList"
+    class="relative"
+  >
     <SearchInput
       v-model="search"
       :aria-expanded="isShowing"
@@ -29,7 +134,10 @@
           'bg-gray-100': !filteredOptions.length,
         }"
       >
-        <div v-if="isLoading" class="text-gray-500 text-center p-4 shadow-lg">
+        <div
+          v-if="isLoading"
+          class="text-gray-500 text-center p-4 shadow-lg"
+        >
           Loading
         </div>
         <div
@@ -54,105 +162,3 @@
     </transition>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-// eslint-disable-next-line import/no-named-as-default
-import Geonames from 'geonames.js'
-import Fuse from 'fuse.js'
-import PinIcon from './location/PinIcon.vue'
-import SearchInput from '@/components/forms/input/SearchInput.vue'
-import ListPicker from '@/components/forms/ListPicker.vue'
-
-// custom type for responses from geonames API
-type Place = {
-  toponymName: string;
-  fcode: string;
-  adminName1: string;
-};
-
-defineProps({
-  modelValue: String
-})
-
-const emit = defineEmits(['update:modelValue', 'select'])
-const listPicker = ref()
-const onKeyDown = (event: Event) => {
-  listPicker.value.incrementFocus(event)
-}
-const onKeyUp = (event: Event) => {
-  listPicker.value.decrementFocus(event)
-}
-const onKeyEnter = () => listPicker.value.selectCurrentItem()
-
-const search = ref('')
-const isShowing = ref(false)
-const isLoading = ref(false)
-
-const { country } = useCountry()
-
-const options = ref<Place[]>([])
-const geonames = Geonames({
-  username: 'myusername',
-  encoding: 'JSON'
-})
-
-const searchRegion = async () => {
-  isLoading.value = true
-  const data = (await geonames.search({
-    country: country.value,
-    featureClass: 'A',
-    featureCode: ['ADM1', 'ADM2'],
-    maxRows: 1000
-  })) as { geonames: Place[] }
-  options.value = data.geonames.sort((a, b) =>
-    a.toponymName.localeCompare(b.toponymName)
-  )
-  isLoading.value = false
-}
-
-const filteredOptions = computed(() => {
-  const fuse = new Fuse(options.value, {
-    includeScore: true,
-    keys: ['toponymName']
-  })
-
-  if (!search.value.trim()) {
-    return options.value
-  }
-  const result = fuse.search(search.value)
-  return result.filter(x => x.score && x.score < 0.3).map(x => x.item)
-})
-
-watch(
-  country,
-  () => {
-    searchRegion()
-  },
-  { immediate: true }
-)
-
-function showList () {
-  isShowing.value = true
-}
-function hideList () {
-  isShowing.value = false
-}
-async function onSelectLocation (item: Place) {
-  emit('update:modelValue', '')
-  await nextTick()
-  search.value = item.toponymName
-  emit('update:modelValue', item.toponymName)
-  emit('select', {
-    type: item.fcode === 'ADM2' ? 'subregion' : 'region',
-    value: item.toponymName
-  })
-
-  isShowing.value = false
-}
-function onCloseClick () {
-  search.value = ''
-  emit('update:modelValue', '')
-  emit('select', null)
-}
-</script>

@@ -1,39 +1,3 @@
-<template>
-  <ol class="flex flex-col gap-16 max-w-5xl">
-    <AccreditationSharingStep
-      :num="1"
-      :step="step1"
-    >
-      <SocialShareButton
-        class="lg:w-fit"
-        network="facebook"
-        :url="step1.links.fb"
-      />
-
-      <SocialShareButton
-        network="twitter"
-        :url="step1.links.fb"
-      />
-    </AccreditationSharingStep>
-
-    <AccreditationSharingStep
-      :num="2"
-      :step="step2"
-    >
-      <BankLocationSearch
-        v-model="bank"
-      />
-      <NuxtLink
-        :to="`/banks/${bank?.['tag']}`"
-        class="button-green"
-        :class="{ disabled: !bank }"
-      >
-        Check My Bank
-      </NuxtLink>
-    </AccreditationSharingStep>
-  </ol>
-</template>
-
 <script lang="ts" setup>
 import type { Step } from './AccreditationSharingStep.vue'
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
@@ -76,3 +40,39 @@ const step2 = {
 
 const { bank } = useContactForm()
 </script>
+
+<template>
+  <ol class="flex flex-col gap-16 max-w-5xl">
+    <AccreditationSharingStep
+      :num="1"
+      :step="step1"
+    >
+      <SocialShareButton
+        class="lg:w-fit"
+        network="facebook"
+        :url="step1.links.fb"
+      />
+
+      <SocialShareButton
+        network="twitter"
+        :url="step1.links.fb"
+      />
+    </AccreditationSharingStep>
+
+    <AccreditationSharingStep
+      :num="2"
+      :step="step2"
+    >
+      <BankLocationSearch
+        v-model="bank"
+      />
+      <NuxtLink
+        :to="`/banks/${bank?.['tag']}`"
+        class="button-green"
+        :class="{ disabled: !bank }"
+      >
+        Check My Bank
+      </NuxtLink>
+    </AccreditationSharingStep>
+  </ol>
+</template>

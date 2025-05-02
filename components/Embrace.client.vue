@@ -1,3 +1,186 @@
+<script setup lang="ts">
+import VueTurnstile from 'vue-turnstile'
+import type { PrismicDocument } from '@prismicio/types'
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import TextField from '@/components/forms/TextField.vue'
+import EmbraceModal from '@/components/EmbraceModal.vue'
+import useCaptcha from '@/composables/useCaptcha'
+
+type Response = {
+  text: string
+  subject: string
+  contactEmail: string
+  bccEmail: string
+}
+
+const { client } = usePrismic()
+
+// TODO: Maybe update this to pass embracepage as a prop
+//       instead of requesting it again
+const { data: embracePage } = await useAsyncData('embrace', () =>
+  client.getSingle('embracepage'),
+)
+
+if (!embracePage?.value) {
+  console.log('Warning: Unable to retrieve embracepage')
+}
+
+const props = withDefaults(defineProps<{
+  name?: string
+  successRedirectURL: string
+  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
+}>(), {
+  successRedirectURL: '/thanks-embrace',
+})
+
+const fullName = ref<string>('')
+const fullNameWarning = ref<string | null>(null)
+const searchValue = ref<string>('')
+const { country } = useCountry()
+const hometown = ref<string>('')
+const background = ref<string>('')
+const showModal = ref<boolean>(false)
+const bankEmail = ref<string>('')
+const bcc = ref<string>('public@bank.green')
+const subject = ref<string>('')
+const generatedMessage = ref<string>('') // pass to preview component as v-model??
+const body = ref<string>('')
+
+const extras = computed(() => {
+  return {
+    fullName: fullName.value || '',
+    country: country.value || '',
+    bankDisplayName: bank.value?.name || '',
+    brandTag: bank.value?.tag,
+    bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
+    hometown: hometown.value || '',
+    background: background.value || '',
+  }
+})
+
+const {
+  email,
+  bank,
+  isAgreeTerms,
+  isAgreeMarketing,
+  hasWarnings,
+  warningsMap,
+  validate,
+  busy,
+} = useContactForm(
+  'embrace',
+  ['email', 'isAgreeTerms', 'bank'],
+  extras,
+)
+
+const form = ref({
+  fullName,
+  email,
+  subject,
+  bank,
+  bankEmail,
+  searchValue,
+  country,
+  hometown,
+  background,
+  body,
+  bcc,
+})
+
+// const emit = defineEmits(['success'])
+
+function searchInputChange(event: HTMLInputElement) {
+  // When bank is selected fetch/update bank contact email
+  if (event && form.value?.bank) {
+    // For now we are getting the contact info from
+    // the message end point on message generation
+  }
+}
+
+// Connect to api to generate message body.
+// Wait for message before showing modal.
+async function getGeneratedMessage() {
+  busy.value = true
+
+  try {
+    const response: Response = await $fetch('message', {
+      baseURL: useRuntimeConfig().public.EMBRACE_URL,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        name: fullName.value,
+        email: email.value,
+        hometown: hometown.value,
+        background: background.value,
+        brandName: extras.value.bankDisplayName,
+        brand_tag: extras.value.brandTag,
+        campaign_id: 1,
+        tone: 'POLITE',
+      },
+      parseResponse: JSON.parse,
+    })
+
+    if (response?.text) {
+      generatedMessage.value = response.text
+      subject.value = response.subject
+      bankEmail.value = response.contactEmail || ''
+      bcc.value = response.bccEmail || ''
+    }
+  } catch (e) {
+    console.error('Error fetching or generating message.', e)
+    // TODO: Fallback to boiler plate message stored in Prismic with filled in
+    // values.
+    generatedMessage.value = 'We were unable to generate a message. Please write your own message here.'
+  } finally {
+    busy.value = false
+  }
+}
+
+async function checkAndDisplayPreview() {
+  validate()
+  if (!extras.value.fullName) {
+    if (embracePage?.value) {
+      fullNameWarning.value = embracePage?.value.data.full_name_warning
+    } else {
+      fullNameWarning.value = 'Your name is required'
+    }
+    return
+  }
+  if (fullNameWarning.value) {
+    fullNameWarning.value = null
+  }
+  if (hasWarnings?.value) {
+    busy.value = false
+    return false
+  }
+  if (!captchaVerified && !isLocal) {
+    return false
+  }
+  // TODO: Call function or use some other trigger
+  // to get generated message body and message subject
+  // and store it in the values passed to modal
+  await getGeneratedMessage()
+  showModal.value = true
+}
+
+function successRedirect() {
+  navigateTo(props.successRedirectURL)
+}
+
+const bankSearchClasses = computed(() => {
+  if (warningsMap?.value?.bank) {
+    return 'border-red-300 tdext-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
+  }
+  return 'text-gray-700'
+})
+
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
+</script>
+
 <template>
   <div class="w-full flex px-10 py-8">
     <div
@@ -91,12 +274,20 @@
               wrapper="span"
               fallback="I have read and understood the Bank.Green "
             />
-            <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
+            <NuxtLink
+              v-if="embracePage?.data"
+              to="/privacy"
+              class="link"
+            >
               {{
                 ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
               }}
             </NuxtLink>
-            <NuxtLink v-else to="/privacy" class="link">
+            <NuxtLink
+              v-else
+              to="/privacy"
+              class="link"
+            >
               privacy policy
             </NuxtLink>
             <vue-turnstile
@@ -111,7 +302,7 @@
         <button
           type="submit"
           class="button-green w-full mt-6 flex justify-center"
-          :class="{'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal)}"
+          :class="{ 'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal) }"
         >
           <span v-if="!busy"> Generate Email Preview </span>
           <span v-else>
@@ -142,187 +333,3 @@
     @success="successRedirect()"
   />
 </template>
-
-<script setup lang="ts">
-import VueTurnstile from 'vue-turnstile'
-import { PrismicDocument } from '@prismicio/types'
-import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import TextField from '@/components/forms/TextField.vue'
-import EmbraceModal from '@/components/EmbraceModal.vue'
-import useCaptcha from '@/composables/useCaptcha'
-
-type Response = {
-  text: string,
-  subject: string,
-  contactEmail: string,
-  bccEmail: string
-}
-
-const { client } = usePrismic()
-
-// TODO: Maybe update this to pass embracepage as a prop
-//       instead of requesting it again
-const { data: embracePage } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage')
-)
-
-if (!embracePage?.value) {
-  console.log('Warning: Unable to retrieve embracepage')
-}
-
-const props = withDefaults(defineProps<{
-  name?: String;
-  successRedirectURL: string;
-  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null;
-}>(), {
-  successRedirectURL: '/thanks-embrace'
-})
-
-const fullName = ref<string>('')
-const fullNameWarning = ref<string | null>(null)
-const searchValue = ref<string>('')
-const { country } = useCountry()
-const hometown = ref<string>('')
-const background = ref<string>('')
-const showModal = ref<boolean>(false)
-const bankEmail = ref<string>('')
-const bcc = ref<string>('public@bank.green')
-const subject = ref<string>('')
-const generatedMessage = ref<string>('') // pass to preview component as v-model??
-const body = ref<string>('')
-
-const extras = computed(() => {
-  return {
-    fullName: fullName.value || '',
-    country: country.value || '',
-    bankDisplayName: bank.value?.name || '',
-    brandTag: bank.value?.tag,
-    bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
-    hometown: hometown.value || '',
-    background: background.value || ''
-  }
-})
-
-const {
-  email,
-  bank,
-  isAgreeTerms,
-  isAgreeMarketing,
-  hasWarnings,
-  warningsMap,
-  validate,
-  busy
-} = useContactForm(
-  'embrace',
-  ['email', 'isAgreeTerms', 'bank'],
-  extras
-)
-
-const form = ref({
-  fullName,
-  email,
-  subject,
-  bank,
-  bankEmail,
-  searchValue,
-  country,
-  hometown,
-  background,
-  body,
-  bcc
-})
-
-// const emit = defineEmits(['success'])
-
-function searchInputChange (event: HTMLInputElement) {
-  // When bank is selected fetch/update bank contact email
-  if (event && form.value?.bank) {
-    // For now we are getting the contact info from
-    // the message end point on message generation
-  }
-}
-
-// Connect to api to generate message body.
-// Wait for message before showing modal.
-async function getGeneratedMessage () {
-  busy.value = true
-
-  try {
-    const response: Response = await $fetch('message', {
-      baseURL: useRuntimeConfig().public.EMBRACE_URL,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: {
-        name: fullName.value,
-        email: email.value,
-        hometown: hometown.value,
-        background: background.value,
-        brandName: extras.value.bankDisplayName,
-        brand_tag: extras.value.brandTag,
-        campaign_id: 1,
-        tone: 'POLITE'
-      },
-      parseResponse: JSON.parse
-    })
-
-    if (response?.text) {
-      generatedMessage.value = response.text
-      subject.value = response.subject
-      bankEmail.value = response.contactEmail || ''
-      bcc.value = response.bccEmail || ''
-    }
-  } catch (e) {
-    console.error('Error fetching or generating message.', e)
-    // TODO: Fallback to boiler plate message stored in Prismic with filled in
-    // values.
-    generatedMessage.value = 'We were unable to generate a message. Please write your own message here.'
-  } finally {
-    busy.value = false
-  }
-}
-
-async function checkAndDisplayPreview () {
-  validate()
-  if (!extras.value.fullName) {
-    if (embracePage?.value) {
-      fullNameWarning.value = embracePage?.value.data.full_name_warning
-    } else {
-      fullNameWarning.value = 'Your name is required'
-    }
-    return
-  }
-  if (fullNameWarning) {
-    fullNameWarning.value = null
-  }
-  if (hasWarnings?.value) {
-    busy.value = false
-    return false
-  }
-  if (!captchaVerified && !isLocal) {
-    return false
-  }
-  // TODO: Call function or use some other trigger
-  // to get generated message body and message subject
-  // and store it in the values passed to modal
-  await getGeneratedMessage()
-  showModal.value = true
-}
-
-function successRedirect () {
-  navigateTo(props.successRedirectURL)
-}
-
-const bankSearchClasses = computed(() => {
-  if (warningsMap?.value?.bank) {
-    return 'border-red-300 tdext-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
-  }
-  return 'text-gray-700'
-})
-
-// Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
-
-</script>

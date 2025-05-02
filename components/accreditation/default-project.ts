@@ -9,8 +9,8 @@ export const defaultProject = {
     url: img,
     dimensions: {
       width: 347.12,
-      height: 100
-    }
+      height: 100,
+    },
   },
-  project_link: 'link-to-project'
+  project_link: 'link-to-project',
 }

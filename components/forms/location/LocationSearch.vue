@@ -1,3 +1,56 @@
+<script setup>
+import en from '../../../lang/en.json'
+import BaseField from '../BaseField.vue'
+import LocationSearchItem from './LocationSearchItem.vue'
+import PinIcon from './PinIcon.vue'
+import { findCountries } from './countries'
+import ListPicker from '@/components/forms/ListPicker.vue'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
+
+const props = defineProps({
+  modelValue: String,
+  disabled: Boolean,
+  warning: String,
+  dark: Boolean,
+  title: String,
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const isShowing = ref(false)
+// const country = useCountry()
+const search = ref('')
+if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
+  search.value = en[`COUNTRY_${props.modelValue}`]
+}
+
+const filteredCountries = computed(() => findCountries(search.value))
+
+function showList() {
+  isShowing.value = true
+}
+function hideList() {
+  isShowing.value = false
+  // if clicking away, go back to originally selected country
+  if (search.value === '') {
+    emit('update:modelValue', '')
+  } else if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
+    search.value = en[`COUNTRY_${props.modelValue}`]
+  }
+}
+
+function onSelectCountry(code) {
+  search.value = en[`COUNTRY_${code}`]
+  emit('update:modelValue', code)
+  isShowing.value = false
+}
+
+function onCloseClick() {
+  search.value = ''
+  emit('update:modelValue', '')
+}
+</script>
+
 <template>
   <BaseField
     v-clickaway="hideList"
@@ -61,56 +114,3 @@
     </transition>
   </BaseField>
 </template>
-
-<script setup>
-import en from '../../../lang/en.json'
-import BaseField from '../BaseField.vue'
-import LocationSearchItem from './LocationSearchItem.vue'
-import PinIcon from './PinIcon.vue'
-import { findCountries } from './countries'
-import ListPicker from '@/components/forms/ListPicker.vue'
-import SearchInput from '@/components/forms/input/SearchInput.vue'
-
-const props = defineProps({
-  modelValue: String,
-  disabled: Boolean,
-  warning: String,
-  dark: Boolean,
-  title: String
-})
-
-const emit = defineEmits(['update:modelValue'])
-
-const isShowing = ref(false)
-// const country = useCountry()
-const search = ref('')
-if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
-  search.value = en[`COUNTRY_${props.modelValue}`]
-}
-
-const filteredCountries = computed(() => findCountries(search.value))
-
-function showList () {
-  isShowing.value = true
-}
-function hideList () {
-  isShowing.value = false
-  // if clicking away, go back to originally selected country
-  if (search.value === '') {
-    emit('update:modelValue', '')
-  } else if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
-    search.value = en[`COUNTRY_${props.modelValue}`]
-  }
-}
-
-function onSelectCountry (code) {
-  search.value = en[`COUNTRY_${code}`]
-  emit('update:modelValue', code)
-  isShowing.value = false
-}
-
-function onCloseClick () {
-  search.value = ''
-  emit('update:modelValue', '')
-}
-</script>

@@ -1,3 +1,11 @@
+<script setup lang="ts">
+const props = defineProps<{
+  bankFeatures: any
+}>()
+
+const features = computed(() => getFeatures(props.bankFeatures))
+</script>
+
 <template>
   <div class="border border-gray-300 rounded-xl shadow-soft">
     <div class="border-b border-gray-200 p-4">
@@ -10,11 +18,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const props = defineProps<{
-  bankFeatures: any;
-}>()
-
-const features = computed(() => getFeatures(props.bankFeatures))
-</script>

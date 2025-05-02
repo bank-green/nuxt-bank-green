@@ -1,3 +1,25 @@
+<script setup lang="ts">
+const props = defineProps<{
+  title?: string
+  description?: string
+  name: string
+  showWarning?: string | boolean
+  typeLabel?: string
+  currencyLabel?: string
+  dark?: boolean
+  infoTooltip?: string
+}>()
+
+const infoTooltipShown = ref<boolean>(false)
+
+const labelClasses = computed(() => {
+  if (props.dark) {
+    return 'text-arctic-blue text-opacity-75 font-medium'
+  }
+  return 'text-gray-600 font-semibold'
+})
+</script>
+
 <template>
   <div class="relative">
     <div
@@ -99,25 +121,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const props = defineProps<{
-  title?: string
-  description?: string
-  name: string
-  showWarning?: string | boolean
-  typeLabel?: string
-  currencyLabel?: string
-  dark?: boolean
-  infoTooltip?: string
-}>()
-
-const infoTooltipShown = ref<boolean>(false)
-
-const labelClasses = computed(() => {
-  if (props.dark) {
-    return 'text-arctic-blue text-opacity-75 font-medium'
-  }
-  return 'text-gray-600 font-semibold'
-})
-</script>

@@ -15,6 +15,7 @@
     />
   </svg>
 </template>
+
 <style scoped>
 .spinner {
   animation: circle-rotator 1.4s linear infinite;

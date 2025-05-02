@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const props = defineProps<{
+  list: {
+    name: string
+    website: string
+    tag: string
+  }[]
+  loaded: boolean
+}>()
+
+const cardsCount = computed(() => (props.loaded ? props.list.length : 3))
+</script>
+
 <template>
   <transition-group
     enter-active-class="transform-gpu ease-out duration-300 transition"
@@ -15,16 +28,3 @@
     />
   </transition-group>
 </template>
-
-<script setup lang="ts">
-const props = defineProps<{
-  list: {
-    name: string
-    website: string
-    tag: string
-  }[]
-  loaded: boolean
-}>()
-
-const cardsCount = computed(() => (props.loaded ? props.list.length : 3))
-</script>

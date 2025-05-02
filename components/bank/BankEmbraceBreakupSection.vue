@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import type { KeyTextField, RichTextField } from '@prismicio/types'
+
+defineProps<{
+  title?: KeyTextField
+  description?: RichTextField
+  checklistItems: (RichTextField | undefined)[]
+}>()
+</script>
+
 <template>
   <div
     id="section-breakup"
@@ -43,13 +53,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { KeyTextField, RichTextField } from '@prismicio/types'
-
-defineProps<{
-  title?: KeyTextField
-  description?: RichTextField
-  checklistItems: (RichTextField | undefined)[]
-}>()
-</script>

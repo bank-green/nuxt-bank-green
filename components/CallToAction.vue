@@ -1,3 +1,21 @@
+<script setup>
+import { asText } from '@prismicio/helpers'
+import CheckList from '@/components/CheckList.vue'
+
+const { client } = usePrismic()
+const { data: call } = await useAsyncData('calltoaction', () =>
+  client.getSingle('calltoaction'),
+)
+defineProps({
+  title: String,
+  paragraph: String,
+  checkListItems: Array,
+  buttonText: String,
+  light: Boolean,
+  spaced: Boolean,
+})
+</script>
+
 <template>
   <div
     class="flex flex-col justify-center items-center rounded-xl py-6 md:py-12 px-6 md:px-16"
@@ -42,21 +60,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { asText } from '@prismicio/helpers'
-import CheckList from '@/components/CheckList.vue'
-
-const { client } = usePrismic()
-const { data: call } = await useAsyncData('calltoaction', () =>
-  client.getSingle('calltoaction'),
-)
-defineProps({
-  title: String,
-  paragraph: String,
-  checkListItems: Array,
-  buttonText: String,
-  light: Boolean,
-  spaced: Boolean,
-})
-</script>

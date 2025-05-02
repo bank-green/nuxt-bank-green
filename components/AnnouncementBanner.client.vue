@@ -1,3 +1,13 @@
+<script setup>
+const showBanner = useCookie('bg.showAnnouncementSurveySeptember2024', {
+  default: () => true,
+})
+
+function close() {
+  showBanner.value = false
+}
+</script>
+
 <template>
   <div
     v-if="showBanner"
@@ -33,13 +43,3 @@
     </button>
   </div>
 </template>
-
-<script setup>
-const showBanner = useCookie('bg.showAnnouncementSurveySeptember2024', {
-  default: () => true,
-})
-
-function close() {
-  showBanner.value = false
-}
-</script>

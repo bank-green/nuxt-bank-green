@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue'
+import Swoosh from '@/components/Swoosh.vue'
+import CallToAction from '@/components/CallToAction.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+</script>
+
 <template>
   <div class="page">
     <!-- SECTION ONE -->
@@ -133,10 +140,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue'
-import Swoosh from '@/components/Swoosh.vue'
-import CallToAction from '@/components/CallToAction.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-</script>

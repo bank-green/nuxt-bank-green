@@ -1,3 +1,14 @@
+<script setup>
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
+
+defineProps({
+  name: String,
+  website: String,
+  inheritBrandRating: Object,
+  subtitle: String,
+})
+</script>
+
 <template>
   <div class="relative col-span-2 md:col-span-1 flex items-end">
     <div class="flex-1 flex items-center md:mt-8">
@@ -38,14 +49,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
-
-defineProps({
-  name: String,
-  website: String,
-  inheritBrandRating: Object,
-  subtitle: String,
-})
-</script>

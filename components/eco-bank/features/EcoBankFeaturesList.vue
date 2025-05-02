@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  features: Object,
+})
+</script>
+
 <template>
   <div
     v-for="(item, key) in features"
@@ -52,9 +58,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  features: Object,
-})
-</script>

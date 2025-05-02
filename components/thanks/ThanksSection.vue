@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { getSliceBoolean } from '@/utils/prismic/conversions'
+
+withDefaults(defineProps<{
+  title: string
+  subtitle?: string
+  description?: string
+  showExploreSection?: boolean | null
+}>(),
+{
+  showExploreSection: true,
+},
+)
+</script>
+
 <template>
   <div class="contain py-10">
     <div class="text-center relative">
@@ -72,18 +87,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { getSliceBoolean } from '@/utils/prismic/conversions'
-
-withDefaults(defineProps<{
-  title: string
-  subtitle?: string
-  description?: string
-  showExploreSection?: boolean | null
-}>(),
-{
-  showExploreSection: true,
-},
-)
-</script>

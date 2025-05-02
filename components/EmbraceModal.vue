@@ -1,3 +1,107 @@
+<script setup lang="ts">
+import type { PrismicDocument } from '@prismicio/types'
+import { ref } from 'vue'
+import TextField from '@/components/forms/TextField.vue'
+import EmailPreviewField from '@/components/forms/EmailPreviewField.vue'
+
+const { client } = usePrismic()
+const completionMarked = ref(false)
+
+// TODO: maybe pass embracepage as a prop instead of requesting it again ??
+const { data: embracePage } = await useAsyncData('embrace', () =>
+  client.getSingle('embracepage'),
+)
+const { data: donationData } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage'),
+)
+
+const props = defineProps<{
+  modelValue: boolean
+  message: string | null
+  form: {
+    fullName: string
+    email: string
+    subject: string
+    bankEmail: string
+    searchValue: string
+    country: string
+    hometown: string
+    background: string
+    body: string
+    bcc: string
+  }
+  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
+}>()
+
+const busy = false
+
+const emit = defineEmits([
+  'update:modelValue',
+  'update:message',
+  'success',
+])
+
+const showModal = computed({
+  get: () => props.modelValue,
+  set: (val) => {
+    if (!val) {
+      completionMarked.value = false
+    }
+    emit('update:modelValue', val)
+  },
+})
+
+const messageBody = computed({
+  get: () => props.message,
+  set: val => emit('update:message', val),
+})
+
+const emailLink = computed(() =>
+  getEmailURI(),
+)
+
+const messageCopied = ref(false)
+
+watch(messageBody, (val, prev) => {
+  if (val !== prev) {
+    messageCopied.value = false
+  }
+})
+
+function copyText() {
+  const textField = document.getElementById('embraceText') as HTMLInputElement
+  // Select the message body field
+  textField.select()
+  textField.setSelectionRange(0, 99999) // For mobile devices
+
+  // Copy the text to clipboard
+  navigator.clipboard.writeText(textField.value)
+  messageCopied.value = true
+}
+
+function markAsComplete() {
+  completionMarked.value = true
+}
+
+function getEmailURI() {
+  const bankEmail = encodeURI(props.form?.bankEmail.trim() || 'missing_bank_email')
+  let emailURI = `mailto:${bankEmail}?`
+
+  const fields = [
+    `subject=${encodeURI(props.form?.subject.trim() || 'missing_subject_line')}`,
+    `bcc=${props.form?.bcc.trim() ? encodeURI(props.form?.bcc.trim()) : 'missing_bcc_address'}`,
+    `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
+    `body=${encodeURI(props?.message?.trim() || 'missing message body')}`,
+  ]
+  emailURI += fields.join('&')
+  return emailURI
+}
+
+function closeModal() {
+  emit('update:modelValue', false)
+}
+</script>
+
 <template>
   <ModalWithBackdrop v-model="showModal">
     <form
@@ -164,107 +268,3 @@
     </div>
   </ModalWithBackdrop>
 </template>
-
-<script setup lang="ts">
-import type { PrismicDocument } from '@prismicio/types'
-import { ref } from 'vue'
-import TextField from '@/components/forms/TextField.vue'
-import EmailPreviewField from '@/components/forms/EmailPreviewField.vue'
-
-const { client } = usePrismic()
-const completionMarked = ref(false)
-
-// TODO: maybe pass embracepage as a prop instead of requesting it again ??
-const { data: embracePage } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage'),
-)
-const { data: donationData } = await useAsyncData('donation', () =>
-  client.getSingle('donationpage'),
-)
-
-const props = defineProps<{
-  modelValue: boolean
-  message: string | null
-  form: {
-    fullName: string
-    email: string
-    subject: string
-    bankEmail: string
-    searchValue: string
-    country: string
-    hometown: string
-    background: string
-    body: string
-    bcc: string
-  }
-  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
-}>()
-
-const busy = false
-
-const emit = defineEmits([
-  'update:modelValue',
-  'update:message',
-  'success',
-])
-
-const showModal = computed({
-  get: () => props.modelValue,
-  set: (val) => {
-    if (!val) {
-      completionMarked.value = false
-    }
-    emit('update:modelValue', val)
-  },
-})
-
-const messageBody = computed({
-  get: () => props.message,
-  set: val => emit('update:message', val),
-})
-
-const emailLink = computed(() =>
-  getEmailURI(),
-)
-
-const messageCopied = ref(false)
-
-watch(messageBody, (val, prev) => {
-  if (val !== prev) {
-    messageCopied.value = false
-  }
-})
-
-function copyText() {
-  const textField = document.getElementById('embraceText') as HTMLInputElement
-  // Select the message body field
-  textField.select()
-  textField.setSelectionRange(0, 99999) // For mobile devices
-
-  // Copy the text to clipboard
-  navigator.clipboard.writeText(textField.value)
-  messageCopied.value = true
-}
-
-function markAsComplete() {
-  completionMarked.value = true
-}
-
-function getEmailURI() {
-  const bankEmail = encodeURI(props.form?.bankEmail.trim() || 'missing_bank_email')
-  let emailURI = `mailto:${bankEmail}?`
-
-  const fields = [
-    `subject=${encodeURI(props.form?.subject.trim() || 'missing_subject_line')}`,
-    `bcc=${props.form?.bcc.trim() ? encodeURI(props.form?.bcc.trim()) : 'missing_bcc_address'}`,
-    `from=${encodeURI(props.form?.email.trim() || 'missing_from_address')}`,
-    `body=${encodeURI(props?.message?.trim() || 'missing message body')}`,
-  ]
-  emailURI += fields.join('&')
-  return emailURI
-}
-
-function closeModal() {
-  emit('update:modelValue', false)
-}
-</script>

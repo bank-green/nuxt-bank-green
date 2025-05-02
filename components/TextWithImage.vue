@@ -1,3 +1,12 @@
+<script setup lang="ts">
+defineProps<{
+  title?: string
+  img: string
+  description: string
+  imgClasses?: string
+}>()
+</script>
+
 <template>
   <div class="flex gap-4">
     <NuxtImg
@@ -17,12 +26,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  title?: string
-  img: string
-  description: string
-  imgClasses?: string
-}>()
-</script>

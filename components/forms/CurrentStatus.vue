@@ -1,3 +1,44 @@
+<script setup lang="ts">
+import BaseField from '@/components/forms/BaseField.vue'
+import ListPicker from '@/components/forms/ListPicker.vue'
+import SearchInput from '@/components/forms/input/SearchInput.vue'
+
+const props = defineProps<{
+  modelValue: string
+  disabled?: boolean
+  warning?: string
+  dark?: boolean
+  title: string
+  options?: (string | null)[]
+}>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const isShowing = ref<boolean>(false)
+
+const selected = ref<string>('')
+
+const status = computed(() => props.options ?? ['I’m actively planning to switch banks', 'I’m considering switching banks'])
+
+function showList() {
+  isShowing.value = true
+}
+function hideList() {
+  isShowing.value = false
+}
+
+function onSelectStatus(status: string) {
+  selected.value = status
+  emit('update:modelValue', status)
+  isShowing.value = false
+}
+
+function onCloseClick() {
+  selected.value = ''
+  emit('update:modelValue', '')
+}
+</script>
+
 <template>
   <BaseField
     v-clickaway="hideList"
@@ -74,44 +115,3 @@
     </transition>
   </BaseField>
 </template>
-
-<script setup lang="ts">
-import BaseField from '@/components/forms/BaseField.vue'
-import ListPicker from '@/components/forms/ListPicker.vue'
-import SearchInput from '@/components/forms/input/SearchInput.vue'
-
-const props = defineProps<{
-  modelValue: string
-  disabled?: boolean
-  warning?: string
-  dark?: boolean
-  title: string
-  options?: (string | null)[]
-}>()
-
-const emit = defineEmits(['update:modelValue'])
-
-const isShowing = ref<boolean>(false)
-
-const selected = ref<string>('')
-
-const status = computed(() => props.options ?? ['I’m actively planning to switch banks', 'I’m considering switching banks'])
-
-function showList() {
-  isShowing.value = true
-}
-function hideList() {
-  isShowing.value = false
-}
-
-function onSelectStatus(status: string) {
-  selected.value = status
-  emit('update:modelValue', status)
-  isShowing.value = false
-}
-
-function onCloseClick() {
-  selected.value = ''
-  emit('update:modelValue', '')
-}
-</script>

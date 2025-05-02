@@ -1,3 +1,36 @@
+<script setup lang="ts">
+import type { RichTextField } from '@prismicio/types'
+
+import LastReviewed from '@/components/lastRated.vue'
+
+const props = withDefaults(
+  defineProps<{
+    website: string
+    name: string
+    inheritBrandRating?: {
+      tag: string
+      name: string
+    }
+    rating?: string
+    lastReviewed: string | null
+    institutionCredentials: Array<{ prismicApiId: string, name: string }>
+    prismicDefaultPageData: Record<string, any> | null
+    prismicOurTake?: RichTextField
+    fossilFreeAlliance?: boolean
+    topPick?: boolean
+  }>(),
+  {
+    fossilFreeAlliance: false,
+    topPick: false,
+    lastReviewed: null,
+  },
+)
+
+const hasInstitutionCredentials: ComputedRef<boolean> = computed(
+  () => props.institutionCredentials && props.institutionCredentials.length > 0,
+)
+</script>
+
 <template>
   <div class="page-fade-in contain">
     <div class="relative bg-white rounded-xl shadow-soft border">
@@ -89,36 +122,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { RichTextField } from '@prismicio/types'
-
-import LastReviewed from '@/components/lastRated.vue'
-
-const props = withDefaults(
-  defineProps<{
-    website: string
-    name: string
-    inheritBrandRating?: {
-      tag: string
-      name: string
-    }
-    rating?: string
-    lastReviewed: string | null
-    institutionCredentials: Array<{ prismicApiId: string, name: string }>
-    prismicDefaultPageData: Record<string, any> | null
-    prismicOurTake?: RichTextField
-    fossilFreeAlliance?: boolean
-    topPick?: boolean
-  }>(),
-  {
-    fossilFreeAlliance: false,
-    topPick: false,
-    lastReviewed: null,
-  },
-)
-
-const hasInstitutionCredentials: ComputedRef<boolean> = computed(
-  () => props.institutionCredentials && props.institutionCredentials.length > 0,
-)
-</script>
