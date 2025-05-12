@@ -22,17 +22,9 @@
       :website="details.website || ''"
     />
 
-    <EcoBankDetail
-      :institution-type="details.institutionType"
-      :from-the-website="details.fromTheWebsite"
-      :name="details.name"
-      :website="details.website || ''"
-      :rating="details.rating || '' "
-      :bank-features="details.bankFeatures"
+    <EcoBankDetails
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
-      :prismic-default-page-data="prismicDefaultPageData"
-      :prismic-slice-components="prismicComponents?.value"
     />
   </div>
 </template>

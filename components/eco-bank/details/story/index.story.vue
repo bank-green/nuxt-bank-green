@@ -1,4 +1,5 @@
-<!--
+<!-- this is an old version of EcoBankDetail -->
+
 <template>
   <div class="contain space-y-8 md:space-y-16">
     <Tab
@@ -285,77 +286,3 @@ function getInvertedBankFeature(
   return defaultValue
 }
 </script>
--->
-
-<template>
-  <div class="bank-details">
-    <table>
-      <thead>
-        <tr>
-          <th colspan="3">Founded in 1984</th>
-        </tr>
-        <tr>
-          <th colspan="3">Has deposit protection</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>Customers served</th>
-          <th>Services <span class="info-icon">&#9432;</span></th>
-          <th>Fees <span class="info-icon">&#9432;</span></th>
-        </tr>
-        <tr>
-          <td>Corporate</td>
-          <td>Local branches</td>
-          <td>No account maintenance fee</td>
-        </tr>
-        <tr>
-          <td>Nonprofit</td>
-          <td>Mobile banking</td>
-          <td>No overdraft fee</td>
-        </tr>
-        <tr>
-          <td>Small and Medium Enterprises (SMEs)</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template>
-
-<script>
-export default {
-  name: "BankDetailsTable",
-}
-</script>
-
-<style scoped>
-.bank-details {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-table {
-  width: 80%;
-  border-collapse: collapse;
-  text-align: left;
-  font-family: Arial, sans-serif;
-}
-
-th, td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
-.info-icon {
-  font-size: 12px;
-  cursor: pointer;
-}
-</style>

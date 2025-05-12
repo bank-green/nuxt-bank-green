@@ -185,3 +185,16 @@ fragment bankFeaturesFields on BrandFeature {
   }
   details
 }
+
+query HarvestDataQuery ($tag: String!) {
+  harvestData(tag: $tag) {
+    customersServed
+    depositProducts
+    financialFeatures
+    services
+    institutionalInformation
+    policies
+    loanProducts
+    interestRates
+  }
+}
