@@ -26,21 +26,14 @@
             class="flex flex-col md:flex-row"
           >
             <div
-              class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
+              class="bg-white lg:bg-sushi-50 rounded-xl lg:w-80 md:sticky py-6 px-5 mb-4 md:mb-0 top-20 flex-shrink-0 lg:px-10"
               style="height: fit-content"
             >
-              <EcoBankFilters
-                v-if="country"
-                :location="country"
-                @filter="applyFilter"
-              />
+              <EcoBankFilters :location="country" @filter="applyFilter" />
             </div>
 
             <div class="relative w-full md:ml-6">
-              <LocationSearch
-                v-model="country"
-                class="z-30 mb-8"
-              />
+              <LocationSearch v-model="country" class="z-30 mb-8" />
 
               <div v-if="!country">
                 <h2
@@ -60,13 +53,10 @@
                   :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                   class="transition"
                 >
-                  <EcoBankCards
-                    :list="banks"
-                    :is-no-credit="isNoCredit"
-                  />
+                  <EcoBankCards :list="banks" :is-no-credit="isNoCredit" />
                 </div>
                 <SliceZone
-                  v-else-if="!loading&&errorMessage"
+                  v-else-if="!loading && errorMessage"
                   :slices="ecobanks?.data?.slices2 ?? []"
                   :components="sliceComps"
                 />
@@ -110,7 +100,7 @@ const { client } = usePrismic()
 const { data: ecobanks } = await useAsyncData('ecobanks', () =>
   client.getSingle('ecobankspage', {
     fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
-  }),
+  })
 )
 
 usePrismicSEO(ecobanks?.value?.data)
@@ -120,11 +110,7 @@ const { country } = useCountry()
 const banks = ref([])
 const loading = ref(false)
 const errorMessage = ref(false)
-const loadBanks = async ({
-  fossilFreeAlliance,
-  topPick,
-  features,
-}) => {
+const loadBanks = async ({ fossilFreeAlliance, topPick, features }) => {
   loading.value = true
   if (!country.value) {
     return
@@ -147,13 +133,15 @@ const loadBanks = async ({
         ...b.commentary,
         rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
       }))
-    // filter show_on_sustainable_banks_page
+      // filter show_on_sustainable_banks_page
       .filter(a => a.showOnSustainableBanksPage)
-    // sort by top_pick first, then fossil_free_alliance_rating, then by name
-      .sort((a, b) =>
-        b.topPick - a.topPick
-        || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
-        || a.name - b.name),
+      // sort by top_pick first, then fossil_free_alliance_rating, then by name
+      .sort(
+        (a, b) =>
+          b.topPick - a.topPick ||
+          b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
+          a.name - b.name
+      )
   )
 
   loading.value = false
@@ -171,7 +159,7 @@ const isNoCredit = computed(() => {
   return country.value === 'FR' || country.value === 'DE'
 })
 
-const applyFilter = (payload) => {
+const applyFilter = payload => {
   loadBanks(payload)
 }
 </script>
