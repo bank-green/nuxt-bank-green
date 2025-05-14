@@ -21,15 +21,16 @@
           leave-to-class="opacity-0 scale-y-95"
           mode="out-in"
         >
-          <div
-            :key="country ? 'has-country' : 'no-country'"
-            class="flex flex-col md:flex-row"
-          >
+          <div class="flex flex-col md:flex-row">
             <div
               class="bg-white lg:bg-sushi-50 rounded-xl lg:w-80 md:sticky py-6 px-5 mb-4 md:mb-0 top-20 flex-shrink-0 lg:px-10"
               style="height: fit-content"
             >
-              <EcoBankFilters :location="country" @filter="applyFilter" />
+              <EcoBankFilters
+                v-if="country"
+                :location="country"
+                @filter="applyFilter"
+              />
             </div>
 
             <div class="relative w-full md:ml-6">
