@@ -22,11 +22,10 @@
       >
         <div class="flex flex-col md:flex-row">
           <div
-            class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
+            class=" bg-white lg:bg-sushi-50 rounded-xl lg:w-80 md:sticky py-6 px-5 mb-4 md:mb-0 top-20 flex-shrink-0 lg:px-10"
             style="height: fit-content"
           >
             <EcoBankFilters
-              v-if="country"
               :location="country"
               @filter="applyFilter"
             />
