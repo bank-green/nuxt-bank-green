@@ -26,6 +26,7 @@
             style="height: fit-content"
           >
             <EcoBankFilters
+              v-if="country"
               :location="country"
               @filter="applyFilter"
             />
