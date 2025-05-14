@@ -124,6 +124,12 @@ const toggleFilters = () => {
 </script>
 
 <template>
+  <div class="md:hidden px-6 pt-6">
+    <LocationSearch
+      v-model="country"
+      class="z-30 mb-6"
+    />
+  </div>
   <div
     class="bg-white hover:bg-gray-50 px-5 py-4 md:py-0 md:px-0 md:bg-transparent md:hover:bg-transparent cursor-pointer md:cursor-auto flex items-center"
     :class="{
@@ -286,3 +292,129 @@ const toggleFilters = () => {
     </CheckboxSection>
   </div>
 </template>
+
+<script setup>
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import RegionSearch from '@/components/forms/RegionSearch.vue'
+import LocationSearch from '@/components/forms/location/LocationSearch.vue'
+
+const { isBE } = useCountry()
+const emit = defineEmits(['filter'])
+const props = defineProps({
+  location: String,
+})
+const searchByLocation = ref(false)
+const onSelectLocation = (payload) => {
+  if (!payload) {
+    filterPayload.value.region = null
+    filterPayload.value.subregion = null
+  } else if (payload.type === 'subregion') {
+    filterPayload.value.region = null
+    filterPayload.value.subregion = payload.value
+  } else {
+    filterPayload.value.region = payload.value
+    filterPayload.value.subregion = null
+  }
+}
+
+const getDefaultFilter = () => ({
+  region: null,
+  subregion: null,
+  location: {
+    'Mobile banking': false,
+  },
+  topPick: false,
+  fossilFreeAlliance: false,
+  convenience: {
+    'Mobile banking': false,
+    'Free ATM network': false,
+    'No overdraft fee': false,
+    'No account maintenance fee': false,
+  },
+  bankAccounts: {
+    'checking': false,
+    'saving': false,
+    'Interest rates': false,
+    'Business accounts': false,
+    'Business savings accounts': false,
+    'Small business lending': false,
+    'Corporate lending': false,
+    'Credit cards': false,
+    'Mortgages or Loans': false,
+  },
+  security: {
+    'Deposit protection': false,
+  },
+})
+
+const filterPayload = ref(getDefaultFilter())
+
+const isFilterDirty = computed(
+  () =>
+    JSON.stringify(filterPayload.value) !== JSON.stringify(getDefaultFilter()),
+)
+
+const parsedFilterPayload = computed(() => {
+  return {
+    regions: filterPayload.value.region
+      ? [filterPayload.value.region]
+      : undefined,
+    subregions: filterPayload.value.subregion
+      ? [filterPayload.value.subregion]
+      : undefined,
+    topPick: filterPayload.value.topPick
+      ? filterPayload.value.topPick
+      : undefined,
+    fossilFreeAlliance: filterPayload.value.fossilFreeAlliance
+      ? filterPayload.value.fossilFreeAlliance
+      : undefined,
+    features: [
+      ...Object.keys(filterPayload.value.location).filter(
+        key => filterPayload.value.location[key],
+      ),
+      ...Object.keys(filterPayload.value.convenience).filter(
+        key => filterPayload.value.convenience[key],
+      ),
+      ...Object.keys(filterPayload.value.bankAccounts).filter(
+        key => filterPayload.value.bankAccounts[key],
+      ),
+      ...Object.keys(filterPayload.value.security).filter(
+        key => filterPayload.value.security[key],
+      ),
+    ],
+  }
+})
+
+watch(
+  filterPayload,
+  () => {
+    emit('filter', parsedFilterPayload.value)
+  },
+  { deep: true },
+)
+
+watch(searchByLocation, () => {
+  filterPayload.value.region = null
+  filterPayload.value.subregion = null
+})
+
+onMounted(() => emit('filter', parsedFilterPayload.value))
+
+const setDefaultFilter = () => {
+  filterPayload.value = getDefaultFilter()
+}
+watch(
+  () => props.location,
+  () => {
+    setDefaultFilter()
+  },
+)
+
+const forceShowMobile = ref(false)
+const showFilters = computed(() => {
+  return forceShowMobile.value || window.innerWidth >= 768
+})
+const toggleFilters = () => {
+  forceShowMobile.value = !forceShowMobile.value
+}
+</script>
