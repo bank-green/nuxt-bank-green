@@ -1,12 +1,18 @@
 <template>
-  <!-- icon -->
+  <!---------------->
+  <!----- icon ----->
+  <!---------------->
+
   <img
     class="cursor-pointer"
     src="/img/icons/information.svg"
     @click="isOpen = true"
   >
 
-  <!-- Account Fees Modal -->
+  <!------------------------------->
+  <!-- Account Fees Modal --------->
+  <!------------------------------->
+
   <EcoBankDetailsModal
     v-if="isOpen"
     :model-value="isOpen"
@@ -19,12 +25,18 @@
         :key="product.key"
         class="grid gap-2"
       >
-        <h3 class="sm:font-semibold font-bold">
+        <h3
+          v-if="hasFeeOrRate(product)"
+          class="sm:font-semibold font-bold"
+        >
           {{ product.displayName }}
         </h3>
 
-        <!-- Rate -->
-        <div class="pl-4 grid gap-2">
+        <!-------- Rate -------->
+        <div
+          v-if="product.interestRates?.low_rate"
+          class="pl-4 grid gap-2"
+        >
           <p>
             {{ product.interestRates?.low_rate }}% - {{ product.interestRates?.high_rate }}%
           </p>
@@ -33,9 +45,9 @@
           </p>
         </div>
 
-        <!-- Maintenance Fees -->
+        <!----- Maintenance Fees -->
         <div
-          v-if="product.fees.available_without_account_maintenance_fee.available"
+          v-if="product.fees.available_without_account_maintenance_fee?.available"
           class="pl-4 grid gap-2"
         >
           <p>
@@ -46,9 +58,9 @@
           </p>
         </div>
 
-        <!-- Overdraft Fees -->
+        <!----- Overdraft Fees ----->
         <div
-          v-if="product.fees.available_without_overdraft_fees.available"
+          v-if="product.fees.available_without_overdraft_fees?.available"
           class="pl-4"
         >
           <p>No overdraft fees</p>
@@ -62,28 +74,27 @@
 </template>
 
 <script setup lang="ts">
-import type { RateType } from '~/utils/constants/eco-bank.constants'
+import type { FeeAvailabilityEntryType, InterestRateDetailType } from '~/utils/types/eco-banks.type'
 
 const isOpen = ref(false)
 
-const props = withDefaults(defineProps<{
+const _props = withDefaults(defineProps<{
   title?: string
   availableDepositProductsList: Array<{
     key: string
     displayName: string
-    interestRates: RateType | undefined
+    interestRates: InterestRateDetailType | undefined
     fees: {
-      available_without_overdraft_fees: {
-        available: boolean
-        additional_details: string
-      }
-      available_without_account_maintenance_fee: {
-        available: boolean
-        additional_details: string
-      }
+      available_without_account_maintenance_fee?: FeeAvailabilityEntryType
+      available_without_overdraft_fees?: FeeAvailabilityEntryType
     }
   }>
 }>(), {
   title: 'Account rates and fees',
 })
+
+const hasFeeOrRate = (product: typeof _props.availableDepositProductsList[0]) =>
+  !!(product.interestRates?.low_rate
+    || product.fees.available_without_account_maintenance_fee?.available
+    || product.fees.available_without_overdraft_fees?.available)
 </script>

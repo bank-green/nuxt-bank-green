@@ -23,8 +23,10 @@
     />
 
     <EcoBankDetails
+      v-if="harvestData"
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
+      :harvest-data="harvestData"
     />
   </div>
 </template>
@@ -55,6 +57,11 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
       })
     : undefined,
   },
+)
+
+const { data: harvestData } = await useAsyncGql('HarvestDataQuery',
+  { tag: bankTag.value },
+  { transform: data => ({ ...data.harvestData }) },
 )
 
 const { data: prismicPageData } = await useAsyncData('sfipage', () =>

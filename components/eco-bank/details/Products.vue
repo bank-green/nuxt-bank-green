@@ -6,7 +6,9 @@
       ]"
       @update:active-tab="value => activeTab = value"
     >
-      <!-- Tab Navigation -->
+      <!------------------------------->
+      <!------ Tab Navigation --------->
+      <!------------------------------->
 
       <template #retail_and_individual-nav>
         Personal
@@ -24,7 +26,10 @@
         Corporate
       </template>
 
-      <!-- Tab Content -->
+      <!------------------------------->
+      <!------- Tab Content ----------->
+      <!------------------------------->
+
       <template #retail_and_individual>
         <EcoBankDetailsTable
           tab-id="retail_and_individual"
@@ -71,13 +76,15 @@
 </template>
 
 <script setup lang="ts">
-import type { HarvestDataQueryQuery } from '#gql'
+import type { DepositProductsType, FinancialFeaturesType, LoanProductsType, PoliciesType } from '~/utils/types/eco-banks.type'
 
-const activeTab = ref('retail_and_individual')
-
-const props = defineProps<{
-  depositProducts: NonNullable<HarvestDataQueryQuery['harvestData']>['depositProducts']
-  loanProducts: NonNullable<HarvestDataQueryQuery['harvestData']>['loanProducts']
-  financialFeatures: NonNullable<HarvestDataQueryQuery['harvestData']>['financialFeatures']
+defineProps<{
+  depositProducts: DepositProductsType
+  loanProducts: LoanProductsType
+  financialFeatures: FinancialFeaturesType
+  policies: PoliciesType
 }>()
+
+// default tabName "Personal"
+const activeTab = ref('retail_and_individual')
 </script>
