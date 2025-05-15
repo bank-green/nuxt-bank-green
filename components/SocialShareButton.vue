@@ -39,7 +39,6 @@ const label: Record<Props['network'], string> = {
           fill="white"
         />
       </svg>
-
       <svg
         v-if="network === 'twitter'"
         class="w-10 lg:w-12 h-10 lg:h-12"
