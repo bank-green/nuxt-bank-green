@@ -1,33 +1,38 @@
 <template>
-  <!-- Overview -->
+  <!------------------------------->
+  <!-------- Overview ------------->
+  <!------------------------------->
+
   <EcoBankDetailsOverview
     :tag="props.tag"
     :prismic-page-data="props.prismicPageData"
-    :customers-served="harvestData.customersServed"
-    :services="harvestData.services"
-    :financial-features="harvestData.financialFeatures"
-    :policies="harvestData.policies"
+    :customers-served="harvestData?.customersServed"
+    :services="harvestData?.services"
+    :financial-features="harvestData?.financialFeatures"
+    :policies="harvestData?.policies"
+    :has-no-harvest-data="hasNoHarvestData"
   />
 
-  <!-- Nonprofit -->
-  <EcoBankDetailsCustomerProducts
-    :deposit-products="harvestData.depositProducts"
-    :loan-products="harvestData.loanProducts"
-    :financial-features="harvestData.financialFeatures"
-    :policies="harvestData.policies"
+  <!------------------------------->
+  <!-------- Product Table -------->
+  <!------------------------------->
+
+  <EcoBankDetailsProducts
+    :deposit-products="harvestData?.depositProducts"
+    :loan-products="harvestData?.loanProducts"
+    :financial-features="harvestData?.financialFeatures"
+    :policies="harvestData?.policies"
   />
 </template>
 
 <script setup lang="ts">
+import type { HarvestDataType } from '~/utils/types/eco-banks.type'
+
 const props = defineProps<{
   tag: string
   prismicPageData: Record<string, any> | null
+  harvestData: HarvestDataType
 }>()
 
-const { data: harvestData } = await useAsyncGql('HarvestDataQuery',
-  { tag: props.tag },
-  {
-    transform: data => ({ ...data.harvestData }),
-  },
-)
+const hasNoHarvestData = !props.harvestData
 </script>

@@ -9,7 +9,7 @@
     appear
   >
     <div
-      class="fixed inset-0 flex justify-center items-center backdrop-brightness-[0.35] p-0 w-full z-50 top-[-80px]"
+      class="fixed inset-0 flex justify-center items-center backdrop-brightness-[0.35] p-0 w-full z-50"
       @click="closeModal"
     >
       <div
@@ -20,23 +20,34 @@
         <div
           class="absolute top-0 flex w-full h-full items-center justify-center"
         >
-          <div class="bg-white p-4 pb-16 relative grid gap-6 w-[671px] max-w-full">
-            <h2
-              v-if="title"
-              class="flex items-center"
-            >
-              <span class="text-xl grow">{{ title }}</span>
-              <button
-                class="hover:text-red-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500 "
-                @click="closeModal"
+          <div class="bg-white px-4 pb-16 relative grid w-[671px] max-w-full max-h-full overscroll-y-scroll">
+            <!------------------------------->
+            <!-------- Modal Header --------->
+            <!------------------------------->
+
+            <div class="sticky top-0 z-10 bg-white py-4">
+              <h2
+                v-if="title"
+                class="flex items-center"
               >
-                <img
-                  src="/img/icons/cross.svg"
-                  alt="Close"
-                  class="h-5 w-5 stroke-1"
+                <span class="text-xl grow">{{ title }}</span>
+                <button
+                  class="hover:text-red-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500 "
+                  @click="closeModal"
                 >
-              </button>
-            </h2>
+                  <img
+                    src="/img/icons/cross.svg"
+                    alt="Close"
+                    class="h-5 w-5 stroke-1"
+                  >
+                </button>
+              </h2>
+            </div>
+
+            <!------------------------------->
+            <!-------- Modal Content -------->
+            <!------------------------------->
+
             <slot />
           </div>
         </div>
