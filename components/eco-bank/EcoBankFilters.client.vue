@@ -124,10 +124,11 @@ const toggleFilters = () => {
 </script>
 
 <template>
-  <div class="md:hidden px-6 pt-6">
-    <LocationSearch
-      v-model="country"
-      class="z-30 mb-6"
+  <div class="px-2 pt-6">
+    <RegionSearch
+      ref="regionPicker"
+      class="pb-4 md:max-w-sm md:mx-auto z-30"
+      @select="onSelectLocation"
     />
   </div>
   <div
@@ -165,31 +166,6 @@ const toggleFilters = () => {
     v-show="showFilters"
     class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
   >
-    <!-- <div>
-      <button
-        v-show="open.Location"
-        class="w-full flex justify-between items-center text-xs uppercase font-semibold"
-      >
-        <h5>Location</h5>
-        <ChevronIcon :is-open="open.Location" />
-      </button>
-    </div> -->
-    <!-- <div class="mt-2 flex flex-col space-y-1">
-      <CheckboxSection
-        v-model="searchByLocation"
-        class="col-span-full"
-        name="local_branches"
-      >
-        Local branches
-      </CheckboxSection>
-      <RegionSearch
-        v-if="searchByLocation"
-        ref="regionPicker"
-        class="pb-4 md:max-w-sm md:mx-auto z-30"
-        @select="onSelectLocation"
-      />
-    </div> -->
-
     <div class="mt-6">
       <button
         class="w-full flex justify-between items-center text-xs uppercase font-semibold"
@@ -382,7 +358,7 @@ const toggleFilters = () => {
 <script setup>
 import { reactive, ref, computed, watch, onMounted } from 'vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-// import RegionSearch from '@/components/forms/RegionSearch.vue'
+import RegionSearch from '@/components/forms/RegionSearch.vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 
 const { isBE } = useCountry()
