@@ -26,20 +26,20 @@
     </button>
   </div>
 
+  <div class="mb-2">
+    <CheckboxSection
+      v-model="allOpen"
+      class="col-span-full"
+      name="expand_all"
+    >
+      {{ allOpen ? 'Collapse all' : 'Expand all' }}
+    </CheckboxSection>
+  </div>
+
   <div
     v-show="showFilters"
     class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
   >
-    <div class="mb-2">
-      <CheckboxSection
-        v-model="allOpen"
-        class="col-span-full"
-        name="expand_all"
-      >
-        {{ allOpen ? 'Collapse all' : 'Expand all' }}
-      </CheckboxSection>
-    </div>
-
     <!-- <div>
       <button
         v-show="open.Location"
@@ -429,4 +429,8 @@ const ChevronIcon = defineComponent({
     )
   },
 })
+
+const toggleSection = (sectionKey) => {
+  open[sectionKey] = !open[sectionKey]
+}
 </script>
