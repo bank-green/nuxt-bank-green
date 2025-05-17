@@ -1,3 +1,21 @@
+<script setup>
+import { asText } from '@prismicio/helpers'
+import CheckList from '@/components/CheckList.vue'
+
+const { client } = usePrismic()
+const { data: call } = await useAsyncData('calltoaction', () =>
+  client.getSingle('calltoaction'),
+)
+defineProps({
+  title: String,
+  paragraph: String,
+  checkListItems: Array,
+  buttonText: String,
+  light: Boolean,
+  spaced: Boolean,
+})
+</script>
+
 <template>
   <div
     class="flex flex-col justify-center items-center rounded-xl py-6 md:py-12 px-6 md:px-16"
@@ -15,7 +33,7 @@
     >
       <div class="md:w-1/2 max-w-md">
         <PrismicRichText
-          class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4 text-white"
+          class="text-lg md:text-2xl tracking-wide mb-1 md:mb-4 text-black"
           :class="light ? 'text-blue-900' : 'text-white'"
           :field="call?.data?.text"
           fallback="Banks live and die on their reputations. Mass movements of money to fossil-free competitors puts those reputations at grave risk. By moving your money to a sustainable financial institution, you will:"
@@ -42,21 +60,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { asText } from '@prismicio/helpers'
-import CheckList from '@/components/CheckList.vue'
-
-const { client } = usePrismic()
-const { data: call } = await useAsyncData('calltoaction', () =>
-  client.getSingle('calltoaction')
-)
-defineProps({
-  title: String,
-  paragraph: String,
-  checkListItems: Array,
-  buttonText: String,
-  light: Boolean,
-  spaced: Boolean
-})
-</script>

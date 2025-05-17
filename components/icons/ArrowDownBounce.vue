@@ -5,5 +5,3 @@
     alt="down arrow"
   >
 </template>
-
-<style></style>

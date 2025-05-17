@@ -1,3 +1,105 @@
+<script setup lang="ts">
+import LoadingJumper from '../../LoadingJumper.vue'
+import SearchInput from '../input/SearchInput.vue'
+import ListPicker from '../ListPicker.vue'
+import BaseField from '../BaseField.vue'
+import BankSearchItem from './BankSearchItem.vue'
+import { findBanks } from './banks'
+
+const props = withDefaults(defineProps<{
+  disabled?: boolean
+  country: string
+  modelValue: object | null
+  warning?: string | boolean
+  infoTooltip?: string
+  dark?: boolean
+  title?: string
+  isEmbrace?: boolean
+}>(), {
+  disabled: false,
+  warning: false,
+  infoTooltip: undefined,
+  dark: false,
+  title: '',
+  isEmbrace: false,
+})
+
+const emit = defineEmits(['update:modelValue', 'searchInputChange'])
+
+const pageStart = new Date()
+const search = ref<string>('')
+const isShowing = ref<boolean>(false)
+const loaded = ref<boolean>(false)
+const selectedItem = ref<string | null>(null)
+const input = ref<HTMLInputElement | null>(null)
+const banks = ref<{
+  name: string
+  tag: string
+  website?: string | null
+  aliases?: string | null
+}[]>([])
+
+const fetchGql = useGql()
+const filteredBanks = computed(() => findBanks(banks.value, search.value))
+
+onMounted(loadBanks)
+
+watch(
+  () => props.country,
+  async function () {
+    await loadBanks()
+    await nextTick()
+    if (input.value?.focus && +new Date() - +pageStart > 15000) {
+      input.value.focus()
+    }
+  },
+)
+
+watch(
+  () => search,
+  function (newValue) {
+    if (props.modelValue && newValue.value !== selectedItem.value) {
+      emit('update:modelValue', null)
+    }
+    emit('searchInputChange', newValue)
+  },
+)
+
+function showList() {
+  isShowing.value = true
+}
+
+function hideList() {
+  isShowing.value = false
+}
+
+async function loadBanks() {
+  if (props.disabled) { return }
+  loaded.value = false
+  const data = props.isEmbrace
+    ? await fetchGql('EmbraceBrandQuery', undefined).then(data => data.brandsFilteredByEmbraceCampaign?.filter(isTruthy)) || []
+    : await fetchGql('BrandsByCountryQuery', { country: props.country }).then(data =>
+      data.brands?.edges.map(o => o?.node).filter(isTruthy),
+    ) || []
+  banks.value = data
+  loaded.value = true
+}
+
+async function onSelectBank(item: { name: string, tag: string }) {
+  emit('update:modelValue', null)
+  await nextTick()
+  search.value = item.name
+  selectedItem.value = item.name
+  emit('update:modelValue', item)
+  isShowing.value = false
+}
+
+function onCloseClick() {
+  search.value = ''
+  emit('update:modelValue', null)
+}
+</script>
+
 <template>
   <div class="col-span-2">
     <BaseField
@@ -14,7 +116,13 @@
         v-model="search"
         :disabled="disabled"
         :aria-expanded="isShowing"
-        :placeholder="disabled ? 'Set a country first' : !loaded ? 'Loading banks...' : !hasBanks ? 'No banks available in this country.' : 'Search bank...'"
+        :placeholder="disabled
+          ? 'Set a country first'
+          : !loaded
+            ? 'Loading banks...'
+            : !banks.length
+              ? 'No banks available in this country.'
+              : 'Search bank...'"
         :warning="warning"
         :dark="dark"
         @keydown.down="
@@ -55,12 +163,12 @@
           v-if="isShowing"
           class="absolute z-10 mt-1 w-full rounded-md shadow-lg"
           :class="{
-            'bg-white': filteredBanks.length > 0,
+            'bg-white': filteredBanks.length,
             'bg-gray-100': !filteredBanks.length,
           }"
         >
           <slot
-            v-if="filteredBanks.length === 0"
+            v-if="!filteredBanks.length"
             name="not-listed"
           >
             <NuxtLink to="/not-listed">
@@ -88,100 +196,3 @@
     </BaseField>
   </div>
 </template>
-
-<script setup lang="ts">
-import LoadingJumper from '../../LoadingJumper.vue'
-import SearchInput from '../input/SearchInput.vue'
-import ListPicker from '../ListPicker.vue'
-import BaseField from '../BaseField.vue'
-import BankSearchItem from './BankSearchItem.vue'
-import { findBanks } from './banks'
-
-const props = withDefaults(defineProps<{
-  disabled?: boolean
-  country: string
-  modelValue: object | null
-  warning?: string | boolean
-  infoTooltip?: string
-  dark?: boolean
-  title?: string
-  isEmbrace?: boolean
-}>(), {
-  disabled: false,
-  warning: false,
-  infoTooltip: undefined,
-  dark: false,
-  title: '',
-  isEmbrace: false,
-})
-
-const emit = defineEmits(['update:modelValue', 'searchInputChange'])
-const router = useRouter()
-
-const pageStart = new Date()
-const banks = ref([])
-const loaded = ref<boolean>(false)
-const search = ref<string>('')
-const isShowing = ref<boolean>(false)
-const selectedItem = ref<string | null>(null)
-const input = ref<HTMLInputElement | null>(null)
-
-const hasBanks = computed(() => banks.value.length > 0)
-const filteredBanks = computed(() => findBanks(banks.value, search.value))
-
-onMounted(() => {
-  loadBanks()
-})
-
-watch(
-  () => props.country,
-  async function () {
-    await loadBanks()
-    await nextTick()
-    if (input.value && +new Date() - +pageStart > 15000) {
-      input.value.focus()
-    }
-  },
-)
-
-watch(
-  () => search,
-  function (newValue) {
-    if (props.modelValue && newValue.value !== selectedItem.value) {
-      emit('update:modelValue', null)
-    }
-    emit('searchInputChange', newValue)
-  },
-)
-
-async function loadBanks() {
-  if (props.disabled) { return }
-  loaded.value = false
-  search.value = ''
-  banks.value = await getBanksList({ country: props.country, isEmbrace: props.isEmbrace })
-  loaded.value = true
-}
-
-function showList() {
-  isShowing.value = true
-}
-
-function hideList() {
-  isShowing.value = false
-}
-
-async function onSelectBank(item: { name: string, tag: string }) {
-  emit('update:modelValue', null)
-  await nextTick()
-  search.value = item.name
-  selectedItem.value = item.name
-  emit('update:modelValue', item)
-  isShowing.value = false
-  router.push(`banks/${item.tag}`)
-}
-
-function onCloseClick() {
-  search.value = ''
-  emit('update:modelValue', null)
-}
-</script>

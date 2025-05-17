@@ -1,3 +1,21 @@
+<script setup>
+import { useGtm } from '@gtm-support/vue-gtm'
+
+const showBanner = useCookie('bg.showbanner', { default: () => true })
+const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+function yesCookies() {
+  showBanner.value = false
+  allowCookies.value = true
+  const gtm = useGtm()
+  gtm.enable(true)
+}
+
+function noCookies() {
+  showBanner.value = false
+  allowCookies.value = false
+}
+</script>
+
 <template>
   <div
     v-if="showBanner"
@@ -11,7 +29,7 @@
         <div class="mt-1 sm:mt-0 flex items-center justify-between">
           <NuxtLink
             to="/privacy"
-            class="cursor-pointer text-sushi-200 hover:text-sushi-100 font-bold no-underline mr-4"
+            class="cursor-pointer text-sushi-200 hover:text-pistachio-green font-bold no-underline mr-4"
           >
             Privacy policy
           </NuxtLink>
@@ -33,21 +51,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { useGtm } from '@gtm-support/vue-gtm'
-
-const showBanner = useCookie('bg.showbanner', { default: () => true })
-const allowCookies = useCookie('bg.allowcookies', { default: () => false })
-function yesCookies () {
-  showBanner.value = false
-  allowCookies.value = true
-  const gtm = useGtm()
-  gtm.enable(true)
-}
-
-function noCookies () {
-  showBanner.value = false
-  allowCookies.value = false
-}
-</script>

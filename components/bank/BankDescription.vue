@@ -1,12 +1,6 @@
-<template>
-  <div
-    class="md:text-2xl tracking-wide mb-4 prose"
-    v-html="processedText"
-  />
-</template>
-
 <script setup lang="ts">
 import { onMounted, watch, ref } from 'vue'
+import { addGlossaryToText } from '~/utils/addGlossaryToText'
 
 const props = defineProps<{ text: string }>()
 const processedText = ref(props.text) // Default to initial text
@@ -22,23 +16,21 @@ onMounted(async () => {
       name: term.term,
       tooltip: term.tooltip,
     }))
-    updateText(props.text, terms)
+    processedText.value = addGlossaryToText(props.text, terms)
   }
 })
 
 watch(() => props.text, (newText) => {
-  updateText(newText, glossaryData?.terms)
+  processedText.value = addGlossaryToText(newText, glossaryData?.terms)
 })
-
-function updateText(text, terms) {
-  let modifiedText = text
-  terms.forEach((term) => {
-    const regex = new RegExp(`\\b${term.name}\\b`, 'gi')
-    modifiedText = modifiedText.replace(regex, `<a href="/glossary#${term.name.toLowerCase()}" class="tooltip" data-tooltip="${term.tooltip}">${term.name}</a>`)
-  })
-  processedText.value = modifiedText
-}
 </script>
+
+<template>
+  <div
+    class="md:text-2xl tracking-wide mb-4 prose"
+    v-html="processedText"
+  />
+</template>
 
 <style>
 .tooltip {

@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const router = useRouter()
+const bankTag = router.currentRoute.value.params.bankTag
+</script>
+
 <template>
   <div class="bg-primary-dark">
     <div class="contain py-4 md:py-8 w-full flex flex-wrap md:flex-nowrap items-center text-gray-100">
@@ -31,8 +36,3 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-
-const router = useRouter()
-const bankTag = router.currentRoute.value.params.bankTag
-</script>

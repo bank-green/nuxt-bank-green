@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+interface Props {
+  network: string
+  url?: string | null
+  title?: string | null
+  user?: string | null
+  hashtags?: string | null
+  image?: string | null
+}
+const props = defineProps<Props>()
+
+const label: Record<Props['network'], string> = {
+  facebook: 'Facebook',
+  twitter: 'X',
+}
+</script>
+
 <template>
   <SocialShare
     v-bind="props"
@@ -59,20 +76,3 @@
     </template>
   </SocialShare>
 </template>
-
-<script lang="ts" setup>
-interface Props {
-  network: string
-  url?: string | null
-  title?: string | null
-  user?: string | null
-  hashtags?: string | null
-  image?: string | null
-}
-const props = defineProps<Props>()
-
-const label: Record<Props['network'], string> = {
-  facebook: 'Facebook',
-  twitter: 'X',
-}
-</script>

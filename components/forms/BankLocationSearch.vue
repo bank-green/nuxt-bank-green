@@ -1,52 +1,25 @@
-<template>
-  <LocationSearch
-    v-if="!isEmbrace && !hideLocation"
-    v-model="country"
-    :dark="dark"
-    class="col-span-2"
-    :title="locationTitle"
-    :class="locationSearchClasses"
-  />
-  <BankSearch
-    ref="bankSearch"
-    v-model="bank"
-    class="col-span-2"
-    :disabled="!country"
-    :title="bankTitle"
-    :dark="dark"
-    :country="country"
-    :warning="warningText"
-    :class="bankSearchClasses"
-    :info-tooltip="infoTooltipBank"
-    :is-embrace="isEmbrace"
-    @search-input-change="onSearchInputChange"
-    @update:model-value="onUpdateModel"
-  >
-    <slot name="bank-not-listed" />
-  </BankSearch>
-</template>
 <script setup lang="ts">
 import BankSearch from './banks/BankSearch.vue'
 import LocationSearch from './location/LocationSearch.vue'
 
 const props = withDefaults(defineProps<{
-    bankTitle?: string;
-    locationTitle?: string;
-    modelValue: Object | null;
-    warning?: string | boolean;
-    infoTooltipBank?: string;
-    bankSearchClasses?: string;
-    locationSearchClasses?: string;
-    dark?: boolean;
-    isEmbrace?: boolean;
-    hideLocation?: boolean
-  }>(), {
+  bankTitle?: string
+  locationTitle?: string
+  modelValue: object | null
+  warning?: string | boolean
+  infoTooltipBank?: string
+  bankSearchClasses?: string
+  locationSearchClasses?: string
+  dark?: boolean
+  isEmbrace?: boolean
+  hideLocation?: boolean
+}>(), {
   warning: false,
   dark: false,
   bankTitle: '',
   locationTitle: '',
   isEmbrace: false,
-  hideLocation: false
+  hideLocation: false,
 })
 
 const { country } = useCountry()
@@ -79,5 +52,32 @@ watch(bank, (newVal) => {
 
   bank.value = newVal
 })
-
 </script>
+
+<template>
+  <LocationSearch
+    v-if="!isEmbrace && !hideLocation"
+    v-model="country"
+    :dark="dark"
+    class="col-span-2"
+    :title="locationTitle"
+    :class="locationSearchClasses"
+  />
+  <BankSearch
+    ref="bankSearch"
+    v-model="bank"
+    class="col-span-2"
+    :disabled="!country"
+    :title="bankTitle"
+    :dark="dark"
+    :country="country"
+    :warning="warningText"
+    :class="bankSearchClasses"
+    :info-tooltip="infoTooltipBank"
+    :is-embrace="isEmbrace"
+    @search-input-change="onSearchInputChange"
+    @update:model-value="onUpdateModel"
+  >
+    <slot name="bank-not-listed" />
+  </BankSearch>
+</template>

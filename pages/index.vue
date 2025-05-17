@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="bg-gradient-to-b from-sushi-50 to-sushi-100 md:pt-20">
+    <div class="bg-gradient-to-b from-sushi-50 to-pistachio-green md:pt-20">
       <div
         class="page-fade-in contain flex flex-col justify-center items-center"
       >
@@ -45,14 +45,14 @@
                 </div>
               </template>
             </ClientOnly>
-            <a
-              :href="`/banks/${bank?.['tag']}`"
+            <NuxtLink
+              :to="`/banks/${bank?.['tag']}`"
               class="flex-initial md:w-48 button-green text-primary-dark"
               :class="{ disabled: !bank }"
               @click="onCheckBankClick"
             >
               Check My Bank
-            </a>
+            </NuxtLink>
           </div>
 
           <div
@@ -151,7 +151,7 @@
         alt=""
       />
     </div>
-    <div class="bg-blue-100 text-gray-800">
+    <div class="bg-arctic-blue text-gray-800">
       <div class="overflow-hidden">
         <Swoosh direction="down" />
         <div class="contain">
@@ -220,6 +220,8 @@ import { components } from '~~/slices'
 import { usePrismicSEO } from '~~/composables/useHeadHelpers'
 import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
+const router = useRouter()
+
 const sliceComps = ref(defineSliceZoneComponents(components))
 
 const { bank, warningsMap } = useContactForm('homepage', ['bank'])
@@ -245,5 +247,9 @@ const { country } = useCountry()
 
 watch(country, (_) => {
   bank.value = null
+})
+
+watch(bank, ({ tag }) => {
+  if (tag) router.push(`banks/${tag}`)
 })
 </script>

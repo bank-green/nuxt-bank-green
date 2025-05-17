@@ -57,7 +57,7 @@ Publish to `test.bank.green` (run after building)
 `npm run stage`
 
 Publish to `bank.green`
-`npm run publish`
+`npm run deploy`
 
 # Tests
 ## Unit Tests/Integration Tests
@@ -81,3 +81,11 @@ Always use the Slice Machine tool from your local for creating and editing custo
 When pushing changes from Slice Machine, make sure only items that you are working on will get updated. If the changes shown in Slice Machine include deleting items, verify with the team to see if these items are safe to delete. Deleting a custom type may delete the associated content which will not be recoverable.
 
 Read the [Prismic & Nuxt docs](https://prismic.io/docs/nuxt) to understand how to use Prismic with Nuxt.
+
+
+# GraphQL Typings
+We're using [nuxt-graphql-client](https://nuxt-graphql-client.web.app/)
+
+It works by fetching and building the schema from queries during build and run commands.
+
+Please note that in order to generate the query types, the queries must be in a `.gql`/`.graphql` file.

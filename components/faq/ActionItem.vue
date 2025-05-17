@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import AccordionItem from '../AccordionItem.vue'
+
+withDefaults(
+  defineProps<{
+    step: number
+    title: string
+    description: string
+    subcontent?: any[]
+    caratClass: string
+  }>(),
+  {
+    subcontent: () => [],
+  },
+)
+</script>
+
 <template>
   <div class="lg:flex">
     <div class="lg:mr-6 pt-4 pl-5">
@@ -20,20 +37,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import AccordionItem from '../AccordionItem.vue'
-
-withDefaults(
-  defineProps<{
-    step: number;
-    title: string;
-    description: string;
-    subcontent?: any[];
-    caratClass: string;
-  }>(),
-  {
-    subcontent: () => []
-  }
-)
-</script>

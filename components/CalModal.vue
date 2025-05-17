@@ -1,3 +1,18 @@
+<script setup lang="ts">
+const props = defineProps<{
+  modelValue: boolean
+}>()
+
+const emit = defineEmits([
+  'update:modelValue',
+
+])
+const showModal = computed({
+  get: () => props.modelValue,
+  set: val => emit('update:modelValue', val),
+})
+</script>
+
 <template>
   <ModalWithBackdrop v-model="showModal">
     <!-- Within this div the cal.com embed will be placed - it requires an embed code on the page -->
@@ -7,18 +22,3 @@
     />
   </ModalWithBackdrop>
 </template>
-<script setup lang="ts">
-
-const props = defineProps<{
-  modelValue: boolean;
-}>()
-
-const emit = defineEmits([
-  'update:modelValue'
-
-])
-const showModal = computed({
-  get: () => props.modelValue,
-  set: val => emit('update:modelValue', val)
-})
-</script>

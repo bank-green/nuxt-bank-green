@@ -1,19 +1,3 @@
-<template>
-  <transition
-    enter-active-class="transition transform-gpu duration-200 ease-out"
-    enter-from-class="opacity-0 scale-95"
-    enter-to-class="opacity-100 scale-100"
-    leave-active-class="transition transform-gpu duration-100 ease-in"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-95"
-    appear
-  >
-    <div ref="observer" :style="styles">
-      <slot v-if="hasBeenInViewport" />
-    </div>
-  </transition>
-</template>
-
 <script setup lang="ts">
 /**
  * Mounts the slot when it is visible in viewport
@@ -21,13 +5,13 @@
  */
 const props = withDefaults(
   defineProps<{
-    placeholderWidth?: number;
-    placeholderHeight?: number;
-    options?: any;
+    placeholderWidth?: number
+    placeholderHeight?: number
+    options?: any
   }>(),
   {
-    options: () => ({})
-  }
+    options: () => ({}),
+  },
 )
 
 const intersectionObserver = ref<IntersectionObserver | null>(null)
@@ -40,7 +24,7 @@ const styles = computed(() => {
   return {
     width: props.placeholderWidth,
     height: props.placeholderHeight,
-    opacity: 0
+    opacity: 0,
   }
 })
 
@@ -68,8 +52,8 @@ onMounted(() => {
         root: null,
         rootMargin: '0px 0px 0px 0px',
         threshold: 0,
-        ...props.options
-      }
+        ...props.options,
+      },
     )
 
     intersectionObserver.value.observe(observer.value)
@@ -84,3 +68,24 @@ onUnmounted(() => {
   }
 })
 </script>
+
+<template>
+  <ClientOnly>
+    <transition
+      enter-active-class="transition transform-gpu duration-200 ease-out"
+      enter-from-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition transform-gpu duration-100 ease-in"
+      leave-from-class="opacity-100 scale-100"
+      leave-to-class="opacity-0 scale-95"
+      appear
+    >
+      <div
+        ref="observer"
+        :style="styles"
+      >
+        <slot v-if="hasBeenInViewport" />
+      </div>
+    </transition>
+  </ClientOnly>
+</template>

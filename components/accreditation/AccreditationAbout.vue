@@ -1,3 +1,21 @@
+<script lang="ts" setup>
+import { asImageSrc } from '@prismicio/helpers'
+import type { AccreditationpageDocumentData } from 'prismicio-types'
+
+interface Props {
+  title?: AccreditationpageDocumentData['about_title']
+  description?: AccreditationpageDocumentData['about_description']
+  logo?: AccreditationpageDocumentData['aboutlogo']
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: 'About the Bank.Green Certification',
+})
+
+const logo = asImageSrc(props.logo) ?? '/img/certification/fossil-free-certified.png'
+const logoProvider = props.logo ? '' : 'none'
+</script>
+
 <template>
   <section class="flex flex-col gap-10 lg:flex-row-reverse min-h-[368px] px-6 lg:px-52 py-16 lg:py-20 bg-primary-dark text-white">
     <div class="flex flex-col gap-6 max-w-3xl">
@@ -27,21 +45,3 @@
     />
   </section>
 </template>
-
-<script lang="ts" setup>
-import { asImageSrc } from '@prismicio/helpers'
-import type { AccreditationpageDocumentData } from 'prismicio-types'
-
-interface Props {
-  title?: AccreditationpageDocumentData['about_title']
-  description?: AccreditationpageDocumentData['about_description']
-  logo?: AccreditationpageDocumentData['aboutlogo']
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  title: 'About the Bank.Green Certification',
-})
-
-const logo = asImageSrc(props.logo) ?? '/img/certification/fossil-free-certified.png'
-const logoProvider = props.logo ? '' : 'none'
-</script>

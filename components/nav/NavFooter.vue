@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import links from './links'
+import SocialLinks from '@/components/nav/SocialLinks.vue'
+
+const computedLinks = computed(() => links({ isHeader: false }))
+</script>
+
 <template>
   <nav class="contain py-8 lg:py-0">
     <div class="lg:flex items-center lg:items-start justify-between lg:py-8">
@@ -49,10 +56,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import links from './links'
-import SocialLinks from '@/components/nav/SocialLinks.vue'
-
-const computedLinks = computed(() => links({ isHeader: false }))
-</script>

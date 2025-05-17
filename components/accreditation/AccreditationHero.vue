@@ -1,5 +1,20 @@
+<script lang="ts" setup>
+import { asImageSrc } from '@prismicio/helpers'
+import type { AccreditationpageDocumentData, AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
+
+const props = defineProps<{
+  title?: AccreditationpageDocumentData['hero_title']
+  description?: AccreditationpageDocumentData['hero_description']
+  logo?: AccreditationpageDocumentData['hero_logo']
+  projects?: AccreditationpageDocumentDataProjectsItem[]
+}>()
+
+const heroLogo = asImageSrc(props.logo) ?? '/img/certification/fossil-free-certified.png'
+const heroLogoProvider = props.logo ? '' : 'none'
+</script>
+
 <template>
-  <section class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 max-w-screen">
+  <section class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 max-w-screen">
     <div class="page-fade-in relative contain pb-20 lg:pt-12 z-10">
       <div
         class="relative flex flex-col items-center gap-10 border rounded-2xl w-full max-w-7xl min-h-[504px] px-4 py-10 bg-white text-center"
@@ -44,21 +59,6 @@
     <Swoosh color="text-white" />
   </section>
 </template>
-
-<script lang="ts" setup>
-import { asImageSrc } from '@prismicio/helpers'
-import type { AccreditationpageDocumentData, AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
-
-const props = defineProps<{
-  title?: AccreditationpageDocumentData['hero_title']
-  description?: AccreditationpageDocumentData['hero_description']
-  logo?: AccreditationpageDocumentData['hero_logo']
-  projects?: AccreditationpageDocumentDataProjectsItem[]
-}>()
-
-const heroLogo = asImageSrc(props.logo) ?? '/img/certification/fossil-free-certified.png'
-const heroLogoProvider = props.logo ? '' : 'none'
-</script>
 
 <style>
 .green-line {

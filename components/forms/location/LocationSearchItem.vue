@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import Flag from '../../Flag.vue'
+
+defineProps<{
+  id: string
+  title: string
+  isSelected: boolean
+}>()
+</script>
+
 <template>
   <div class="flex items-center">
     <div class="w-5 h-4">
@@ -33,13 +43,3 @@
     </svg>
   </span>
 </template>
-
-<script setup lang="ts">
-import Flag from '../../Flag.vue'
-
-defineProps<{
-  id: string;
-  title: string;
-  isSelected: boolean;
-}>()
-</script>

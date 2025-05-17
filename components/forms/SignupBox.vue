@@ -1,12 +1,91 @@
+<script setup lang="ts">
+import VueTurnstile from 'vue-turnstile'
+import CheckboxSection from '@/components/forms/CheckboxSection.vue'
+import TextField from '@/components/forms/TextField.vue'
+import type { ContactFormPrefill } from '@/utils/interfaces/contactForm'
+
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
+
+// TODO: manage in separate file
+interface DetailsInterface {
+  'tag': string
+  'name': string
+  'rating': string | number | null
+  'country': string
+  'dirty deal 1': any
+  'dirty deal 2': any
+}
+
+const props = withDefaults(
+  defineProps<{
+    tag?: string
+    successRedirectURL?: string
+    details?: DetailsInterface | null
+    title?: string
+    prefill?: ContactFormPrefill | undefined
+  }>(),
+  {
+    tag: 'signupbox',
+    successRedirectURL: '/thanks',
+  },
+)
+
+const emit = defineEmits(['success'])
+
+const router = useRouter()
+
+const extra = computed(() => {
+  if (!props.details) {
+    return {}
+  }
+  return {
+    bank: props.details.tag,
+    bankDisplayName: props.details.name,
+    rating: props.details.rating,
+    country: props.details.country,
+    dirty_deal_1: props.details['dirty deal 1'],
+    dirty_deal_2: props.details['dirty deal 2'],
+  }
+})
+
+const {
+  firstName,
+  email,
+  isAgreeTerms,
+  isAgreeMarketing,
+  warningsMap,
+  send,
+  busy,
+} = useContactForm(
+  props.tag,
+  ['email', 'isAgreeTerms', 'isAgreeMarketing'],
+  extra,
+  toRef(props, 'prefill'),
+)
+
+const submit = async () => {
+  if (await send()) {
+    emit('success')
+    router.push(props.successRedirectURL)
+  }
+}
+</script>
+
 <template>
   <div
     class="flex items-center justify-center bg-primary-dark rounded-2xl px-6 py-12 text-gray-50 text-center font-semibold"
   >
     <div class="max-w-xl">
-      <p v-if="title" class="text-xl md:text-3xl mb-6">
+      <p
+        v-if="title"
+        class="text-xl md:text-3xl mb-6"
+      >
         {{ title }}
       </p>
-      <p v-else class="text-xl md:text-3xl mb-6">
+      <p
+        v-else
+        class="text-xl md:text-3xl mb-6"
+      >
         Take action with Bank.Green
       </p>
 
@@ -50,7 +129,10 @@
             :warning="warningsMap['isAgreeTerms']"
           >
             I have read and understood Bank.Green’s
-            <NuxtLink to="/privacy" class="link">
+            <NuxtLink
+              to="/privacy"
+              class="link"
+            >
               privacy policy
             </NuxtLink>.
           </CheckboxSection>
@@ -89,77 +171,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-
-import VueTurnstile from 'vue-turnstile'
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import TextField from '@/components/forms/TextField.vue'
-import { ContactFormPrefill } from '@/utils/interfaces/contactForm'
-
-const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
-
-// TODO: manage in separate file
-interface DetailsInterface {
-  tag: string;
-  name: string;
-  rating: string | number | null;
-  country: string;
-  'dirty deal 1': any;
-  'dirty deal 2': any;
-}
-
-const props = withDefaults(
-  defineProps<{
-    tag?: string;
-    successRedirectURL?: string;
-    details?: DetailsInterface | null;
-    title?: string;
-    prefill?: ContactFormPrefill | undefined;
-  }>(),
-  {
-    tag: 'signupbox',
-    successRedirectURL: '/thanks'
-  }
-)
-
-const emit = defineEmits(['success'])
-
-const router = useRouter()
-
-const extra = computed(() => {
-  if (!props.details) {
-    return {}
-  }
-  return {
-    bank: props.details.tag,
-    bankDisplayName: props.details.name,
-    rating: props.details.rating,
-    country: props.details.country,
-    dirty_deal_1: props.details['dirty deal 1'],
-    dirty_deal_2: props.details['dirty deal 2']
-  }
-})
-
-const {
-  firstName,
-  email,
-  isAgreeTerms,
-  isAgreeMarketing,
-  warningsMap,
-  send,
-  busy
-} = useContactForm(
-  props.tag,
-  ['email', 'isAgreeTerms', 'isAgreeMarketing'],
-  extra,
-  toRef(props, 'prefill')
-)
-
-const submit = async () => {
-  if (await send()) {
-    emit('success')
-    router.push(props.successRedirectURL)
-  }
-}
-</script>

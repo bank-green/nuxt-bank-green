@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  features: Object,
+})
+</script>
+
 <template>
   <div
     v-for="(item, key) in features"
@@ -6,7 +12,7 @@
   >
     <svg
       v-if="item.isChecked"
-      class="flex-none p-1 w-6 h-6 mt-0.5 mr-4 bg-sushi-100 rounded-full text-sushi-500"
+      class="flex-none p-1 w-6 h-6 mt-0.5 mr-4 bg-pistachio-green rounded-full text-sushi-500"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -35,17 +41,20 @@
       />
     </svg>
     <div class="flex-1">
-      <span v-if="item.isChecked && item.text" class="text-gray-900">{{
+      <span
+        v-if="item.isChecked && item.text"
+        class="text-gray-900"
+      >{{
         `${key}: ${item.text}`
       }}</span>
-      <span v-else-if="item.isChecked" class="text-gray-700">{{ key }}</span>
-      <span v-else class="text-gray-400">{{ key }}</span>
+      <span
+        v-else-if="item.isChecked"
+        class="text-gray-700"
+      >{{ key }}</span>
+      <span
+        v-else
+        class="text-gray-400"
+      >{{ key }}</span>
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  features: Object
-})
-</script>

@@ -1,3 +1,14 @@
+<script lang="ts" setup>
+import { asImageSrc } from '@prismicio/helpers'
+import type { AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
+import PinIcon from '~/components/forms/location/PinIcon.vue'
+
+interface Props extends /* @vue-ignore */ Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location' | 'image'> {
+  link: string
+}
+defineProps<Props>()
+</script>
+
 <template>
   <a
     :href="link"
@@ -22,14 +33,3 @@
     />
   </a>
 </template>
-
-<script lang="ts" setup>
-import { asImageSrc } from '@prismicio/helpers'
-import type { AccreditationpageDocumentDataProjectsItem } from 'prismicio-types'
-import PinIcon from '~/components/forms/location/PinIcon.vue'
-
-interface Props extends /* @vue-ignore */ Pick<AccreditationpageDocumentDataProjectsItem, 'title' | 'location' | 'image'> {
-  link: string
-}
-defineProps<Props>()
-</script>

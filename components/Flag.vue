@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+  country: String,
+})
+</script>
+
 <template>
   <NuxtImg
     v-if="country && country != -1"
@@ -8,9 +14,3 @@
   />
   <span v-else />
 </template>
-
-<script setup>
-defineProps({
-  country: String
-})
-</script>

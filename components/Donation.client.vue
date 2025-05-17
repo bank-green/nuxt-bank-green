@@ -1,8 +1,24 @@
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    background?: 'light' | 'dark'
+  }>(),
+  {
+    background: 'light',
+  },
+)
+
+const { client } = usePrismic()
+const { data: donationData } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage'),
+)
+</script>
+
 <template>
   <div
     v-if="donationData"
     class="flex flex-col justify-center items-center rounded-xl py-6 md:py-12 px-6 md:px-16"
-    :class="background === 'light' ? 'bg-gray-50' : 'bg-sushi-100'"
+    :class="background === 'light' ? 'bg-gray-50' : 'bg-pistachio-green'"
   >
     <PrismicText
       :field="donationData.data['title']"
@@ -25,19 +41,3 @@
     </NuxtLink>
   </div>
 </template>
-<script setup lang="ts">
-
-withDefaults(
-  defineProps<{
-    background?: 'light' | 'dark';
-  }>(),
-  {
-    background: 'light'
-  }
-)
-
-const { client } = usePrismic()
-const { data: donationData } = await useAsyncData('donation', () =>
-  client.getSingle('donationpage')
-)
-</script>

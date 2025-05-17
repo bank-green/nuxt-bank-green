@@ -1,3 +1,48 @@
+<script setup lang="ts">
+import { defineProps, computed } from 'vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+
+// Import the layout components
+import BankLayoutBad from '@/components/bank/BankLayoutBad.vue'
+import BankLayoutGood from '@/components/bank/BankLayoutGood.vue'
+
+import LastReviewed from '@/components/lastRated.vue'
+
+// Props definition
+const props = defineProps<{
+  name: string
+  website: string
+  inheritBrandRating?: {
+    tag: string
+    name: string
+  }
+  lastReviewed: string | null
+  fossilFreeAlliance: boolean
+  headline: string
+  subtitle: string
+  description1: string
+  description2: string
+  description3: string
+  description4: string
+  rating: string
+  showEmbraceBreakup: boolean
+}>()
+
+// Determine which layout to use based on the rating prop
+const layoutType = computed(() => {
+  switch (props.rating) {
+    case 'worst':
+    case 'bad':
+    case 'ok':
+      return BankLayoutBad
+    case 'good':
+    case 'great':
+    default:
+      return BankLayoutGood
+  }
+})
+</script>
+
 <template>
   <component :is="layoutType">
     <template #section1>
@@ -25,6 +70,7 @@
           >
             How Bank.Green rates institutions
           </NuxtLink>
+          <LastReviewed :last-reviewed="lastReviewed" />
         </div>
       </div>
       <div class="col-span-2 md:col-span-1">
@@ -56,7 +102,6 @@
             <div :class="layoutType === BankLayoutGood ? 'md:w-3/6' : 'w-full'">
               <BankDescription :text="description2" />
               <BankDescription
-                class="md:text-xl"
                 :text="description3"
               />
 
@@ -99,45 +144,3 @@
     </template>
   </component>
 </template>
-
-<script setup lang="ts">
-import { defineProps, computed } from 'vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-
-// Import the layout components
-import BankLayoutBad from '@/components/bank/BankLayoutBad.vue'
-import BankLayoutGood from '@/components/bank/BankLayoutGood.vue'
-
-// Props definition
-const props = defineProps<{
-  name: string
-  website: string
-  inheritBrandRating: {
-    tag: string
-    name: string
-  }
-  fossilFreeAlliance: boolean
-  headline: string
-  subtitle: string
-  description1: string
-  description2: string
-  description3: string
-  description4: string
-  rating: string
-  showEmbraceBreakup: boolean
-}>()
-
-// Determine which layout to use based on the rating prop
-const layoutType = computed(() => {
-  switch (props.rating) {
-    case 'worst':
-    case 'bad':
-    case 'ok':
-      return BankLayoutBad
-    case 'good':
-    case 'great':
-    default:
-      return BankLayoutGood
-  }
-})
-</script>

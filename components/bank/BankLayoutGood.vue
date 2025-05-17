@@ -1,9 +1,32 @@
+<script setup lang="ts">
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
+import Swoosh from '@/components/Swoosh.vue'
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import SignupBox from '@/components/forms/SignupBox.vue'
+
+const checkList = [
+  'Learn about the issues via our blog updates',
+  'Join our campaigns to take action against fossil finance',
+  'Discover other ways to divest from fossil fuels',
+]
+
+const sliceComps = ref(defineSliceZoneComponents(components))
+
+withDefaults(defineProps<{
+  showLeadGenSlice?: boolean
+  prismicSliceData?: any
+}>(), {
+  showLeadGenSlice: false,
+})
+</script>
+
 <template>
   <div class="page">
     <!-- SECTION ONE -->
     <div
       id="section-one"
-      class="bg-gradient-to-b from-sushi-50 to-sushi-100 pt-28 md:mb-16"
+      class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 md:mb-16"
     >
       <div
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
@@ -33,7 +56,7 @@
     <!-- CALL TO ACTION -->
     <div
       id="call-to-action"
-      class="bg-blue-100 text-gray-800"
+      class="bg-arctic-blue text-gray-800"
     >
       <Swoosh direction="down" />
       <div class="contain pt-32">
@@ -101,25 +124,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import { components } from '~~/slices'
-import Swoosh from '@/components/Swoosh.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-
-const checkList = [
-  'Learn about the issues via our blog updates',
-  'Join our campaigns to take action against fossil finance',
-  'Discover other ways to divest from fossil fuels',
-]
-
-const sliceComps = ref(defineSliceZoneComponents(components))
-
-withDefaults(defineProps<{
-  showLeadGenSlice?: boolean
-  prismicSliceData?: any
-}>(), {
-  showLeadGenSlice: false,
-})
-</script>

@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+import type { AccreditationpageDocumentData } from 'prismicio-types'
+import type { Step } from './AccreditationSharingStep.vue'
+
+interface Props {
+  title?: AccreditationpageDocumentData['sharing_title']
+  steps: {
+    step1: Step
+    step2: Step
+  }
+}
+
+withDefaults(defineProps<Props>(), {
+  title: 'With just a few clicks, you can do so much more...',
+})
+</script>
+
 <template>
   <section
     style="
@@ -15,20 +32,3 @@
     <AccreditationSharingSteps :steps="steps" />
   </section>
 </template>
-
-<script lang="ts" setup>
-import type { AccreditationpageDocumentData } from 'prismicio-types'
-import type { Step } from './AccreditationSharingStep.vue'
-
-interface Props {
-  title?: AccreditationpageDocumentData['sharing_title']
-  steps: {
-    step1: Step
-    step2: Step
-  }
-}
-
-withDefaults(defineProps<Props>(), {
-  title: 'With just a few clicks, you can do so much more...',
-})
-</script>

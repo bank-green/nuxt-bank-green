@@ -1,3 +1,59 @@
+<script setup>
+const props = defineProps({
+  rating: String,
+})
+
+const initialRotation = ref(-120)
+
+const rotation = computed(() => {
+  switch (props.rating) {
+    case 'great':
+      return 90
+    case 'good':
+      return 75
+    case 'ok':
+      return 0
+    case 'bad':
+      return -45
+    case 'worst':
+      return -90
+    case 'unknown':
+      return 0
+    default:
+      return 0
+  }
+})
+
+const emojiForRating = computed(() => {
+  let emoji = 'Shrug'
+  switch (props.rating) {
+    case 'great':
+      emoji = 'Heart_Eyes'
+      break
+    case 'good':
+      emoji = 'Happy'
+      break
+    case 'ok':
+      emoji = 'Meh'
+      break
+    case 'bad':
+      emoji = 'Sad_Tear'
+      break
+    case 'worst':
+      emoji = 'Cussing'
+      break
+    case 'unknown':
+      emoji = 'Meh'
+      break
+  }
+  return `/anim/emoji/${emoji}_Flat.json`
+})
+
+onMounted(() => {
+  initialRotation.value = null
+})
+</script>
+
 <template>
   <div class="w-full flex px-12 md:px-0">
     <div class="shadow-circle bg-white rounded-full relative squarebox">
@@ -23,12 +79,30 @@
             y2="69.9302"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0.0" stop-color="#F96363" />
-            <stop offset="0.2" stop-color="#FFB067" />
-            <stop offset="0.4" stop-color="#E8C753" />
-            <stop offset="0.6" stop-color="#AEDA66" />
-            <stop offset="0.8" stop-color="#64E287" />
-            <stop offset="1.0" stop-color="#29DEBD" />
+            <stop
+              offset="0.0"
+              stop-color="#F96363"
+            />
+            <stop
+              offset="0.2"
+              stop-color="#FFB067"
+            />
+            <stop
+              offset="0.4"
+              stop-color="#E8C753"
+            />
+            <stop
+              offset="0.6"
+              stop-color="#AEDA66"
+            />
+            <stop
+              offset="0.8"
+              stop-color="#64E287"
+            />
+            <stop
+              offset="1.0"
+              stop-color="#29DEBD"
+            />
           </linearGradient>
         </defs>
       </svg>
@@ -96,10 +170,16 @@
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
+          class="fill-primary-dark"
           d="M13.6271 3.42899C13.5065 2.05146 12.353 0.994614 10.9702 0.994614V0.994614C9.60004 0.994615 8.45279 2.03274 8.3163 3.39605L1.75908 68.8903C1.23773 74.0976 5.32678 78.6165 10.5601 78.6165V78.6165C15.7497 78.6165 19.8243 74.1694 19.3714 68.9995L13.6271 3.42899Z"
-          fill="#293145"
+          fill="currentColor"
         />
-        <circle cx="10.4996" cy="67.6369" r="3.4" fill="white" />
+        <circle
+          cx="10.4996"
+          cy="67.6369"
+          r="3.4"
+          fill="white"
+        />
       </svg>
       <div
         class="absolute inset-x-0 mx-auto text-center font-extrabold text-gray-900 text-3xl"
@@ -116,61 +196,6 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  rating: String
-})
-
-const initialRotation = ref(-120)
-
-const rotation = computed(() => {
-  switch (props.rating) {
-    case 'great':
-      return 90
-    case 'good':
-      return 75
-    case 'ok':
-      return 0
-    case 'bad':
-      return -45
-    case 'worst':
-      return -90
-    case 'unknown':
-      return 0
-    default:
-      return 0
-  }
-})
-
-const emojiForRating = computed(() => {
-  let emoji = 'Shrug'
-  switch (props.rating) {
-    case 'great':
-      emoji = 'Heart_Eyes'
-      break
-    case 'good':
-      emoji = 'Happy'
-      break
-    case 'ok':
-      emoji = 'Meh'
-      break
-    case 'bad':
-      emoji = 'Sad_Tear'
-      break
-    case 'worst':
-      emoji = 'Cussing'
-      break
-    case 'unknown':
-      emoji = 'Meh'
-      break
-  }
-  return `/anim/emoji/${emoji}_Flat.json`
-})
-
-onMounted(() => {
-  initialRotation.value = null
-})
-</script>
 <style scoped>
 .squarebox {
   flex: 1 0 auto;
