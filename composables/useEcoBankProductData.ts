@@ -20,7 +20,7 @@ export const useEcoBankProductDisplayData = (
   const availableDepositProductsList = computed(() =>
     depositProductsList
       .filter(product =>
-        depositProducts?.[product.key]?.offered_to.customer_type.includes(tabId),
+        depositProducts?.[product.key]?.offered_to.customer_type?.includes(tabId),
       )
       .map((product) => {
         const interestRates = financialFeatures.interest_rates.rates.find(
@@ -61,7 +61,7 @@ export const useEcoBankProductDisplayData = (
   const availableLoanProductList = computed(() =>
     loanProductsList
       .filter(product =>
-        loanProducts?.[product.key]?.offered_to.includes(tabId),
+        loanProducts?.[product.key]?.offered_to?.includes(tabId),
       )
       .map(product => ({
         ...product,
