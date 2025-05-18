@@ -1,23 +1,21 @@
 <template>
   <!------------------------------->
-  <!-------- Overview ------------->
+  <!--       Overview            -->
   <!------------------------------->
 
   <EcoBankDetailsOverview
     :tag="props.tag"
     :prismic-page-data="props.prismicPageData"
-    :customers-served="harvestData?.customersServed"
-    :services="harvestData?.services"
-    :financial-features="harvestData?.financialFeatures"
-    :policies="harvestData?.policies"
-    :has-no-harvest-data="hasNoHarvestData"
+    :harvest-data="props.harvestData"
+    :is-harvest-data-null="isHarvestDataNull"
   />
 
   <!------------------------------->
-  <!-------- Product Table -------->
+  <!--       Product Table       -->
   <!------------------------------->
 
   <EcoBankDetailsProducts
+    v-if="!isHarvestDataNull"
     :deposit-products="harvestData?.depositProducts"
     :loan-products="harvestData?.loanProducts"
     :financial-features="harvestData?.financialFeatures"
@@ -34,5 +32,6 @@ const props = defineProps<{
   harvestData: HarvestDataType
 }>()
 
-const hasNoHarvestData = !props.harvestData
+// harvestData === null
+const isHarvestDataNull = Object.values(toRaw(props.harvestData)).every(v => !v)
 </script>
