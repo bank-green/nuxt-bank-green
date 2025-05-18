@@ -85,7 +85,7 @@ watch(
         <div
           :id="tabId"
           :class="[
-            'w-full block relative bg-white rounded-xl shadow-soft border sm:py-12 py-10 px-6',
+            'w-full block relative bg-white rounded-xl sm:py-12 py-10 px-6',
             !isActive(tabId) && 'md:hidden',
           ]"
         >

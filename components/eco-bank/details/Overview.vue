@@ -11,11 +11,12 @@
         <div class="grid gap-6">
           <div class="grid gap-4 md:gap-2">
             <div class="font-semibold">
-              Founded in {{ prismicPageData?.founded }}
+              Founded in {{ yearFound }}
             </div>
 
-            <!-- policy (desktop) -->
-            <div class="hidden md:block font-semibold">
+            <!------- policy (desktop) ------->
+
+            <div class="hidden md:block font-bold">
               <div v-if="policies?.deposit_protection.offered && policies?.environmental_policy.offered">
                 Has deposit protection and environmental policy
               </div>
@@ -27,7 +28,8 @@
               </div>
             </div>
 
-            <!-- policy (mobile) -->
+            <!-------- policy (mobile) -------->
+
             <div class="grid md:hidden gap-2">
               <h3 class="font-semibold">
                 Policies
@@ -42,10 +44,11 @@
           </div>
 
           <div
-            v-if="!hasNoHarvestData"
-            class="grid md:grid-cols-3 grid-cols-1 md:gap-6 gap-4 items-start"
+            v-if="!isHarvestDataNull"
+            class="grid md:grid-cols-[minmax(0,1fr)_minmax(100px,1fr)_minmax(max-content,1fr)] grid-cols-1 md:gap-6 gap-4 items-start"
           >
-            <!-- Customers served -->
+            <!-------- Customers served -------->
+
             <div class="grid gap-2">
               <h3 class="font-semibold">
                 Customers served
@@ -68,7 +71,8 @@
               </div>
             </div>
 
-            <!-- Services -->
+            <!----------- Services ----------->
+
             <div class="grid gap-2">
               <div class=" flex items-center gap-1">
                 <h3 class="font-semibold">
@@ -88,9 +92,13 @@
               <div v-if="services?.ATM_network.offered">
                 ATM network
               </div>
+              <div v-if="isNoServices">
+                -
+              </div>
             </div>
 
-            <!-- Fees -->
+            <!----------- Fees ----------->
+
             <div class="grid gap-2">
               <div class="flex items-center gap-1">
                 <h3 class="font-semibold">
@@ -116,34 +124,41 @@
 </template>
 
 <script setup lang="ts">
-import type { CustomersServedType, FeeAvailabilityEntryType, FinancialFeaturesType, PoliciesType, ServiceDetailType } from '~/utils/types/eco-banks.type'
+import type { FeeAvailabilityEntryType, HarvestDataType } from '~/utils/types/eco-banks.type'
 
+// props
 const props = defineProps<{
   tag: string
   prismicPageData: Record<string, any> | null
-  hasNoHarvestData: boolean
-  customersServed: CustomersServedType
-  services?: {
-    local_branches: ServiceDetailType
-    mobile_banking: ServiceDetailType
-    ATM_network: ServiceDetailType
-  }
-  financialFeatures: FinancialFeaturesType
-  policies: PoliciesType
+  harvestData: HarvestDataType
+  isHarvestDataNull: boolean
 }>()
 
-const isNoAccountMaintenanceFee = props.financialFeatures?.fees.available_without_account_maintenance_fee.offered_to
-  .some((customer_type: FeeAvailabilityEntryType) => customer_type.available)
-const isNoOverdraftFee = props.financialFeatures?.fees.available_without_overdraft_fees.offered_to
-  .some((customer_type: FeeAvailabilityEntryType) => customer_type.available)
+const { financialFeatures, services, policies, customersServed, institutionalInformation } = props.harvestData
 
+// ------------------------------------
+//         Utility & Data
+// ------------------------------------
+
+const yearFound = institutionalInformation?.year_founded.founded || props.prismicPageData?.founded
+
+// Check fee availability
+const isFeeAvailable = (fee?: { offered_to?: FeeAvailabilityEntryType[] }) =>
+  fee?.offered_to?.some(entry => entry.available) ?? false
+
+const isNoAccountMaintenanceFee = isFeeAvailable(financialFeatures?.fees?.available_without_account_maintenance_fee)
+const isNoOverdraftFee = isFeeAvailable(financialFeatures?.fees?.available_without_overdraft_fees)
+const isNoServices = Object.values(toRaw(services) || {}).every(service => !service.offered)
+
+// format the fees detail
 const feesDetail = [
-  { heading: 'Account maintenance fee', description: props.financialFeatures?.fees.available_without_account_maintenance_fee.explanation },
-  { heading: 'Overdraft fee', description: props.financialFeatures?.fees.available_without_overdraft_fees.explanation },
+  { heading: 'Account maintenance fee', description: financialFeatures?.fees.available_without_account_maintenance_fee.explanation },
+  { heading: 'Overdraft fee', description: financialFeatures?.fees.available_without_overdraft_fees.explanation },
 ].filter(item => item.description)
 
+// Filter out services that are not offered
 const servicesDetail = Object
-  .entries(props.services || {})
+  .entries(services || {})
   .filter(([_, value]) => value.offered)
   .map(([key, value]) => ({
     heading: key

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!---------------------------------------->
     <!-- If no any account and loan product -->
-    <!---------------------------------------->
     <div
       v-if="hasNoDepositProducts"
       class="font-semibold"
@@ -13,9 +11,9 @@
       v-else
       class="max-w-[808px] mx-auto grid gap-6"
     >
-      <!------------------------------------------------->
-      <!-- Upper Part : Accounts / depositProducts ------>
-      <!------------------------------------------------->
+      <!----------------------------------------------------------->
+      <!--      Upper Part : Accounts / depositProducts          -->
+      <!----------------------------------------------------------->
 
       <div
         v-if="!availableDepositProductsList.length"
@@ -25,14 +23,14 @@
       </div>
       <div
         v-else
-        class="grid md:grid-cols-3 gap-6 items-start"
+        class="grid md:grid-cols-[minmax(0,1fr)_minmax(100px,1fr)_minmax(max-content,1fr)] gap-6 items-start"
       >
-        <!-- Accounts / depositProducts -->
+        <!------- Accounts / depositProducts ------------------->
         <div class="grid gap-2">
           <h3 class="flex gap-1 items-center">
             <span class="font-semibold">Accounts</span>
             <div class="md:hidden">
-              <EcoBankDetailsCustomerFeesModalWithIcon
+              <MoreIcon
                 v-if="hasDepositFeesDetail"
                 title="Account rates and fees"
                 :available-deposit-products-list="availableDepositProductsList"
@@ -47,7 +45,7 @@
           </span>
         </div>
 
-        <!-- Accounts / depositProducts Interest rates -->
+        <!------- Accounts / depositProducts Interest rates ---->
 
         <div class="hidden md:grid gap-2">
           <h3 class="font-semibold">
@@ -62,11 +60,11 @@
           </div>
         </div>
 
-        <!-- Accounts / depositProducts Fees -->
+        <!------- Accounts / depositProducts Fees -------------->
         <div class="hidden md:grid gap-2">
           <h3 class="flex items-center gap-1">
             <span class="font-semibold">Fees</span>
-            <EcoBankDetailsCustomerFeesModalWithIcon
+            <MoreIcon
               v-if="hasDepositFeesDetail"
               :available-deposit-products-list="availableDepositProductsList"
             />
@@ -81,9 +79,9 @@
         </div>
       </div>
 
-      <!--------------------------------------->
-      <!-- Lower Part : Loans / loanProducts -->
-      <!--------------------------------------->
+      <!------------------------------------------------->
+      <!--      Lower Part : Loans / loanProducts      -->
+      <!------------------------------------------------->
 
       <div
         v-if="!availableLoanProductList.length"
@@ -95,7 +93,7 @@
         v-else
         class="grid md:grid-cols-3 gap-6 items-start"
       >
-        <!-- Loans / loanProducts -->
+        <!----- Loans / loanProducts ------------------->
         <div class="grid gap-2">
           <h3 class="font-semibold">
             Loans
@@ -109,7 +107,7 @@
           </div>
         </div>
 
-        <!-- Loans / loanProducts Interest rates -->
+        <!----- Loans / loanProducts Interest rates ----->
         <div class="hidden md:grid gap-2">
           <h3 class="font-semibold">
             Interest rates
@@ -117,7 +115,7 @@
           <span>Rates may vary</span>
         </div>
 
-        <!-- Loans / loanProducts Fees -->
+        <!----- Loans / loanProducts Fees --------------->
         <div class="hidden md:grid gap-2">
           <h3 class="font-semibold flex items-center gap-1">
             Fees
@@ -130,6 +128,7 @@
 </template>
 
 <script setup lang="ts">
+import MoreIcon from './CustomerFeesModalWithIcon.vue'
 import type { CustomerCategoryType, DepositProductsType, FinancialFeaturesType, LoanProductsType } from '~/utils/types/eco-banks.type'
 
 const props = defineProps<{

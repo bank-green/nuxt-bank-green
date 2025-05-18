@@ -1,7 +1,7 @@
 <template>
-  <!---------------->
-  <!----- icon ----->
-  <!---------------->
+  <!------------------->
+  <!---     icon     -->
+  <!------------------->
 
   <img
     class="cursor-pointer"
@@ -9,9 +9,9 @@
     @click="isOpen = true"
   >
 
-  <!------------------------------->
-  <!-- Account Fees Modal --------->
-  <!------------------------------->
+  <!--------------------------------->
+  <!--      Account Fees Modal     -->
+  <!--------------------------------->
 
   <EcoBankDetailsModal
     v-if="isOpen"
@@ -21,20 +21,17 @@
   >
     <div class="grid gap-6">
       <div
-        v-for="product in availableDepositProductsList"
+        v-for="product in filteredList"
         :key="product.key"
         class="grid gap-2"
       >
-        <h3
-          v-if="hasFeeOrRate(product)"
-          class="sm:font-semibold font-bold"
-        >
+        <h3 class="font-bold">
           {{ product.displayName }}
         </h3>
 
         <!-------- Rate -------->
         <div
-          v-if="product.interestRates?.low_rate"
+          v-if="hasRate(product)"
           class="pl-4 grid gap-2"
         >
           <p>
@@ -47,25 +44,25 @@
 
         <!----- Maintenance Fees -->
         <div
-          v-if="product.fees.available_without_account_maintenance_fee?.available"
+          v-if="hasMaintenanceFee(product)"
           class="pl-4 grid gap-2"
         >
           <p>
             No maintenance fees
           </p>
           <p class="text-[10px]">
-            {{ product.fees.available_without_account_maintenance_fee.additional_details }}
+            {{ product.fees.available_without_account_maintenance_fee?.additional_details }}
           </p>
         </div>
 
         <!----- Overdraft Fees ----->
         <div
-          v-if="product.fees.available_without_overdraft_fees?.available"
-          class="pl-4"
+          v-if="hasOverdraftFee(product)"
+          class="pl-4 grid gap-2"
         >
           <p>No overdraft fees</p>
           <p class="text-[10px]">
-            {{ product.fees.available_without_overdraft_fees.additional_details }}
+            {{ product.fees.available_without_overdraft_fees?.additional_details }}
           </p>
         </div>
       </div>
@@ -76,9 +73,14 @@
 <script setup lang="ts">
 import type { FeeAvailabilityEntryType, InterestRateDetailType } from '~/utils/types/eco-banks.type'
 
+// type
+type ProductType = typeof props.availableDepositProductsList[0]
+
+// state
 const isOpen = ref(false)
 
-const _props = withDefaults(defineProps<{
+// props
+const props = withDefaults(defineProps<{
   title?: string
   availableDepositProductsList: Array<{
     key: string
@@ -90,11 +92,21 @@ const _props = withDefaults(defineProps<{
     }
   }>
 }>(), {
-  title: 'Account rates and fees',
+  title: 'Fee details',
 })
 
-const hasFeeOrRate = (product: typeof _props.availableDepositProductsList[0]) =>
+// display the field with conditions
+
+const hasFeeOrRate = (product: ProductType) =>
   !!(product.interestRates?.low_rate
     || product.fees.available_without_account_maintenance_fee?.available
     || product.fees.available_without_overdraft_fees?.available)
+
+const hasRate = (product: ProductType) => product.interestRates?.low_rate
+
+const hasMaintenanceFee = (product: ProductType) => product.fees.available_without_account_maintenance_fee?.available
+
+const hasOverdraftFee = (product: ProductType) => product.fees.available_without_overdraft_fees?.available
+
+const filteredList = props.availableDepositProductsList.filter(hasFeeOrRate)
 </script>

@@ -2,10 +2,10 @@ import type { DepositProductsType, LoanProductsType } from '../types/eco-banks.t
 
 const customersList = {
   retail_and_individual: 'Personal',
-  nonprofit: 'Nonprofits',
-  government: 'Governments',
+  nonprofit: 'Nonprofit',
+  government: 'Government',
   sme: 'SMEs',
-  corporate: 'Corporates',
+  corporate: 'Corporate',
 }
 
 const depositProductsList = [
