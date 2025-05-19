@@ -9,14 +9,14 @@ export interface HarvestDataResponseType {
 }
 
 export interface HarvestDataType {
-  depositProducts: DepositProductsType
-  services: ServicesType
-  customersServed: CustomersServedType
-  loanProducts: LoanProductsType
-  financialFeatures: FinancialFeaturesType
-  institutionalInformation: InstitutionalInformationType
-  policies: PoliciesType
-  interestRates: null // Can replace with a type if needed
+  depositProducts?: DepositProductsType
+  services?: ServicesType
+  customersServed?: CustomersServedType
+  loanProducts?: LoanProductsType
+  financialFeatures?: FinancialFeaturesType
+  institutionalInformation?: InstitutionalInformationType
+  policies?: PoliciesType
+  interestRates?: null // Can replace with a type if needed
 }
 
 // ---------------------------
@@ -181,7 +181,7 @@ export type CustomerCategoryType =
 
 export interface LoanSectionItem {
   heading: string
-  description: string
+  description?: string
   high_rate?: number
   low_rate?: number
   type?: 'rate'

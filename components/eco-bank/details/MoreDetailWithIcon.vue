@@ -21,7 +21,7 @@
           {{ item.heading }}
         </h3>
         <p
-          v-for="p in item.description.split(';')"
+          v-for="p in item.description?.split(';')"
           :key="p"
           class="pl-4"
         >
@@ -35,8 +35,8 @@
 <script setup lang="ts">
 defineProps<{
   content: {
-    heading: string
-    description: string
+    heading?: string
+    description?: string
   }[]
   title: string
 }>()

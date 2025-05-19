@@ -132,18 +132,18 @@ import MoreIcon from './CustomerFeesModalWithIcon.vue'
 import type { CustomerCategoryType, DepositProductsType, FinancialFeaturesType, LoanProductsType } from '~/utils/types/eco-banks.type'
 
 const props = defineProps<{
-  depositProducts: DepositProductsType
-  loanProducts: LoanProductsType
-  financialFeatures: FinancialFeaturesType
+  depositProducts?: DepositProductsType
+  loanProducts?: LoanProductsType
+  financialFeatures?: FinancialFeaturesType
   tabId: CustomerCategoryType
 }>()
 
 const { availableDepositProductsList, availableLoanProductList, tabName, hasNoDepositProducts, hasDepositFeesDetail }
   = useEcoBankProductDisplayData(
+    props.tabId,
     props.depositProducts,
     props.loanProducts,
     props.financialFeatures,
-    props.tabId,
   )
 
 // get label for Accounts fees

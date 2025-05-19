@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
+import type { HarvestDataType } from '~/utils/types/eco-banks.type'
 import { components } from '~~/slices'
 
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
@@ -61,7 +62,7 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
 
 const { data: harvestData } = await useAsyncGql('HarvestDataQuery', { tag: bankTag.value }, {
   transform: (data) => {
-    return data?.harvestData || null
+    return data.harvestData
   },
 })
 
