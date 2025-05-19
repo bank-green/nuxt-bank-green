@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const props = defineProps<{ text: string }>()
-const processedText = ref(props.text) // Default to initial text
+const { text } = defineProps<{ text: string }>()
 </script>
 
 <template>
   <div
     class="md:text-2xl tracking-wide mb-4 prose"
-    v-html="processedText"
+    v-html="text"
   />
 </template>
 
