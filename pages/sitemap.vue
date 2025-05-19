@@ -7,7 +7,6 @@
             v-for="bank in banks"
             :key="bank.tag"
           >
-            <p><a :href="`/banks/${bank.tag}`">{{ bank.name }}</a></p>
             <p>
               <a
                 v-if="bank.isSustainable"

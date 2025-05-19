@@ -205,7 +205,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare',
     prerender: {
       crawlLinks: true,
-      routes: ['/sitemap', '/sitemap.xml'],
+      routes: ['/sitemap'],
       ignore: ['/team', '/team/*', '/banks/undefined'],
     },
   },
