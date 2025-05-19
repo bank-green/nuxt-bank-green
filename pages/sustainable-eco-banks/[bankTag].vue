@@ -22,19 +22,11 @@
       :website="details.website || ''"
     />
 
-    <p>{{ JSON.stringify(harvestData?.institutionalInformation ?? "{}") }}</p>
-
-    <EcoBankDetail
-      :institution-type="details.institutionType"
-      :from-the-website="details.fromTheWebsite"
-      :name="details.name"
-      :website="details.website || ''"
-      :rating="details.rating || '' "
-      :bank-features="details.bankFeatures"
+    <EcoBankDetails
+      v-if="harvestData"
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
-      :prismic-default-page-data="prismicDefaultPageData"
-      :prismic-slice-components="prismicComponents?.value"
+      :harvest-data="harvestData"
     />
   </div>
 </template>
