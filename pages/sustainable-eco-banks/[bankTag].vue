@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
+import type { HarvestDataType } from '~/utils/types/eco-banks.type'
 import { components } from '~~/slices'
 
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
@@ -40,6 +41,8 @@ const route = useRoute()
 const bankTag = ref((route.params.bankTag as string).toLowerCase())
 
 const { client } = usePrismic()
+
+const harvestData = ref<any>(null)
 
 const { data: details } = await useAsyncGql('BrandByTagQuery',
   { tag: bankTag.value },
@@ -59,10 +62,17 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
   },
 )
 
-const { data: harvestData } = await useAsyncGql('HarvestDataQuery',
-  { tag: bankTag.value },
-  { transform: data => ({ ...data.harvestData }) },
-)
+try {
+  const result = await useAsyncGql('HarvestDataQuery', { tag: bankTag.value }, {
+    transform: (data) => {
+      return data?.harvestData || null
+    },
+  })
+  harvestData.value = result.data.value
+} catch (err) {
+  console.error('❌ HarvestDataQuery failed during build:', err)
+  harvestData.value = null
+}
 
 const { data: prismicPageData } = await useAsyncData('sfipage', () =>
   client.getByUID('sfipage', bankTag.value),
