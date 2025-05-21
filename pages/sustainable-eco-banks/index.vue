@@ -117,8 +117,6 @@ const banks = ref([])
 const loading = ref(false)
 const errorMessage = ref(false)
 const loadBanks = async ({
-  regions,
-  subregions,
   fossilFreeAlliance,
   topPick,
   features,
@@ -130,7 +128,6 @@ const loadBanks = async ({
 
   banks.value = await fetchGql('FilteredBrandsQuery', {
     country: country.value,
-    regions, subregions,
     topPick,
     fossilFreeAlliance,
     features,
