@@ -22,23 +22,18 @@
       :website="details.website || ''"
     />
 
-    <EcoBankDetail
-      :institution-type="details.institutionType"
-      :from-the-website="details.fromTheWebsite"
-      :name="details.name"
-      :website="details.website || ''"
-      :rating="details.rating || '' "
-      :bank-features="details.bankFeatures"
+    <EcoBankDetails
+      v-if="harvestData"
       :tag="details.tag"
       :prismic-page-data="prismicPageData"
-      :prismic-default-page-data="prismicDefaultPageData"
-      :prismic-slice-components="prismicComponents?.value"
+      :harvest-data="harvestData"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
+import type { HarvestDataType } from '~/utils/types/eco-banks.type'
 import { components } from '~~/slices'
 
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
@@ -64,6 +59,12 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
     : undefined,
   },
 )
+
+const { data: harvestData } = await useAsyncGql('HarvestDataQuery', { tag: bankTag.value }, {
+  transform: (data) => {
+    return data.harvestData
+  },
+})
 
 const { data: prismicPageData } = await useAsyncData('sfipage', () =>
   client.getByUID('sfipage', bankTag.value),
