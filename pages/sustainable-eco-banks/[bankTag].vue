@@ -42,8 +42,6 @@ const bankTag = ref((route.params.bankTag as string).toLowerCase())
 
 const { client } = usePrismic()
 
-const harvestData = ref<any>(null)
-
 const { data: details } = await useAsyncGql('BrandByTagQuery',
   { tag: bankTag.value },
   { transform: data => data?.brand
@@ -62,17 +60,11 @@ const { data: details } = await useAsyncGql('BrandByTagQuery',
   },
 )
 
-try {
-  const result = await useAsyncGql('HarvestDataQuery', { tag: bankTag.value }, {
-    transform: (data) => {
-      return data?.harvestData || null
-    },
-  })
-  harvestData.value = result.data.value
-} catch (err) {
-  console.error('❌ HarvestDataQuery failed during build:', err)
-  harvestData.value = null
-}
+const { data: harvestData } = await useAsyncGql('HarvestDataQuery', { tag: bankTag.value }, {
+  transform: (data) => {
+    return data.harvestData
+  },
+})
 
 const { data: prismicPageData } = await useAsyncData('sfipage', () =>
   client.getByUID('sfipage', bankTag.value),

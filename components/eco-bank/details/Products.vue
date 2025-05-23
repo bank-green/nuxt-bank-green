@@ -79,10 +79,10 @@
 import type { DepositProductsType, FinancialFeaturesType, LoanProductsType, PoliciesType } from '~/utils/types/eco-banks.type'
 
 defineProps<{
-  depositProducts: DepositProductsType
-  loanProducts: LoanProductsType
-  financialFeatures: FinancialFeaturesType
-  policies: PoliciesType
+  depositProducts?: DepositProductsType
+  loanProducts?: LoanProductsType
+  financialFeatures?: FinancialFeaturesType
+  policies?: PoliciesType
 }>()
 
 // default tabName "Personal"
