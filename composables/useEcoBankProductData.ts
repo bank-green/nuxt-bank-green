@@ -49,8 +49,10 @@ export const useEcoBankProductDisplayData = (
             available_without_account_maintenance_fee: maintenanceFee,
           },
         }
-      }),
-
+      })
+      ?.toSorted(
+        (a, b) => (b?.interestRates?.low_rate ?? 0) - (a.interestRates?.low_rate ?? 0),
+      ),
   )
 
   // ---------------------------
