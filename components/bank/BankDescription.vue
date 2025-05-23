@@ -1,34 +1,11 @@
 <script setup lang="ts">
-import { onMounted, watch, ref } from 'vue'
-import { addGlossaryToText } from '~/utils/addGlossaryToText'
-
-const props = defineProps<{ text: string }>()
-const processedText = ref(props.text) // Default to initial text
-
-const { client } = usePrismic()
-const { data: glossarypage } = await useAsyncData('glossary', () => client.getSingle('glossarypage'))
-usePrismicSEO(glossarypage?.value?.data)
-
-onMounted(async () => {
-  const glossaryData = glossarypage?.value?.data
-  if (glossaryData?.terms) {
-    const terms = glossaryData.terms.map(term => ({
-      name: term.term,
-      tooltip: term.tooltip,
-    }))
-    processedText.value = addGlossaryToText(props.text, terms)
-  }
-})
-
-watch(() => props.text, (newText) => {
-  processedText.value = addGlossaryToText(newText, glossaryData?.terms)
-})
+const { text } = defineProps<{ text: string }>()
 </script>
 
 <template>
   <div
     class="md:text-2xl tracking-wide mb-4 prose"
-    v-html="processedText"
+    v-html="text"
   />
 </template>
 

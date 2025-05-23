@@ -149,25 +149,6 @@ const toggleFilters = () => {
     v-show="showFilters"
     class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
   >
-    <h5 class="text-xs uppercase font-semibold md:mt-6 mb-2">
-      Location
-    </h5>
-    <div class="flex flex-col space-y-1">
-      <CheckboxSection
-        v-model="searchByLocation"
-        class="col-span-full"
-        name="local_branches"
-      >
-        Local branches
-      </CheckboxSection>
-      <RegionSearch
-        v-if="searchByLocation"
-        ref="regionPicker"
-        class="pb-4 md:max-w-sm md:mx-auto z-30"
-        @select="onSelectLocation"
-      />
-    </div>
-
     <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
       Top Pick
     </h5>
