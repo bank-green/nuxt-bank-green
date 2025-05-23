@@ -203,9 +203,10 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'cloudflare',
+    logLevel: 'debug', // or 'info'
     prerender: {
       crawlLinks: true,
-      routes: ['/sitemap', '/sitemap.xml'],
+      routes: ['/sitemap'],
       ignore: ['/team', '/team/*', '/banks/undefined'],
     },
   },
