@@ -53,8 +53,6 @@ query FilteredBrandsQuery(
   $recommendedOnly: Boolean
   $fossilFreeAlliance: Boolean
   $features: [String]
-  $regions: [String]
-  $subregions: [String]
   $withCommentary: Boolean = false
   $withFeatures: Boolean = false
 ) {
@@ -65,8 +63,6 @@ query FilteredBrandsQuery(
     recommendedOnly: $recommendedOnly
     fossilFreeAlliance: $fossilFreeAlliance
     features: $features
-    regions: $regions
-    subregions: $subregions
   ) {
     edges {
       node {
@@ -74,11 +70,6 @@ query FilteredBrandsQuery(
         tag
         website
         aliases
-        regions {
-          id
-          name
-          slug
-        }
         commentary @include(if: $withCommentary) {
           ...commentaryFields
         }
