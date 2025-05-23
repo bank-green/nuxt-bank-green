@@ -9,10 +9,10 @@ import type {
 } from '~/utils/types/eco-banks.type'
 
 export const useEcoBankProductDisplayData = (
+  depositProducts: DepositProductsType,
+  loanProducts: LoanProductsType,
+  financialFeatures: FinancialFeaturesType,
   tabId: CustomerCategoryType,
-  depositProducts?: DepositProductsType,
-  loanProducts?: LoanProductsType,
-  financialFeatures?: FinancialFeaturesType,
 ) => {
   // ---------------------------
   // display in "Accounts" row
@@ -20,25 +20,25 @@ export const useEcoBankProductDisplayData = (
   const availableDepositProductsList = computed(() =>
     depositProductsList
       .filter(product =>
-        depositProducts?.[product.key]?.offered_to?.customer_type?.includes(tabId),
+        depositProducts?.[product.key]?.offered_to.customer_type?.includes(tabId),
       )
       .map((product) => {
-        const interestRates = financialFeatures?.interest_rates.rates?.find(
+        const interestRates = financialFeatures.interest_rates.rates.find(
           rate =>
-            rate?.deposit_product === product.key
-            && rate?.customer_type === tabId,
+            rate.deposit_product === product.key
+            && rate.customer_type === tabId,
         )
 
-        const overdraftFee = financialFeatures?.fees?.available_without_overdraft_fees?.offered_to?.find(
+        const overdraftFee = financialFeatures.fees.available_without_overdraft_fees.offered_to.find(
           fee =>
-            fee?.deposit_product === product.key
-            && fee?.customer_type === tabId,
+            fee.deposit_product === product.key
+            && fee.customer_type === tabId,
         )
 
-        const maintenanceFee = financialFeatures?.fees?.available_without_account_maintenance_fee?.offered_to?.find(
+        const maintenanceFee = financialFeatures.fees.available_without_account_maintenance_fee.offered_to.find(
           fee =>
-            fee?.deposit_product === product.key
-            && fee?.customer_type === tabId,
+            fee.deposit_product === product.key
+            && fee.customer_type === tabId,
         )
 
         return {
@@ -49,8 +49,10 @@ export const useEcoBankProductDisplayData = (
             available_without_account_maintenance_fee: maintenanceFee,
           },
         }
-      }),
-
+      })
+      ?.toSorted(
+        (a, b) => (b?.interestRates?.low_rate || 0) - (a?.interestRates?.low_rate || 0),
+      ),
   )
 
   // ---------------------------
@@ -63,7 +65,7 @@ export const useEcoBankProductDisplayData = (
       )
       .map(product => ({
         ...product,
-        ...loanProducts?.[product.key],
+        ...loanProducts[product.key],
       })),
   )
 
@@ -86,7 +88,7 @@ export const useEcoBankProductDisplayData = (
   // whether harvast has any fees detail for this customer_type
   // ----------------------------------------------------------------
   const hasDepositFeesDetail = availableDepositProductsList.value
-    .some(product => product.fees?.available_without_overdraft_fees?.available || product.fees.available_without_account_maintenance_fee?.available)
+    .some(product => product.fees.available_without_overdraft_fees?.available || product.fees.available_without_account_maintenance_fee?.available)
 
   // ----------------------------------------------------------------
   // format Data for displaying in Loan > Fees > "!" icon
@@ -100,11 +102,11 @@ export const useEcoBankProductDisplayData = (
     const sections: LoanSectionItem[] = [
       {
         heading: 'Explanation',
-        description: product?.explanation,
+        description: product.explanation,
       },
       {
         heading: 'Additional Details',
-        description: product?.additional_details,
+        description: product.additional_details,
       },
     ]
 
