@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import type { HarvestDataType } from '~/utils/types/eco-banks.type'
+
+const props = defineProps<{
+  tag: string
+  prismicPageData: Record<string, any> | null
+  harvestData: HarvestDataType
+}>()
+
+// harvestData === null
+const isHarvestDataNull = Object.values(toRaw(props.harvestData)).every(v => !v)
+</script>
+
 <template>
   <!------------------------------->
   <!--       Overview            -->
@@ -22,16 +35,3 @@
     :policies="harvestData?.policies"
   />
 </template>
-
-<script setup lang="ts">
-import type { HarvestDataType } from '~/utils/types/eco-banks.type'
-
-const props = defineProps<{
-  tag: string
-  prismicPageData: Record<string, any> | null
-  harvestData: HarvestDataType
-}>()
-
-// harvestData === null
-const isHarvestDataNull = Object.values(toRaw(props.harvestData)).every(v => !v)
-</script>

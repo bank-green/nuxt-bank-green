@@ -1,3 +1,44 @@
+<script setup lang="ts">
+import type { FeeAvailabilityEntryType, InterestRateDetailType } from '~/utils/types/eco-banks.type'
+
+// type
+type ProductType = typeof props.availableDepositProductsList[0]
+
+// state
+const isOpen = ref(false)
+
+// props
+const props = withDefaults(defineProps<{
+  title?: string
+  availableDepositProductsList: Array<{
+    key: string
+    displayName: string
+    interestRates: InterestRateDetailType | undefined
+    fees: {
+      available_without_account_maintenance_fee?: FeeAvailabilityEntryType
+      available_without_overdraft_fees?: FeeAvailabilityEntryType
+    }
+  }>
+}>(), {
+  title: 'Fee details',
+})
+
+// display the field with conditions
+
+const hasFeeOrRate = (product: ProductType) =>
+  !!(product.interestRates?.low_rate
+    || product.fees.available_without_account_maintenance_fee?.available
+    || product.fees.available_without_overdraft_fees?.available)
+
+const hasRate = (product: ProductType) => product.interestRates?.low_rate
+
+const hasMaintenanceFee = (product: ProductType) => product.fees.available_without_account_maintenance_fee?.available
+
+const hasOverdraftFee = (product: ProductType) => product.fees.available_without_overdraft_fees?.available
+
+const filteredList = props.availableDepositProductsList.filter(hasFeeOrRate)
+</script>
+
 <template>
   <!------------------->
   <!---     icon     -->
@@ -69,44 +110,3 @@
     </div>
   </EcoBankDetailsModal>
 </template>
-
-<script setup lang="ts">
-import type { FeeAvailabilityEntryType, InterestRateDetailType } from '~/utils/types/eco-banks.type'
-
-// type
-type ProductType = typeof props.availableDepositProductsList[0]
-
-// state
-const isOpen = ref(false)
-
-// props
-const props = withDefaults(defineProps<{
-  title?: string
-  availableDepositProductsList: Array<{
-    key: string
-    displayName: string
-    interestRates: InterestRateDetailType | undefined
-    fees: {
-      available_without_account_maintenance_fee?: FeeAvailabilityEntryType
-      available_without_overdraft_fees?: FeeAvailabilityEntryType
-    }
-  }>
-}>(), {
-  title: 'Fee details',
-})
-
-// display the field with conditions
-
-const hasFeeOrRate = (product: ProductType) =>
-  !!(product.interestRates?.low_rate
-    || product.fees.available_without_account_maintenance_fee?.available
-    || product.fees.available_without_overdraft_fees?.available)
-
-const hasRate = (product: ProductType) => product.interestRates?.low_rate
-
-const hasMaintenanceFee = (product: ProductType) => product.fees.available_without_account_maintenance_fee?.available
-
-const hasOverdraftFee = (product: ProductType) => product.fees.available_without_overdraft_fees?.available
-
-const filteredList = props.availableDepositProductsList.filter(hasFeeOrRate)
-</script>

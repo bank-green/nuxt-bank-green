@@ -1,43 +1,3 @@
-<template>
-  <div
-    v-if="details"
-    class="page bg-sushi-50 space-y-8 md:space-y-16 pt-32 pb-16"
-  >
-    <EcoBankHeader
-      :name="details.name"
-      :rating="details.rating"
-      :website="details.website"
-      :inherit-brand-rating="details?.inheritBrandRating || undefined"
-      :institution-credentials="details.institutionCredentials"
-      :prismic-our-take="prismicPageData?.our_take"
-      :prismic-default-page-data="prismicDefaultPageData"
-      :last-reviewed="details.lastReviewed"
-      :fossil-free-alliance="details.fossilFreeAlliance"
-      :top-pick="!!details.topPick "
-    />
-
-    <EcoBankSwitchSurvey
-      :bank-name="details.name"
-      :prismic-default-page-data="prismicDefaultPageData"
-      :website="details.website || ''"
-    />
-
-    <EcoBankDetails
-      v-if="harvestData"
-      :tag="details.tag"
-      :prismic-page-data="prismicPageData"
-      :harvest-data="harvestData"
-    />
-
-    <div class="contain">
-      <SliceZone
-        :slices="prismicSlices ?? []"
-        :components="prismicComponents?.value"
-      />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import { components } from '~~/slices'
@@ -95,3 +55,43 @@ const prismicSlices = computed(() => prismicPageData?.value?.slices?.length ?? 0
 const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 prismicComponents.value = ref(defineSliceZoneComponents(components))
 </script>
+
+<template>
+  <div
+    v-if="details"
+    class="page bg-sushi-50 space-y-8 md:space-y-16 pt-32 pb-16"
+  >
+    <EcoBankHeader
+      :name="details.name"
+      :rating="details.rating"
+      :website="details.website"
+      :inherit-brand-rating="details?.inheritBrandRating || undefined"
+      :institution-credentials="details.institutionCredentials"
+      :prismic-our-take="prismicPageData?.our_take"
+      :prismic-default-page-data="prismicDefaultPageData"
+      :last-reviewed="details.lastReviewed"
+      :fossil-free-alliance="details.fossilFreeAlliance"
+      :top-pick="!!details.topPick "
+    />
+
+    <EcoBankSwitchSurvey
+      :bank-name="details.name"
+      :prismic-default-page-data="prismicDefaultPageData"
+      :website="details.website || ''"
+    />
+
+    <EcoBankDetails
+      v-if="harvestData"
+      :tag="details.tag"
+      :prismic-page-data="prismicPageData"
+      :harvest-data="harvestData"
+    />
+
+    <div class="contain">
+      <SliceZone
+        :slices="prismicSlices ?? []"
+        :components="prismicComponents?.value"
+      />
+    </div>
+  </div>
+</template>

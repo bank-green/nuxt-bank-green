@@ -1,3 +1,34 @@
+<script setup lang="ts">
+import MoreIcon from './CustomerFeesModalWithIcon.vue'
+import type { CustomerCategoryType, DepositProductsType, FinancialFeaturesType, LoanProductsType } from '~/utils/types/eco-banks.type'
+
+const props = defineProps<{
+  depositProducts?: DepositProductsType
+  loanProducts?: LoanProductsType
+  financialFeatures?: FinancialFeaturesType
+  tabId: CustomerCategoryType
+}>()
+
+const { availableDepositProductsList, availableLoanProductList, tabName, hasNoDepositProducts, hasDepositFeesDetail }
+  = useEcoBankProductDisplayData(
+    props.tabId,
+    props.depositProducts,
+    props.loanProducts,
+    props.financialFeatures,
+  )
+
+// get label for Accounts fees
+const getFeeLabel = (product: typeof availableDepositProductsList.value[0]): string => {
+  const overdraft = product.fees.available_without_overdraft_fees?.available
+  const maintenance = product.fees.available_without_account_maintenance_fee?.available
+
+  if (overdraft && maintenance) return 'No maintenance or overdraft fees'
+  if (overdraft) return 'No maintenance fees'
+  if (maintenance) return 'No overdraft fees'
+  return '-'
+}
+</script>
+
 <template>
   <div>
     <!-- If no any account and loan product -->
@@ -126,34 +157,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import MoreIcon from './CustomerFeesModalWithIcon.vue'
-import type { CustomerCategoryType, DepositProductsType, FinancialFeaturesType, LoanProductsType } from '~/utils/types/eco-banks.type'
-
-const props = defineProps<{
-  depositProducts?: DepositProductsType
-  loanProducts?: LoanProductsType
-  financialFeatures?: FinancialFeaturesType
-  tabId: CustomerCategoryType
-}>()
-
-const { availableDepositProductsList, availableLoanProductList, tabName, hasNoDepositProducts, hasDepositFeesDetail }
-  = useEcoBankProductDisplayData(
-    props.tabId,
-    props.depositProducts,
-    props.loanProducts,
-    props.financialFeatures,
-  )
-
-// get label for Accounts fees
-const getFeeLabel = (product: typeof availableDepositProductsList.value[0]): string => {
-  const overdraft = product.fees.available_without_overdraft_fees?.available
-  const maintenance = product.fees.available_without_account_maintenance_fee?.available
-
-  if (overdraft && maintenance) return 'No maintenance or overdraft fees'
-  if (overdraft) return 'No maintenance fees'
-  if (maintenance) return 'No overdraft fees'
-  return '-'
-}
-</script>

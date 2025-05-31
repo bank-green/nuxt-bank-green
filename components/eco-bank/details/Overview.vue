@@ -1,3 +1,48 @@
+<script setup lang="ts">
+import type { FeeAvailabilityEntryType, HarvestDataType } from '~/utils/types/eco-banks.type'
+
+// props
+const props = defineProps<{
+  tag: string
+  prismicPageData: Record<string, any> | null
+  harvestData: HarvestDataType
+  isHarvestDataNull: boolean
+}>()
+
+const { financialFeatures, services, policies, customersServed, institutionalInformation } = props.harvestData
+
+// ------------------------------------
+//         Utility & Data
+// ------------------------------------
+
+const yearFound = institutionalInformation?.year_founded.founded || props.prismicPageData?.founded
+
+// Check fee availability
+const isFeeAvailable = (fee?: { offered_to?: FeeAvailabilityEntryType[] }) =>
+  fee?.offered_to?.some(entry => entry.available) ?? false
+
+const isNoAccountMaintenanceFee = isFeeAvailable(financialFeatures?.fees?.available_without_account_maintenance_fee)
+const isNoOverdraftFee = isFeeAvailable(financialFeatures?.fees?.available_without_overdraft_fees)
+const isNoServices = Object.values(toRaw(services) || {}).every(service => !service.offered)
+
+// format the fees detail
+const feesDetail = [
+  { heading: 'Account maintenance fee', description: financialFeatures?.fees.available_without_account_maintenance_fee.explanation },
+  { heading: 'Overdraft fee', description: financialFeatures?.fees.available_without_overdraft_fees.explanation },
+].filter(item => item.description)
+
+// Filter out services that are not offered
+const servicesDetail = Object
+  .entries(services || {})
+  .filter(([_, value]) => value.offered)
+  .map(([key, value]) => ({
+    heading: key
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, l => l.toUpperCase()),
+    description: value.additional_details,
+  }))
+</script>
+
 <template>
   <div class="contain">
     <Tab
@@ -122,48 +167,3 @@
     </Tab>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { FeeAvailabilityEntryType, HarvestDataType } from '~/utils/types/eco-banks.type'
-
-// props
-const props = defineProps<{
-  tag: string
-  prismicPageData: Record<string, any> | null
-  harvestData: HarvestDataType
-  isHarvestDataNull: boolean
-}>()
-
-const { financialFeatures, services, policies, customersServed, institutionalInformation } = props.harvestData
-
-// ------------------------------------
-//         Utility & Data
-// ------------------------------------
-
-const yearFound = institutionalInformation?.year_founded.founded || props.prismicPageData?.founded
-
-// Check fee availability
-const isFeeAvailable = (fee?: { offered_to?: FeeAvailabilityEntryType[] }) =>
-  fee?.offered_to?.some(entry => entry.available) ?? false
-
-const isNoAccountMaintenanceFee = isFeeAvailable(financialFeatures?.fees?.available_without_account_maintenance_fee)
-const isNoOverdraftFee = isFeeAvailable(financialFeatures?.fees?.available_without_overdraft_fees)
-const isNoServices = Object.values(toRaw(services) || {}).every(service => !service.offered)
-
-// format the fees detail
-const feesDetail = [
-  { heading: 'Account maintenance fee', description: financialFeatures?.fees.available_without_account_maintenance_fee.explanation },
-  { heading: 'Overdraft fee', description: financialFeatures?.fees.available_without_overdraft_fees.explanation },
-].filter(item => item.description)
-
-// Filter out services that are not offered
-const servicesDetail = Object
-  .entries(services || {})
-  .filter(([_, value]) => value.offered)
-  .map(([key, value]) => ({
-    heading: key
-      .replace(/_/g, ' ')
-      .replace(/\b\w/g, l => l.toUpperCase()),
-    description: value.additional_details,
-  }))
-</script>

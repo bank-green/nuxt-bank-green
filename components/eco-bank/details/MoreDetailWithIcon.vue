@@ -1,3 +1,15 @@
+<script setup lang="ts">
+defineProps<{
+  content: {
+    heading?: string
+    description?: string
+  }[]
+  title: string
+}>()
+
+const isOpen = ref(false)
+</script>
+
 <template>
   <img
     v-if="content.length"
@@ -31,15 +43,3 @@
     </div>
   </EcoBankDetailsModal>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  content: {
-    heading?: string
-    description?: string
-  }[]
-  title: string
-}>()
-
-const isOpen = ref(false)
-</script>

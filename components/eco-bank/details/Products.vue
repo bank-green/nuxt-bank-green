@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import type { DepositProductsType, FinancialFeaturesType, LoanProductsType, PoliciesType } from '~/utils/types/eco-banks.type'
+
+defineProps<{
+  depositProducts?: DepositProductsType
+  loanProducts?: LoanProductsType
+  financialFeatures?: FinancialFeaturesType
+  policies?: PoliciesType
+}>()
+
+// default tabName "Personal"
+const activeTab = ref('retail_and_individual')
+</script>
+
 <template>
   <div class="contain">
     <Tab
@@ -74,17 +88,3 @@
     </Tab>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { DepositProductsType, FinancialFeaturesType, LoanProductsType, PoliciesType } from '~/utils/types/eco-banks.type'
-
-defineProps<{
-  depositProducts?: DepositProductsType
-  loanProducts?: LoanProductsType
-  financialFeatures?: FinancialFeaturesType
-  policies?: PoliciesType
-}>()
-
-// default tabName "Personal"
-const activeTab = ref('retail_and_individual')
-</script>
