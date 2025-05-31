@@ -28,15 +28,20 @@
       :prismic-page-data="prismicPageData"
       :harvest-data="harvestData"
     />
+
+    <div class="contain">
+      <SliceZone
+        :slices="prismicSlices ?? []"
+        :components="prismicComponents?.value"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
-import type { HarvestDataType } from '~/utils/types/eco-banks.type'
 import { components } from '~~/slices'
 
-const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 const route = useRoute()
 const bankTag = ref((route.params.bankTag as string).toLowerCase())
 
@@ -66,6 +71,13 @@ const { data: harvestData } = await useAsyncGql('HarvestDataQuery', { tag: bankT
   },
 })
 
+useHeadHelper(
+  `${details?.value?.name} Review and Service Offering - Bank.Green`,
+)
+
+// -------------------------
+//    Prismic Page Data
+// -------------------------
 const { data: prismicPageData } = await useAsyncData('sfipage', () =>
   client.getByUID('sfipage', bankTag.value),
 { transform: res => res?.data },
@@ -75,9 +87,11 @@ const { data: prismicDefaultPageData } = await useAsyncData('sfidefaults', () =>
 { transform: res => res?.data },
 )
 
-useHeadHelper(
-  `${details?.value?.name} Review and Service Offering - Bank.Green`,
-)
+const prismicSlices = computed(() => prismicPageData?.value?.slices?.length ?? 0 > 0 ? prismicPageData.value?.slices : (prismicDefaultPageData as Record<string, any>).value?.slices)
 
+// -------------------------
+//    Prismic Components
+// -------------------------
+const prismicComponents: Ref<Record<string, any> | null> = ref(null)
 prismicComponents.value = ref(defineSliceZoneComponents(components))
 </script>
