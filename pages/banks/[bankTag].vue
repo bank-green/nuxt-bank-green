@@ -2,14 +2,14 @@
   <div :key="bankTag">
     <Bank
       v-if="bankData"
-      :name="bankData.name"
+      :name="bankData.name ?? ''"
       :website="bankData.website ?? ''"
       :inherit-brand-rating="bankData.inheritBrandRating ?? undefined"
       :fossil-free-alliance="!!bankData.fossilFreeAlliance"
-      :rating="bankData.rating"
+      :rating="bankData.rating ?? ''"
       :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
-      :last-reviewed="bankData.lastReviewed"
-      :style="bankData.style"
+      :last-reviewed="bankData.lastReviewed ?? ''"
+      :style="bankData.style ?? {}"
       :headline="getFieldOrDefault('headline')"
       :subtitle="getFieldOrDefault('subtitle')"
       :description1="getFieldOrDefault('description1')"
@@ -22,60 +22,84 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import Bank from '@/components/bank/Bank.vue'
 import { getDefaultFields } from '~/utils/banks'
 import type { BrandByTagQueryQuery } from '#gql'
 
+// Route param
 const route = useRoute()
 const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
-const defaultFields = ref()
+
+// Default content fallback
+const defaultFields = ref<Record<string, string>>({})
+
+// Prismic client
 const { client } = usePrismic()
 
+// Helper to adjust rating logic
 const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
-  const inheritedRating = commentary?.ratingInherited?.toLocaleLowerCase()
+  const inheritedRating = commentary?.ratingInherited?.toLowerCase()
   const isCreditUnion = commentary?.institutionType?.[0]?.name === 'Credit Union'
   const isRatingUnknown = commentary?.rating === 'unknown'
-
-  // for credit unions we want to overwrite a brand's rating to 'good' if 'unknown'
   if (isCreditUnion && isRatingUnknown) {
     return 'good'
   }
   return inheritedRating || ''
 }
 
-const { data: bankData } = await useAsyncGql('BrandByTagQuery',
+// Define the extended BankData type
+type BankData = NonNullable<BrandByTagQueryQuery['brand']> & {
+  inheritBrandRating?: boolean
+  rating?: string
+  style?: unknown
+  bankFatures?: unknown
+}
+
+// GraphQL fetch
+const { data: bankData } = await useAsyncGql<BankData | undefined>(
+  'BrandByTagQuery',
   { tag: bankTag.value },
-  { transform: ({ brand }) => brand
-    ? ({
-        ...brand,
-        ...brand.commentary,
-        bankFatures: brand.bankFeatures,
-        inheritBrandRating: brand.commentary?.inheritBrandRating,
-        rating: getRating(brand),
-        // FIXME: where is 'style' suppose to come from?
-        style: undefined,
-      })
-    : undefined,
+  {
+    transform: ({ brand }) =>
+      brand
+        ? {
+            ...brand,
+            ...brand.commentary,
+            bankFatures: brand.bankFeatures,
+            inheritBrandRating: brand.commentary?.inheritBrandRating,
+            rating: getRating(brand),
+            style: undefined, // FIXME: Placeholder, assign correct logic
+          }
+        : undefined,
   },
 )
 
+// SEO head setup
 useHeadHelper(
   bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
   'Find and compare the service offerings of ethical and sustainable banks.',
 )
 
 if (bankData.value) {
-  useHeadRating(bankData.value.rating)
+  useHeadRating(bankData.value.rating ?? '')
+
   const institutionType = bankData.value.institutionType?.[0]?.name || ''
-  defaultFields.value = await getDefaultFields(client, bankData.value.rating, bankData.value.name, institutionType)
+  const rating = bankData.value.rating ?? ''
+  const name = bankData.value.name ?? ''
+  try {
+    defaultFields.value = await getDefaultFields(client, rating, name, institutionType)
+  } catch (error) {
+    defaultFields.value = {}// fallback to empty object
+  }
 }
 
-const getFieldOrDefault = (fieldName: string) => {
-  const trimmedText = bankData.value[fieldName]?.replace(/<\/?[^>]+(>|$)/g, '').trim()
-  if (trimmedText) {
-    return bankData.value[fieldName] || defaultFields.value[fieldName]
-  } else {
-    return defaultFields.value[fieldName]
-  }
+// Field helper with type guard
+const getFieldOrDefault = (fieldName: keyof BankData & string): string => {
+  const fieldValue = bankData.value?.[fieldName]
+  const trimmedText = typeof fieldValue === 'string'
+    ? fieldValue.replace(/<\/?[^>]+(>|$)/g, '').trim()
+    : ''
+  return trimmedText || defaultFields.value?.[fieldName] || ''
 }
 </script>
