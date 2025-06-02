@@ -5,56 +5,96 @@ defineProps({
 </script>
 
 <template>
-  <div
-    v-for="(item, key) in features"
-    :key="key"
-    class="flex items-center mr-10 my-2"
-  >
-    <svg
-      v-if="item.isChecked"
-      class="flex-none p-1 w-6 h-6 mt-0.5 mr-4 bg-pistachio-green rounded-full text-sushi-500"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M5 13l4 4L19 7"
-      />
-    </svg>
-    <svg
-      v-else
-      class="w-6 h-6 mr-4 text-gray-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-    <div class="flex-1">
-      <span
-        v-if="item.isChecked && item.text"
-        class="text-gray-900"
-      >{{
-        `${key}: ${item.text}`
-      }}</span>
-      <span
-        v-else-if="item.isChecked"
-        class="text-gray-700"
-      >{{ key }}</span>
-      <span
-        v-else
-        class="text-gray-400"
-      >{{ key }}</span>
+  <div class="grid sm:grid-cols-3 gap-3">
+    <div>
+      <Accordion>
+        <template #title>
+          <h2 class="font-semibold text-base py-2 sm:py-0 sm:pb-2">
+            Personal
+          </h2>
+        </template>
+
+        <template #content>
+          <ul class="text-sm grid gap-2">
+            <li>
+              <span class="px-2 hidden sm:inline">•</span>
+              <span>Credit Cards</span>
+            </li>
+            <li>
+              <span class="px-2 hidden sm:inline">•</span>
+              <span>Checking Accounts</span>
+            </li>
+            <li>
+              <span class="px-2 hidden sm:inline">•</span>
+              <span>Savings Accounts</span>
+            </li>
+            <li>
+              <span class="px-2 hidden sm:inline">•</span>
+              <span>Mortgage</span>
+            </li>
+          </ul>
+        </template>
+      </Accordion>
     </div>
+
+    <div class="border-b border-gray-200 sm:hidden" />
+
+    <Accordion>
+      <template #title>
+        <h2 class="font-semibold text-base py-2 sm:py-0 sm:pb-2">
+          Business
+        </h2>
+      </template>
+      <template #content>
+        <ul class="text-sm grid gap-2">
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Credit Cards</span>
+          </li>
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Checking Accounts</span>
+          </li>
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Savings Accounts</span>
+          </li>
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Mortgage</span>
+          </li>
+        </ul>
+      </template>
+    </Accordion>
+
+    <div class="border-b border-gray-200 sm:hidden" />
+
+    <Accordion>
+      <template #title>
+        <h2 class="font-semibold text-base py-2 sm:py-0 sm:pb-2">
+          Service
+        </h2>
+      </template>
+      <template #content>
+        <ul class="text-sm grid gap-2">
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Credit Cards</span>
+          </li>
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Checking Accounts</span>
+          </li>
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Savings Accounts</span>
+          </li>
+          <li>
+            <span class="px-2 hidden sm:inline">•</span>
+            <span>Mortgage</span>
+          </li>
+        </ul>
+      </template>
+    </Accordion>
   </div>
 </template>
