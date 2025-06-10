@@ -48,16 +48,8 @@ const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): 
   return inheritedRating || ''
 }
 
-// Define the extended BankData type
-type BankData = NonNullable<BrandByTagQueryQuery['brand']> & {
-  inheritBrandRating?: boolean
-  rating?: string
-  style?: unknown
-  bankFatures?: unknown
-}
-
 // GraphQL fetch
-const { data: bankData } = await useAsyncGql<BankData | undefined>(
+const { data: bankData } = await useAsyncGql(
   'BrandByTagQuery',
   { tag: bankTag.value },
   {
@@ -95,7 +87,7 @@ if (bankData.value) {
 }
 
 // Field helper with type guard
-const getFieldOrDefault = (fieldName: keyof BankData & string): string => {
+const getFieldOrDefault = (fieldName: string): string => {
   const fieldValue = bankData.value?.[fieldName]
   const trimmedText = typeof fieldValue === 'string'
     ? fieldValue.replace(/<\/?[^>]+(>|$)/g, '').trim()
