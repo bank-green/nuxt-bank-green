@@ -101,6 +101,8 @@ const fetchGql = useGql()
 
 const sliceComps = ref(defineSliceZoneComponents(components))
 
+console.log('sliceComps', sliceComps)
+
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
 const { client } = usePrismic()
