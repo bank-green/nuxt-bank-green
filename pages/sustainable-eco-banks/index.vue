@@ -1,90 +1,92 @@
 <template>
-  <div class="bg-sushi-50">
-    <div class="page-fade-in contain pt-28 pb-16">
-      <div
-        v-if="ecobanks?.data?.slices"
-        class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold"
-      >
-        <SliceZone
-          :slices="ecobanks?.data?.slices ?? []"
-          :components="sliceComps"
-        />
-      </div>
-
-      <transition
-        enter-active-class="duration-200 transform-gpu origin-top ease-out"
-        enter-from-class="opacity-0 scale-y-95"
-        enter-to-class="opacity-100 scale-y-100"
-        leave-active-class="duration-100 transform-gpu origin-top ease-in"
-        leave-from-class="opacity-100 scale-y-100"
-        leave-to-class="opacity-0 scale-y-95"
-        mode="out-in"
-      >
+  <div>
+    <div class="bg-sushi-50">
+      <div class="page-fade-in contain pt-28 pb-32">
         <div
-          :key="country ? 'has-country' : 'no-country'"
-          class="flex flex-col md:flex-row"
+          v-if="ecobanks?.data?.slices"
+          class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold"
+        >
+          <SliceZone
+            :slices="ecobanks?.data?.slices ?? []"
+            :components="sliceComps"
+          />
+        </div>
+
+        <transition
+          enter-active-class="duration-200 transform-gpu origin-top ease-out"
+          enter-from-class="opacity-0 scale-y-95"
+          enter-to-class="opacity-100 scale-y-100"
+          leave-active-class="duration-100 transform-gpu origin-top ease-in"
+          leave-from-class="opacity-100 scale-y-100"
+          leave-to-class="opacity-0 scale-y-95"
+          mode="out-in"
         >
           <div
-            class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
-            style="height: fit-content"
+            :key="country ? 'has-country' : 'no-country'"
+            class="flex flex-col md:flex-row"
           >
-            <EcoBankFilters
-              v-if="country"
-              :location="country"
-              @filter="applyFilter"
-            />
-          </div>
-
-          <div class="relative w-full md:ml-6">
-            <LocationSearch
-              v-model="country"
-              class="z-30 mb-8"
-            />
-
-            <div v-if="!country">
-              <h2
-                class="w-full px-5 py-4 bg-gray-100 border border-gray-300 rounded-2xl text-sm"
-              >
-                <div class="font-medium text-gray-600">
-                  No country selected
-                </div>
-                <div class="text-sm text-gray-500">
-                  To continue, please select a country.
-                </div>
-              </h2>
-            </div>
-            <div v-else>
-              <div
-                v-if="banks.length"
-                :class="[loading ? 'opacity-50 pointer-events-none' : '']"
-                class="transition"
-              >
-                <EcoBankCards
-                  :list="banks"
-                  :is-no-credit="isNoCredit"
-                />
-              </div>
-              <SliceZone
-                v-else-if="!loading&&errorMessage"
-                :slices="ecobanks?.data?.slices2 ?? []"
-                :components="sliceComps"
+            <div
+              class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
+              style="height: fit-content"
+            >
+              <EcoBankFilters
+                v-if="country"
+                :location="country"
+                @filter="applyFilter"
               />
             </div>
+
+            <div class="relative w-full md:ml-6">
+              <LocationSearch
+                v-model="country"
+                class="z-30 mb-8"
+              />
+
+              <div v-if="!country">
+                <h2
+                  class="w-full px-5 py-4 bg-gray-100 border border-gray-300 rounded-2xl text-sm"
+                >
+                  <div class="font-medium text-gray-600">
+                    No country selected
+                  </div>
+                  <div class="text-sm text-gray-500">
+                    To continue, please select a country.
+                  </div>
+                </h2>
+              </div>
+              <div v-else>
+                <div
+                  v-if="banks.length"
+                  :class="[loading ? 'opacity-50 pointer-events-none' : '']"
+                  class="transition"
+                >
+                  <EcoBankCards
+                    :list="banks"
+                    :is-no-credit="isNoCredit"
+                  />
+                </div>
+                <SliceZone
+                  v-else-if="!loading&&errorMessage"
+                  :slices="ecobanks?.data?.slices2 ?? []"
+                  :components="sliceComps"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </transition>
-      <div
-        class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
-      >
-        <SliceZone
-          :slices="ecobanks?.data?.slices1 ?? []"
-          :components="sliceComps"
-        />
+        </transition>
       </div>
     </div>
-    <div class="flex items-end justify-end pointer-events-none">
-      <div class="w-11/12">
-        <LottiePlayer path="'/anim/wind_2_without_bg.json'" />
+    <div class="md:bg-blue-100 bg-sushi-50 px-2 pb-14 sm:pb-0">
+      <EcoBankIntroductory
+        :eco-banks-data="ecobanks?.data"
+        :slice-comps="sliceComps"
+      />
+      <!-- Money Smoke Animation -->
+      <div class="md:flex hidden flex-row items-center justify-center">
+        <LazyLottiePlayer
+          path="/anim/money_smoke.json"
+          class="w-full md:max-w-2xl h-42 object-cover object-bottom"
+        />
       </div>
     </div>
   </div>
