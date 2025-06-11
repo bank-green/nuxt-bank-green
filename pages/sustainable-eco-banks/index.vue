@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-sushi-50">
-      <div class="page-fade-in contain pt-28 pb-16">
+      <div class="page-fade-in contain pt-28 pb-32">
         <div
           v-if="ecobanks?.data?.slices"
           class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold"
@@ -76,16 +76,13 @@
         </transition>
       </div>
     </div>
-    <div class="bg-blue-100 pt-20">
-      <div
-        class="prose sm:prose-lg xl:prose-xl mx-auto max-w-4xl xl:max-w-5xl mb-10"
-      >
-        <SliceZone
-          :slices="ecobanks?.data?.slices1 ?? []"
-          :components="sliceComps"
-        />
-      </div>
-      <div class="flex flex-row items-center justify-center">
+    <div class="md:bg-blue-100 bg-sushi-50 px-2 pb-14 sm:pb-0">
+      <EcoBankIntroductory
+        :eco-banks-data="ecobanks?.data"
+        :slice-comps="sliceComps"
+      />
+      <!-- Money Smoke Animation -->
+      <div class="md:flex hidden flex-row items-center justify-center">
         <LazyLottiePlayer
           path="/anim/money_smoke.json"
           class="w-full md:max-w-2xl h-42 object-cover object-bottom"
@@ -103,8 +100,6 @@ import { components } from '~~/slices'
 const fetchGql = useGql()
 
 const sliceComps = ref(defineSliceZoneComponents(components))
-
-console.log('sliceComps', sliceComps)
 
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
