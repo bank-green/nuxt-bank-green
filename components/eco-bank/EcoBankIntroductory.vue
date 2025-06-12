@@ -1,31 +1,29 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   ecoBanksData: any
   sliceComps: any
 }>()
 
 const readMoreP1 = ref(false)
 const readMoreP2 = ref(false)
-
-console.log(props.ecoBanksData)
 </script>
 
 <template>
   <div>
     <div
-      class="prose introductory sm:prose-lg xl:prose-xl mx-auto max-w-[800px] pb-28 text-lg pt-5"
+      class="prose introductory sm:prose-lg xl:prose-xl mx-auto max-w-[800px] pb-28 text-lg sm:pt-5 pt-0"
     >
       <!-- Introductory -->
 
-      <div v-if="ecoBanksData.introductory?.length">
+      <div v-if="ecoBanksData?.introductory?.length">
         <!-- Why Find a Green Bank? -->
         <PrismicRichText
-          :field="ecoBanksData.introductory?.[0]?.primary?.text"
+          :field="ecoBanksData?.introductory?.[0]?.primary?.text"
           :class="readMoreP1 ? '' : 'line-clamp-6'"
         />
 
         <button
-          class="font-bold md:pt-0 pt-4"
+          class="font-bold pt-2"
           @click="readMoreP1 = !readMoreP1"
         >
           {{ readMoreP1 ? 'Read less' : 'Read more' }}
@@ -34,13 +32,13 @@ console.log(props.ecoBanksData)
         <!-- What is the Fossil Free Alliance? -->
         <div :class="readMoreP2 ? '' : 'line-clamp-6'">
           <SliceZone
-            :slices="ecoBanksData.introductory?.slice(1) ?? []"
+            :slices="ecoBanksData?.introductory?.slice(1) ?? []"
             :components="sliceComps"
           />
         </div>
 
         <button
-          class="font-bold md:pt-0 pt-4"
+          class="font-bold pt-2"
           @click="readMoreP2 = !readMoreP2"
         >
           {{ readMoreP2 ? 'Read less' : 'Read more' }}
@@ -77,7 +75,7 @@ console.log(props.ecoBanksData)
 }
 
 .prose h1 {
-  @apply text-center text-3xl font-semibold sm:pt-[112px] pt-[96px] mt-0 tracking-wide px-8;
+  @apply text-center text-3xl font-semibold pt-[112px] mt-0 tracking-wide px-8;
 }
 
 .footer-banner a {
