@@ -13,7 +13,7 @@ console.log(props.ecoBanksData)
 <template>
   <div>
     <div
-      class="prose introductory sm:prose-lg xl:prose-xl mx-auto max-w-[800px] pb-32 text-lg pt-5"
+      class="prose introductory sm:prose-lg xl:prose-xl mx-auto max-w-[800px] pb-28 text-lg pt-5"
     >
       <!-- Introductory -->
 

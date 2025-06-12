@@ -116,4 +116,5 @@ module.exports = {
     typography,
     aspectRatio,
   ],
+  safelist: ['my-4'],
 }

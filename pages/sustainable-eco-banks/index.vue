@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="bg-sushi-50">
-      <div class="page-fade-in contain pt-28 pb-32">
+      <div class="page-fade-in contain pb-32">
         <div
           v-if="ecobanks?.data?.slices"
-          class="prose mx-auto max-w-4xl prose-headings:text-center prose-h1:font-semibold"
+          class="prose mx-auto max-w-[800px] prose-headings:text-center prose-h1:font-semibold sm:pt-9 pt-2 sm:pb-20 text-lg [&_h1]:!px-0"
         >
           <SliceZone
             :slices="ecobanks?.data?.slices ?? []"
