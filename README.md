@@ -5,6 +5,11 @@ Running at https://bank.green
 Install dependencies:
 `npm i`
 
+# Install IDE extensions (recommended for VS Code):
+   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint): For real-time linting.
+   - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): For code formatting.
+   - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar): For Nuxt/Vue development with TypeScript support.
+
 # Development
 
 `npm run dev`
