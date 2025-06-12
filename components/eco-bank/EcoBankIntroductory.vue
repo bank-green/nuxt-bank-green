@@ -47,18 +47,18 @@ const readMoreP2 = ref(false)
 
       <!-- F&Q -->
       <SliceZone
-        :slices="ecoBanksData.slices1 ?? []"
+        :slices="ecoBanksData?.slices1 ?? []"
         :components="sliceComps"
       />
     </div>
 
     <div
-      v-if="ecoBanksData.footerBanner?.length"
+      v-if="ecoBanksData?.footerBanner?.length"
       class="prose footer-banner bg-[#293145] contain max-w-[1072px] py-14 px-10 rounded-2xl"
     >
       <!-- Footer banner -->
       <SliceZone
-        :slices="ecoBanksData.footerBanner ?? []"
+        :slices="ecoBanksData?.footerBanner ?? []"
         :components="sliceComps"
       />
     </div>
