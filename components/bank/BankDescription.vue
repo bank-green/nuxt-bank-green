@@ -1,8 +1,11 @@
 <script setup lang="ts">
 const { text } = defineProps<{ text: string }>()
-
-const modifiedText = computed(() => {
-  if (!text) return ''
+const modifiedText = ref('')
+onMounted(() => {
+  if (!text) {
+    modifiedText.value = ''
+    return
+  }
 
   const parser = new DOMParser()
   const doc = parser.parseFromString(text, 'text/html')
@@ -13,7 +16,7 @@ const modifiedText = computed(() => {
       link.setAttribute('rel', 'noopener noreferrer')
     })
   }
-  return doc.body.innerHTML
+  modifiedText.value = doc.body.innerHTML
 })
 </script>
 
