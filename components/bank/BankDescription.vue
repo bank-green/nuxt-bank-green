@@ -1,11 +1,29 @@
 <script setup lang="ts">
 const { text } = defineProps<{ text: string }>()
+const modifiedText = ref('')
+onMounted(() => {
+  if (!text) {
+    modifiedText.value = ''
+    return
+  }
+
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(text, 'text/html')
+  const links = doc.querySelectorAll('a')
+  if (links.length > 0) {
+    links.forEach((link) => {
+      link.setAttribute('target', '_blank')
+      link.setAttribute('rel', 'noopener noreferrer')
+    })
+  }
+  modifiedText.value = doc.body.innerHTML
+})
 </script>
 
 <template>
   <div
     class="md:text-2xl tracking-wide mb-4 prose"
-    v-html="text"
+    v-html="modifiedText"
   />
 </template>
 
