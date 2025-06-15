@@ -6,8 +6,6 @@ const modifiedText = computed(() => {
 
   const parser = new DOMParser()
   const doc = parser.parseFromString(text, 'text/html')
-
-  // Only if any <a> exist
   const links = doc.querySelectorAll('a')
   if (links.length > 0) {
     links.forEach((link) => {
