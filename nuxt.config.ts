@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     '@stefanobartoletti/nuxt-social-share',
     '@nuxtjs/sitemap',
     'nuxt-graphql-client',
-
   ],
 
   site: { url: 'https://bank.green' },
@@ -29,7 +28,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      STRIPE_PUBLISHABLE_KEY: process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY,
       DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
       DATA_URL: process.env.PUBLIC_DATA_URL,
       EMBRACE_URL: process.env.PUBLIC_EMBRACE_URL,
@@ -40,21 +38,9 @@ export default defineNuxtConfig({
       ZAPIER_CONTACT: process.env.ZAPIER_CONTACT,
       ACTIVE_CAMPAIGN_KEY: process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_API_KEY,
       ACTIVE_CAMPAIGN_URL: process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL,
-      GQL_HOST: process.env.PUBLIC_DATA_URL || 'https://data.bank.green/graphql',
+      GQL_HOST:
+        process.env.PUBLIC_DATA_URL || 'https://data.bank.green/graphql',
     },
-    STRIPE_SECRET_KEY: process.env.PRIVATE_STRIPE_SECRET_KEY,
-    STRIPE_SUBSCRIPTION_PRICE_1:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_1,
-    STRIPE_SUBSCRIPTION_PRICE_2:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_2,
-    STRIPE_SUBSCRIPTION_PRICE_3:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_3,
-    STRIPE_SUBSCRIPTION_PRICE_4:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_4,
-    STRIPE_SUBSCRIPTION_PRICE_5:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_5,
-    STRIPE_SUBSCRIPTION_PRICE_6:
-      process.env.PRIVATE_STRIPE_SUBSCRIPTION_PRICE_6,
   },
 
   vue: {
@@ -83,11 +69,11 @@ export default defineNuxtConfig({
         },
         {
           'http-equiv': 'x-ua-compatible',
-          'content': 'IE-edge',
+          content: 'IE-edge',
         },
         {
           'http-equiv': 'Content-Language',
-          'content': 'en',
+          content: 'en',
         },
         {
           name: 'apple-mobile-web-app-title',
@@ -220,5 +206,4 @@ export default defineNuxtConfig({
   socialShare: {
     baseUrl: process.env.PUBLIC_DOMAIN_URL,
   },
-
-})
+});

@@ -31,7 +31,6 @@
     "@prismicio/types": "^0.2.4",
     "@slicemachine/adapter-nuxt": "^0.3.7",
     "@stefanobartoletti/nuxt-social-share": "^1.1.1",
-    "@stripe/stripe-js": "^1.54.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
@@ -52,7 +51,6 @@
     "playwright-core": "^1.43.0",
     "prettier": "^3.5.3",
     "slice-machine-ui": "^2.11.0",
-    "stripe": "^12.8.0",
     "typescript": "^5.5.4",
     "vite-plugin-eslint2": "^4.4.0",
     "vitest": "^1.4.0"
