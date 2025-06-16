@@ -10,6 +10,8 @@ Install dependencies:
    - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): For code formatting.
    - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar): For Nuxt/Vue development with TypeScript support.
 
+**reload the VSCode might be required**
+
 # Development
 
 `npm run dev`
