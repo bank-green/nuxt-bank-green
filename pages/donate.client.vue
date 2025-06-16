@@ -1,23 +1,19 @@
 <script setup lang="ts">
-const isRaiselyLoaded = ref(false);
+const { client } = usePrismic();
+const { data: donation } = await useAsyncData('donation', () =>
+  client.getSingle('donationpage')
+);
+usePrismicSEO(donation.value?.data);
+
 useHead({
   script: [
     {
       src: 'https://cdn.raisely.com/v3/public/embed.js',
       defer: true,
       async: true,
-      onload: () => {
-        isRaiselyLoaded.value = true;
-      },
     },
   ],
 });
-
-const { client } = usePrismic();
-const { data: donation } = await useAsyncData('donation', () =>
-  client.getSingle('donationpage')
-);
-usePrismicSEO(donation.value?.data);
 </script>
 
 <template>
