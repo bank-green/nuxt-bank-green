@@ -16,6 +16,8 @@
     "lint-staged:fix": "npx lint-staged --fix",
     "lint:fix-changed-win": "powershell -Command \"git diff --name-only main | Where-Object {$_ -match '\\.(ts|js|vue)$'} | ForEach-Object {eslint --fix $_}\"",
     "test": "vitest --run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -36,7 +38,9 @@
     "@typeform/embed": "^2.8.0",
     "@vue/test-utils": "^2.4.5",
     "date-fns": "^2.29.3",
-    "eslint": "^9.9.1",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
     "fuse.js": "^6.6.2",
     "geonames.js": "^3.0.6",
     "happy-dom": "^15.11.7",
@@ -46,6 +50,7 @@
     "nuxt": "^3.14.159",
     "nuxt-graphql-client": "^0.2.43",
     "playwright-core": "^1.43.0",
+    "prettier": "^3.5.3",
     "slice-machine-ui": "^2.11.0",
     "stripe": "^12.8.0",
     "typescript": "^5.5.4",
