@@ -12,26 +12,13 @@
           />
         </div>
 
-        <transition
-          enter-active-class="duration-200 transform-gpu origin-top ease-out"
-          enter-from-class="opacity-0 scale-y-95"
-          enter-to-class="opacity-100 scale-y-100"
-          leave-active-class="duration-100 transform-gpu origin-top ease-in"
-          leave-from-class="opacity-100 scale-y-100"
-          leave-to-class="opacity-0 scale-y-95"
-          mode="out-in"
-        >
-          <div class="flex flex-col md:flex-row">
-            <div
-              class="bg-white rounded-xl lg:w-80 md:sticky py-6 px-5 mb-4 md:mb-0 top-20 flex-shrink-0 lg:px-10"
-              style="height: fit-content"
-            >
-              <EcoBankFilters
-                v-if="country"
-                :location="country"
-                @filter="applyFilter"
-              />
-            </div>
+        <div>
+          <div class="flex flex-col md:flex-row md:items-start items-stretch">
+            <EcoBankFilters
+              v-if="country"
+              :location="country"
+              @filter="applyFilter"
+            />
 
             <div class="relative w-full md:ml-6">
               <LocationSearch v-model="country" class="z-30 mb-8" />
@@ -64,7 +51,7 @@
               </div>
             </div>
           </div>
-        </transition>
+        </div>
       </div>
     </div>
     <div class="md:bg-blue-100 bg-sushi-50 px-2 pb-14 sm:pb-0">
@@ -92,8 +79,6 @@ const fetchGql = useGql()
 
 const sliceComps = ref(defineSliceZoneComponents(components))
 
-console.log('sliceComps', sliceComps)
-
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
 const { client } = usePrismic()
@@ -111,39 +96,16 @@ const { country } = useCountry()
 const banks = ref([])
 const loading = ref(false)
 const errorMessage = ref(false)
-const loadBanks = async ({ fossilFreeAlliance, topPick, features }) => {
+
+const loadBanks = async payload => {
   loading.value = true
   if (!country.value) {
     return
   }
 
-  banks.value = await fetchGql('FilteredBrandsQuery', {
-    country: country.value,
-    topPick,
-    fossilFreeAlliance,
-    features,
-    recommendedOnly: true,
-    first: 300,
-    withCommentary: true,
-    withFeatures: true,
-  }).then(data =>
-    data.brands.edges
-      .map(o => o.node)
-      .map(b => ({
-        ...b,
-        ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
-      }))
-      // filter show_on_sustainable_banks_page
-      .filter(a => a.showOnSustainableBanksPage)
-      // sort by top_pick first, then fossil_free_alliance_rating, then by name
-      .sort(
-        (a, b) =>
-          b.topPick - a.topPick ||
-          b.fossilFreeAllianceRating - a.fossilFreeAllianceRating ||
-          a.name - b.name
-      )
-  )
+  banks.value = await fetchGql('AllHarvestDataQuery', {
+    ...payload.features,
+  }).then(data => [])
 
   loading.value = false
 

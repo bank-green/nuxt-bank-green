@@ -1,4 +1,7 @@
-import type { DepositProductsType, LoanProductsType } from '../types/eco-banks.type'
+import type {
+  DepositProductsType,
+  LoanProductsType,
+} from '../types/eco-banks.type'
 
 const customersList = {
   retail_and_individual: 'Personal',
@@ -30,8 +33,27 @@ const loanProductsList = [
   displayName: string
 }[]
 
-export {
-  customersList,
-  depositProductsList,
-  loanProductsList,
+const filterMapping = {
+  region: 'Region',
+  subregion: 'Subregion',
+  individual: 'Individual',
+  non_profit: 'Non-profit',
+  corporate: 'Corporate',
+  government: 'Government',
+  checking: 'Checking',
+  saving: 'Saving',
+  investment: 'Investment',
+  current: 'Current',
+  social: 'Social',
+  personal: 'Personal',
+  small_business_lending: 'Small Business Lending',
+  mortgages: 'Mortgages',
+  corporate_lending: 'Corporate Lending',
+  local_branches: 'Local Branches',
+  free_atm_network: 'Free ATM Network',
+  deposition_protection: 'Deposit Protection',
+  no_overdraft_fee: 'No Overdraft Fees',
+  mobile_banking: 'Mobile Banking',
+  no_account_maintenance_fee: 'No Account Maintenance Fees',
 }
+export { customersList, depositProductsList, loanProductsList, filterMapping }

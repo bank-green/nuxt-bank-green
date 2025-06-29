@@ -20,7 +20,7 @@ withDefaults(
     disabled: false,
     hasExtaIconSpacing: true,
     readOnly: false,
-  },
+  }
 )
 defineExpose({
   focus: () => input.value?.focus(),
@@ -46,10 +46,7 @@ const onCloseClick = () => emit('onCloseClick')
 </script>
 
 <template>
-  <div
-    aria-haspopup="listbox"
-    class="flex items-center"
-  >
+  <div aria-haspopup="listbox" class="flex items-center">
     <!-- input form -->
     <input
       ref="input"
@@ -57,12 +54,14 @@ const onCloseClick = () => emit('onCloseClick')
       :placeholder="placeholder"
       type="text"
       :readonly="readOnly"
-      class="relative w-full appearance-none border bg-white rounded-2xl shadow-soft pr-10 py-4 text-left cursor-default focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate 'px-5 py-4 text-gray-900 placeholder-cool-gray-800'"
+      class="relative w-full appearance-none border bg-white rounded-xl pr-10 text-left cursor-default border-sushi focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate px-5 py-4 text-gray-900 placeholder-cool-gray-800'"
       :class="{
         'border-gray-200': !modelValue,
         'border-sushi-500': modelValue,
-        'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red': !!warning,
-        'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400': disabled,
+        'pl-5 pr-10 py-4 border-red-300 text-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red':
+          !!warning,
+        'bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400':
+          disabled,
         'pl-12': hasExtaIconSpacing,
         'pl-5': !hasExtaIconSpacing,
       }"
@@ -74,7 +73,7 @@ const onCloseClick = () => emit('onCloseClick')
       @focus="onFocus"
       @blur="onBlur"
       @click="onClick"
-    >
+    />
 
     <!-- icon on the left -->
     <slot name="icon" />
@@ -92,12 +91,7 @@ const onCloseClick = () => emit('onCloseClick')
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle
-          cx="8"
-          cy="8.5"
-          r="8"
-          fill="currentColor"
-        />
+        <circle cx="8" cy="8.5" r="8" fill="currentColor" />
         <path
           d="M5.17157 5.67157L10.8284 11.3284"
           stroke="white"
@@ -120,12 +114,7 @@ const onCloseClick = () => emit('onCloseClick')
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle
-          cx="8"
-          cy="8.5"
-          r="8"
-          fill="currentColor"
-        />
+        <circle cx="8" cy="8.5" r="8" fill="currentColor" />
         <path
           d="M5.17157 5.67157L10.8284 11.3284"
           stroke="white"

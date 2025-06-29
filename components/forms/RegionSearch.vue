@@ -49,7 +49,7 @@ const searchRegion = async () => {
     maxRows: 1000,
   })) as { geonames: Place[] }
   options.value = data.geonames.sort((a, b) =>
-    a.toponymName.localeCompare(b.toponymName),
+    a.toponymName.localeCompare(b.toponymName)
   )
   isLoading.value = false
 }
@@ -72,7 +72,7 @@ watch(
   () => {
     searchRegion()
   },
-  { immediate: true },
+  { immediate: true }
 )
 
 function showList() {
@@ -101,10 +101,7 @@ function onCloseClick() {
 </script>
 
 <template>
-  <div
-    v-clickaway="hideList"
-    class="relative"
-  >
+  <div v-clickaway="hideList" class="relative">
     <SearchInput
       v-model="search"
       :aria-expanded="isShowing"
@@ -128,21 +125,18 @@ function onCloseClick() {
     >
       <div
         v-if="isShowing"
-        class="absolute z-10 mt-1 w-full rounded-md shadow-lg"
+        class="absolute z-10 mt-1 w-full rounded-md"
         :class="{
           'bg-white': filteredOptions.length > 0,
           'bg-gray-100': !filteredOptions.length,
         }"
       >
-        <div
-          v-if="isLoading"
-          class="text-gray-500 text-center p-4 shadow-lg"
-        >
+        <div v-if="isLoading" class="text-gray-500 text-center p-4">
           Loading
         </div>
         <div
           v-else-if="filteredOptions.length === 0"
-          class="text-gray-500 text-center p-4 shadow-lg"
+          class="text-gray-500 text-center p-4"
         >
           No region/state found
         </div>
@@ -155,7 +149,7 @@ function onCloseClick() {
         >
           <div>
             {{ item.toponymName
-            }}{{ item.fcode === "ADM2" ? `, ${item.adminName1}` : "" }}
+            }}{{ item.fcode === 'ADM2' ? `, ${item.adminName1}` : '' }}
           </div>
         </ListPicker>
       </div>

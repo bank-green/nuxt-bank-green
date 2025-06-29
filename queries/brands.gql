@@ -1,8 +1,5 @@
-query BrandsByCountryQuery($country: String){
-    brands(
-    country: $country
-    displayOnWebsite: true
-  ) {
+query BrandsByCountryQuery($country: String) {
+  brands(country: $country, displayOnWebsite: true) {
     edges {
       node {
         name
@@ -131,7 +128,6 @@ query EmbraceBrandQuery {
   }
 }
 
-
 query AllBanksList {
   brands {
     edges {
@@ -177,15 +173,46 @@ fragment bankFeaturesFields on BrandFeature {
   details
 }
 
-query HarvestDataQuery ($tag: String!) {
+fragment HarvestDataFields on HarvestData {
+  customersServed
+  depositProducts
+  financialFeatures
+  services
+  institutionalInformation
+  policies
+  loanProducts
+  interestRates
+}
+
+query HarvestDataQuery($tag: String!) {
   harvestData(tag: $tag) {
-    customersServed
-    depositProducts
-    financialFeatures
-    services
-    institutionalInformation
-    policies
-    loanProducts
-    interestRates
+    ...HarvestDataFields
+  }
+}
+
+query AllHarvestDataQuery(
+  $customersServed: String
+  $depositProducts: String
+  $financialFeatures: String
+  $services: String
+  $institutionalInformation: String
+  $policies: String
+  $loanProducts: String
+  $interestRates: String
+) {
+  allHarvestData(
+    customersServed: $customersServed
+    depositProducts: $depositProducts
+    financialFeatures: $financialFeatures
+    services: $services
+    institutionalInformation: $institutionalInformation
+    policies: $policies
+    loanProducts: $loanProducts
+    interestRates: $interestRates
+  ) {
+    tag
+    features {
+      ...HarvestDataFields
+    }
   }
 }
