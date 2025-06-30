@@ -3,30 +3,13 @@ import { reactive, ref, computed, watch, onMounted } from 'vue'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import RegionSearch from '@/components/forms/RegionSearch.vue'
 
-// define reactive state
-const forceShowMobile = ref(false)
-const sharedKey = ref(0)
-const searchByLocation = ref(false)
-const filterPayload = ref(deepClone(defaultFilter))
-
-// EcoBankAccordion open states
-const open = reactive({
-  customerServed: true,
-  depositProducts: true,
-  loanProducts: true,
-  services: true,
-})
-
-const allOpen = computed({
-  get: () => Object.values(open).every(v => v),
-  set: val => Object.keys(open).forEach(key => (open[key] = val)),
-})
-
+// props
 const emit = defineEmits(['filter', 'update:location'])
 const props = defineProps({
   location: String,
 })
 
+// define constants
 const defaultFilter = {
   region: null,
   subregion: null,
@@ -59,21 +42,28 @@ const defaultFilter = {
   },
 }
 
+// define reactive state
+const forceShowMobile = ref(false)
+const sharedKey = ref(0)
+const searchByLocation = ref(false)
+const filterPayload = ref(deepClone(defaultFilter))
+
+// EcoBankAccordion open states
+const open = reactive({
+  customerServed: true,
+  depositProducts: true,
+  loanProducts: true,
+  services: true,
+})
+
+const allOpen = computed({
+  get: () => Object.values(open).every(v => v),
+  set: val => Object.keys(open).forEach(key => (open[key] = val)),
+})
+
 const isFilterDirty = computed(() =>
   isDirty(filterPayload.value, defaultFilter)
 )
-
-const getPayload = keys => {
-  const payload = Object.entries(filterPayload.value[keys]).reduce(
-    (acc, [key, value]) => {
-      if (value) acc.push(key)
-      return acc
-    },
-    []
-  )
-
-  return JSON.stringify(payload)
-}
 
 const parsedFilterPayload = computed(() => {
   return {
@@ -92,6 +82,11 @@ const parsedFilterPayload = computed(() => {
   }
 })
 
+const showFilters = computed(() => {
+  return forceShowMobile.value || window.innerWidth >= 768
+})
+
+// listeners
 watch(
   filterPayload,
   () => {
@@ -105,12 +100,6 @@ watch(searchByLocation, () => {
   filterPayload.value.subregion = null
 })
 
-onMounted(() => emit('filter', parsedFilterPayload.value))
-
-const setDefaultFilter = () => {
-  filterPayload.value = deepClone(defaultFilter)
-  sharedKey.value++
-}
 watch(
   () => props.location,
   () => {
@@ -118,11 +107,29 @@ watch(
   }
 )
 
-const showFilters = computed(() => {
-  return forceShowMobile.value || window.innerWidth >= 768
-})
+// lifecycle hooks
+onMounted(() => emit('filter', parsedFilterPayload.value))
+
+// methods
+const setDefaultFilter = () => {
+  filterPayload.value = deepClone(defaultFilter)
+  sharedKey.value++ // Reset checkboxes to empty state
+}
+
 const toggleFilters = () => {
   forceShowMobile.value = !forceShowMobile.value
+}
+
+const getPayload = keys => {
+  const payload = Object.entries(filterPayload.value[keys]).reduce(
+    (acc, [key, value]) => {
+      if (value) acc.push(key)
+      return acc
+    },
+    []
+  )
+
+  return JSON.stringify(payload)
 }
 </script>
 
@@ -170,6 +177,8 @@ const toggleFilters = () => {
             Expand all
           </CheckboxSection>
         </div>
+
+        <!-- Customers Served -->
         <EcoBankAccordion
           :key="sharedKey"
           :is-open="open.customerServed"
@@ -180,6 +189,7 @@ const toggleFilters = () => {
           @check="(key, value) => (filterPayload.customerServed[key] = value)"
         />
 
+        <!-- Deposit Products -->
         <EcoBankAccordion
           :key="sharedKey"
           :is-open="open.depositProducts"
@@ -190,6 +200,7 @@ const toggleFilters = () => {
           @check="(key, value) => (filterPayload.depositProducts[key] = value)"
         />
 
+        <!-- Loan Products -->
         <EcoBankAccordion
           :key="sharedKey"
           :is-open="open.loanProducts"
@@ -200,6 +211,7 @@ const toggleFilters = () => {
           @check="(key, value) => (filterPayload.loanProducts[key] = value)"
         />
 
+        <!-- Services -->
         <EcoBankAccordion
           :key="sharedKey"
           no-border

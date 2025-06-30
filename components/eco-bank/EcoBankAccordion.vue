@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import CheckboxSection from '../forms/CheckboxSection.vue'
 import { filterMapping } from '~/utils/constants/eco-bank.constants'
 
+// props
 withDefaults(
   defineProps<{
     noBorder?: boolean
@@ -15,10 +16,11 @@ withDefaults(
   }
 )
 
-const emit = defineEmits(['toggle', 'check'])
+defineEmits(['toggle', 'check'])
 
 const content = ref<HTMLElement>()
 
+// animation
 const onEnter = (el: Element) => {
   const element = el as HTMLElement
   element.style.height = '0'
@@ -47,6 +49,7 @@ const onLeave = (el: Element) => {
       >
         <div class="py-2 mb-2">{{ title }}</div>
 
+        <!-- Icon -->
         <svg
           :class="[
             'transition-transform duration-300',
