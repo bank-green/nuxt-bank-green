@@ -12,35 +12,16 @@
           />
         </div>
 
-        <transition
-          enter-active-class="duration-200 transform-gpu origin-top ease-out"
-          enter-from-class="opacity-0 scale-y-95"
-          enter-to-class="opacity-100 scale-y-100"
-          leave-active-class="duration-100 transform-gpu origin-top ease-in"
-          leave-from-class="opacity-100 scale-y-100"
-          leave-to-class="opacity-0 scale-y-95"
-          mode="out-in"
-        >
-          <div
-            :key="country ? 'has-country' : 'no-country'"
-            class="flex flex-col md:flex-row"
-          >
-            <div
-              class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
-              style="height: fit-content"
-            >
-              <EcoBankFilters
-                v-if="country"
-                :location="country"
-                @filter="applyFilter"
-              />
-            </div>
+        <div>
+          <div class="flex flex-col md:flex-row md:items-start items-stretch">
+            <EcoBankFilters
+              v-if="country"
+              :location="country"
+              @filter="applyFilter"
+            />
 
             <div class="relative w-full md:ml-6">
-              <LocationSearch
-                v-model="country"
-                class="z-30 mb-8"
-              />
+              <LocationSearch v-model="country" class="z-30 mb-8" />
 
               <div v-if="!country">
                 <h2
@@ -60,20 +41,17 @@
                   :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                   class="transition"
                 >
-                  <EcoBankCards
-                    :list="banks"
-                    :is-no-credit="isNoCredit"
-                  />
+                  <EcoBankCards :list="banks" :is-no-credit="isNoCredit" />
                 </div>
                 <SliceZone
-                  v-else-if="!loading&&errorMessage"
+                  v-else-if="!loading && errorMessage"
                   :slices="ecobanks?.data?.slices2 ?? []"
                   :components="sliceComps"
                 />
               </div>
             </div>
           </div>
-        </transition>
+        </div>
       </div>
     </div>
     <div class="md:bg-blue-100 bg-sushi-50 px-2 pb-14 sm:pb-0">
@@ -101,8 +79,6 @@ const fetchGql = useGql()
 
 const sliceComps = ref(defineSliceZoneComponents(components))
 
-console.log('sliceComps', sliceComps)
-
 // useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
 const { client } = usePrismic()
@@ -110,7 +86,7 @@ const { client } = usePrismic()
 const { data: ecobanks } = await useAsyncData('ecobanks', () =>
   client.getSingle('ecobankspage', {
     fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
-  }),
+  })
 )
 
 usePrismicSEO(ecobanks?.value?.data)
@@ -120,41 +96,16 @@ const { country } = useCountry()
 const banks = ref([])
 const loading = ref(false)
 const errorMessage = ref(false)
-const loadBanks = async ({
-  fossilFreeAlliance,
-  topPick,
-  features,
-}) => {
+
+const loadBanks = async payload => {
   loading.value = true
   if (!country.value) {
     return
   }
 
-  banks.value = await fetchGql('FilteredBrandsQuery', {
-    country: country.value,
-    topPick,
-    fossilFreeAlliance,
-    features,
-    recommendedOnly: true,
-    first: 300,
-    withCommentary: true,
-    withFeatures: true,
-  }).then(data =>
-    data.brands.edges
-      .map(o => o.node)
-      .map(b => ({
-        ...b,
-        ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
-      }))
-    // filter show_on_sustainable_banks_page
-      .filter(a => a.showOnSustainableBanksPage)
-    // sort by top_pick first, then fossil_free_alliance_rating, then by name
-      .sort((a, b) =>
-        b.topPick - a.topPick
-        || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
-        || a.name - b.name),
-  )
+  banks.value = await fetchGql('AllHarvestDataQuery', {
+    ...payload.features,
+  }).then(data => [])
 
   loading.value = false
 
@@ -171,7 +122,7 @@ const isNoCredit = computed(() => {
   return country.value === 'FR' || country.value === 'DE'
 })
 
-const applyFilter = (payload) => {
+const applyFilter = payload => {
   loadBanks(payload)
 }
 </script>
