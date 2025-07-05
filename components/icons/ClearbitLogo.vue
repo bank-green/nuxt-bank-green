@@ -2,7 +2,6 @@
 const showClearbit = ref(true)
 
 function handleError() {
-  console.log('handling error')
   showClearbit.value = false
 }
 
