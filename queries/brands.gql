@@ -1,5 +1,5 @@
-query BrandsByCountryQuery($country: String){
-    brands(
+query BrandsByCountryQuery($country: String) {
+  brands(
     country: $country
     displayOnWebsite: true
   ) {
@@ -131,7 +131,6 @@ query EmbraceBrandQuery {
   }
 }
 
-
 query AllBanksList {
   brands {
     edges {
@@ -175,4 +174,21 @@ fragment bankFeaturesFields on BrandFeature {
     name
   }
   details
+}
+
+fragment harvestDataFields on HarvestData {
+  customersServed
+  depositProducts
+  financialFeatures
+  services
+  institutionalInformation
+  policies
+  loanProducts
+  interestRates
+}
+
+query HarvestDataQuery($tag: String!) {
+  harvestData(tag: $tag) {
+    ...harvestDataFields
+  }
 }
