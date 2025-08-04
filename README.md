@@ -6,9 +6,10 @@ Install dependencies:
 `npm i`
 
 # Install IDE extensions (recommended for VS Code):
-   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint): For real-time linting.
-   - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): For code formatting.
-   - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar): For Nuxt/Vue development with TypeScript support.
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint): For real-time linting.
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): For code formatting.
+- [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar): For Nuxt/Vue development with TypeScript support.
 
 **reload the VSCode might be required**
 
@@ -21,24 +22,31 @@ Install dependencies:
 Linter automatically runs when saving a file, on pre-commit staged files and on a GitHub Action when pushing into a PR.
 
 You can manually check for linter errors in staged files using:
+
 ```bash
 npm run lint-staged
 ```
-And to fix the errors: 
+
+And to fix the errors:
+
 ```bash
 npm run lint-staged:fix
 ```
 
 To run the linter manually in all files, you can use:
+
 ```bash
 npm run lint
 ```
-To fix errors found, you can run: 
+
+To fix errors found, you can run:
+
 ```bash
 npm run lint:fix
 ```
 
 If you are in Windows and the above does not work, try using:
+
 ```bash
 npm run lint:fix-changed-win
 ```
@@ -67,8 +75,10 @@ Publish to `bank.green`
 `npm run deploy`
 
 # Tests
+
 ## Unit Tests/Integration Tests
-All test cases are located at directory [__tests __](__tests__)
+
+All test cases are located at directory [**tests **](__tests__)
 
 To run tests
 `npm run test`
@@ -89,8 +99,8 @@ When pushing changes from Slice Machine, make sure only items that you are worki
 
 Read the [Prismic & Nuxt docs](https://prismic.io/docs/nuxt) to understand how to use Prismic with Nuxt.
 
-
 # GraphQL Typings
+
 We're using [nuxt-graphql-client](https://nuxt-graphql-client.web.app/)
 
 It works by fetching and building the schema from queries during build and run commands.
