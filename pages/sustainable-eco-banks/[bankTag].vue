@@ -7,47 +7,61 @@ const bankTag = ref((route.params.bankTag as string).toLowerCase())
 
 const { client } = usePrismic()
 
-const { data: details } = await useAsyncGql('BrandByTagQuery',
+const { data: details } = await useAsyncGql(
+  'BrandByTagQuery',
   { tag: bankTag.value },
-  { transform: data => data?.brand
-    ? ({
-        ...data.brand,
-        ...data.brand.commentary,
-        bankFatures: data.brand.bankFeatures,
-        inheritBrandRating: data.brand.commentary?.inheritBrandRating,
-        rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
-        website: data.brand?.website || '',
-        institutionCredentials: data.brand?.commentary?.institutionCredentials || [],
-        institutionType: data.brand?.commentary?.institutionType?.[0]?.name,
-        fromTheWebsite: data.brand?.commentary?.fromTheWebsite,
-      })
-    : undefined,
-  },
+  {
+    transform: data =>
+      data?.brand
+        ? {
+            ...data.brand,
+            ...data.brand.commentary,
+            bankFatures: data.brand.bankFeatures,
+            inheritBrandRating: data.brand.commentary?.inheritBrandRating,
+            rating: data.brand.commentary?.ratingInherited?.toLocaleLowerCase(),
+            website: data.brand?.website || '',
+            institutionCredentials:
+              data.brand?.commentary?.institutionCredentials || [],
+            institutionType: data.brand?.commentary?.institutionType?.[0]?.name,
+            fromTheWebsite: data.brand?.commentary?.fromTheWebsite,
+          }
+        : undefined,
+  }
 )
 
-const { data: harvestData } = await useAsyncGql('HarvestDataQuery', { tag: bankTag.value }, {
-  transform: (data) => {
-    return data.harvestData
-  },
-})
+const { data: harvestData } = await useAsyncGql(
+  'HarvestDataQuery',
+  { tag: bankTag.value },
+  {
+    transform: data => {
+      return data.harvestData
+    },
+  }
+)
 
 useHeadHelper(
-  `${details?.value?.name} Review and Service Offering - Bank.Green`,
+  `${details?.value?.name} Review and Service Offering - Bank.Green`
 )
 
 // -------------------------
 //    Prismic Page Data
 // -------------------------
-const { data: prismicPageData } = await useAsyncData('sfipage', () =>
-  client.getByUID('sfipage', bankTag.value),
-{ transform: res => res?.data },
+const { data: prismicPageData } = await useAsyncData(
+  `sfipage-${bankTag.value}`,
+  () => client.getByUID('sfipage', bankTag.value),
+  { transform: res => res?.data }
 )
-const { data: prismicDefaultPageData } = await useAsyncData('sfidefaults', () =>
-  client.getByID('ZFpGfhEAACEAuFIf'),
-{ transform: res => res?.data },
+const { data: prismicDefaultPageData } = await useAsyncData(
+  'sfidefaults',
+  () => client.getByID('ZFpGfhEAACEAuFIf'),
+  { transform: res => res?.data }
 )
 
-const prismicSlices = computed(() => prismicPageData?.value?.slices?.length ?? 0 > 0 ? prismicPageData.value?.slices : (prismicDefaultPageData as Record<string, any>).value?.slices)
+const prismicSlices = computed(() =>
+  (prismicPageData?.value?.slices?.length ?? 0 > 0)
+    ? prismicPageData.value?.slices
+    : (prismicDefaultPageData as Record<string, any>).value?.slices
+)
 
 // -------------------------
 //    Prismic Components
@@ -71,7 +85,7 @@ prismicComponents.value = ref(defineSliceZoneComponents(components))
       :prismic-default-page-data="prismicDefaultPageData"
       :last-reviewed="details.lastReviewed"
       :fossil-free-alliance="details.fossilFreeAlliance"
-      :top-pick="!!details.topPick "
+      :top-pick="!!details.topPick"
     />
 
     <EcoBankSwitchSurvey

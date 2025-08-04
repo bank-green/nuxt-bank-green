@@ -2,7 +2,6 @@
 const showClearbit = ref(true)
 
 function handleError() {
-  console.log('handling error')
   showClearbit.value = false
 }
 
@@ -15,13 +14,15 @@ const props = withDefaults(
   {
     size: 60,
     src: 'doesnotexist', // added to trigger handleError, not ideal, but it works
-  },
+  }
 )
 
 const urlDomain = computed(() => {
   let url = props.url
   if (url) {
-    if (!url.includes('http')) { url = `https://${url}` }
+    if (!url.includes('http')) {
+      url = `https://${url}`
+    }
     if (url.includes('.')) {
       return new URL(url).hostname
     }
@@ -50,8 +51,7 @@ const src = computed(() => {
         return '/img/logos/green_got.png'
     }
 
-    return `https://logo.clearbit.com/${urlDomain.value}?size=${props.size * 2
-    }`
+    return `https://logo.clearbit.com/${urlDomain.value}?size=${props.size * 2}`
   }
   return ''
 })
@@ -65,12 +65,12 @@ const src = computed(() => {
       :class="`object-contain`"
       :style="`width: ${size}px; height: ${size}px`"
       @error="handleError"
-    >
+    />
     <img
       v-else
       src="/img/icons/bank-icon.svg"
       :style="`width: ${size}px; height: ${size}px`"
       :class="`object-contain`"
-    >
+    />
   </ClientOnly>
 </template>

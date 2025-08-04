@@ -6,17 +6,16 @@
   >
     <!-- Google Tag Manager (noscript) -->
     <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMGKCN3"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KMGKCN3"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+        title="Google Tag Manager"
+      ></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <NuxtLoadingIndicator
-      :color="'#7BB123'"
-      :height="6"
-    />
-    <ClientOnly>
-      <CookieBanner />
-    </ClientOnly>
+    <NuxtLoadingIndicator :color="'#7BB123'" :height="6" />
     <NavBar />
     <NuxtPage />
     <NavFooter />
@@ -38,9 +37,15 @@ const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
 const route = useRoute()
 
 function onExitIntent() {
-  if (hasUserSeenExitIntentModal.value) { return }
-  if (openSwitchSurveyModal.value) { return }
-  if (route.path.includes('/impact')) { return }
+  if (hasUserSeenExitIntentModal.value) {
+    return
+  }
+  if (openSwitchSurveyModal.value) {
+    return
+  }
+  if (route.path.includes('/impact')) {
+    return
+  }
   openSwitchSurveyModal.value = true
   hasUserSeenExitIntentModal.value = true
 }

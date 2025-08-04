@@ -16,8 +16,6 @@ query BrandsQuery(
   $recommendedOnly: Boolean
   $rating: [String]
   $first: Int
-  $withCommentary: Boolean = false
-  $withFeatures: Boolean = false
 ) {
   brands(
     country: $country
@@ -31,13 +29,6 @@ query BrandsQuery(
         name
         tag
         website
-        aliases
-        commentary @include(if: $withCommentary) {
-          ...commentaryFields
-        }
-        bankFeatures @include(if: $withFeatures) {
-          ...bankFeaturesFields
-        }
       }
     }
   }
@@ -84,7 +75,6 @@ query BrandByTagQuery($tag: String!) {
     name
     website
     commentary {
-      fromTheWebsite
       lastReviewed
       rating
       ratingInherited
@@ -92,17 +82,12 @@ query BrandByTagQuery($tag: String!) {
         tag
         name
       }
-      amountFinancedSince2016
-      topPick
       fossilFreeAlliance
-      fossilFreeAllianceRating
       headline
       description1
       description2
       description3
       subtitle
-      ourTake
-      showOnSustainableBanksPage
       institutionType {
         name
       }
@@ -110,9 +95,6 @@ query BrandByTagQuery($tag: String!) {
         name
         prismicApiId
       }
-    }
-    bankFeatures {
-      ...bankFeaturesFields
     }
     countries {
       code

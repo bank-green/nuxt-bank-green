@@ -31,33 +31,39 @@ export async function getDefaultFields(
   prismicClient: Client,
   rating: string,
   bankname: string = 'this bank',
-  institutionType: string,
+  institutionType: string
 ): Promise<DefaultFields> {
-  const queryKey = rating === 'unknown'
-    ? 'unknownbank-' + institutionType.toLowerCase().replace(' ', '')
-    : rating + 'bank'
+  const queryKey =
+    rating === 'unknown'
+      ? 'unknownbank-' + institutionType.toLowerCase().replace(/\s/g, '')
+      : rating + 'bank'
 
-  const prismicDefaultFields = await prismicClient.getByUID('bankpage', queryKey)
-    .then(response => response?.data)
-    .catch(console.error)
+  try {
+    const response = await prismicClient.getByUID('bankpage', queryKey)
+    const prismicDefaultFields = response?.data
 
-  if (!prismicDefaultFields)
+    return {
+      headline: prismicH.asHTML(prismicDefaultFields?.headline) || '',
+      subtitle: prismicH.asHTML(prismicDefaultFields?.subtitle) || '',
+      description1: prismicH.asHTML(prismicDefaultFields?.description1) || '',
+      description2: prismicH.asHTML(prismicDefaultFields?.description2) || '',
+      description3: prismicH.asHTML(prismicDefaultFields?.description3) || '',
+      description4: prismicH.asHTML(prismicDefaultFields?.description4) || '',
+    }
+  } catch (err) {
+    console.warn(
+      `⚠️ Could not fetch defaultFields for queryKey "${queryKey}":`,
+      err
+    )
+
     return {
       rating: 'unknown',
       headline: `<p>Sorry, we don't know enough about ${bankname} yet.</p>`,
       subtitle: '',
       description1: `<p>Unfortunately, we don’t yet have enough information on ${bankname} to know what it’s funding. What we do know however, is that contacting ${bankname} to ask them yourself will send a powerful message – banks will have no choice but to reassess socially irresponsible funding activities if they realize their customers are concerned. To take positive action, keep on scrolling…</p>`,
-      description2: `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. Mass movements will pull us out of  the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
+      description2: `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. Mass movements will pull us out of the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
       description3: '',
       description4: '',
     }
-
-  return {
-    headline: prismicH.asHTML(prismicDefaultFields?.headline) || '',
-    subtitle: prismicH.asHTML(prismicDefaultFields?.subtitle) || '',
-    description1: prismicH.asHTML(prismicDefaultFields?.description1) || '',
-    description2: prismicH.asHTML(prismicDefaultFields?.description2) || '',
-    description3: prismicH.asHTML(prismicDefaultFields?.description3) || '',
-    description4: prismicH.asHTML(prismicDefaultFields?.description4) || '',
   }
 }
