@@ -71,8 +71,8 @@ function closePopup() {
               to="/donate"
               active-class="bg-sushi-600"
               class="whitespace-nowrap inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-black text-center md:w-full rounded-xl capitalize md:ml-0 mr-4"
-            >
               Donate
+            >
             </NuxtLink>
             <svg
               class="h-6 w-6 ml-2"

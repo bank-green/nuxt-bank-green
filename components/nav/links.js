@@ -12,6 +12,9 @@ export default function getLinks({ isHeader = false }) {
     },
     { href: '/contact', title: 'Contact us' },
     { href: '/take-action', title: 'Take Action' },
+
+
+
   ]
 
   if (isHeader) {
@@ -19,6 +22,7 @@ export default function getLinks({ isHeader = false }) {
       href: '/impact',
       title: 'Switch Survey',
     })
+
   } else {
     links.push({
       href: '/certification',
@@ -58,6 +62,7 @@ export default function getLinks({ isHeader = false }) {
       title: 'Donate',
       isButton: true,
     })
+
   }
 
   return links
