@@ -96,7 +96,7 @@ function onCloseClick() {
           v-else-if="filteredOptions.length === 0"
           class="text-gray-500 text-center p-4"
         >
-          State/region is not found or unsupoorted
+          No State/Region found
         </div>
         <ListPicker
           v-else

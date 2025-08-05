@@ -65,7 +65,6 @@ const isFilterDirty = computed(() =>
 )
 
 const parsedFilterPayload = computed(() => {
-  console.log('###### ', filterPayload.value.stateLicensed)
   return {
     stateLicensed: filterPayload.value.stateLicensed || false,
     features: {
@@ -125,7 +124,6 @@ const getPayload = keys => {
 const onSelectState = payload => {
   const selectedState = STATES_BY_COUNTRY?.[props.location]?.[payload?.value]
   filterPayload.value.stateLicensed = selectedState || false
-  console.log('^^', filterPayload.value.stateLicensed)
 }
 </script>
 
