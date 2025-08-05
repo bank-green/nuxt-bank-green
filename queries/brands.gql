@@ -1,8 +1,5 @@
-query BrandsByCountryQuery($country: String){
-    brands(
-    country: $country
-    displayOnWebsite: true
-  ) {
+query BrandsByCountryQuery($country: String) {
+  brands(country: $country, displayOnWebsite: true) {
     edges {
       node {
         name
@@ -46,6 +43,7 @@ query FilteredBrandsQuery(
   $features: [String]
   $withCommentary: Boolean = false
   $withFeatures: Boolean = false
+  $stateLicensed: String
 ) {
   brands(
     country: $country
@@ -54,6 +52,7 @@ query FilteredBrandsQuery(
     recommendedOnly: $recommendedOnly
     fossilFreeAlliance: $fossilFreeAlliance
     features: $features
+    stateLicensed: $stateLicensed
   ) {
     edges {
       node {
@@ -105,7 +104,6 @@ query BrandByTagQuery($tag: String!) {
   }
 }
 
-
 query EmbraceBrandQuery {
   brandsFilteredByEmbraceCampaign(id: 1) {
     name
@@ -113,7 +111,6 @@ query EmbraceBrandQuery {
     tag
   }
 }
-
 
 query AllBanksList {
   brands {
@@ -160,15 +157,46 @@ fragment bankFeaturesFields on BrandFeature {
   details
 }
 
-query HarvestDataQuery ($tag: String!) {
+fragment HarvestDataFields on HarvestData {
+  customersServed
+  depositProducts
+  financialFeatures
+  services
+  institutionalInformation
+  policies
+  loanProducts
+  interestRates
+}
+
+query HarvestDataQuery($tag: String!) {
   harvestData(tag: $tag) {
-    customersServed
-    depositProducts
-    financialFeatures
-    services
-    institutionalInformation
-    policies
-    loanProducts
-    interestRates
+    ...HarvestDataFields
+  }
+}
+
+query AllHarvestDataQuery(
+  $customersServed: String
+  $depositProducts: String
+  $financialFeatures: String
+  $services: String
+  $institutionalInformation: String
+  $policies: String
+  $loanProducts: String
+  $interestRates: String
+) {
+  allHarvestData(
+    customersServed: $customersServed
+    depositProducts: $depositProducts
+    financialFeatures: $financialFeatures
+    services: $services
+    institutionalInformation: $institutionalInformation
+    policies: $policies
+    loanProducts: $loanProducts
+    interestRates: $interestRates
+  ) {
+    tag
+    features {
+      ...HarvestDataFields
+    }
   }
 }

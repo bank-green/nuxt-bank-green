@@ -7,7 +7,7 @@
       :inherit-brand-rating="bankData.inheritBrandRating ?? undefined"
       :fossil-free-alliance="!!bankData.fossilFreeAlliance"
       :rating="bankData.rating ?? ''"
-      :show-embrace-breakup="!!bankData.countries?.find((c) => c?.code === 'GB')"
+      :show-embrace-breakup="!!bankData.countries?.find(c => c?.code === 'GB')"
       :last-reviewed="bankData.lastReviewed ?? ''"
       :style="bankData.style ?? {}"
       :headline="getFieldOrDefault('headline')"
@@ -38,9 +38,12 @@ const defaultFields = ref<Record<string, string>>({})
 const { client } = usePrismic()
 
 // Helper to adjust rating logic
-const getRating = ({ commentary }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
+const getRating = ({
+  commentary,
+}: NonNullable<BrandByTagQueryQuery['brand']>): string => {
   const inheritedRating = commentary?.ratingInherited?.toLowerCase()
-  const isCreditUnion = commentary?.institutionType?.[0]?.name === 'Credit Union'
+  const isCreditUnion =
+    commentary?.institutionType?.[0]?.name === 'Credit Union'
   const isRatingUnknown = commentary?.rating === 'unknown'
   if (isCreditUnion && isRatingUnknown) {
     return 'good'
@@ -64,13 +67,15 @@ const { data: bankData } = await useAsyncGql(
             style: undefined, // FIXME: Placeholder, assign correct logic
           }
         : undefined,
-  },
+  }
 )
 
 // SEO head setup
 useHeadHelper(
-  bankData.value?.name ? `${bankData.value.name}'s Climate Score - Bank.Green` : '',
-  'Find and compare the service offerings of ethical and sustainable banks.',
+  bankData.value?.name
+    ? `${bankData.value.name}'s Climate Score - Bank.Green`
+    : '',
+  'Find and compare the service offerings of ethical and sustainable banks.'
 )
 
 if (bankData.value) {
@@ -80,18 +85,24 @@ if (bankData.value) {
   const rating = bankData.value.rating ?? ''
   const name = bankData.value.name ?? ''
   try {
-    defaultFields.value = await getDefaultFields(client, rating, name, institutionType)
-  } catch (error) {
-    defaultFields.value = {}// fallback to empty object
+    defaultFields.value = await getDefaultFields(
+      client,
+      rating,
+      name,
+      institutionType
+    )
+  } catch {
+    defaultFields.value = {} // fallback to empty object
   }
 }
 
 // Field helper with type guard
 const getFieldOrDefault = (fieldName: string): string => {
   const fieldValue = bankData.value?.[fieldName]
-  const trimmedText = typeof fieldValue === 'string'
-    ? fieldValue.replace(/<\/?[^>]+(>|$)/g, '').trim()
-    : ''
+  const trimmedText =
+    typeof fieldValue === 'string'
+      ? fieldValue.replace(/<\/?[^>]+(>|$)/g, '').trim()
+      : ''
   return trimmedText || defaultFields.value?.[fieldName] || ''
 }
 </script>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import getLinks from './links';
-import SocialLinks from '@/components/nav/SocialLinks.vue';
+import getLinks from './links'
+import SocialLinks from '@/components/nav/SocialLinks.vue'
 
 const linksGroup = groupBy(getLinks({ isHeader: false }), i =>
   Math.floor(i.footerOrder ?? 0)
-);
+)
 </script>
 
 <template>

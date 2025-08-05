@@ -29,25 +29,25 @@
 </template>
 
 <script setup>
-const openSwitchSurveyModal = ref(false);
+const openSwitchSurveyModal = ref(false)
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false,
-});
+})
 
-const route = useRoute();
+const route = useRoute()
 
 function onExitIntent() {
   if (hasUserSeenExitIntentModal.value) {
-    return;
+    return
   }
   if (openSwitchSurveyModal.value) {
-    return;
+    return
   }
   if (route.path.includes('/impact')) {
-    return;
+    return
   }
-  openSwitchSurveyModal.value = true;
-  hasUserSeenExitIntentModal.value = true;
+  openSwitchSurveyModal.value = true
+  hasUserSeenExitIntentModal.value = true
 }
 
 // <!-- Google Tag Manager -->
@@ -66,7 +66,7 @@ useHead({
   __dangerouslyDisableSanitizersByTagID: {
     'gtm-script': ['innerHTML'],
   },
-});
+})
 </script>
 
 <style>
