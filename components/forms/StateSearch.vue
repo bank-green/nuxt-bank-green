@@ -1,24 +1,16 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
-import Geonames from 'geonames.js'
 import Fuse from 'fuse.js'
 import PinIcon from './location/PinIcon.vue'
 import SearchInput from '@/components/forms/input/SearchInput.vue'
 import ListPicker from '@/components/forms/ListPicker.vue'
 
-// custom type for responses from geonames API
-type Place = {
-  toponymName: string
-  fcode: string
-  adminName1: string
-}
+const props = defineProps<{
+  options: string[]
+}>()
 
-defineProps({
-  modelValue: String,
-})
-
-const emit = defineEmits(['update:modelValue', 'select'])
+const emit = defineEmits(['select'])
 const listPicker = ref()
 const onKeyDown = (event: Event) => {
   listPicker.value.incrementFocus(event)
@@ -31,28 +23,7 @@ const onKeyEnter = () => listPicker.value.selectCurrentItem()
 const search = ref('')
 const isShowing = ref(false)
 const isLoading = ref(false)
-
-const { country } = useCountry()
-
-const options = ref<Place[]>([])
-const geonames = Geonames({
-  username: 'myusername',
-  encoding: 'JSON',
-})
-
-const searchRegion = async () => {
-  isLoading.value = true
-  const data = (await geonames.search({
-    country: country.value,
-    featureClass: 'A',
-    featureCode: ['ADM1', 'ADM2'],
-    maxRows: 1000,
-  })) as { geonames: Place[] }
-  options.value = data.geonames.sort((a, b) =>
-    a.toponymName.localeCompare(b.toponymName)
-  )
-  isLoading.value = false
-}
+const options = ref<string[]>(props.options)
 
 const filteredOptions = computed(() => {
   const fuse = new Fuse(options.value, {
@@ -67,35 +38,22 @@ const filteredOptions = computed(() => {
   return result.filter(x => x.score && x.score < 0.3).map(x => x.item)
 })
 
-watch(
-  country,
-  () => {
-    searchRegion()
-  },
-  { immediate: true }
-)
-
 function showList() {
   isShowing.value = true
 }
 function hideList() {
   isShowing.value = false
 }
-async function onSelectLocation(item: Place) {
-  emit('update:modelValue', '')
-  await nextTick()
-  search.value = item.toponymName
-  emit('update:modelValue', item.toponymName)
-  emit('select', {
-    type: item.fcode === 'ADM2' ? 'subregion' : 'region',
-    value: item.toponymName,
-  })
 
+async function onSelectLocation(item: string) {
+  search.value = item
+  emit('select', {
+    value: item,
+  })
   isShowing.value = false
 }
 function onCloseClick() {
   search.value = ''
-  emit('update:modelValue', '')
   emit('select', null)
 }
 </script>
@@ -138,7 +96,7 @@ function onCloseClick() {
           v-else-if="filteredOptions.length === 0"
           class="text-gray-500 text-center p-4"
         >
-          No region/state found
+          State/region is not found or unsupoorted
         </div>
         <ListPicker
           v-else
@@ -148,8 +106,7 @@ function onCloseClick() {
           @select-item="onSelectLocation"
         >
           <div>
-            {{ item.toponymName
-            }}{{ item.fcode === 'ADM2' ? `, ${item.adminName1}` : '' }}
+            {{ item }}
           </div>
         </ListPicker>
       </div>

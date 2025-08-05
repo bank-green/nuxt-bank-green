@@ -43,6 +43,7 @@ query FilteredBrandsQuery(
   $features: [String]
   $withCommentary: Boolean = false
   $withFeatures: Boolean = false
+  $stateLicensed: String
 ) {
   brands(
     country: $country
@@ -51,6 +52,7 @@ query FilteredBrandsQuery(
     recommendedOnly: $recommendedOnly
     fossilFreeAlliance: $fossilFreeAlliance
     features: $features
+    stateLicensed: $stateLicensed
   ) {
     edges {
       node {

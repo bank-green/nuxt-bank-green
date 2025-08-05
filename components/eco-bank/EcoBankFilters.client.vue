@@ -1,7 +1,8 @@
 <script setup>
 import { reactive, ref, computed, watch, onMounted } from 'vue'
+import { STATES_BY_COUNTRY } from '../forms/location/iso3166-2States'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import RegionSearch from '@/components/forms/RegionSearch.vue'
+import StateSearch from '~/components/forms/StateSearch.vue'
 
 // props
 const emit = defineEmits(['filter', 'update:location'])
@@ -11,8 +12,7 @@ const props = defineProps({
 
 // define constants
 const defaultFilter = {
-  region: null,
-  subregion: null,
+  stateLicensed: false,
   customerServed: {
     individual: false,
     non_profit: false,
@@ -45,7 +45,6 @@ const defaultFilter = {
 // define reactive state
 const forceShowMobile = ref(false)
 const sharedKey = ref(0)
-const searchByLocation = ref(false)
 const filterPayload = ref(deepClone(defaultFilter))
 
 // EcoBankAccordion open states
@@ -66,17 +65,13 @@ const isFilterDirty = computed(() =>
 )
 
 const parsedFilterPayload = computed(() => {
+  console.log('###### ', filterPayload.value.stateLicensed)
   return {
-    regions: filterPayload.value.region
-      ? [filterPayload.value.region]
-      : undefined,
-    subregions: filterPayload.value.subregion
-      ? [filterPayload.value.subregion]
-      : undefined,
+    stateLicensed: filterPayload.value.stateLicensed || false,
     features: {
       customersServed: getPayload('customerServed'),
       depositProducts: getPayload('depositProducts'),
-      loanProducts: getPayload('loanProducts'),
+      loanProduces: getPayload('loanProducts'),
       services: getPayload('services'),
     },
   }
@@ -94,11 +89,6 @@ watch(
   },
   { deep: true }
 )
-
-watch(searchByLocation, () => {
-  filterPayload.value.region = null
-  filterPayload.value.subregion = null
-})
 
 watch(
   () => props.location,
@@ -131,6 +121,12 @@ const getPayload = keys => {
 
   return JSON.stringify(payload)
 }
+
+const onSelectState = payload => {
+  const selectedState = STATES_BY_COUNTRY?.[props.location]?.[payload?.value]
+  filterPayload.value.stateLicensed = selectedState || false
+  console.log('^^', filterPayload.value.stateLicensed)
+}
 </script>
 
 <template>
@@ -138,10 +134,12 @@ const getPayload = keys => {
     <div
       class="md:bg-white bg-none md:w-[288px] py-6 md:px-4 rounded-2xl md:h-[85svh] h-auto md:overflow-y-scroll z-10"
     >
-      <RegionSearch
-        ref="regionPicker"
+      <StateSearch
+        v-if="STATES_BY_COUNTRY[location]"
+        ref="statePicker"
+        :options="Object.keys(STATES_BY_COUNTRY?.[location])"
         class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
-        @select="onSelectLocation"
+        @select="onSelectState"
       />
 
       <div

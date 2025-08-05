@@ -99,13 +99,29 @@ const errorMessage = ref(false)
 
 const loadBanks = async payload => {
   loading.value = true
+
   if (!country.value) {
     return
   }
 
-  banks.value = await fetchGql('AllHarvestDataQuery', {
-    ...payload.features,
-  }).then(data => [])
+  banks.value = await fetchGql('FilteredBrandsQuery', {
+    country: country.value,
+    recommendedOnly: true,
+    first: 300,
+    withCommentary: true,
+    withFeatures: true,
+    stateLicensed: payload.stateLicensed || null,
+  }).then(data =>
+    data.brands.edges
+      .map(o => o.node)
+      .map(b => ({
+        ...b,
+        ...b.commentary,
+        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
+      }))
+      // filter show_on_sustainable_banks_page
+      .filter(a => a.showOnSustainableBanksPage)
+  )
 
   loading.value = false
 
