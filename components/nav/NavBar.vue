@@ -1,13 +1,13 @@
 <script setup>
-import links from './links'
+import links from './links';
 
-const isOpen = ref(false)
+const isOpen = ref(false);
 const headerLinks = computed(() => {
-  return links({ isHeader: true })
-})
+  return links({ isHeader: true });
+});
 
 function closePopup() {
-  isOpen.value = false
+  isOpen.value = false;
 }
 </script>
 
@@ -22,16 +22,12 @@ function closePopup() {
           class="custom:py-4 custom:px-6 p-4 ml-2 custom:ml-0"
           @click="isOpen = false"
         >
-          <img
-            class="mt-1 h-5"
-            src="/img/logo.svg"
-            alt="Bank.Green"
-          >
+          <img class="mt-1 h-5" src="/img/logo.svg" alt="Bank.Green" />
         </NuxtLink>
 
         <button
           type="button"
-          class="custom:hidden bg-sushi-900 bg-opacity-0 rounded-md p-2 inline-flex items-center justify-center text-white  background-color:inherit outline:none"
+          class="custom:hidden bg-sushi-900 bg-opacity-0 rounded-md p-2 inline-flex items-center justify-center text-white background-color:inherit outline:none"
           @click.prevent.stop="isOpen = !isOpen"
         >
           <template v-if="!isOpen">
@@ -107,13 +103,12 @@ function closePopup() {
           <NuxtLink
             to="/donate"
             active-class="bg-sushi-600"
-            class="whitespace-nowrap inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center md:w-full rounded-xl shadow-green capitalize md:ml-0 md:mr-0 "
+            class="whitespace-nowrap inline w-auto px-4 py-2 font-medium bg-sushi-500 hover:bg-sushi-600 text-white text-center md:w-full rounded-xl shadow-green capitalize md:ml-0 md:mr-0"
           >
             Donate
           </NuxtLink>
         </div>
       </div>
-      <AnnouncementBanner />
     </nav>
 
     <transition
