@@ -19,18 +19,7 @@ export const POLICY_LABELS: Record<string, string> = {
   deposit_protection: 'Deposit Protection',
 };
 
-export const DEPOSIT_PRODUCT_LABELS: Record<string, string> = {
-  checkings_or_current: 'Checking / Current Accounts',
-  savings: 'Savings',
-  ISAs: 'ISAs',
-  CDs: 'CDs',
-  wealth_management: 'Wealth Management',
-};
-
-export const LOAN_PRODUCT_LABELS: Record<string, string> = {
-  corporate_lending: 'Corporate Lending',
-  small_business_lending: 'Small Business Lending',
-  equipment_lending: 'Equipment Lending',
-  credit_cards: 'Credit Cards',
-  mortgages_or_loans: 'Mortgages / Loans',
+export const FEE_POLICIES_LABELS: Record<string, string> = {
+  available_without_overdraft_fees: 'Overdraft fee',
+  available_without_account_maintenance_fee: 'Account maintenance fee',
 };
