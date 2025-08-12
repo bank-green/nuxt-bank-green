@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
 
-import type {
-  FeeAvailabilityEntryType,
-  HarvestDataType,
-} from '~/utils/types/eco-banks.type';
+import type { HarvestDataType } from '~/utils/types/eco-banks.type';
 
 import {
   CUSTOMER_LABELS,
@@ -17,10 +14,7 @@ import { getOfferedList } from '~/utils/sustentableBankOfferedFeatures';
 
 // props
 const props = defineProps<{
-  // tag: string;
-  // prismicPageData: Record<string, unknown> | null;
   harvestData: HarvestDataType;
-  // isHarvestDataNull: boolean;
 }>();
 
 const {
@@ -46,44 +40,6 @@ const hasYearFounded = computed(
   () => institutionalInformation?.value?.year_founded?.founded
 );
 
-// overview visibility: render only if any section has data
-// const hasAnyHarvestData = computed(() => hasCustomersServed.value);
-
-// ------------------------------------
-//         Utility & Data
-// ------------------------------------
-
-// Check fee availability
-// const isFeeAvailable = (fee?: { offered_to?: FeeAvailabilityEntryType[] }) =>
-//   fee?.offered_to?.some(entry => entry.available) ?? false;
-
-// const isNoAccountMaintenanceFee = isFeeAvailable(
-//   financialFeatures?.fees?.available_without_account_maintenance_fee
-// );
-
-// const isNoOverdraftFee = isFeeAvailable(
-//   financialFeatures?.fees?.available_without_overdraft_fees
-// );
-
-// const isNoServices = Object.values(toRaw(services) || {}).every(
-//   service => !service.offered
-// );
-
-// format the fees detail
-// const feesDetail = [
-//   {
-//     heading: 'Account maintenance fee',
-//     description:
-//       financialFeatures?.fees.available_without_account_maintenance_fee
-//         .explanation,
-//   },
-//   {
-//     heading: 'Overdraft fee',
-//     description:
-//       financialFeatures?.fees.available_without_overdraft_fees.explanation,
-//   },
-// ].filter(item => item.description);
-
 // Build services detail safely from services
 const servicesDetail = computed(() => {
   return Object.entries(services?.value || {})
@@ -99,9 +55,6 @@ const feePoliciesDetails = computed(() => {
   return Object.entries(financialFeatures?.value?.fees || {})
     .filter(([_, fee]) => Boolean(fee?.explanation))
     .map(([key, fee]) => {
-      console.log(
-        `Fee key:${FEE_POLICIES_LABELS[key]}, Fee explanation: ${fee?.explanation}`
-      );
       return {
         heading: FEE_POLICIES_LABELS[key] || key,
         description: fee?.explanation,
@@ -125,7 +78,11 @@ const feePoliciesDetails = computed(() => {
             <section class="hidden md:block font-bold">
               <div v-if="hasPolicies.length">
                 Has
-                {{ hasPolicies.map(p => p.label.toLowerCase()).join(' and ') }}
+                {{
+                  hasPolicies
+                    .map((policy: any) => policy.label.toLowerCase())
+                    .join(' and ')
+                }}
               </div>
             </section>
 
