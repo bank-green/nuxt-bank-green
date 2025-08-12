@@ -132,14 +132,14 @@ const feePoliciesDetails = computed(() => {
                   title="Fees"
                   :content="feePoliciesDetails"
                 />
-                <div
-                  v-if="
-                    financialFeatures?.fees
-                      ?.available_without_account_maintenance_fee?.explanation
-                  "
-                >
-                  No account maintenance fee
-                </div>
+              </div>
+              <div
+                v-if="
+                  financialFeatures?.fees
+                    ?.available_without_account_maintenance_fee?.explanation
+                "
+              >
+                No account maintenance fee
               </div>
               <div
                 v-if="
