@@ -75,8 +75,8 @@ const feePoliciesDetails = computed(() => {
             </div>
 
             <!------- policy (desktop) ------->
-            <section class="hidden md:block font-bold">
-              <div v-if="hasPolicies.length">
+            <section v-if="hasPolicies.length">
+              <div class="hidden md:block font-bold">
                 Has
                 {{
                   hasPolicies
@@ -84,16 +84,15 @@ const feePoliciesDetails = computed(() => {
                     .join(' and ')
                 }}
               </div>
-            </section>
 
-            <!-------- policy (mobile) -------->
-
-            <div class="grid md:hidden gap-2">
-              <h3 class="font-semibold">Policies</h3>
-              <div v-for="policy in hasPolicies" :key="policy.type">
-                {{ policy.label }}
+              <!-------- policy (mobile) -------->
+              <div class="grid md:hidden gap-2">
+                <h3 class="font-semibold">Policies</h3>
+                <div v-for="policy in hasPolicies" :key="policy.type">
+                  {{ policy.label }}
+                </div>
               </div>
-            </div>
+            </section>
           </div>
           <!-- Overview only renders if there is any data -->
           <div
@@ -124,7 +123,7 @@ const feePoliciesDetails = computed(() => {
             </section>
 
             <!----------- Fees ----------->
-            <section class="grid gap-2">
+            <section v-if="feePoliciesDetails.length" class="grid gap-2">
               <div class="flex items-center gap-1">
                 <h3 class="font-semibold">Fees</h3>
                 <!-- question mark icon to open a modal with more details -->
