@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import type { EcoBankCard } from '../types'
+import type { EcoBankCard } from '../../../pages/sustainable-eco-banks/utils'
 
 defineProps<{ features: EcoBankCard['features'] }>()
 </script>
 
 <template>
-  <div
-    v-for="(items, key) in features"
-    :key="key"
-    class="flex items-center mr-10 my-2"
-  >
-    <div v-if="!items.length"></div>
-    <div v-for="item of items" v-else :key="item">
-      <p></p>
-      <p>{{ item + '~~' }}</p>
-    </div>
+  <div v-for="(items, key) in features" :key="key" class="flex-1 min-w-[140px]">
+    <span class="text-lg font-semibold">
+      {{ key }}
+    </span>
+    <ul class="list-disc list-inside marker:[font-size:12px]">
+      <li v-for="item of items" :key="item" class="text-sm">
+        {{ item }}
+      </li>
+    </ul>
   </div>
 </template>

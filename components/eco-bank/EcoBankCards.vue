@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { EcoBankCard } from './types'
+import type { EcoBankCard } from '../../pages/sustainable-eco-banks/utils'
 
 defineProps<{
   list: EcoBankCard[]
-  isNoCredit: boolean
 }>()
 </script>
 
@@ -17,7 +16,7 @@ defineProps<{
     leave-to-class="opacity-0"
   >
     <li v-for="i in list.length" :key="i" class="list-none">
-      <EcoBankCard :item="list[i - 1]" :is-no-credit="isNoCredit" />
+      <EcoBankCard :item="list[i - 1]" />
     </li>
   </transition-group>
 </template>

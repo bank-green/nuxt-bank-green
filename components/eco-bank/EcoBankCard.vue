@@ -1,116 +1,85 @@
 <script setup lang="ts">
-import type { EcoBankCard } from './types'
+import type { EcoBankCard } from '../../pages/sustainable-eco-banks/utils'
 import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 
 defineProps<{
   item: EcoBankCard
-  isNoCredit: boolean
 }>()
-
-// TODO - FIXME
-// const features = computed(() => {
-//   // filter our credit card
-//   const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
-//   const allFeatures: Record<string, any> = {}
-//   for (const [featKey, featValue] of Object.entries(features)) {
-//     if (
-//       (props.isNoCredit && featKey === 'Credit Card') ||
-//       !featValue.isChecked
-//     ) {
-//       continue
-//     }
-//     allFeatures[featKey] = features[featKey]
-//   }
-//   return allFeatures
-// })
 </script>
 
 <template>
-  <NuxtLink
-    :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
-    class="block mb-6 rounded-2xl shadow-sm bg-white transition duration-150 ease-in-out hover:bg-gray-50 border border-transparent hover:border-sushi-500"
+  <div
+    class="block p-6 pb-4 mb-6 rounded-2xl bg-white border border-gray-200 hover:border-sushi-500 shadow-sm transition duration-150 ease-in-out"
   >
-    <div
-      class="py-3 pl-4 pr-5 border-b border-gray-200 flex items-center justify-between"
-    >
-      <transition
-        enter-active-class="duration-200 transform-gpu origin-top ease-out"
-        enter-from-class="opacity-0 scale-y-95"
-        enter-to-class="opacity-100 scale-y-100"
-        leave-active-class="duration-100 transform-gpu origin-top ease-in"
-        leave-from-class="opacity-100 scale-y-100"
-        leave-to-class="opacity-0 scale-y-95"
-        mode="out-in"
+    <div class="flex items-center justify-between mb-6">
+      <div
+        v-if="item"
+        class="flex items-center justify-between w-full flex-wrap gap-y-4"
       >
-        <div v-if="item" class="flex items-center truncate">
-          <div class="relative w-12 h-12">
-            <ClearbitLogo
-              :url="item.website"
-              :size="48"
-              img-class="absolute inset-0 z-20"
-            />
-          </div>
-          <div
-            class="ml-3 flex-1 flex items-center font-semibold text-gray-800 truncate"
-          >
-            <span>
-              {{ item.name }}
-            </span>
-            <img
-              v-if="item.fossilFreeAlliance"
-              class="w-10 ml-4"
-              src="/img/certification/fossil-free-certified.png"
-              alt="Fossil Free Certification"
-            />
-            <img
-              v-if="item.topPick"
-              class="w-10 ml-4"
-              src="/img/certification/TopPick.svg"
-              alt="Top Pick"
-            />
-          </div>
+        <div class="flex items-start gap-1">
+          <ClearbitLogo
+            :url="item.website"
+            :size="32"
+            img-class="absolute inset-0 z-20"
+            class="relative w-8 h-8"
+          />
+          <span class="text-2xl font-semibold">
+            {{ item.name }}
+          </span>
         </div>
+        <EcoBankCardTags
+          :top-pick="item.topPick"
+          :fossil-free-alliance="item.fossilFreeAlliance"
+        />
+      </div>
+    </div>
 
-        <div v-else class="w-full flex items-center truncate">
-          <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse" />
-          <div class="ml-3 flex-1 font-semibold text-gray-200 block truncate">
-            loading...
-          </div>
-        </div>
-      </transition>
+    <!-- !TODO Where to get interest rates and deposite protection from? -->
+    <!-- <dl class="grid grid-cols-3">
+      <div class="flex flex-col gap-1">
+        <dt class="text-gray-600 text-xs">Interest Rate</dt>
+        <dd class="text-base text-primary-dark font-semibold truncate">
+          {{ '-' }}
+        </dd>
+      </div>
+
+      <div class="col-span-2 flex flex-col gap-1">
+        <dt class="text-gray-600 text-xs">Deposit Protection</dt>
+        <dd class="text-base text-primary-dark font-semibold truncate">
+          {{ '-' }}
+        </dd>
+      </div>
+    </dl> -->
+
+    <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200" />
+
+    <div v-if="Object.keys(item.features).length" class="flex flex-wrap gap-5">
+      <EcoBankFeaturesList :features="item.features" />
+    </div>
+
+    <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200" />
+
+    <NuxtLink
+      :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
+      class="w-fit ml-auto mr-0 flex gap-2 items-center"
+    >
+      <span class="text-sm text-primary-dark font-medium">Learn more</span>
 
       <svg
-        class="text-sushi-500"
-        width="7"
-        height="13"
-        viewBox="0 0 7 13"
+        width="27"
+        height="27"
+        viewBox="0 0 27 27"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M1 11.5L6 6.5L1 1.5"
+          d="M10.2993 20.041L16.9794 13.361L10.2993 6.68094"
           stroke="currentColor"
-          stroke-width="1.8"
+          stroke-width="1.78134"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
       </svg>
-    </div>
-
-    <transition
-      enter-active-class="duration-200 transform-gpu origin-top ease-out"
-      enter-from-class="opacity-0 scale-95"
-      enter-to-class="opacity-100 scale-100"
-      leave-active-class="duration-100 transform-gpu origin-top ease-in"
-      leave-from-class="opacity-100 scale-100"
-      leave-to-class="opacity-0 scale-95"
-    >
-      <div
-        v-if="Object.keys(item.features).length"
-        class="py-4 px-7 flex flex-wrap"
-      >
-        <EcoBankFeaturesList :features="item.features" />
-      </div>
-    </transition>
-  </NuxtLink>
+    </NuxtLink>
+  </div>
 </template>

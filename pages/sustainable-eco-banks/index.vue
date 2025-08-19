@@ -41,7 +41,7 @@
                   :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                   class="transition"
                 >
-                  <EcoBankCards :list="banks" :is-no-credit="isNoCredit" />
+                  <EcoBankCards :list="banks" />
                 </div>
                 <SliceZone
                   v-else-if="!loading && errorMessage"
@@ -75,7 +75,11 @@ import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import { components } from '~~/slices'
 import type { EcoBanksQueryPayload } from '@/utils/types/eco-banks.type.ts'
-import type { EcoBankCard } from '~/components/eco-bank/types'
+import {
+  sortEcoBanks,
+  toEcoBankCardFeatures,
+  type EcoBankCard,
+} from '~/pages/sustainable-eco-banks/utils'
 
 const fetchGql = useGql()
 
@@ -108,74 +112,37 @@ const loadBanks = async ({
   if (!country.value) {
     return
   }
+  const isNoCredit = country.value === 'FR' || country.value === 'DE'
 
-  const res = await fetchGql('FilteredBrandsQuery', {
-    country: country.value,
-    recommendedOnly: true,
-    first: 300,
-    withCommentary: true,
-    stateLicensed,
-    harvestData,
-  }).then(data =>
-    data?.brands?.edges
-      .map(o => o?.node)
-      .filter(
-        brand =>
-          brand && brand.name && brand?.commentary?.showOnSustainableBanksPage
-      )
-      // sort by top_pick first, then fossil_free_alliance_rating, then by name
-      .sort((a, b) => {
-        if (!a || !b) return 0
-        return (
-          +(b.commentary?.topPick || 0) - +(a.commentary?.topPick || 0) ||
-          (b.commentary?.fossilFreeAllianceRating || 0) -
-            (a.commentary?.fossilFreeAllianceRating || 0) ||
-          a!.name.localeCompare(b!.name)
-        )
-      })
-      .map<EcoBankCard>(brand => ({
-        name: brand?.name || '',
-        website: brand?.website || '',
-
-        tag: brand?.tag || '',
-        topPick: !!brand?.commentary?.topPick,
-        fossilFreeAlliance: !!brand?.commentary?.fossilFreeAlliance,
-        features: (
-          [
-            'services',
-            'customersServed',
-            'loanProducts',
-            'depositProducts',
-          ] as (keyof EcoBankCard['features'])[]
-        )
-          // transform harvest's feature data into a list of features
-          .reduce(
-            (acc, featureType) => {
-              const { harvestData } = brand!
-              if (!harvestData) return acc
-              acc[featureType] = Object.entries(
-                harvestData?.[featureType] || {}
-              )
-                .filter(([_, v]) => (v as { offered: boolean })?.offered)
-                .map(([k, _]) => k)
-              return acc
-            },
-            {} as EcoBankCard['features']
-          ),
-      }))
-  )
-
-  if (res) banks.value = res
+  banks.value =
+    (await fetchGql('FilteredBrandsQuery', {
+      country: country.value,
+      recommendedOnly: true,
+      first: 300,
+      withCommentary: true,
+      stateLicensed,
+      harvestData,
+    }).then(data =>
+      data?.brands?.edges
+        .map(o => o?.node)
+        .filter(brand => brand?.commentary?.showOnSustainableBanksPage)
+        .sort(sortEcoBanks)
+        .map<EcoBankCard>(brand => ({
+          name: brand?.name || '',
+          website: brand?.website || '',
+          tag: brand?.tag || '',
+          topPick: !!brand?.commentary?.topPick,
+          fossilFreeAlliance: !!brand?.commentary?.fossilFreeAlliance,
+          features: toEcoBankCardFeatures(brand?.harvestData, isNoCredit),
+          // TODO: Add interest rate and Deposit protection
+        }))
+    )) || []
 
   loading.value = false
   if (banks.value.length === 0) errorMessage.value = true
 }
 watch(country, () => {
   banks.value = []
-})
-
-const isNoCredit = computed(() => {
-  return country.value === 'FR' || country.value === 'DE'
 })
 
 const applyFilter = (filterQueryData: EcoBanksQueryPayload) => {

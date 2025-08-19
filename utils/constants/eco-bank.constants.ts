@@ -55,5 +55,15 @@ const filterMapping = {
   no_overdraft_fee: 'No Overdraft Fees',
   mobile_banking: 'Mobile Banking',
   no_account_maintenance_fee: 'No Account Maintenance Fees',
+  retail_and_individual: 'Personal',
+  ATM_network: 'ATM network',
+  nonprofit: 'Non-profit',
+  sme: 'SMEs',
+  wealth_management: 'Wealth Management',
+  checkings_or_current: 'Checking',
+  CDs: 'CDs',
+  ISAs: 'ISAs',
+  mortgages_or_loans: 'Mortgages or Loans',
+  credit_cards: 'Credit Cards',
 }
 export { customersList, depositProductsList, loanProductsList, filterMapping }

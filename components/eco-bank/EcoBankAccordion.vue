@@ -81,7 +81,7 @@ const onLeave = (el: Element) => {
             :name="key"
             @update:model-value="checked => $emit('check', key, checked)"
           >
-            {{ filterMapping[key as keyof typeof filterMapping] }}
+            {{ filterMapping[key as keyof typeof filterMapping] || key }}
           </CheckboxSection>
         </div>
       </div>
