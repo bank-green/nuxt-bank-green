@@ -85,6 +85,6 @@ export const STATES_BY_COUNTRY = {
   },
 } as const
 
-export type StateCodes = {
+export type StateCode = {
   [K in keyof typeof STATES_BY_COUNTRY]: (typeof STATES_BY_COUNTRY)[K][keyof (typeof STATES_BY_COUNTRY)[K]]
 }[keyof typeof STATES_BY_COUNTRY]

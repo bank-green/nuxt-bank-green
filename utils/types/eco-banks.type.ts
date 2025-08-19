@@ -3,7 +3,7 @@
 // ---------------------------
 
 import type { HarvestDataFilterInput } from '#gql'
-import type { StateCodes } from '~/components/forms/location/iso3166-2States'
+import type { StateCode } from '~/components/forms/location/iso3166-2States'
 
 export interface HarvestDataResponseType {
   data: {
@@ -259,5 +259,5 @@ export type EcoBankAccordionState = Omit<
 
 export type EcoBanksQueryPayload = {
   harvestData: HarvestDataFilterInput | null
-  stateLicensed: StateCodes | null
+  stateLicensed: StateCode | null
 }

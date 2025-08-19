@@ -97,7 +97,15 @@ const { data: ecobanks } = await useAsyncData('ecobanks', () =>
 
 usePrismicSEO(ecobanks?.value?.data)
 
-const { country } = useCountry()
+const route = useRoute()
+const router = useRouter()
+// if country is provided by url query, it will be used initially
+// example: /sustainable-eco-banks?country=us
+const country = ref(
+  (typeof route.query.country == 'string' &&
+    route.query?.country?.toUpperCase()) ||
+    useCountry().country
+)
 
 const banks = ref<EcoBankCard[]>([])
 const loading = ref(false)
@@ -142,6 +150,7 @@ const loadBanks = async ({
   if (banks.value.length === 0) errorMessage.value = true
 }
 watch(country, () => {
+  router.replace({ query: {} })
   banks.value = []
 })
 

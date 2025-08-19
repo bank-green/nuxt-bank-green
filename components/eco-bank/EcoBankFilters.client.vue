@@ -2,7 +2,7 @@
 import { reactive, ref, computed, watch, onMounted } from 'vue'
 import {
   STATES_BY_COUNTRY,
-  type StateCodes,
+  type StateCode,
 } from '../forms/location/iso3166-2States'
 import type {
   EcoBankAccordionState,
@@ -15,7 +15,7 @@ import type { HarvestDataFilterInput } from '#gql'
 
 // props
 const emit = defineEmits(['filter', 'update:location'])
-const selectedState = ref<StateCodes | null>(null)
+const selectedState = ref<StateCode | null>(null)
 const props = defineProps({
   country: { type: String, required: true },
 })
