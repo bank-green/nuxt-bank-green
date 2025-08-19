@@ -40,10 +40,9 @@ query FilteredBrandsQuery(
   $topPick: Boolean
   $recommendedOnly: Boolean
   $fossilFreeAlliance: Boolean
-  $features: [String]
   $withCommentary: Boolean = false
-  $withFeatures: Boolean = false
   $stateLicensed: String
+  $harvestData: HarvestDataFilterInput
 ) {
   brands(
     country: $country
@@ -51,8 +50,8 @@ query FilteredBrandsQuery(
     topPick: $topPick
     recommendedOnly: $recommendedOnly
     fossilFreeAlliance: $fossilFreeAlliance
-    features: $features
     stateLicensed: $stateLicensed
+    harvestData: $harvestData
   ) {
     edges {
       node {
@@ -63,8 +62,15 @@ query FilteredBrandsQuery(
         commentary @include(if: $withCommentary) {
           ...commentaryFields
         }
-        bankFeatures @include(if: $withFeatures) {
-          ...bankFeaturesFields
+        harvestData {
+          customersServed
+          depositProducts
+          financialFeatures
+          services
+          institutionalInformation
+          policies
+          loanProducts
+          interestRates
         }
       }
     }

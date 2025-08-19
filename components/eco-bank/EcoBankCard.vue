@@ -1,26 +1,28 @@
 <script setup lang="ts">
+import type { EcoBankCard } from './types'
 import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
 
-const props = defineProps<{
-  item: any
+defineProps<{
+  item: EcoBankCard
   isNoCredit: boolean
 }>()
 
-const features = computed(() => {
-  // filter our credit card
-  const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
-  const allFeatures: Record<string, any> = {}
-  for (const [featKey, featValue] of Object.entries(features)) {
-    if (
-      (props.isNoCredit && featKey === 'Credit Card')
-      || !featValue.isChecked
-    ) {
-      continue
-    }
-    allFeatures[featKey] = features[featKey]
-  }
-  return allFeatures
-})
+// TODO - FIXME
+// const features = computed(() => {
+//   // filter our credit card
+//   const features = getFeatures(props.item?.bankFeatures) as Record<string, any>
+//   const allFeatures: Record<string, any> = {}
+//   for (const [featKey, featValue] of Object.entries(features)) {
+//     if (
+//       (props.isNoCredit && featKey === 'Credit Card') ||
+//       !featValue.isChecked
+//     ) {
+//       continue
+//     }
+//     allFeatures[featKey] = features[featKey]
+//   }
+//   return allFeatures
+// })
 </script>
 
 <template>
@@ -40,10 +42,7 @@ const features = computed(() => {
         leave-to-class="opacity-0 scale-y-95"
         mode="out-in"
       >
-        <div
-          v-if="item"
-          class="flex items-center truncate"
-        >
+        <div v-if="item" class="flex items-center truncate">
           <div class="relative w-12 h-12">
             <ClearbitLogo
               :url="item.website"
@@ -62,20 +61,17 @@ const features = computed(() => {
               class="w-10 ml-4"
               src="/img/certification/fossil-free-certified.png"
               alt="Fossil Free Certification"
-            >
+            />
             <img
               v-if="item.topPick"
               class="w-10 ml-4"
               src="/img/certification/TopPick.svg"
               alt="Top Pick"
-            >
+            />
           </div>
         </div>
 
-        <div
-          v-else
-          class="w-full flex items-center truncate"
-        >
+        <div v-else class="w-full flex items-center truncate">
           <div class="w-12 h-12 bg-gray-100 rounded-xl animate-pulse" />
           <div class="ml-3 flex-1 font-semibold text-gray-200 block truncate">
             loading...
@@ -110,10 +106,10 @@ const features = computed(() => {
       leave-to-class="opacity-0 scale-95"
     >
       <div
-        v-if="Object.keys(features).length"
+        v-if="Object.keys(item.features).length"
         class="py-4 px-7 flex flex-wrap"
       >
-        <EcoBankFeaturesList :features="features" />
+        <EcoBankFeaturesList :features="item.features" />
       </div>
     </transition>
   </NuxtLink>

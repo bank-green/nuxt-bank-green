@@ -1,80 +1,82 @@
-<script setup>
+<script setup lang="ts">
 import { reactive, ref, computed, watch, onMounted } from 'vue'
-import { STATES_BY_COUNTRY } from '../forms/location/iso3166-2States'
+import {
+  STATES_BY_COUNTRY,
+  type StateCodes,
+} from '../forms/location/iso3166-2States'
+import type {
+  EcoBankAccordionState,
+  EcoBankFilters,
+  EcoBanksQueryPayload,
+} from '@/utils/types/eco-banks.type.ts'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import StateSearch from '~/components/forms/StateSearch.vue'
+import type { HarvestDataFilterInput } from '#gql'
 
 // props
 const emit = defineEmits(['filter', 'update:location'])
+const selectedState = ref<StateCodes | null>(null)
 const props = defineProps({
-  location: String,
+  country: { type: String, required: true },
 })
 
 // define constants
-const defaultFilter = {
-  stateLicensed: false,
-  customerServed: {
-    individual: false,
-    non_profit: false,
-    corporate: false,
+const defaultState: EcoBankFilters = {
+  customersServed: {
+    retail_and_individual: false,
+    nonprofit: false,
+    sme: false,
     government: false,
   },
   depositProducts: {
-    checking: false,
-    saving: false,
-    investment: false,
-    current: false,
-    social: false,
+    checkings_or_current: false,
+    savings: false,
+    ISAs: false,
+    CDs: false,
+    wealth_management: false,
   },
   loanProducts: {
-    personal: false,
     small_business_lending: false,
-    mortgages: false,
     corporate_lending: false,
+    mortgages_or_loans: false,
+    credit_cards: false,
   },
   services: {
     local_branches: false,
-    free_atm_network: false,
     deposition_protection: false,
-    no_overdraft_fee: false,
     mobile_banking: false,
-    no_account_maintenance_fee: false,
+    ATM_network: false,
   },
 }
 
 // define reactive state
 const forceShowMobile = ref(false)
 const sharedKey = ref(0)
-const filterPayload = ref(deepClone(defaultFilter))
+const filterState = ref(deepClone<EcoBankFilters>(defaultState))
 
-// EcoBankAccordion open states
-const open = reactive({
-  customerServed: true,
+const AccordionState = reactive<EcoBankAccordionState>({
+  customersServed: true,
   depositProducts: true,
   loanProducts: true,
   services: true,
 })
 
 const allOpen = computed({
-  get: () => Object.values(open).every(v => v),
-  set: val => Object.keys(open).forEach(key => (open[key] = val)),
+  get: () => Object.values(AccordionState).every(v => v),
+  set: val =>
+    Object.keys(AccordionState).forEach(key => {
+      AccordionState[key as keyof EcoBankAccordionState] = val
+    }),
 })
 
-const isFilterDirty = computed(() =>
-  isDirty(filterPayload.value, defaultFilter)
+const isFilterDirty = computed(() => isDirty(filterState.value, defaultState))
+
+const filterQueryData = computed<EcoBanksQueryPayload>(
+  (): EcoBanksQueryPayload => ({
+    stateLicensed: selectedState.value,
+    harvestData: getHarvestData(),
+  })
 )
-
-const parsedFilterPayload = computed(() => {
-  return {
-    stateLicensed: filterPayload.value.stateLicensed || false,
-    features: {
-      customersServed: getPayload('customerServed'),
-      depositProducts: getPayload('depositProducts'),
-      loanProduces: getPayload('loanProducts'),
-      services: getPayload('services'),
-    },
-  }
-})
 
 const showFilters = computed(() => {
   return forceShowMobile.value || window.innerWidth >= 768
@@ -82,26 +84,26 @@ const showFilters = computed(() => {
 
 // listeners
 watch(
-  filterPayload,
+  [filterState, selectedState],
   () => {
-    emit('filter', parsedFilterPayload.value)
+    emit('filter', filterQueryData.value)
   },
   { deep: true }
 )
 
 watch(
-  () => props.location,
+  () => props.country,
   () => {
     setDefaultFilter()
   }
 )
 
 // lifecycle hooks
-onMounted(() => emit('filter', parsedFilterPayload.value))
+onMounted(() => emit('filter', filterQueryData.value))
 
 // methods
 const setDefaultFilter = () => {
-  filterPayload.value = deepClone(defaultFilter)
+  filterState.value = deepClone(defaultState)
   sharedKey.value++ // Reset checkboxes to empty state
 }
 
@@ -109,21 +111,28 @@ const toggleFilters = () => {
   forceShowMobile.value = !forceShowMobile.value
 }
 
-const getPayload = keys => {
-  const payload = Object.entries(filterPayload.value[keys]).reduce(
-    (acc, [key, value]) => {
-      if (value) acc.push(key)
-      return acc
-    },
-    []
-  )
+const getHarvestData = (): HarvestDataFilterInput | null => {
+  const harvestData: HarvestDataFilterInput = {}
 
-  return JSON.stringify(payload)
+  for (const [featureKey, featureValues] of Object.entries(filterState.value)) {
+    const selectedFilters = Object.entries(featureValues)
+      .filter(([, isSelected]) => isSelected)
+      .map(([filterKey]) => filterKey)
+
+    if (selectedFilters.length > 0) {
+      harvestData[featureKey as keyof HarvestDataFilterInput] = selectedFilters
+    }
+  }
+
+  const hasHarvestData = Object.keys(harvestData).length
+  if (!hasHarvestData) return null
+  return harvestData
 }
 
-const onSelectState = payload => {
-  const selectedState = STATES_BY_COUNTRY?.[props.location]?.[payload?.value]
-  filterPayload.value.stateLicensed = selectedState || false
+const onSelectState = (payload: { value: string } | null) => {
+  selectedState.value =
+    // @ts-expect-error ts(7053)
+    STATES_BY_COUNTRY?.[props.country]?.[payload?.value] || null
 }
 </script>
 
@@ -133,9 +142,13 @@ const onSelectState = payload => {
       class="md:bg-white bg-none md:w-[288px] py-6 md:px-4 rounded-2xl md:h-[85svh] h-auto md:overflow-y-scroll z-10"
     >
       <StateSearch
-        v-if="STATES_BY_COUNTRY[location]"
+        v-if="STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]"
         ref="statePicker"
-        :options="Object.keys(STATES_BY_COUNTRY?.[location])"
+        :options="
+          Object.keys(
+            STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]
+          )
+        "
         class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
         @select="onSelectState"
       />
@@ -177,34 +190,53 @@ const onSelectState = payload => {
         <!-- Customers Served -->
         <EcoBankAccordion
           :key="sharedKey"
-          :is-open="open.customerServed"
+          :is-open="AccordionState.customersServed"
           title="Customer Served"
-          :checkbox-options="Object.keys(defaultFilter.customerServed)"
-          :model-ref="filterPayload"
-          @toggle="open.customerServed = !open.customerServed"
-          @check="(key, value) => (filterPayload.customerServed[key] = value)"
+          :checkbox-options="Object.keys(defaultState.customersServed)"
+          :model-ref="filterState"
+          @toggle="
+            AccordionState.customersServed = !AccordionState.customersServed
+          "
+          @check="
+            (key, value) =>
+              (filterState.customersServed[
+                key as keyof typeof filterState.customersServed
+              ] = value)
+          "
         />
 
         <!-- Deposit Products -->
         <EcoBankAccordion
           :key="sharedKey"
-          :is-open="open.depositProducts"
+          :is-open="AccordionState.depositProducts"
           title="Deposit Products"
-          :checkbox-options="Object.keys(defaultFilter.depositProducts)"
-          :model-ref="filterPayload"
-          @toggle="open.depositProducts = !open.depositProducts"
-          @check="(key, value) => (filterPayload.depositProducts[key] = value)"
+          :checkbox-options="Object.keys(defaultState.depositProducts)"
+          :model-ref="filterState"
+          @toggle="
+            AccordionState.depositProducts = !AccordionState.depositProducts
+          "
+          @check="
+            (key, value) =>
+              (filterState.depositProducts[
+                key as keyof EcoBankFilters['depositProducts']
+              ] = value)
+          "
         />
 
         <!-- Loan Products -->
         <EcoBankAccordion
           :key="sharedKey"
-          :is-open="open.loanProducts"
+          :is-open="AccordionState.loanProducts"
           title="Loan Products"
-          :checkbox-options="Object.keys(defaultFilter.loanProducts)"
-          :model-ref="filterPayload"
-          @toggle="open.loanProducts = !open.loanProducts"
-          @check="(key, value) => (filterPayload.loanProducts[key] = value)"
+          :checkbox-options="Object.keys(defaultState.loanProducts)"
+          :model-ref="filterState"
+          @toggle="AccordionState.loanProducts = !AccordionState.loanProducts"
+          @check="
+            (key, value) =>
+              (filterState.loanProducts[
+                key as keyof EcoBankFilters['loanProducts']
+              ] = value)
+          "
         />
 
         <!-- Services -->
@@ -212,11 +244,15 @@ const onSelectState = payload => {
           :key="sharedKey"
           no-border
           title="Services"
-          :is-open="open.services"
-          :checkbox-options="Object.keys(defaultFilter.services)"
-          :model-ref="filterPayload"
-          @toggle="open.services = !open.services"
-          @check="(key, value) => (filterPayload.services[key] = value)"
+          :is-open="AccordionState.services"
+          :checkbox-options="Object.keys(defaultState.services)"
+          :model-ref="filterState"
+          @toggle="AccordionState.services = !AccordionState.services"
+          @check="
+            (key, value) =>
+              (filterState.services[key as keyof EcoBankFilters['services']] =
+                value)
+          "
         />
       </div>
     </div>

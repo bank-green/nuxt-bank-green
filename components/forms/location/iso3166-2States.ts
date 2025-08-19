@@ -84,3 +84,7 @@ export const STATES_BY_COUNTRY = {
     'Western Australia': 'AU-WA',
   },
 } as const
+
+export type StateCodes = {
+  [K in keyof typeof STATES_BY_COUNTRY]: (typeof STATES_BY_COUNTRY)[K][keyof (typeof STATES_BY_COUNTRY)[K]]
+}[keyof typeof STATES_BY_COUNTRY]

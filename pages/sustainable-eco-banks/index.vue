@@ -16,7 +16,7 @@
           <div class="flex flex-col md:flex-row md:items-start items-stretch">
             <EcoBankFilters
               v-if="country"
-              :location="country"
+              :country="country"
               @filter="applyFilter"
             />
 
@@ -70,10 +70,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import { components } from '~~/slices'
+import type { EcoBanksQueryPayload } from '@/utils/types/eco-banks.type.ts'
+import type { EcoBankCard } from '~/components/eco-bank/types'
 
 const fetchGql = useGql()
 
@@ -93,42 +95,80 @@ usePrismicSEO(ecobanks?.value?.data)
 
 const { country } = useCountry()
 
-const banks = ref([])
+const banks = ref<EcoBankCard[]>([])
 const loading = ref(false)
 const errorMessage = ref(false)
 
-const loadBanks = async payload => {
+const loadBanks = async ({
+  harvestData,
+  stateLicensed,
+}: EcoBanksQueryPayload) => {
   loading.value = true
 
   if (!country.value) {
     return
   }
 
-  banks.value = await fetchGql('FilteredBrandsQuery', {
+  const res = await fetchGql('FilteredBrandsQuery', {
     country: country.value,
     recommendedOnly: true,
     first: 300,
     withCommentary: true,
-    withFeatures: true,
-    stateLicensed: payload.stateLicensed || null,
+    stateLicensed,
+    harvestData,
   }).then(data =>
-    data.brands.edges
-      .map(o => o.node)
-      .map(b => ({
-        ...b,
-        ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
+    data?.brands?.edges
+      .map(o => o?.node)
+      .filter(
+        brand =>
+          brand && brand.name && brand?.commentary?.showOnSustainableBanksPage
+      )
+      // sort by top_pick first, then fossil_free_alliance_rating, then by name
+      .sort((a, b) => {
+        if (!a || !b) return 0
+        return (
+          +(b.commentary?.topPick || 0) - +(a.commentary?.topPick || 0) ||
+          (b.commentary?.fossilFreeAllianceRating || 0) -
+            (a.commentary?.fossilFreeAllianceRating || 0) ||
+          a!.name.localeCompare(b!.name)
+        )
+      })
+      .map<EcoBankCard>(brand => ({
+        name: brand?.name || '',
+        website: brand?.website || '',
+
+        tag: brand?.tag || '',
+        topPick: !!brand?.commentary?.topPick,
+        fossilFreeAlliance: !!brand?.commentary?.fossilFreeAlliance,
+        features: (
+          [
+            'services',
+            'customersServed',
+            'loanProducts',
+            'depositProducts',
+          ] as (keyof EcoBankCard['features'])[]
+        )
+          // transform harvest's feature data into a list of features
+          .reduce(
+            (acc, featureType) => {
+              const { harvestData } = brand!
+              if (!harvestData) return acc
+              acc[featureType] = Object.entries(
+                harvestData?.[featureType] || {}
+              )
+                .filter(([_, v]) => (v as { offered: boolean })?.offered)
+                .map(([k, _]) => k)
+              return acc
+            },
+            {} as EcoBankCard['features']
+          ),
       }))
-      // filter show_on_sustainable_banks_page
-      .filter(a => a.showOnSustainableBanksPage)
   )
 
-  loading.value = false
+  if (res) banks.value = res
 
-  if (banks.value.length === 0) {
-    errorMessage.value = true
-    //  "Sorry, we don't have any banks that meet the required filter."
-  } // TODO: should put this string in Prismic
+  loading.value = false
+  if (banks.value.length === 0) errorMessage.value = true
 }
 watch(country, () => {
   banks.value = []
@@ -138,7 +178,7 @@ const isNoCredit = computed(() => {
   return country.value === 'FR' || country.value === 'DE'
 })
 
-const applyFilter = payload => {
-  loadBanks(payload)
+const applyFilter = (filterQueryData: EcoBanksQueryPayload) => {
+  loadBanks(filterQueryData)
 }
 </script>

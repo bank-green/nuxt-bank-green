@@ -1,7 +1,7 @@
 // @ts-check
-import prettierPlugin from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
-import withNuxt from './.nuxt/eslint.config.mjs';
+import prettierPlugin from 'eslint-plugin-prettier'
+import prettierConfig from 'eslint-config-prettier'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
   {
@@ -19,6 +19,7 @@ export default withNuxt(
       'vue/require-toggle-inside-transition': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/ban-ts-comment': 'off',
       '@stylistic/max-statements-per-line': ['error', { max: 2 }],
       '@stylistic/quotes': ['warn', 'single', { avoidEscape: true }],
       '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
@@ -26,4 +27,4 @@ export default withNuxt(
     },
   },
   prettierConfig // Extend eslint-config-prettier to disable conflicting rules
-);
+)

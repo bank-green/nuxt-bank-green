@@ -10,7 +10,9 @@ const props = defineProps<{
   options: string[]
 }>()
 
-const emit = defineEmits(['select'])
+const emit = defineEmits<{
+  (event: 'select', payload: { value: string } | null): void
+}>()
 const listPicker = ref()
 const onKeyDown = (event: Event) => {
   listPicker.value.incrementFocus(event)
