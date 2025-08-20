@@ -17,6 +17,8 @@
             <EcoBankFilters
               v-if="country"
               :country="country"
+              :on-select-state="onSelectState"
+              :state-licensed="stateLicensed"
               @filter="applyFilter"
             />
 
@@ -80,12 +82,14 @@ import {
   toEcoBankCardFeatures,
   type EcoBankCard,
 } from '~/pages/sustainable-eco-banks/utils'
+import {
+  STATES_BY_COUNTRY,
+  type StateCode,
+} from '~/components/forms/location/iso3166-2States'
 
 const fetchGql = useGql()
 
 const sliceComps = ref(defineSliceZoneComponents(components))
-
-// useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
 const { client } = usePrismic()
 
@@ -99,14 +103,26 @@ usePrismicSEO(ecobanks?.value?.data)
 
 const route = useRoute()
 const router = useRouter()
-// if country is provided by url query, it will be used initially
-// example: /sustainable-eco-banks?country=us
-const country = ref(
-  (typeof route.query.country == 'string' &&
-    route.query?.country?.toUpperCase()) ||
-    useCountry().country
-)
 
+// if country or state are provided by url query, it will be used initially
+// example: /sustainable-eco-banks?country=us&state=us-ca
+const initCountry =
+  (typeof route.query.country == 'string' &&
+    (route.query?.country?.toUpperCase() as string)) ||
+  useCountry().country.value
+
+const initState =
+  typeof route.query?.state == 'string' &&
+  // @ts-expect-error: ts(7052) 'string' can't be used to index an object
+  Object.values(STATES_BY_COUNTRY?.[initCountry]).includes(
+    route.query?.state?.toUpperCase()
+  ) &&
+  (route.query?.state?.toUpperCase() as StateCode)
+
+const country = ref(initCountry)
+const stateLicensed = ref<StateCode | null>(initState || null)
+
+router.replace({ query: {} })
 const banks = ref<EcoBankCard[]>([])
 const loading = ref(false)
 const errorMessage = ref(false)
@@ -149,12 +165,14 @@ const loadBanks = async ({
   loading.value = false
   if (banks.value.length === 0) errorMessage.value = true
 }
-watch(country, () => {
-  router.replace({ query: {} })
-  banks.value = []
-})
 
 const applyFilter = (filterQueryData: EcoBanksQueryPayload) => {
   loadBanks(filterQueryData)
+}
+const onSelectState = (payload: { value: string } | null): void => {
+  stateLicensed.value = payload?.value
+    ? // @ts-expect-error: ts(7052) 'string' can't be used to index an object
+      STATES_BY_COUNTRY?.[country.value]?.[payload?.value] || null
+    : null
 }
 </script>

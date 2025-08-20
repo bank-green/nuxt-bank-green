@@ -8,6 +8,7 @@ import ListPicker from '@/components/forms/ListPicker.vue'
 
 const props = defineProps<{
   options: string[]
+  initValue?: string
 }>()
 
 const emit = defineEmits<{
@@ -22,7 +23,7 @@ const onKeyUp = (event: Event) => {
 }
 const onKeyEnter = () => listPicker.value.selectCurrentItem()
 
-const search = ref('')
+const search = ref(props.initValue || '')
 const isShowing = ref(false)
 const isLoading = ref(false)
 const options = ref<string[]>(props.options)

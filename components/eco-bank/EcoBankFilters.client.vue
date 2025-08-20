@@ -2,6 +2,7 @@
 import { reactive, ref, computed, watch, onMounted } from 'vue'
 import {
   STATES_BY_COUNTRY,
+  STATE_BY_STATE_CODE,
   type StateCode,
 } from '../forms/location/iso3166-2States'
 import type {
@@ -13,12 +14,16 @@ import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import StateSearch from '~/components/forms/StateSearch.vue'
 import type { HarvestDataFilterInput } from '#gql'
 
+// TODO: the current 2-way data flow between this component and its parent is unnecessarily complex
+// refactor to lift state and updates to the parent for a 1-way data flow
+
 // props
 const emit = defineEmits(['filter', 'update:location'])
-const selectedState = ref<StateCode | null>(null)
-const props = defineProps({
-  country: { type: String, required: true },
-})
+const props = defineProps<{
+  country: string
+  stateLicensed: StateCode | null
+  onSelectState: (payload: { value: string } | null) => void
+}>()
 
 // define constants
 const defaultState: EcoBankFilters = {
@@ -73,7 +78,7 @@ const isFilterDirty = computed(() => isDirty(filterState.value, defaultState))
 
 const filterQueryData = computed<EcoBanksQueryPayload>(
   (): EcoBanksQueryPayload => ({
-    stateLicensed: selectedState.value,
+    stateLicensed: props.stateLicensed,
     harvestData: getHarvestData(),
   })
 )
@@ -84,7 +89,7 @@ const showFilters = computed(() => {
 
 // listeners
 watch(
-  [filterState, selectedState],
+  [filterState, () => props.stateLicensed],
   () => {
     emit('filter', filterQueryData.value)
   },
@@ -128,12 +133,6 @@ const getHarvestData = (): HarvestDataFilterInput | null => {
   if (!hasHarvestData) return null
   return harvestData
 }
-
-const onSelectState = (payload: { value: string } | null) => {
-  selectedState.value =
-    // @ts-expect-error ts(7053)
-    STATES_BY_COUNTRY?.[props.country]?.[payload?.value] || null
-}
 </script>
 
 <template>
@@ -149,8 +148,9 @@ const onSelectState = (payload: { value: string } | null) => {
             STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]
           )
         "
+        :init-value="(STATE_BY_STATE_CODE as any)[props.stateLicensed || '']"
         class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
-        @select="onSelectState"
+        @select="props.onSelectState"
       />
 
       <div
