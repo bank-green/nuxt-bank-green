@@ -1,7 +1,23 @@
 <script setup lang="ts">
-import type { EcoBankCard } from '../../../pages/sustainable-eco-banks/utils'
+import { ref, onMounted } from 'vue'
+import type { EcoBankCard } from '../../../utils/sustainableEcoBanksUtils'
 
 defineProps<{ features: EcoBankCard['features'] }>()
+
+const withBullet = ref(false)
+
+const checkWidth = () => {
+  withBullet.value = window.innerWidth > 400
+}
+
+onMounted(() => {
+  checkWidth()
+  window.addEventListener('resize', checkWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkWidth)
+})
 </script>
 
 <template>
@@ -9,7 +25,7 @@ defineProps<{ features: EcoBankCard['features'] }>()
     <span class="text-lg font-semibold">
       {{ key }}
     </span>
-    <ul class="list-disc list-inside marker:[font-size:12px]">
+    <ul :class="withBullet && 'list-disc list-inside marker:[font-size:12px]'">
       <li v-for="item of items" :key="item" class="text-sm">
         {{ item }}
       </li>
