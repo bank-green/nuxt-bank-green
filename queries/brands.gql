@@ -163,46 +163,15 @@ fragment bankFeaturesFields on BrandFeature {
   details
 }
 
-fragment HarvestDataFields on HarvestData {
-  customersServed
-  depositProducts
-  financialFeatures
-  services
-  institutionalInformation
-  policies
-  loanProducts
-  interestRates
-}
-
 query HarvestDataQuery($tag: String!) {
   harvestData(tag: $tag) {
-    ...HarvestDataFields
-  }
-}
-
-query AllHarvestDataQuery(
-  $customersServed: String
-  $depositProducts: String
-  $financialFeatures: String
-  $services: String
-  $institutionalInformation: String
-  $policies: String
-  $loanProducts: String
-  $interestRates: String
-) {
-  allHarvestData(
-    customersServed: $customersServed
-    depositProducts: $depositProducts
-    financialFeatures: $financialFeatures
-    services: $services
-    institutionalInformation: $institutionalInformation
-    policies: $policies
-    loanProducts: $loanProducts
-    interestRates: $interestRates
-  ) {
-    tag
-    features {
-      ...HarvestDataFields
-    }
+    customersServed
+    depositProducts
+    financialFeatures
+    services
+    institutionalInformation
+    policies
+    loanProducts
+    interestRates
   }
 }

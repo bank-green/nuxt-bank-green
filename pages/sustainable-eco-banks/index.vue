@@ -81,7 +81,7 @@ import {
   sortEcoBanks,
   toEcoBankCardFeatures,
   type EcoBankCard,
-} from '~/pages/sustainable-eco-banks/utils'
+} from '~/utils/sustainableEcoBanksUtils'
 import {
   STATES_BY_COUNTRY,
   type StateCode,

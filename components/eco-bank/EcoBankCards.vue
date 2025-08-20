@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { EcoBankCard } from '../../pages/sustainable-eco-banks/utils'
+import type { EcoBankCard } from '../../utils/sustainableEcoBanksUtils'
 
 defineProps<{
   list: EcoBankCard[]
