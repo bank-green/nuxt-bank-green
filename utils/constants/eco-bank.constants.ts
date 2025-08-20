@@ -65,5 +65,6 @@ const filterMapping = {
   ISAs: 'ISAs',
   mortgages_or_loans: 'Mortgages or Loans',
   credit_cards: 'Credit Cards',
+  savings: 'Savings',
 }
 export { customersList, depositProductsList, loanProductsList, filterMapping }
