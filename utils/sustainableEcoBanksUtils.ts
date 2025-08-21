@@ -131,7 +131,8 @@ export const extractDepositProtection = (
   const s = depositProtection.additional_details
   const startIdx = s.indexOf('up to')
   const moneyIdx = s.indexOf('000')
-  if (startIdx === -1 || moneyIdx === -1) return NO_DATA
+  if (startIdx === -1) return NO_DATA
+  if (moneyIdx === -1) return 'Yes'
   const endIdx = moneyIdx + 3
   let result = `U${s.slice(startIdx + 1, endIdx)}`
 
@@ -140,7 +141,7 @@ export const extractDepositProtection = (
   if (s.slice(endIdx, endIdx + 4) == ' NOK') result += ' NOK'
 
   // details are too convoluted, better play it safe...
-  if (result.length > 34) return NO_DATA
+  if (result.length > 34) return 'Yes'
 
   return result
 }
