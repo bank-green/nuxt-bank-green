@@ -110,9 +110,9 @@ export const extractInterestRate = (
     const rate = +curr.high_rate
     if (isNaN(rate)) return acc
     return acc ? Math.max(acc, rate) : rate
-  }, -Infinity)
+  }, 0)
 
-  if (max === -Infinity) return NO_DATA
+  if (max === 0) return NO_DATA
   return `Up to ${max}%`
 }
 
@@ -122,26 +122,8 @@ export type HarvestDataDepositProtection = {
   urls: string[]
 }
 
-// check details for line "up to XXX,000" and returns it
 export const extractDepositProtection = (
   depositProtection?: HarvestDataDepositProtection
 ): string => {
-  if (!depositProtection?.offered || !depositProtection?.additional_details)
-    return NO_DATA
-  const s = depositProtection.additional_details
-  const startIdx = s.indexOf('up to')
-  const moneyIdx = s.indexOf('000')
-  if (startIdx === -1) return NO_DATA
-  if (moneyIdx === -1) return 'Yes'
-  const endIdx = moneyIdx + 3
-  let result = `U${s.slice(startIdx + 1, endIdx)}`
-
-  // some currencies are after the amount; ex: "up to 100,000 EUR"
-  if (s.slice(endIdx, endIdx + 4) == ' EUR') result += ' EUR'
-  if (s.slice(endIdx, endIdx + 4) == ' NOK') result += ' NOK'
-
-  // details are too convoluted, better play it safe...
-  if (result.length > 34) return 'Yes'
-
-  return result
+  return depositProtection?.offered ? 'YES' : '-'
 }
