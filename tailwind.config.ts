@@ -59,6 +59,7 @@ module.exports = {
       screens: {
         lg: '1028px', // The lg breakpoint at 1280px will be overridden.
         custom: '1124px', // Define your custom breakpoint
+        xs: '400px',
       },
       colors: {
         ...colorPalette,
@@ -111,10 +112,6 @@ module.exports = {
     display: ['responsive', 'group-hover'],
     scale: ['responsive', 'hover', 'focus', 'group-hover'],
   },
-  plugins: [
-    forms,
-    typography,
-    aspectRatio,
-  ],
+  plugins: [forms, typography, aspectRatio],
   safelist: ['my-4'],
 }

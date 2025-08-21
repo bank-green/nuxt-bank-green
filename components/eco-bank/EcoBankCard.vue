@@ -34,22 +34,21 @@ defineProps<{
       </div>
     </div>
 
-    <!-- !TODO Where to get interest rates and deposite protection from? -->
-    <!-- <dl class="grid grid-cols-3">
+    <dl class="flex flex-col xs:grid xs:grid-cols-3">
       <div class="flex flex-col gap-1">
         <dt class="text-gray-600 text-xs">Interest Rate</dt>
         <dd class="text-base text-primary-dark font-semibold truncate">
-          {{ '-' }}
+          {{ item.interestRate }}
         </dd>
       </div>
 
       <div class="col-span-2 flex flex-col gap-1">
         <dt class="text-gray-600 text-xs">Deposit Protection</dt>
         <dd class="text-base text-primary-dark font-semibold truncate">
-          {{ '-' }}
+          {{ item.depositProtection }}
         </dd>
       </div>
-    </dl> -->
+    </dl>
 
     <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200" />
 

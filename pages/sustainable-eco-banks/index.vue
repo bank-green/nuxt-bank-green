@@ -79,8 +79,12 @@ import { components } from '~~/slices'
 import type { EcoBanksQueryPayload } from '@/utils/types/eco-banks.type.ts'
 import {
   sortEcoBanks,
-  toEcoBankCardFeatures,
+  extractFeatures,
   type EcoBankCard,
+  type HarvestDataInterestRate,
+  extractInterestRate,
+  extractDepositProtection,
+  type HarvestDataDepositProtection,
 } from '~/utils/sustainableEcoBanksUtils'
 import {
   STATES_BY_COUNTRY,
@@ -157,8 +161,15 @@ const loadBanks = async ({
           tag: brand?.tag || '',
           topPick: !!brand?.commentary?.topPick,
           fossilFreeAlliance: !!brand?.commentary?.fossilFreeAlliance,
-          features: toEcoBankCardFeatures(brand?.harvestData, isNoCredit),
-          // TODO: Add interest rate and Deposit protection
+          features: extractFeatures(brand?.harvestData, isNoCredit),
+          interestRate: extractInterestRate(
+            brand?.harvestData?.financialFeatures?.interest_rates
+              ?.rates as HarvestDataInterestRate[]
+          ),
+          depositProtection: extractDepositProtection(
+            brand?.harvestData?.policies
+              ?.deposit_protection as HarvestDataDepositProtection
+          ),
         }))
     )) || []
 
