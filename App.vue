@@ -33,22 +33,37 @@ const openSwitchSurveyModal = ref(false);
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false,
 });
+const EXIT_MODAL_DELAY = 100;
+let exitTimer = null;
 
 const route = useRoute();
 
 function onExitIntent() {
-  if (hasUserSeenExitIntentModal.value) {
-    return;
-  }
-  if (openSwitchSurveyModal.value) {
-    return;
-  }
-  if (route.path.includes('/impact')) {
-    return;
-  }
+  if (hasUserSeenExitIntentModal.value) return;
+  if (openSwitchSurveyModal.value) return;
+  if (route.path.includes('/impact')) return;
   openSwitchSurveyModal.value = true;
   hasUserSeenExitIntentModal.value = true;
+
+  if (exitTimer !== null) {
+    clearTimeout(exitTimer);
+  }
+
+  exitTimer = window.setTimeout(() => {
+    openSwitchSurveyModal.value = true;
+    hasUserSeenExitIntentModal.value = true;
+    exitTimer = null;
+  }, EXIT_MODAL_DELAY);
 }
+
+onBeforeUnmount(() => {
+  console.log('BEFORE mount');
+
+  if (exitTimer !== null) {
+    clearTimeout(exitTimer);
+    exitTimer = null;
+  }
+});
 
 // <!-- Google Tag Manager -->
 useHead({
