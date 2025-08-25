@@ -31,11 +31,12 @@ export async function getDefaultFields(
   prismicClient: Client,
   rating: string,
   bankname: string = 'this bank',
-  institutionType: string,
+  institutionType: string
 ): Promise<DefaultFields> {
-  const queryKey = rating === 'unknown'
-    ? 'unknownbank-' + institutionType.toLowerCase().replace(/\s/g, '')
-    : rating + 'bank'
+  const queryKey =
+    rating === 'unknown'
+      ? 'unknownbank-' + institutionType.toLowerCase().replace(/\s/g, '')
+      : rating + 'bank'
 
   try {
     const response = await prismicClient.getByUID('bankpage', queryKey)
@@ -50,7 +51,10 @@ export async function getDefaultFields(
       description4: prismicH.asHTML(prismicDefaultFields?.description4) || '',
     }
   } catch (err) {
-    console.warn(`⚠️ Could not fetch defaultFields for queryKey "${queryKey}":`, err)
+    console.warn(
+      `⚠️ Could not fetch defaultFields for queryKey "${queryKey}":`,
+      err
+    )
 
     return {
       rating: 'unknown',

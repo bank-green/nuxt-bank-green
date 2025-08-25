@@ -2,6 +2,9 @@
 // Root Response
 // ---------------------------
 
+import type { HarvestDataFilterInput } from '#gql'
+import type { StateCode } from '~/components/forms/location/iso3166-2States'
+
 export interface HarvestDataResponseType {
   data: {
     harvestData: HarvestDataType;
@@ -185,4 +188,76 @@ export interface LoanSectionItem {
   high_rate?: number;
   low_rate?: number;
   type?: 'rate';
+}
+
+// ---------------------------
+// Filter
+// ---------------------------
+
+export const DEFAULT_FILTER_STATE: EcoBankFilters = {
+  customersServed: {
+    retail_and_individual: false,
+    nonprofit: false,
+    sme: false,
+    government: false,
+  },
+  depositProducts: {
+    checkings_or_current: false,
+    savings: false,
+    ISAs: false,
+    CDs: false,
+    wealth_management: false,
+  },
+  loanProducts: {
+    small_business_lending: false,
+    corporate_lending: false,
+    mortgages_or_loans: false,
+    credit_cards: false,
+  },
+  services: {
+    local_branches: false,
+    deposition_protection: false,
+    mobile_banking: false,
+    ATM_network: false,
+  },
+}
+
+export type EcoBankFilters = {
+  customersServed: {
+    retail_and_individual: boolean
+    nonprofit: boolean
+    sme: boolean
+    government: boolean
+  }
+  depositProducts: {
+    checkings_or_current: boolean
+    savings: boolean
+    ISAs: boolean
+    CDs: boolean
+    wealth_management: boolean
+  }
+  loanProducts: {
+    small_business_lending: boolean
+    mortgages_or_loans: boolean
+    corporate_lending: boolean
+    credit_cards: boolean
+  }
+  services: {
+    mobile_banking: boolean
+    local_branches: boolean
+    ATM_network: boolean
+    deposition_protection: boolean
+  }
+}
+
+export type EcoBankAccordionState = Omit<
+  {
+    [K in keyof EcoBankFilters]: boolean
+  },
+  'stateLicensed'
+>
+
+export type EcoBanksQueryPayload = {
+  harvestData: HarvestDataFilterInput | null
+  stateLicensed: StateCode | null
 }

@@ -12,35 +12,18 @@
           />
         </div>
 
-        <transition
-          enter-active-class="duration-200 transform-gpu origin-top ease-out"
-          enter-from-class="opacity-0 scale-y-95"
-          enter-to-class="opacity-100 scale-y-100"
-          leave-active-class="duration-100 transform-gpu origin-top ease-in"
-          leave-from-class="opacity-100 scale-y-100"
-          leave-to-class="opacity-0 scale-y-95"
-          mode="out-in"
-        >
-          <div
-            :key="country ? 'has-country' : 'no-country'"
-            class="flex flex-col md:flex-row"
-          >
-            <div
-              class="lg:w-80 md:sticky mb-4 md:mb-0 top-20 flex-shrink-0 rounded-2xl lg:px-10"
-              style="height: fit-content"
-            >
-              <EcoBankFilters
-                v-if="country"
-                :location="country"
-                @filter="applyFilter"
-              />
-            </div>
+        <div>
+          <div class="flex flex-col md:flex-row md:items-start items-stretch">
+            <EcoBankFilters
+              v-if="country"
+              :country="country"
+              :on-select-state="onSelectState"
+              :state-licensed="stateLicensed"
+              @filter="applyFilter"
+            />
 
             <div class="relative w-full md:ml-6">
-              <LocationSearch
-                v-model="country"
-                class="z-30 mb-8"
-              />
+              <LocationSearch v-model="country" class="z-30 mb-8" />
 
               <div v-if="!country">
                 <h2
@@ -60,20 +43,17 @@
                   :class="[loading ? 'opacity-50 pointer-events-none' : '']"
                   class="transition"
                 >
-                  <EcoBankCards
-                    :list="banks"
-                    :is-no-credit="isNoCredit"
-                  />
+                  <EcoBankCards :list="banks" />
                 </div>
                 <SliceZone
-                  v-else-if="!loading&&errorMessage"
+                  v-else-if="!loading && errorMessage"
                   :slices="ecobanks?.data?.slices2 ?? []"
                   :components="sliceComps"
                 />
               </div>
             </div>
           </div>
-        </transition>
+        </div>
       </div>
     </div>
     <div class="md:bg-blue-100 bg-sushi-50 px-2 pb-14 sm:pb-0">
@@ -92,86 +72,118 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineSliceZoneComponents } from '@prismicio/vue'
 import LocationSearch from '@/components/forms/location/LocationSearch.vue'
 import { components } from '~~/slices'
+import type { EcoBanksQueryPayload } from '@/utils/types/eco-banks.type.ts'
+import {
+  sortEcoBanks,
+  extractFeatures,
+  type EcoBankCard,
+  type HarvestDataInterestRate,
+  extractInterestRate,
+  extractDepositProtection,
+  type HarvestDataDepositProtection,
+} from '~/utils/sustainableEcoBanksUtils'
+import {
+  STATES_BY_COUNTRY,
+  type StateCode,
+} from '~/components/forms/location/iso3166-2States'
 
 const fetchGql = useGql()
 
 const sliceComps = ref(defineSliceZoneComponents(components))
-
-console.log('sliceComps', sliceComps)
-
-// useHeadHelper('Find Eco Banks & Sustainable Banks In Your Area - Bank.Green', 'Find and compare the service offerings of ethical and sustainable banks.')
 
 const { client } = usePrismic()
 
 const { data: ecobanks } = await useAsyncData('ecobanks', () =>
   client.getSingle('ecobankspage', {
     fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
-  }),
+  })
 )
 
 usePrismicSEO(ecobanks?.value?.data)
 
-const { country } = useCountry()
+const route = useRoute()
+const router = useRouter()
 
-const banks = ref([])
+// if country or state are provided by url query, it will be used initially
+// example: /sustainable-eco-banks?country=us&state=us-ca
+const initCountry =
+  (typeof route.query.country == 'string' &&
+    (route.query?.country?.toUpperCase() as string)) ||
+  useCountry().country.value
+
+const initState =
+  typeof route.query?.state == 'string' &&
+  // @ts-expect-error: ts(7052) 'string' can't be used to index an object
+  Object.values(STATES_BY_COUNTRY?.[initCountry]).includes(
+    route.query?.state?.toUpperCase()
+  ) &&
+  (route.query?.state?.toUpperCase() as StateCode)
+
+const country = ref(initCountry)
+const stateLicensed = ref<StateCode | null>(initState || null)
+
+router.replace({ query: {} })
+const banks = ref<EcoBankCard[]>([])
 const loading = ref(false)
 const errorMessage = ref(false)
+
 const loadBanks = async ({
-  fossilFreeAlliance,
-  topPick,
-  features,
-}) => {
+  harvestData,
+  stateLicensed,
+}: EcoBanksQueryPayload) => {
   loading.value = true
+
   if (!country.value) {
     return
   }
+  const isNoCredit = country.value === 'FR' || country.value === 'DE'
 
-  banks.value = await fetchGql('FilteredBrandsQuery', {
-    country: country.value,
-    topPick,
-    fossilFreeAlliance,
-    features,
-    recommendedOnly: true,
-    first: 300,
-    withCommentary: true,
-    withFeatures: true,
-  }).then(data =>
-    data.brands.edges
-      .map(o => o.node)
-      .map(b => ({
-        ...b,
-        ...b.commentary,
-        rating: b.commentary?.ratingInherited?.toLowerCase() ?? 0,
-      }))
-    // filter show_on_sustainable_banks_page
-      .filter(a => a.showOnSustainableBanksPage)
-    // sort by top_pick first, then fossil_free_alliance_rating, then by name
-      .sort((a, b) =>
-        b.topPick - a.topPick
-        || b.fossilFreeAllianceRating - a.fossilFreeAllianceRating
-        || a.name - b.name),
-  )
+  banks.value =
+    (await fetchGql('FilteredBrandsQuery', {
+      country: country.value,
+      recommendedOnly: true,
+      first: 300,
+      withCommentary: true,
+      stateLicensed,
+      harvestData,
+    }).then(data =>
+      data?.brands?.edges
+        .map(o => o?.node)
+        .filter(brand => brand?.commentary?.showOnSustainableBanksPage)
+        .sort(sortEcoBanks)
+        .map<EcoBankCard>(brand => ({
+          name: brand?.name || '',
+          website: brand?.website || '',
+          tag: brand?.tag || '',
+          topPick: !!brand?.commentary?.topPick,
+          fossilFreeAlliance: !!brand?.commentary?.fossilFreeAlliance,
+          features: extractFeatures(brand?.harvestData, isNoCredit),
+          interestRate: extractInterestRate(
+            brand?.harvestData?.financialFeatures?.interest_rates
+              ?.rates as HarvestDataInterestRate[]
+          ),
+          depositProtection: extractDepositProtection(
+            brand?.harvestData?.policies
+              ?.deposit_protection as HarvestDataDepositProtection
+          ),
+        }))
+    )) || []
 
   loading.value = false
-
-  if (banks.value.length === 0) {
-    errorMessage.value = true
-    //  "Sorry, we don't have any banks that meet the required filter."
-  } // TODO: should put this string in Prismic
+  if (banks.value.length === 0) errorMessage.value = true
 }
-watch(country, () => {
-  banks.value = []
-})
 
-const isNoCredit = computed(() => {
-  return country.value === 'FR' || country.value === 'DE'
-})
-
-const applyFilter = (payload) => {
-  loadBanks(payload)
+const applyFilter = (filterQueryData: EcoBanksQueryPayload) => {
+  loadBanks(filterQueryData)
+}
+const onSelectState = (payload: { value: string } | null): void => {
+  stateLicensed.value = payload?.value
+    ? // @ts-expect-error: ts(7052) 'string' can't be used to index an object
+      STATES_BY_COUNTRY?.[country.value]?.[payload?.value] || null
+    : null
 }
 </script>
