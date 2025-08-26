@@ -14,9 +14,6 @@ import CheckboxSection from '@/components/forms/CheckboxSection.vue'
 import StateSearch from '~/components/forms/StateSearch.vue'
 import type { HarvestDataFilterInput } from '#gql'
 
-// TODO: the current 2-way data flow between this component and its parent is unnecessarily complex
-// refactor to lift state and updates to the parent for a 1-way data flow
-
 // props
 const emit = defineEmits(['filter', 'update:location'])
 const props = defineProps<{

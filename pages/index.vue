@@ -78,14 +78,6 @@
                 :slices="home?.data.slices1 ?? []"
                 :components="sliceComps"
               />
-              <!-- <img class="h-6 w-auto" src="/img/featured/forbes.png"
-                                alt="Bank Green featured in Forbes" />
-                            <img class="h-12 pb-2 w-auto" src="/img/featured/the-new-yorker.png"
-                                alt="Bank Green featured in The New Yorker" />
-                            <img class="h-10 w-auto" src="/img/featured/independent.png"
-                                alt="Bank Green featured in Independent" />
-                            <img class="h-12 w-auto" src="/img/featured/the-big-issue.png"
-                                alt="Bank Green featured in The Big Issue" /> -->
             </div>
           </div>
           <div class="hidden md:flex flex-col justify-center items-center">
@@ -123,9 +115,6 @@
       </div>
       <Swoosh />
     </div>
-    <!-- <pre>
-            {{ JSON.stringify(home, null, 2) }}
-         </pre> -->
     <div
       class="flex flex-col md:flex-row items-center justify-center py-16 contain"
     >
@@ -247,7 +236,9 @@ watch(country, _ => {
   bank.value = null
 })
 
-watch(bank, ({ tag }) => {
+watch(bank, newBank => {
+  if (!newBank) return
+  const { tag } = newBank
   if (tag) router.push(`banks/${tag}`)
 })
 </script>
