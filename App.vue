@@ -33,7 +33,7 @@ const openSwitchSurveyModal = ref(false);
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false,
 });
-const EXIT_MODAL_DELAY = 100;
+const EXIT_MODAL_DELAY = 1000;
 let exitTimer = null;
 
 const route = useRoute();
