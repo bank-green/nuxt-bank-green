@@ -3,6 +3,7 @@ import { reactive, ref, computed, watch, onMounted } from 'vue'
 import {
   STATES_BY_COUNTRY,
   STATE_BY_STATE_CODE,
+  isValidStateCountry,
   type StateCode,
 } from '../forms/location/iso3166-2States'
 import type {
@@ -138,14 +139,12 @@ const getHarvestData = (): HarvestDataFilterInput | null => {
       class="md:bg-white bg-none md:w-[288px] py-6 md:px-4 rounded-2xl md:h-[85svh] h-auto md:overflow-y-scroll z-10"
     >
       <StateSearch
-        v-if="STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]"
+        v-if="isValidStateCountry(country)"
         ref="statePicker"
-        :options="
-          Object.keys(
-            STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]
-          )
+        :options="Object.keys(STATES_BY_COUNTRY?.[country])"
+        :init-value="
+          STATE_BY_STATE_CODE[props.stateLicensed || ('' as StateCode)]
         "
-        :init-value="(STATE_BY_STATE_CODE as any)[props.stateLicensed || '']"
         class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
         @select="props.onSelectState"
       />
