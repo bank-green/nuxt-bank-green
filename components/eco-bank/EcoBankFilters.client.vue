@@ -1,288 +1,260 @@
-<script setup>
+<script setup lang="ts">
+import { reactive, ref, computed, watch, onMounted } from 'vue'
+import {
+  STATES_BY_COUNTRY,
+  STATE_BY_STATE_CODE,
+  type StateCode,
+} from '../forms/location/iso3166-2States'
+import type {
+  EcoBankAccordionState,
+  EcoBankFilters,
+  EcoBanksQueryPayload,
+} from '@/utils/types/eco-banks.type.ts'
 import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import RegionSearch from '@/components/forms/RegionSearch.vue'
+import StateSearch from '~/components/forms/StateSearch.vue'
+import type { HarvestDataFilterInput } from '#gql'
 
-const { isBE } = useCountry()
-const emit = defineEmits(['filter'])
-const props = defineProps({
-  location: String,
-})
-const searchByLocation = ref(false)
-const onSelectLocation = (payload) => {
-  if (!payload) {
-    filterPayload.value.region = null
-    filterPayload.value.subregion = null
-  } else if (payload.type === 'subregion') {
-    filterPayload.value.region = null
-    filterPayload.value.subregion = payload.value
-  } else {
-    filterPayload.value.region = payload.value
-    filterPayload.value.subregion = null
-  }
+// TODO: the current 2-way data flow between this component and its parent is unnecessarily complex
+// refactor to lift state and updates to the parent for a 1-way data flow
+
+// props
+const emit = defineEmits(['filter', 'update:location'])
+const props = defineProps<{
+  country: string
+  stateLicensed: StateCode | null
+  onSelectState: (payload: { value: string } | null) => void
+}>()
+
+// define constants
+const defaultState: EcoBankFilters = {
+  customersServed: {
+    retail_and_individual: false,
+    nonprofit: false,
+    sme: false,
+    government: false,
+  },
+  depositProducts: {
+    checkings_or_current: false,
+    savings: false,
+    ISAs: false,
+    CDs: false,
+    wealth_management: false,
+  },
+  loanProducts: {
+    small_business_lending: false,
+    corporate_lending: false,
+    mortgages_or_loans: false,
+    credit_cards: false,
+  },
+  services: {
+    local_branches: false,
+    deposition_protection: false,
+    mobile_banking: false,
+    ATM_network: false,
+  },
 }
 
-const getDefaultFilter = () => ({
-  region: null,
-  subregion: null,
-  location: {
-    'Mobile banking': false,
-  },
-  topPick: false,
-  fossilFreeAlliance: false,
-  convenience: {
-    'Mobile banking': false,
-    'Free ATM network': false,
-    'No overdraft fee': false,
-    'No account maintenance fee': false,
-  },
-  bankAccounts: {
-    'checking': false,
-    'saving': false,
-    'Interest rates': false,
-    'Business accounts': false,
-    'Business savings accounts': false,
-    'Small business lending': false,
-    'Corporate lending': false,
-    'Credit cards': false,
-    'Mortgages or Loans': false,
-  },
-  security: {
-    'Deposit protection': false,
-  },
-})
-
-const filterPayload = ref(getDefaultFilter())
-
-const isFilterDirty = computed(
-  () =>
-    JSON.stringify(filterPayload.value) !== JSON.stringify(getDefaultFilter()),
-)
-
-const parsedFilterPayload = computed(() => {
-  return {
-    regions: filterPayload.value.region
-      ? [filterPayload.value.region]
-      : undefined,
-    subregions: filterPayload.value.subregion
-      ? [filterPayload.value.subregion]
-      : undefined,
-    topPick: filterPayload.value.topPick
-      ? filterPayload.value.topPick
-      : undefined,
-    fossilFreeAlliance: filterPayload.value.fossilFreeAlliance
-      ? filterPayload.value.fossilFreeAlliance
-      : undefined,
-    features: [
-      ...Object.keys(filterPayload.value.location).filter(
-        key => filterPayload.value.location[key],
-      ),
-      ...Object.keys(filterPayload.value.convenience).filter(
-        key => filterPayload.value.convenience[key],
-      ),
-      ...Object.keys(filterPayload.value.bankAccounts).filter(
-        key => filterPayload.value.bankAccounts[key],
-      ),
-      ...Object.keys(filterPayload.value.security).filter(
-        key => filterPayload.value.security[key],
-      ),
-    ],
-  }
-})
-
-watch(
-  filterPayload,
-  () => {
-    emit('filter', parsedFilterPayload.value)
-  },
-  { deep: true },
-)
-
-watch(searchByLocation, () => {
-  filterPayload.value.region = null
-  filterPayload.value.subregion = null
-})
-
-onMounted(() => emit('filter', parsedFilterPayload.value))
-
-const setDefaultFilter = () => {
-  filterPayload.value = getDefaultFilter()
-}
-watch(
-  () => props.location,
-  () => {
-    setDefaultFilter()
-  },
-)
-
+// define reactive state
 const forceShowMobile = ref(false)
+const sharedKey = ref(0)
+const filterState = ref(deepClone<EcoBankFilters>(defaultState))
+
+const AccordionState = reactive<EcoBankAccordionState>({
+  customersServed: true,
+  depositProducts: true,
+  loanProducts: true,
+  services: true,
+})
+
+const allOpen = computed({
+  get: () => Object.values(AccordionState).every(v => v),
+  set: val =>
+    Object.keys(AccordionState).forEach(key => {
+      AccordionState[key as keyof EcoBankAccordionState] = val
+    }),
+})
+
+const isFilterDirty = computed(() => isDirty(filterState.value, defaultState))
+
+const filterQueryData = computed<EcoBanksQueryPayload>(
+  (): EcoBanksQueryPayload => ({
+    stateLicensed: props.stateLicensed,
+    harvestData: getHarvestData(),
+  })
+)
+
 const showFilters = computed(() => {
   return forceShowMobile.value || window.innerWidth >= 768
 })
+
+// listeners
+watch(
+  [filterState, () => props.stateLicensed],
+  () => {
+    emit('filter', filterQueryData.value)
+  },
+  { deep: true }
+)
+
+watch(
+  () => props.country,
+  () => {
+    setDefaultFilter()
+  }
+)
+
+// lifecycle hooks
+onMounted(() => emit('filter', filterQueryData.value))
+
+// methods
+const setDefaultFilter = () => {
+  filterState.value = deepClone(defaultState)
+  sharedKey.value++ // Reset checkboxes to empty state
+}
+
 const toggleFilters = () => {
   forceShowMobile.value = !forceShowMobile.value
+}
+
+const getHarvestData = (): HarvestDataFilterInput | null => {
+  const harvestData: HarvestDataFilterInput = {}
+
+  for (const [featureKey, featureValues] of Object.entries(filterState.value)) {
+    const selectedFilters = Object.entries(featureValues)
+      .filter(([, isSelected]) => isSelected)
+      .map(([filterKey]) => filterKey)
+
+    if (selectedFilters.length > 0) {
+      harvestData[featureKey as keyof HarvestDataFilterInput] = selectedFilters
+    }
+  }
+
+  const hasHarvestData = Object.keys(harvestData).length
+  if (!hasHarvestData) return null
+  return harvestData
 }
 </script>
 
 <template>
-  <div
-    class="bg-white hover:bg-gray-50 px-5 py-4 md:py-0 md:px-0 md:bg-transparent md:hover:bg-transparent cursor-pointer md:cursor-auto flex items-center"
-    :class="{
-      'rounded-xl': !showFilters,
-      'rounded-t-xl': showFilters,
-    }"
-    @click="toggleFilters"
-  >
-    <h4 class="font-semibold text-left md:text-xl">
-      Filter
-    </h4>
-
-    <button
-      v-if="isFilterDirty"
-      class="ml-6 text-sm text-sushi-500 hover:text-sushi-600 font-semibold focus:outline-none"
-      @click="setDefaultFilter"
+  <div class="md:sticky top-20 flex-shrink-0 rounded-2xl">
+    <div
+      class="md:bg-white bg-none md:w-[288px] py-6 md:px-4 rounded-2xl md:h-[85svh] h-auto md:overflow-y-scroll z-10"
     >
-      Reset
-    </button>
-  </div>
+      <StateSearch
+        v-if="STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]"
+        ref="statePicker"
+        :options="
+          Object.keys(
+            STATES_BY_COUNTRY?.[country as keyof typeof STATES_BY_COUNTRY]
+          )
+        "
+        :init-value="(STATE_BY_STATE_CODE as any)[props.stateLicensed || '']"
+        class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
+        @select="props.onSelectState"
+      />
 
-  <div
-    v-show="showFilters"
-    class="flex flex-col bg-gray-50 md:bg-transparent px-5 py-4 md:py-0 md:px-0"
-  >
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
-      Top Pick
-    </h5>
-    <CheckboxSection
-      v-model="filterPayload.topPick"
-      class="col-span-full"
-      name="topPick"
-    >
-      Top Pick
-    </CheckboxSection>
+      <div
+        class="bg-white md:px-0 md:bg-transparent cursor-pointer md:cursor-auto flex items-center p-4"
+        :class="{
+          'rounded-2xl': !showFilters,
+          'rounded-t-xl': showFilters,
+        }"
+        @click="toggleFilters"
+      >
+        <h4 class="font-semibold text-left md:text-lg">Filter</h4>
 
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
-      Fossil Free Alliance
-    </h5>
-    <CheckboxSection
-      v-model="filterPayload.fossilFreeAlliance"
-      class="col-span-full"
-      name="fossilFreeAlliance"
-    >
-      Fossil Free Alliance
-    </CheckboxSection>
+        <button
+          v-if="isFilterDirty"
+          class="ml-6 text-sm text-sushi-500 hover:text-sushi-600 font-semibold focus:outline-none"
+          @click="setDefaultFilter"
+        >
+          Reset
+        </button>
+      </div>
 
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
-      Convenience
-    </h5>
-    <div class="flex flex-col space-y-1">
-      <CheckboxSection
-        v-model="filterPayload.convenience['Mobile banking']"
-        class="col-span-full"
-        name="Mobile banking"
+      <!-- Filter -->
+      <div
+        v-show="showFilters"
+        class="flex flex-col md:bg-transparent pb-6 md:px-0 bg-white px-4 rounded-b-2xl"
       >
-        Mobile banking
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.convenience['Free ATM network']"
-        class="col-span-full"
-        name="Free ATM network"
-      >
-        Free ATM network
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.convenience['No overdraft fee']"
-        class="col-span-full"
-        name="No overdraft fee"
-      >
-        No overdraft fee
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.convenience['No account maintenance fee']"
-        class="col-span-full"
-        name="No account maintenance fee"
-      >
-        No account maintenance fees
-      </CheckboxSection>
+        <div class="mb-2">
+          <CheckboxSection
+            v-model="allOpen"
+            class="col-span-full"
+            name="expand_all"
+          >
+            Expand all
+          </CheckboxSection>
+        </div>
+
+        <!-- Customers Served -->
+        <EcoBankAccordion
+          :key="sharedKey"
+          :is-open="AccordionState.customersServed"
+          title="Customer Served"
+          :checkbox-options="Object.keys(defaultState.customersServed)"
+          :model-ref="filterState"
+          @toggle="
+            AccordionState.customersServed = !AccordionState.customersServed
+          "
+          @check="
+            (key, value) =>
+              (filterState.customersServed[
+                key as keyof typeof filterState.customersServed
+              ] = value)
+          "
+        />
+
+        <!-- Deposit Products -->
+        <EcoBankAccordion
+          :key="sharedKey"
+          :is-open="AccordionState.depositProducts"
+          title="Deposit Products"
+          :checkbox-options="Object.keys(defaultState.depositProducts)"
+          :model-ref="filterState"
+          @toggle="
+            AccordionState.depositProducts = !AccordionState.depositProducts
+          "
+          @check="
+            (key, value) =>
+              (filterState.depositProducts[
+                key as keyof EcoBankFilters['depositProducts']
+              ] = value)
+          "
+        />
+
+        <!-- Loan Products -->
+        <EcoBankAccordion
+          :key="sharedKey"
+          :is-open="AccordionState.loanProducts"
+          title="Loan Products"
+          :checkbox-options="Object.keys(defaultState.loanProducts)"
+          :model-ref="filterState"
+          @toggle="AccordionState.loanProducts = !AccordionState.loanProducts"
+          @check="
+            (key, value) =>
+              (filterState.loanProducts[
+                key as keyof EcoBankFilters['loanProducts']
+              ] = value)
+          "
+        />
+
+        <!-- Services -->
+        <EcoBankAccordion
+          :key="sharedKey"
+          no-border
+          title="Services"
+          :is-open="AccordionState.services"
+          :checkbox-options="Object.keys(defaultState.services)"
+          :model-ref="filterState"
+          @toggle="AccordionState.services = !AccordionState.services"
+          @check="
+            (key, value) =>
+              (filterState.services[key as keyof EcoBankFilters['services']] =
+                value)
+          "
+        />
+      </div>
     </div>
-
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
-      Bank Accounts
-    </h5>
-    <div class="flex flex-col space-y-1">
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts.checking"
-        class="col-span-full"
-        name="checking"
-      >
-        {{ isBE() ? "Current accounts" : "Checking accounts" }}
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts.saving"
-        class="col-span-full"
-        name="saving"
-      >
-        Savings accounts
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Interest rates']"
-        class="col-span-full"
-        name="Interest rates"
-      >
-        Interest rates
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Business accounts']"
-        class="col-span-full"
-        name="Business accounts"
-      >
-        {{ isBE() ? "Business current accounts" : "Business checking accounts" }}
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Business savings accounts']"
-        class="col-span-full"
-        name="Business Savings Accounts"
-      >
-        Business savings accounts
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Small business lending']"
-        class="col-span-full"
-        name="Small business lending"
-      >
-        Small business lending
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Corporate lending']"
-        class="col-span-full"
-        name="Corporate Lending"
-      >
-        Corporate Lending
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Credit cards']"
-        class="col-span-full"
-        name="Credit cards"
-      >
-        Credit cards
-      </CheckboxSection>
-      <CheckboxSection
-        v-model="filterPayload.bankAccounts['Mortgages or Loans']"
-        class="col-span-full"
-        name="Mortgages or Loans"
-      >
-        Mortgage or loan options
-      </CheckboxSection>
-    </div>
-
-    <h5 class="text-xs uppercase font-semibold mt-6 mb-2">
-      Security
-    </h5>
-    <CheckboxSection
-      v-model="filterPayload.security['Deposit protection']"
-      class="col-span-full"
-      name="Deposit protection"
-    >
-      Deposit protection
-    </CheckboxSection>
   </div>
 </template>

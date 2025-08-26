@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { defineSliceZoneComponents } from '@prismicio/vue';
-import { components } from '~~/slices';
+import { defineSliceZoneComponents } from '@prismicio/vue'
+import { components } from '~~/slices'
 
-const route = useRoute();
-const bankTag = ref((route.params.bankTag as string).toLowerCase());
+const route = useRoute()
+const bankTag = ref((route.params.bankTag as string).toLowerCase())
 
-const { client } = usePrismic();
+const { client } = usePrismic()
 
 const { data: details } = await useAsyncGql(
   'BrandByTagQuery',
@@ -27,21 +27,21 @@ const { data: details } = await useAsyncGql(
           }
         : undefined,
   }
-);
+)
 
 const { data: harvestData } = await useAsyncGql(
   'HarvestDataQuery',
   { tag: bankTag.value },
   {
     transform: data => {
-      return data.harvestData;
+      return data.harvestData
     },
   }
-);
+)
 
 useHeadHelper(
   `${details?.value?.name} Review and Service Offering - Bank.Green`
-);
+)
 
 // -------------------------
 //    Prismic Page Data
@@ -50,24 +50,24 @@ const { data: prismicPageData } = await useAsyncData(
   `sfipage-${bankTag.value}`,
   () => client.getByUID('sfipage', bankTag.value),
   { transform: res => res?.data }
-);
+)
 const { data: prismicDefaultPageData } = await useAsyncData(
   'sfidefaults',
   () => client.getByID('ZFpGfhEAACEAuFIf'),
   { transform: res => res?.data }
-);
+)
 
 const prismicSlices = computed(() =>
   (prismicPageData?.value?.slices?.length ?? 0 > 0)
     ? prismicPageData.value?.slices
     : (prismicDefaultPageData as Record<string, any>).value?.slices
-);
+)
 
 // -------------------------
 //    Prismic Components
 // -------------------------
-const prismicComponents: Ref<Record<string, any> | null> = ref(null);
-prismicComponents.value = ref(defineSliceZoneComponents(components));
+const prismicComponents: Ref<Record<string, any> | null> = ref(null)
+prismicComponents.value = ref(defineSliceZoneComponents(components))
 </script>
 
 <template>

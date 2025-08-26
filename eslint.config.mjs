@@ -1,7 +1,7 @@
 // @ts-check
-import prettierPlugin from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
-import withNuxt from './.nuxt/eslint.config.mjs';
+import prettierPlugin from 'eslint-plugin-prettier'
+import prettierConfig from 'eslint-config-prettier'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
   {
@@ -26,4 +26,4 @@ export default withNuxt(
     },
   },
   prettierConfig // Extend eslint-config-prettier to disable conflicting rules
-);
+)
