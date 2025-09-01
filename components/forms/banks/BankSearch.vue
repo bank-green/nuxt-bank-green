@@ -3,7 +3,10 @@ import LoadingJumper from '../../LoadingJumper.vue'
 import SearchInput from '../input/SearchInput.vue'
 import ListPicker from '../ListPicker.vue'
 import BaseField from '../BaseField.vue'
-import type { StateCode } from '../location/iso3166-2States'
+import {
+  isValidStateCountry,
+  type StateCode,
+} from '../location/iso3166-2States'
 import BankSearchItem from './BankSearchItem.vue'
 import { findBanks } from './banks'
 
@@ -51,16 +54,15 @@ const filteredBanks = computed(() => findBanks(banks.value, search.value))
 
 onMounted(loadBanks)
 
-watch(
-  () => props.country,
-  async function () {
-    await loadBanks()
-    await nextTick()
-    if (input.value?.focus && +new Date() - +pageStart > 15000) {
-      input.value.focus()
-    }
+watch([() => props.country, () => props.state], async function () {
+  if (isValidStateCountry(props.country) && !props.state) return
+
+  await loadBanks()
+  await nextTick()
+  if (input.value?.focus && +new Date() - +pageStart > 15000) {
+    input.value.focus()
   }
-)
+})
 
 watch(
   () => search,

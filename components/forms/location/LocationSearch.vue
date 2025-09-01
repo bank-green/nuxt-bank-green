@@ -18,7 +18,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const isShowing = ref(false)
-// const country = useCountry()
 const search = ref('')
 if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
   search.value = en[`COUNTRY_${props.modelValue}`]
