@@ -22,6 +22,7 @@ const search = ref('')
 if (props.modelValue && en[`COUNTRY_${props.modelValue}`]) {
   search.value = en[`COUNTRY_${props.modelValue}`]
 }
+const searchInput = ref()
 
 const filteredCountries = computed(() => findCountries(search.value))
 
@@ -48,6 +49,19 @@ function onCloseClick() {
   search.value = ''
   emit('update:modelValue', '')
 }
+
+async function focus() {
+  // nextTick & requestAnimationFrame needed
+  // otherwise it will focus before list can render
+  await nextTick()
+  requestAnimationFrame(() => {
+    searchInput.value.focus()
+  })
+}
+
+defineExpose({
+  focus,
+})
 </script>
 
 <template>
@@ -60,6 +74,7 @@ function onCloseClick() {
     :show-warning="warning"
   >
     <SearchInput
+      ref="searchInput"
       v-model="search"
       :aria-expanded="isShowing"
       :use-pencil="true"

@@ -32,14 +32,28 @@ const props = withDefaults(
   }
 )
 
+const pageStart = new Date()
 const { country } = useCountry()
 const state = ref<StateCode>()
 const bank = ref(props.modelValue)
 const warningText = ref(props.warning)
+const loading = ref<boolean>(false)
+const banks = ref<
+  {
+    name: string
+    tag: string
+    website?: string | null
+    aliases?: string | null
+  }[]
+>([])
+
+const statePicker = ref<InstanceType<typeof StateSearch> | null>(null)
+const bankSearch = ref<InstanceType<typeof BankSearch> | null>(null)
+const locationSearch = ref<InstanceType<typeof LocationSearch> | null>(null)
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
 
-const onUpdateModel = (ev: HTMLInputElement) => {
+const onBankSelect = (ev: HTMLInputElement) => {
   emit('update:modelValue', ev)
 }
 
@@ -74,11 +88,61 @@ watch(bank, newVal => {
 
   bank.value = newVal
 })
+
+const fetchGql = useGql()
+
+watch(
+  [() => country.value, () => state.value],
+  async function ([newCountry, newState]) {
+    await loadBanks()
+
+    // handle focus
+    if (!(+new Date() - +pageStart > 15000)) return
+    if (!newCountry) {
+      locationSearch?.value?.focus()
+      return
+    }
+    const isExpectingState = isValidStateCountry(newCountry)
+    if (!isExpectingState) {
+      bankSearch?.value?.focus()
+      return
+    }
+    if (newState) bankSearch?.value?.focus()
+    if (!newState) statePicker.value?.focus()
+  }
+)
+
+onMounted(loadBanks)
+
+async function loadBanks() {
+  if (!country.value) return
+
+  const isExpectingState = isValidStateCountry(country.value)
+  if (isExpectingState && !state.value) {
+    banks.value = []
+    return
+  }
+
+  loading.value = true
+
+  banks.value = props.isEmbrace
+    ? (await fetchGql('EmbraceBrandQuery', undefined).then(data =>
+        data.brandsFilteredByEmbraceCampaign?.filter(isTruthy)
+      )) || []
+    : (await fetchGql('BrandsByCountryQuery', {
+        country: country.value,
+        state: state.value,
+      }).then(data => data.brands?.edges.map(o => o?.node).filter(isTruthy))) ||
+      []
+
+  loading.value = false
+}
 </script>
 
 <template>
   <LocationSearch
     v-if="!isEmbrace && !hideLocation"
+    ref="locationSearch"
     v-model="country"
     :dark="dark"
     class="col-span-2"
@@ -103,7 +167,8 @@ watch(bank, newVal => {
     ref="bankSearch"
     v-model="bank"
     class="col-span-2"
-    :disabled="!country"
+    :loading="loading"
+    :disabled="!country || (isValidStateCountry(country) && !state)"
     :title="bankTitle"
     :dark="dark"
     :state="state"
@@ -112,8 +177,9 @@ watch(bank, newVal => {
     :class="bankSearchClasses"
     :info-tooltip="infoTooltipBank"
     :is-embrace="isEmbrace"
+    :options="banks"
     @search-input-change="onSearchInputChange"
-    @update:model-value="onUpdateModel"
+    @update:model-value="onBankSelect"
   >
     <slot name="bank-not-listed" />
   </BankSearch>

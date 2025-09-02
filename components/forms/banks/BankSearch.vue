@@ -21,6 +21,13 @@ const props = withDefaults(
     dark?: boolean
     title?: string
     isEmbrace?: boolean
+    loading: boolean
+    options: {
+      name: string
+      tag: string
+      website?: string | null
+      aliases?: string | null
+    }[]
   }>(),
   {
     disabled: false,
@@ -34,33 +41,23 @@ const props = withDefaults(
 
 const emit = defineEmits(['update:modelValue', 'searchInputChange'])
 
-const pageStart = new Date()
 const search = ref<string>('')
 const isShowing = ref<boolean>(false)
-const loaded = ref<boolean>(false)
 const selectedItem = ref<string | null>(null)
 const input = ref<HTMLInputElement | null>(null)
-const banks = ref<
-  {
-    name: string
-    tag: string
-    website?: string | null
-    aliases?: string | null
-  }[]
->([])
 
-const fetchGql = useGql()
-const filteredBanks = computed(() => findBanks(banks.value, search.value))
-
-onMounted(loadBanks)
-
-watch([() => props.country, () => props.state], async function () {
-  await loadBanks()
-  await nextTick()
-  if (input.value?.focus && +new Date() - +pageStart > 15000) {
-    input.value.focus()
-  }
+const placeholder = computed<string>(() => {
+  const isExpectingState = isValidStateCountry(props.country)
+  if (props.loading) return 'Loading banks...'
+  if (!props.country) return 'Set a country first'
+  if (isExpectingState && !props.state) return 'Set a state/region first'
+  const noBanksFound = !props?.options.length
+  if (noBanksFound)
+    return `No bank data found for this ${isExpectingState && props.state ? 'state/region' : 'country'}`
+  return 'Search bank...'
 })
+
+const filteredBanks = computed(() => findBanks(props.options, search.value))
 
 watch(
   () => search,
@@ -80,35 +77,6 @@ function hideList() {
   isShowing.value = false
 }
 
-async function loadBanks() {
-  // @TODO - move up  to banklocation search
-  if (props.disabled) return
-  const stateEnabled = !props.isEmbrace && isValidStateCountry(props.country)
-  let data = []
-  loaded.value = false
-  if (props.isEmbrace) {
-    data =
-      (await fetchGql('EmbraceBrandQuery', undefined).then(data =>
-        data.brandsFilteredByEmbraceCampaign?.filter(isTruthy)
-      )) || []
-  } else {
-    if ((stateEnabled && props.state) || !stateEnabled) {
-      data =
-        (await fetchGql('BrandsByCountryQuery', {
-          country: props.country,
-          state: props.state,
-        }).then(data =>
-          data.brands?.edges.map(o => o?.node).filter(isTruthy)
-        )) || []
-    } else {
-      data = []
-    }
-  }
-
-  banks.value = data
-  loaded.value = true
-}
-
 async function onSelectBank(item: { name: string; tag: string }) {
   emit('update:modelValue', null)
   await nextTick()
@@ -122,6 +90,14 @@ function onCloseClick() {
   search.value = ''
   emit('update:modelValue', null)
 }
+
+async function focus() {
+  input?.value?.focus()
+}
+
+defineExpose({
+  focus,
+})
 </script>
 
 <template>
@@ -140,16 +116,7 @@ function onCloseClick() {
         v-model="search"
         :disabled="disabled"
         :aria-expanded="isShowing"
-        :placeholder="
-          // @TODO - add message for selecting state
-          disabled
-            ? 'Set a country first'
-            : !loaded
-              ? 'Loading banks...'
-              : !banks.length
-                ? 'No banks available in this country' + '.'
-                : 'Search bank...'
-        "
+        :placeholder="placeholder"
         :warning="warning"
         :dark="dark"
         @keydown.down="
@@ -170,7 +137,7 @@ function onCloseClick() {
       >
         <template #icon>
           <LoadingJumper
-            v-if="!loaded && !disabled"
+            v-if="loading && !disabled"
             class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
           />
           <img
