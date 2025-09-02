@@ -155,11 +155,11 @@ async function loadBanks() {
     name="stateSearch"
     :dark="dark"
     title="State"
+    :class="locationSearchClasses"
   >
     <StateSearch
       ref="statePicker"
       :options="Object.keys(STATES_BY_COUNTRY?.[country])"
-      :class="locationSearchClasses"
       @select="onStateSelect"
     />
   </BaseField>
