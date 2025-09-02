@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import {
   STATES_BY_COUNTRY,
-  STATE_BY_STATE_CODE,
   isValidStateCountry,
   type StateCode,
-  // type StateCode,
 } from '../forms/location/iso3166-2States'
 import BaseField from './BaseField.vue'
 import BankSearch from './banks/BankSearch.vue'
@@ -50,8 +48,11 @@ const onSearchInputChange = () => {
 }
 
 const onStateSelect = (e: { value: string } | null): void => {
-  if (!isValidStateCountry(country.value) || !e || !e.value) return
-  console.log(e.value)
+  if (!isValidStateCountry(country.value) || !e || !e.value) {
+    state.value = undefined
+    return
+  }
+  state.value = STATES_BY_COUNTRY[country.value][e.value]
 }
 
 watch(

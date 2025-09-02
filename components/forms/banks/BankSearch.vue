@@ -55,8 +55,6 @@ const filteredBanks = computed(() => findBanks(banks.value, search.value))
 onMounted(loadBanks)
 
 watch([() => props.country, () => props.state], async function () {
-  if (isValidStateCountry(props.country) && !props.state) return
-
   await loadBanks()
   await nextTick()
   if (input.value?.focus && +new Date() - +pageStart > 15000) {
@@ -83,19 +81,30 @@ function hideList() {
 }
 
 async function loadBanks() {
-  if (props.disabled) {
-    return
-  }
+  // @TODO - move up  to banklocation search
+  if (props.disabled) return
+  const stateEnabled = !props.isEmbrace && isValidStateCountry(props.country)
+  let data = []
   loaded.value = false
-  const data = props.isEmbrace
-    ? (await fetchGql('EmbraceBrandQuery', undefined).then(data =>
+  if (props.isEmbrace) {
+    data =
+      (await fetchGql('EmbraceBrandQuery', undefined).then(data =>
         data.brandsFilteredByEmbraceCampaign?.filter(isTruthy)
       )) || []
-    : (await fetchGql('BrandsByCountryQuery', {
-        country: props.country,
-        state: props.state,
-      }).then(data => data.brands?.edges.map(o => o?.node).filter(isTruthy))) ||
-      []
+  } else {
+    if ((stateEnabled && props.state) || !stateEnabled) {
+      data =
+        (await fetchGql('BrandsByCountryQuery', {
+          country: props.country,
+          state: props.state,
+        }).then(data =>
+          data.brands?.edges.map(o => o?.node).filter(isTruthy)
+        )) || []
+    } else {
+      data = []
+    }
+  }
+
   banks.value = data
   loaded.value = true
 }
@@ -132,6 +141,7 @@ function onCloseClick() {
         :disabled="disabled"
         :aria-expanded="isShowing"
         :placeholder="
+          // @TODO - add message for selecting state
           disabled
             ? 'Set a country first'
             : !loaded
