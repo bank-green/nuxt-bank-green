@@ -44,8 +44,6 @@ function onExitIntent() {
   if (hasUserSeenExitIntentModal.value) return;
   if (openSwitchSurveyModal.value) return;
   if (route.path.includes('/impact')) return;
-  openSwitchSurveyModal.value = true;
-  hasUserSeenExitIntentModal.value = true;
 
   if (exitTimer !== null) {
     clearTimeout(exitTimer);
