@@ -186,4 +186,8 @@ const onSelectState = (payload: { value: string } | null): void => {
       STATES_BY_COUNTRY?.[country.value]?.[payload?.value] || null
     : null
 }
+
+watch(country, () => {
+  stateLicensed.value = null
+})
 </script>

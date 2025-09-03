@@ -16,25 +16,17 @@ const labelClasses = computed(() => {
   if (props.dark) {
     return 'text-arctic-blue text-opacity-75 font-medium'
   }
-  return 'text-gray-600 font-semibold'
+  return 'text-gray-800'
 })
 </script>
 
 <template>
   <div class="relative">
-    <div
-      v-if="title"
-      class="flex items-center gap-2 mb-2"
-    >
-      <label
-        :for="name"
-        class="block text-sm leading-5"
-        :class="labelClasses"
-      >{{ title }}</label>
-      <div
-        v-if="infoTooltip"
-        class="relative overflow-visible"
-      >
+    <div v-if="title" class="flex items-center gap-2 mb-2">
+      <label :for="name" class="block text-sm leading-5" :class="labelClasses">
+        {{ title }}
+      </label>
+      <div v-if="infoTooltip" class="relative overflow-visible">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -106,10 +98,7 @@ const labelClasses = computed(() => {
         </span>
       </div>
     </div>
-    <div
-      v-if="description"
-      class="mt-2 text-xs text-gray-600"
-    >
+    <div v-if="description" class="mt-2 text-xs text-gray-600">
       {{ description }}
     </div>
     <div

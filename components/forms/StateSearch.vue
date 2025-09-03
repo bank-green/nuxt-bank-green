@@ -27,6 +27,7 @@ const search = ref(props.initValue || '')
 const isShowing = ref(false)
 const isLoading = ref(false)
 const options = ref<string[]>(props.options)
+const searchInput = ref<InstanceType<typeof SearchInput> | null>(null)
 
 const filteredOptions = computed(() => {
   const fuse = new Fuse(options.value, {
@@ -59,11 +60,25 @@ function onCloseClick() {
   search.value = ''
   emit('select', null)
 }
+
+async function focus() {
+  // nextTick & requestAnimationFrame needed
+  // otherwise it will focus before list can render
+  await nextTick()
+  requestAnimationFrame(() => {
+    searchInput?.value?.focus()
+  })
+}
+
+defineExpose({
+  focus,
+})
 </script>
 
 <template>
   <div v-clickaway="hideList" class="relative">
     <SearchInput
+      ref="searchInput"
       v-model="search"
       :aria-expanded="isShowing"
       placeholder="Search region/state"
