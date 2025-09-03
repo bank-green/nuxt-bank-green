@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { defineProps, computed } from 'vue'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 
 // Import the layout components
@@ -56,7 +56,10 @@ const layoutType = computed(() => {
         class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8"
       >
         <div class="flex flex-col items-center justify-start w-full">
-          <BankCircle class="max-w-sm" :rating="rating" />
+          <BankCircle
+            class="max-w-sm"
+            :rating="rating"
+          />
           <SocialSharer
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
@@ -79,26 +82,28 @@ const layoutType = computed(() => {
             class="w-32"
             src="/img/certification/fossil-free-certified.png"
             alt="Fossil Free Certification"
-          />
+          >
         </div>
         <div
           class="font-semibold text-gray-800 text-2xl md:text-4xl tracking-wider mb-2 md:mb-6"
           v-html="headline"
         />
-        <BankDescription :text="description1" />
+        <BankDescription
+          :text="description1"
+        />
       </div>
     </template>
 
     <template #section2>
       <div class="text-gray-800 overflow-hidden py-16">
         <div class="contain">
-          <div
-            class="flex flex-col md:flex-row md:justify-between md:items-start pt-8 pb-16 w-full"
-          >
+          <div class="flex flex-col md:flex-row md:justify-between md:items-start pt-8 pb-16 w-full">
             <!-- Text Container -->
             <div :class="layoutType === BankLayoutGood ? 'md:w-3/6' : 'w-full'">
               <BankDescription :text="description2" />
-              <BankDescription :text="description3" />
+              <BankDescription
+                :text="description3"
+              />
 
               <div class="flex justify-center mt-6">
                 <ArrowDownBounce class="inline-block w-10" />
@@ -111,20 +116,26 @@ const layoutType = computed(() => {
               class="md:order-first md:w-2/6 md:ml-4"
               src="/img/illustrations/dig.svg"
               alt=""
-            />
+            >
           </div>
         </div>
       </div>
     </template>
 
-    <template v-if="description4" #section3>
+    <template
+      v-if="description4"
+      #section3
+    >
       <div
         class="text-blue-900 leading-loose text-lg prose sm:prose-md xl:prose-l break-words text-center"
         v-html="description4"
       />
     </template>
 
-    <template v-if="layoutType === BankLayoutGood" #footer-image>
+    <template
+      v-if="layoutType === BankLayoutGood"
+      #footer-image
+    >
       <div class="flex items-end justify-end pointer-events-none">
         <div class="w-11/12">
           <LottiePlayer path="/anim/wind_2_without_bg.json" />
