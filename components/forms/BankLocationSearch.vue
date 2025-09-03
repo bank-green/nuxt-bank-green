@@ -93,11 +93,14 @@ const fetchGql = useGql()
 
 watch(
   [() => country.value, () => state.value],
-  async function ([newCountry, newState]) {
+  async function ([newCountry, newState], [oldCountry]) {
+    // reset state if country changes
+    if (oldCountry !== newCountry) state.value = undefined
+
     await loadBanks()
 
     // handle focus
-    if (!(+new Date() - +pageStart > 15000)) return
+    if (!(+new Date() - +pageStart > 5_000)) return
     if (!newCountry) {
       locationSearch?.value?.focus()
       return

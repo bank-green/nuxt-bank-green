@@ -47,13 +47,17 @@ const selectedItem = ref<string | null>(null)
 const input = ref<HTMLInputElement | null>(null)
 
 const placeholder = computed<string>(() => {
-  const isExpectingState = isValidStateCountry(props.country)
   if (props.loading) return 'Loading banks...'
   if (!props.country) return 'Set a country first'
+
+  const isExpectingState = isValidStateCountry(props.country)
+
   if (isExpectingState && !props.state) return 'Set a state/region first'
+
   const noBanksFound = !props?.options.length
   if (noBanksFound)
     return `No bank data found for this ${isExpectingState && props.state ? 'state/region' : 'country'}`
+
   return 'Search bank...'
 })
 
