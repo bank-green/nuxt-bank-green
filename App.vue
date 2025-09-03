@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$route"
-    class="min-h-screen flex flex-col"
+    class="min-h-screen flex flex-col app"
     @mouseleave="onExitIntent"
   >
     <!-- Google Tag Manager (noscript) -->
@@ -22,48 +22,48 @@
   </div>
   <SwitchSurveyExit
     v-model="openSwitchSurveyModal"
+    class="survey-modal"
     tag="popup"
+    data-test="modal"
     @success="openSwitchSurveyModal = false"
   />
   <NotificationPanel />
 </template>
 
 <script setup>
-const openSwitchSurveyModal = ref(false)
+const openSwitchSurveyModal = ref(false);
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false,
-})
-const EXIT_MODAL_DELAY = 1000
-let exitTimer = null
+});
+const EXIT_MODAL_DELAY = 30000;
+let exitTimer = null;
 
-const route = useRoute()
+const route = useRoute();
 
 function onExitIntent() {
-  if (hasUserSeenExitIntentModal.value) return
-  if (openSwitchSurveyModal.value) return
-  if (route.path.includes('/impact')) return
-  openSwitchSurveyModal.value = true
-  hasUserSeenExitIntentModal.value = true
+  if (hasUserSeenExitIntentModal.value) return;
+  if (openSwitchSurveyModal.value) return;
+  if (route.path.includes('/impact')) return;
+  openSwitchSurveyModal.value = true;
+  hasUserSeenExitIntentModal.value = true;
 
   if (exitTimer !== null) {
-    clearTimeout(exitTimer)
+    clearTimeout(exitTimer);
   }
 
   exitTimer = window.setTimeout(() => {
-    openSwitchSurveyModal.value = true
-    hasUserSeenExitIntentModal.value = true
-    exitTimer = null
-  }, EXIT_MODAL_DELAY)
+    openSwitchSurveyModal.value = true;
+    hasUserSeenExitIntentModal.value = true;
+    exitTimer = null;
+  }, EXIT_MODAL_DELAY);
 }
 
 onBeforeUnmount(() => {
-  console.log('BEFORE mount')
-
   if (exitTimer !== null) {
-    clearTimeout(exitTimer)
-    exitTimer = null
+    clearTimeout(exitTimer);
+    exitTimer = null;
   }
-})
+});
 
 // <!-- Google Tag Manager -->
 useHead({
@@ -81,7 +81,7 @@ useHead({
   __dangerouslyDisableSanitizersByTagID: {
     'gtm-script': ['innerHTML'],
   },
-})
+});
 </script>
 
 <style>
