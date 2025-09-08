@@ -73,10 +73,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import LocationSearch from '@/components/forms/location/LocationSearch.vue'
-import { components } from '~~/slices'
-import type { EcoBanksQueryPayload } from '@/utils/types/eco-banks.type.ts'
+import { defineSliceZoneComponents } from '@prismicio/vue';
+import LocationSearch from '@/components/forms/location/LocationSearch.vue';
+import { components } from '~~/slices';
+import type { EcoBanksQueryPayload } from '@/utils/types/eco-banks.type.ts';
 import {
   sortEcoBanks,
   extractFeatures,
@@ -85,35 +85,35 @@ import {
   extractInterestRate,
   extractDepositProtection,
   type HarvestDataDepositProtection,
-} from '~/utils/sustainableEcoBanksUtils'
+} from '~/utils/sustainableEcoBanksUtils';
 import {
   STATES_BY_COUNTRY,
   type StateCode,
-} from '~/components/forms/location/iso3166-2States'
+} from '~/components/forms/location/iso3166-2States';
 
-const fetchGql = useGql()
+const fetchGql = useGql();
 
-const sliceComps = ref(defineSliceZoneComponents(components))
+const sliceComps = ref(defineSliceZoneComponents(components));
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 
 const { data: ecobanks } = await useAsyncData('ecobanks', () =>
   client.getSingle('ecobankspage', {
     fetchLinks: ['accordionitem.title', 'accordionitem.slices'],
   })
-)
+);
 
-usePrismicSEO(ecobanks?.value?.data)
+usePrismicSEO(ecobanks?.value?.data);
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
 // if country or state are provided by url query, it will be used initially
 // example: /sustainable-eco-banks?country=us&state=us-ca
 const initCountry =
   (typeof route.query.country == 'string' &&
     (route.query?.country?.toUpperCase() as string)) ||
-  useCountry().country.value
+  useCountry().country.value;
 
 const initState =
   typeof route.query?.state == 'string' &&
@@ -121,26 +121,26 @@ const initState =
   Object.values(STATES_BY_COUNTRY?.[initCountry]).includes(
     route.query?.state?.toUpperCase()
   ) &&
-  (route.query?.state?.toUpperCase() as StateCode)
+  (route.query?.state?.toUpperCase() as StateCode);
 
-const country = ref(initCountry)
-const stateLicensed = ref<StateCode | null>(initState || null)
+const country = ref(initCountry);
+const stateLicensed = ref<StateCode | null>(initState || null);
 
-router.replace({ query: {} })
-const banks = ref<EcoBankCard[]>([])
-const loading = ref(false)
-const errorMessage = ref(false)
+router.replace({ query: {} });
+const banks = ref<EcoBankCard[]>([]);
+const loading = ref(false);
+const errorMessage = ref(false);
 
 const loadBanks = async ({
   harvestData,
   stateLicensed,
 }: EcoBanksQueryPayload) => {
-  loading.value = true
+  loading.value = true;
 
   if (!country.value) {
-    return
+    return;
   }
-  const isNoCredit = country.value === 'FR' || country.value === 'DE'
+  const isNoCredit = country.value === 'FR' || country.value === 'DE';
 
   banks.value =
     (await fetchGql('FilteredBrandsQuery', {
@@ -171,23 +171,23 @@ const loadBanks = async ({
               ?.deposit_protection as HarvestDataDepositProtection
           ),
         }))
-    )) || []
+    )) || [];
 
-  loading.value = false
-  if (banks.value.length === 0) errorMessage.value = true
-}
+  loading.value = false;
+  if (banks.value.length === 0) errorMessage.value = true;
+};
 
 const applyFilter = (filterQueryData: EcoBanksQueryPayload) => {
-  loadBanks(filterQueryData)
-}
+  loadBanks(filterQueryData);
+};
 const onSelectState = (payload: { value: string } | null): void => {
   stateLicensed.value = payload?.value
     ? // @ts-expect-error: ts(7052) 'string' can't be used to index an object
       STATES_BY_COUNTRY?.[country.value]?.[payload?.value] || null
-    : null
-}
+    : null;
+};
 
 watch(country, () => {
-  stateLicensed.value = null
-})
+  stateLicensed.value = null;
+});
 </script>

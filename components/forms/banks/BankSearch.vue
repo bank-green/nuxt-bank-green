@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import LoadingJumper from '../../LoadingJumper.vue'
-import SearchInput from '../input/SearchInput.vue'
-import ListPicker from '../ListPicker.vue'
-import BaseField from '../BaseField.vue'
+import LoadingJumper from '../../LoadingJumper.vue';
+import SearchInput from '../input/SearchInput.vue';
+import ListPicker from '../ListPicker.vue';
+import BaseField from '../BaseField.vue';
 import {
   isValidStateCountry,
   type StateCode,
-} from '../location/iso3166-2States'
-import BankSearchItem from './BankSearchItem.vue'
-import { findBanks } from './banks'
+} from '../location/iso3166-2States';
+import BankSearchItem from './BankSearchItem.vue';
+import { findBanks } from './banks';
 
 const props = withDefaults(
   defineProps<{
-    disabled?: boolean
-    country: string
-    state?: StateCode
-    modelValue: object | null
-    warning?: string | boolean
-    infoTooltip?: string
-    dark?: boolean
-    title?: string
-    isEmbrace?: boolean
-    loading: boolean
+    disabled?: boolean;
+    country: string;
+    state?: StateCode;
+    modelValue: object | null;
+    warning?: string | boolean;
+    infoTooltip?: string;
+    dark?: boolean;
+    title?: string;
+    isEmbrace?: boolean;
+    loading: boolean;
     options: {
-      name: string
-      tag: string
-      website?: string | null
-      aliases?: string | null
-    }[]
+      name: string;
+      tag: string;
+      website?: string | null;
+      aliases?: string | null;
+    }[];
   }>(),
   {
     disabled: false,
@@ -37,71 +37,71 @@ const props = withDefaults(
     title: '',
     isEmbrace: false,
   }
-)
+);
 
-const emit = defineEmits(['update:modelValue', 'searchInputChange'])
+const emit = defineEmits(['update:modelValue', 'searchInputChange']);
 
-const search = ref<string>('')
-const isShowing = ref<boolean>(false)
-const selectedItem = ref<string | null>(null)
-const input = ref<HTMLInputElement | null>(null)
+const search = ref<string>('');
+const isShowing = ref<boolean>(false);
+const selectedItem = ref<string | null>(null);
+const input = ref<HTMLInputElement | null>(null);
 
 const placeholder = computed<string>(() => {
-  if (props.loading) return 'Loading banks...'
-  if (!props.country) return 'Set a country first'
+  if (props.loading) return 'Loading banks...';
+  if (!props.country) return 'Set a country first';
 
-  const isExpectingState = isValidStateCountry(props.country)
+  const isExpectingState = isValidStateCountry(props.country);
 
-  if (isExpectingState && !props.state) return 'Set a state/region first'
+  if (isExpectingState && !props.state) return 'Set a state/region first';
 
-  const noBanksFound = !props?.options.length
+  const noBanksFound = !props?.options.length;
   if (noBanksFound)
-    return `No bank data found for this ${isExpectingState && props.state ? 'state/region' : 'country'}`
+    return `No bank data found for this ${isExpectingState && props.state ? 'state/region' : 'country'}`;
 
-  return 'Search bank...'
-})
+  return 'Search bank...';
+});
 
-const filteredBanks = computed(() => findBanks(props.options, search.value))
+const filteredBanks = computed(() => findBanks(props.options, search.value));
 
 watch(
   () => search,
   function (newValue) {
     if (props.modelValue && newValue.value !== selectedItem.value) {
-      emit('update:modelValue', null)
+      emit('update:modelValue', null);
     }
-    emit('searchInputChange', newValue)
+    emit('searchInputChange', newValue);
   }
-)
+);
 
 function showList() {
-  isShowing.value = true
+  isShowing.value = true;
 }
 
 function hideList() {
-  isShowing.value = false
+  isShowing.value = false;
 }
 
 async function onSelectBank(item: { name: string; tag: string }) {
-  emit('update:modelValue', null)
-  await nextTick()
-  search.value = item.name
-  selectedItem.value = item.name
-  emit('update:modelValue', item)
-  isShowing.value = false
+  emit('update:modelValue', null);
+  await nextTick();
+  search.value = item.name;
+  selectedItem.value = item.name;
+  emit('update:modelValue', item);
+  isShowing.value = false;
 }
 
 function onCloseClick() {
-  search.value = ''
-  emit('update:modelValue', null)
+  search.value = '';
+  emit('update:modelValue', null);
 }
 
 async function focus() {
-  input?.value?.focus()
+  input?.value?.focus();
 }
 
 defineExpose({
   focus,
-})
+});
 </script>
 
 <template>

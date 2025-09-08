@@ -1,6 +1,6 @@
-const STATE_COUNTIRES = ['US', 'AU', 'CA'] as const
+const STATE_COUNTIRES = ['US', 'AU', 'CA'] as const;
 
-export type StateCountryCode = (typeof STATE_COUNTIRES)[number]
+export type StateCountryCode = (typeof STATE_COUNTIRES)[number];
 
 export const STATE_BY_STATE_CODE = {
   'US-AL': 'Alabama',
@@ -81,9 +81,9 @@ export const STATE_BY_STATE_CODE = {
   'AU-TAS': 'Tasmania',
   'AU-VIC': 'Victoria',
   'AU-WA': 'Western Australia',
-} as const
+} as const;
 
-export type StateCode = keyof typeof STATE_BY_STATE_CODE
+export type StateCode = keyof typeof STATE_BY_STATE_CODE;
 
 export const STATES_BY_COUNTRY: Record<
   StateCountryCode,
@@ -173,10 +173,10 @@ export const STATES_BY_COUNTRY: Record<
     Victoria: 'AU-VIC',
     'Western Australia': 'AU-WA',
   },
-} as const
+} as const;
 
 export const isValidStateCountry = (
   country: unknown
 ): country is StateCountryCode =>
   typeof country === 'string' &&
-  STATE_COUNTIRES.includes(country as StateCountryCode)
+  STATE_COUNTIRES.includes(country as StateCountryCode);

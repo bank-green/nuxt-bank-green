@@ -1,78 +1,78 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref } from 'vue';
 
-import Fuse from 'fuse.js'
-import PinIcon from './location/PinIcon.vue'
-import SearchInput from '@/components/forms/input/SearchInput.vue'
-import ListPicker from '@/components/forms/ListPicker.vue'
+import Fuse from 'fuse.js';
+import PinIcon from './location/PinIcon.vue';
+import SearchInput from '@/components/forms/input/SearchInput.vue';
+import ListPicker from '@/components/forms/ListPicker.vue';
 
 const props = defineProps<{
-  options: string[]
-  initValue?: string
-}>()
+  options: string[];
+  initValue?: string;
+}>();
 
 const emit = defineEmits<{
-  (event: 'select', payload: { value: string } | null): void
-}>()
-const listPicker = ref()
+  (event: 'select', payload: { value: string } | null): void;
+}>();
+const listPicker = ref();
 const onKeyDown = (event: Event) => {
-  listPicker.value.incrementFocus(event)
-}
+  listPicker.value.incrementFocus(event);
+};
 const onKeyUp = (event: Event) => {
-  listPicker.value.decrementFocus(event)
-}
-const onKeyEnter = () => listPicker.value.selectCurrentItem()
+  listPicker.value.decrementFocus(event);
+};
+const onKeyEnter = () => listPicker.value.selectCurrentItem();
 
-const search = ref(props.initValue || '')
-const isShowing = ref(false)
-const isLoading = ref(false)
-const options = ref<string[]>(props.options)
-const searchInput = ref<InstanceType<typeof SearchInput> | null>(null)
+const search = ref(props.initValue || '');
+const isShowing = ref(false);
+const isLoading = ref(false);
+const options = ref<string[]>(props.options);
+const searchInput = ref<InstanceType<typeof SearchInput> | null>(null);
 
 const filteredOptions = computed(() => {
   const fuse = new Fuse(options.value, {
     includeScore: true,
     keys: ['toponymName'],
-  })
+  });
 
   if (!search.value.trim()) {
-    return options.value
+    return options.value;
   }
-  const result = fuse.search(search.value)
-  return result.filter(x => x.score && x.score < 0.3).map(x => x.item)
-})
+  const result = fuse.search(search.value);
+  return result.filter(x => x.score && x.score < 0.3).map(x => x.item);
+});
 
 function showList() {
-  isShowing.value = true
+  isShowing.value = true;
 }
 function hideList() {
-  isShowing.value = false
+  isShowing.value = false;
 }
 
 async function onSelectLocation(item: string) {
-  search.value = item
+  search.value = item;
   emit('select', {
     value: item,
-  })
-  isShowing.value = false
+  });
+  isShowing.value = false;
 }
 function onCloseClick() {
-  search.value = ''
-  emit('select', null)
+  search.value = '';
+  emit('select', null);
 }
 
 async function focus() {
   // nextTick & requestAnimationFrame needed
   // otherwise it will focus before list can render
-  await nextTick()
+  await nextTick();
   requestAnimationFrame(() => {
-    searchInput?.value?.focus()
-  })
+    searchInput?.value?.focus();
+  });
 }
 
 defineExpose({
   focus,
-})
+});
 </script>
 
 <template>

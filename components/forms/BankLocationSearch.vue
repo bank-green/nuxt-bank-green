@@ -3,24 +3,24 @@ import {
   STATES_BY_COUNTRY,
   isValidStateCountry,
   type StateCode,
-} from '../forms/location/iso3166-2States'
-import BaseField from './BaseField.vue'
-import BankSearch from './banks/BankSearch.vue'
-import LocationSearch from './location/LocationSearch.vue'
-import StateSearch from '~/components/forms/StateSearch.vue'
+} from '../forms/location/iso3166-2States';
+import BaseField from './BaseField.vue';
+import BankSearch from './banks/BankSearch.vue';
+import LocationSearch from './location/LocationSearch.vue';
+import StateSearch from '~/components/forms/StateSearch.vue';
 
 const props = withDefaults(
   defineProps<{
-    bankTitle?: string
-    locationTitle?: string
-    modelValue: object | null
-    warning?: string | boolean
-    infoTooltipBank?: string
-    bankSearchClasses?: string
-    locationSearchClasses?: string
-    dark?: boolean
-    isEmbrace?: boolean
-    hideLocation?: boolean
+    bankTitle?: string;
+    locationTitle?: string;
+    modelValue: object | null;
+    warning?: string | boolean;
+    infoTooltipBank?: string;
+    bankSearchClasses?: string;
+    locationSearchClasses?: string;
+    dark?: boolean;
+    isEmbrace?: boolean;
+    hideLocation?: boolean;
   }>(),
   {
     warning: false,
@@ -30,103 +30,103 @@ const props = withDefaults(
     isEmbrace: false,
     hideLocation: false,
   }
-)
+);
 
-const pageStart = new Date()
-const { country } = useCountry()
-const state = ref<StateCode>()
-const bank = ref(props.modelValue)
-const warningText = ref(props.warning)
-const loading = ref<boolean>(false)
+const pageStart = new Date();
+const { country } = useCountry();
+const state = ref<StateCode>();
+const bank = ref(props.modelValue);
+const warningText = ref(props.warning);
+const loading = ref<boolean>(false);
 const banks = ref<
   {
-    name: string
-    tag: string
-    website?: string | null
-    aliases?: string | null
+    name: string;
+    tag: string;
+    website?: string | null;
+    aliases?: string | null;
   }[]
->([])
+>([]);
 
-const statePicker = ref<InstanceType<typeof StateSearch> | null>(null)
-const bankSearch = ref<InstanceType<typeof BankSearch> | null>(null)
-const locationSearch = ref<InstanceType<typeof LocationSearch> | null>(null)
+const statePicker = ref<InstanceType<typeof StateSearch> | null>(null);
+const bankSearch = ref<InstanceType<typeof BankSearch> | null>(null);
+const locationSearch = ref<InstanceType<typeof LocationSearch> | null>(null);
 
-const emit = defineEmits(['update:modelValue', 'searchInputChange'])
+const emit = defineEmits(['update:modelValue', 'searchInputChange']);
 
 const onBankSelect = (ev: HTMLInputElement) => {
-  emit('update:modelValue', ev)
-}
+  emit('update:modelValue', ev);
+};
 
 const onSearchInputChange = () => {
-  emit('searchInputChange')
-}
+  emit('searchInputChange');
+};
 
 const onStateSelect = (e: { value: string } | null): void => {
   if (!isValidStateCountry(country.value) || !e || !e.value) {
-    state.value = undefined
-    return
+    state.value = undefined;
+    return;
   }
-  state.value = STATES_BY_COUNTRY[country.value][e.value]
-}
+  state.value = STATES_BY_COUNTRY[country.value][e.value];
+};
 
 watch(
   () => props.warning,
   newVal => {
     // synch passed down warning with the state here
-    warningText.value = newVal
+    warningText.value = newVal;
   }
-)
+);
 
 watch(bank, newVal => {
   if (bank?.value) {
     // make sure that warning is not shown once a bank is selected
-    warningText.value = false
+    warningText.value = false;
   } else {
     // if bank is removed again, make sure the warning is shown again
-    warningText.value = props.warning
+    warningText.value = props.warning;
   }
 
-  bank.value = newVal
-})
+  bank.value = newVal;
+});
 
-const fetchGql = useGql()
+const fetchGql = useGql();
 
 watch(
   [() => country.value, () => state.value],
   async function ([newCountry, newState], [oldCountry]) {
     // reset state if country changes
-    if (oldCountry !== newCountry) state.value = undefined
+    if (oldCountry !== newCountry) state.value = undefined;
 
-    await loadBanks()
+    await loadBanks();
 
     // handle focus
-    if (!(+new Date() - +pageStart > 5_000)) return
+    if (!(+new Date() - +pageStart > 5_000)) return;
     if (!newCountry) {
-      locationSearch?.value?.focus()
-      return
+      locationSearch?.value?.focus();
+      return;
     }
-    const isExpectingState = isValidStateCountry(newCountry)
+    const isExpectingState = isValidStateCountry(newCountry);
     if (!isExpectingState) {
-      bankSearch?.value?.focus()
-      return
+      bankSearch?.value?.focus();
+      return;
     }
-    if (newState) bankSearch?.value?.focus()
-    if (!newState) statePicker.value?.focus()
+    if (newState) bankSearch?.value?.focus();
+    if (!newState) statePicker.value?.focus();
   }
-)
+);
 
-onMounted(loadBanks)
+onMounted(loadBanks);
 
 async function loadBanks() {
-  if (!country.value) return
+  if (!country.value) return;
 
-  const isExpectingState = isValidStateCountry(country.value)
+  const isExpectingState = isValidStateCountry(country.value);
   if (isExpectingState && !state.value) {
-    banks.value = []
-    return
+    banks.value = [];
+    return;
   }
 
-  loading.value = true
+  loading.value = true;
 
   banks.value = props.isEmbrace
     ? (await fetchGql('EmbraceBrandQuery', undefined).then(data =>
@@ -136,9 +136,9 @@ async function loadBanks() {
         country: country.value,
         state: state.value,
       }).then(data => data.brands?.edges.map(o => o?.node).filter(isTruthy))) ||
-      []
+      [];
 
-  loading.value = false
+  loading.value = false;
 }
 </script>
 

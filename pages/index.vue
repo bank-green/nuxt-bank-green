@@ -199,48 +199,48 @@
 </template>
 
 <script setup lang="ts">
-import { useGtm } from '@gtm-support/vue-gtm'
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import { components } from '~~/slices'
-import { usePrismicSEO } from '~~/composables/useHeadHelpers'
-import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
+import { useGtm } from '@gtm-support/vue-gtm';
+import { defineSliceZoneComponents } from '@prismicio/vue';
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue';
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
+import { components } from '~~/slices';
+import { usePrismicSEO } from '~~/composables/useHeadHelpers';
+import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField';
 
-const router = useRouter()
+const router = useRouter();
 
-const sliceComps = ref(defineSliceZoneComponents(components))
+const sliceComps = ref(defineSliceZoneComponents(components));
 
-const { bank, warningsMap } = useContactForm('homepage', ['bank'])
+const { bank, warningsMap } = useContactForm('homepage', ['bank']);
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 const { data: home } = await useAsyncData('home', () =>
   client.getSingle('homepage')
-)
+);
 
-usePrismicSEO(home.value?.data)
+usePrismicSEO(home.value?.data);
 
 const onCheckBankClick = () => {
-  const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+  const allowCookies = useCookie('bg.allowcookies', { default: () => false });
   if (!allowCookies.value) {
-    return
+    return;
   }
-  const gtm = useGtm()
-  gtm?.enable(true)
-  gtm?.trackEvent({ event: 'onBankCheckClick' })
-}
+  const gtm = useGtm();
+  gtm?.enable(true);
+  gtm?.trackEvent({ event: 'onBankCheckClick' });
+};
 
-const { country } = useCountry()
+const { country } = useCountry();
 
 watch(country, _ => {
-  bank.value = null
-})
+  bank.value = null;
+});
 
 watch(bank, newBank => {
-  if (!newBank) return
-  const { tag } = newBank
-  if (tag) router.push(`banks/${tag}`)
-})
+  if (!newBank) return;
+  const { tag } = newBank;
+  if (tag) router.push(`banks/${tag}`);
+});
 </script>
 
 <style>

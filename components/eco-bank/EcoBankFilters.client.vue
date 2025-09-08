@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { reactive, ref, computed, watch, onMounted } from 'vue'
+import { reactive, ref, computed, watch, onMounted } from 'vue';
 import {
   STATES_BY_COUNTRY,
   STATE_BY_STATE_CODE,
   isValidStateCountry,
   type StateCode,
-} from '../forms/location/iso3166-2States'
+} from '../forms/location/iso3166-2States';
 import type {
   EcoBankAccordionState,
   EcoBankFilters,
   EcoBanksQueryPayload,
-} from '@/utils/types/eco-banks.type.ts'
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import StateSearch from '~/components/forms/StateSearch.vue'
-import type { HarvestDataFilterInput } from '#gql'
+} from '@/utils/types/eco-banks.type.ts';
+import CheckboxSection from '@/components/forms/CheckboxSection.vue';
+import StateSearch from '~/components/forms/StateSearch.vue';
+import type { HarvestDataFilterInput } from '#gql';
 
 // props
-const emit = defineEmits(['filter', 'update:location'])
+const emit = defineEmits(['filter', 'update:location']);
 const props = defineProps<{
-  country: string
-  stateLicensed: StateCode | null
-  onSelectState: (payload: { value: string } | null) => void
-}>()
+  country: string;
+  stateLicensed: StateCode | null;
+  onSelectState: (payload: { value: string } | null) => void;
+}>();
 
 // define constants
 const defaultState: EcoBankFilters = {
@@ -50,87 +50,87 @@ const defaultState: EcoBankFilters = {
     mobile_banking: false,
     ATM_network: false,
   },
-}
+};
 
 // define reactive state
-const forceShowMobile = ref(false)
-const sharedKey = ref(0)
-const filterState = ref(deepClone<EcoBankFilters>(defaultState))
+const forceShowMobile = ref(false);
+const sharedKey = ref(0);
+const filterState = ref(deepClone<EcoBankFilters>(defaultState));
 
 const AccordionState = reactive<EcoBankAccordionState>({
   customersServed: true,
   depositProducts: true,
   loanProducts: true,
   services: true,
-})
+});
 
 const allOpen = computed({
   get: () => Object.values(AccordionState).every(v => v),
   set: val =>
     Object.keys(AccordionState).forEach(key => {
-      AccordionState[key as keyof EcoBankAccordionState] = val
+      AccordionState[key as keyof EcoBankAccordionState] = val;
     }),
-})
+});
 
-const isFilterDirty = computed(() => isDirty(filterState.value, defaultState))
+const isFilterDirty = computed(() => isDirty(filterState.value, defaultState));
 
 const filterQueryData = computed<EcoBanksQueryPayload>(
   (): EcoBanksQueryPayload => ({
     stateLicensed: props.stateLicensed,
     harvestData: getHarvestData(),
   })
-)
+);
 
 const showFilters = computed(() => {
-  return forceShowMobile.value || window.innerWidth >= 768
-})
+  return forceShowMobile.value || window.innerWidth >= 768;
+});
 
 // listeners
 watch(
   [filterState, () => props.stateLicensed],
   () => {
-    emit('filter', filterQueryData.value)
+    emit('filter', filterQueryData.value);
   },
   { deep: true }
-)
+);
 
 watch(
   () => props.country,
   () => {
-    setDefaultFilter()
+    setDefaultFilter();
   }
-)
+);
 
 // lifecycle hooks
-onMounted(() => emit('filter', filterQueryData.value))
+onMounted(() => emit('filter', filterQueryData.value));
 
 // methods
 const setDefaultFilter = () => {
-  filterState.value = deepClone(defaultState)
-  sharedKey.value++ // Reset checkboxes to empty state
-}
+  filterState.value = deepClone(defaultState);
+  sharedKey.value++; // Reset checkboxes to empty state
+};
 
 const toggleFilters = () => {
-  forceShowMobile.value = !forceShowMobile.value
-}
+  forceShowMobile.value = !forceShowMobile.value;
+};
 
 const getHarvestData = (): HarvestDataFilterInput | null => {
-  const harvestData: HarvestDataFilterInput = {}
+  const harvestData: HarvestDataFilterInput = {};
 
   for (const [featureKey, featureValues] of Object.entries(filterState.value)) {
     const selectedFilters = Object.entries(featureValues)
       .filter(([, isSelected]) => isSelected)
-      .map(([filterKey]) => filterKey)
+      .map(([filterKey]) => filterKey);
 
     if (selectedFilters.length > 0) {
-      harvestData[featureKey as keyof HarvestDataFilterInput] = selectedFilters
+      harvestData[featureKey as keyof HarvestDataFilterInput] = selectedFilters;
     }
   }
 
-  const hasHarvestData = Object.keys(harvestData).length
-  if (!hasHarvestData) return null
-  return harvestData
-}
+  const hasHarvestData = Object.keys(harvestData).length;
+  if (!hasHarvestData) return null;
+  return harvestData;
+};
 </script>
 
 <template>
