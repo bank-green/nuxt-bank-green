@@ -80,6 +80,7 @@ defineExpose({
     <SearchInput
       ref="searchInput"
       v-model="search"
+      data-testid="state-search-input"
       :aria-expanded="isShowing"
       placeholder="Search region/state"
       @keydown.down="onKeyDown"

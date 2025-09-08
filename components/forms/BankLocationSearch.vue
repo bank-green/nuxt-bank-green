@@ -153,7 +153,7 @@ async function loadBanks() {
     :class="locationSearchClasses"
   />
   <BaseField
-    v-if="isValidStateCountry(country)"
+    v-if="isValidStateCountry(country) && !hideLocation"
     class="relative col-span-2"
     name="stateSearch"
     :dark="dark"

@@ -76,6 +76,7 @@ defineExpose({
     <SearchInput
       ref="searchInput"
       v-model="search"
+      data-testid="location-search-input"
       :aria-expanded="isShowing"
       :use-pencil="true"
       :warning="warning"

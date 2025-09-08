@@ -118,6 +118,7 @@ defineExpose({
       <SearchInput
         ref="input"
         v-model="search"
+        data-testid="bank-search-input"
         :disabled="disabled"
         :aria-expanded="isShowing"
         :placeholder="placeholder"
