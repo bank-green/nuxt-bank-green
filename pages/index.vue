@@ -10,44 +10,51 @@
             class="text-center text-2xl font-semibold text-gray-800 sm:text-5xl"
           >
             {{
-              home?.data.title
-                || "Is your money being used to fund climate chaos?"
+              home?.data.title ||
+              'Is your money being used to fund climate chaos?'
             }}
           </h1>
-          <div
-            class="flex flex-col md:flex-row items-stretch md:items-center space-y-2 md:space-y-0 md:space-x-4 mt-8 md:mt-10 md:mb-10"
-          >
+          <div class="flex flex-col items-center w-full mt-4 py-2 gap-y-2">
             <ClientOnly>
               <BankLocationSearch
                 v-model="bank"
+                location-title="Country"
+                bank-title="Bank"
                 :warning="warningsMap['bank']"
-                bank-search-classes="md:w-1/2 flex-initial"
-                location-search-classes="md:w-1/2 flex-initial"
+                bank-search-classes="location-search-input"
+                location-search-classes="location-search-input"
               />
               <template #fallback>
-                <div class="relative md:w-1/2 flex-initial">
+                <div class="relative location-search-input text-gray-800">
+                  <label class="block mb-2 text-sm leading-5 text-gray-800">
+                    Country
+                  </label>
                   <input
                     disabled
                     class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate"
-                  >
+                  />
+
                   <LoadingJumper
-                    class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
+                    class="h-5 w-5 absolute inset-0 m-4 mt-11 text-sushi-500"
                   />
                 </div>
-                <div class="relative md:w-1/2 flex-initial">
+                <div class="relative location-search-input">
+                  <label class="block mb-2 text-sm leading-5 text-gray-800">
+                    Bank
+                  </label>
                   <input
                     disabled
                     class="relative w-full appearance-none border border-gray-200 text-gray-500 placeholder-gray-300 bg-gray-100 rounded-2xl shadow-sm pl-12 pr-10 py-4 text-left cursor-wait focus:outline-none focus:ring-1 sm:text-sm truncate"
-                  >
+                  />
                   <LoadingJumper
-                    class="h-5 w-5 absolute inset-0 m-4 text-sushi-500"
+                    class="h-5 w-5 absolute inset-0 m-4 mt-11 text-sushi-500"
                   />
                 </div>
               </template>
             </ClientOnly>
             <NuxtLink
               :to="`/banks/${bank?.['tag']}`"
-              class="flex-initial md:w-48 button-green text-primary-dark"
+              class="flex-initial sm:w-96 button-green text-primary-dark mt-6"
               :class="{ disabled: !bank }"
               @click="onCheckBankClick"
             >
@@ -71,14 +78,6 @@
                 :slices="home?.data.slices1 ?? []"
                 :components="sliceComps"
               />
-              <!-- <img class="h-6 w-auto" src="/img/featured/forbes.png"
-                                alt="Bank Green featured in Forbes" />
-                            <img class="h-12 pb-2 w-auto" src="/img/featured/the-new-yorker.png"
-                                alt="Bank Green featured in The New Yorker" />
-                            <img class="h-10 w-auto" src="/img/featured/independent.png"
-                                alt="Bank Green featured in Independent" />
-                            <img class="h-12 w-auto" src="/img/featured/the-big-issue.png"
-                                alt="Bank Green featured in The Big Issue" /> -->
             </div>
           </div>
           <div class="hidden md:flex flex-col justify-center items-center">
@@ -92,17 +91,11 @@
                 target="_blank"
               >
                 <div class="bg-white rounded-xl p-5">
-                  <img
-                    class="w-36"
-                    src="/img/logos/banktrack.svg"
-                  >
+                  <img class="w-36" src="/img/logos/banktrack.svg" />
                 </div>
               </a>
             </div>
-            <NuxtLink
-              to="/partners"
-              class="underline mt-2 text-sm"
-            >
+            <NuxtLink to="/partners" class="underline mt-2 text-sm">
               See our partners
             </NuxtLink>
           </div>
@@ -113,7 +106,7 @@
                 class="inline-block h-5 px-0.5"
                 src="/img/trim-hor-light.svg"
                 alt="Bank.Green"
-              >
+              />
               ?
             </div>
             <ArrowDownBounce class="mx-auto mt-4 w-10" />
@@ -122,9 +115,6 @@
       </div>
       <Swoosh />
     </div>
-    <!-- <pre>
-            {{ JSON.stringify(home, null, 2) }}
-         </pre> -->
     <div
       class="flex flex-col md:flex-row items-center justify-center py-16 contain"
     >
@@ -146,7 +136,7 @@
       <LazyLottiePlayer
         :placeholder-height="480"
         :placeholder-width="426"
-        class="md:w-2/5 max-w-full md:ml-24"
+        class="md:w-1/2 max-w-full md:ml-24"
         path="/anim/atm_without_bg.json"
         alt=""
       />
@@ -161,8 +151,8 @@
             <div class="md:w-1/2 max-w-sm">
               <PrismicRichText
                 v-if="
-                  home?.data?.description3
-                    && !isEmptyPrismicField(home?.data.description3)
+                  home?.data?.description3 &&
+                  !isEmptyPrismicField(home?.data.description3)
                 "
                 class="text-lg md:text-2xl tracking-wide mb-4"
                 :field="home?.data.description3"
@@ -171,8 +161,8 @@
               />
               <PrismicRichText
                 v-if="
-                  home?.data?.description4
-                    && !isEmptyPrismicField(home?.data.description4)
+                  home?.data?.description4 &&
+                  !isEmptyPrismicField(home?.data.description4)
                 "
                 class="md:text-xl tracking-wide whitespace-pre-line text-gray-600 mb-12 md:mb-0"
                 :field="home?.data.description4"
@@ -182,18 +172,15 @@
               />
             </div>
             <img
-              class="md:order-first md:w-2/5 -mx-24 md:mx-0 md:mr-24"
+              class="md:order-first md:w-1/2 -mx-24 md:mx-0 md:mr-24"
               src="/img/illustrations/bank.svg"
               alt=""
               width="450"
               height="450"
-            >
+            />
           </div>
         </div>
-        <div
-          id="join"
-          class="contain max-w-6xl"
-        >
+        <div id="join" class="contain max-w-6xl">
           <!--  <CallToAction /> -->
           <SliceZone
             :slices="home?.data.slices ?? []"
@@ -212,44 +199,52 @@
 </template>
 
 <script setup lang="ts">
-import { useGtm } from '@gtm-support/vue-gtm'
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import { components } from '~~/slices'
-import { usePrismicSEO } from '~~/composables/useHeadHelpers'
-import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
+import { useGtm } from '@gtm-support/vue-gtm';
+import { defineSliceZoneComponents } from '@prismicio/vue';
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue';
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
+import { components } from '~~/slices';
+import { usePrismicSEO } from '~~/composables/useHeadHelpers';
+import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField';
 
-const router = useRouter()
+const router = useRouter();
 
-const sliceComps = ref(defineSliceZoneComponents(components))
+const sliceComps = ref(defineSliceZoneComponents(components));
 
-const { bank, warningsMap } = useContactForm('homepage', ['bank'])
+const { bank, warningsMap } = useContactForm('homepage', ['bank']);
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 const { data: home } = await useAsyncData('home', () =>
-  client.getSingle('homepage'),
-)
+  client.getSingle('homepage')
+);
 
-usePrismicSEO(home.value?.data)
+usePrismicSEO(home.value?.data);
 
 const onCheckBankClick = () => {
-  const allowCookies = useCookie('bg.allowcookies', { default: () => false })
+  const allowCookies = useCookie('bg.allowcookies', { default: () => false });
   if (!allowCookies.value) {
-    return
+    return;
   }
-  const gtm = useGtm()
-  gtm?.enable(true)
-  gtm?.trackEvent({ event: 'onBankCheckClick' })
-}
+  const gtm = useGtm();
+  gtm?.enable(true);
+  gtm?.trackEvent({ event: 'onBankCheckClick' });
+};
 
-const { country } = useCountry()
+const { country } = useCountry();
 
-watch(country, (_) => {
-  bank.value = null
-})
+watch(country, _ => {
+  bank.value = null;
+});
 
-watch(bank, ({ tag }) => {
-  if (tag) router.push(`banks/${tag}`)
-})
+watch(bank, newBank => {
+  if (!newBank) return;
+  const { tag } = newBank;
+  if (tag) router.push(`banks/${tag}`);
+});
 </script>
+
+<style>
+.location-search-input {
+  @apply flex-initial w-full sm:w-96;
+}
+</style>
