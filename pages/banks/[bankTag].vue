@@ -21,35 +21,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import Bank from '@/components/bank/Bank.vue'
-import { getDefaultFields } from '~/utils/banks'
-import type { BrandByTagQueryQuery } from '#gql'
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import Bank from '@/components/bank/Bank.vue';
+import { getDefaultFields } from '~/utils/banks';
+import type { BrandByTagQueryQuery } from '#gql';
 
 // Route param
-const route = useRoute()
-const bankTag = ref((route.params.bankTag as string)?.toLowerCase())
+const route = useRoute();
+const bankTag = ref((route.params.bankTag as string)?.toLowerCase());
 
 // Default content fallback
-const defaultFields = ref<Record<string, string>>({})
+const defaultFields = ref<Record<string, string>>({});
 
 // Prismic client
-const { client } = usePrismic()
+const { client } = usePrismic();
 
 // Helper to adjust rating logic
 const getRating = ({
   commentary,
 }: NonNullable<BrandByTagQueryQuery['brand']>): string => {
-  const inheritedRating = commentary?.ratingInherited?.toLowerCase()
+  const inheritedRating = commentary?.ratingInherited?.toLowerCase();
   const isCreditUnion =
-    commentary?.institutionType?.[0]?.name === 'Credit Union'
-  const isRatingUnknown = commentary?.rating === 'unknown'
+    commentary?.institutionType?.[0]?.name === 'Credit Union';
+  const isRatingUnknown = commentary?.rating === 'unknown';
   if (isCreditUnion && isRatingUnknown) {
-    return 'good'
+    return 'good';
   }
-  return inheritedRating || ''
-}
+  return inheritedRating || '';
+};
 
 // GraphQL fetch
 const { data: bankData } = await useAsyncGql(
@@ -68,7 +68,7 @@ const { data: bankData } = await useAsyncGql(
           }
         : undefined,
   }
-)
+);
 
 // SEO head setup
 useHeadHelper(
@@ -76,33 +76,33 @@ useHeadHelper(
     ? `${bankData.value.name}'s Climate Score - Bank.Green`
     : '',
   'Find and compare the service offerings of ethical and sustainable banks.'
-)
+);
 
 if (bankData.value) {
-  useHeadRating(bankData.value.rating ?? '')
+  useHeadRating(bankData.value.rating ?? '');
 
-  const institutionType = bankData.value.institutionType?.[0]?.name || ''
-  const rating = bankData.value.rating ?? ''
-  const name = bankData.value.name ?? ''
+  const institutionType = bankData.value.institutionType?.[0]?.name || '';
+  const rating = bankData.value.rating ?? '';
+  const name = bankData.value.name ?? '';
   try {
     defaultFields.value = await getDefaultFields(
       client,
       rating,
       name,
       institutionType
-    )
+    );
   } catch {
-    defaultFields.value = {} // fallback to empty object
+    defaultFields.value = {}; // fallback to empty object
   }
 }
 
 // Field helper with type guard
 const getFieldOrDefault = (fieldName: string): string => {
-  const fieldValue = bankData.value?.[fieldName]
+  const fieldValue = (bankData.value as Record<string, unknown>)?.[fieldName];
   const trimmedText =
     typeof fieldValue === 'string'
       ? fieldValue.replace(/<\/?[^>]+(>|$)/g, '').trim()
-      : ''
-  return trimmedText || defaultFields.value?.[fieldName] || ''
-}
+      : '';
+  return trimmedText || defaultFields.value?.[fieldName] || '';
+};
 </script>

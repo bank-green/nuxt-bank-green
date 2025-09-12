@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { EcoBankCard } from '../../utils/sustainableEcoBanksUtils'
-import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
+import type { EcoBankCard } from '../../utils/sustainableEcoBanksUtils';
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue';
 
 defineProps<{
-  item: EcoBankCard
-}>()
+  item: EcoBankCard;
+}>();
 </script>
 
 <template>
@@ -57,7 +57,7 @@ defineProps<{
     </div>
 
     <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200" />
-
+    <!-- sustainable-eco-banks -->
     <NuxtLink
       :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
       class="w-fit ml-auto mr-0 flex gap-2 items-center"
