@@ -1,9 +1,32 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
 import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue';
 import Swoosh from '@/components/Swoosh.vue';
 import CallToAction from '@/components/CallToAction.vue';
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
 import ContactBank from '@/components/contact/ContactBank.vue';
+
+// Props definition
+const props = defineProps<{
+  name: string;
+  website: string;
+  inheritBrandRating?: {
+    tag: string;
+    name: string;
+  };
+  lastReviewed: string | null;
+  fossilFreeAlliance: boolean;
+  headline: string;
+  subtitle: string;
+  description1: string;
+  description2: string;
+  description3: string;
+  description4: string;
+  rating: string;
+  showEmbraceBreakup: boolean;
+}>();
+
+console.log('bank Name', props.name);
 </script>
 
 <template>
@@ -89,13 +112,13 @@ import ContactBank from '@/components/contact/ContactBank.vue';
       <div class="contain flex flex-col justify-center items-center">
         <CallToAction :light="true" :spaced="true" />
         <a href="#contact-bank" class="button-green w-auto">
-          Contact Your Bank To Be Greener
+          Contact {{ props.name }} To Be Greener
         </a>
       </div>
     </div>
 
     <div id="contact-bank">
-      <ContactBank />
+      <ContactBank :name="name" />
     </div>
     <!-- FOOTER IMAGE -->
     <div class="bg-arctic-blue overflow-hidden w-full pointer-events-none">

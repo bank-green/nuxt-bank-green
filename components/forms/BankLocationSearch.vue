@@ -1,57 +1,63 @@
 <script setup lang="ts">
-import BankSearch from './banks/BankSearch.vue'
-import LocationSearch from './location/LocationSearch.vue'
+import BankSearch from './banks/BankSearch.vue';
+import LocationSearch from './location/LocationSearch.vue';
 
-const props = withDefaults(defineProps<{
-  bankTitle?: string
-  locationTitle?: string
-  modelValue: object | null
-  warning?: string | boolean
-  infoTooltipBank?: string
-  bankSearchClasses?: string
-  locationSearchClasses?: string
-  dark?: boolean
-  isEmbrace?: boolean
-  hideLocation?: boolean
-}>(), {
-  warning: false,
-  dark: false,
-  bankTitle: '',
-  locationTitle: '',
-  isEmbrace: false,
-  hideLocation: false,
-})
+const props = withDefaults(
+  defineProps<{
+    bankTitle?: string;
+    locationTitle?: string;
+    modelValue: object | null;
+    warning?: string | boolean;
+    infoTooltipBank?: string;
+    bankSearchClasses?: string;
+    locationSearchClasses?: string;
+    dark?: boolean;
+    isEmbrace?: boolean;
+    hideLocation?: boolean;
+  }>(),
+  {
+    warning: false,
+    dark: false,
+    bankTitle: '',
+    locationTitle: '',
+    isEmbrace: false,
+    hideLocation: false,
+  }
+);
 
-const { country } = useCountry()
-const bank = ref(props.modelValue)
-const warningText = ref(props.warning)
+const { country } = useCountry();
+const bank = ref(props.modelValue);
+const warningText = ref(props.warning);
 
-const emit = defineEmits(['update:modelValue', 'searchInputChange'])
+const emit = defineEmits(['update:modelValue', 'searchInputChange']);
 
 const onUpdateModel = (ev: HTMLInputElement) => {
-  emit('update:modelValue', ev)
-}
+  emit('update:modelValue', ev);
+};
 
 const onSearchInputChange = () => {
-  emit('searchInputChange')
-}
+  emit('searchInputChange');
+};
 
-watch(() => props.warning, (newVal) => {
-  // synch passed down warning with the state here
-  warningText.value = newVal
-})
+watch(
+  () => props.warning,
+  newVal => {
+    // synch passed down warning with the state here
+    warningText.value = newVal;
+  }
+);
 
-watch(bank, (newVal) => {
+watch(bank, newVal => {
   if (bank?.value) {
     // make sure that warning is not shown once a bank is selected
-    warningText.value = false
+    warningText.value = false;
   } else {
     // if bank is removed again, make sure the warning is shown again
-    warningText.value = props.warning
+    warningText.value = props.warning;
   }
 
-  bank.value = newVal
-})
+  bank.value = newVal;
+});
 </script>
 
 <template>

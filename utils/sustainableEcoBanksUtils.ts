@@ -13,34 +13,17 @@ export type EcoBankCard = {
   depositProtection: string;
 };
 
-type HarvestData = NonNullable<
-  NonNullable<
-    NonNullable<FilteredBrandsQueryQuery['brands']>['edges'][number]
-  >['node']
->['harvestData'];
+// type HarvestData = NonNullable<
+//   NonNullable<
+//     NonNullable<FilteredBrandsQueryQuery['brands']>['edges'][number]
+//   >['node']
+// >['harvestData'];
 
-// type BrandConnection = NonNullable<FilteredBrandsQueryQuery['brands']>;
-// type BrandEdge = NonNullable<BrandConnection['edges'][number]>;
-// type BrandNode = NonNullable<BrandEdge['node']>;
+type BrandConnection = NonNullable<FilteredBrandsQueryQuery['brands']>;
+type BrandEdge = NonNullable<BrandConnection['edges'][number]>;
+type BrandNode = NonNullable<BrandEdge['node']>;
 
-// export type HarvestData = NonNullable<BrandNode['harvestData']>;
-
-export const toCardBank = (node: any): EcoBankCard => {
-  if (!node) {
-    return null as any;
-  }
-  console.log('bank name 💸', node.name);
-  return {
-    name: node.name || '',
-    features: {},
-    website: '',
-    tag: '',
-    topPick: false,
-    fossilFreeAlliance: false,
-    interestRate: '',
-    depositProtection: '',
-  };
-};
+export type HarvestData = NonNullable<BrandNode['harvestData']>;
 
 const HARVEST_TO_FEATURE_TEST_EXCEPTIONS: Record<string, string> = {
   checkings_or_current: 'Checking',

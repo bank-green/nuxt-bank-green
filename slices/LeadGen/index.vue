@@ -1,19 +1,27 @@
 <template>
   <div
     id="lead-gen"
-    style="scroll-margin-top: 80px; background-image: url('/img/backgrounds/circle-quarter.svg'); background-position: left bottom;"
+    style="
+      scroll-margin-top: 80px;
+      background-image: url('/img/backgrounds/circle-quarter.svg');
+      background-position: left bottom;
+    "
     class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
   >
     <div class="flex flex-col gap-12">
       <h2
         class="w-full text-xl md:text-4xl tracking-wider text-gray-50"
-        style="font-weight: 900; line-height: 3rem;"
+        style="font-weight: 900; line-height: 3rem"
       >
-        {{ content?.title || "Curious about switching to a green bank?" }}
+        {{ content?.title || 'Curious about switching to a green bank?' }}
       </h2>
       <CheckList
         class="md:text-xl"
-        :list="slice.items.map((i: any) => asText(i.bullet_text)).filter((i: string) => i.length > 0)"
+        :list="
+          slice.items
+            .map((i: any) => asText(i.bullet_text))
+            .filter((i: string) => i.length > 0)
+        "
       />
     </div>
     <form
@@ -31,9 +39,9 @@
       >
         <template #not-listed>
           <p class="text-gray-500 p-4 shadow-lg">
-            We couldn't find your bank. <br>
-            But that's ok! Just type in your bank's name and leave it at
-            that.
+            We couldn't find your bank.
+            <br />
+            But that's ok! Just type in your bank's name and leave it at that.
           </p>
         </template>
       </BankLocationSearch>
@@ -60,7 +68,10 @@
         :options="statusOptions"
         dark
         :warning="warningsMap['currentStatus']"
-        :title="content.form_status_label || 'Which option best describes your current status?'"
+        :title="
+          content.form_status_label ||
+          'Which option best describes your current status?'
+        "
       />
       <CheckboxSection
         v-model="isAgreeMarketing"
@@ -68,8 +79,7 @@
         :warning="warningsMap['isAgreeMarketing']"
         dark
       >
-        I wish to receive more information via email from
-        Bank.Green.
+        I wish to receive more information via email from Bank.Green.
       </CheckboxSection>
       <CheckboxSection
         v-model="isAgreeTerms"
@@ -78,12 +88,8 @@
         dark
       >
         I have read and understood Bank.Green’s
-        <NuxtLink
-          to="/privacy"
-          class="link"
-        >
-          privacy policy
-        </NuxtLink>.
+        <NuxtLink to="/privacy" class="link">privacy policy</NuxtLink>
+        .
       </CheckboxSection>
       <vue-turnstile
         v-if="!isLocal"
@@ -93,12 +99,15 @@
       />
       <button
         type="submit"
-        class="button-green w-full md:w-auto mt-2 flex justify-center text-primary-dark"
+        class="button-gre en w-full md:w-auto mt-2 flex justify-center text-primary-dark"
         :class="{
-          'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
+          'pointer-events-none opacity-75':
+            busy || (!captchaVerified && !isLocal),
         }"
       >
-        <span v-if="!busy"> {{ content.button_label || 'Complete Sign Up' }} </span>
+        <span v-if="!busy">
+          {{ content.button_label || 'Complete Sign Up' }}
+        </span>
         <span v-else>
           <svg
             width="32"
@@ -114,36 +123,40 @@
           </svg>
         </span>
       </button>
-      <span
-        v-if="formError"
-        class="text-red-300 font-semibold text-center"
-      >Something went wrong, try again!</span>
+      <span v-if="formError" class="text-red-300 font-semibold text-center">
+        Something went wrong, try again!
+      </span>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { asText } from '@prismicio/helpers'
-import { getSliceComponentProps } from '@prismicio/vue'
-import VueTurnstile from 'vue-turnstile'
-import { getSliceBoolean } from '@/utils/prismic/conversions'
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
-import TextField from '@/components/forms/TextField.vue'
-import CurrentStatus from '@/components/forms/CurrentStatus.vue'
+import { asText } from '@prismicio/helpers';
+import { getSliceComponentProps } from '@prismicio/vue';
+import VueTurnstile from 'vue-turnstile';
+import { getSliceBoolean } from '@/utils/prismic/conversions';
+import CheckboxSection from '@/components/forms/CheckboxSection.vue';
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue';
+import TextField from '@/components/forms/TextField.vue';
+import CurrentStatus from '@/components/forms/CurrentStatus.vue';
 
-const searchValue = ref(null)
-const props = defineProps(getSliceComponentProps(['slice', 'index', 'slices', 'context']))
+const searchValue = ref(null);
+const props = defineProps(
+  getSliceComponentProps(['slice', 'index', 'slices', 'context'])
+);
 
 const statusOptions = computed(() => {
-  const options = props.slice.items.map((i: any) => i.dropdown_status_option)
-  const filteredOptions = options.filter((opt: null | string) => opt !== 'Select none (default)' && typeof (opt) === 'string')
-  return filteredOptions.length > 0 ? filteredOptions : undefined
-})
+  const options = props.slice.items.map((i: any) => i.dropdown_status_option);
+  const filteredOptions = options.filter(
+    (opt: null | string) =>
+      opt !== 'Select none (default)' && typeof opt === 'string'
+  );
+  return filteredOptions.length > 0 ? filteredOptions : undefined;
+});
 
-const content = computed(() => props.slice.primary)
+const content = computed(() => props.slice.primary);
 
-const { country } = useCountry()
+const { country } = useCountry();
 
 const extras = computed(() => {
   return {
@@ -152,11 +165,11 @@ const extras = computed(() => {
     bankDisplayName: bank.value?.name || '',
     rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
-  }
-})
+  };
+});
 
 // Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
 
 const {
   firstName,
@@ -171,22 +184,27 @@ const {
   busy,
 } = useContactForm(
   'leadGen',
-  ['firstName', 'email', 'isAgreeTerms', getSliceBoolean(content.value.show_status_field) ? 'currentStatus' : ''],
-  extras,
-)
+  [
+    'firstName',
+    'email',
+    'isAgreeTerms',
+    getSliceBoolean(content.value.show_status_field) ? 'currentStatus' : '',
+  ],
+  extras
+);
 
-const formError = ref<boolean>(false)
+const formError = ref<boolean>(false);
 const submitForm = async () => {
-  showWarnings.value = true
+  showWarnings.value = true;
   if (hasWarnings.value) {
-    busy.value = false
-    return false
+    busy.value = false;
+    return false;
   }
 
   if (busy.value) {
-    return // already busy, prevent double requests
+    return; // already busy, prevent double requests
   }
-  busy.value = true
+  busy.value = true;
 
   const formFields = {
     firstName: firstName.value,
@@ -194,7 +212,7 @@ const submitForm = async () => {
     bankName: bank.value?.name,
     status: currentStatus.value,
     marketing: isAgreeMarketing.value ? 'Yes' : 'No',
-  }
+  };
 
   const response = await $fetch('/api/lead-gen-active-campaign', {
     method: 'POST',
@@ -202,15 +220,15 @@ const submitForm = async () => {
       formFields,
       bankLeadList: getSliceBoolean(content?.value?.bank_leads_ac_list),
     },
-  })
+  });
 
   if (response.success) {
-    formError.value = false
-    busy.value = false
-    navigateTo('/thanks')
+    formError.value = false;
+    busy.value = false;
+    navigateTo('/thanks');
   } else {
-    formError.value = true
-    busy.value = false
+    formError.value = true;
+    busy.value = false;
   }
-}
+};
 </script>

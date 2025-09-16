@@ -44,7 +44,7 @@ const layoutType = computed(() => {
 </script>
 
 <template>
-  <component :is="layoutType">
+  <component :is="layoutType" v-bind="props">
     <template #section1>
       <BankHeadline
         :name="name"
@@ -88,7 +88,6 @@ const layoutType = computed(() => {
         <BankDescription :text="description1" />
       </div>
     </template>
-
     <template #section2>
       <div class="text-gray-800 overflow-hidden py-16">
         <div class="contain">
@@ -123,7 +122,6 @@ const layoutType = computed(() => {
         v-html="description4"
       />
     </template>
-
     <template v-if="layoutType === BankLayoutGood" #footer-image>
       >
       <div class="flex items-end justify-end pointer-events-none">
