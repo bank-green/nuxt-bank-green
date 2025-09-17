@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import VueTurnstile from 'vue-turnstile';
 import ClearbitLogo from '../icons/ClearbitLogo.vue';
+import CheckboxSection from '../forms/CheckboxSection.vue';
+
+const { isLocal, captchaToken, captchaSitekey } = useCaptcha();
 
 defineProps({
   name: String,
@@ -78,11 +82,18 @@ defineProps({
           <option value="serouse">🤨 Serious</option>
           <option value="assertive">😡 Assertive</option>
         </select>
-        <CheckboxSection name="isAgreeTerms">
+        <CheckboxSection name="isAgreeTerms" :dark="true">
           I have read and understood Bank.Green’s
           <NuxtLink to="/privacy" class="link">privacy policy</NuxtLink>
           .
         </CheckboxSection>
+
+        <vue-turnstile
+          v-model="captchaToken"
+          :site-key="captchaSitekey"
+          theme="light"
+          class="col-span-full mt-4"
+        />
 
         <button class="button-green w-full mt-4" type="submit">
           Generate my email

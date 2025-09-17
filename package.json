@@ -61,9 +61,10 @@
     "axios": "^1.7.9",
     "lock": "^1.1.0",
     "nuxt-jsonld": "^2.0.8",
+    "pinia": "^3.0.3",
     "rollup": "^4.28.1",
     "swiper": "^11.1.14",
-    "vue-turnstile": "^1.0.9"
+    "vue-turnstile": "^1.0.11"
   },
   "lint-staged": {
     "*": "eslint"
