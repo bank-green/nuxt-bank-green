@@ -27,7 +27,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    FEATURE_CONTACT_EMAIL: process.env.FEATURE_CONTACT_EMAIL ?? 'off',
     public: {
+      FEATURE_CONTACT_EMAIL: process.env.PUBLIC_FEATURE_CONTACT_EMAIL ?? 'off',
       DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
       DATA_URL: process.env.PUBLIC_DATA_URL,
       EMBRACE_URL: process.env.PUBLIC_EMBRACE_URL,
