@@ -1,5 +1,5 @@
 query BrandsByCountryQuery($country: String, $state: String) {
-  brands(country: $country, displayOnWebsite: true, stateLicensed: $state) {
+  brands(country: $country, stateLicensed: $state) {
     edges {
       node {
         name
