@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@stefanobartoletti/nuxt-social-share',
     '@nuxtjs/sitemap',
     'nuxt-graphql-client',
+    '@pinia/nuxt',
   ],
 
   site: { url: 'https://bank.green' },
