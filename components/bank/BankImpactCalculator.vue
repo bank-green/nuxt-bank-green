@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import BankSelector from './BankSelector.vue';
 
 // Props to receive bank interest rate data
 const props = defineProps<{
   bankInterestRate?: number;
+  currentBankName?: string;
 }>();
 
 // Impact calculator reactive data
@@ -17,6 +19,19 @@ const baselineRate = 0.03; // 3% baseline
 const currentBankRate = computed(() => props.bankInterestRate || 0);
 const hasLowRate = computed(() => currentBankRate.value < 0.005); // Less than 0.5%
 
+// Selected sustainable bank
+const selectedSustainableBank = ref<{
+  name: string;
+  tag: string;
+  website: string;
+  interestRate: number;
+  displayRate: string;
+} | null>(null);
+
+const onBankChange = (bank: { name: string; tag: string; website: string; interestRate: number; displayRate: string }) => {
+  selectedSustainableBank.value = bank;
+};
+
 // Computed CO2 impact
 const co2Impact = computed(() => {
   return (amountMoved.value / 1000) * co2Factor;
@@ -25,7 +40,8 @@ const co2Impact = computed(() => {
 // Computed interest difference
 const interestDifference = computed(() => {
   if (!hasLowRate.value) return 0;
-  return (baselineRate - currentBankRate.value) * amountMoved.value;
+  const sustainableRate = selectedSustainableBank.value?.interestRate || baselineRate;
+  return (sustainableRate - currentBankRate.value) * amountMoved.value;
 });
 
 // Maximum value for comparison (used for bar scaling)
@@ -61,11 +77,11 @@ const sortedActions = computed(() => {
 <template>
   <div class="bg-white rounded-lg p-6 shadow-lg">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">
-      Impact of moving your money to a climate friendly bank
+      Your bank choice has more impact than you think
     </h2>
     <div class="text-gray-600 space-y-3 mb-6">
       <p>
-        By moving money to a climate-friendly bank, you can significantly reduce
+        Moving your money is one of the easiest ways to both reduce
         your personal carbon footprint and contribute to the global fight
         against climate change.
       </p>
@@ -76,6 +92,12 @@ const sortedActions = computed(() => {
         economy.
       </p>
     </div>
+
+    <!-- Bank Selector -->
+    <BankSelector 
+      :current-bank-name="currentBankName"
+      @bank-change="onBankChange" 
+    />
 
     <!-- Slider Section -->
     <div class="mb-6">
@@ -108,9 +130,7 @@ const sortedActions = computed(() => {
             {{ co2Impact.toFixed(2) }}
           </div>
           <div class="text-sm text-green-700">
-            tons CO
-            <sub>2</sub>
-            e saved annually
+            tons CO<sub>2</sub>e saved annually
           </div>
         </div>
       </div>
@@ -123,7 +143,6 @@ const sortedActions = computed(() => {
         <div class="text-center">
           <div class="text-3xl font-bold text-blue-600">
             +${{ interestDifference.toFixed(0) }}
-            <sup class="text-lg">*</sup>
           </div>
           <div class="text-sm text-blue-700">additional interest annually</div>
           <div class="text-xs text-blue-600 mt-1">
@@ -162,11 +181,6 @@ const sortedActions = computed(() => {
       </div>
     </div>
 
-    <!-- Footnote for additional interest estimate -->
-    <div v-if="hasLowRate" class="mt-4 text-xs text-gray-500">
-      <sup>*</sup>
-      Based on an average rate of 3% for climate-friendly banks
-    </div>
   </div>
 </template>
 

@@ -106,10 +106,13 @@ const layoutType = computed(() => {
           @rate-change="onInterestRateChange"
         />
       </div>
-      <!-- Right Side: Impact Section -->
-      <div class="col-span-2 md:col-span-1">
-        <BankImpactCalculator :bank-interest-rate="bankInterestRate" />
-      </div>
+             <!-- Right Side: Impact Section -->
+             <div class="col-span-2 md:col-span-1">
+               <BankImpactCalculator 
+                 :bank-interest-rate="bankInterestRate" 
+                 :current-bank-name="name"
+               />
+             </div>
     </template>
 
     <template #section2>
