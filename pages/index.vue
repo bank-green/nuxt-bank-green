@@ -23,6 +23,7 @@
                 :warning="warningsMap['bank']"
                 bank-search-classes="location-search-input"
                 location-search-classes="location-search-input"
+                is-landing-page
               />
               <template #fallback>
                 <div class="relative location-search-input text-gray-800">
