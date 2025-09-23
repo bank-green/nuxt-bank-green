@@ -101,12 +101,7 @@ const sortedActions = computed(() => {
 
     <!-- Slider Section -->
     <div class="mb-6">
-      <label class="block text-lg font-semibold text-gray-800 mb-3">
-        Amount moved to climate-friendly bank:
-        <span class="text-2xl font-bold text-green-600">
-          ${{ amountMoved.toLocaleString() }}
-        </span>
-      </label>
+
       <input
         v-model="amountMoved"
         type="range"
@@ -115,10 +110,17 @@ const sortedActions = computed(() => {
         step="1000"
         class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
       />
+      
       <div class="flex justify-between text-sm font-medium text-gray-600 mt-2">
         <span>$0</span>
         <span>$100,000</span>
       </div>
+      <label class="block text-lg font-semibold text-gray-800 mb-3">
+        If you moved 
+        <span class="font-bold">
+          ${{ amountMoved.toLocaleString() }}
+        </span>...
+      </label>
     </div>
 
     <!-- Impact Display -->
