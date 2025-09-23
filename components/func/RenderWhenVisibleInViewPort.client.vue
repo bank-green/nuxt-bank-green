@@ -15,9 +15,10 @@ const props = withDefaults(
 )
 
 const intersectionObserver = ref<IntersectionObserver | null>(null)
-const root = ref<InstanceType<typeof HTMLElement>>()
-const observer = ref<InstanceType<typeof HTMLElement>>()
+const root = ref<InstanceType<typeof HTMLElement> | null>(null)
+const observer = ref<InstanceType<typeof HTMLElement> | null>(null)
 const hasBeenInViewport = ref(false)
+const isMounted = ref(false)
 
 const styles = computed(() => {
   if (hasBeenInViewport.value) { return }
@@ -29,6 +30,8 @@ const styles = computed(() => {
 })
 
 onMounted(() => {
+  isMounted.value = true
+  
   if (!('IntersectionObserver' in window)) {
     // no support for IntersectionObserver, just show right away, instead of loading polyfills
     hasBeenInViewport.value = true
@@ -37,29 +40,32 @@ onMounted(() => {
 
   if (hasBeenInViewport.value) { return }
 
-  if (observer.value && root.value) {
-    intersectionObserver.value = new window.IntersectionObserver(
-      (entries) => {
-        const image = entries[0]
-        if (image.intersectionRatio > 0) {
-          hasBeenInViewport.value = true
-          if (intersectionObserver.value) {
-            intersectionObserver.value.disconnect()
+  // Use nextTick to ensure the DOM is fully updated
+  nextTick(() => {
+    if (observer.value) {
+      intersectionObserver.value = new window.IntersectionObserver(
+        (entries) => {
+          const image = entries[0]
+          if (image.intersectionRatio > 0) {
+            hasBeenInViewport.value = true
+            if (intersectionObserver.value) {
+              intersectionObserver.value.disconnect()
+            }
           }
-        }
-      },
-      {
-        root: null,
-        rootMargin: '0px 0px 0px 0px',
-        threshold: 0,
-        ...props.options,
-      },
-    )
+        },
+        {
+          root: null,
+          rootMargin: '0px 0px 0px 0px',
+          threshold: 0,
+          ...props.options,
+        },
+      )
 
-    intersectionObserver.value.observe(observer.value)
-  } else {
-    hasBeenInViewport.value = true
-  }
+      intersectionObserver.value.observe(observer.value)
+    } else {
+      hasBeenInViewport.value = true
+    }
+  })
 })
 
 onUnmounted(() => {
@@ -84,8 +90,13 @@ onUnmounted(() => {
         ref="observer"
         :style="styles"
       >
-        <slot v-if="hasBeenInViewport" />
+        <slot v-if="hasBeenInViewport && isMounted" />
       </div>
     </transition>
+    <template #fallback>
+      <div :style="styles">
+        <!-- Fallback content during hydration -->
+      </div>
+    </template>
   </ClientOnly>
 </template>

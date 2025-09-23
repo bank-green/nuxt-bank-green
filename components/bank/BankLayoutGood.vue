@@ -29,7 +29,7 @@ withDefaults(defineProps<{
       class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 md:mb-16"
     >
       <div
-        class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
+        class="relative page-fade-in contain max-w-6xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
         <slot name="section1" />
         <div class="relative flex-grow md:flex-none text-center flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
