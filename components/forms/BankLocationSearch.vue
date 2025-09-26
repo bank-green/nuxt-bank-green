@@ -146,9 +146,10 @@ async function loadBanks() {
 
 <template>
   <div
-    :class="
-      isLandingPage ? 'flex flex-row mb-2 gap-x-2' : 'flex flex-col gap-y-2'
-    "
+    :class="[
+      'flex flex-col gap-y-2 w-full justify-center',
+      isLandingPage && 'items-center lg:flex-row lg:mb-2 lg:gap-x-2',
+    ]"
   >
     <LocationSearch
       v-if="!isEmbrace && !hideLocation"
