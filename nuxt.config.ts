@@ -40,7 +40,6 @@ export default defineNuxtConfig({
       ACTIVE_CAMPAIGN_URL: process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL,
       GQL_HOST:
         process.env.PUBLIC_DATA_URL || 'https://data.bank.green/graphql',
-      BRANDFETCH_CLIENT_ID: process.env.BRANDFETCH_CLIENT_ID,
     },
   },
 
