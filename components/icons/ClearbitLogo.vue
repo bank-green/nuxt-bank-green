@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const showClearbit = ref(true)
+const { public: { BRANDFETCH_CLIENT_ID: brandFetchClientId } } = useRuntimeConfig()
 
 function handleError() {
   showClearbit.value = false
@@ -51,7 +52,7 @@ const src = computed(() => {
         return '/img/logos/green_got.png'
     }
 
-    return `https://logo.clearbit.com/${urlDomain.value}?size=${props.size * 2}`
+    return `https://cdn.brandfetch.io/${urlDomain.value}/icon/fallback/lettermark/h/${props.size * 2}/w/${props.size * 2}?c=${brandFetchClientId}`
   }
   return ''
 })
