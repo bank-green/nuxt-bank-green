@@ -21,8 +21,10 @@ const props = withDefaults(
     dark?: boolean;
     isEmbrace?: boolean;
     hideLocation?: boolean;
+    isLandingPage?: boolean;
   }>(),
   {
+    isLandingPageSearch: false,
     warning: false,
     dark: false,
     bankTitle: '',
@@ -143,29 +145,36 @@ async function loadBanks() {
 </script>
 
 <template>
-  <LocationSearch
-    v-if="!isEmbrace && !hideLocation"
-    ref="locationSearch"
-    v-model="country"
-    :dark="dark"
-    class="col-span-2"
-    :title="locationTitle"
-    :class="locationSearchClasses"
-  />
-  <BaseField
-    v-if="isValidStateCountry(country) && !hideLocation"
-    class="relative col-span-2"
-    name="stateSearch"
-    :dark="dark"
-    title="State"
-    :class="locationSearchClasses"
+  <div
+    :class="[
+      'flex flex-col gap-y-2 w-full justify-center',
+      isLandingPage && 'items-center lg:flex-row lg:mb-2 lg:gap-x-2',
+    ]"
   >
-    <StateSearch
-      ref="statePicker"
-      :options="Object.keys(STATES_BY_COUNTRY?.[country])"
-      @select="onStateSelect"
+    <LocationSearch
+      v-if="!isEmbrace && !hideLocation"
+      ref="locationSearch"
+      v-model="country"
+      :dark="dark"
+      class="col-span-2"
+      :title="locationTitle"
+      :class="locationSearchClasses"
     />
-  </BaseField>
+    <BaseField
+      v-if="isValidStateCountry(country) && !hideLocation"
+      class="relative col-span-2"
+      name="stateSearch"
+      :dark="dark"
+      title="State"
+      :class="locationSearchClasses"
+    >
+      <StateSearch
+        ref="statePicker"
+        :options="Object.keys(STATES_BY_COUNTRY?.[country])"
+        @select="onStateSelect"
+      />
+    </BaseField>
+  </div>
   <BankSearch
     ref="bankSearch"
     v-model="bank"
