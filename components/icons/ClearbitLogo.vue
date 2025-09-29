@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const showClearbit = ref(true)
+const showBrandIcon = ref(true)
+/** BrandFetch requires the client ID to be directly embedded in each request, so there's no point in obfuscating it */
+const brandFetchClientId = "1idgd9eLaoZ3OpDvC0X"
 
 function handleError() {
-  showClearbit.value = false
+  showBrandIcon.value = false
 }
 
 const props = withDefaults(
@@ -51,7 +53,7 @@ const src = computed(() => {
         return '/img/logos/green_got.png'
     }
 
-    return `https://logo.clearbit.com/${urlDomain.value}?size=${props.size * 2}`
+    return `https://cdn.brandfetch.io/${urlDomain.value}/icon/fallback/lettermark/h/${props.size*2}/w/${props.size*2}?c=${brandFetchClientId}`
   }
   return ''
 })
@@ -60,7 +62,7 @@ const src = computed(() => {
 <template>
   <ClientOnly>
     <img
-      v-if="showClearbit"
+      v-if="showBrandIcon"
       :src="src"
       :class="`object-contain`"
       :style="`width: ${size}px; height: ${size}px`"
