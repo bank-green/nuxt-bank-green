@@ -3,10 +3,6 @@ import LoadingJumper from '../../LoadingJumper.vue';
 import SearchInput from '../input/SearchInput.vue';
 import ListPicker from '../ListPicker.vue';
 import BaseField from '../BaseField.vue';
-import {
-  isValidStateCountry,
-  type StateCode,
-} from '../location/iso3166-2States';
 import BankSearchItem from './BankSearchItem.vue';
 import { findBanks } from './banks';
 
@@ -14,7 +10,6 @@ const props = withDefaults(
   defineProps<{
     disabled?: boolean;
     country: string;
-    state?: StateCode;
     modelValue: object | null;
     warning?: string | boolean;
     infoTooltip?: string;
@@ -50,13 +45,8 @@ const placeholder = computed<string>(() => {
   if (props.loading) return 'Loading banks...';
   if (!props.country) return 'Set a country first';
 
-  const isExpectingState = isValidStateCountry(props.country);
-
-  if (isExpectingState && !props.state) return 'Set a state/region first';
-
   const noBanksFound = !props?.options.length;
-  if (noBanksFound)
-    return `No bank data found for this ${isExpectingState && props.state ? 'state/region' : 'country'}`;
+  if (noBanksFound) return 'No bank data found for this country';
 
   return 'Search bank...';
 });

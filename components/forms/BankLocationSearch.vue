@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import {
-  STATES_BY_COUNTRY,
-  isValidStateCountry,
-  type StateCode,
-} from '../forms/location/iso3166-2States';
-import BaseField from './BaseField.vue';
 import BankSearch from './banks/BankSearch.vue';
 import LocationSearch from './location/LocationSearch.vue';
-import StateSearch from '~/components/forms/StateSearch.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -34,7 +27,6 @@ const props = withDefaults(
 
 const pageStart = new Date();
 const { country } = useCountry();
-const state = ref<StateCode>();
 const bank = ref(props.modelValue);
 const warningText = ref(props.warning);
 const loading = ref<boolean>(false);
@@ -47,7 +39,6 @@ const banks = ref<
   }[]
 >([]);
 
-const statePicker = ref<InstanceType<typeof StateSearch> | null>(null);
 const bankSearch = ref<InstanceType<typeof BankSearch> | null>(null);
 const locationSearch = ref<InstanceType<typeof LocationSearch> | null>(null);
 
@@ -61,13 +52,6 @@ const onSearchInputChange = () => {
   emit('searchInputChange');
 };
 
-const onStateSelect = (e: { value: string } | null): void => {
-  if (!isValidStateCountry(country.value) || !e || !e.value) {
-    state.value = undefined;
-    return;
-  }
-  state.value = STATES_BY_COUNTRY[country.value][e.value];
-};
 
 watch(
   () => props.warning,
@@ -92,11 +76,8 @@ watch(bank, newVal => {
 const fetchGql = useGql();
 
 watch(
-  [() => country.value, () => state.value],
-  async function ([newCountry, newState], [oldCountry]) {
-    // reset state if country changes
-    if (oldCountry !== newCountry) state.value = undefined;
-
+  () => country.value,
+  async function (newCountry) {
     await loadBanks();
 
     // handle focus
@@ -105,13 +86,7 @@ watch(
       locationSearch?.value?.focus();
       return;
     }
-    const isExpectingState = isValidStateCountry(newCountry);
-    if (!isExpectingState) {
-      bankSearch?.value?.focus();
-      return;
-    }
-    if (newState) bankSearch?.value?.focus();
-    if (!newState) statePicker.value?.focus();
+    bankSearch?.value?.focus();
   }
 );
 
@@ -119,12 +94,6 @@ onMounted(loadBanks);
 
 async function loadBanks() {
   if (!country.value) return;
-
-  const isExpectingState = isValidStateCountry(country.value);
-  if (isExpectingState && !state.value) {
-    banks.value = [];
-    return;
-  }
 
   loading.value = true;
 
@@ -134,7 +103,6 @@ async function loadBanks() {
       )) || []
     : (await fetchGql('BrandsByCountryQuery', {
         country: country.value,
-        state: state.value,
       }).then(data => data.brands?.edges.map(o => o?.node).filter(isTruthy))) ||
       [];
 
@@ -152,29 +120,14 @@ async function loadBanks() {
     :title="locationTitle"
     :class="locationSearchClasses"
   />
-  <BaseField
-    v-if="isValidStateCountry(country) && !hideLocation"
-    class="relative col-span-2"
-    name="stateSearch"
-    :dark="dark"
-    title="State"
-    :class="locationSearchClasses"
-  >
-    <StateSearch
-      ref="statePicker"
-      :options="Object.keys(STATES_BY_COUNTRY?.[country])"
-      @select="onStateSelect"
-    />
-  </BaseField>
   <BankSearch
     ref="bankSearch"
     v-model="bank"
     class="col-span-2"
     :loading="loading"
-    :disabled="!country || (isValidStateCountry(country) && !state)"
+    :disabled="!country"
     :title="bankTitle"
     :dark="dark"
-    :state="state"
     :country="country"
     :warning="warningText"
     :class="bankSearchClasses"

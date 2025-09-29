@@ -13,7 +13,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
       class="bg-gradient-to-b from-sushi-50 to-pistachio-green pt-28 md:mb-16"
     >
       <div
-        class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
+        class="relative page-fade-in contain max-w-6xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
         <slot name="section1" />
         <div
