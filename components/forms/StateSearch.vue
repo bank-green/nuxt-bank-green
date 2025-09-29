@@ -102,7 +102,7 @@ defineExpose({
     >
       <div
         v-if="isShowing"
-        class="absolute z-10 mt-1 w-full rounded-md"
+        class="z-10 mt-1 w-full rounded-md"
         :class="{
           'bg-white': filteredOptions.length > 0,
           'bg-gray-100': !filteredOptions.length,

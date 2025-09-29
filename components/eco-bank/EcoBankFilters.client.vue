@@ -138,22 +138,26 @@ const getHarvestData = (): HarvestDataFilterInput | null => {
     <div
       class="md:bg-white bg-none md:w-[288px] py-6 md:px-4 rounded-2xl md:h-[85svh] h-auto md:overflow-y-scroll z-10"
     >
-      <StateSearch
+      <div
         v-if="isValidStateCountry(country)"
-        ref="statePicker"
-        :options="Object.keys(STATES_BY_COUNTRY?.[country])"
-        :init-value="
-          STATE_BY_STATE_CODE[props.stateLicensed || ('' as StateCode)]
-        "
-        class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
-        @select="props.onSelectState"
-      />
-
+        class="filter-section-search-state"
+      >
+        <StateSearch
+          ref="statePicker"
+          :options="Object.keys(STATES_BY_COUNTRY?.[country])"
+          :init-value="
+            STATE_BY_STATE_CODE[props.stateLicensed || ('' as StateCode)]
+          "
+          class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
+          @select="props.onSelectState"
+        />
+      </div>
       <div
         class="bg-white md:px-0 md:bg-transparent cursor-pointer md:cursor-auto flex items-center p-4"
         :class="{
           'rounded-2xl': !showFilters,
           'rounded-t-xl': showFilters,
+          'md:pt-20': isValidStateCountry(country),
         }"
         @click="toggleFilters"
       >
@@ -254,3 +258,20 @@ const getHarvestData = (): HarvestDataFilterInput | null => {
     </div>
   </div>
 </template>
+
+<style>
+@media (min-width: 768px) {
+  .filter-section-search-state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 20px 0px 20px;
+    background-color: white;
+    z-index: 1;
+    border-bottom: 1px solid #e5e7eb; /* Tailwind's gray-200 */
+    border-top-left-radius: 12px; /* Tailwind's rounded-t-2xl */
+    border-top-right-radius: 12px; /* Tailwind's rounded-t-2xl */
+  }
+}
+</style>
