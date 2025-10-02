@@ -109,6 +109,7 @@ function closePopup() {
           </NuxtLink>
         </div>
       </div>
+      <AnnouncementBanner />
     </nav>
 
     <transition
