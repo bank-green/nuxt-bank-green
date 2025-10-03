@@ -149,6 +149,7 @@ const getHarvestData = (): HarvestDataFilterInput | null => {
             STATE_BY_STATE_CODE[props.stateLicensed || ('' as StateCode)]
           "
           class="md:pb-4 pb-3 md:max-w-sm md:mx-auto z-30"
+          is-eco-bank-filter
           @select="props.onSelectState"
         />
       </div>
