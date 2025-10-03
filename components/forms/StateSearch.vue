@@ -9,6 +9,7 @@ import ListPicker from '@/components/forms/ListPicker.vue';
 const props = defineProps<{
   options: string[];
   initValue?: string;
+  isEcoBankFilter?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -102,11 +103,11 @@ defineExpose({
     >
       <div
         v-if="isShowing"
-        class="z-10 mt-1 w-full rounded-md"
-        :class="{
-          'bg-white': filteredOptions.length > 0,
-          'bg-gray-100': !filteredOptions.length,
-        }"
+        :class="[
+          !isEcoBankFilter && 'absolute',
+          'z-10 mt-1 w-full rounded-md',
+          filteredOptions.length > 0 ? 'bg-white' : 'bg-gray-100',
+        ]"
       >
         <div v-if="isLoading" class="text-gray-500 text-center p-4">
           Loading
