@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     dirty_deal_2: body.dirty_deal_2 || '',
     rating: body.rating || '',
     country: body.country || '',
-    is_agree_marketing: body.isAgreeMarketing || false,
+    is_agree_marketing: body.isAgreeMarketing,
     path: body.path || '',
     ip: headers['cf-connecting-ip'] || '',
     location: {
