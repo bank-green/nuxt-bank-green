@@ -154,8 +154,6 @@ const { data: contact } = await useAsyncData('contact', () =>
 )
 usePrismicSEO(contact.value?.data)
 
-const extras = ref({ isAgreeMarketing: false })
-
 // Cloudflare Turnstile Captcha
 const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
 
@@ -169,7 +167,7 @@ const {
   warningsMap,
   send,
   busy,
-} = useContactForm('contact page form', ['email', 'isAgreeTerms'], extras) // tag used specifically for GTM
+} = useContactForm('contact page form', ['email', 'isAgreeTerms']) // tag used specifically for GTM
 
 async function onSend() {
   if (await send()) {

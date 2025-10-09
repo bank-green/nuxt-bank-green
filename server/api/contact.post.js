@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     dirty_deal_2: body.dirty_deal_2 || '',
     rating: body.rating || '',
     country: body.country || '',
-    is_agree_marketing: body.isAgreeMarketing || false,
+    is_agree_marketing: body.isAgreeMarketing,
     path: body.path || '',
     ip: headers['cf-connecting-ip'] || '',
     location: {
@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  await sendZapierOrACContact(message)
+  await sendACContact(message)
 
   // return {
   //   message,
@@ -60,78 +60,81 @@ export default defineEventHandler(async (event) => {
 const secret = useRuntimeConfig().public.ACTIVE_CAMPAIGN_KEY
 const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL
 
-async function sendZapierOrACContact (message) {
-  if(message && message.tag === 'contact page form') {
-    // Zapier api for just the contact form (for now)
-    const hookUrl = useRuntimeConfig().public.ZAPIER_CONTACT;
-    await $fetch(hookUrl, { method: 'POST', body: message })
+async function sendACContact (message) {
+  // ActiveCampaign api 
+  const tag = () => {
+    switch(message.tag) {
+      case "FAQ bottom": return 124;
+      case "partners bottom": return 24;
+      case "bank ok bottom": return 101;
+      case "join form": return 201;
+      default: return 14 // contact page form
+    }
   }
-  else {
-    // ActiveCampaign api for rest of forms
-    const tag = () => {
-      switch(message.tag) {
-        case "FAQ bottom": return 124;
-        case "partners bottom": return 24;
-        case "bank ok bottom": return 101;
-        case "join form": return 201;
-        default: return 14 // contact page form
-      }
-    }
 
-    const reqBody = {
-      contact: {
-        email: message.email,
-        firstName: message.first_name,
-        fieldValues: [
-          {
-            field: '2',
-            value: message.bank_display_name
-          },
-          {
-            field: '11',
-            value: message.is_agree_marketing
-          }
-        ]
-      }
-    }
-
-    const sendActiveCampaignForm = await $fetch(baseUrl + '/contact/sync', {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        'Api-Token': secret
-      },
-      body: reqBody
-    }
-    )
-    if (sendActiveCampaignForm?.contact?.id?.length > 0) {
-      // If we have a created contact, add to contact the correct tag
-      const addContactToList = await $fetch(
-        baseUrl + '/contactTags',
+  const reqBody = {
+    contact: {
+      email: message.email,
+      firstName: message.first_name,
+      subject: message.subject,
+      message: message.message,
+      fieldValues: [
         {
-          headers: {
-            accept: 'application/json',
-            'content-type': 'application/json',
-            'Api-Token': secret
-          },
-          method: 'POST',
-          body: {
-            contactTag: {
-              contact: sendActiveCampaignForm?.contact?.id,
-              tag: tag()
-            }
+          field: '2',
+          value: message.bank_display_name
+        },
+        {
+          field: '11',
+          value: message.is_agree_marketing
+        },
+        {
+          field: '19',
+          value: message.subject
+        },
+        {
+          field: '20',
+          value: message.message
+        }
+      ]
+    }
+  }
+
+  const sendActiveCampaignForm = await $fetch(baseUrl + '/contact/sync', {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'Api-Token': secret
+    },
+    body: reqBody
+  }
+  )
+  if (sendActiveCampaignForm?.contact?.id?.length > 0) {
+    // If we have a created contact, add to contact the correct tag
+    const addContactToList = await $fetch(
+      baseUrl + '/contactTags',
+      {
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          'Api-Token': secret
+        },
+        method: 'POST',
+        body: {
+          contactTag: {
+            contact: sendActiveCampaignForm?.contact?.id,
+            tag: tag()
           }
         }
-      )
+      }
+    )
 
-      if (addContactToList?.contactList?.id) {
-        return { success: true }
-      }
-    } else {
-      return {
-        success: false
-      }
+    if (addContactToList?.contactList?.id) {
+      return { success: true }
+    }
+  } else {
+    return {
+      success: false
     }
   }
 }

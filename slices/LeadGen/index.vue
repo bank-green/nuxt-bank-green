@@ -193,7 +193,7 @@ const submitForm = async () => {
     email: email.value,
     bankName: bank.value?.name,
     status: currentStatus.value,
-    marketing: isAgreeMarketing.value ? 'Yes' : 'No',
+    marketing: isAgreeMarketing.value,
   }
 
   const response = await $fetch('/api/lead-gen-active-campaign', {
@@ -204,7 +204,7 @@ const submitForm = async () => {
     },
   })
 
-  if (response.success) {
+  if (response?.success) {
     formError.value = false
     busy.value = false
     navigateTo('/thanks')
