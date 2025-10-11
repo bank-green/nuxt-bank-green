@@ -1,11 +1,13 @@
 <script setup>
-import { asText } from '@prismicio/helpers'
-import CheckList from '@/components/CheckList.vue'
+import { asText } from '@prismicio/helpers';
+import CheckList from '@/components/CheckList.vue';
+import useSSRCache from '~/composables/useSSRCache';
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 const { data: call } = await useAsyncData('calltoaction', () =>
-  client.getSingle('calltoaction'),
-)
+  useSSRCache('calltoaction', () => client.getSingle('calltoaction'))
+);
+
 defineProps({
   title: String,
   paragraph: String,
@@ -13,7 +15,7 @@ defineProps({
   buttonText: String,
   light: Boolean,
   spaced: Boolean,
-})
+});
 </script>
 
 <template>
@@ -25,7 +27,7 @@ defineProps({
       class="w-full text-center font-semibold text-xl md:text-3xl tracking-wider mb-8 md:mb-4"
       :class="light ? 'text-gray-800' : 'text-gray-50'"
     >
-      {{ call?.data?.title || "Start to Bank Green Today" }}
+      {{ call?.data?.title || 'Start to Bank Green Today' }}
     </h2>
     <div
       class="flex flex-col md:flex-row items-center justify-center md:space-x-8"
@@ -42,9 +44,12 @@ defineProps({
       <CheckList
         class="md:w-1/2 my-6 md:text-xl"
         :list="[
-          asText(call?.data?.checklist1) || 'Send a message to your bank that it must defund fossil fuels',
-          asText(call?.data?.checklist2) || 'Join a fast-growing movement of consumers standing up for their future',
-          asText(call?.data?.checklist3) || 'Take a critical climate action with profound effects',
+          asText(call?.data?.checklist1) ||
+            'Send a message to your bank that it must defund fossil fuels',
+          asText(call?.data?.checklist2) ||
+            'Join a fast-growing movement of consumers standing up for their future',
+          asText(call?.data?.checklist3) ||
+            'Take a critical climate action with profound effects',
         ]"
       />
     </div>
