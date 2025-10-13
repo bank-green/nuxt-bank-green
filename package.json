@@ -12,7 +12,7 @@
     "clean": "nuxt clean",
     "slicemachine": "start-slicemachine",
     "deploy": "npx wrangler deploy",
-    "stage": "npx wrangler publish --env staging",
+    "stage": "npx wrangler deploy -e staging",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint-staged": "npx lint-staged",
