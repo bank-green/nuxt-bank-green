@@ -1,30 +1,22 @@
 <script setup lang="ts">
-const { text } = defineProps<{ text: string }>()
-const modifiedText = ref('')
-onMounted(() => {
-  if (!text) {
-    modifiedText.value = ''
-    return
-  }
+const props = defineProps<{ text: string }>();
+const processedText = ref(props.text || '');
+const { process } = await useProcessBankDescriptionText();
 
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(text, 'text/html')
-  const links = doc.querySelectorAll('a')
-  if (links.length > 0) {
-    links.forEach((link) => {
-      link.setAttribute('target', '_blank')
-      link.setAttribute('rel', 'noopener noreferrer')
-    })
+onMounted(() => {
+  processedText.value = process(props.text);
+});
+
+watch(
+  () => props.text,
+  newText => {
+    processedText.value = process(newText);
   }
-  modifiedText.value = doc.body.innerHTML
-})
+);
 </script>
 
 <template>
-  <div
-    class="md:text-2xl tracking-wide mb-4 prose"
-    v-html="modifiedText"
-  />
+  <div class="md:text-2xl tracking-wide mb-4 prose" v-html="processedText" />
 </template>
 
 <style>
