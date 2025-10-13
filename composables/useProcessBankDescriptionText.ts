@@ -6,10 +6,13 @@ export default async function useProcessBankDescriptionText() {
 
     // add tooltip to glossary words
     if (glossary?.terms) {
-      const terms = glossary.terms.map(term => ({
-        name: term.term as string,
-        tooltip: term.tooltip as string,
-      }));
+      const terms = glossary.terms
+        // not all glossary terms have tooltips
+        .filter(term => !!term.tooltip)
+        .map(term => ({
+          name: term.term as string,
+          tooltip: term.tooltip as string,
+        }));
       text = addGlossaryToText(text, terms);
     }
 
