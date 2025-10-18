@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue'
-import Swoosh from '@/components/Swoosh.vue'
-import CallToAction from '@/components/CallToAction.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import ContactMyBankForm from './ContactMyBankForm.vue';
+import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue';
+import Swoosh from '@/components/Swoosh.vue';
+import CallToAction from '@/components/CallToAction.vue';
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
+
+defineProps<{
+  bankName: string;
+  bankEmail?: string;
+}>();
 </script>
 
 <template>
@@ -22,10 +28,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
           <div
             class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8"
           >
-            <NuxtLink
-              to="/sustainable-eco-banks"
-              class="button-green w-auto"
-            >
+            <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">
               Move Your Money
             </NuxtLink>
           </div>
@@ -60,10 +63,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
           <div
             class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center w-auto"
           >
-            <NuxtLink
-              to="/sustainable-eco-banks"
-              class="button-green w-auto"
-            >
+            <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">
               Move Your Money
             </NuxtLink>
           </div>
@@ -77,31 +77,32 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
     </div>
 
     <!-- SECTION THREE -->
-    <div
-      id="section-three"
-      class="relative bg-arctic-blue"
-    >
+    <div id="section-three" class="relative bg-arctic-blue">
       <Swoosh direction="down" />
       <img
         class="relative inline-block mb-4"
         src="/img/illustrations/fishes.svg"
         alt=""
-      >
+      />
       <div class="relative z-10 contain max-w-2xl">
         <slot name="section3" />
       </div>
     </div>
 
     <!-- CALL TO ACTION -->
-    <div
-      id="call-to-action"
-      class="bg-arctic-blue pb-8 pt-8"
-    >
+    <div id="call-to-action" class="bg-arctic-blue pb-8 pt-8">
       <div class="contain flex flex-col justify-center items-center">
-        <CallToAction
-          :light="true"
-          :spaced="true"
-        />
+        <CallToAction :light="true" :spaced="true" />
+      </div>
+    </div>
+
+    <!-- CONTACT MY BANK -->
+    <div
+      id="contact-my-bank"
+      class="bg-arctic-blue py-12 border-t border-pistachio-green"
+    >
+      <div class="contain flex flex-col justify-center items-center max-w-3xl">
+        <ContactMyBankForm :bank-name="bankName" :bank-email="bankEmail" />
       </div>
     </div>
 
@@ -129,10 +130,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
           >
             How do we derive our results?
           </h2>
-          <NuxtLink
-            to="/methodology"
-            class="button-green inline-block w-max"
-          >
+          <NuxtLink to="/methodology" class="button-green inline-block w-max">
             Find out more
           </NuxtLink>
         </div>
