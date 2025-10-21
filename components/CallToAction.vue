@@ -1,11 +1,11 @@
 <script setup>
 import { asText } from '@prismicio/helpers';
 import CheckList from '@/components/CheckList.vue';
-import useSSRCache from '~/composables/useSSRCache';
+import usePrerenderCache from '~/composables/usePrerenderCache';
 
 const { client } = usePrismic();
 const { data: call } = await useAsyncData('calltoaction', () =>
-  useSSRCache('calltoaction', () => client.getSingle('calltoaction'))
+  usePrerenderCache('calltoaction', () => client.getSingle('calltoaction'))
 );
 
 defineProps({
@@ -15,6 +15,18 @@ defineProps({
   buttonText: String,
   light: Boolean,
   spaced: Boolean,
+});
+
+const checklist = computed(() => {
+  const d = call.value?.data ?? {};
+  const defaults = [
+    'Send a message to your bank that it must defund fossil fuels',
+    'Join a fast-growing movement of consumers standing up for their future',
+    'Take a critical climate action with profound effects',
+  ];
+  return defaults.map(
+    (fallback, i) => asText(d[`checklist${i + 1}`]) || fallback
+  );
 });
 </script>
 
@@ -41,17 +53,7 @@ defineProps({
           fallback="Banks live and die on their reputations. Mass movements of money to fossil-free competitors puts those reputations at grave risk. By moving your money to a sustainable financial institution, you will:"
         />
       </div>
-      <CheckList
-        class="md:w-1/2 my-6 md:text-xl"
-        :list="[
-          asText(call?.data?.checklist1) ||
-            'Send a message to your bank that it must defund fossil fuels',
-          asText(call?.data?.checklist2) ||
-            'Join a fast-growing movement of consumers standing up for their future',
-          asText(call?.data?.checklist3) ||
-            'Take a critical climate action with profound effects',
-        ]"
-      />
+      <CheckList class="md:w-1/2 my-6 md:text-xl" :list="checklist" />
     </div>
     <div
       class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8"

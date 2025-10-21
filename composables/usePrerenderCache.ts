@@ -1,10 +1,10 @@
 const cache = new Map();
 
-export default async function useSSRCache<T>(
+export default async function usePrerenderCache<T>(
   key: string,
   _fn: () => Promise<T>
 ): Promise<T> {
-  if (!import.meta.env.SSR) return await _fn();
+  if (!import.meta.prerender) return await _fn();
   if (cache.has(key)) return cache.get(key) as T;
   const data = await _fn();
   cache.set(key, data);

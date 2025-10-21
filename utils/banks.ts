@@ -2,7 +2,7 @@ import * as prismicH from '@prismicio/helpers';
 import type { Client } from '@prismicio/client';
 
 import { get } from './backend';
-import useSSRCache from '~/composables/useSSRCache';
+import usePrerenderCache from '~/composables/usePrerenderCache';
 
 export async function getCountry() {
   const cachedCountry = useCookie('bg.country.suggested', {
@@ -41,7 +41,7 @@ export async function getDefaultFields(
 
   try {
     const key = 'bankpage' + queryKey;
-    const response = await useSSRCache(key, () =>
+    const response = await usePrerenderCache(key, () =>
       prismicClient.getByUID('bankpage', queryKey)
     );
     const prismicDefaultFields = response?.data;
