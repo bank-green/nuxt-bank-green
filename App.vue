@@ -35,32 +35,35 @@ const openSwitchSurveyModal = ref(false);
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false,
 });
-const EXIT_MODAL_DELAY = 30000;
-let exitTimer = null;
 
-const route = useRoute();
-
-function onExitIntent() {
+const handleExitIntent = event => {
   if (hasUserSeenExitIntentModal.value) return;
   if (openSwitchSurveyModal.value) return;
-  if (route.path.includes('/impact')) return;
 
-  if (exitTimer !== null) {
-    clearTimeout(exitTimer);
+  // Case 1: moving toward top (close/tab intent)
+  if (event.type === 'mousemove' && event.clientY <= 10) {
+    triggerModal();
   }
 
-  exitTimer = window.setTimeout(() => {
-    openSwitchSurveyModal.value = true;
-    hasUserSeenExitIntentModal.value = true;
-    exitTimer = null;
-  }, EXIT_MODAL_DELAY);
-}
+  // Case 2: leaving the viewport (mouseleave)
+  if (event.type === 'mouseout' && !event.relatedTarget) {
+    triggerModal();
+  }
+};
+
+const triggerModal = () => {
+  openSwitchSurveyModal.value = true;
+  hasUserSeenExitIntentModal.value = true;
+};
+
+onMounted(() => {
+  window.addEventListener('mousemove', handleExitIntent);
+  document.body.addEventListener('mouseout', handleExitIntent);
+});
 
 onBeforeUnmount(() => {
-  if (exitTimer !== null) {
-    clearTimeout(exitTimer);
-    exitTimer = null;
-  }
+  window.removeEventListener('mousemove', handleExitIntent);
+  document.body.removeEventListener('mouseout', handleExitIntent);
 });
 
 // <!-- Google Tag Manager -->
