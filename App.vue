@@ -35,10 +35,6 @@ const openSwitchSurveyModal = ref(false);
 const hasUserSeenExitIntentModal = useCookie('bg.seenExitIntent', {
   default: () => false,
 });
-// TODO: Remove this in production (but make sure to reset cookie for testing)
-if (import.meta.dev) {
-  hasUserSeenExitIntentModal.value = false; // easier testing in dev
-}
 
 const handleExitIntent = event => {
   if (hasUserSeenExitIntentModal.value) return;
