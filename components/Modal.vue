@@ -29,7 +29,7 @@ function closeModal() {
         class="relative bg-primary-dark bg-opacity-80 flex items-center justify-center h-screen w-full max-h-screen overflow-auto"
       >
         <div
-          class="relative flex items-center justify-center bg-primary-dark px-6 lg:px-10 py-8 text-gray-50 text-center rounded-xl"
+          class="relative flex items-center justify-center bg-primary-dark px-6 lg:px-10 py-12 lg:py-8 text-gray-50 text-center md:rounded-xl"
         >
           <slot />
 
