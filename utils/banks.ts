@@ -1,31 +1,32 @@
-import * as prismicH from '@prismicio/helpers'
-import type { Client } from '@prismicio/client'
+import * as prismicH from '@prismicio/helpers';
+import type { Client } from '@prismicio/client';
 
-import { get } from './backend'
+import { get } from './backend';
+import usePrerenderCache from '~/composables/usePrerenderCache';
 
 export async function getCountry() {
   const cachedCountry = useCookie('bg.country.suggested', {
     default: () => '',
-  })
+  });
 
   if (!cachedCountry.value) {
-    const res = await get('/getCountry')
+    const res = await get('/getCountry');
     if (res.country) {
-      cachedCountry.value = res.country
+      cachedCountry.value = res.country;
     }
   }
-  return cachedCountry
+  return cachedCountry;
 }
 
 type DefaultFields = {
-  rating?: string
-  headline: string
-  subtitle: string
-  description1: string
-  description2: string
-  description3: string
-  description4: string
-}
+  rating?: string;
+  headline: string;
+  subtitle: string;
+  description1: string;
+  description2: string;
+  description3: string;
+  description4: string;
+};
 
 export async function getDefaultFields(
   prismicClient: Client,
@@ -36,11 +37,14 @@ export async function getDefaultFields(
   const queryKey =
     rating === 'unknown'
       ? 'unknownbank-' + institutionType.toLowerCase().replace(/\s/g, '')
-      : rating + 'bank'
+      : rating + 'bank';
 
   try {
-    const response = await prismicClient.getByUID('bankpage', queryKey)
-    const prismicDefaultFields = response?.data
+    const key = 'bankpage' + queryKey;
+    const response = await usePrerenderCache(key, () =>
+      prismicClient.getByUID('bankpage', queryKey)
+    );
+    const prismicDefaultFields = response?.data;
 
     return {
       headline: prismicH.asHTML(prismicDefaultFields?.headline) || '',
@@ -49,12 +53,12 @@ export async function getDefaultFields(
       description2: prismicH.asHTML(prismicDefaultFields?.description2) || '',
       description3: prismicH.asHTML(prismicDefaultFields?.description3) || '',
       description4: prismicH.asHTML(prismicDefaultFields?.description4) || '',
-    }
+    };
   } catch (err) {
     console.warn(
       `⚠️ Could not fetch defaultFields for queryKey "${queryKey}":`,
       err
-    )
+    );
 
     return {
       rating: 'unknown',
@@ -64,6 +68,6 @@ export async function getDefaultFields(
       description2: `<p>Bank.Green was founded on the belief that banks have had an easy time from their customers for too long. Mass movements will pull us out of the climate crisis – and they’ll pull ${bankname} out, too.</p>`,
       description3: '',
       description4: '',
-    }
+    };
   }
 }
