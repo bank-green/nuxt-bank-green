@@ -50,14 +50,15 @@ const { data: prismicPageData } = await useAsyncData(
   `sfipage-${bankTag.value}`,
 
   () =>
-    useSSRCache(`sfipage-${bankTag.value}`, () =>
+    usePrerenderCache(`sfipage-${bankTag.value}`, () =>
       client.getByUID('sfipage', bankTag.value)
     ),
   { transform: res => res?.data }
 );
 const { data: prismicDefaultPageData } = await useAsyncData(
   'sfidefaults',
-  () => useSSRCache('sfidefaults', () => client.getByID('ZFpGfhEAACEAuFIf')),
+  () =>
+    usePrerenderCache('sfidefaults', () => client.getByID('ZFpGfhEAACEAuFIf')),
   { transform: res => res?.data }
 );
 
