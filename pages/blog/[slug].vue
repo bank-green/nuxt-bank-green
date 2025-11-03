@@ -6,23 +6,15 @@
           <h1 class="text-2xl sm:text-5xl font-extrabold text-sushi-900 mb-4">
             {{ post?.data.title }}
           </h1>
-          <span
-            v-if="isUpdated"
-            class="text-base text-gray-700 font-semibold"
-          >
+          <span v-if="isUpdated" class="text-base text-gray-700 font-semibold">
             Updated {{ modifiedDateDisplay }} by {{ post?.data.author }}
           </span>
-          <span
-            v-else
-            class="text-base text-gray-700 font-semibold"
-          >
+          <span v-else class="text-base text-gray-700 font-semibold">
             Posted {{ publishedDateDisplay }} by {{ post?.data.author }}
           </span>
         </div>
         <div class="flex flex-col justify-center items-center">
-          <div
-            class="prose sm:prose-lg xl:prose-xl break-words w-full"
-          >
+          <div class="prose sm:prose-lg xl:prose-xl break-words w-full">
             <SliceZone
               :slices="post?.data.slices ?? []"
               :components="comps"
@@ -36,10 +28,7 @@
       <Swoosh direction="down" />
       <div class="contain">
         <div class="flex justify-center">
-          <CallToAction
-            class="max-w-5xl"
-            :light="true"
-          />
+          <CallToAction class="max-w-5xl" :light="true" />
         </div>
       </div>
       <div class="flex items-end justify-end pointer-events-none">
@@ -53,20 +42,12 @@
     v-else-if="error"
     class="w-full h-screen flex items-center justify-center flex flex-col items-center"
   >
-    <p class="text-4xl font-bold">
-      No blog found
-    </p>
-    <NuxtLink
-      class="mt-2 border-b border-primary-dark"
-      to="/blog"
-    >
+    <p class="text-4xl font-bold">No blog found</p>
+    <NuxtLink class="mt-2 border-b border-primary-dark" to="/blog">
       Go back to Blogs
     </NuxtLink>
   </div>
-  <div
-    v-else
-    class="w-full h-screen flex items-center justify-center"
-  >
+  <div v-else class="w-full h-screen flex items-center justify-center">
     <span>
       <svg
         width="32"
@@ -85,67 +66,75 @@
 </template>
 
 <script setup lang="ts">
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import { components } from '~~/slices'
+import { defineSliceZoneComponents } from '@prismicio/vue';
+import type { BlogpostDocument } from '~/prismicio-types';
+import { components } from '~~/slices';
 
-const route = useRoute()
-const error = ref(false)
+const route = useRoute();
+const error = ref(false);
 
-const { client } = usePrismic()
-const slug = route.path.split('/').at(-1) ?? ''
-const { data: post } = await useAsyncData(slug, () =>
-  client.getByUID('blogpost', slug),
-)
+const slug = route.path.split('/').at(-1) ?? '';
+const post = ref<globalThis.Ref<BlogpostDocument<string>> | null>(null);
 
-const comps = ref(defineSliceZoneComponents(components))
+// All blog posts are pre-rendered at build time using SSG (configured in nuxt.config via sitemap.vue)
+// This avoids unnecessary calls to the Prismic API for non-existent blog entries
+if (import.meta.prerender || import.meta.dev) {
+  const { client } = usePrismic();
+  const { data } = await useAsyncData(slug, () =>
+    client.getByUID('blogpost', slug)
+  );
+
+  post.value = data.value;
+}
+
+const comps = ref(defineSliceZoneComponents(components));
 
 const publishedDateDisplay = computed(() => {
   if (!post.value?.first_publication_date) {
-    return ''
+    return '';
   }
-  const date = new Date(post.value?.first_publication_date)
+  const date = new Date(post.value?.first_publication_date);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  })
-})
+  });
+});
 
 const modifiedDateDisplay = computed(() => {
   if (!post.value?.last_publication_date) {
-    return ''
+    return '';
   }
-  const date = new Date(post.value?.last_publication_date)
+  const date = new Date(post.value?.last_publication_date);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  })
-})
+  });
+});
 
 const isUpdated = computed(() => {
   return (
-    post.value?.first_publication_date
-    !== post.value?.last_publication_date
-  )
-})
+    post.value?.first_publication_date !== post.value?.last_publication_date
+  );
+});
 
 const getDescription = (p: typeof post) => {
-  const array = p.value?.data?.description ?? []
+  const array = p.value?.data?.description ?? [];
   for (const item of array) {
     if (item.type === 'paragraph') {
-      return item.text
+      return item.text;
     }
   }
-  return ''
-}
+  return '';
+};
 
-const title = post.value?.data?.title ?? 'Blog Post'
-const description = getDescription(post)
+const title = post.value?.data?.title ?? 'Blog Post';
+const description = getDescription(post);
 
 const url = computed(() => {
-  return `https://bank.green/blog/${slug}`
-})
+  return `https://bank.green/blog/${slug}`;
+});
 
 useHead({
   title,
@@ -163,13 +152,28 @@ useHead({
     { property: 'og:locale', content: 'en_US' },
     { property: 'og:type', content: 'article' },
     { property: 'og:site_name', content: 'Bank Green' },
-    { property: 'article:published_time', content: post.value?.first_publication_date ?? '' },
-    { property: 'article:modified_time', content: post.value?.last_publication_date ?? '' },
+    {
+      property: 'article:published_time',
+      content: post.value?.first_publication_date ?? '',
+    },
+    {
+      property: 'article:modified_time',
+      content: post.value?.last_publication_date ?? '',
+    },
     { property: 'og:url', content: url.value },
     { property: 'og:image', content: post.value?.data.cardimage.url ?? '' },
-    { property: 'og:image:alt', content: post.value?.data.cardimage.alt ?? title },
-    { property: 'og:image:width', content: post.value?.data.cardimage.dimensions?.width ?? 1200 },
-    { property: 'og:image:height', content: post.value?.data.cardimage.dimensions?.height ?? 630 },
+    {
+      property: 'og:image:alt',
+      content: post.value?.data.cardimage.alt ?? title,
+    },
+    {
+      property: 'og:image:width',
+      content: post.value?.data.cardimage.dimensions?.width ?? 1200,
+    },
+    {
+      property: 'og:image:height',
+      content: post.value?.data.cardimage.dimensions?.height ?? 630,
+    },
     { property: 'og:title', content: title },
     { name: 'apple-mobile-web-app-title', content: title },
     { name: 'twitter:card', content: 'summary_large_image' },
@@ -183,22 +187,26 @@ useHead({
     { name: 'twitter:data2', content: publishedDateDisplay.value },
     { property: 'og:description', content: description },
     { name: 'description', content: description },
-    { name: 'robots', content: 'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large' },
+    {
+      name: 'robots',
+      content:
+        'follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large',
+    },
   ],
-})
+});
 
 useJsonld({
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
-  'mainEntityOfPage': {
+  mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': url.value,
   },
-  'headline': title,
-  'image': post.value?.data.cardimage.url ?? '',
-  'datePublished': post.value?.first_publication_date ?? '',
-  'dateModified': post.value?.last_publication_date ?? '',
-})
+  headline: title,
+  image: post.value?.data.cardimage.url ?? '',
+  datePublished: post.value?.first_publication_date ?? '',
+  dateModified: post.value?.last_publication_date ?? '',
+});
 </script>
 
 <style></style>
