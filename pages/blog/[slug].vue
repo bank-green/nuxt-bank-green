@@ -78,6 +78,7 @@ const post = ref<globalThis.Ref<BlogpostDocument<string>> | null>(null);
 
 // All blog posts are pre-rendered at build time using SSG (configured in nuxt.config via sitemap.vue)
 // This avoids unnecessary calls to the Prismic API for non-existent blog entries
+// Done after a bot attack flooded Prismic endpoints
 if (import.meta.prerender || import.meta.dev) {
   const { client } = usePrismic();
   const { data } = await useAsyncData(slug, () =>
