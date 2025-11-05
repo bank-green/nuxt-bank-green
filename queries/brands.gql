@@ -83,6 +83,9 @@ query BrandByTagQuery($tag: String!) {
     name
     website
     commentary {
+      embraceCampaign {
+        id
+      }
       lastReviewed
       rating
       ratingInherited
