@@ -39,29 +39,37 @@
   </div>
 </template>
 
-<script setup>
-import { useRoute } from 'vue-router';
+<script setup lang="ts">
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useEmbraceStore } from '~/stores/embrace';
 
 const route = useRoute();
-const bankName = route.query.bankName || 'Your Bank';
-const tone = route.query.tone || 'formal';
+const bankName = (route.query.bankName as string) || 'Your Bank';
+const tone = (route.query.tone as string) || 'polite';
 
-const emailSubject = computed(() => `Inquiry from ${bankName}`);
-const emailMessage = computed(() => {
-  return `Dear ${bankName},
+const store = useEmbraceStore();
+const { draft } = storeToRefs(store);
+
+const emailSubject = computed(
+  () => draft.value.subject || `Inquiry from ${bankName}`
+);
+const emailMessage = computed(
+  () =>
+    draft.value.text ||
+    `Dear ${bankName},
 
 I am writing to you with a ${tone} tone to discuss some important matters.
 
 Thank you for your attention.
 
 Best regards,
-[Your Name]`;
-});
+[Your Name]`
+);
 
-const mailtoLink = computed(() => {
-  const subject = encodeURIComponent(emailSubject.value);
-  const body = encodeURIComponent(emailMessage.value);
-  return `mailto:?subject=${subject}&body=${body}`;
-});
+const mailtoLink = computed(
+  () =>
+    `mailto:?subject=${encodeURIComponent(emailSubject.value)}&body=${encodeURIComponent(emailMessage.value)}`
+);
 </script>

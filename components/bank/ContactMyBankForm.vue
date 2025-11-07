@@ -25,7 +25,7 @@
 
       <!-- Privacy checkbox -->
       <label class="flex items-center gap-2">
-        <input type="checkbox" v-model="accepted" />
+        <input v-model="accepted" type="checkbox" />
         <span>
           I agree to the
           <NuxtLink
@@ -39,13 +39,16 @@
       </label>
 
       <!-- Submit button -->
-      <button
+      <!-- <button
         type="button"
         @click="handleSubmit"
         :disabled="!isFormValid"
         class="button-green w-full disabled:opacity-60"
       >
         Generate Email Message
+      </button> -->
+      <button :disabled="loading" @click="generateAndGo(bankName)">
+        {{ loading ? 'Generating…' : 'Generate Email Message' }}
       </button>
     </form>
   </section>
@@ -54,31 +57,74 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useEmbraceStore } from '../../stores/embrace';
+
+const router = useRouter();
+const store = useEmbraceStore();
+const { draft } = storeToRefs(store);
+// // Form state
+const tone = ref<'polite' | 'firm'>('polite');
+const accepted = ref(false);
+const isFormValid = computed(() => accepted.value);
+
+const loading = ref(false);
 
 const props = defineProps<{
   bankName: string;
   bankEmail?: string;
 }>();
 
-const router = useRouter();
+async function generateAndGo(bankName: string) {
+  loading.value = true;
+  try {
+    const res = await fetch('/api/embrace', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bankName,
+        name: 'Neri Esparza',
+        email: 'neri@test.com',
+        hometown: 'Jersey City, NJ',
+        background:
+          'Bank.Green user contacting brand about sustainability concerns.',
+        tone: 'POLITE',
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+    store.setDraft({
+      subject: data.subject,
+      text: data.text,
+      campaignId: data.campaign_id,
+    });
+    router.push({
+      path: '/contact-my-bank',
+      query: { bankName, tone: 'polite' },
+    });
+  } finally {
+    loading.value = false;
+  }
+}
+const emailSubject = computed(
+  () => draft.value.subject || `Inquiry from ${props.bankName}`
+);
+const emailMessage = computed(
+  () => draft.value.text || `Dear ${props.bankName}, ...`
+);
 
-// Form state
-const tone = ref<'polite' | 'firm'>('polite');
-const accepted = ref(false);
-const isFormValid = computed(() => accepted.value);
-
-// Handle submit -> navigate to next page
-const handleSubmit = () => {
-  if (!isFormValid.value) return;
-  router.push({
-    path: '/contact-my-bank',
-    query: {
-      bankName: props.bankName,
-      bankEmail: props.bankEmail || '',
-      tone: tone.value,
-    },
-  });
-};
+// // Handle submit -> navigate to next page
+// const handleSubmit = () => {
+//   if (!isFormValid.value) return;
+//   router.push({
+//     path: '/contact-my-bank',
+//     query: {
+//       bankName: props.bankName,
+//       bankEmail: props.bankEmail || '',
+//       tone: tone.value,
+//     },
+//   });
+// };
 </script>
 
 <style scoped>
