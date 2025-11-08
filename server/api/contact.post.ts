@@ -16,6 +16,7 @@ interface ContactRequestBody {
   country?: string;
   isAgreeMarketing?: boolean;
   path?: string;
+  currentStatus?: string;
 }
 
 interface ContactMessage {
@@ -38,6 +39,7 @@ interface ContactMessage {
   country: string;
   is_agree_marketing?: boolean;
   path: string;
+  current_status: string;
   ip: string;
   location: {
     country: string;
@@ -109,6 +111,7 @@ export default defineEventHandler(async event => {
     country: body.country || '',
     is_agree_marketing: body.isAgreeMarketing,
     path: body.path || '',
+    current_status: body.currentStatus || '',
     ip: (headers['cf-connecting-ip'] as string) || '',
     location: {
       country: (headers['cf-ipcountry'] as string) || '',
@@ -123,11 +126,6 @@ export default defineEventHandler(async event => {
 
   await sendACContact(message);
 
-  // return {
-  //   message,
-  //   body,
-  //   headers,
-  // };
   return 'OK';
 });
 
@@ -138,6 +136,49 @@ async function sendACContact(
   message: ContactMessage
 ): Promise<{ success: boolean } | undefined> {
   // ActiveCampaign api
+  /* tags:
+  4: worst
+  5: ok
+  6: bad
+  7: great
+  8: unknown
+  9: switch later
+  11: index bottom
+  13: pledge page form
+  14: contact page form
+  21: has switched
+  24: partners bottom
+  26: not listed bottom
+  37: take action
+  46: double-opt-in bypassed
+  56: broken double-opt-in
+  81: changed preferences
+  89: signupbox
+  99: modal /sustainable-ethical-banks
+  101: bank ok bottom
+  103: bank bad bottom
+  109: modal /
+  111: modal /pledge
+  121: pledge
+  124: FAQ bottom
+  132: unk
+  152: Successful Pledge
+  162: tiktok ads
+  163: tiktok lead
+  185: Dead Pledge
+  201: join form
+  515: Bank Rank: bad
+  516: Bank Rank: worst
+  517: Confirmed
+  518: Launch
+  519: Mailing List: Bank.Green Updates
+  526: unsubscribed
+  554: Unsubscribed from newsletter via EMT
+  827: Double Opt In NOT Confirmed
+  859: n/a
+  504: Confirmed but unengaged
+  */
+
   const tag = (): number => {
     switch (message.tag) {
       case 'FAQ bottom':
@@ -148,6 +189,14 @@ async function sendACContact(
         return 101;
       case 'join form':
         return 201;
+      case 'leadGen':
+        return 27; // Lead generation form
+      case 'not listed bottom':
+        return 26; // Bank not listed form
+      case 'submitbank':
+        return 28; // Submit bank form
+      case 'signupbox':
+        return 14; // Generic signup
       default:
         return 14; // contact page form
     }
@@ -167,6 +216,10 @@ async function sendACContact(
         {
           field: '11',
           value: message.is_agree_marketing,
+        },
+        {
+          field: '18',
+          value: message.current_status,
         },
         {
           field: '19',
