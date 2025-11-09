@@ -40,9 +40,10 @@ if (fs.existsSync(envPath)) {
 
 // Valid tag IDs extracted from the contact.post.ts file
 const VALID_TAG_IDS = new Set([
-  4, 5, 6, 7, 8, 9, 11, 13, 14, 21, 24, 26, 27, 28, 37, 46, 56, 81, 84, 89, 99,
-  101, 103, 109, 111, 121, 124, 132, 152, 162, 163, 185, 201, 298, 515, 516,
-  517, 518, 519, 526, 554, 601, 743, 744, 745, 746, 827, 859, 861, 504,
+  4, 5, 6, 7, 8, 9, 11, 13, 14, 21, 24, 26, 27, 28, 37, 46, 56, 77, 81, 83, 84,
+  89, 95, 99, 101, 103, 109, 111, 121, 124, 132, 152, 162, 163, 185, 201, 298,
+  514, 515, 516, 517, 518, 519, 526, 554, 601, 743, 744, 745, 746, 827, 859,
+  860, 861, 504,
 ]);
 
 const AC_URL = process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL?.trim();
@@ -54,26 +55,6 @@ if (!AC_URL || !AC_KEY) {
     'Missing NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL or NUXT_PUBLIC_ACTIVE_CAMPAIGN_KEY in .env file'
   );
   process.exit(1);
-}
-
-async function getContacts(limit = 100, offset = 0) {
-  const url = new URL(`${AC_URL}/contacts`);
-  url.searchParams.append('limit', limit.toString());
-  url.searchParams.append('offset', offset.toString());
-
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'Api-Token': AC_KEY,
-      accept: 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch contacts: ${response.statusText}`);
-  }
-
-  return response.json();
 }
 
 async function getContactTags(contactId) {
@@ -93,6 +74,50 @@ async function getContactTags(contactId) {
 
   const data = await response.json();
   return data.contactTags || [];
+}
+
+async function getAllTags(limit = 100, offset = 0) {
+  const url = new URL(`${AC_URL}/tags`);
+  url.searchParams.append('limit', limit.toString());
+  url.searchParams.append('offset', offset.toString());
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Api-Token': AC_KEY,
+      accept: 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch tags: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+async function getContactsForTag(tagId, limit = 100, offset = 0) {
+  // Query contacts directly by tag ID using the proper parameter format
+  const url = new URL(`${AC_URL}/contacts`);
+  url.searchParams.append('limit', limit.toString());
+  url.searchParams.append('offset', offset.toString());
+  url.searchParams.append('tagid', tagId.toString());
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'Api-Token': AC_KEY,
+      accept: 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch contacts for tag ${tagId}: ${response.statusText}`
+    );
+  }
+
+  return response.json();
 }
 
 async function updateContact(contactId, email, firstName, bankName) {
@@ -190,82 +215,76 @@ function isSystemTag(tagName) {
 }
 
 async function processAllContacts() {
-  let offset = 0;
+  let tagOffset = 0;
+  let contactOffset = 0;
   const limit = 100;
   let totalProcessed = 0;
   let totalUpdated = 0;
   const nonBankTags = new Map(); // Map of tagId -> tagName for system tags
 
+  // Create timestamped log file for this run
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5); // YYYY-MM-DDTHH-mm-ss
+  const logPath = path.join(__dirname, '..', `fix-ac-tags-${timestamp}.log`);
+  console.log(`Log file: ${logPath}\n`);
+
   try {
+    // Fetch all tags and iterate through them
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      console.log(`Fetching contacts (offset: ${offset})...`);
-      const result = await getContacts(limit, offset);
+      console.log(`Fetching tags (offset: ${tagOffset})...`);
+      const tagsResult = await getAllTags(limit, tagOffset);
 
-      if (!result.contacts || result.contacts.length === 0) {
-        console.log('No more contacts to process');
+      if (!tagsResult.tags || tagsResult.tags.length === 0) {
+        console.log('No more tags to process');
         break;
       }
 
-      for (const contact of result.contacts) {
-        totalProcessed++;
+      for (const tagObj of tagsResult.tags) {
+        const tagId = tagObj.id;
+        const tagName = tagObj.tag;
 
-        // Fetch tags for this contact
-        let tags = [];
-        try {
-          tags = await getContactTags(contact.id);
-        } catch (error) {
-          console.error(
-            `Error fetching tags for contact ${contact.id}:`,
-            error.message
+        // Skip valid tags
+        if (VALID_TAG_IDS.has(parseInt(tagId, 10))) {
+          continue;
+        }
+
+        // Track system/non-bank tags
+        if (isSystemTag(tagName) && !nonBankTags.has(tagId)) {
+          nonBankTags.set(tagId, tagName);
+          console.log(
+            `Skipping system tag ${tagId} (${tagName}) - will be added to valid list`
           );
           continue;
         }
 
-        // Find tags that are NOT in the valid list
-        const invalidTags = tags.filter(
-          t => !VALID_TAG_IDS.has(parseInt(t.tag, 10))
-        );
+        console.log(`\nProcessing tag ${tagId}: ${tagName}`);
 
-        if (invalidTags.length > 0) {
-          console.log(
-            `Contact ${contact.id} (${contact.email}) has ${invalidTags.length} invalid tag(s):`
-          );
+        // Get all contacts with this tag
+        contactOffset = 0;
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          try {
+            const contactsResult = await getContactsForTag(
+              tagId,
+              limit,
+              contactOffset
+            );
 
-          for (const contactTag of invalidTags) {
-            const tagId = contactTag.tag;
-            const contactTagId = contactTag.id; // The ID of the contactTag relationship
-            // We need to fetch the tag details to get the tag name
-            let tagName = '';
-            try {
-              const tagResponse = await fetch(`${AC_URL}/tags/${tagId}`, {
-                method: 'GET',
-                headers: {
-                  'Api-Token': AC_KEY,
-                  accept: 'application/json',
-                },
-              });
-              if (tagResponse.ok) {
-                const tagData = await tagResponse.json();
-                tagName = tagData.tag?.tag || `Tag ${tagId}`;
-              } else {
-                tagName = `Tag ${tagId}`;
-              }
-            } catch (error) {
-              console.error(error);
-              tagName = `Tag ${tagId}`;
+            if (
+              !contactsResult.contacts ||
+              contactsResult.contacts.length === 0
+            ) {
+              break;
             }
 
-            // Track system/non-bank tags
-            if (isSystemTag(tagName) && !nonBankTags.has(tagId)) {
-              nonBankTags.set(tagId, tagName);
-            }
+            for (const contact of contactsResult.contacts) {
+              const contactId = contact.id;
 
-            console.log(`  - Tag ID: ${tagId}, Tag Name: ${tagName}`);
+              totalProcessed++;
 
-            try {
-              // Only update if it looks like a bank name, skip system tags
-              if (!isSystemTag(tagName)) {
+              console.log(`  Processing Contact ${contactId}: ${tagName}`);
+
+              try {
                 // Update the Bank field with the tag name
                 await updateContact(
                   contact.id,
@@ -276,35 +295,59 @@ async function processAllContacts() {
                 const prefix = DRY_RUN ? '[DRY-RUN]' : '✓';
                 console.log(`    ${prefix} Updated Bank field to "${tagName}"`);
 
-                // Remove the invalid tag
-                await removeTagFromContact(contact.id, contactTagId);
-                console.log(`    ${prefix} Removed tag ID ${tagId}`);
+                // Get the contact tags to find the one we need to remove
+                const contactTags = await getContactTags(contactId);
+                const contactTagToRemove = contactTags.find(
+                  ct => parseInt(ct.tag, 10) === parseInt(tagId, 10)
+                );
 
-                totalUpdated++;
-              } else {
-                console.log(
-                  `    ⊘ Skipping system tag (should be added to valid list)`
+                if (contactTagToRemove) {
+                  // Remove the invalid tag
+                  await removeTagFromContact(contact.id, contactTagToRemove.id);
+                  console.log(`    ${prefix} Removed tag ID ${tagId}`);
+                  totalUpdated++;
+                } else {
+                  console.log(
+                    `    ⚠ Tag ID ${tagId} not found in contact tags, skipping removal`
+                  );
+                }
+              } catch (error) {
+                console.error(
+                  `    ✗ Error processing contact ${contactId}:`,
+                  error.message
                 );
               }
-            } catch (error) {
-              console.error(
-                `    ✗ Error processing tag ${tagId} for contact ${contact.id}:`,
-                error.message
-              );
             }
+
+            // Check if there are more contacts with this tag
+            if (
+              contactsResult.meta &&
+              contactsResult.meta.offset + contactsResult.meta.limit >=
+                contactsResult.meta.total
+            ) {
+              break;
+            }
+
+            contactOffset += limit;
+          } catch (error) {
+            console.error(
+              `Error fetching contacts for tag ${tagId}:`,
+              error.message
+            );
+            break;
           }
         }
       }
 
-      // Check if there are more contacts
+      // Check if there are more tags
       if (
-        result.meta &&
-        result.meta.offset + result.meta.limit >= result.meta.total
+        tagsResult.meta &&
+        tagsResult.meta.offset + tagsResult.meta.limit >= tagsResult.meta.total
       ) {
         break;
       }
 
-      offset += limit;
+      tagOffset += limit;
     }
   } catch (error) {
     console.error('Fatal error:', error.message);

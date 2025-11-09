@@ -187,8 +187,14 @@ async function sendACContact(
         return 24;
       case 'bank ok bottom':
         return 101;
+      case 'bank bad bottom':
+        return 103;
+      case 'index bottom':
+        return 11;
       case 'join form':
         return 201;
+      case 'take action':
+        return 37;
       case 'leadGen':
         return 27; // Lead generation form
       case 'not listed bottom':
