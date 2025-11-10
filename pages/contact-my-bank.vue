@@ -55,8 +55,10 @@ const { draft } = storeToRefs(store);
 const emailSubject = computed(
   () => draft.value.subject || `Inquiry from ${bankName}`
 );
-const emailMessage = computed(
-  () =>
+console.log('u', draft.value.text, 'u');
+
+const emailMessage = computed(() => {
+  return (
     draft.value.text ||
     `Dear ${bankName},
 
@@ -66,10 +68,18 @@ Thank you for your attention.
 
 Best regards,
 [Your Name]`
+  );
+});
+
+const emailContactBank = computed(
+  () => draft.value.contactEmail || 'bank@green.com'
 );
+console.log(emailMessage.value);
+
+const emailBcc = computed(() => draft.value.bccEmail || 'bank@green.com');
 
 const mailtoLink = computed(
   () =>
-    `mailto:?subject=${encodeURIComponent(emailSubject.value)}&body=${encodeURIComponent(emailMessage.value)}`
+    `mailto:${encodeURIComponent(emailContactBank.value)}?cc=${encodeURIComponent(emailBcc.value)}?subject=${encodeURIComponent(emailSubject.value)}&body=${encodeURIComponent(emailMessage.value)}`
 );
 </script>

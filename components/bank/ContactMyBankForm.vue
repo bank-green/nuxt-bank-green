@@ -10,16 +10,18 @@
       directly from your inbox.
     </p>
 
-    <form
-      @submit.prevent="handleSubmit"
-      class="flex flex-col gap-6 max-w-md mx-auto text-left"
-    >
+    <form class="flex flex-col gap-6 max-w-md mx-auto text-left">
       <!-- Tone selection -->
       <label class="flex flex-col gap-1">
         <span class="font-medium">Tone</span>
-        <select v-model="tone" class="border border-gray-300 rounded p-2">
-          <option value="polite">Polite</option>
-          <option value="firm">Firm</option>
+        <select
+          id="tone"
+          v-model="selectedTone"
+          class="border border-gray-300 rounded p-2"
+        >
+          <option v-for="tone in tones" :key="tone" :value="tone">
+            {{ tone }}
+          </option>
         </select>
       </label>
 
@@ -55,25 +57,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
 import { useEmbraceStore } from '../../stores/embrace';
 
 const router = useRouter();
 const store = useEmbraceStore();
-const { draft } = storeToRefs(store);
 // // Form state
-const tone = ref<'polite' | 'firm'>('polite');
-const accepted = ref(false);
-const isFormValid = computed(() => accepted.value);
-
+const tones = [
+  'POLITE',
+  'FRIENDLY',
+  'FORMAL',
+  'DIRECT',
+  'HUMOROUS',
+  'ANGRY',
+  'EMPATHETIC',
+  'CASUAL',
+];
 const loading = ref(false);
 
 const props = defineProps<{
   bankName: string;
   bankEmail?: string;
 }>();
+const selectedTone = ref('polite');
 
 async function generateAndGo(bankName: string) {
   loading.value = true;
@@ -83,45 +90,40 @@ async function generateAndGo(bankName: string) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         bankName,
-        name: 'Neri Esparza',
-        email: 'neri@test.com',
-        hometown: 'Jersey City, NJ',
-        background:
-          'Bank.Green user contacting brand about sustainability concerns.',
-        tone: 'POLITE',
+        tone: selectedTone.value,
       }),
     });
+
     const data = await res.json();
-    console.log(data);
+
     store.setDraft({
       subject: data.subject,
       text: data.text,
       campaignId: data.campaign_id,
+      contactEmail: data.contactEmail,
     });
     router.push({
       path: '/contact-my-bank',
-      query: { bankName, tone: 'polite' },
+      query: {
+        bankName,
+        tone: selectedTone.value,
+      },
     });
   } finally {
     loading.value = false;
   }
 }
-const emailSubject = computed(
-  () => draft.value.subject || `Inquiry from ${props.bankName}`
-);
-const emailMessage = computed(
-  () => draft.value.text || `Dear ${props.bankName}, ...`
-);
 
-// // Handle submit -> navigate to next page
+// Handle submit -> navigate to next page
 // const handleSubmit = () => {
-//   if (!isFormValid.value) return;
+//   // Assume valid if accepted and bankName is set
+//   if (!accepted.value || !props.bankName) return;
 //   router.push({
 //     path: '/contact-my-bank',
 //     query: {
 //       bankName: props.bankName,
 //       bankEmail: props.bankEmail || '',
-//       tone: tone.value,
+//       tone: selectedTone.value,
 //     },
 //   });
 // };

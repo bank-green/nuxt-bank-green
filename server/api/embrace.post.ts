@@ -76,5 +76,7 @@ export default defineEventHandler(async event => {
     subject: payload.subject ?? payload.response?.subject ?? '',
     text: payload.text ?? payload.response?.text ?? '',
     response: payload,
+    contactEmail: payload.response?.contactEmail ?? null,
+    bccEmail: payload.response?.bccEmail,
   };
 });

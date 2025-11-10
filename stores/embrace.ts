@@ -5,16 +5,20 @@ type Draft = {
   text: string;
   campaignId?: number;
   brandTag?: string;
+  contactEmail: string;
+  bccEmail: string;
 };
 
 export const useEmbraceStore = defineStore('embrace', {
-  state: () => ({ draft: { subject: '', text: '' } as Draft }),
+  state: () => ({
+    draft: { subject: '', text: '', contactEmail: '', bccEmail: '' } as Draft,
+  }),
   actions: {
     setDraft(p: Partial<Draft>) {
       this.draft = { ...this.draft, ...p };
     },
     clearDraft() {
-      this.draft = { subject: '', text: '' };
+      this.draft = { subject: '', text: '', contactEmail: '', bccEmail: '' };
     },
   },
 });
