@@ -1,40 +1,62 @@
 <template>
   <div
-    class="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-6"
+    class="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-b from-sushi-50 to-pistachio-green p-28"
   >
-    <h1 class="text-4xl font-bold text-white mb-4">Contacting your bank</h1>
-    <p class="text-gray-300 mb-8 text-center max-w-xl">
-      You may copy the email message and send it using your personal email
-      account.
-    </p>
     <div
-      class="bg-white rounded-lg shadow-lg max-w-xl w-full p-6 flex flex-col items-center"
+      class="w-full ax-w-5xl rounded-3xl bg-[#22283a] px-8 py-10 md:px-12 md:py-12 text-white grid"
     >
-      <div class="mb-4 flex flex-col items-center">
-        <div
-          class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center mb-2"
+      <!-- w-full max-w-5xl rounded-3xl bg-slate-900/70 border border-white/10 px-6 py-10 md:px-10 md:py-12" -->
+      <!-- Header -->
+      <header class="mb-8 text-center">
+        <h1
+          class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight"
         >
-          <!-- Placeholder for bank logo -->
-          <span class="text-gray-600 font-semibold text-xl">Logo</span>
+          Contacting your bank
+        </h1>
+        <div
+          class="mx-auto max-w-xl rounded-2xl bg-white/15 px-6 py-4 text-sm md:text-base text-white"
+        >
+          <p>
+            You may copy the email message and send it using your personal email
+            account.
+          </p>
         </div>
-        <h2 class="text-2xl font-semibold mb-1">{{ bankName }}</h2>
-      </div>
-      <p class="text-sm text-gray-700 mb-4 text-center">
-        Please remember to blind copy us in the email!
-        <br />
-        <span class="font-mono">BCC: begreener@bank.green</span>
-      </p>
-      <textarea
-        readonly
-        class="w-full h-48 p-3 border border-gray-300 rounded mb-6 resize-none text-gray-900"
-        :value="emailMessage"
-      ></textarea>
-      <a
-        :href="mailtoLink"
-        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded transition-colors duration-300"
+      </header>
+
+      <!-- Card -->
+      <div
+        class="mx-auto mt-8 w-full max-w-3xl rounded-3xl shadow-lg px-6 py-6 md:px-8 md:py-8"
       >
-        Open in Email Client
-      </a>
+        <!-- Bank header -->
+        <div class="flex items-center gap-3 mb-4">
+          <div
+            class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-200 text-sky-900 text-lg font-bold"
+          ></div>
+          {{ bankName?.[0] || 'B' }}
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-white">
+            {{ bankName }}
+          </p>
+          <p class="text-xs text-white/70">Message to your bank</p>
+        </div>
+        <!-- Message textarea -->
+        <textarea
+          readonly
+          class="mt-4 w-full h-72 rounded-xl border border-white/30 bg-white/90 p-4 text-sm text-slate-900 leading-relaxed resize-none"
+          :value="emailMessage"
+        ></textarea>
+
+        <!-- Button -->
+        <div class="mt-6 flex justify-center">
+          <a
+            :href="mailtoLink"
+            class="inline-flex w-full max-w-xs items-center justify-center rounded-full bg-lime-400/90 px-8 py-3 text-sm font-semibold text-slate-900 shadow-md transition hover:bg-lime-400"
+          >
+            Open In Email Client
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +77,6 @@ const { draft } = storeToRefs(store);
 const emailSubject = computed(
   () => draft.value.subject || `Inquiry from ${bankName}`
 );
-console.log('u', draft.value.text, 'u');
 
 const emailMessage = computed(() => {
   return (
@@ -74,12 +95,15 @@ Best regards,
 const emailContactBank = computed(
   () => draft.value.contactEmail || 'bank@green.com'
 );
-console.log(emailMessage.value);
 
 const emailBcc = computed(() => draft.value.bccEmail || 'bank@green.com');
 
 const mailtoLink = computed(
   () =>
-    `mailto:${encodeURIComponent(emailContactBank.value)}?cc=${encodeURIComponent(emailBcc.value)}?subject=${encodeURIComponent(emailSubject.value)}&body=${encodeURIComponent(emailMessage.value)}`
+    `mailto:${encodeURIComponent(
+      emailContactBank.value
+    )}?bcc=${encodeURIComponent(emailBcc.value)}&subject=${encodeURIComponent(
+      emailSubject.value
+    )}&body=${encodeURIComponent(emailMessage.value)}`
 );
 </script>

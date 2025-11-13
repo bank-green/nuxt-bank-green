@@ -70,7 +70,7 @@ export default defineEventHandler(async event => {
     'application/json'
   );
   const payload = isJson ? JSON.parse(payloadText) : { raw: payloadText };
-
+  // after you build `payload`
   return {
     campaign_id: campaignId,
     subject: payload.subject ?? payload.response?.subject ?? '',
