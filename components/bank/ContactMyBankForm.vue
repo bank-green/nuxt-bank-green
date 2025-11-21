@@ -1,135 +1,189 @@
 <template>
-  <section
-    class="rounded-3xl bg-[#22283a] px-8 py-10 md:px-12 md:py-12 text-white grid gap-10 md:grid-cols-2 items-center"
-  >
-    <!-- LEFT COLUMN -->
-    <div class="space-y-6">
-      <h1 class="text-3xl md:text-4xl font-semibold leading-tight">
-        Contact your bank to be greener
-      </h1>
-
+  <section class="bg-gradient-to-b from-sushi-50 to-pistachio-green p-28">
+    <div class="contain">
       <div
-        class="mt-4 max-w-lg rounded-3xl bg-white/10 px-6 py-6 backdrop-blur-sm"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
+        style="
+          scroll-margin-top: 80px;
+          background-image: url('/img/backgrounds/circle-quarter.svg');
+          background-position: left bottom;
+        "
       >
-        <p class="text-lg font-semibold">Help green your bank!</p>
-        <p class="mt-3 text-sm md:text-base text-white/90">
-          Banks play a crucial role in financing a sustainable future by
-          investing in greener projects. Use our form to contact your bank and
-          encourage them to adopt greener policies.
-        </p>
-      </div>
-    </div>
-    <!-- RIGHT COLUMN (your existing form component) -->
-    <div class="space-y-6">
-      <!-- Bank pill -->
-      <div class="space-y-2">
-        <p class="text-xs font-medium uppercase tracking-wide text-white/70">
-          My bank is
-        </p>
-        <div
-          class="flex items-center justify-between rounded-full bg-white px-4 py-2.5 shadow-lg shadow-slate-900/25 border border-white/40"
-        >
-          <div class="flex items-center gap-3 min-w-0">
-            <span
-              class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-700 text-lg"
-            >
-              🏦
-            </span>
-            <span class="text-sm font-semibold text-slate-900 truncate">
-              {{ bankName }}
-            </span>
+        <!-- LEFT COLUMN -->
+        <div class="flex flex-col gap-12">
+          <h2
+            class="w-full text-xl md:text-4xl tracking-wider text-gray-50"
+            style="font-weight: 900; line-height: 3rem"
+          >
+            Contact your bank to be greener
+          </h2>
+
+          <div
+            class="bg-white text-gray-700 md:shadow-md rounded-2xl px-8 py-10 space-y-6 md:text-xl"
+          >
+            <p>Help green your bank!</p>
+            <p>
+              Banks play a crucial role in financing a sustainable future by
+              investing in greener projects. Use our form to contact your bank
+              and encourage them to adopt greener policies.
+            </p>
           </div>
-          <!-- optional clear button placeholder -->
+        </div>
+        <!-- RIGHT COLUMN (your existing form component) -->
+        <div class="space-y-6">
+          <!-- Bank pill -->
+          <div class="space-y-2">
+            <p
+              class="text-arctic-blue text-opacity-75 font-medium block text-sm leading-5"
+            >
+              My bank is
+            </p>
+            <div
+              class="flex items-center justify-between bg-white shadow-lg shadow-slate-900/25 border border-white/40 relative w-full border bg-white rounded-xl text-left cursor-default border-sushi focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate px-5 py-2 text-gray-900 placeholder-cool-gray-800' border-gray-200 bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400"
+            >
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="inline-flex h-8 w-8 items-center justify-center">
+                  <img src="/img/icons/bank-icon.svg" class="h-6 w-6" />
+                </span>
+                <span class="text-sm text-slate-900 truncate">
+                  {{ bankName }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tone selector -->
+          <div class="space-y-2">
+            <p
+              class="text-arctic-blue text-opacity-75 font-medium block text-sm leading-5"
+            >
+              Tone of message to your bank
+            </p>
+            <div ref="dropdownRef" class="relative">
+              <!-- Selected tone button -->
+              <button
+                type="button"
+                class="w-full flex items-center gap-3 bg-white rounded-xl px-5 py-1 shadow-lg shadow-slate-900/25 border border-white/40"
+                @click="isDropdownOpen = !isDropdownOpen"
+              >
+                <span
+                  class="text-sm text-slate-900 flex-1 text-left capitalize"
+                >
+                  {{ selectedTone.toLowerCase() }}
+                </span>
+                <img
+                  :src="getToneEmoji(selectedTone).src"
+                  :alt="getToneEmoji(selectedTone).alt"
+                  class="h-10 w-10 flex-shrink-0"
+                />
+                <svg
+                  class="h-5 w-5 text-slate-900 flex-shrink-0 transition-transform"
+                  :class="{ 'rotate-180': isDropdownOpen }"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              <!-- Dropdown options -->
+              <div
+                v-if="isDropdownOpen"
+                class="absolute z-10 mt-2 w-full rounded-xl bg-white shadow-lg shadow-slate-900/25 border border-white/40 overflow-hidden"
+              >
+                <button
+                  v-for="tone in tones"
+                  :key="tone"
+                  type="button"
+                  class="w-full flex justify-between items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-gray-50 transition-colors"
+                  :class="{
+                    'bg-sushi-50': selectedTone === tone,
+                  }"
+                  @click="selectTone(tone)"
+                >
+                  <span class="capitalize">
+                    {{ tone.toLowerCase() }}
+                  </span>
+                  <img
+                    :src="getToneEmoji(tone).src"
+                    :alt="getToneEmoji(tone).alt"
+                    class="h-10 w-10 flex-shrink-0"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Privacy checkbox -->
+          <label
+            class="mt-2 flex items-start gap-2 text-xs text-white/90 leading-snug"
+          >
+            <input
+              v-model="accepted"
+              type="checkbox"
+              class="mt-0.5 h-4 w-4 rounded border-white/40 bg-transparent text-lime-400 focus:ring-lime-400"
+            />
+            <span>
+              I have read and understood Bank.Green’s
+              <NuxtLink
+                to="/privacy-policy"
+                class="underline text-lime-200 hover:text-lime-100"
+              >
+                privacy policy
+              </NuxtLink>
+            </span>
+          </label>
+
+          <!-- Cloudflare Turnstile -->
+          <div
+            v-if="captchaSitekey"
+            class="mt-3 rounded-lg bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25"
+          >
+            <vue-turnstile
+              v-model="captchaToken"
+              :site-key="captchaSitekey"
+              theme="light"
+            />
+          </div>
+
+          <!-- Submit button -->
           <button
             type="button"
-            class="ml-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-500 text-[10px] hover:bg-slate-200 hover:text-slate-700"
-            aria-label="Change bank"
+            class="mt-4 w-full rounded-full bg-[#47692c] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/40 transition hover:bg-[#3f5c26] disabled:opacity-60 disabled:cursor-not-allowed"
+            :disabled="loading || !accepted || (!captchaVerified && !isLocal)"
+            @click="generateAndGo(bankName)"
           >
-            ✕
+            {{ loading ? 'Generating…' : 'Generate Email Message' }}
           </button>
+
+          <p class="mt-1 text-center text-xs text-white/70">
+            (Opens in new window)
+          </p>
         </div>
       </div>
-
-      <!-- Tone selector pill -->
-      <div class="space-y-2">
-        <p class="text-xs font-medium uppercase tracking-wide text-white/70">
-          Tone of message to your bank
-        </p>
-        <div
-          class="flex items-center justify-between rounded-full bg-white px-4 py-2.5 shadow-lg shadow-slate-900/25 border border-white/40"
-        >
-          <select
-            id="tone"
-            v-model="selectedTone"
-            class="flex-1 bg-transparent border-none text-sm font-semibold text-slate-900 focus:outline-none focus:ring-0 appearance-none pr-6"
-          >
-            <option v-for="tone in tones" :key="tone" :value="tone">
-              {{ tone.charAt(0) + tone.slice(1).toLowerCase() }}
-            </option>
-          </select>
-          <span class="ml-3 text-xl">
-            <span v-if="selectedTone === 'POLITE'">😊</span>
-            <span v-else-if="selectedTone === 'FRIENDLY'">🙂</span>
-            <span v-else-if="selectedTone === 'FORMAL'">📝</span>
-            <span v-else-if="selectedTone === 'DIRECT'">💬</span>
-            <span v-else>😌</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- Privacy checkbox -->
-      <label
-        class="mt-2 flex items-start gap-2 text-xs text-white/90 leading-snug"
-      >
-        <input
-          v-model="accepted"
-          type="checkbox"
-          class="mt-0.5 h-4 w-4 rounded border-white/40 bg-transparent text-lime-400 focus:ring-lime-400"
-        />
-        <span>
-          I have read and understood Bank.Green’s
-          <NuxtLink
-            to="/privacy-policy"
-            class="underline text-lime-200 hover:text-lime-100"
-          >
-            privacy policy
-          </NuxtLink>
-        </span>
-      </label>
-
-      <!-- Turnstile slot / placeholder -->
-      <div
-        class="mt-3 rounded-lg bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25"
-      >
-        <slot name="turnstile" />
-      </div>
-
-      <!-- Submit button -->
-      <button
-        type="button"
-        class="mt-4 w-full rounded-full bg-[#47692c] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/40 transition hover:bg-[#3f5c26] disabled:opacity-60 disabled:cursor-not-allowed"
-        :disabled="loading || !accepted"
-        @click="generateAndGo(bankName)"
-      >
-        {{ loading ? 'Generating…' : 'Generate Email Message' }}
-      </button>
-
-      <p class="mt-1 text-center text-xs text-white/70">
-        (Opens in new window)
-      </p>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
+import VueTurnstile from 'vue-turnstile';
 import { useEmbraceStore } from '../../stores/embrace';
 
 const router = useRouter();
 const store = useEmbraceStore();
-// // Form state
-const tones = ['FRIENDLY', 'POLITE', 'FORMAL', 'DIRECT'];
+
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
+
+// Form state
+const tones = ['FRIENDLY', 'POLITE', 'SERIOUS', 'DIRECT'];
 const loading = ref(false);
 const accepted = ref(false);
 
@@ -139,6 +193,50 @@ const props = defineProps<{
 }>();
 
 const selectedTone = ref('POLITE');
+const isDropdownOpen = ref(false);
+const dropdownRef = ref<HTMLElement | null>(null);
+
+function getToneEmoji(tone: string) {
+  const emojis: Record<string, { src: string; alt: string }> = {
+    FRIENDLY: {
+      src: '/img/icons/laughing-emoji.svg',
+      alt: 'friendly tone',
+    },
+    POLITE: {
+      src: '/img/icons/polite-emoji.svg',
+      alt: 'polite tone',
+    },
+    SERIOUS: {
+      src: '/img/icons/serious-emoji.svg',
+      alt: 'serious tone',
+    },
+    DIRECT: {
+      src: '/img/icons/angry-emoji.svg',
+      alt: 'direct tone',
+    },
+  };
+  return emojis[tone] || emojis.POLITE;
+}
+
+function selectTone(tone: string) {
+  selectedTone.value = tone;
+  isDropdownOpen.value = false;
+}
+
+// Close dropdown when clicking outside
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
+    isDropdownOpen.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+});
 
 async function generateAndGo(bankName: string) {
   loading.value = true;
@@ -204,5 +302,25 @@ async function generateAndGo(bankName: string) {
 
 .button-green:hover {
   background-color: #166534;
+}
+
+/* Custom select styling - removes default HTML select styles */
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+}
+
+/* Remove default select arrow and add custom styling */
+.custom-select::-ms-expand {
+  display: none;
+}
+
+/* Style the select options */
+.custom-select option {
+  background-color: white;
+  color: #1e293b;
+  padding: 0.5rem;
 }
 </style>

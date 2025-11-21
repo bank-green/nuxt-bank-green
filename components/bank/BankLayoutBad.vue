@@ -97,14 +97,11 @@ defineProps<{
     </div>
 
     <!-- CONTACT MY BANK -->
-    <div
+    <ContactMyBankForm
       id="contact-my-bank"
-      class="bg-gradient-to-b from-sushi-50 to-pistachio-green p-28"
-    >
-      <div class="contain flex flex-col justify-center items-center max-w-10xl">
-        <ContactMyBankForm :bank-name="bankName" :bank-email="bankEmail" />
-      </div>
-    </div>
+      :bank-name="bankName"
+      :bank-email="bankEmail"
+    />
 
     <!-- FOOTER IMAGE -->
     <div class="bg-arctic-blue overflow-hidden w-full pointer-events-none">
