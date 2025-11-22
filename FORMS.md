@@ -41,8 +41,9 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 
 ### `/` - Homepage / Index
 
-- **SignupBox** or other forms (tag: "index bottom", AC Tag ID: 11)
-  - May vary depending on current CMS configuration
+- **LeadGen Slice** (tag: "green directory", AC Tag ID: 878)
+  - Dynamically embedded via Prismic CMS SliceZone
+  - Current configuration uses LeadGen slice for lead capture
 
 ### Various Pages (CMS-driven)
 
@@ -53,10 +54,10 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 
 | Form Type         | File                               | Pages                                   | Fields                              | AC Tag          |
 | ----------------- | ---------------------------------- | --------------------------------------- | ----------------------------------- | --------------- |
-| **SignupBox**     | `/components/forms/SignupBox.vue`  | /join, /partners, /faq, /banks/[tag] (good), / | 3 (name, email, +)            | varies (11, 24, 124, 201, 879) |
+| **SignupBox**     | `/components/forms/SignupBox.vue`  | /join, /partners, /faq, /banks/[tag] (good) | 3 (name, email, +)            | varies (24, 124, 201, 879) |
 | **SubmitBank**    | `/components/forms/SubmitBank.vue` | /not-listed                             | 5 (+bank)                           | 26              |
 | **Contact Form**  | `/pages/contact.vue`               | /contact                                | 4 (+subject, message)               | 14              |
-| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /sustainable-eco-banks/[tag]            | 5 (CMS-configurable)                | 878             |
+| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /, /sustainable-eco-banks/[tag]         | 5 (CMS-configurable)                | 878             |
 | **Embrace**       | `/components/Embrace.client.vue`   | /embrace, bank pages                    | 7 (+fullName, hometown, background) | "embrace"       |
 | **SwitchForm**    | `/components/SwitchForm.vue`       | Various                                 | Typeform-defined                    | none            |
 
@@ -77,7 +78,6 @@ Page/URL                          Tag                    AC Tag ID
 /partners                          "partners bottom"      24
 /faq                              "FAQ bottom"           124
 /banks/[bankTag] (Good rating)     "green bank"           879
-/                                 "index bottom"         11
 ```
 
 **Fields Collected:**
@@ -297,17 +297,16 @@ Used by: All forms with captcha verification
 AC Tag ID  | Form/Source                    | Component
 ─────────────────────────────────────────────────────────
 8          | form tag not defined (error)   | Any form
-11         | Index/homepage signup          | SignupBox
-14         | Contact page form              | Contact, SignupBox
+14         | Contact page form              | Contact
 24         | Partners bottom                | SignupBox
 26         | Not listed bottom              | SubmitBank
 124        | FAQ bottom                     | SignupBox
 201        | Join form                      | SignupBox
-878        | green directory                | LeadGen slice
+878        | green directory (homepage, eco-banks) | LeadGen slice
 879        | green bank (good bank detail)  | SignupBox
 ```
 
-**Note:** Tags 27, 28, 37, 101, 103 documented in older versions are no longer used. The "embrace" form (tag: "embrace") is not mapped to an AC Tag ID.
+**Note:** Tags 11, 27, 28, 37, 101, 103 documented in older versions are no longer used. The "embrace" form (tag: "embrace") is not mapped to an AC Tag ID.
 
 ### AC CUSTOM FIELDS MAPPED
 
@@ -325,7 +324,7 @@ Field ID  | Data                  | Used By
 
 ## Key Composables & Utilities
 
-### `useContactForm(tag, required, extra, prefill)`
+### `useContactForm(tag, required, extra, prefill, captchaToken)`
 
 **Location:** `/composables/useContactForm.ts`
 
@@ -335,6 +334,7 @@ Field ID  | Data                  | Used By
 - `required` (array, default: ['email', 'isAgreeTerms']) - Fields that must be validated
 - `extra` (ref, default: ref({})) - Additional data to send with form
 - `prefill` (ref, default: ref(undefined)) - Pre-populate form fields
+- `captchaToken` (ref, default: ref('')) - Cloudflare Turnstile captcha token from vue-turnstile component
 
 **Returns:**
 
@@ -414,5 +414,6 @@ ZAPIER_CONTACT=<zapier_webhook>
 - **SubmitBank** form does NOT include Cloudflare Turnstile captcha (unlike other forms)
 - **Embrace form** does not directly submit to `/api/contact` via form submission; instead uses external service + mailto: links
 - **Bad bank detail pages** do not show a signup form; instead show "Move Your Money" CTA
-- **Index page** may use dynamic forms via Prismic slices rather than hardcoded components
+- **Index page** uses dynamic LeadGen Slice via Prismic CMS SliceZone (not a hardcoded component)
+- **New in this version**: Server-side captcha token validation now required (all forms must send `captchaToken` to `/api/contact` endpoint in production)
 - Tags 27, 28, 37, 101, 103 from older documentation are deprecated and no longer used

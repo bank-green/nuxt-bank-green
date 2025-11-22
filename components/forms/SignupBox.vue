@@ -60,7 +60,8 @@ const {
   props.tag,
   ['email', 'isAgreeTerms', 'isAgreeMarketing'],
   extra,
-  toRef(props, 'prefill')
+  toRef(props, 'prefill'),
+  captchaToken
 );
 
 const submit = async () => {
@@ -124,7 +125,6 @@ const submit = async () => {
             .
           </CheckboxSection>
           <vue-turnstile
-            v-if="!isLocal"
             v-model="captchaToken"
             :site-key="captchaSitekey"
             theme="light"

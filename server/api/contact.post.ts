@@ -17,6 +17,7 @@ interface ContactRequestBody {
   isAgreeMarketing?: boolean;
   path?: string;
   currentStatus?: string;
+  captchaToken?: string;
 }
 
 interface ContactMessage {
@@ -78,6 +79,43 @@ export default defineEventHandler(async event => {
     body = JSON.parse(new TextDecoder().decode(body)) as ContactRequestBody;
   }
   const headers = event.node.req.headers;
+
+  // Validate captcha token (skip in development)
+  if (process.env.NODE_ENV !== 'development') {
+    if (!body.captchaToken) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Captcha token is required',
+      });
+    }
+
+    try {
+      const captchaVerification = await $fetch<{ success: boolean }>(
+        '/api/captcha-site-verify',
+        {
+          method: 'POST',
+          body: {
+            token: body.captchaToken,
+          },
+        }
+      );
+
+      if (!captchaVerification.success) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'Captcha verification failed',
+        });
+      }
+    } catch (error) {
+      if (error instanceof Error && 'statusCode' in error) {
+        throw error;
+      }
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Captcha verification failed',
+      });
+    }
+  }
 
   const formatDate = (date?: string): string | undefined => {
     if (!date) {

@@ -186,7 +186,9 @@ const {
     rating: bank.value?.rating || '',
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     currentStatus: currentStatus.value || '',
-  }))
+  })),
+  ref(undefined),
+  captchaToken
 );
 
 const formError = ref<boolean>(false);
