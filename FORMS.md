@@ -53,15 +53,15 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 
 ## Form Types Overview
 
-| Form Type         | File                               | Pages                                   | Fields                              | AC Tag          |
-| ----------------- | ---------------------------------- | --------------------------------------- | ----------------------------------- | --------------- |
-| **SignupBox**     | `/components/forms/SignupBox.vue`  | /join, /partners, /faq, /banks/[tag] (good) | 3 (name, email, +)            | varies (24, 124, 201, 879) |
-| **SubmitBank**    | `/components/forms/SubmitBank.vue` | /not-listed                             | 5 (+bank)                           | 26              |
-| **Contact Form**  | `/pages/contact.vue`               | /contact                                | 4 (+subject, message)               | 14              |
-| **LeadGenForm**   | `/components/forms/LeadGenForm.vue` | / (static version)                      | 4 or 5 (bank optional)              | 11              |
-| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /sustainable-eco-banks/[tag]            | 5 (CMS-configurable)                | 878 (configurable per page) |
-| **Embrace**       | `/components/Embrace.client.vue`   | /embrace, bank pages                    | 7 (+fullName, hometown, background) | "embrace"       |
-| **SwitchForm**    | `/components/SwitchForm.vue`       | Various                                 | Typeform-defined                    | none            |
+| Form Type         | File                                | Pages                                       | Fields                              | AC Tag                      |
+| ----------------- | ----------------------------------- | ------------------------------------------- | ----------------------------------- | --------------------------- |
+| **SignupBox**     | `/components/forms/SignupBox.vue`   | /join, /partners, /faq, /banks/[tag] (good) | 3 (name, email, +)                  | varies (24, 124, 201, 879)  |
+| **SubmitBank**    | `/components/forms/SubmitBank.vue`  | /not-listed                                 | 5 (+bank)                           | 26                          |
+| **Contact Form**  | `/pages/contact.vue`                | /contact                                    | 4 (+subject, message)               | 14                          |
+| **LeadGenForm**   | `/components/forms/LeadGenForm.vue` | / (static version)                          | 4 or 5 (bank optional)              | 11                          |
+| **LeadGen Slice** | `/slices/LeadGen/index.vue`         | /sustainable-eco-banks/[tag]                | 5 (CMS-configurable)                | 878 (configurable per page) |
+| **Embrace**       | `/components/Embrace.client.vue`    | /embrace, bank pages                        | 7 (+fullName, hometown, background) | "embrace"                   |
+| **SwitchForm**    | `/components/SwitchForm.vue`        | Various                                     | Typeform-defined                    | none                        |
 
 ## Detailed Form Documentation
 
@@ -120,10 +120,11 @@ Page/URL              Tag                    AC Tag ID
 - email (required)
 - isAgreeMarketing (checkbox, optional)
 - isAgreeTerms (required)
+- Cloudflare Turnstile captcha
 
 **Component Props:**
 
-- `tag`: Form identifier for AC tagging (default: 'submitbank')
+- `tag`: Form identifier for AC tagging (default: 'submit bank')
 
 **Success Behavior:** Shows success message inline via cookie tracking, does NOT redirect (unlike other forms)
 
@@ -470,7 +471,6 @@ ZAPIER_CONTACT=<zapier_webhook>
 
 ## Known Limitations & Caveats
 
-- **SubmitBank** form does NOT include Cloudflare Turnstile captcha (unlike other forms)
 - **Embrace form** does not directly submit to `/api/contact` via form submission; instead uses external service + mailto: links
 - **Bad bank detail pages** do not show a signup form; instead show "Move Your Money" CTA
 - **Homepage (/)** now uses static **LeadGenForm** component instead of Prismic CMS slice
