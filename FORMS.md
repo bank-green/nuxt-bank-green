@@ -41,9 +41,10 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 
 ### `/` - Homepage / Index
 
-- **LeadGen Slice** (tag: "index bottom", AC Tag ID: 11)
-  - Dynamically embedded via Prismic CMS SliceZone
-  - Form tag configured in Prismic CMS slice data
+- **LeadGenForm Component** (tag: "index bottom", AC Tag ID: 11)
+  - Static component with hardcoded defaults
+  - Bank field hidden
+  - Title: "Start to Bank Green Today"
 
 ### Various Pages (CMS-driven)
 
@@ -57,7 +58,8 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 | **SignupBox**     | `/components/forms/SignupBox.vue`  | /join, /partners, /faq, /banks/[tag] (good) | 3 (name, email, +)            | varies (24, 124, 201, 879) |
 | **SubmitBank**    | `/components/forms/SubmitBank.vue` | /not-listed                             | 5 (+bank)                           | 26              |
 | **Contact Form**  | `/pages/contact.vue`               | /contact                                | 4 (+subject, message)               | 14              |
-| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /, /sustainable-eco-banks/[tag]         | 5 (CMS-configurable)                | 11, 878 (configurable per page) |
+| **LeadGenForm**   | `/components/forms/LeadGenForm.vue` | / (static version)                      | 4 or 5 (bank optional)              | 11              |
+| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /sustainable-eco-banks/[tag]            | 5 (CMS-configurable)                | 878 (configurable per page) |
 | **Embrace**       | `/components/Embrace.client.vue`   | /embrace, bank pages                    | 7 (+fullName, hometown, background) | "embrace"       |
 | **SwitchForm**    | `/components/SwitchForm.vue`       | Various                                 | Typeform-defined                    | none            |
 
@@ -153,6 +155,61 @@ Page/URL              Tag                    AC Tag ID
 
 **Success Redirect:** `/thanks-contact`
 **GTM Event:** `contactpage`
+
+---
+
+### LeadGenForm Component (Static)
+
+**Location:** `/components/forms/LeadGenForm.vue`
+**Endpoint:** `/server/api/contact.post.ts`
+**Primary Use:** Static lead capture form with hardcoded defaults (replaces Prismic LeadGen slice on homepage)
+
+**USAGE LOCATIONS:**
+
+```
+Page/URL              Component Props                          AC Tag ID
+────────────────────────────────────────────────────────────────────────
+/                     formTag="index bottom"                  11
+                      title="Start to Bank Green Today"
+                      showBankField=false
+```
+
+**Fields Collected:**
+
+- firstName (required)
+- email (required)
+- bank (hidden on homepage via `showBankField=false`)
+- currentStatus (always shown)
+- isAgreeMarketing (checkbox)
+- isAgreeTerms (required)
+- Cloudflare Turnstile captcha
+
+**Component Props:**
+
+- `formTag`: Form identifier for AC tagging (default: 'lead-gen-default')
+- `title`: Custom heading (default: 'Curious about switching to a green bank?')
+- `showBankField`: Toggle bank field visibility (default: true)
+
+**Hardcoded Configuration:**
+
+- **Title (Homepage):** "Start to Bank Green Today"
+- **Bullet Points:**
+  - Learn how to take action on fossil fuel finance.
+  - Discover green banking and how easy it is to switch.
+  - Stay up to date with climate finance news.
+- **Status Options:** Student, Employed, Self-employed, Retired, Unemployed
+- **Bank Field:** Hidden on homepage (showBankField=false)
+
+**Extra Data Sent to AC:**
+
+- country (from IP geolocation)
+- bank (bank tag and name, if field enabled)
+- bankDisplayName
+- rating (bank rating)
+- bankNameWhenNotFound
+- currentStatus
+
+**Success Redirect:** `/thanks`
 
 ---
 
@@ -259,7 +316,7 @@ Page/URL              Tag                    AC Tag ID
 
 **Central form submission handler for all contact/signup forms**
 
-Handles: SignupBox, SubmitBank, Contact Form, LeadGen, Embrace
+Handles: SignupBox, SubmitBank, Contact Form, LeadGenForm, LeadGen Slice, Embrace
 
 **Request Processing:**
 
@@ -298,13 +355,13 @@ Used by: All forms with captcha verification
 AC Tag ID  | Form/Source                    | Component
 ─────────────────────────────────────────────────────────
 8          | form tag not defined (error)   | Any form
-11         | Index/homepage bottom          | LeadGen slice
+11         | Index/homepage bottom          | LeadGenForm (static)
 14         | Contact page form              | Contact
 24         | Partners bottom                | SignupBox
 26         | Not listed bottom              | SubmitBank
 124        | FAQ bottom                     | SignupBox
 201        | Join form                      | SignupBox
-878        | green directory (eco-banks)    | LeadGen slice
+878        | green directory (eco-banks)    | LeadGen Slice
 879        | green bank (good bank detail)  | SignupBox
 ```
 
@@ -416,7 +473,11 @@ ZAPIER_CONTACT=<zapier_webhook>
 - **SubmitBank** form does NOT include Cloudflare Turnstile captcha (unlike other forms)
 - **Embrace form** does not directly submit to `/api/contact` via form submission; instead uses external service + mailto: links
 - **Bad bank detail pages** do not show a signup form; instead show "Move Your Money" CTA
-- **Index page** uses dynamic LeadGen Slice via Prismic CMS SliceZone with `form_tag` field set to "index bottom"
-- **LeadGen Slice** form tag is now configurable via `form_tag` CMS field (homepage uses "index bottom", eco-banks use "green directory")
-- **New in this version**: Server-side captcha token validation now required (all forms must send `captchaToken` to `/api/contact` endpoint in production)
+- **Homepage (/)** now uses static **LeadGenForm** component instead of Prismic CMS slice
+  - Bank field is hidden on homepage (showBankField=false)
+  - Uses hardcoded defaults instead of CMS configuration
+  - Can be extended to other pages by passing different props
+- **Eco-bank pages (/sustainable-eco-banks/[tag])** still use LeadGen Slice from Prismic CMS
+- **LeadGenForm** form tag is configurable via `formTag` prop (defaults to 'lead-gen-default')
+- **Server-side captcha token validation** now required (all forms must send `captchaToken` to `/api/contact` endpoint in production)
 - Tags 27, 28, 37, 101, 103 from older documentation are deprecated and no longer used
