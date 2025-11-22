@@ -41,9 +41,9 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 
 ### `/` - Homepage / Index
 
-- **LeadGen Slice** (tag: "green directory", AC Tag ID: 878)
+- **LeadGen Slice** (tag: "index bottom", AC Tag ID: 11)
   - Dynamically embedded via Prismic CMS SliceZone
-  - Current configuration uses LeadGen slice for lead capture
+  - Form tag configured in Prismic CMS slice data
 
 ### Various Pages (CMS-driven)
 
@@ -57,7 +57,7 @@ Complete documentation of all forms, their endpoints, and integrations. For form
 | **SignupBox**     | `/components/forms/SignupBox.vue`  | /join, /partners, /faq, /banks/[tag] (good) | 3 (name, email, +)            | varies (24, 124, 201, 879) |
 | **SubmitBank**    | `/components/forms/SubmitBank.vue` | /not-listed                             | 5 (+bank)                           | 26              |
 | **Contact Form**  | `/pages/contact.vue`               | /contact                                | 4 (+subject, message)               | 14              |
-| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /, /sustainable-eco-banks/[tag]         | 5 (CMS-configurable)                | 878             |
+| **LeadGen Slice** | `/slices/LeadGen/index.vue`        | /, /sustainable-eco-banks/[tag]         | 5 (CMS-configurable)                | 11, 878 (configurable per page) |
 | **Embrace**       | `/components/Embrace.client.vue`   | /embrace, bank pages                    | 7 (+fullName, hometown, background) | "embrace"       |
 | **SwitchForm**    | `/components/SwitchForm.vue`       | Various                                 | Typeform-defined                    | none            |
 
@@ -165,6 +165,7 @@ Page/URL              Tag                    AC Tag ID
 **CMS Configuration Fields:**
 
 - `title`: Custom heading
+- `form_tag`: Form identifier for AC tagging (defaults to "green directory")
 - `show_bank_field`: Toggle bank field visibility
 - `show_status_field`: Toggle status field visibility
 - `form_bank_label`: Bank field label
@@ -183,7 +184,7 @@ Page/URL              Tag                    AC Tag ID
 - isAgreeTerms (required)
 - Cloudflare Turnstile captcha
 
-**Form Tag:** "green directory" (hardcoded)
+**Form Tag:** Configurable via `form_tag` field (defaults to "green directory")
 
 **Extra Data Sent to AC:**
 
@@ -297,16 +298,17 @@ Used by: All forms with captcha verification
 AC Tag ID  | Form/Source                    | Component
 ─────────────────────────────────────────────────────────
 8          | form tag not defined (error)   | Any form
+11         | Index/homepage bottom          | LeadGen slice
 14         | Contact page form              | Contact
 24         | Partners bottom                | SignupBox
 26         | Not listed bottom              | SubmitBank
 124        | FAQ bottom                     | SignupBox
 201        | Join form                      | SignupBox
-878        | green directory (homepage, eco-banks) | LeadGen slice
+878        | green directory (eco-banks)    | LeadGen slice
 879        | green bank (good bank detail)  | SignupBox
 ```
 
-**Note:** Tags 11, 27, 28, 37, 101, 103 documented in older versions are no longer used. The "embrace" form (tag: "embrace") is not mapped to an AC Tag ID.
+**Note:** Tags 27, 28, 37, 101, 103 documented in older versions are no longer used. The "embrace" form (tag: "embrace") is not mapped to an AC Tag ID.
 
 ### AC CUSTOM FIELDS MAPPED
 
@@ -414,6 +416,7 @@ ZAPIER_CONTACT=<zapier_webhook>
 - **SubmitBank** form does NOT include Cloudflare Turnstile captcha (unlike other forms)
 - **Embrace form** does not directly submit to `/api/contact` via form submission; instead uses external service + mailto: links
 - **Bad bank detail pages** do not show a signup form; instead show "Move Your Money" CTA
-- **Index page** uses dynamic LeadGen Slice via Prismic CMS SliceZone (not a hardcoded component)
+- **Index page** uses dynamic LeadGen Slice via Prismic CMS SliceZone with `form_tag` field set to "index bottom"
+- **LeadGen Slice** form tag is now configurable via `form_tag` CMS field (homepage uses "index bottom", eco-banks use "green directory")
 - **New in this version**: Server-side captcha token validation now required (all forms must send `captchaToken` to `/api/contact` endpoint in production)
 - Tags 27, 28, 37, 101, 103 from older documentation are deprecated and no longer used
