@@ -135,76 +135,28 @@ const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL;
 async function sendACContact(
   message: ContactMessage
 ): Promise<{ success: boolean } | undefined> {
-  // ActiveCampaign api
-  /* tags:
-  4: worst
-  5: ok
-  6: bad
-  7: great
-  8: unknown
-  9: switch later
-  11: index bottom
-  13: pledge page form
-  14: contact page form
-  21: has switched
-  24: partners bottom
-  26: not listed bottom
-  37: take action
-  46: double-opt-in bypassed
-  56: broken double-opt-in
-  81: changed preferences
-  89: signupbox
-  99: modal /sustainable-ethical-banks
-  101: bank ok bottom
-  103: bank bad bottom
-  109: modal /
-  111: modal /pledge
-  121: pledge
-  124: FAQ bottom
-  132: unk
-  152: Successful Pledge
-  162: tiktok ads
-  163: tiktok lead
-  185: Dead Pledge
-  201: join form
-  515: Bank Rank: bad
-  516: Bank Rank: worst
-  517: Confirmed
-  518: Launch
-  519: Mailing List: Bank.Green Updates
-  526: unsubscribed
-  554: Unsubscribed from newsletter via EMT
-  827: Double Opt In NOT Confirmed
-  859: n/a
-  504: Confirmed but unengaged
-  */
-
   const tag = (): number => {
     switch (message.tag) {
       case 'FAQ bottom':
         return 124;
       case 'partners bottom':
         return 24;
-      case 'bank ok bottom':
-        return 101;
-      case 'bank bad bottom':
-        return 103;
       case 'index bottom':
         return 11;
       case 'join form':
         return 201;
-      case 'take action':
-        return 37;
-      case 'leadGen':
-        return 27; // Lead generation form
       case 'not listed bottom':
-        return 26; // Bank not listed form
-      case 'submitbank':
-        return 28; // Submit bank form
-      case 'signupbox':
-        return 14; // Generic signup
+        return 26;
+      case 'contact page form':
+        return 14;
+      case 'green directory':
+        return 878;
+      case 'green bank':
+        return 879;
+      case 'form tag not defined':
       default:
-        return 14; // contact page form
+        console.error('ActiveCampaign form used without a tag defined.');
+        return 8;
     }
   };
 

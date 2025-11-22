@@ -19,6 +19,7 @@ Bank.Green is a Nuxt 3 application that helps users find ethical and sustainable
 ## Architecture
 
 ### Core Structure
+
 - **Pages**: Standard Nuxt 3 file-based routing in `/pages`
 - **Components**: Organized by feature areas (bank/, eco-bank/, forms/, nav/, etc.)
 - **Slices**: Prismic slice components in `/slices` for CMS content blocks
@@ -27,29 +28,35 @@ Bank.Green is a Nuxt 3 application that helps users find ethical and sustainable
 - **Styles**: Tailwind CSS with custom color palette and design tokens
 
 ### Key Features
+
 - **Bank Search**: Location-based sustainable bank discovery
 - **CMS Integration**: Prismic for content management via Slice Machine
 - **GraphQL Data**: Uses `nuxt-graphql-client` with `.gql` query files
-- **Form Handling**: Contact forms, bank submissions, and surveys
+- **Form Handling**: Contact forms, bank submissions, and surveys (see [FORMS.md](FORMS.md) for complete documentation)
+  @FORMS.md
 - **Social Features**: Sharing, embracing campaigns, donation flows
 
 ### Prismic CMS
+
 - **Critical**: Always use Slice Machine (`npm run slicemachine`) for creating/editing custom types
 - **Never** use the Prismic dashboard web interface for custom types - this can delete content
 - Custom types are defined in `/customtypes`
 - Slices are in `/slices` with auto-imports configured
 
 ### Data Layer
+
 - **GraphQL**: Queries in `/queries/*.gql` files for type generation
 - **Server API**: Routes in `/server/api/` for backend functionality
 - **Runtime Config**: Environment variables configured in `nuxt.config.ts`
 
 ### Component Organization
+
 - **Feature-based**: Components grouped by domain (bank/, eco-bank/, forms/)
 - **Shared components**: Common UI elements in root `/components`
 - **Client components**: Use `.client.vue` suffix for client-only components
 
 ### Styling
+
 - **Tailwind CSS**: Custom design system with brand colors (sushi green, sunglow yellow)
 - **Typography**: Custom prose styles for CMS content
 - **Responsive**: Mobile-first with custom breakpoints

@@ -172,7 +172,7 @@ const {
   busy,
   send,
 } = useContactForm(
-  'leadGen',
+  'green directory',
   [
     'firstName',
     'email',
