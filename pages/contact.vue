@@ -7,31 +7,19 @@
           class="text-gray-600 mb-12 whitespace-pre-line prose"
           :field="contact?.data.description"
         />
-        <div
-          v-else
-          class="text-gray-600 mb-12 whitespace-pre-line prose"
-        >
-          <h1>
-            Contact us
-          </h1>
+        <div v-else class="text-gray-600 mb-12 whitespace-pre-line prose">
+          <h1>Contact us</h1>
           <p>
-            Unfortunately we are not currently accepting requests to research new banks,
-            but we encourage you to
+            Unfortunately we are not currently accepting requests to research
+            new banks, but we encourage you to
             <strong>
-              <NuxtLink
-                to="/take-action"
-                class="underline"
-              >
+              <NuxtLink to="/take-action" class="underline">
                 reach out to your own bank
               </NuxtLink>
             </strong>
-            to establish whether or not they
-            are financing fossil fuels.
+            to establish whether or not they are financing fossil fuels.
             <strong>
-              <NuxtLink
-                to="/take-action"
-                class="underline"
-              >
+              <NuxtLink to="/take-action" class="underline">
                 You can also volunteer
               </NuxtLink>
             </strong>
@@ -83,8 +71,7 @@
               class="md:col-span-2"
               name="isAgreeMarketing"
             >
-              I wish to receive more information via email from
-              Bank.Green.
+              I wish to receive more information via email from Bank.Green.
             </CheckboxSection>
             <CheckboxSection
               v-model="isAgreeTerms"
@@ -93,12 +80,8 @@
               :warning="warningsMap.isAgreeTerms"
             >
               I have read and understood Bank.Green’s
-              <NuxtLink
-                to="/privacy"
-                class="link"
-              >
-                privacy policy
-              </NuxtLink>.
+              <NuxtLink to="/privacy" class="link">privacy policy</NuxtLink>
+              .
             </CheckboxSection>
             <vue-turnstile
               v-if="!isLocal"
@@ -112,11 +95,11 @@
             type="submit"
             class="button-green mt-6 md:w-48 flex justify-center text-primary-dark"
             :class="{
-              'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal),
-
+              'pointer-events-none opacity-75':
+                busy || (!captchaVerified && !isLocal),
             }"
           >
-            <span v-if="!busy"> Send message </span>
+            <span v-if="!busy">Send message</span>
             <span v-else>
               <svg
                 width="32"
@@ -141,21 +124,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import VueTurnstile from 'vue-turnstile'
-import CheckboxSection from '../components/forms/CheckboxSection.vue'
-import TextField from '../components/forms/TextField.vue'
+import { ref } from 'vue';
+import VueTurnstile from 'vue-turnstile';
+import CheckboxSection from '../components/forms/CheckboxSection.vue';
+import TextField from '../components/forms/TextField.vue';
 
-import Swoosh from '@/components/Swoosh.vue'
+import Swoosh from '@/components/Swoosh.vue';
 
-const p = usePrismic()
+const p = usePrismic();
 const { data: contact } = await useAsyncData('contact', () =>
-  p.client.getSingle('contactpage'),
-)
-usePrismicSEO(contact.value?.data)
+  p.client.getSingle('contactpage')
+);
+usePrismicSEO(contact.value?.data);
 
 // Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
 
 const {
   firstName,
@@ -167,11 +150,17 @@ const {
   warningsMap,
   send,
   busy,
-} = useContactForm('contact page form', ['email', 'isAgreeTerms']) // tag used specifically for GTM
+} = useContactForm(
+  'contact page form',
+  ['email', 'isAgreeTerms'],
+  ref({}),
+  ref(undefined),
+  captchaToken
+); // tag used specifically for GTM
 
 async function onSend() {
   if (await send()) {
-    navigateTo('/thanks-contact')
+    navigateTo('/thanks-contact');
   }
 }
 </script>

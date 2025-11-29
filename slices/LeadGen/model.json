@@ -53,15 +53,6 @@
             "placeholder_true": "true",
             "default_value": true
           }
-        },
-        "bank_leads_ac_list": {
-          "type": "Boolean",
-          "config": {
-            "label": "Bank Leads AC List",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
-          }
         }
       },
       "items": {

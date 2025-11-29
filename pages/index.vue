@@ -183,9 +183,10 @@
         </div>
         <div id="join" class="contain max-w-6xl">
           <!--  <CallToAction /> -->
-          <SliceZone
-            :slices="home?.data.slices ?? []"
-            :components="sliceComps"
+          <LeadGenForm
+            form-tag="index bottom"
+            title="Start to Bank Green Today"
+            :show-bank-field="false"
           />
         </div>
       </div>
@@ -203,6 +204,7 @@
 import { useGtm } from '@gtm-support/vue-gtm';
 import { defineSliceZoneComponents } from '@prismicio/vue';
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue';
+import LeadGenForm from '@/components/forms/LeadGenForm.vue';
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
 import { components } from '~~/slices';
 import { usePrismicSEO } from '~~/composables/useHeadHelpers';

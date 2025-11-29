@@ -40,10 +40,6 @@
 			"show_status_field": {
 				"__TYPE__": "BooleanContent",
 				"value": true
-			},
-			"bank_leads_ac_list": {
-				"__TYPE__": "BooleanContent",
-				"value": false
 			}
 		},
 		"items": [

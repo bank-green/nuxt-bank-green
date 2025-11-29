@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import { defineSliceZoneComponents } from '@prismicio/vue'
-import { components } from '~~/slices'
-import Swoosh from '@/components/Swoosh.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
-import SignupBox from '@/components/forms/SignupBox.vue'
+import { defineSliceZoneComponents } from '@prismicio/vue';
+import { components } from '~~/slices';
+import Swoosh from '@/components/Swoosh.vue';
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
+import SignupBox from '@/components/forms/SignupBox.vue';
 
 const checkList = [
   'Learn about the issues via our blog updates',
   'Join our campaigns to take action against fossil finance',
   'Discover other ways to divest from fossil fuels',
-]
+];
 
-const sliceComps = ref(defineSliceZoneComponents(components))
+const sliceComps = ref(defineSliceZoneComponents(components));
 
-withDefaults(defineProps<{
-  showLeadGenSlice?: boolean
-  prismicSliceData?: any
-}>(), {
-  showLeadGenSlice: false,
-})
+withDefaults(
+  defineProps<{
+    showLeadGenSlice?: boolean;
+    prismicSliceData?: any;
+  }>(),
+  {
+    showLeadGenSlice: false,
+  }
+);
 </script>
 
 <template>
@@ -32,7 +35,9 @@ withDefaults(defineProps<{
         class="relative page-fade-in contain max-w-5xl grid grid-cols-2 gap-8 md:gap-10 z-10"
       >
         <slot name="section1" />
-        <div class="relative flex-grow md:flex-none text-center flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center">
+        <div
+          class="relative flex-grow md:flex-none text-center flex flex-col space-y-4 md:space-y-0 md:flex-row justify-center items-center"
+        >
           <ArrowDownBounce class="inline-block mt-8 w-10" />
         </div>
       </div>
@@ -40,10 +45,7 @@ withDefaults(defineProps<{
     </div>
 
     <!-- SECTION TWO -->
-    <div
-      id="section-two"
-      class="text-gray-800 overflow-hidden py-16"
-    >
+    <div id="section-two" class="text-gray-800 overflow-hidden py-16">
       <div class="contain">
         <slot name="section2" />
       </div>
@@ -54,10 +56,7 @@ withDefaults(defineProps<{
       <slot name="section3" />
     </div>
     <!-- CALL TO ACTION -->
-    <div
-      id="call-to-action"
-      class="bg-arctic-blue text-gray-800"
-    >
+    <div id="call-to-action" class="bg-arctic-blue text-gray-800">
       <Swoosh direction="down" />
       <div class="contain pt-32">
         <SliceZone
@@ -65,10 +64,7 @@ withDefaults(defineProps<{
           :slices="prismicSliceData ?? []"
           :components="sliceComps"
         />
-        <slot
-          v-else
-          name="call-to-action"
-        >
+        <slot v-else name="call-to-action">
           <h2
             class="text-center text-gray-800 font-semibold text-lg md:text-2xl tracking-wider mb-4"
           >
@@ -84,15 +80,12 @@ withDefaults(defineProps<{
                 But don’t wait for the fire department to turn up – join us!
               </p>
             </div>
-            <CheckList
-              class="lg:w-1/2 w-full my-8"
-              :list="checkList"
-            />
+            <CheckList class="lg:w-1/2 w-full my-8" :list="checkList" />
           </div>
           <div class="flex flex-row justify-center items-center">
             <SignupBox
               title="Sign up to Bank.Green. We'll take the fight to the banks together."
-              tag="bank ok bottom"
+              tag="green bank"
               class="max-w-4xl w-full mt-8"
             />
           </div>
@@ -113,10 +106,7 @@ withDefaults(defineProps<{
           >
             How do we derive our results?
           </h2>
-          <NuxtLink
-            to="/methodology"
-            class="button-green inline-block w-max"
-          >
+          <NuxtLink to="/methodology" class="button-green inline-block w-max">
             Find out more
           </NuxtLink>
         </div>
