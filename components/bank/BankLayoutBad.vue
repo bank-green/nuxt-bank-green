@@ -5,9 +5,10 @@ import Swoosh from '@/components/Swoosh.vue';
 import CallToAction from '@/components/CallToAction.vue';
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
 
-defineProps<{
+const props = defineProps<{
   bankName: string;
   bankEmail?: string;
+  bankWebsite?: string;
 }>();
 </script>
 
@@ -99,8 +100,9 @@ defineProps<{
     <!-- CONTACT MY BANK -->
     <ContactMyBankForm
       id="contact-my-bank"
-      :bank-name="bankName"
-      :bank-email="bankEmail"
+      :bank-name="props.bankName"
+      :bank-email="props.bankEmail"
+      :bank-website="props.bankWebsite"
     />
 
     <!-- FOOTER IMAGE -->

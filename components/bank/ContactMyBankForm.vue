@@ -2,7 +2,7 @@
   <section class="bg-gradient-to-b from-sushi-50 to-pistachio-green p-28">
     <div class="contain">
       <div
-        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
+        class="grid grid-cols-1 lg:grid-cols-10 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
         style="
           scroll-margin-top: 80px;
           background-image: url('/img/backgrounds/circle-quarter.svg');
@@ -10,7 +10,7 @@
         "
       >
         <!-- LEFT COLUMN -->
-        <div class="flex flex-col gap-12">
+        <div class="flex flex-col gap-12 lg:col-span-6">
           <h2
             class="w-full text-xl md:text-4xl tracking-wider text-gray-50"
             style="font-weight: 900; line-height: 3rem"
@@ -30,7 +30,7 @@
           </div>
         </div>
         <!-- RIGHT COLUMN (your existing form component) -->
-        <div class="space-y-6">
+        <div class="space-y-6 lg:col-span-4">
           <!-- Bank pill -->
           <div class="space-y-2">
             <p
@@ -39,7 +39,7 @@
               My bank is
             </p>
             <div
-              class="flex items-center justify-between bg-white shadow-lg shadow-slate-900/25 border border-white/40 relative w-full border bg-white rounded-xl text-left cursor-default border-sushi focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate px-5 py-2 text-gray-900 placeholder-cool-gray-800' border-gray-200 bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400"
+              class="flex items-center justify-between bg-white shadow-lg shadow-slate-900/25 border border-white/40 relative w-full rounded-xl text-left cursor-default border-sushi focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate px-5 py-2 text-gray-900 placeholder-cool-gray-800 bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400"
             >
               <div class="flex items-center gap-3 min-w-0">
                 <span class="inline-flex h-8 w-8 items-center justify-center">
@@ -142,7 +142,7 @@
           <!-- Cloudflare Turnstile -->
           <div
             v-if="captchaSitekey"
-            class="mt-3 rounded-lg bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25"
+            class="captcha-cloudflare bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25"
           >
             <vue-turnstile
               v-model="captchaToken"
@@ -190,6 +190,7 @@ const accepted = ref(false);
 const props = defineProps<{
   bankName: string;
   bankEmail?: string;
+  bankWebsite?: string;
 }>();
 
 const selectedTone = ref('POLITE');
@@ -268,6 +269,7 @@ async function generateAndGo(bankName: string) {
       query: {
         bankName,
         tone: selectedTone.value,
+        bankWebsite: props.bankWebsite,
       },
     });
   } finally {
@@ -322,5 +324,10 @@ async function generateAndGo(bankName: string) {
   background-color: white;
   color: #1e293b;
   padding: 0.5rem;
+}
+
+/* Style iframe for captcha */
+.captcha-cloudflare iframe {
+  width: 100%;
 }
 </style>
