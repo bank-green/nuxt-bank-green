@@ -71,12 +71,18 @@ export default defineEventHandler(async event => {
   );
   const payload = isJson ? JSON.parse(payloadText) : { raw: payloadText };
   // after you build `payload`
+  // The Embrace API returns contactEmail in response.contactEmail
+  // but we also check the top level in case the structure varies
+  const contactEmail =
+    payload.contactEmail || payload.response?.contactEmail || null;
+  const bccEmail = payload.bccEmail || payload.response?.bccEmail || null;
+
   return {
     campaign_id: campaignId,
     subject: payload.subject ?? payload.response?.subject ?? '',
     text: payload.text ?? payload.response?.text ?? '',
     response: payload,
-    contactEmail: payload.response?.contactEmail ?? null,
-    bccEmail: payload.response?.bccEmail,
+    contactEmail,
+    bccEmail,
   };
 });

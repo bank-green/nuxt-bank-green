@@ -7,18 +7,31 @@ type Draft = {
   brandTag?: string;
   contactEmail: string;
   bccEmail: string;
+  bankWebsite?: string;
 };
 
 export const useEmbraceStore = defineStore('embrace', {
   state: () => ({
-    draft: { subject: '', text: '', contactEmail: '', bccEmail: '' } as Draft,
+    draft: {
+      subject: '',
+      text: '',
+      contactEmail: '',
+      bccEmail: '',
+      bankWebsite: '',
+    } as Draft,
   }),
   actions: {
     setDraft(p: Partial<Draft>) {
       this.draft = { ...this.draft, ...p };
     },
     clearDraft() {
-      this.draft = { subject: '', text: '', contactEmail: '', bccEmail: '' };
+      this.draft = {
+        subject: '',
+        text: '',
+        contactEmail: '',
+        bccEmail: '',
+        bankWebsite: '',
+      };
     },
   },
 });

@@ -2,7 +2,7 @@
   <section class="bg-gradient-to-b from-sushi-50 to-pistachio-green p-28">
     <div class="contain">
       <div
-        class="grid grid-cols-1 lg:grid-cols-10 gap-12 lg:gap-20 rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
+        class="flex justify-between flex-flow rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
         style="
           scroll-margin-top: 80px;
           background-image: url('/img/backgrounds/circle-quarter.svg');
@@ -10,10 +10,9 @@
         "
       >
         <!-- LEFT COLUMN -->
-        <div class="flex flex-col gap-12 lg:col-span-6">
+        <div class="w-3/5 space-y-8">
           <h2
-            class="w-full text-xl md:text-4xl tracking-wider text-gray-50"
-            style="font-weight: 900; line-height: 3rem"
+            class="w-full text-xl md:text-4xl tracking-wider text-gray-50 font-black leading-[3rem] mb-[2em]"
           >
             Contact your bank to be greener
           </h2>
@@ -30,7 +29,7 @@
           </div>
         </div>
         <!-- RIGHT COLUMN (your existing form component) -->
-        <div class="space-y-6 lg:col-span-4">
+        <div class="w-1/3 space-y-6">
           <!-- Bank pill -->
           <div class="space-y-2">
             <p
@@ -126,7 +125,7 @@
             <input
               v-model="accepted"
               type="checkbox"
-              class="mt-0.5 h-4 w-4 rounded border-white/40 bg-transparent text-lime-400 focus:ring-lime-400"
+              class="mt-0.5 h-4 w-4 text-sushi-600 focus:ring-transparent border-gray-300 rounded appearance-none"
             />
             <span>
               I have read and understood Bank.Green’s
@@ -142,7 +141,7 @@
           <!-- Cloudflare Turnstile -->
           <div
             v-if="captchaSitekey"
-            class="captcha-cloudflare bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25"
+            class="captcha-cloudflare bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25 flex justify-center"
           >
             <vue-turnstile
               v-model="captchaToken"
@@ -154,13 +153,12 @@
           <!-- Submit button -->
           <button
             type="button"
-            class="mt-4 w-full rounded-full bg-[#47692c] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/40 transition hover:bg-[#3f5c26] disabled:opacity-60 disabled:cursor-not-allowed"
+            class="mt-4 inline-block w-full max-w-full text-center rounded-xl bg-lime-400/90 px-6 py-5 text-sm font-semibold text-white shadow-lg shadow-slate-900/40 transition hover:bg-[#3f5c26] disabled:opacity-60 disabled:cursor-not-allowed"
             :disabled="loading || !accepted || (!captchaVerified && !isLocal)"
             @click="generateAndGo(bankName)"
           >
             {{ loading ? 'Generating…' : 'Generate Email Message' }}
           </button>
-
           <p class="mt-1 text-center text-xs text-white/70">
             (Opens in new window)
           </p>
@@ -258,12 +256,25 @@ async function generateAndGo(bankName: string) {
     });
 
     const data = await res.json();
+
+    // Try multiple possible locations for the email
+    const contactEmail =
+      data.contactEmail ||
+      data.response?.contactEmail ||
+      data.response?.contact_email ||
+      props.bankEmail ||
+      '';
+
+    console.log('BANK WEBSITE', props.bankWebsite);
+
     store.setDraft({
       subject: data.subject,
       text: data.text || data.response?.text || '',
       campaignId: data.campaign_id,
-      contactEmail: data.contactEmail,
+      bankWebsite: props.bankWebsite || '',
+      contactEmail,
     });
+
     router.push({
       path: '/contact-my-bank',
       query: {
@@ -276,20 +287,6 @@ async function generateAndGo(bankName: string) {
     loading.value = false;
   }
 }
-
-// Handle submit -> navigate to next page
-// const handleSubmit = () => {
-//   // Assume valid if accepted and bankName is set
-//   if (!accepted.value || !props.bankName) return;
-//   router.push({
-//     path: '/contact-my-bank',
-//     query: {
-//       bankName: props.bankName,
-//       bankEmail: props.bankEmail || '',
-//       tone: selectedTone.value,
-//     },
-//   });
-// };
 </script>
 
 <style scoped>
