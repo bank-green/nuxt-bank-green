@@ -1,27 +1,64 @@
 <script setup lang="ts">
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import TextField from '@/components/forms/TextField.vue'
+import VueTurnstile from 'vue-turnstile';
+import CheckboxSection from '@/components/forms/CheckboxSection.vue';
+import TextField from '@/components/forms/TextField.vue';
 
 const props = withDefaults(
   defineProps<{
-    tag: string
+    tag: string;
   }>(),
   {
-    tag: 'submitbank',
-  },
-)
+    tag: 'submit bank',
+  }
+);
+
+// Cloudflare Turnstile Captcha
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
+
+// Create a local bank ref since this form needs a string, not an object
+const bank = ref('');
 
 const {
   firstName,
   email,
-  bank,
   isAgreeTerms,
   isAgreeMarketing,
   isSent,
   warningsMap,
+  showWarnings,
   send,
   busy,
-} = useContactForm(props.tag, ['email', 'bank', 'isAgreeTerms'], ref({}))
+} = useContactForm(
+  props.tag,
+  ['email', 'isAgreeTerms'],
+  computed(() => ({
+    bank: bank.value,
+  })),
+  ref(undefined),
+  captchaToken
+);
+
+// Manual validation for bank field
+const bankWarning = computed(() => {
+  if (showWarnings.value && !bank.value) {
+    return 'Please tell us the name of your bank';
+  }
+  return '';
+});
+
+// Custom submit handler that validates bank
+const handleSubmit = async () => {
+  // Show warnings to trigger validation display
+  showWarnings.value = true;
+
+  // Check if bank is filled before submitting
+  if (!bank.value) {
+    return;
+  }
+
+  // Proceed with form submission
+  await send();
+};
 </script>
 
 <template>
@@ -38,17 +75,17 @@ const {
     <div class="max-w-xl">
       <form
         class="flex flex-col justify-center items-center"
-        @submit.prevent.stop="send"
+        @submit.prevent.stop="handleSubmit"
       >
         <div class="grid grid-cols-2 gap-6 text-left">
           <TextField
             v-model="bank"
             class="col-span-2"
             name="bank"
-            type="bank"
+            type="text"
             :title="'Name of bank'"
             :placeholder="'Name of bank'"
-            :warning="warningsMap['bank']"
+            :warning="bankWarning"
             :dark="true"
           />
           <TextField
@@ -77,8 +114,7 @@ const {
             :warning="warningsMap['isAgreeMarketing']"
             :dark="true"
           >
-            I wish to receive more information via email from
-            Bank.Green.
+            I wish to receive more information via email from Bank.Green.
           </CheckboxSection>
           <CheckboxSection
             v-model="isAgreeTerms"
@@ -87,20 +123,24 @@ const {
             :dark="true"
             :warning="warningsMap['isAgreeTerms']"
           >
-            I have read and understood Bank.Green’s
-            <NuxtLink
-              to="/privacy"
-              class="link"
-            >
-              privacy policy
-            </NuxtLink>.
+            I have read and understood Bank.Green's
+            <NuxtLink to="/privacy" class="link">privacy policy</NuxtLink>
+            .
           </CheckboxSection>
+          <vue-turnstile
+            v-if="!isLocal"
+            v-model="captchaToken"
+            :site-key="captchaSitekey"
+            theme="light"
+            class="col-span-2"
+          />
         </div>
         <button
           type="submit"
           class="button-green w-full md:w-36 mt-6 md:text-lg flex justify-center"
           :class="{
-            'pointer-events-none opacity-75': busy,
+            'pointer-events-none opacity-75':
+              busy || (!captchaVerified && !isLocal),
           }"
         >
           <span v-if="!busy">Submit</span>

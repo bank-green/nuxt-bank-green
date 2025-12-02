@@ -1,51 +1,62 @@
 <script setup lang="ts">
-import VueTurnstile from 'vue-turnstile'
-import type { PrismicDocument } from '@prismicio/types'
-import BankLocationSearch from '@/components/forms/BankLocationSearch.vue'
-import CheckboxSection from '@/components/forms/CheckboxSection.vue'
-import TextField from '@/components/forms/TextField.vue'
-import EmbraceModal from '@/components/EmbraceModal.vue'
-import useCaptcha from '@/composables/useCaptcha'
+import VueTurnstile from 'vue-turnstile';
+import type { PrismicDocument } from '@prismicio/types';
+import BankLocationSearch from '@/components/forms/BankLocationSearch.vue';
+import CheckboxSection from '@/components/forms/CheckboxSection.vue';
+import TextField from '@/components/forms/TextField.vue';
+import EmbraceModal from '@/components/EmbraceModal.vue';
+import useCaptcha from '@/composables/useCaptcha';
 
 type Response = {
-  text: string
-  subject: string
-  contactEmail: string
-  bccEmail: string
-}
+  text: string;
+  subject: string;
+  contactEmail: string;
+  bccEmail: string;
+};
 
-const { client } = usePrismic()
+const { client } = usePrismic();
 
 // TODO: Maybe update this to pass embracepage as a prop
 //       instead of requesting it again
 const { data: embracePage } = await useAsyncData('embrace', () =>
-  client.getSingle('embracepage'),
-)
+  client.getSingle('embracepage')
+);
 
 if (!embracePage?.value) {
-  console.log('Warning: Unable to retrieve embracepage')
+  console.log('Warning: Unable to retrieve embracepage');
 }
 
-const props = withDefaults(defineProps<{
-  name?: string
-  successRedirectURL: string
-  embracePageProp?: PrismicDocument<Record<string, any>, string, string> | null
-}>(), {
-  successRedirectURL: '/thanks-embrace',
-})
+const props = withDefaults(
+  defineProps<{
+    name?: string;
+    successRedirectURL: string;
+    embracePageProp?: PrismicDocument<
+      Record<string, any>,
+      string,
+      string
+    > | null;
+  }>(),
+  {
+    successRedirectURL: '/thanks-embrace',
+  }
+);
 
-const fullName = ref<string>('')
-const fullNameWarning = ref<string | null>(null)
-const searchValue = ref<string>('')
-const { country } = useCountry()
-const hometown = ref<string>('')
-const background = ref<string>('')
-const showModal = ref<boolean>(false)
-const bankEmail = ref<string>('')
-const bcc = ref<string>('public@bank.green')
-const subject = ref<string>('')
-const generatedMessage = ref<string>('') // pass to preview component as v-model??
-const body = ref<string>('')
+const fullName = ref<string>('');
+const fullNameWarning = ref<string | null>(null);
+const searchValue = ref<string>('');
+const { country } = useCountry();
+
+// Cloudflare Turnstile Captcha (must be before useContactForm)
+const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
+
+const hometown = ref<string>('');
+const background = ref<string>('');
+const showModal = ref<boolean>(false);
+const bankEmail = ref<string>('');
+const bcc = ref<string>('public@bank.green');
+const subject = ref<string>('');
+const generatedMessage = ref<string>(''); // pass to preview component as v-model??
+const body = ref<string>('');
 
 const extras = computed(() => {
   return {
@@ -56,8 +67,8 @@ const extras = computed(() => {
     bankNameWhenNotFound: (!bank.value && searchValue.value) || '',
     hometown: hometown.value || '',
     background: background.value || '',
-  }
-})
+  };
+});
 
 const {
   email,
@@ -72,7 +83,9 @@ const {
   'embrace',
   ['email', 'isAgreeTerms', 'bank'],
   extras,
-)
+  ref(undefined),
+  captchaToken
+);
 
 const form = ref({
   fullName,
@@ -86,7 +99,7 @@ const form = ref({
   background,
   body,
   bcc,
-})
+});
 
 // const emit = defineEmits(['success'])
 
@@ -101,7 +114,7 @@ function searchInputChange(event: HTMLInputElement) {
 // Connect to api to generate message body.
 // Wait for message before showing modal.
 async function getGeneratedMessage() {
-  busy.value = true
+  busy.value = true;
 
   try {
     const response: Response = await $fetch('message', {
@@ -121,64 +134,62 @@ async function getGeneratedMessage() {
         tone: 'POLITE',
       },
       parseResponse: JSON.parse,
-    })
+    });
 
     if (response?.text) {
-      generatedMessage.value = response.text
-      subject.value = response.subject
-      bankEmail.value = response.contactEmail || ''
-      bcc.value = response.bccEmail || ''
+      generatedMessage.value = response.text;
+      subject.value = response.subject;
+      bankEmail.value = response.contactEmail || '';
+      bcc.value = response.bccEmail || '';
     }
   } catch (e) {
-    console.error('Error fetching or generating message.', e)
+    console.error('Error fetching or generating message.', e);
     // TODO: Fallback to boiler plate message stored in Prismic with filled in
     // values.
-    generatedMessage.value = 'We were unable to generate a message. Please write your own message here.'
+    generatedMessage.value =
+      'We were unable to generate a message. Please write your own message here.';
   } finally {
-    busy.value = false
+    busy.value = false;
   }
 }
 
 async function checkAndDisplayPreview() {
-  validate()
+  validate();
   if (!extras.value.fullName) {
     if (embracePage?.value) {
-      fullNameWarning.value = embracePage?.value.data.full_name_warning
+      fullNameWarning.value = embracePage?.value.data.full_name_warning;
     } else {
-      fullNameWarning.value = 'Your name is required'
+      fullNameWarning.value = 'Your name is required';
     }
-    return
+    return;
   }
   if (fullNameWarning.value) {
-    fullNameWarning.value = null
+    fullNameWarning.value = null;
   }
   if (hasWarnings?.value) {
-    busy.value = false
-    return false
+    busy.value = false;
+    return false;
   }
   if (!captchaVerified && !isLocal) {
-    return false
+    return false;
   }
   // TODO: Call function or use some other trigger
   // to get generated message body and message subject
   // and store it in the values passed to modal
-  await getGeneratedMessage()
-  showModal.value = true
+  await getGeneratedMessage();
+  showModal.value = true;
 }
 
 function successRedirect() {
-  navigateTo(props.successRedirectURL)
+  navigateTo(props.successRedirectURL);
 }
 
 const bankSearchClasses = computed(() => {
   if (warningsMap?.value?.bank) {
-    return 'border-red-300 tdext-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red'
+    return 'border-red-300 tdext-red-900 placeholder-red-800 focus:border-red-300 focus:ring-red';
   }
-  return 'text-gray-700'
-})
-
-// Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
+  return 'text-gray-700';
+});
 </script>
 
 <template>
@@ -190,7 +201,9 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
         class="flex flex-col items-center w-full"
         @submit.prevent.stop="checkAndDisplayPreview"
       >
-        <p class="text-xl md:text-2xl text-primary-dark mb-6 font-semibold whitespace-pre-wrap">
+        <p
+          class="text-xl md:text-2xl text-primary-dark mb-6 font-semibold whitespace-pre-wrap"
+        >
           {{ embracePage?.data.form_title || 'Send Your Break-Up Email' }}
         </p>
         <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
@@ -201,7 +214,9 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
             type="text"
             border-color="border-sushi-500"
             :title="embracePage?.data.full_name_label || 'Your full name'"
-            :placeholder="embracePage?.data.full_name_placeholder || 'Write your full name'"
+            :placeholder="
+              embracePage?.data.full_name_placeholder || 'Write your full name'
+            "
             :warning="fullNameWarning ? fullNameWarning : false"
           />
           <TextField
@@ -211,17 +226,27 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
             name="email"
             border-color="border-sushi-500"
             :title="embracePage?.data.email_label || 'Email'"
-            :placeholder="embracePage?.data.email_placeholder || 'email@example.com'"
+            :placeholder="
+              embracePage?.data.email_placeholder || 'email@example.com'
+            "
             :warning="warningsMap['email']"
           />
           <BankLocationSearch
             v-model="form.bank"
             :bank-search-classes="bankSearchClasses"
             :warning="warningsMap['bank']"
-            :info-tooltip-bank="embracePage?.data.bank_select_tooltip || 'For now, we are only considering certain banks for this campaign. We may add more eventually.'"
+            :info-tooltip-bank="
+              embracePage?.data.bank_select_tooltip ||
+              'For now, we are only considering certain banks for this campaign. We may add more eventually.'
+            "
             class="col-span-2"
-            :bank-title="embracePage?.data.bank_select_label || 'Choose the bank you broke up with'"
-            :location-title="embracePage?.data?.country_select_label || 'Choose your country'"
+            :bank-title="
+              embracePage?.data.bank_select_label ||
+              'Choose the bank you broke up with'
+            "
+            :location-title="
+              embracePage?.data?.country_select_label || 'Choose your country'
+            "
             :is-embrace="true"
             @search-input-change="searchValue = $event"
             @update:model-value="searchInputChange"
@@ -241,7 +266,9 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
             name="hometown"
             type="text"
             :title="embracePage?.data.hometown_label || 'Where do you live'"
-            :placeholder="embracePage?.data.hometown_placeholder || 'Enter your city'"
+            :placeholder="
+              embracePage?.data.hometown_placeholder || 'Enter your city'
+            "
           />
           <TextField
             v-model="form.background"
@@ -250,8 +277,13 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
             border-color="border-sushi-500"
             name="backgound"
             type="text"
-            :title="embracePage?.data.background_label || 'Tell us more about you'"
-            :placeholder="embracePage?.data.background_placeholder || 'Why is this issue important to you?'"
+            :title="
+              embracePage?.data.background_label || 'Tell us more about you'
+            "
+            :placeholder="
+              embracePage?.data.background_placeholder ||
+              'Why is this issue important to you?'
+            "
           />
           <CheckboxSection
             v-model="isAgreeMarketing"
@@ -274,20 +306,13 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
               wrapper="span"
               fallback="I have read and understood the Bank.Green "
             />
-            <NuxtLink
-              v-if="embracePage?.data"
-              to="/privacy"
-              class="link"
-            >
+            <NuxtLink v-if="embracePage?.data" to="/privacy" class="link">
               {{
-                ' ' + (embracePage?.data.privacy_policy_link_text || "privacy policy")
+                ' ' +
+                (embracePage?.data.privacy_policy_link_text || 'privacy policy')
               }}
             </NuxtLink>
-            <NuxtLink
-              v-else
-              to="/privacy"
-              class="link"
-            >
+            <NuxtLink v-else to="/privacy" class="link">
               privacy policy
             </NuxtLink>
             <vue-turnstile
@@ -302,9 +327,12 @@ const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha()
         <button
           type="submit"
           class="button-green w-full mt-6 flex justify-center"
-          :class="{ 'pointer-events-none opacity-75': busy || (!captchaVerified && !isLocal) }"
+          :class="{
+            'pointer-events-none opacity-75':
+              busy || (!captchaVerified && !isLocal),
+          }"
         >
-          <span v-if="!busy"> Generate Email Preview </span>
+          <span v-if="!busy">Generate Email Preview</span>
           <span v-else>
             <svg
               width="24"

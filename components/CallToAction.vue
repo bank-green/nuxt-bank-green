@@ -1,16 +1,12 @@
 <script setup>
 import { asText } from '@prismicio/helpers';
 import CheckList from '@/components/CheckList.vue';
+import usePrerenderCache from '~/composables/usePrerenderCache';
 
 const { client } = usePrismic();
 const { data: call } = await useAsyncData('calltoaction', () =>
-  client.getSingle('calltoaction')
+  usePrerenderCache('calltoaction', () => client.getSingle('calltoaction'))
 );
-const checklist = computed(() => {
-  const d = call.value?.data ?? {};
-  const defaults = ['...', '...', '...'];
-  return defaults.map((fb, i) => asText(d[`checklist${i + 1}`]) || fb);
-});
 
 defineProps({
   title: String,
@@ -19,6 +15,18 @@ defineProps({
   buttonText: String,
   light: Boolean,
   spaced: Boolean,
+});
+
+const checklist = computed(() => {
+  const d = call.value?.data ?? {};
+  const defaults = [
+    'Send a message to your bank that it must defund fossil fuels',
+    'Join a fast-growing movement of consumers standing up for their future',
+    'Take a critical climate action with profound effects',
+  ];
+  return defaults.map(
+    (fallback, i) => asText(d[`checklist${i + 1}`]) || fallback
+  );
 });
 </script>
 

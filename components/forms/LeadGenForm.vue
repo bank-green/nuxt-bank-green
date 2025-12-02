@@ -1,6 +1,9 @@
+<!-- NOTE: This is a static copy of the Prismic form in slices/LeadGen/index.vue.
+     TODO: replace that Prismic form with this easier-to-maintain component. -->
+
 <template>
   <div
-    id="lead-gen"
+    id="lead-gen-form-static"
     style="
       scroll-margin-top: 80px;
       background-image: url('/img/backgrounds/circle-quarter.svg');
@@ -13,28 +16,21 @@
         class="w-full text-xl md:text-4xl tracking-wider text-gray-50"
         style="font-weight: 900; line-height: 3rem"
       >
-        {{ content?.title || 'Curious about switching to a green bank?' }}
+        {{ title }}
       </h2>
-      <CheckList
-        class="md:text-xl"
-        :list="
-          slice.items
-            .map((i: any) => asText(i.bullet_text))
-            .filter((i: string) => i.length > 0)
-        "
-      />
+      <CheckList :list="bulletPoints" class="md:text-xl" />
     </div>
     <form
       class="flex flex-col gap-6 text-left"
       @submit.prevent.stop="submitForm"
     >
       <BankLocationSearch
-        v-if="getSliceBoolean(content.show_bank_field) ?? true"
+        v-if="props.showBankField"
         v-model="bank"
         :warning="warningsMap['bank']"
         dark
         hide-location
-        :bank-title="content.form_bank_label || 'I am interested in'"
+        bank-title="I am interested in"
         @search-input-change="searchValue = $event"
       >
         <template #not-listed>
@@ -49,29 +45,25 @@
         v-model="firstName"
         name="firstName"
         type="text"
-        :title="content.form_name_label || 'First name'"
-        :placeholder="'First name, so we can say hi'"
+        title="First name"
+        placeholder="First name, so we can say hi"
         dark
       />
       <TextField
         v-model="email"
         type="email"
         name="email"
-        :title="content.form_email_label || 'Email address'"
-        :placeholder="'Your email address'"
+        title="Email address"
+        placeholder="Your email address"
         :warning="warningsMap['email']"
         dark
       />
       <CurrentStatus
-        v-if="getSliceBoolean(content.show_status_field) ?? true"
         v-model="currentStatus"
         :options="statusOptions"
         dark
         :warning="warningsMap['currentStatus']"
-        :title="
-          content.form_status_label ||
-          'Which option best describes your current status?'
-        "
+        title="Which option best describes your current status?"
       />
       <CheckboxSection
         v-model="isAgreeMarketing"
@@ -87,7 +79,7 @@
         :warning="warningsMap['isAgreeTerms']"
         dark
       >
-        I have read and understood Bank.Green’s
+        I have read and understood Bank.Green's
         <NuxtLink to="/privacy" class="link">privacy policy</NuxtLink>
         .
       </CheckboxSection>
@@ -105,9 +97,7 @@
             busy || (!captchaVerified && !isLocal),
         }"
       >
-        <span v-if="!busy">
-          {{ content.button_label || 'Complete Sign Up' }}
-        </span>
+        <span v-if="!busy">Complete Sign Up</span>
         <span v-else>
           <svg
             width="32"
@@ -131,30 +121,41 @@
 </template>
 
 <script setup lang="ts">
-import { asText } from '@prismicio/helpers';
-import { getSliceComponentProps } from '@prismicio/vue';
 import VueTurnstile from 'vue-turnstile';
-import { getSliceBoolean } from '@/utils/prismic/conversions';
 import CheckboxSection from '@/components/forms/CheckboxSection.vue';
 import BankLocationSearch from '@/components/forms/BankLocationSearch.vue';
+import CheckList from '@/components/CheckList.vue';
 import TextField from '@/components/forms/TextField.vue';
 import CurrentStatus from '@/components/forms/CurrentStatus.vue';
 
-const searchValue = ref(null);
-const props = defineProps(
-  getSliceComponentProps(['slice', 'index', 'slices', 'context'])
-);
+interface Props {
+  formTag?: string;
+  title?: string;
+  showBankField?: boolean;
+}
 
-const statusOptions = computed(() => {
-  const options = props.slice.items.map((i: any) => i.dropdown_status_option);
-  const filteredOptions = options.filter(
-    (opt: null | string) =>
-      opt !== 'Select none (default)' && typeof opt === 'string'
-  );
-  return filteredOptions.length > 0 ? filteredOptions : undefined;
+const props = withDefaults(defineProps<Props>(), {
+  formTag: 'lead-gen-default',
+  title: 'Curious about switching to a green bank?',
+  showBankField: true,
 });
 
-const content = computed(() => props.slice.primary);
+const searchValue = ref(null);
+
+// Static configuration - no CMS data
+const bulletPoints = [
+  'Learn how to take action on fossil fuel finance.',
+  'Discover green banking and how easy it is to switch.',
+  'Stay up to date with climate finance news.',
+];
+
+const statusOptions = [
+  'Student',
+  'Employed',
+  'Self-employed',
+  'Retired',
+  'Unemployed',
+];
 
 const { country } = useCountry();
 
@@ -172,13 +173,8 @@ const {
   busy,
   send,
 } = useContactForm(
-  'green directory',
-  [
-    'firstName',
-    'email',
-    'isAgreeTerms',
-    getSliceBoolean(content.value.show_status_field) ? 'currentStatus' : '',
-  ],
+  props.formTag,
+  ['firstName', 'email', 'isAgreeTerms', 'currentStatus'],
   computed(() => ({
     country: country.value || '',
     bank: bank.value?.tag || '',
