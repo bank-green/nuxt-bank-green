@@ -10,7 +10,7 @@
         "
       >
         <!-- LEFT COLUMN -->
-        <div class="w-3/5 space-y-8">
+        <div class="space-y-8" style="width: 57%">
           <h2
             class="w-full text-xl md:text-4xl tracking-wider text-gray-50 font-black leading-[3rem] mb-[2em]"
           >

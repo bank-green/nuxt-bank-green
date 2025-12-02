@@ -4,18 +4,23 @@
   >
     <div class="contain">
       <div
-        class="rounded-3xl bg-[#22283a] px-8 py-10 md:px-12 md:py-12 text-white grid grid-cols-1"
+        class="rounded-3xl bg-[#22283a] px-8 py-10 md:px-12 md:py-12 text-white grid grid-cols-1 bg-primary-dark bg-no-repeat"
+        style="
+          scroll-margin-top: 80px;
+          background-image: url('/img/backgrounds/circle-quarter.svg');
+          background-position: left bottom;
+        "
       >
         <!-- w-full max-w-5xl rounded-3xl bg-slate-900/70 border border-white/10 px-6 py-10 md:px-10 md:py-12" -->
         <!-- Header -->
-        <div class="mb-8 text-center">
-          <h1
-            class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight"
+        <div class="mb-8 text-center space-y-8 mx-auto">
+          <h2
+            class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight text-left"
           >
             Contacting your bank
-          </h1>
+          </h2>
           <div
-            class="mx-auto max-w-xl rounded-2xl bg-white/15 px-6 py-4 text-sm md:text-base text-white"
+            class="text-left mx-auto max-w-xl rounded-2xl bg-white/15 px-6 py-4 text-sm md:text-base text-white"
           >
             <p>
               You may copy the email message and send it using your personal
@@ -25,9 +30,7 @@
         </div>
 
         <!-- Card -->
-        <div
-          class="mx-auto w-full max-w-xl rounded-2xl px-6 py-4 text-sm md:text-base"
-        >
+        <div class="mx-auto w-full max-w-xl rounded-2xl text-sm md:text-base">
           <!-- Bank header -->
           <div class="flex items-center gap-3 mb-4">
             <div
@@ -51,7 +54,7 @@
           <!-- Message textarea -->
           <textarea
             readonly
-            class="mt-4 w-full h-72 rounded-xl border border-white/30 bg-white/90 p-4 text-sm text-slate-900 leading-relaxed resize-none"
+            class="mt-4 w-full h-72 rounded-xl border border-white/30 bg-white/90 px-6 py-4 text-sm text-slate-900 leading-relaxed resize-none"
             :value="emailMessage"
           ></textarea>
 
