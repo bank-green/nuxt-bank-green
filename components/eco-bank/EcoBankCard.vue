@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { EcoBankCard } from '../../utils/sustainableEcoBanksUtils'
-import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
+import type { EcoBankCard } from '../../utils/sustainableEcoBanksUtils';
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue';
 
 defineProps<{
-  item: EcoBankCard
-}>()
+  item: EcoBankCard;
+}>();
 </script>
 
 <template>
-  <div
-    class="block p-6 pb-4 mb-6 rounded-2xl bg-white border border-gray-200 hover:border-sushi-500 shadow-sm transition duration-150 ease-in-out"
+  <NuxtLink
+    :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
+    class="block p-6 pb-4 mb-6 rounded-2xl bg-white border border-gray-200 hover:border-sushi-500 shadow-sm transition duration-150 ease-in-out group"
   >
     <div class="flex items-center justify-between mb-6">
       <div
@@ -58,10 +59,7 @@ defineProps<{
 
     <hr class="h-1 mb-4 mt-4 stroke-1 stroke-gray-200" />
 
-    <NuxtLink
-      :to="item ? `/sustainable-eco-banks/${item.tag}` : ''"
-      class="w-fit ml-auto mr-0 flex gap-2 items-center"
-    >
+    <div class="w-fit ml-auto mr-0 flex gap-2 items-center">
       <span class="text-sm text-primary-dark font-medium">Learn more</span>
 
       <svg
@@ -79,6 +77,6 @@ defineProps<{
           stroke-linejoin="round"
         />
       </svg>
-    </NuxtLink>
-  </div>
+    </div>
+  </NuxtLink>
 </template>
