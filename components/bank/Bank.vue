@@ -45,7 +45,12 @@ const layoutType = computed(() => {
 </script>
 
 <template>
-  <component :is="layoutType" :bank-name="name" :bank-email="email">
+  <component
+    :is="layoutType"
+    :bank-name="name"
+    :bank-email="email"
+    :bank-website="website"
+  >
     <template #section1>
       <BankHeadline
         :name="name"

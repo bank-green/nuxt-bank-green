@@ -1,8 +1,10 @@
 <template>
-  <section class="bg-gradient-to-b from-sushi-50 to-pistachio-green p-28">
+  <section
+    class="bg-gradient-to-b from-sushi-50 to-pistachio-green py-6 md:py-12 px-6 md:px-12"
+  >
     <div class="contain">
       <div
-        class="flex justify-between flex-flow rounded-xl py-6 md:py-12 px-6 md:px-16 bg-primary-dark bg-no-repeat"
+        class="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-0 rounded-xl py-16 px-16 bg-primary-dark bg-no-repeat"
         style="
           scroll-margin-top: 80px;
           background-image: url('/img/backgrounds/circle-quarter.svg');
@@ -10,15 +12,15 @@
         "
       >
         <!-- LEFT COLUMN -->
-        <div class="space-y-8" style="width: 57%">
+        <div class="space-y-8 w-full lg:w-[57%]">
           <h2
-            class="w-full text-xl md:text-4xl tracking-wider text-gray-50 font-black leading-[3rem] mb-[2em]"
+            class="w-full text-xl md:text-4xl tracking-wider text-gray-50 font-black md:leading-[3rem] mb-8 md:mb-[2em]"
           >
             Contact your bank to be greener
           </h2>
 
           <div
-            class="bg-white text-gray-700 md:shadow-md rounded-2xl px-8 py-10 space-y-6 md:text-xl"
+            class="bg-white text-gray-700 md:shadow-md rounded-2xl px-4 md:px-8 py-6 md:py-10 space-y-4 md:space-y-6 text-base md:text-xl"
           >
             <p>Help green your bank!</p>
             <p>
@@ -29,7 +31,7 @@
           </div>
         </div>
         <!-- RIGHT COLUMN (your existing form component) -->
-        <div class="w-1/3 space-y-6">
+        <div class="w-full lg:w-1/3 space-y-6">
           <!-- Bank pill -->
           <div class="space-y-2">
             <p
@@ -38,7 +40,7 @@
               My bank is
             </p>
             <div
-              class="flex items-center justify-between bg-white shadow-lg shadow-slate-900/25 border border-white/40 relative w-full rounded-xl text-left cursor-default border-sushi focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 sm:text-sm truncate px-5 py-2 text-gray-900 placeholder-cool-gray-800 bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400"
+              class="flex items-center justify-between bg-white shadow-lg shadow-slate-900/25 border border-white/40 relative w-full rounded-xl text-left cursor-default border-sushi focus:border-sushi-300 focus:ring focus:ring-sushi-200 focus:ring-opacity-50 text-sm truncate px-4 md:px-5 py-2 text-gray-900 placeholder-cool-gray-800 bg-gray-100 border-gray-200 text-gray-700 placeholder-gray-400"
             >
               <div class="flex items-center gap-3 min-w-0">
                 <span class="inline-flex h-8 w-8 items-center justify-center">
@@ -62,7 +64,7 @@
               <!-- Selected tone button -->
               <button
                 type="button"
-                class="w-full flex items-center gap-3 bg-white rounded-xl px-5 py-1 shadow-lg shadow-slate-900/25 border border-white/40"
+                class="w-full flex items-center gap-2 md:gap-3 bg-white rounded-xl px-4 md:px-5 py-2 md:py-1 shadow-lg shadow-slate-900/25 border border-white/40"
                 @click="isDropdownOpen = !isDropdownOpen"
               >
                 <span
@@ -73,7 +75,7 @@
                 <img
                   :src="getToneEmoji(selectedTone).src"
                   :alt="getToneEmoji(selectedTone).alt"
-                  class="h-10 w-10 flex-shrink-0"
+                  class="h-8 w-8 md:h-10 md:w-10 flex-shrink-0"
                 />
                 <svg
                   class="h-5 w-5 text-slate-900 flex-shrink-0 transition-transform"
@@ -111,7 +113,7 @@
                   <img
                     :src="getToneEmoji(tone).src"
                     :alt="getToneEmoji(tone).alt"
-                    class="h-10 w-10 flex-shrink-0"
+                    class="h-8 w-8 md:h-10 md:w-10 flex-shrink-0"
                   />
                 </button>
               </div>
@@ -141,7 +143,7 @@
           <!-- Cloudflare Turnstile -->
           <div
             v-if="captchaSitekey"
-            class="captcha-cloudflare bg-white/95 px-4 py-3 shadow-lg shadow-slate-900/25 flex justify-center"
+            class="captcha-cloudflare bg-white/95 px-2 py-2 md:px-4 md:py-3 shadow-lg shadow-slate-900/25 flex justify-center rounded-xl"
           >
             <vue-turnstile
               v-model="captchaToken"
@@ -153,8 +155,8 @@
           <!-- Submit button -->
           <button
             type="button"
-            class="mt-4 inline-block w-full max-w-full text-center rounded-xl bg-lime-400/90 px-6 py-5 text-sm font-semibold text-white shadow-lg shadow-slate-900/40 transition hover:bg-[#3f5c26] disabled:opacity-60 disabled:cursor-not-allowed"
-            :disabled="loading || !accepted || (!captchaVerified && !isLocal)"
+            class="mt-4 inline-block w-full max-w-full text-center rounded-xl bg-lime-400/90 px-4 py-4 md:px-6 md:py-5 text-sm font-semibold text-white shadow-lg shadow-slate-900/40 transition hover:bg-[#3f5c26] disabled:opacity-60 disabled:cursor-not-allowed"
+            :disabled="loading || !accepted || !captchaVerified"
             @click="generateAndGo(bankName)"
           >
             {{ loading ? 'Generating…' : 'Generate Email Message' }}
@@ -178,7 +180,7 @@ const router = useRouter();
 const store = useEmbraceStore();
 
 // Cloudflare Turnstile Captcha
-const { isLocal, captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
+const { captchaVerified, captchaSitekey, captchaToken } = useCaptcha();
 
 // Form state
 const tones = ['FRIENDLY', 'POLITE', 'SERIOUS', 'DIRECT'];
@@ -264,8 +266,6 @@ async function generateAndGo(bankName: string) {
       data.response?.contact_email ||
       props.bankEmail ||
       '';
-
-    console.log('BANK WEBSITE', props.bankWebsite);
 
     store.setDraft({
       subject: data.subject,
