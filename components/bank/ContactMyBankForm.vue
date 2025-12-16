@@ -132,7 +132,7 @@
             <span>
               I have read and understood Bank.Green’s
               <NuxtLink
-                to="/privacy-policy"
+                to="/privacy"
                 class="underline text-lime-200 hover:text-lime-100"
               >
                 privacy policy
