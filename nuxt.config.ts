@@ -206,4 +206,6 @@ export default defineNuxtConfig({
   socialShare: {
     baseUrl: process.env.PUBLIC_DOMAIN_URL,
   },
+
+  compatibilityDate: '2025-11-06',
 });
