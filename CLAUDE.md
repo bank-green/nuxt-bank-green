@@ -88,3 +88,88 @@ Bank.Green is a Nuxt 3 application that helps users find ethical and sustainable
 - **Node.js**: >= 22.19.0 (see `.nvmrc`)
 - **Package manager**: npm
 - **IDE**: VS Code with Vue, ESLint, and Prettier extensions recommended
+
+## Environment Variables
+
+### Local Development Setup
+
+1. **Create `.env` file** (copy from `.env.sample`):
+
+   ```bash
+   cp .env.sample .env
+   ```
+
+2. **Required environment variables for local development**:
+
+   ```bash
+   # Cloudflare Turnstile Captcha
+   NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY=0x4AAA...  # Public site key (get from Cloudflare Dashboard)
+   NUXT_CLOUDFLARE_CAPTCHA_SECRET=0x4AAA...          # Private secret key (NEVER commit to git)
+
+   # Other required variables
+   PUBLIC_DOMAIN_URL=https://bank.green
+   PUBLIC_DATA_URL=https://data.bank.green/graphql
+   NUXT_PUBLIC_ACTIVE_CAMPAIGN_KEY=...
+   NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL=...
+   ```
+
+3. **For Wrangler local preview** (optional - only if using `npm run preview`):
+   ```bash
+   # Create .dev.vars file (NOT committed to git)
+   cp .env .dev.vars
+   ```
+
+### Production/Staging Setup (Cloudflare Workers)
+
+Secrets are managed via Wrangler CLI or Cloudflare Dashboard:
+
+**Option 1: Using Wrangler CLI** (recommended for secrets):
+
+```bash
+# Set production secret
+npx wrangler secret put NUXT_CLOUDFLARE_CAPTCHA_SECRET
+
+# Set staging secret
+npx wrangler secret put NUXT_CLOUDFLARE_CAPTCHA_SECRET -e staging
+
+# List secrets
+npx wrangler secret list
+npx wrangler secret list -e staging
+```
+
+**Option 2: Using Cloudflare Dashboard**:
+
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com)
+2. Navigate to **Workers & Pages** → Select your worker (`website` or `website-staging`)
+3. Go to **Settings** → **Variables**
+4. Click **"Add variable"** → Choose **"Encrypt"**
+5. Add: `NUXT_CLOUDFLARE_CAPTCHA_SECRET` with your secret value
+
+### Environment Variable Naming Conventions
+
+- **Private (server-only)**: Use `NUXT_` prefix (e.g., `NUXT_CLOUDFLARE_CAPTCHA_SECRET`)
+
+  - Accessible only in server-side code via `useRuntimeConfig().VARIABLE_NAME`
+  - NOT exposed to client-side JavaScript bundles
+  - Use for API keys, secrets, credentials
+
+- **Public (client + server)**: Use `NUXT_PUBLIC_` prefix (e.g., `NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY`)
+  - Accessible everywhere via `useRuntimeConfig().public.VARIABLE_NAME`
+  - Exposed to client-side JavaScript (visible in browser DevTools)
+  - Use for non-sensitive config like API endpoints, feature flags, public keys
+
+### Getting Cloudflare Turnstile Keys
+
+1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
+2. Go to **Turnstile** (under Security section)
+3. Select your site (or create a new one)
+4. Copy:
+   - **Site Key** → Use for `NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY`
+   - **Secret Key** → Use for `NUXT_CLOUDFLARE_CAPTCHA_SECRET`
+
+### Security Notes
+
+- **NEVER** commit `.env` or `.dev.vars` files to git (they are in `.gitignore`)
+- **NEVER** put secrets in `wrangler.toml` (it's committed to git)
+- Private variables (without `_PUBLIC_`) are ONLY accessible server-side
+- Captcha secret is now properly secured in private runtime config (fixed as of 2025-12-17)

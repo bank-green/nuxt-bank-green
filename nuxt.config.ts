@@ -27,13 +27,16 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    // Private server-only config
+    CAPTCHA_SECRET: process.env.NUXT_CLOUDFLARE_CAPTCHA_SECRET,
+
+    // Public config (client + server)
     public: {
       DOMAIN_URL: process.env.PUBLIC_DOMAIN_URL,
       DATA_URL: process.env.PUBLIC_DATA_URL,
       EMBRACE_URL: process.env.PUBLIC_EMBRACE_URL,
       GPE_URL: process.env.PUBLIC_GPE_URL,
       CAPTCHA_SITEKEY: process.env.NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY,
-      CAPTCHA_SECRET: process.env.NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SECRET,
       ZAPIER_OTHER_SUBMIT: process.env.ZAPIER_OTHER_SUBMIT,
       ZAPIER_CONTACT: process.env.ZAPIER_CONTACT,
       ACTIVE_CAMPAIGN_KEY: process.env.NUXT_PUBLIC_ACTIVE_CAMPAIGN_API_KEY,
