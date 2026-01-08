@@ -24,6 +24,7 @@ const checklist = computed(() => {
     'Join a fast-growing movement of consumers standing up for their future',
     'Take a critical climate action with profound effects',
   ];
+
   return defaults.map(
     (fallback, i) => asText(d[`checklist${i + 1}`]) || fallback
   );

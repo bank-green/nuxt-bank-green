@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps({
   modelValue: Boolean,
-})
+});
 
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue']);
 
 function closeModal() {
-  console.info('close')
-  emits('update:modelValue', false)
+  console.info('close');
+  emits('update:modelValue', false);
 }
 </script>
 
@@ -37,11 +37,7 @@ function closeModal() {
             class="absolute right-2 top-2 text-white hover:text-red-400 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sushi-500 h-6 w-6 sm:h-8 sm:w-8 flex items-center justify-center m-auto mr-3.5 mt-2 sm:mt-1.5"
             @click="closeModal"
           >
-            <svg
-              class="h-7 w-7"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
+            <svg class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
               <path
                 fill-rule="evenodd"
                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"

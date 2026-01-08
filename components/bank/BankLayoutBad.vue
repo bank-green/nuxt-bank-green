@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue'
-import Swoosh from '@/components/Swoosh.vue'
-import CallToAction from '@/components/CallToAction.vue'
-import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
+import ContactMyBankForm from './ContactMyBankForm.vue';
+import RenderWhenVisibleInViewPort from '@/components/func/RenderWhenVisibleInViewPort.client.vue';
+import Swoosh from '@/components/Swoosh.vue';
+import CallToAction from '@/components/CallToAction.vue';
+import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue';
+
+const props = defineProps<{
+  bankName: string;
+  bankEmail?: string;
+  bankWebsite?: string;
+}>();
 </script>
 
 <template>
@@ -22,10 +29,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
           <div
             class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center mt-8"
           >
-            <NuxtLink
-              to="/sustainable-eco-banks"
-              class="button-green w-auto"
-            >
+            <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">
               Move Your Money
             </NuxtLink>
           </div>
@@ -60,10 +64,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
           <div
             class="flex flex-col space-y-2 sm:space-y-0 sm:flex-row justify-between items-center w-auto"
           >
-            <NuxtLink
-              to="/sustainable-eco-banks"
-              class="button-green w-auto"
-            >
+            <NuxtLink to="/sustainable-eco-banks" class="button-green w-auto">
               Move Your Money
             </NuxtLink>
           </div>
@@ -77,37 +78,35 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
     </div>
 
     <!-- SECTION THREE -->
-    <div
-      id="section-three"
-      class="relative bg-arctic-blue"
-    >
+    <div id="section-three" class="relative bg-arctic-blue">
       <Swoosh direction="down" />
       <img
         class="relative inline-block mb-4"
         src="/img/illustrations/fishes.svg"
         alt=""
-      >
+      />
       <div class="relative z-10 contain max-w-2xl">
         <slot name="section3" />
       </div>
     </div>
 
     <!-- CALL TO ACTION -->
-    <div
-      id="call-to-action"
-      class="bg-arctic-blue pb-8 pt-8"
-    >
+    <div id="call-to-action" class="bg-arctic-blue pb-8 pt-8">
       <div class="contain flex flex-col justify-center items-center">
-        <CallToAction
-          :light="true"
-          :spaced="true"
-        />
+        <CallToAction :light="true" :spaced="true" />
       </div>
     </div>
 
+    <!-- CONTACT MY BANK -->
+    <ContactMyBankForm
+      id="contact-my-bank"
+      :bank-name="props.bankName"
+      :bank-email="props.bankEmail"
+      :bank-website="props.bankWebsite"
+    />
+
     <!-- FOOTER IMAGE -->
     <div class="bg-arctic-blue overflow-hidden w-full pointer-events-none">
-      <!-- <div class="-mx-1/4 sm:mx-0 sm:w-full"> -->
       <div
         class="w-full -mt-24 sm:-mt-16 lg:-mt-32 pointer-events-none overflow-hidden"
       >
@@ -129,10 +128,7 @@ import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
           >
             How do we derive our results?
           </h2>
-          <NuxtLink
-            to="/methodology"
-            class="button-green inline-block w-max"
-          >
+          <NuxtLink to="/methodology" class="button-green inline-block w-max">
             Find out more
           </NuxtLink>
         </div>
