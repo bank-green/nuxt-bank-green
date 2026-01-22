@@ -18,7 +18,7 @@ export default defineEventHandler(async event => {
   );
   const validateCaptchaResponseBody = await validateCaptchaResponse.json();
 
-  // Temporary debug logging
+  // Debug logging
   console.log(
     '[Captcha Debug] Cloudflare response:',
     JSON.stringify(validateCaptchaResponseBody)
