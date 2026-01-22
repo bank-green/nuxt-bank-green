@@ -8,6 +8,11 @@ route = { pattern = "bank.green", custom_domain = true }
 [site]
 bucket = ".output/public"
 
+[vars]
+NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY = "0x4AAAAAAAc173K_9pcR3lej"
+NUXT_PUBLIC_ACTIVE_CAMPAIGN_KEY = "c6cf4fc7eb4671eeffc37f721fd4b35773e90fbed3e138d64fb649a333e2380b490da35e"
+NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL = "https://bankgreen.api-us1.com/api/3"
+
 [env.staging]
 name = "website-staging"
 main = "./.output/server/index.mjs"
@@ -15,3 +20,8 @@ workers_dev = false
 compatibility_date = "2022-09-10"
 account_id = "9ba52192e6bf2e5785e83c2ccb0d68ae"
 route = { pattern = "test.bank.green", custom_domain = true }
+
+[env.staging.vars]
+NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY = "0x4AAAAAAAc173K_9pcR3lej"
+NUXT_PUBLIC_ACTIVE_CAMPAIGN_KEY = "c6cf4fc7eb4671eeffc37f721fd4b35773e90fbed3e138d64fb649a333e2380b490da35e"
+NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL = "https://bankgreen.api-us1.com/api/3"

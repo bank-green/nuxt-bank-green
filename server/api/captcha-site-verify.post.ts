@@ -18,6 +18,14 @@ export default defineEventHandler(async event => {
   );
   const validateCaptchaResponseBody = await validateCaptchaResponse.json();
 
+  // Debug logging
+  console.log(
+    '[Captcha Debug] Cloudflare response:',
+    JSON.stringify(validateCaptchaResponseBody)
+  );
+  console.log('[Captcha Debug] Secret exists:', !!secret);
+  console.log('[Captcha Debug] Secret length:', secret?.length);
+
   if (validateCaptchaResponseBody.success) {
     return {
       success: true,
@@ -25,6 +33,7 @@ export default defineEventHandler(async event => {
   } else {
     return {
       success: false,
+      errorCodes: validateCaptchaResponseBody['error-codes'],
     };
   }
 });

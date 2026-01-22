@@ -68,7 +68,7 @@ interface ActiveCampaignResponse {
 }
 
 interface ContactTagResponse {
-  contactList?: {
+  contactTag?: {
     id?: string;
   };
 }
@@ -173,6 +173,13 @@ const baseUrl = useRuntimeConfig().public.ACTIVE_CAMPAIGN_URL;
 async function sendACContact(
   message: ContactMessage
 ): Promise<{ success: boolean } | undefined> {
+  console.log('[AC Debug] Starting ActiveCampaign contact sync');
+  console.log('[AC Debug] Base URL:', baseUrl);
+  console.log('[AC Debug] API Key exists:', !!secret);
+  console.log('[AC Debug] API Key length:', secret?.length);
+  console.log('[AC Debug] Email:', message.email);
+  console.log('[AC Debug] Tag:', message.tag);
+
   const tag = (): number => {
     switch (message.tag) {
       case 'FAQ bottom':
@@ -229,47 +236,72 @@ async function sendACContact(
     },
   };
 
-  const sendActiveCampaignForm = await $fetch<ActiveCampaignResponse>(
-    baseUrl + '/contact/sync',
-    {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        'Api-Token': secret,
-      },
-      body: reqBody,
-    }
-  );
-  if (
-    sendActiveCampaignForm?.contact?.id?.length &&
-    sendActiveCampaignForm.contact.id.length > 0
-  ) {
-    // If we have a created contact, add to contact the correct tag
-    const addContactToList = await $fetch<ContactTagResponse>(
-      baseUrl + '/contactTags',
+  console.log('[AC Debug] Request body:', JSON.stringify(reqBody));
+
+  try {
+    const sendActiveCampaignForm = await $fetch<ActiveCampaignResponse>(
+      baseUrl + '/contact/sync',
       {
+        method: 'POST',
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
           'Api-Token': secret,
         },
-        method: 'POST',
-        body: {
-          contactTag: {
-            contact: sendActiveCampaignForm?.contact?.id,
-            tag: tag(),
-          },
-        },
+        body: reqBody,
       }
     );
 
-    if (addContactToList?.contactList?.id) {
-      return { success: true };
+    console.log(
+      '[AC Debug] AC Response:',
+      JSON.stringify(sendActiveCampaignForm)
+    );
+
+    if (
+      sendActiveCampaignForm?.contact?.id?.length &&
+      sendActiveCampaignForm.contact.id.length > 0
+    ) {
+      console.log(
+        '[AC Debug] Contact created with ID:',
+        sendActiveCampaignForm.contact.id
+      );
+      console.log('[AC Debug] Adding tag:', tag());
+
+      // If we have a created contact, add to contact the correct tag
+      const addContactToList = await $fetch<ContactTagResponse>(
+        baseUrl + '/contactTags',
+        {
+          headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            'Api-Token': secret,
+          },
+          method: 'POST',
+          body: {
+            contactTag: {
+              contact: sendActiveCampaignForm?.contact?.id,
+              tag: tag(),
+            },
+          },
+        }
+      );
+
+      console.log('[AC Debug] Tag response:', JSON.stringify(addContactToList));
+
+      if (addContactToList?.contactTag?.id) {
+        console.log('[AC Debug] ✓ Contact and tag created successfully');
+        return { success: true };
+      } else {
+        console.log('[AC Debug] ✗ Tag creation failed');
+      }
+    } else {
+      console.log('[AC Debug] ✗ No contact ID in response');
+      return {
+        success: false,
+      };
     }
-  } else {
-    return {
-      success: false,
-    };
+  } catch (error) {
+    console.log('[AC Debug] ✗ Error during AC sync:', error);
+    throw error;
   }
 }
