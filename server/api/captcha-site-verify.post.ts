@@ -3,7 +3,10 @@ export default defineEventHandler(async event => {
   if (body instanceof Uint8Array) {
     body = JSON.parse(new TextDecoder().decode(body));
   }
-  const secret = useRuntimeConfig().CAPTCHA_SECRET;
+  // In Cloudflare Workers, secrets are available on event.context.cloudflare.env
+  const secret =
+    event.context.cloudflare?.env?.NUXT_CLOUDFLARE_CAPTCHA_SECRET ||
+    useRuntimeConfig().CAPTCHA_SECRET;
 
   const formData = new FormData();
   formData.append('secret', secret);
