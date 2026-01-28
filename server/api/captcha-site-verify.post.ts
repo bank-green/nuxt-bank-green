@@ -27,8 +27,8 @@ export default defineEventHandler(async event => {
     '[Captcha Debug] Cloudflare response:',
     JSON.stringify(validateCaptchaResponseBody)
   );
-  console.log('[Captcha Debug] Secret exists:', !!secret);
-  console.log('[Captcha Debug] Secret length:', secret?.length);
+  const secretExists = !!secret;
+  console.log('[Captcha Debug] Secret exists:', secretExists);
 
   if (validateCaptchaResponseBody.success) {
     return {
