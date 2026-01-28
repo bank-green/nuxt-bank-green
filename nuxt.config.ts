@@ -28,7 +28,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Private server-only config
-    CAPTCHA_SECRET: process.env.NUXT_CLOUDFLARE_CAPTCHA_SECRET,
+    // Note: Do NOT set CAPTCHA_SECRET here with process.env - it would be inlined at build time
+    // and leak into the build output. Instead, Nuxt automatically picks up NUXT_CAPTCHA_SECRET
+    // from the environment at runtime. For Cloudflare Workers, use event.context.cloudflare.env.
 
     // Public config (client + server)
     public: {

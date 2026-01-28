@@ -4,9 +4,10 @@ export default defineEventHandler(async event => {
     body = JSON.parse(new TextDecoder().decode(body));
   }
   // In Cloudflare Workers, secrets are available on event.context.cloudflare.env
+  // For local dev, use process.env directly (NOT via runtimeConfig to avoid build-time inlining)
   const secret =
     event.context.cloudflare?.env?.NUXT_CLOUDFLARE_CAPTCHA_SECRET ||
-    useRuntimeConfig().CAPTCHA_SECRET;
+    process.env.NUXT_CLOUDFLARE_CAPTCHA_SECRET;
 
   const formData = new FormData();
   formData.append('secret', secret);
