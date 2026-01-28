@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  compatibilityDate: '2026-01-28',
   modules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
