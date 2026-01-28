@@ -3,7 +3,11 @@ export default defineEventHandler(async event => {
   if (body instanceof Uint8Array) {
     body = JSON.parse(new TextDecoder().decode(body));
   }
-  const secret = useRuntimeConfig().CAPTCHA_SECRET;
+  // In Cloudflare Workers, secrets are available on event.context.cloudflare.env
+  // For local dev, use process.env directly (NOT via runtimeConfig to avoid build-time inlining)
+  const secret =
+    event.context.cloudflare?.env?.NUXT_CLOUDFLARE_CAPTCHA_SECRET ||
+    process.env.NUXT_CLOUDFLARE_CAPTCHA_SECRET;
 
   const formData = new FormData();
   formData.append('secret', secret);
@@ -23,8 +27,8 @@ export default defineEventHandler(async event => {
     '[Captcha Debug] Cloudflare response:',
     JSON.stringify(validateCaptchaResponseBody)
   );
-  console.log('[Captcha Debug] Secret exists:', !!secret);
-  console.log('[Captcha Debug] Secret length:', secret?.length);
+  const secretExists = !!secret;
+  console.log('[Captcha Debug] Secret exists:', secretExists);
 
   if (validateCaptchaResponseBody.success) {
     return {

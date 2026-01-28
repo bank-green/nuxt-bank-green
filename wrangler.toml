@@ -25,3 +25,18 @@ route = { pattern = "test.bank.green", custom_domain = true }
 NUXT_PUBLIC_CLOUDFLARE_CAPTCHA_SITEKEY = "0x4AAAAAAAc173K_9pcR3lej"
 NUXT_PUBLIC_ACTIVE_CAMPAIGN_KEY = "c6cf4fc7eb4671eeffc37f721fd4b35773e90fbed3e138d64fb649a333e2380b490da35e"
 NUXT_PUBLIC_ACTIVE_CAMPAIGN_URL = "https://bankgreen.api-us1.com/api/3"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = true
+persist = true
+head_sampling_rate = 1
