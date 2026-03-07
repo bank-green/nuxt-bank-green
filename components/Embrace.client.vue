@@ -23,7 +23,7 @@ const { data: embracePage } = await useAsyncData('embrace', () =>
 );
 
 if (!embracePage?.value) {
-  console.log('Warning: Unable to retrieve embracepage');
+  console.warn('Warning: Unable to retrieve embracepage');
 }
 
 const props = withDefaults(

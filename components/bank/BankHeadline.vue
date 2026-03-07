@@ -1,12 +1,12 @@
 <script setup>
-import ClearbitLogo from '@/components/icons/ClearbitLogo.vue'
+import ClearbitLogo from '@/components/icons/ClearbitLogo.vue';
 
 defineProps({
   name: String,
   website: String,
   inheritBrandRating: Object,
   subtitle: String,
-})
+});
 </script>
 
 <template>
@@ -25,23 +25,12 @@ defineProps({
         >
           {{ name }}
         </h1>
-        <div
-          v-if="subtitle"
-          class="text-lg md:text-xl text-gray-500 font-bold"
-        >
-          <div
-            v-html="subtitle"
-          />
+        <div v-if="subtitle" class="text-lg md:text-xl text-gray-500 font-bold">
+          <div v-html="subtitle" />
         </div>
-        <div
-          v-if="inheritBrandRating"
-          class="text-xs text-gray-500"
-        >
+        <div v-if="inheritBrandRating" class="text-xs text-gray-500">
           Deposits or policies controlled by
-          <NuxtLink
-            class="underline"
-            :to="`/banks/${inheritBrandRating.tag}`"
-          >
+          <NuxtLink class="underline" :to="`/banks/${inheritBrandRating.tag}`">
             {{ inheritBrandRating.name }}
           </NuxtLink>
         </div>
